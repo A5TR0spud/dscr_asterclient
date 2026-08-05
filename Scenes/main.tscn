@@ -123,7 +123,7 @@ size_flags_horizontal = 3
 [node name="SidebarTabber" type="TabContainer" parent="MarginContainer/MainContainer/Body/Sidebar" unique_id=853955400]
 layout_mode = 2
 size_flags_vertical = 3
-current_tab = 0
+current_tab = 2
 clip_tabs = false
 use_hidden_tabs_for_min_size = true
 tab_0/title = "Dict"
@@ -131,6 +131,7 @@ tab_1/title = "Human"
 script = ExtResource("4_ynf5e")
 
 [node name="DictionaryTab" type="VBoxContainer" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber" unique_id=1031905730]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 metadata/_tab_name = "Dict"
@@ -141,9 +142,7 @@ layout_mode = 2
 [node name="DictionaryLabel" type="Label" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/DictionaryHeader" unique_id=1789763146]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "dict TODO:
-add \"active callsigns\" sidebar
-add \"macro edit\" sidebar"
+text = "dict"
 horizontal_alignment = 1
 script = ExtResource("2_8gbba")
 Message = Array[int]([-42, -237])
@@ -246,7 +245,6 @@ theme_override_constants/h_separation = -2
 theme_override_constants/v_separation = -2
 
 [node name="SettingsTab" type="VBoxContainer" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber" unique_id=329279550]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
@@ -259,6 +257,38 @@ Message = Array[int]([-241, -174])
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/SettingsTab" unique_id=2095612331]
 layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/SettingsTab" unique_id=1581182943]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/SettingsTab/ScrollContainer" unique_id=208719635]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "TODO:
+add input parsing so sending messages is possible
+trim really long messages with the -25 signal as a button
+save current callsign and try to grab it when reloading
+add autoscrolling when new messages arrive if already scrolled to the bottom
+add channel system
+add image renderer (should be quite simple really)
+websocket address setting
+font size setting
+formatting on/off setting
+callsign image on/off setting
+change callsign image from shader to draw call and from a parameter to a variable
+new transmission makes a noise setting
+lone confetti signal makes confetti setting
+clean vs clunky UI setting (current UI is in \"clean\" mode)
+add \"macro edit\" sidebar
+"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+meta_underlined = false
+hint_underlined = false
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/MainContainer/Body/Sidebar" unique_id=1590731449]
 layout_mode = 2
@@ -279,6 +309,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="DictEditMenu" type="CenterContainer" parent="." unique_id=336075557]
+visible = false
 layout_mode = 2
 mouse_filter = 2
 script = ExtResource("5_kry3j")

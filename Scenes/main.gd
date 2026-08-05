@@ -75,7 +75,6 @@ static func _hueToRgb(p: float, q: float, t: float) -> float:
 func StartConnect() -> void:
 	NeedCallsign = true
 	Callsign = randi_range(0, 4095)
-	#TODO: save and load callsign to settings.json
 	# Initiate connection to the given URL.
 	var err = socket.connect_to_url(websocket_url)
 	if err == OK:
@@ -97,7 +96,6 @@ func RenderNewMessage(incoming: PackedStringArray) -> void:
 		o.append(s.to_int())
 	newMessage.Message = o
 	ChatBody.add_child(newMessage)
-	#TODO: autoscroll
 
 func HandlePacket(incoming: String) -> void:
 	var Status: PackedStringArray = incoming.split(",")
