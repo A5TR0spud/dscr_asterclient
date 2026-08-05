@@ -161,6 +161,40 @@ static func FilterNameInput(input: String) -> String:
 		o += c
 	return o
 
+static func ParseTextToSignals(input: String) -> Array[int]:
+	input = input.strip_edges().strip_escapes()
+	var out: Array[int] = []
+	while input:
+		for i: int in range(input.length()):
+			var idx: int = input.length() - i - 1
+			var sub: String = input.left(idx + 1)
+			if sub[0] == " ":
+				input = input.right(-1)
+				break
+			if sub[0] == "|":
+				var subsub: String = sub.right(-1)
+				if subsub and subsub.is_valid_int():
+					out.append(subsub.to_int())
+					input = input.right(-idx - 1)
+					break
+				continue
+			var found: int = wordNames.find(sub)
+			if found >= 0:
+				out.append(wordKeys[found])
+				input = input.right(-idx - 1)
+				break
+			if (sub[0].is_valid_int() and
+				sub.is_valid_int()
+			):
+				out.append(sub.to_int())
+				input = input.right(-idx - 1)
+				break
+			if idx == 0:
+				return []
+		if out.size() > Main.MaxMessageLength:
+			return []
+	return out
+
 static func ContainsSignal(sig: int) -> bool:
 	var idx: int = wordKeys.find(sig)
 	if idx == -1:

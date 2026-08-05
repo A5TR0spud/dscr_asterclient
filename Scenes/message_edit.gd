@@ -2,7 +2,8 @@ extends TextEdit
 
 func _input(event: InputEvent):
 	if event.is_action_pressed("ui_text_submit") and not event.is_action_pressed("ui_text_newline"):
-		text = ""
+		if Main.instance.SendMessage(text):
+			text = ""
 	if event.is_action_pressed("ui_text_completion_accept"):
 		pass
 

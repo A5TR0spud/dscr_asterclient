@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://dqce42c573ptg" path="res://Scripts/SimpleTranslatable.gd" id="2_8gbba"]
 [ext_resource type="Script" uid="uid://dr2cb7q6mysjs" path="res://Scenes/chat.gd" id="3_6bp64"]
 [ext_resource type="Script" uid="uid://b6d5ucfwdeqjh" path="res://Scenes/dictionary_display.gd" id="3_jjvhh"]
+[ext_resource type="Script" uid="uid://b17wh5igsahay" path="res://Scenes/auto_scroll.gd" id="4_6iyac"]
 [ext_resource type="Script" uid="uid://eyonivvk3glk" path="res://Scenes/message_edit.gd" id="4_d1ilt"]
 [ext_resource type="Script" uid="uid://bft2883q6jmm7" path="res://Scenes/sidebar_tabber.gd" id="4_ynf5e"]
 [ext_resource type="Script" uid="uid://cyqng7nb5maao" path="res://Scenes/new_signal_button.gd" id="5_344ge"]
@@ -90,6 +91,7 @@ layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
+script = ExtResource("4_6iyac")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MainContainer/Body/Chat/MarginContainer/ScrollContainer" unique_id=1246148359]
 layout_mode = 2
@@ -97,16 +99,15 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/margin_right = 15
 
-[node name="ChatDisplay" type="VBoxContainer" parent="MarginContainer/MainContainer/Body/Chat/MarginContainer/ScrollContainer/MarginContainer" unique_id=1565782848]
+[node name="ChatDisplay" type="VBoxContainer" parent="MarginContainer/MainContainer/Body/Chat/MarginContainer/ScrollContainer/MarginContainer" unique_id=327611547]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 alignment = 2
 
 [node name="MessageEdit" type="TextEdit" parent="MarginContainer/MainContainer/Body/Chat" unique_id=1012249618]
 custom_maximum_size = Vector2(-1, 400)
 layout_mode = 2
 size_flags_vertical = 8
+localize_numeral_system = false
 placeholder_text = "type here"
 emoji_menu_enabled = false
 wrap_mode = 1
@@ -267,23 +268,25 @@ horizontal_scroll_mode = 0
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "TODO:
-add input parsing so sending messages is possible
-add confirmation message for deleting signals
-trim really long messages with the -25 signal as a button
-save current callsign and try to grab it when reloading
-add autoscrolling when new messages arrive if already scrolled to the bottom
-add channel system
-add image renderer (should be quite simple really)
-websocket address setting
-font size setting
-formatting on/off setting
-callsign image on/off setting
-change callsign image from shader to draw call and from a parameter to a variable
-new transmission makes a noise setting
-lone confetti signal makes confetti setting
-clean vs clunky UI setting (current UI is in \"clean\" mode)
-add \"macro edit\" sidebar
+text = "this will be the settings menu at some point, and the todo list will be removed.
+TODO:
+- add default formatting edit menu
+- fix weird bug where typing a message arbitrarily moves the caret????
+- add confirmation message for deleting dictionary entries
+- trim really long messages with the -25 signal as a button
+- save current callsign and try to grab it when reloading
+- add autoscrolling when new messages arrive if already scrolled to the bottom
+- add channel system
+- add image renderer (should be quite simple really) (famous last words)
+- websocket address setting
+- font size setting
+- formatting on/off setting
+- callsign image on/off setting
+- change callsign image from shader to draw call and from a parameter to a variable that redraws automatically (use setter func)
+- new transmission makes a noise setting
+- lone confetti signal makes confetti setting (only visible if the confetti signal is defined)
+- clean vs clunky UI setting (current UI is in \"clean\" mode)
+- add \"macro edit\" sidebar
 "
 fit_content = true
 scroll_active = false

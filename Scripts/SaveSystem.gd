@@ -22,7 +22,6 @@ const MACRO_PATH : String = "user://macro.json"
 const SETTINGS_PATH : String = "user://settings.json"
 
 static func OpenSaveLocation() -> void:
-	LoadDict()
 	OS.shell_show_in_file_manager(ProjectSettings.globalize_path(DICT_PATH))
 
 # TMFDS DICT.save structure:
@@ -59,11 +58,23 @@ static func OpenSaveLocation() -> void:
 # 3: double new line
 
 static func LoadDict() -> void:
+	var file_access := FileAccess.open(DICT_PATH, FileAccess.READ)
 	if not FileAccess.file_exists(DICT_PATH):
 		SaveDict()
 		Main.OnDictReload()
+		OpenSaveLocation()
+		var orig_json_string := FileAccess.get_file_as_string(DICT_PATH)
+		var tries: int = 0
+		while (
+			(not FileAccess.file_exists(DICT_PATH)) or
+			orig_json_string == FileAccess.get_file_as_string(DICT_PATH)
+		):
+			if tries > 60:
+				return
+			await Main.instance.get_tree().create_timer(1).timeout
+			tries += 1
+		LoadDict()
 		return
-	var file_access := FileAccess.open(DICT_PATH, FileAccess.READ)
 	var json_string:= FileAccess.get_file_as_string(DICT_PATH)
 	file_access.close()
 	var json := JSON.new()

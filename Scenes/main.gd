@@ -22,8 +22,7 @@ var Callsign: int = 0:
 var NeedCallsign: bool = true
 var previous_state: WebSocketPeer.State = WebSocketPeer.STATE_CLOSED
 
-@onready var ChatBody: VBoxContainer = $MarginContainer/MainContainer/Body/Chat/MarginContainer/ScrollContainer/MarginContainer/ChatDisplay
-@onready var ChatScroll: ScrollContainer = $MarginContainer/MainContainer/Body/Chat/MarginContainer/ScrollContainer
+@onready var ChatBody: Container = $MarginContainer/MainContainer/Body/Chat/MarginContainer/ScrollContainer/MarginContainer/ChatDisplay
 
 var ConnectedUsers: Array[int] = []
 
@@ -86,6 +85,17 @@ func StartConnect() -> void:
 
 var Trx = preload("res://Scenes/transmission_entry.tscn")
 
+func SendMessage(written: String) -> bool:
+	var sig: Array[int] = DictionaryHandler.ParseTextToSignals(written)
+	if sig.size() == 0:
+		return false
+	var strig: Array = sig.map(func (a): return str(a)) as Array[String]
+	strig.insert(0, "M")
+	var o: String = ",".join(strig)
+	if o and socket.send_text(o) == Error.OK:
+		return true
+	return false
+
 func RenderNewMessage(incoming: PackedStringArray) -> void:
 	var newMessage: TransEntry = Trx.instantiate()
 	newMessage.Timestamp = Time.get_ticks_msec()
@@ -98,6 +108,7 @@ func RenderNewMessage(incoming: PackedStringArray) -> void:
 	ChatBody.add_child(newMessage)
 
 func HandlePacket(incoming: String) -> void:
+	print("< Got string data from server: %s" % incoming)
 	var Status: PackedStringArray = incoming.split(",")
 	if Status[0] == "K":
 		Callsign = Status[1].to_int()
@@ -176,6 +187,7 @@ func _physics_process(_delta):
 	previous_state = state
 
 func _on_dictionary_save_open_pressed():
+	SaveSystem.LoadDict()
 	SaveSystem.OpenSaveLocation()
 
 static func OnDictReload() -> void:

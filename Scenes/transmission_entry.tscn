@@ -86,7 +86,8 @@ theme_override_styles/separator = SubResource("StyleBoxLine_i75l1")
 [node name="Message" type="RichTextLabel" parent="Body" unique_id=698847018]
 layout_mode = 2
 size_flags_horizontal = 3
-focus_mode = 2
+localize_numeral_system = false
+focus_mode = 0
 mouse_default_cursor_shape = 1
 text = "test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test "
 fit_content = true
