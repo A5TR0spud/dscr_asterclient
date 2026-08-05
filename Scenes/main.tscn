@@ -1,0 +1,426 @@
+[gd_scene format=3 uid="uid://bft3wuvruhqvw"]
+
+[ext_resource type="Script" uid="uid://1aqi7v8d5nf0" path="res://Scenes/main.gd" id="1_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://c1h04iufkd28w" path="res://Scenes/callsign_node.tscn" id="1_jjgbg"]
+[ext_resource type="Script" uid="uid://dqce42c573ptg" path="res://Scripts/SimpleTranslatable.gd" id="2_8gbba"]
+[ext_resource type="Script" uid="uid://dr2cb7q6mysjs" path="res://Scenes/chat.gd" id="3_6bp64"]
+[ext_resource type="Script" uid="uid://b6d5ucfwdeqjh" path="res://Scenes/dictionary_display.gd" id="3_jjvhh"]
+[ext_resource type="Script" uid="uid://eyonivvk3glk" path="res://Scenes/message_edit.gd" id="4_d1ilt"]
+[ext_resource type="Script" uid="uid://bft2883q6jmm7" path="res://Scenes/sidebar_tabber.gd" id="4_ynf5e"]
+[ext_resource type="Script" uid="uid://cyqng7nb5maao" path="res://Scenes/new_signal_button.gd" id="5_344ge"]
+[ext_resource type="Script" uid="uid://ciogfbq06qv56" path="res://Scenes/dict_edit_menu.gd" id="5_kry3j"]
+[ext_resource type="PackedScene" uid="uid://bw4nasduhbqkb" path="res://Scenes/bool_toggle_button.tscn" id="6_21xkr"]
+[ext_resource type="Script" uid="uid://b5s8ghwqkgph2" path="res://Scenes/online_people_tab.gd" id="7_hptm8"]
+
+[node name="Main" type="PanelContainer" unique_id=201184023]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bo1nx")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=71793566]
+layout_mode = 2
+
+[node name="MainContainer" type="VBoxContainer" parent="MarginContainer" unique_id=651321224]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="MarginContainer/MainContainer" unique_id=1305811835]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/MainContainer/Header" unique_id=1283547797]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "dscr client"
+script = ExtResource("2_8gbba")
+Message = Array[int]([-247, -128])
+
+[node name="Address" type="HBoxContainer" parent="MarginContainer/MainContainer/Header" unique_id=1263877326]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="AddressLabel" type="Label" parent="MarginContainer/MainContainer/Header/Address" unique_id=1194611740]
+visible = false
+layout_mode = 2
+text = "websocket address MOVE THIS TO SETTINGS"
+script = ExtResource("2_8gbba")
+Message = Array[int]([-257, -41])
+
+[node name="AddressEdit" type="LineEdit" parent="MarginContainer/MainContainer/Header/Address" unique_id=334873355]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+placeholder_text = "wss://dscr-relay.dixonary.co.uk"
+expand_to_text_length = true
+emoji_menu_enabled = false
+clear_button_enabled = true
+draw_control_chars = true
+select_all_on_focus = true
+caret_blink = true
+
+[node name="DsveButton" type="Button" parent="MarginContainer/MainContainer/Header" unique_id=408009820]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "visual editor"
+script = ExtResource("2_8gbba")
+Message = Array[int]([-53, -38])
+
+[node name="HSeparator3" type="HSeparator" parent="MarginContainer/MainContainer" unique_id=544634055]
+layout_mode = 2
+
+[node name="Body" type="HSplitContainer" parent="MarginContainer/MainContainer" unique_id=116522902]
+layout_mode = 2
+size_flags_vertical = 3
+split_offsets = PackedInt32Array(600)
+split_offset = 600
+
+[node name="Chat" type="VBoxContainer" parent="MarginContainer/MainContainer/Body" unique_id=737534547]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("3_6bp64")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MainContainer/Body/Chat" unique_id=598428739]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_bottom = 12
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/MainContainer/Body/Chat/MarginContainer" unique_id=357398252]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MainContainer/Body/Chat/MarginContainer/ScrollContainer" unique_id=1246148359]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_right = 15
+
+[node name="ChatDisplay" type="VBoxContainer" parent="MarginContainer/MainContainer/Body/Chat/MarginContainer/ScrollContainer/MarginContainer" unique_id=1565782848]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 2
+
+[node name="MessageEdit" type="TextEdit" parent="MarginContainer/MainContainer/Body/Chat" unique_id=1012249618]
+custom_maximum_size = Vector2(-1, 400)
+layout_mode = 2
+size_flags_vertical = 8
+placeholder_text = "type here"
+emoji_menu_enabled = false
+wrap_mode = 1
+tab_input_mode = false
+scroll_fit_content_height = true
+caret_blink = true
+caret_multiple = false
+script = ExtResource("4_d1ilt")
+
+[node name="Sidebar" type="VBoxContainer" parent="MarginContainer/MainContainer/Body" unique_id=2052290855]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SidebarTabber" type="TabContainer" parent="MarginContainer/MainContainer/Body/Sidebar" unique_id=853955400]
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 0
+clip_tabs = false
+use_hidden_tabs_for_min_size = true
+tab_0/title = "Dict"
+tab_1/title = "Human"
+script = ExtResource("4_ynf5e")
+
+[node name="DictionaryTab" type="VBoxContainer" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber" unique_id=1031905730]
+layout_mode = 2
+metadata/_tab_index = 0
+metadata/_tab_name = "Dict"
+
+[node name="DictionaryHeader" type="HBoxContainer" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab" unique_id=31377089]
+layout_mode = 2
+
+[node name="DictionaryLabel" type="Label" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/DictionaryHeader" unique_id=1789763146]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "dict TODO:
+add \"active callsigns\" sidebar
+add \"macro edit\" sidebar"
+horizontal_alignment = 1
+script = ExtResource("2_8gbba")
+Message = Array[int]([-42, -237])
+
+[node name="DictionarySaveOpen" type="Button" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/DictionaryHeader" unique_id=2053265305]
+layout_mode = 2
+mouse_default_cursor_shape = 16
+text = "file"
+script = ExtResource("2_8gbba")
+Message = Array[int]([-40])
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab" unique_id=1051184365]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab" unique_id=1195777997]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/ScrollContainer" unique_id=1308036800]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_right = 10
+
+[node name="Dictionary" type="VBoxContainer" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/ScrollContainer/MarginContainer" unique_id=1356490977]
+layout_mode = 2
+script = ExtResource("3_jjvhh")
+
+[node name="NewSignalButton" type="Button" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab" unique_id=85783762]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "new signal"
+script = ExtResource("5_344ge")
+Message = Array[int]([-38, -77, -163])
+
+[node name="NewSignalDesig" type="HBoxContainer" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab" unique_id=479765799]
+layout_mode = 2
+
+[node name="NumEdit" type="LineEdit" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/NewSignalDesig" unique_id=71935504]
+custom_maximum_size = Vector2(230, -1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+placeholder_text = "number"
+max_length = 8
+expand_to_text_length = true
+emoji_menu_enabled = false
+caret_blink = true
+script = ExtResource("2_8gbba")
+Message = Array[int]([-260])
+PropertyName = &"placeholder_text"
+
+[node name="SigEdit" type="LineEdit" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/NewSignalDesig" unique_id=2024505779]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "signal"
+alignment = 2
+max_length = 20
+expand_to_text_length = true
+emoji_menu_enabled = false
+caret_blink = true
+script = ExtResource("2_8gbba")
+Message = Array[int]([-42])
+PropertyName = &"placeholder_text"
+
+[node name="OnlinePeopleTab" type="VBoxContainer" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber" unique_id=1359956486]
+visible = false
+layout_mode = 2
+script = ExtResource("7_hptm8")
+metadata/_tab_index = 1
+metadata/_tab_name = "Human"
+
+[node name="Label" type="Label" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/OnlinePeopleTab" unique_id=1138224005]
+layout_mode = 2
+text = "human count = 12"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/OnlinePeopleTab" unique_id=1603650221]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/OnlinePeopleTab" unique_id=696724468]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="Margins" type="MarginContainer" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/OnlinePeopleTab/ScrollContainer" unique_id=1615665372]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 7
+
+[node name="List" type="HFlowContainer" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/OnlinePeopleTab/ScrollContainer/Margins" unique_id=285872867]
+layout_mode = 2
+theme_override_constants/h_separation = -2
+theme_override_constants/v_separation = -2
+
+[node name="SettingsTab" type="VBoxContainer" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber" unique_id=329279550]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/SettingsTab" unique_id=735866599]
+layout_mode = 2
+text = "settings"
+horizontal_alignment = 1
+script = ExtResource("2_8gbba")
+Message = Array[int]([-241, -174])
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/SettingsTab" unique_id=2095612331]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/MainContainer/Body/Sidebar" unique_id=1590731449]
+layout_mode = 2
+
+[node name="CallsignContainer" type="VBoxContainer" parent="MarginContainer/MainContainer/Body/Sidebar" unique_id=90528685]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="CallsignLabel" type="Label" parent="MarginContainer/MainContainer/Body/Sidebar/CallsignContainer" unique_id=1998627814]
+layout_mode = 2
+text = "callsign"
+horizontal_alignment = 1
+script = ExtResource("2_8gbba")
+Message = Array[int]([-128, -260])
+
+[node name="CallsignEdit" parent="MarginContainer/MainContainer/Body/Sidebar/CallsignContainer" unique_id=965442127 instance=ExtResource("1_jjgbg")]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="DictEditMenu" type="CenterContainer" parent="." unique_id=336075557]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("5_kry3j")
+
+[node name="PanelContainer" type="PanelContainer" parent="DictEditMenu" unique_id=2132934213]
+layout_mode = 2
+
+[node name="DictEditMainframe" type="VBoxContainer" parent="DictEditMenu/PanelContainer" unique_id=1159010305]
+layout_mode = 2
+
+[node name="DictEditTitle" type="Label" parent="DictEditMenu/PanelContainer/DictEditMainframe" unique_id=375024181]
+layout_mode = 2
+text = "signal editor UI Title"
+horizontal_alignment = 1
+script = ExtResource("2_8gbba")
+Message = Array[int]([-42, -38, -77, -174])
+
+[node name="HSeparator" type="HSeparator" parent="DictEditMenu/PanelContainer/DictEditMainframe" unique_id=747557822]
+layout_mode = 2
+
+[node name="SignalNameEdit" type="HBoxContainer" parent="DictEditMenu/PanelContainer/DictEditMainframe" unique_id=1611752844]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="DictEditMenu/PanelContainer/DictEditMainframe/SignalNameEdit" unique_id=1348840724]
+layout_mode = 2
+text = "signal -# ="
+
+[node name="NameLineEdit" type="LineEdit" parent="DictEditMenu/PanelContainer/DictEditMainframe/SignalNameEdit" unique_id=817691418]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "small meaning makes"
+max_length = 20
+expand_to_text_length = true
+caret_blink = true
+script = ExtResource("2_8gbba")
+Message = Array[int]([-109, -237, -38])
+PropertyName = &"placeholder_text"
+
+[node name="NotesEdit" type="TextEdit" parent="DictEditMenu/PanelContainer/DictEditMainframe" unique_id=2012997211]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+placeholder_text = "human 0 does big meaning makes dost"
+emoji_menu_enabled = false
+wrap_mode = 1
+tab_input_mode = false
+scroll_fit_content_height = true
+caret_blink = true
+caret_multiple = false
+script = ExtResource("2_8gbba")
+Message = Array[int]([-130, 0, -86, -108, -237, -38, -85])
+Format = true
+PropertyName = &"placeholder_text"
+
+[node name="BeforeAndAfterFormat" type="HBoxContainer" parent="DictEditMenu/PanelContainer/DictEditMainframe" unique_id=1403600552]
+layout_mode = 2
+
+[node name="BeforeOption" type="OptionButton" parent="DictEditMenu/PanelContainer/DictEditMainframe/BeforeAndAfterFormat" unique_id=1577303935]
+layout_mode = 2
+alignment = 2
+selected = 1
+item_count = 4
+popup/item_0/text = "nothing"
+popup/item_0/id = 0
+popup/item_1/text = "1 repel"
+popup/item_1/id = 1
+popup/item_2/text = "1 big repel"
+popup/item_2/id = 2
+popup/item_3/text = "2 big repel"
+popup/item_3/id = 3
+
+[node name="FormatClarity" type="Label" parent="DictEditMenu/PanelContainer/DictEditMainframe/BeforeAndAfterFormat" unique_id=1431238135]
+layout_mode = 2
+text = "precedes |-# precedes"
+
+[node name="AfterOption" type="OptionButton" parent="DictEditMenu/PanelContainer/DictEditMainframe/BeforeAndAfterFormat" unique_id=1828508937]
+layout_mode = 2
+selected = 1
+item_count = 4
+popup/item_0/text = "nothing"
+popup/item_0/id = 0
+popup/item_1/text = "1 repel"
+popup/item_1/id = 1
+popup/item_2/text = "1 big repel"
+popup/item_2/id = 2
+popup/item_3/text = "2 big repel"
+popup/item_3/id = 3
+
+[node name="BreakSentence" type="HBoxContainer" parent="DictEditMenu/PanelContainer/DictEditMainframe" unique_id=1524775415]
+layout_mode = 2
+
+[node name="BreakClarity" type="Label" parent="DictEditMenu/PanelContainer/DictEditMainframe/BreakSentence" unique_id=627647181]
+layout_mode = 2
+text = "bool [2 |-# precedes 1 big repel] ="
+script = ExtResource("2_8gbba")
+Message = Array[int]([-26, -14, 2, -229, -42, -122, 1, -108, -190, -15, -4])
+
+[node name="BreakOnDouble" parent="DictEditMenu/PanelContainer/DictEditMainframe/BreakSentence" unique_id=1728394877 instance=ExtResource("6_21xkr")]
+layout_mode = 2
+
+[node name="SubmitElseCancel" type="GridContainer" parent="DictEditMenu/PanelContainer/DictEditMainframe" unique_id=356346339]
+layout_mode = 2
+columns = 2
+
+[node name="SubmitButton" type="Button" parent="DictEditMenu/PanelContainer/DictEditMainframe/SubmitElseCancel" unique_id=1494365595]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "change"
+script = ExtResource("2_8gbba")
+Message = Array[int]([-174, -85])
+
+[node name="CancelButton" type="Button" parent="DictEditMenu/PanelContainer/DictEditMainframe/SubmitElseCancel" unique_id=1660648352]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "not"
+script = ExtResource("2_8gbba")
+Message = Array[int]([-174, -29, -85])
+
+[node name="DeleteButton" type="Button" parent="DictEditMenu/PanelContainer/DictEditMainframe/SubmitElseCancel" unique_id=1597325337]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "delete"
+script = ExtResource("2_8gbba")
+Message = Array[int]([-42, -88, -85])
+
+[node name="CloseButton" type="Button" parent="DictEditMenu/PanelContainer/DictEditMainframe/SubmitElseCancel" unique_id=332941635]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "close"
+script = ExtResource("2_8gbba")
+Message = Array[int]([-163, -29, -85])
+
+[connection signal="pressed" from="MarginContainer/MainContainer/Header/DsveButton" to="." method="_on_dsve_button_pressed"]
+[connection signal="lines_edited_from" from="MarginContainer/MainContainer/Body/Chat/MessageEdit" to="MarginContainer/MainContainer/Body/Chat/MessageEdit" method="_on_lines_edited_from"]
+[connection signal="text_changed" from="MarginContainer/MainContainer/Body/Chat/MessageEdit" to="MarginContainer/MainContainer/Body/Chat/MessageEdit" method="_on_text_changed"]
+[connection signal="pressed" from="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/DictionaryHeader/DictionarySaveOpen" to="." method="_on_dictionary_save_open_pressed"]
+[connection signal="pressed" from="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/NewSignalButton" to="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/NewSignalButton" method="_on_pressed"]
+[connection signal="text_changed" from="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/NewSignalDesig/NumEdit" to="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/ScrollContainer/MarginContainer/Dictionary" method="_on_num_edit_text_changed"]
+[connection signal="text_changed" from="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/NewSignalDesig/SigEdit" to="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/ScrollContainer/MarginContainer/Dictionary" method="_on_sig_edit_text_changed"]
+[connection signal="CallsignSubmitted" from="MarginContainer/MainContainer/Body/Sidebar/CallsignContainer/CallsignEdit" to="." method="_on_callsign_edit_callsign_submitted"]
+[connection signal="text_changed" from="DictEditMenu/PanelContainer/DictEditMainframe/SignalNameEdit/NameLineEdit" to="DictEditMenu" method="_on_name_line_edit_text_changed"]
+[connection signal="text_submitted" from="DictEditMenu/PanelContainer/DictEditMainframe/SignalNameEdit/NameLineEdit" to="DictEditMenu" method="_on_name_line_edit_text_submitted"]
+[connection signal="pressed" from="DictEditMenu/PanelContainer/DictEditMainframe/SubmitElseCancel/SubmitButton" to="DictEditMenu" method="_on_submit_button_pressed"]
+[connection signal="pressed" from="DictEditMenu/PanelContainer/DictEditMainframe/SubmitElseCancel/CancelButton" to="DictEditMenu" method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="DictEditMenu/PanelContainer/DictEditMainframe/SubmitElseCancel/DeleteButton" to="DictEditMenu" method="_on_delete_button_pressed"]
+[connection signal="pressed" from="DictEditMenu/PanelContainer/DictEditMainframe/SubmitElseCancel/CloseButton" to="DictEditMenu" method="_on_close_button_pressed"]

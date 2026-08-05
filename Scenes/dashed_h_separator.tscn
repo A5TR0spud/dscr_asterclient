@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://5vo5f0g0mnfc"]
+
+[sub_resource type="Gradient" id="Gradient_grots"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.5)
+colors = PackedColorArray(1, 1, 1, 0.5019608, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_easa1"]
+gradient = SubResource("Gradient_grots")
+width = 12
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mprdl"]
+content_margin_bottom = 1.0
+texture = SubResource("GradientTexture1D_easa1")
+axis_stretch_horizontal = 1
+
+[node name="HSeparator" type="HSeparator" unique_id=587229885]
+texture_filter = 1
+texture_repeat = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxTexture_mprdl")

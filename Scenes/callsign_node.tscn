@@ -1,0 +1,169 @@
+[gd_scene format=3 uid="uid://c1h04iufkd28w"]
+
+[ext_resource type="Script" uid="uid://dqce42c573ptg" path="res://Scripts/SimpleTranslatable.gd" id="1_l64t4"]
+[ext_resource type="Script" uid="uid://com1i3l3kqyrr" path="res://Scenes/callsign_node.gd" id="1_pf6dc"]
+[ext_resource type="PackedScene" uid="uid://dc1vhk1wyejon" path="res://Scenes/identicon.tscn" id="3_61est"]
+[ext_resource type="Shader" uid="uid://b7218835sr28v" path="res://Scenes/identicon.gdshader" id="4_s2jau"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lsdqp"]
+resource_local_to_scene = true
+shader = ExtResource("4_s2jau")
+shader_parameter/Value = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_i75l1"]
+
+[node name="CallsignNode" type="HBoxContainer" unique_id=1004165478]
+offset_right = 325.0
+offset_bottom = 183.0
+script = ExtResource("1_pf6dc")
+
+[node name="RollerGrid" type="GridContainer" parent="." unique_id=1449477405]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+columns = 5
+
+[node name="AddLabel" type="Label" parent="RollerGrid" unique_id=1504196195]
+layout_mode = 2
+size_flags_vertical = 3
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_l64t4")
+Message = Array[int]([-5])
+
+[node name="Digit512Inc" type="Button" parent="RollerGrid" unique_id=1437929607]
+custom_minimum_size = Vector2(22, 22)
+custom_maximum_size = Vector2(22, 22)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 10
+mouse_default_cursor_shape = 2
+
+[node name="Digit64Inc" type="Button" parent="RollerGrid" unique_id=2021691330]
+custom_minimum_size = Vector2(22, 22)
+custom_maximum_size = Vector2(22, 22)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 10
+mouse_default_cursor_shape = 2
+
+[node name="Digit8Inc" type="Button" parent="RollerGrid" unique_id=217833461]
+custom_minimum_size = Vector2(22, 22)
+custom_maximum_size = Vector2(22, 22)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 10
+mouse_default_cursor_shape = 2
+
+[node name="Digit1Inc" type="Button" parent="RollerGrid" unique_id=1952005071]
+custom_minimum_size = Vector2(22, 22)
+custom_maximum_size = Vector2(22, 22)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 10
+mouse_default_cursor_shape = 2
+
+[node name="Identicon" parent="RollerGrid" unique_id=1738948121 instance=ExtResource("3_61est")]
+material = SubResource("ShaderMaterial_lsdqp")
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="Digit512" type="Label" parent="RollerGrid" unique_id=22588574]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+label_settings = SubResource("LabelSettings_i75l1")
+horizontal_alignment = 1
+
+[node name="Digit64" type="Label" parent="RollerGrid" unique_id=851997231]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+label_settings = SubResource("LabelSettings_i75l1")
+horizontal_alignment = 1
+
+[node name="Digit8" type="Label" parent="RollerGrid" unique_id=1292547140]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+label_settings = SubResource("LabelSettings_i75l1")
+horizontal_alignment = 1
+
+[node name="Digit1" type="Label" parent="RollerGrid" unique_id=1226118488]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+label_settings = SubResource("LabelSettings_i75l1")
+horizontal_alignment = 1
+
+[node name="SubLabel" type="Label" parent="RollerGrid" unique_id=676305010]
+layout_mode = 2
+size_flags_vertical = 3
+text = "-"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_l64t4")
+Message = Array[int]([-7])
+
+[node name="Digit512Dec" type="Button" parent="RollerGrid" unique_id=117634177]
+custom_minimum_size = Vector2(22, 22)
+custom_maximum_size = Vector2(22, 22)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+mouse_default_cursor_shape = 2
+
+[node name="Digit64Dec" type="Button" parent="RollerGrid" unique_id=1657094902]
+custom_minimum_size = Vector2(22, 22)
+custom_maximum_size = Vector2(22, 22)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+mouse_default_cursor_shape = 2
+
+[node name="Digit8Dec" type="Button" parent="RollerGrid" unique_id=1507032618]
+custom_minimum_size = Vector2(22, 22)
+custom_maximum_size = Vector2(22, 22)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+mouse_default_cursor_shape = 2
+
+[node name="Digit1Dec" type="Button" parent="RollerGrid" unique_id=443557325]
+custom_minimum_size = Vector2(22, 22)
+custom_maximum_size = Vector2(22, 22)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+mouse_default_cursor_shape = 2
+
+[node name="ActionButtons" type="VBoxContainer" parent="." unique_id=1189970378]
+layout_mode = 2
+
+[node name="SubmitButton" type="Button" parent="ActionButtons" unique_id=415710274]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+text = "set"
+script = ExtResource("1_l64t4")
+Message = Array[int]([-174])
+
+[node name="UndoButton" type="Button" parent="ActionButtons" unique_id=113470087]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+text = "reset"
+script = ExtResource("1_l64t4")
+Message = Array[int]([-29])
+
+[connection signal="pressed" from="RollerGrid/Digit512Inc" to="." method="_on_digit_512_inc_pressed"]
+[connection signal="pressed" from="RollerGrid/Digit64Inc" to="." method="_on_digit_64_inc_pressed"]
+[connection signal="pressed" from="RollerGrid/Digit8Inc" to="." method="_on_digit_8_inc_pressed"]
+[connection signal="pressed" from="RollerGrid/Digit1Inc" to="." method="_on_digit_1_inc_pressed"]
+[connection signal="pressed" from="RollerGrid/Digit512Dec" to="." method="_on_digit_512_dec_pressed"]
+[connection signal="pressed" from="RollerGrid/Digit64Dec" to="." method="_on_digit_64_dec_pressed"]
+[connection signal="pressed" from="RollerGrid/Digit8Dec" to="." method="_on_digit_8_dec_pressed"]
+[connection signal="pressed" from="RollerGrid/Digit1Dec" to="." method="_on_digit_1_dec_pressed"]
+[connection signal="pressed" from="ActionButtons/SubmitButton" to="." method="_on_submit_button_pressed"]
+[connection signal="pressed" from="ActionButtons/UndoButton" to="." method="_on_undo_button_pressed"]

@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dc1vhk1wyejon"]
+
+[ext_resource type="Shader" uid="uid://b7218835sr28v" path="res://Scenes/identicon.gdshader" id="1_tr8sa"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kd1wj"]
+resource_local_to_scene = true
+shader = ExtResource("1_tr8sa")
+shader_parameter/Value = 0
+
+[node name="Identicon" type="ColorRect" unique_id=1738948121]
+material = SubResource("ShaderMaterial_kd1wj")
+custom_minimum_size = Vector2(16, 16)
+custom_maximum_size = Vector2(16, 16)

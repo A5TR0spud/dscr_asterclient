@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dwkx03fumio6d"]
+
+[ext_resource type="Script" uid="uid://b5gm3ho0sr5aa" path="res://Scenes/dict_entry.gd" id="1_b8k2r"]
+
+[node name="DictEntry" type="VBoxContainer" unique_id=674482300]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_b8k2r")
+
+[node name="Entry" type="HBoxContainer" parent="." unique_id=92735987]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_constants/separation = 16
+
+[node name="Signal" type="Label" parent="Entry" unique_id=61928078]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "-2"
+
+[node name="Meaning" type="Label" parent="Entry" unique_id=12358058]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "-2"
+horizontal_alignment = 2
+uppercase = true
+
+[node name="HSeparator" type="HSeparator" parent="." unique_id=1714625919]
+layout_mode = 2
