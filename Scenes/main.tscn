@@ -269,6 +269,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "TODO:
 add input parsing so sending messages is possible
+add confirmation message for deleting signals
 trim really long messages with the -25 signal as a button
 save current callsign and try to grab it when reloading
 add autoscrolling when new messages arrive if already scrolled to the bottom
