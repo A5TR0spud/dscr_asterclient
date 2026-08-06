@@ -1,7 +1,7 @@
 extends ScrollContainer
 
 var oldBottom: float = 0
-@export var Tolerance: int = 100
+@export var Tolerance: int = 25
 @onready var scrollbar: VScrollBar = get_v_scroll_bar()
 
 func _ready():

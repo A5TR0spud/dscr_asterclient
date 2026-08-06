@@ -1,7 +1,7 @@
 extends VBoxContainer
 class_name DictionaryDisplay
 
-var dictEntryScene = preload("res://Scenes/dict_entry.tscn")
+static var dictEntryScene = preload("res://Scenes/DictDisplayMenu/dict_entry.tscn")
 
 var NumSearch: String = ""
 var NamSearch: String = ""
@@ -42,3 +42,6 @@ func SearchChildren() -> void:
 			(not NamSearch or DictionaryHandler.GetOrDefaultSignalName(child.Sig).contains(NamSearch))
 		)
 	ReSearch = false
+
+func _on_dictionary_save_open_pressed():
+	SaveSystem.OpenSaveLocation()

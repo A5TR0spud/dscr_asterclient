@@ -3,8 +3,8 @@ class_name Main
 
 @export var websocket_url: String = "wss://dscr-relay.dixonary.co.uk"
 var socket: WebSocketPeer = WebSocketPeer.new()
-const MaxMessageLength: int = 2000
 
+const MaxMessageLength: int = 2000
 const He6HalfLife: float = 0.8067 #about 121/150
 const CHANNEL_LEAVE: int = -65533
 const CHANNEL_JOIN: int = -65534
@@ -22,20 +22,24 @@ var Callsign: int = 0:
 var NeedCallsign: bool = true
 var previous_state: WebSocketPeer.State = WebSocketPeer.STATE_CLOSED
 
-@onready var ChatBody: Container = $MarginContainer/MainContainer/Body/Chat/MarginContainer/ScrollContainer/MarginContainer/ChatDisplay
-
 var ConnectedUsers: Array[int] = []
 
 static var instance : Main
 
 signal ReloadDict
+signal ReloadSettings
+static func OnDictReload() -> void:
+	instance.ReloadDict.emit()
+static func OnSettingsReload() -> void:
+	instance.ReloadSettings.emit()
+
 signal ConnectedUserChange
 
 func _enter_tree() -> void:
 	instance = self
 
 func _ready():
-	SaveSystem.LoadDict()
+	SaveSystem.Load()
 	StartConnect()
 
 static func GetCallsignColor(value: int) -> Color:
@@ -73,7 +77,10 @@ static func _hueToRgb(p: float, q: float, t: float) -> float:
 
 func StartConnect() -> void:
 	NeedCallsign = true
-	Callsign = randi_range(0, 4095)
+	if SettingsHandler.PreferredCallsign <= 4095 and SettingsHandler.PreferredCallsign >= 0:
+		Callsign = SettingsHandler.PreferredCallsign
+	else:
+		Callsign = randi_range(0, 4095)
 	# Initiate connection to the given URL.
 	var err = socket.connect_to_url(websocket_url)
 	if err == OK:
@@ -82,8 +89,6 @@ func StartConnect() -> void:
 	else:
 		push_error("Unable to connect.")
 		set_physics_process(false)
-
-var Trx = preload("res://Scenes/transmission_entry.tscn")
 
 func SendMessage(written: String) -> bool:
 	var sig: Array[int] = DictionaryHandler.ParseTextToSignals(written)
@@ -96,17 +101,6 @@ func SendMessage(written: String) -> bool:
 		return true
 	return false
 
-func RenderNewMessage(incoming: PackedStringArray) -> void:
-	var newMessage: TransEntry = Trx.instantiate()
-	newMessage.Timestamp = Time.get_ticks_msec()
-	newMessage.Sender = incoming[0].to_int()
-	newMessage.Trans = incoming[1].to_int()
-	var o: Array[int] = []
-	for s in incoming.slice(2):
-		o.append(s.to_int())
-	newMessage.Message = o
-	ChatBody.add_child(newMessage)
-
 func HandlePacket(incoming: String) -> void:
 	print("< Got string data from server: %s" % incoming)
 	var Status: PackedStringArray = incoming.split(",")
@@ -118,7 +112,7 @@ func HandlePacket(incoming: String) -> void:
 		NeedCallsign = true
 		return
 	if Status[0] == "R":
-		RenderNewMessage(Status.slice(1))
+		Chat.NewTransmission(Status.slice(1))
 		return
 	if Status[0] == "C":
 		ConnectedUsers.clear()
@@ -190,15 +184,11 @@ func _on_dictionary_save_open_pressed():
 	SaveSystem.LoadDict()
 	SaveSystem.OpenSaveLocation()
 
-static func OnDictReload() -> void:
-	instance._onDictReload()
-
-func _onDictReload() -> void:
-	ReloadDict.emit()
-
 func _on_dsve_button_pressed():
 	OS.shell_open("https://dsve.akqqa.dev/")
 
 func _on_callsign_edit_callsign_submitted(newValue: int) -> void:
 	Callsign = newValue
+	SettingsHandler.PreferredCallsign = newValue
+	SettingsHandler.Save()
 	NeedCallsign = true

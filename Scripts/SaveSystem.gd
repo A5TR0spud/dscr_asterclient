@@ -17,6 +17,8 @@ static var Dict: Dictionary = {
 	"afterUserDefaultMode": 1
 }
 
+static var Settings: Dictionary = {}
+
 const DICT_PATH : String = "user://DICTIONARY-1.save"
 const MACRO_PATH : String = "user://macro.json"
 const SETTINGS_PATH : String = "user://settings.json"
@@ -56,6 +58,38 @@ static func OpenSaveLocation() -> void:
 # 1: space
 # 2: new line
 # 3: double new line
+
+static func Load() -> void:
+	LoadDict()
+	LoadSettings()
+
+static func SaveSettings() -> void:
+	SettingsHandler.Export()
+	var json_string := JSON.stringify(Settings, "\t")
+	var file_access := FileAccess.open(SETTINGS_PATH, FileAccess.WRITE)
+	if not file_access:
+		print("An error happened while saving data: ", FileAccess.get_open_error())
+		return
+
+	file_access.store_string(json_string)
+	file_access.close()
+
+static func LoadSettings() -> void:
+	if not FileAccess.file_exists(SETTINGS_PATH):
+		SaveSettings()
+		SettingsHandler.Initialize()
+		return
+	var file_access := FileAccess.open(SETTINGS_PATH, FileAccess.READ)
+	var json_string:= FileAccess.get_file_as_string(SETTINGS_PATH)
+	file_access.close()
+	var json := JSON.new()
+	var error := json.parse(json_string)
+	if error:
+		print("JSON Parse Error: ", error)
+		return
+	Settings = json.data
+	SettingsHandler.Initialize()
+	Main.OnSettingsReload()
 
 static func LoadDict() -> void:
 	var file_access := FileAccess.open(DICT_PATH, FileAccess.READ)

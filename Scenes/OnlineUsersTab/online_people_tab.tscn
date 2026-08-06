@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://bunet4g0aqi5h"]
+
+[ext_resource type="Script" uid="uid://b5s8ghwqkgph2" path="res://Scenes/OnlineUsersTab/online_people_tab.gd" id="1_o3t4p"]
+
+[node name="OnlinePeopleTab" type="VBoxContainer" unique_id=1445824947]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_o3t4p")
+metadata/_tab_index = 1
+metadata/_tab_name = "Human"
+
+[node name="Label" type="Label" parent="." unique_id=679086166]
+layout_mode = 2
+text = "human count = 12"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="." unique_id=1949605660]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=2140011194]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="Margins" type="MarginContainer" parent="ScrollContainer" unique_id=171983257]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 7
+
+[node name="List" type="HFlowContainer" parent="ScrollContainer/Margins" unique_id=1206511835]
+layout_mode = 2
+theme_override_constants/h_separation = -2
+theme_override_constants/v_separation = -2

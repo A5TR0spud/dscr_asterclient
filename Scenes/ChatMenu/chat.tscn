@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://bmqd6twlnn8dk"]
+
+[ext_resource type="Script" uid="uid://dr2cb7q6mysjs" path="res://Scenes/ChatMenu/chat.gd" id="1_iy605"]
+[ext_resource type="Script" uid="uid://b17wh5igsahay" path="res://Scripts/auto_scroll.gd" id="2_md8bx"]
+[ext_resource type="Script" uid="uid://eyonivvk3glk" path="res://Scenes/ChatMenu/message_edit.gd" id="3_ttrms"]
+
+[node name="Chat" type="VBoxContainer" unique_id=2068892274]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_iy605")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1886248044]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_bottom = 12
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer" unique_id=18972742]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+script = ExtResource("2_md8bx")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer" unique_id=2076998585]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_right = 15
+
+[node name="ChatDisplay" type="VBoxContainer" parent="MarginContainer/ScrollContainer/MarginContainer" unique_id=1752267889]
+layout_mode = 2
+alignment = 2
+
+[node name="MessageEdit" type="TextEdit" parent="." unique_id=838416481]
+custom_maximum_size = Vector2(-1, 400)
+layout_mode = 2
+size_flags_vertical = 8
+localize_numeral_system = false
+placeholder_text = "type here"
+emoji_menu_enabled = false
+wrap_mode = 1
+tab_input_mode = false
+scroll_fit_content_height = true
+caret_blink = true
+caret_multiple = false
+script = ExtResource("3_ttrms")
+
+[connection signal="lines_edited_from" from="MessageEdit" to="MessageEdit" method="_on_lines_edited_from"]
+[connection signal="text_changed" from="MessageEdit" to="MessageEdit" method="_on_text_changed"]

@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://dnd1u3xl3gie1"]
+
+[ext_resource type="Script" uid="uid://dac7uo18qn4rm" path="res://Scenes/SettingsMenu/setting_entry.gd" id="1_1q4p6"]
+[ext_resource type="PackedScene" uid="uid://bw4nasduhbqkb" path="res://Scenes/Common/bool_toggle_button.tscn" id="2_48t1y"]
+
+[node name="SettingEntry" type="VBoxContainer" unique_id=1141489488]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_1q4p6")
+
+[node name="Description" type="Label" parent="." unique_id=1770222688]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "bool [setting]"
+autowrap_mode = 2
+
+[node name="BoolOption" type="HBoxContainer" parent="." unique_id=161004079]
+layout_mode = 2
+
+[node name="Equals" type="Label" parent="BoolOption" unique_id=1098791462]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "is"
+
+[node name="BoolButton" parent="BoolOption" unique_id=1728394877 instance=ExtResource("2_48t1y")]
+layout_mode = 2
+IsOn = true
+
+[node name="HSeparator" type="HSeparator" parent="." unique_id=264909740]
+layout_mode = 2
+
+[connection signal="toggled" from="BoolOption/BoolButton" to="." method="_on_bool_button_toggled"]

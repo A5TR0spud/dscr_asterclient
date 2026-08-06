@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://tpn8p2apuh1t"]
+
+[ext_resource type="Script" uid="uid://dqce42c573ptg" path="res://Scripts/SimpleTranslatable.gd" id="1_tpcp0"]
+[ext_resource type="Script" uid="uid://cwf16ujxnodbv" path="res://Scenes/DictDisplayMenu/default_format_option.gd" id="2_wphnd"]
+[ext_resource type="Script" uid="uid://b6d5ucfwdeqjh" path="res://Scenes/DictDisplayMenu/dictionary_display.gd" id="3_b08ua"]
+[ext_resource type="Script" uid="uid://cyqng7nb5maao" path="res://Scenes/DictDisplayMenu/new_signal_button.gd" id="4_1mk6h"]
+
+[node name="DictionaryTab" type="VBoxContainer" unique_id=1745367524]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_tab_index = 0
+metadata/_tab_name = "Dict"
+
+[node name="DictionaryHeader" type="HBoxContainer" parent="." unique_id=1297061459]
+layout_mode = 2
+
+[node name="DictionaryLabel" type="Label" parent="DictionaryHeader" unique_id=1474423653]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "dict"
+horizontal_alignment = 1
+script = ExtResource("1_tpcp0")
+Message = Array[int]([-42, -237])
+
+[node name="DictionarySaveOpen" type="Button" parent="DictionaryHeader" unique_id=1945237576]
+layout_mode = 2
+mouse_default_cursor_shape = 16
+text = "file"
+script = ExtResource("1_tpcp0")
+Message = Array[int]([-40])
+
+[node name="HSeparator2" type="HSeparator" parent="." unique_id=1377386859]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=656199895]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer" unique_id=1835053845]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_right = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer" unique_id=1306308516]
+layout_mode = 2
+
+[node name="DefaultFormatOption" type="VBoxContainer" parent="ScrollContainer/MarginContainer/VBoxContainer" unique_id=114364998]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+script = ExtResource("2_wphnd")
+
+[node name="Signal" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer/DefaultFormatOption" unique_id=805318430]
+layout_mode = 2
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+text = "unknown signal"
+horizontal_alignment = 3
+script = ExtResource("1_tpcp0")
+Message = Array[int]([-110, -124])
+
+[node name="HSeparator" type="HSeparator" parent="ScrollContainer/MarginContainer/VBoxContainer/DefaultFormatOption" unique_id=384322409]
+layout_mode = 2
+
+[node name="Dictionary" type="VBoxContainer" parent="ScrollContainer/MarginContainer/VBoxContainer" unique_id=2102306008]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("3_b08ua")
+
+[node name="NewSignalButton" type="Button" parent="." unique_id=1501381942]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "new signal"
+script = ExtResource("4_1mk6h")
+Message = Array[int]([-38, -77, -163])
+
+[node name="NewSignalDesig" type="HBoxContainer" parent="." unique_id=1003123393]
+layout_mode = 2
+
+[node name="NumEdit" type="LineEdit" parent="NewSignalDesig" unique_id=1375073779]
+custom_maximum_size = Vector2(230, -1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+placeholder_text = "number"
+max_length = 8
+expand_to_text_length = true
+emoji_menu_enabled = false
+caret_blink = true
+script = ExtResource("1_tpcp0")
+Message = Array[int]([-260])
+PropertyName = &"placeholder_text"
+
+[node name="SigEdit" type="LineEdit" parent="NewSignalDesig" unique_id=804966430]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "signal"
+alignment = 2
+max_length = 20
+expand_to_text_length = true
+emoji_menu_enabled = false
+caret_blink = true
+script = ExtResource("1_tpcp0")
+Message = Array[int]([-42])
+PropertyName = &"placeholder_text"
+
+[connection signal="pressed" from="DictionaryHeader/DictionarySaveOpen" to="ScrollContainer/MarginContainer/VBoxContainer/Dictionary" method="_on_dictionary_save_open_pressed"]
+[connection signal="pressed" from="NewSignalButton" to="NewSignalButton" method="_on_pressed"]
+[connection signal="text_changed" from="NewSignalDesig/NumEdit" to="ScrollContainer/MarginContainer/VBoxContainer/Dictionary" method="_on_num_edit_text_changed"]
+[connection signal="text_changed" from="NewSignalDesig/SigEdit" to="ScrollContainer/MarginContainer/VBoxContainer/Dictionary" method="_on_sig_edit_text_changed"]

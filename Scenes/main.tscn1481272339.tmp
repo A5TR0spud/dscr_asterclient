@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://cyqng7nb5maao" path="res://Scenes/new_signal_button.gd" id="5_344ge"]
 [ext_resource type="Script" uid="uid://ciogfbq06qv56" path="res://Scenes/dict_edit_menu.gd" id="5_kry3j"]
 [ext_resource type="PackedScene" uid="uid://bw4nasduhbqkb" path="res://Scenes/bool_toggle_button.tscn" id="6_21xkr"]
+[ext_resource type="Script" uid="uid://b5gm3ho0sr5aa" path="res://Scenes/dict_entry.gd" id="7_fdnlq"]
 [ext_resource type="Script" uid="uid://b5s8ghwqkgph2" path="res://Scenes/online_people_tab.gd" id="7_hptm8"]
 
 [node name="Main" type="PanelContainer" unique_id=201184023]
@@ -124,7 +125,7 @@ size_flags_horizontal = 3
 [node name="SidebarTabber" type="TabContainer" parent="MarginContainer/MainContainer/Body/Sidebar" unique_id=853955400]
 layout_mode = 2
 size_flags_vertical = 3
-current_tab = 2
+current_tab = 0
 clip_tabs = false
 use_hidden_tabs_for_min_size = true
 tab_0/title = "Dict"
@@ -132,7 +133,6 @@ tab_1/title = "Human"
 script = ExtResource("4_ynf5e")
 
 [node name="DictionaryTab" type="VBoxContainer" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber" unique_id=1031905730]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 metadata/_tab_name = "Dict"
@@ -170,8 +170,27 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/margin_right = 10
 
-[node name="Dictionary" type="VBoxContainer" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/ScrollContainer/MarginContainer" unique_id=1356490977]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/ScrollContainer/MarginContainer" unique_id=1029360119]
 layout_mode = 2
+
+[node name="DictEntry" type="VBoxContainer" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/ScrollContainer/MarginContainer/VBoxContainer" unique_id=674482300]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("7_fdnlq")
+
+[node name="Signal" type="Label" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/ScrollContainer/MarginContainer/VBoxContainer/DictEntry" unique_id=61928078]
+layout_mode = 2
+text = "unknown signal"
+horizontal_alignment = 1
+script = ExtResource("2_8gbba")
+Message = Array[int]([-110, -124, -42])
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/ScrollContainer/MarginContainer/VBoxContainer/DictEntry" unique_id=1714625919]
+layout_mode = 2
+
+[node name="Dictionary" type="VBoxContainer" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/ScrollContainer/MarginContainer/VBoxContainer" unique_id=1356490977]
+layout_mode = 2
+size_flags_vertical = 3
 script = ExtResource("3_jjvhh")
 
 [node name="NewSignalButton" type="Button" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab" unique_id=85783762]
@@ -246,6 +265,7 @@ theme_override_constants/h_separation = -2
 theme_override_constants/v_separation = -2
 
 [node name="SettingsTab" type="VBoxContainer" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber" unique_id=329279550]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
@@ -271,11 +291,13 @@ size_flags_vertical = 3
 text = "this will be the settings menu at some point, and the todo list will be removed.
 TODO:
 - add default formatting edit menu
+- add transmission bookmark option
 - fix weird bug where typing a message arbitrarily moves the caret????
+- add error messages
+- add copy button for raw signals to transmissions
 - add confirmation message for deleting dictionary entries
 - trim really long messages with the -25 signal as a button
 - save current callsign and try to grab it when reloading
-- add autoscrolling when new messages arrive if already scrolled to the bottom
 - add channel system
 - add image renderer (should be quite simple really) (famous last words)
 - websocket address setting
@@ -313,7 +335,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="DictEditMenu" type="CenterContainer" parent="." unique_id=336075557]
-visible = false
 layout_mode = 2
 mouse_filter = 2
 script = ExtResource("5_kry3j")
@@ -413,9 +434,8 @@ Message = Array[int]([-26, -14, 2, -229, -42, -122, 1, -108, -190, -15, -4])
 [node name="BreakOnDouble" parent="DictEditMenu/PanelContainer/DictEditMainframe/BreakSentence" unique_id=1728394877 instance=ExtResource("6_21xkr")]
 layout_mode = 2
 
-[node name="SubmitElseCancel" type="GridContainer" parent="DictEditMenu/PanelContainer/DictEditMainframe" unique_id=356346339]
+[node name="SubmitElseCancel" type="FlowContainer" parent="DictEditMenu/PanelContainer/DictEditMainframe" unique_id=1676947008]
 layout_mode = 2
-columns = 2
 
 [node name="SubmitButton" type="Button" parent="DictEditMenu/PanelContainer/DictEditMainframe/SubmitElseCancel" unique_id=1494365595]
 layout_mode = 2
@@ -450,8 +470,8 @@ Message = Array[int]([-163, -29, -85])
 [connection signal="text_changed" from="MarginContainer/MainContainer/Body/Chat/MessageEdit" to="MarginContainer/MainContainer/Body/Chat/MessageEdit" method="_on_text_changed"]
 [connection signal="pressed" from="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/DictionaryHeader/DictionarySaveOpen" to="." method="_on_dictionary_save_open_pressed"]
 [connection signal="pressed" from="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/NewSignalButton" to="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/NewSignalButton" method="_on_pressed"]
-[connection signal="text_changed" from="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/NewSignalDesig/NumEdit" to="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/ScrollContainer/MarginContainer/Dictionary" method="_on_num_edit_text_changed"]
-[connection signal="text_changed" from="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/NewSignalDesig/SigEdit" to="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/ScrollContainer/MarginContainer/Dictionary" method="_on_sig_edit_text_changed"]
+[connection signal="text_changed" from="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/NewSignalDesig/NumEdit" to="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/ScrollContainer/MarginContainer/VBoxContainer/Dictionary" method="_on_num_edit_text_changed"]
+[connection signal="text_changed" from="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/NewSignalDesig/SigEdit" to="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/ScrollContainer/MarginContainer/VBoxContainer/Dictionary" method="_on_sig_edit_text_changed"]
 [connection signal="CallsignSubmitted" from="MarginContainer/MainContainer/Body/Sidebar/CallsignContainer/CallsignEdit" to="." method="_on_callsign_edit_callsign_submitted"]
 [connection signal="text_changed" from="DictEditMenu/PanelContainer/DictEditMainframe/SignalNameEdit/NameLineEdit" to="DictEditMenu" method="_on_name_line_edit_text_changed"]
 [connection signal="text_submitted" from="DictEditMenu/PanelContainer/DictEditMainframe/SignalNameEdit/NameLineEdit" to="DictEditMenu" method="_on_name_line_edit_text_submitted"]

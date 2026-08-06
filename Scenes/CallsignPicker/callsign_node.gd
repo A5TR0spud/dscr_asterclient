@@ -4,7 +4,7 @@ class_name CallsignSelector
 @onready var dig64: Label = $RollerGrid/Digit64
 @onready var dig8: Label = $RollerGrid/Digit8
 @onready var dig1: Label = $RollerGrid/Digit1
-@onready var ID: ColorRect = $RollerGrid/Identicon
+@onready var ID: Identicon  = $RollerGrid/Identicon
 
 @export_range(0, 4095, 1, "prefer_slider") var base10: int = 0:
 	set (value):
@@ -24,8 +24,7 @@ class_name CallsignSelector
 		rem = rem % 8
 		dig1.text = String.num_int64(rem)
 		dig1.label_settings.font_color = Main.GetCallsignColor(base10)
-		ID.material.set_shader_parameter("Value", base10)
-		ID.color = Main.GetCallsignColor(base10)
+		ID.Num = base10
 
 @export var CALLSIGN: int = 0:
 	set(value):

@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://bvo2gxc2kcenm"]
+
+[ext_resource type="Script" uid="uid://bx77kcm12yq8h" path="res://Scenes/SettingsMenu/settings_tab.gd" id="1_0yg8b"]
+[ext_resource type="Script" uid="uid://dqce42c573ptg" path="res://Scripts/SimpleTranslatable.gd" id="1_1gwgo"]
+[ext_resource type="PackedScene" uid="uid://dnd1u3xl3gie1" path="res://Scenes/SettingsMenu/setting_entry.tscn" id="3_0yg8b"]
+
+[node name="SettingsTab" type="VBoxContainer" unique_id=1649791393]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_0yg8b")
+metadata/_tab_index = 2
+
+[node name="Label" type="Label" parent="." unique_id=77176787]
+layout_mode = 2
+text = "settings"
+horizontal_alignment = 1
+script = ExtResource("1_1gwgo")
+Message = Array[int]([-241, -174])
+
+[node name="HSeparator" type="HSeparator" parent="." unique_id=482587478]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1648418170]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer" unique_id=1280514268]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_right = 10
+
+[node name="Options" type="VBoxContainer" parent="ScrollContainer/MarginContainer" unique_id=1647770350]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Formatting" parent="ScrollContainer/MarginContainer/Options" unique_id=1141489488 instance=ExtResource("3_0yg8b")]
+layout_mode = 2
+Description = Array[int]([-42, -190, -85, -100, -223])
+
+[node name="TruncMargin" type="MarginContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=730512064]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+
+[node name="TruncHbox" type="HBoxContainer" parent="ScrollContainer/MarginContainer/Options/TruncMargin" unique_id=720322280]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TruncationSpinner" type="SpinBox" parent="ScrollContainer/MarginContainer/Options/TruncMargin/TruncHbox" unique_id=1798054392]
+layout_mode = 2
+size_flags_horizontal = 0
+min_value = 31.0
+max_value = 511.0
+value = 63.0
+rounded = true
+
+[node name="TruncLabel" type="Label" parent="ScrollContainer/MarginContainer/Options/TruncMargin/TruncHbox" unique_id=1597931858]
+layout_mode = 2
+text = "they say flowers fade and their beauty can't be weighed with flowers so fake"
+script = ExtResource("1_1gwgo")
+Message = Array[int]([-42, -122, -25])
+
+[node name="HSeparator" type="HSeparator" parent="ScrollContainer/MarginContainer/Options" unique_id=1571308958]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/MarginContainer/Options" unique_id=1987941446]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "this will be the settings menu at some point, and the todo list will be removed.
+TODO:
+- add transmission bookmark option
+- fix weird bug where typing a message arbitrarily moves the caret????
+- add error messages
+- add copy button for raw signals to transmissions (and remove context menu)
+- add confirmation message for deleting dictionary entries
+- add channel system
+- add image renderer (should be quite simple really) (famous last words)
+- websocket address setting
+- font size setting
+- callsign image on/off setting
+- change callsign image from shader to draw call and from a parameter to a variable that redraws automatically (use setter func)
+- new transmission makes a noise setting
+- lone confetti signal makes confetti setting (only visible if the confetti signal is defined)
+- clean vs clunky UI setting (current UI is in \"clean\" mode)
+- add \"macro edit\" sidebar
+"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+meta_underlined = false
+hint_underlined = false
+
+[connection signal="Set" from="ScrollContainer/MarginContainer/Options/Formatting" to="." method="_on_formatting_set"]

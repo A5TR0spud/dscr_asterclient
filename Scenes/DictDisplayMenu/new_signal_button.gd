@@ -2,7 +2,6 @@ extends TranslatableSimple
 
 @onready var NumChooser: LineEdit = $"../NewSignalDesig/NumEdit"
 @onready var NameChooser: LineEdit = $"../NewSignalDesig/SigEdit"
-@onready var Dict: DictionaryDisplay = $"../ScrollContainer/MarginContainer/Dictionary"
 
 func _on_pressed() -> void:
 	var sig: int = -absi(int(NumChooser.text.to_int()))

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dc1vhk1wyejon"]
 
-[ext_resource type="Shader" uid="uid://b7218835sr28v" path="res://Scenes/identicon.gdshader" id="1_tr8sa"]
+[ext_resource type="Shader" uid="uid://b7218835sr28v" path="res://Scenes/Common/identicon.gdshader" id="1_tr8sa"]
+[ext_resource type="Script" uid="uid://bj5byqo1egtnk" path="res://Scenes/Common/identicon.gd" id="2_gq0d8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kd1wj"]
 resource_local_to_scene = true
@@ -11,3 +12,4 @@ shader_parameter/Value = 0
 material = SubResource("ShaderMaterial_kd1wj")
 custom_minimum_size = Vector2(16, 16)
 custom_maximum_size = Vector2(16, 16)
+script = ExtResource("2_gq0d8")

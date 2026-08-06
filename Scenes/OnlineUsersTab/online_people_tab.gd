@@ -4,7 +4,7 @@ func _ready():
 	Main.instance.ReloadDict.connect(Refresh)
 	Main.instance.ConnectedUserChange.connect(Reload)
 
-var entry = preload("res://Scenes/callsign_entry.tscn")
+var entry = preload("res://Scenes/OnlineUsersTab/callsign_entry.tscn")
 
 @onready var List: FlowContainer = $ScrollContainer/Margins/List
 @onready var Header: Label = $Label

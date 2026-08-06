@@ -1,7 +1,7 @@
 extends Button
 class_name BoolButton
 
-var IsOn: bool:
+@export var IsOn: bool:
 	set(value):
 		button_pressed = not value
 	get:

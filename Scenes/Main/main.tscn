@@ -1,0 +1,134 @@
+[gd_scene format=3 uid="uid://bft3wuvruhqvw"]
+
+[ext_resource type="Script" uid="uid://1aqi7v8d5nf0" path="res://Scenes/Main/main.gd" id="1_6t3k2"]
+[ext_resource type="Script" uid="uid://dqce42c573ptg" path="res://Scripts/SimpleTranslatable.gd" id="2_vk4q2"]
+[ext_resource type="PackedScene" uid="uid://bmqd6twlnn8dk" path="res://Scenes/ChatMenu/chat.tscn" id="3_imbg2"]
+[ext_resource type="Script" uid="uid://bft2883q6jmm7" path="res://Scenes/Main/sidebar_tabber.gd" id="6_es6iu"]
+[ext_resource type="PackedScene" uid="uid://tpn8p2apuh1t" path="res://Scenes/DictDisplayMenu/dictionary_tab.tscn" id="7_hfg1r"]
+[ext_resource type="PackedScene" uid="uid://bunet4g0aqi5h" path="res://Scenes/OnlineUsersTab/online_people_tab.tscn" id="8_hfg1r"]
+[ext_resource type="PackedScene" uid="uid://bvo2gxc2kcenm" path="res://Scenes/SettingsMenu/settings_tab.tscn" id="9_4e4y2"]
+[ext_resource type="PackedScene" uid="uid://c1h04iufkd28w" path="res://Scenes/CallsignPicker/callsign_node.tscn" id="11_4a3kt"]
+[ext_resource type="Script" uid="uid://cmdmiuvan8h1p" path="res://Scenes/Main/dict_edit_prison.gd" id="12_ifk88"]
+[ext_resource type="PackedScene" uid="uid://crn4b5wrwilbc" path="res://Scenes/DictEditMenu/dict_edit_window.tscn" id="13_8sujb"]
+
+[node name="Main" type="PanelContainer" unique_id=201184023]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6t3k2")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=71793566]
+layout_mode = 2
+
+[node name="MainContainer" type="VBoxContainer" parent="MarginContainer" unique_id=651321224]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="MarginContainer/MainContainer" unique_id=1305811835]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/MainContainer/Header" unique_id=1283547797]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "dscr client"
+script = ExtResource("2_vk4q2")
+Message = Array[int]([-247, -128])
+
+[node name="Address" type="HBoxContainer" parent="MarginContainer/MainContainer/Header" unique_id=1263877326]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="AddressLabel" type="Label" parent="MarginContainer/MainContainer/Header/Address" unique_id=1194611740]
+visible = false
+layout_mode = 2
+text = "websocket address MOVE THIS TO SETTINGS"
+script = ExtResource("2_vk4q2")
+Message = Array[int]([-257, -41])
+
+[node name="AddressEdit" type="LineEdit" parent="MarginContainer/MainContainer/Header/Address" unique_id=334873355]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+placeholder_text = "wss://dscr-relay.dixonary.co.uk"
+expand_to_text_length = true
+emoji_menu_enabled = false
+clear_button_enabled = true
+draw_control_chars = true
+select_all_on_focus = true
+caret_blink = true
+
+[node name="DsveButton" type="Button" parent="MarginContainer/MainContainer/Header" unique_id=408009820]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "visual editor"
+script = ExtResource("2_vk4q2")
+Message = Array[int]([-53, -38])
+
+[node name="HSeparator3" type="HSeparator" parent="MarginContainer/MainContainer" unique_id=544634055]
+layout_mode = 2
+
+[node name="Body" type="HSplitContainer" parent="MarginContainer/MainContainer" unique_id=116522902]
+layout_mode = 2
+size_flags_vertical = 3
+split_offsets = PackedInt32Array(600)
+split_offset = 600
+
+[node name="Chat" parent="MarginContainer/MainContainer/Body" unique_id=2068892274 instance=ExtResource("3_imbg2")]
+layout_mode = 2
+
+[node name="Sidebar" type="VBoxContainer" parent="MarginContainer/MainContainer/Body" unique_id=2052290855]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SidebarTabber" type="TabContainer" parent="MarginContainer/MainContainer/Body/Sidebar" unique_id=853955400]
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 2
+clip_tabs = false
+use_hidden_tabs_for_min_size = true
+tab_0/title = "Dict"
+tab_1/title = "Human"
+script = ExtResource("6_es6iu")
+
+[node name="DictionaryTab" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber" unique_id=1745367524 instance=ExtResource("7_hfg1r")]
+visible = false
+layout_mode = 2
+
+[node name="OnlinePeopleTab" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber" unique_id=1445824947 instance=ExtResource("8_hfg1r")]
+visible = false
+layout_mode = 2
+
+[node name="SettingsTab" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber" unique_id=1649791393 instance=ExtResource("9_4e4y2")]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/MainContainer/Body/Sidebar" unique_id=1590731449]
+layout_mode = 2
+
+[node name="CallsignContainer" type="VBoxContainer" parent="MarginContainer/MainContainer/Body/Sidebar" unique_id=90528685]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="CallsignLabel" type="Label" parent="MarginContainer/MainContainer/Body/Sidebar/CallsignContainer" unique_id=1998627814]
+layout_mode = 2
+text = "callsign"
+horizontal_alignment = 1
+script = ExtResource("2_vk4q2")
+Message = Array[int]([-128, -260])
+
+[node name="CallsignEdit" parent="MarginContainer/MainContainer/Body/Sidebar/CallsignContainer" unique_id=965442127 instance=ExtResource("11_4a3kt")]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="DictEditPrison" type="CenterContainer" parent="." unique_id=336075557]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("12_ifk88")
+
+[node name="DictEditWindow" parent="DictEditPrison" unique_id=1113766720 instance=ExtResource("13_8sujb")]
+layout_mode = 2
+
+[connection signal="pressed" from="MarginContainer/MainContainer/Header/DsveButton" to="." method="_on_dsve_button_pressed"]
+[connection signal="CallsignSubmitted" from="MarginContainer/MainContainer/Body/Sidebar/CallsignContainer/CallsignEdit" to="." method="_on_callsign_edit_callsign_submitted"]
+[connection signal="visibility_changed" from="DictEditPrison/DictEditWindow" to="DictEditPrison" method="_on_dict_edit_window_visibility_changed"]

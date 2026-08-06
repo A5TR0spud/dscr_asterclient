@@ -23,6 +23,21 @@ window/size/initial_position_type=5
 window/size/sharp_corners=true
 window/stretch/aspect="expand"
 
+[file_customization]
+
+folder_colors={
+"res://Builds/": "orange",
+"res://Scenes/": "green",
+"res://Scenes/CallsignPicker/": "gray",
+"res://Scenes/ChatMenu/": "blue",
+"res://Scenes/Common/": "gray",
+"res://Scenes/DictDisplayMenu/": "orange",
+"res://Scenes/DictEditMenu/": "yellow",
+"res://Scenes/OnlineUsersTab/": "pink",
+"res://Scripts/": "gray",
+"res://fonts/": "red"
+}
+
 [gui]
 
 theme/custom="uid://c0reghmcwiqpy"

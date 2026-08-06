@@ -1,4 +1,4 @@
-extends CenterContainer
+extends Container
 class_name DictEditMenu
 
 static var instance: DictEditMenu
@@ -8,23 +8,33 @@ func _enter_tree():
 
 @export var CURRENT_SIGNAL: int = 0:
 	set(value):
-		CURRENT_SIGNAL = min(value, -1)
+		CURRENT_SIGNAL = min(value, 0)
 		Reload()
 
-@onready var NameLabel: Label = $PanelContainer/DictEditMainframe/SignalNameEdit/NameLabel
-@onready var BefLabel: OptionButton = $PanelContainer/DictEditMainframe/BeforeAndAfterFormat/BeforeOption
-@onready var BAClearLabel: Label = $PanelContainer/DictEditMainframe/BeforeAndAfterFormat/FormatClarity
-@onready var AftLabel: OptionButton = $PanelContainer/DictEditMainframe/BeforeAndAfterFormat/AfterOption
-@onready var BrkButton: BoolButton = $PanelContainer/DictEditMainframe/BreakSentence/BreakOnDouble
+@onready var NameLabel: Label = $DictEditMainframe/SignalNameEdit/NameLabel
+@onready var BefLabel: OptionButton = $DictEditMainframe/BeforeAndAfterFormat/BeforeOption
+@onready var BAClearLabel: Label = $DictEditMainframe/BeforeAndAfterFormat/FormatClarity
+@onready var AftLabel: OptionButton = $DictEditMainframe/BeforeAndAfterFormat/AfterOption
+@onready var BrkButton: BoolButton = $DictEditMainframe/BreakSentence/BreakOnDouble
 
-@onready var NameEdit: LineEdit = $PanelContainer/DictEditMainframe/SignalNameEdit/NameLineEdit
-@onready var DescEdit: TextEdit = $PanelContainer/DictEditMainframe/NotesEdit
+@onready var NameEdit: LineEdit = $DictEditMainframe/SignalNameEdit/NameLineEdit
+@onready var DescEdit: TextEdit = $DictEditMainframe/NotesEdit
+
+@onready var BreakSentence: HBoxContainer = $DictEditMainframe/BreakSentence
+@onready var NameSentence: HBoxContainer = $DictEditMainframe/SignalNameEdit
+@onready var DeleteButton: Button = $DictEditMainframe/SubmitElseCancel/DeleteButton
 
 func _ready():
 	Main.instance.ReloadDict.connect(Refresh)
 	hide()
 
 func Save() -> void:
+	if CURRENT_SIGNAL == 0:
+		DictionaryHandler.defaultBeforeMode = BefLabel.selected
+		DictionaryHandler.defaultAfterMode = AftLabel.selected
+		SaveSystem.SaveDict()
+		Main.OnDictReload()
+		return
 	DictionaryHandler.ApplySignalName(CURRENT_SIGNAL, NameEdit.text)
 	NameLabel.text = DictionaryHandler.GetOrDefaultSignalName(CURRENT_SIGNAL)
 	DictionaryHandler.ApplySignalDesc(CURRENT_SIGNAL, {
@@ -37,6 +47,15 @@ func Save() -> void:
 	Main.OnDictReload()
 
 func Reload() -> void:
+	BreakSentence.visible = CURRENT_SIGNAL != 0
+	NameSentence.visible = CURRENT_SIGNAL != 0
+	DescEdit.visible = CURRENT_SIGNAL != 0
+	DeleteButton.visible = CURRENT_SIGNAL != 0
+	if CURRENT_SIGNAL == 0:
+		BAClearLabel.text = DictionaryHandler.Signals2Words([-122, -124, -42, -122])
+		BefLabel.select(DictionaryHandler.defaultBeforeMode)
+		AftLabel.select(DictionaryHandler.defaultAfterMode)
+		return
 	var desc: Dictionary = DictionaryHandler.GetOrDefaultSignalDesc(CURRENT_SIGNAL)
 	NameLabel.text = DictionaryHandler.Signals2Words([-42, -14, -1, absi(CURRENT_SIGNAL), -15, -4])
 	BAClearLabel.text = DictionaryHandler.Signals2Words([-122, CURRENT_SIGNAL, -122])

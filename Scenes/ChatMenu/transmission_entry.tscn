@@ -1,15 +1,18 @@
 [gd_scene format=3 uid="uid://d4neakrhevfia"]
 
-[ext_resource type="Script" uid="uid://bni3uvm8h06ws" path="res://Scenes/transmission_entry.gd" id="1_i75l1"]
-[ext_resource type="FontFile" uid="uid://d1qf4i8th7m5o" path="res://fonts/Hack-Bold.ttf" id="2_grots"]
-[ext_resource type="PackedScene" uid="uid://dc1vhk1wyejon" path="res://Scenes/identicon.tscn" id="3_ep8hj"]
-[ext_resource type="PackedScene" uid="uid://5vo5f0g0mnfc" path="res://Scenes/dashed_h_separator.tscn" id="3_mprdl"]
-[ext_resource type="Shader" uid="uid://b7218835sr28v" path="res://Scenes/identicon.gdshader" id="4_40iv5"]
+[ext_resource type="Script" uid="uid://bni3uvm8h06ws" path="res://Scenes/ChatMenu/transmission_entry.gd" id="1_42owa"]
+[ext_resource type="PackedScene" uid="uid://dc1vhk1wyejon" path="res://Scenes/Common/identicon.tscn" id="2_wapdh"]
+[ext_resource type="Shader" uid="uid://b7218835sr28v" path="res://Scenes/Common/identicon.gdshader" id="3_kq2tu"]
+[ext_resource type="FontFile" uid="uid://d1qf4i8th7m5o" path="res://fonts/Hack-Bold.ttf" id="4_gt42v"]
+[ext_resource type="PackedScene" uid="uid://5vo5f0g0mnfc" path="res://Scenes/Common/dashed_h_separator.tscn" id="5_a82gk"]
+[ext_resource type="Script" uid="uid://dqce42c573ptg" path="res://Scripts/SimpleTranslatable.gd" id="5_wapdh"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ep8hj"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wapdh"]
 resource_local_to_scene = true
-shader = ExtResource("4_40iv5")
+shader = ExtResource("3_kq2tu")
 shader_parameter/Value = 0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g4v7s"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_i75l1"]
 color = Color(1, 1, 1, 1)
@@ -24,40 +27,56 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
-script = ExtResource("1_i75l1")
+script = ExtResource("1_42owa")
 
 [node name="Header" type="HBoxContainer" parent="." unique_id=1945409952]
 layout_mode = 2
 
 [node name="Cbox" type="HBoxContainer" parent="Header" unique_id=873763597]
 layout_mode = 2
+theme_override_constants/separation = 0
 
-[node name="Identicon" parent="Header/Cbox" unique_id=1738948121 instance=ExtResource("3_ep8hj")]
-material = SubResource("ShaderMaterial_ep8hj")
+[node name="Identicon" parent="Header/Cbox" unique_id=1738948121 instance=ExtResource("2_wapdh")]
+material = SubResource("ShaderMaterial_wapdh")
 layout_mode = 2
 size_flags_vertical = 4
+mouse_filter = 1
+
+[node name="VSeparator" type="VSeparator" parent="Header/Cbox" unique_id=431956489]
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/separator = SubResource("StyleBoxEmpty_g4v7s")
 
 [node name="CallsignLabel" type="Label" parent="Header/Cbox" unique_id=1243900506]
 visible = false
 self_modulate = Color(1, 1, 1, 0.49803922)
 layout_mode = 2
 size_flags_horizontal = 0
+mouse_filter = 1
 text = "callsign "
 
 [node name="Callsign" type="Label" parent="Header/Cbox" unique_id=127964771]
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_fonts/font = ExtResource("2_grots")
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("4_gt42v")
 text = "1574"
+
+[node name="Control" type="Control" parent="Header" unique_id=1847686898]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
 
 [node name="Timeago" type="Label" parent="Header" unique_id=1382497997]
 self_modulate = Color(1, 1, 1, 0.49803922)
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 8
+mouse_filter = 1
 text = "30 akersecond prior when"
 
-[node name="VSeparator" type="VSeparator" parent="Header" unique_id=1107757692]
+[node name="TimeTRXSep" type="VSeparator" parent="Header" unique_id=1107757692]
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Tbox" type="HBoxContainer" parent="Header" unique_id=596106445]
 layout_mode = 2
@@ -68,11 +87,13 @@ visible = false
 self_modulate = Color(1, 1, 1, 0.49803922)
 layout_mode = 2
 size_flags_horizontal = 0
+mouse_filter = 1
 text = "transmission "
 
 [node name="Trans" type="Label" parent="Header/Tbox" unique_id=1279467106]
 layout_mode = 2
 size_flags_horizontal = 0
+mouse_filter = 1
 text = "254"
 
 [node name="Body" type="HBoxContainer" parent="." unique_id=1048473022]
@@ -80,14 +101,20 @@ layout_mode = 2
 
 [node name="MessageIndent" type="VSeparator" parent="Body" unique_id=931651164]
 layout_mode = 2
+mouse_filter = 1
 theme_override_constants/separation = 10
 theme_override_styles/separator = SubResource("StyleBoxLine_i75l1")
 
-[node name="Message" type="RichTextLabel" parent="Body" unique_id=698847018]
+[node name="Corpus" type="VBoxContainer" parent="Body" unique_id=805018228]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Message" type="RichTextLabel" parent="Body/Corpus" unique_id=698847018]
 layout_mode = 2
 size_flags_horizontal = 3
 localize_numeral_system = false
-focus_mode = 0
+focus_mode = 2
+mouse_filter = 1
 mouse_default_cursor_shape = 1
 text = "test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test "
 fit_content = true
@@ -98,6 +125,20 @@ meta_underlined = false
 hint_underlined = false
 selection_enabled = true
 
-[node name="HSeparator" parent="." unique_id=587229885 instance=ExtResource("3_mprdl")]
+[node name="EtcButton" type="Button" parent="Body/Corpus" unique_id=109864259]
 layout_mode = 2
+size_flags_horizontal = 0
+toggle_mode = true
+text = "ETC"
+alignment = 0
+script = ExtResource("5_wapdh")
+Message = Array[int]([-25])
+
+[node name="HSeparator" parent="." unique_id=587229885 instance=ExtResource("5_a82gk")]
+layout_mode = 2
+mouse_filter = 1
 theme_override_constants/separation = 12
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="toggled" from="Body/Corpus/EtcButton" to="." method="_on_etc_button_toggled"]
