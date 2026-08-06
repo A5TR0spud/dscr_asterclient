@@ -7,8 +7,8 @@
 * Dictionary now has a button to edit default formatting
 * Added a save/load for preferred callsign. It gets set when manually changing callsign and gets queried every load
 * Added a save/load system to be used for settings
--- Added a setting for formatting. It defaults to on.
--- Transmissions with more than 63 signals now get truncated with |-25 and an option to expand it. Setting ranges from 31 to 511.
+  * Added a setting for formatting. It defaults to on.
+  * Transmissions with more than 63 signals now get truncated with |-25 and an option to expand it. Setting ranges from 31 to 511.
 
 ### Changes
 
