@@ -23,7 +23,10 @@ class_name CallsignSelector
 		dig8.text = String.num_int64(floori(rem / 8))
 		rem = rem % 8
 		dig1.text = String.num_int64(rem)
-		dig1.label_settings.font_color = Main.GetCallsignColor(base10)
+		dig1.self_modulate = Main.GetCallsignColor(base10)
+		dig8.self_modulate = Main.GetCallsignColor(base10)
+		dig64.self_modulate = Main.GetCallsignColor(base10)
+		dig512.self_modulate = Main.GetCallsignColor(base10)
 		ID.Num = base10
 
 @export var CALLSIGN: int = 0:

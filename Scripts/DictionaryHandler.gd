@@ -33,6 +33,8 @@ class_name DictionaryHandler
 # 2: new line
 # 3: double new line
 
+const MAX_NAME_LENGTH: int = 20
+
 static var descDict: Dictionary:
 	get:
 		return SaveSystem.Dict.get_or_add("descDict", {
@@ -159,40 +161,66 @@ static func FilterNameInput(input: String) -> String:
 		if c.is_valid_int():
 			continue
 		o += c
+	if o.length() > MAX_NAME_LENGTH:
+		o = o.left(MAX_NAME_LENGTH)
 	return o
 
-static func ParseTextToSignals(input: String) -> Array[int]:
+static func ParseTextToSignals(input: String, doLogging: bool = true) -> Array[int]:
 	input = input.strip_edges().strip_escapes()
 	var out: Array[int] = []
+	var failed: Array[String] = []
+	var currentFailure: String = ""
 	while input:
-		for i: int in range(input.length()):
-			var idx: int = input.length() - i - 1
+		var cap: int = min(input.length(), MAX_NAME_LENGTH)
+		var cutFailure: bool = false
+		for i: int in range(cap):
+			var idx: int = cap - i - 1
 			var sub: String = input.left(idx + 1)
 			if sub[0] == " ":
 				input = input.right(-1)
+				cutFailure = true
 				break
 			if sub[0] == "|":
 				var subsub: String = sub.right(-1)
 				if subsub and subsub.is_valid_int():
 					out.append(subsub.to_int())
 					input = input.right(-idx - 1)
+					cutFailure = true
 					break
 				continue
 			var found: int = wordNames.find(sub)
 			if found >= 0:
 				out.append(wordKeys[found])
 				input = input.right(-idx - 1)
+				cutFailure = true
 				break
 			if (sub[0].is_valid_int() and
 				sub.is_valid_int()
 			):
 				out.append(sub.to_int())
 				input = input.right(-idx - 1)
+				cutFailure = true
 				break
 			if idx == 0:
-				return []
+				if not doLogging:
+					return []
+				currentFailure += input[0]
+				input = input.right(-1)
+		if (
+			not currentFailure.is_empty() and
+			(cutFailure or currentFailure.length() >= MAX_NAME_LENGTH)
+		):
+			failed.append(currentFailure)
+			currentFailure = ""
 		if out.size() > Main.MaxMessageLength:
+			if doLogging:
+				Chat.NewLog(Chat.State.InputTooLong)
 			return []
+	if not currentFailure.is_empty():
+		failed.append(currentFailure)
+	if failed.size() > 0:
+		Chat.NewLog(Chat.State.UnknownWord, failed)
+		return []
 	return out
 
 static func ContainsSignal(sig: int) -> bool:
@@ -221,11 +249,16 @@ static func GetOrDefaultSignalDesc(sig: int) -> Dictionary:
 		tmp[breakKey] = false
 	return descV[idx]
 
-static func Signals2Words(input: Array[int], format: bool = false) -> String:
+static func Signals2Words(input: Array, format: bool = false) -> String:
 	var o: String = ""
 	for i in input.size():
-		var prev: int = input[i - 1] if i > 0 else 1
-		var sig: int = input[i]
+		if input[i] is String:
+			o += input[i]
+			continue
+		var prev = input[i - 1] if i > 0 else 1
+		if prev is String: prev = 1
+		else: prev = prev as int
+		var sig: int = str(input[i]).to_int()
 		if sig >= 0:
 			o += String.num_int64(sig)
 			continue
@@ -245,11 +278,12 @@ static func Signals2Words(input: Array[int], format: bool = false) -> String:
 				if o.right(1) == " ":
 					o = o.left(-1)
 				o += "\n\n"
-		if not format and i > 0:
+		if not format and i > 0 and o.right(1) != " ":
 			o += " "
 		o += name
 		if not format and i < input.size() - 1:
-			if input[i + 1] >= 0:
+			var next = input[i + 1]
+			if next is int and next >= 0:
 				o += " "
 		if format and i < input.size() - 1:
 			if brkDouble and prev == sig:

@@ -1,6 +1,6 @@
 # Versions
 
-## --WIP--
+## Build 1: Some QoL
 
 ### Additions
 
@@ -9,20 +9,26 @@
 * Added a save/load system to be used for settings
   * Added a setting for formatting. It defaults to on.
   * Transmissions with more than 63 signals now get truncated with |-25 and an option to expand it. Setting ranges from 31 to 511.
+  * Added font size setting
+* Clicking the transmission number now has an option to copy raw signals. This is a temporary location while I think of a more visible place to put it that doesn't mess with formatting
+* Now displays system messages for:
+  * Connecting, disconnecting, reconnecting
+  * Trying to send a transmission too large
+  * Failure to parse a word, with the word(s) that failed
 
 ### Changes
 
+* Parsing no longer allows indefinitely long signal names. They are capped to 20 characters, like the editor. This shouldn't affect very many people and makes parsing a LOT faster on long transmissions.
 * Timestamps are now hidden unless hovering over the message
 * Quartered the tolerance of auto-scroll (reduced range from 100px to 25px)
+* Disabled context menus of various text boxes due to its ability to insert formatting characters
+* Consecutive messages by the same user no longer have a separating dashed line
+* Now handles proper closure, so phantom callsigns should be less common (still happens if connection is lost and then the client is closed before reconnecting)
+* Disabled word wrapping on transmission input, as it was hijacking the cursor (manual new lines still seem buggy(?), but less so)
 
 ### Fixed Bugs
 
 * Clicking on a message while the dictionary editor popup is open no longer eats the input and will properly close the editor
-
-### Potential Bugs
-
-* I organized the menus into separate scenes, and some connections broke. Some buttons may not work, but I think I repaired them all.
-
 
 
 ## Build 0: "Minimum Viable Product"

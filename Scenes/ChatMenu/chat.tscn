@@ -4,6 +4,13 @@
 [ext_resource type="Script" uid="uid://b17wh5igsahay" path="res://Scripts/auto_scroll.gd" id="2_md8bx"]
 [ext_resource type="Script" uid="uid://eyonivvk3glk" path="res://Scenes/ChatMenu/message_edit.gd" id="3_ttrms"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iy605"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.10073931, 0.10073931, 0.10073926, 1)
+
 [node name="Chat" type="VBoxContainer" unique_id=2068892274]
 anchors_preset = 15
 anchor_right = 1.0
@@ -41,14 +48,17 @@ custom_maximum_size = Vector2(-1, 400)
 layout_mode = 2
 size_flags_vertical = 8
 localize_numeral_system = false
+theme_override_styles/normal = SubResource("StyleBoxFlat_iy605")
 placeholder_text = "type here"
+context_menu_enabled = false
 emoji_menu_enabled = false
-wrap_mode = 1
 tab_input_mode = false
 scroll_fit_content_height = true
 caret_blink = true
 caret_multiple = false
 script = ExtResource("3_ttrms")
 
+[connection signal="child_entered_tree" from="MarginContainer/ScrollContainer/MarginContainer/ChatDisplay" to="." method="_on_chat_display_child_entered_tree"]
+[connection signal="child_exiting_tree" from="MarginContainer/ScrollContainer/MarginContainer/ChatDisplay" to="." method="_on_chat_display_child_exiting_tree"]
 [connection signal="lines_edited_from" from="MessageEdit" to="MessageEdit" method="_on_lines_edited_from"]
 [connection signal="text_changed" from="MessageEdit" to="MessageEdit" method="_on_text_changed"]

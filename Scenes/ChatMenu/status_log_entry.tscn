@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://bfuqifdrv6kq3"]
+
+[ext_resource type="Script" uid="uid://k010sonc4dg5" path="res://Scenes/ChatMenu/status_log_entry.gd" id="1_4wbxh"]
+[ext_resource type="FontFile" uid="uid://d1qf4i8th7m5o" path="res://fonts/Hack-Bold.ttf" id="4_u1lvt"]
+[ext_resource type="Script" uid="uid://dqce42c573ptg" path="res://Scripts/SimpleTranslatable.gd" id="5_v4d2j"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_i75l1"]
+color = Color(1, 1, 1, 1)
+thickness = 6
+vertical = true
+
+[node name="StatusLogEntry" type="VBoxContainer" unique_id=822668353]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+script = ExtResource("1_4wbxh")
+
+[node name="Header" type="HBoxContainer" parent="." unique_id=1945409952]
+layout_mode = 2
+
+[node name="Callsign" type="Label" parent="Header" unique_id=127964771]
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("4_u1lvt")
+text = "system message"
+script = ExtResource("5_v4d2j")
+Message = Array[int]([-241])
+
+[node name="Timeago" type="Label" parent="Header" unique_id=1382497997]
+self_modulate = Color(1, 1, 1, 0.49803922)
+layout_mode = 2
+size_flags_horizontal = 10
+mouse_filter = 1
+text = "30 akersecond prior when"
+
+[node name="Body" type="HBoxContainer" parent="." unique_id=1048473022]
+layout_mode = 2
+
+[node name="MessageIndent" type="VSeparator" parent="Body" unique_id=931651164]
+layout_mode = 2
+mouse_filter = 1
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxLine_i75l1")
+
+[node name="Corpus" type="VBoxContainer" parent="Body" unique_id=1576697985]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Message" type="RichTextLabel" parent="Body/Corpus" unique_id=698847018]
+layout_mode = 2
+size_flags_horizontal = 3
+localize_numeral_system = false
+focus_mode = 2
+mouse_filter = 1
+mouse_default_cursor_shape = 1
+text = "test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test "
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+meta_underlined = false
+hint_underlined = false
+selection_enabled = true
+
+[node name="ContextButtons" type="HBoxContainer" parent="Body/Corpus" unique_id=1810309450]
+layout_mode = 2
+
+[node name="DeleteButton" type="Button" parent="Body/Corpus/ContextButtons" unique_id=1291118185]
+layout_mode = 2
+text = "delete"
+script = ExtResource("5_v4d2j")
+Message = Array[int]([-88])
+
+[node name="EtcButton" type="Button" parent="Body/Corpus/ContextButtons" unique_id=896475718]
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+toggle_mode = true
+text = "More"
+alignment = 0
+script = ExtResource("5_v4d2j")
+Message = Array[int]([-25])
+
+[connection signal="pressed" from="Body/Corpus/ContextButtons/DeleteButton" to="." method="_on_delete_button_pressed"]
+[connection signal="toggled" from="Body/Corpus/ContextButtons/EtcButton" to="." method="_on_etc_button_toggled"]

@@ -6,6 +6,7 @@ class_name TranslatableSimple
 
 func _ready():
 	Main.instance.ReloadDict.connect(Refresh)
+	Refresh()
 
 func Refresh():
-	self.set(PropertyName, DictionaryHandler.Signals2Words(Message, Format))
+	set(PropertyName, DictionaryHandler.Signals2Words(Message, Format))

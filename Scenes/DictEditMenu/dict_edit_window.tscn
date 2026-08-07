@@ -103,6 +103,7 @@ Message = Array[int]([-26, -14, 2, -229, -42, -122, 1, -108, -190, -15, -4])
 
 [node name="BreakOnDouble" parent="DictEditMainframe/BreakSentence" unique_id=1728394877 instance=ExtResource("3_si2t6")]
 layout_mode = 2
+size_flags_horizontal = 1
 
 [node name="SubmitElseCancel" type="GridContainer" parent="DictEditMainframe" unique_id=1177023276]
 layout_mode = 2

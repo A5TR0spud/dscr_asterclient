@@ -68,6 +68,31 @@ text = "they say flowers fade and their beauty can't be weighed with flowers so 
 script = ExtResource("1_1gwgo")
 Message = Array[int]([-42, -122, -25])
 
+[node name="HSeparator2" type="HSeparator" parent="ScrollContainer/MarginContainer/Options" unique_id=2092124219]
+layout_mode = 2
+
+[node name="FontMargin" type="MarginContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=816504442]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+
+[node name="FontHbox" type="HBoxContainer" parent="ScrollContainer/MarginContainer/Options/FontMargin" unique_id=90540622]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="FontSizeLabel" type="Label" parent="ScrollContainer/MarginContainer/Options/FontMargin/FontHbox" unique_id=110664921]
+layout_mode = 2
+text = "la dee da dee da"
+script = ExtResource("1_1gwgo")
+Message = Array[int]([-42, -22, -4])
+
+[node name="FontSpinner" type="SpinBox" parent="ScrollContainer/MarginContainer/Options/FontMargin/FontHbox" unique_id=897245892]
+layout_mode = 2
+size_flags_horizontal = 0
+min_value = 15.0
+max_value = 24.0
+value = 18.0
+rounded = true
+
 [node name="HSeparator" type="HSeparator" parent="ScrollContainer/MarginContainer/Options" unique_id=1571308958]
 layout_mode = 2
 
@@ -75,24 +100,24 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "this will be the settings menu at some point, and the todo list will be removed.
+text = "the todo list will be removed at some point
 TODO:
 - add transmission bookmark option
-- fix weird bug where typing a message arbitrarily moves the caret????
-- add error messages
-- add copy button for raw signals to transmissions (and remove context menu)
+- change placement of copy button (find a visible spot that doesn't cause formatting to screw up when it disappears)
 - add confirmation message for deleting dictionary entries
 - add channel system
 - add image renderer (should be quite simple really) (famous last words)
 - websocket address setting
-- font size setting
+- add button to manually try to reconnect
 - callsign image on/off setting
-- change callsign image from shader to draw call and from a parameter to a variable that redraws automatically (use setter func)
+- change callsign image from shader to draw call
 - new transmission makes a noise setting
 - lone confetti signal makes confetti setting (only visible if the confetti signal is defined)
+- add autocomplete
 - clean vs clunky UI setting (current UI is in \"clean\" mode)
-- add \"macro edit\" sidebar
-"
+- add \"macro-dictionary\" sidebar
+- make sidebar collapsable
+- make callsign picker collapsable"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
@@ -100,3 +125,4 @@ meta_underlined = false
 hint_underlined = false
 
 [connection signal="Set" from="ScrollContainer/MarginContainer/Options/Formatting" to="." method="_on_formatting_set"]
+[connection signal="value_changed" from="ScrollContainer/MarginContainer/Options/FontMargin/FontHbox/FontSpinner" to="." method="_on_font_spinner_value_changed"]

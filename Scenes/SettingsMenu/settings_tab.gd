@@ -5,10 +5,12 @@ func _ready() -> void:
 
 @onready var Formatting: SettingEntry = $ScrollContainer/MarginContainer/Options/Formatting
 @onready var Trunc: SpinBox = $ScrollContainer/MarginContainer/Options/TruncMargin/TruncHbox/TruncationSpinner
+@onready var Fon: SpinBox = $ScrollContainer/MarginContainer/Options/FontMargin/FontHbox/FontSpinner
 
 func Refresh() -> void:
 	Formatting.State = SettingsHandler.DoFormatting
 	Trunc.value = SettingsHandler.TruncateMessageSize
+	Fon.value = SettingsHandler.FontSize
 
 func Save() -> void:
 	SettingsHandler.Save()
@@ -26,3 +28,7 @@ func _physics_process(_delta):
 			Save()
 		count = -1
 	count += 1
+
+func _on_font_spinner_value_changed(value):
+	SettingsHandler.FontSize = value
+	Save()

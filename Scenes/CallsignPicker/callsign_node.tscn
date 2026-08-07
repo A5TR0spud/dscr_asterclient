@@ -10,8 +10,6 @@ resource_local_to_scene = true
 shader = ExtResource("4_s2jau")
 shader_parameter/Value = 0
 
-[sub_resource type="LabelSettings" id="LabelSettings_i75l1"]
-
 [node name="CallsignNode" type="HBoxContainer" unique_id=1004165478]
 offset_right = 199.0
 offset_bottom = 71.0
@@ -67,34 +65,31 @@ mouse_default_cursor_shape = 2
 [node name="Identicon" parent="RollerGrid" unique_id=1738948121 instance=ExtResource("3_61est")]
 material = SubResource("ShaderMaterial_em3l3")
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 6
+size_flags_vertical = 6
 
 [node name="Digit512" type="Label" parent="RollerGrid" unique_id=22588574]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
-label_settings = SubResource("LabelSettings_i75l1")
 horizontal_alignment = 1
 
 [node name="Digit64" type="Label" parent="RollerGrid" unique_id=851997231]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
-label_settings = SubResource("LabelSettings_i75l1")
 horizontal_alignment = 1
 
 [node name="Digit8" type="Label" parent="RollerGrid" unique_id=1292547140]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
-label_settings = SubResource("LabelSettings_i75l1")
 horizontal_alignment = 1
 
 [node name="Digit1" type="Label" parent="RollerGrid" unique_id=1226118488]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
-label_settings = SubResource("LabelSettings_i75l1")
 horizontal_alignment = 1
 
 [node name="SubLabel" type="Label" parent="RollerGrid" unique_id=676305010]

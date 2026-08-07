@@ -5,13 +5,13 @@ class_name Main
 var socket: WebSocketPeer = WebSocketPeer.new()
 
 const MaxMessageLength: int = 2000
-const He6HalfLife: float = 0.8067 #about 121/150
+const He6HalfLife: float = 0.8067
 const CHANNEL_LEAVE: int = -65533
 const CHANNEL_JOIN: int = -65534
 const CHANNEL_AT: int = -65535
 const SKELETON_KEY: int = -65536
 
-@onready var CallsignNode: CallsignSelector =  $MarginContainer/MainContainer/Body/Sidebar/CallsignContainer/CallsignEdit
+@onready var CallsignNode: CallsignSelector = $MarginContainer/MainContainer/Body/Sidebar/CallsignContainer/CallsignEdit
 var Callsign: int = 0:
 	set(value):
 		if value < 0:
@@ -19,18 +19,24 @@ var Callsign: int = 0:
 		value = value % 4096
 		CallsignNode.CALLSIGN = value
 		Callsign = value
-var NeedCallsign: bool = true
-var previous_state: WebSocketPeer.State = WebSocketPeer.STATE_CLOSED
+var previous_state = null
+
+var PreviouslyAcceptedCallsign: int = -1
 
 var ConnectedUsers: Array[int] = []
+@onready var TimeoutTime: Timer = $TimeoutTime
+@onready var ReconnectTime: Timer = $ReconnectTime
+@onready var ReconnectCD: Timer = $ReconnectCooldown
 
 static var instance : Main
 
 signal ReloadDict
 signal ReloadSettings
+static var NEW_THEME = preload("uid://c0reghmcwiqpy")
 static func OnDictReload() -> void:
 	instance.ReloadDict.emit()
 static func OnSettingsReload() -> void:
+	NEW_THEME.default_font_size = SettingsHandler.FontSize
 	instance.ReloadSettings.emit()
 
 signal ConnectedUserChange
@@ -38,8 +44,25 @@ signal ConnectedUserChange
 func _enter_tree() -> void:
 	instance = self
 
+var TRYING_TO_QUIT: bool = false
+
+func _notification(what):
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		if socket.get_ready_state() == WebSocketPeer.STATE_CLOSED:
+			KillProcess()
+			return
+		TRYING_TO_QUIT = true
+		socket.close(1001)
+		# if it can't close properly in 10 seconds then just shut it down anyway
+		get_tree().create_timer(10).timeout.connect(KillProcess)
+
+func KillProcess():
+	get_tree().quit()
+
 func _ready():
 	SaveSystem.Load()
+	TRYING_TO_QUIT = false
+	get_tree().set_auto_accept_quit(false)
 	StartConnect()
 
 static func GetCallsignColor(value: int) -> Color:
@@ -75,19 +98,34 @@ static func _hueToRgb(p: float, q: float, t: float) -> float:
 		return (q - p) * (2./3. - t) * 6 + p
 	return p
 
-func StartConnect() -> void:
-	NeedCallsign = true
-	if SettingsHandler.PreferredCallsign <= 4095 and SettingsHandler.PreferredCallsign >= 0:
-		Callsign = SettingsHandler.PreferredCallsign
+var _queuedCallsign: Array = [0, false]
+
+func CallsignSet(cs: int, IsReconnect: bool = false) -> void:
+	for i in ConnectedUsers:
+		if i == cs and i != PreviouslyAcceptedCallsign:
+			cs += 1
+			cs %= 4096
+	_queuedCallsign = [cs, IsReconnect]
+
+func StartConnect(IsReconnectAttempt: bool = false) -> void:
+	if TRYING_TO_QUIT: return
+	if IsReconnectAttempt:
+		print("Attempting Reconnect")
 	else:
-		Callsign = randi_range(0, 4095)
+		if SettingsHandler.PreferredCallsign <= 4095 and SettingsHandler.PreferredCallsign >= 0:
+			CallsignSet(SettingsHandler.PreferredCallsign)
+		else:
+			CallsignSet(randi_range(0, 4095))
 	# Initiate connection to the given URL.
 	var err = socket.connect_to_url(websocket_url)
 	if err == OK:
+		Chat.NewLog(Chat.State.Connecting)
+		TimeoutTime.start()
 		print("Connecting to %s..." % websocket_url)
 		set_physics_process(true)
 	else:
 		push_error("Unable to connect.")
+		Chat.NewLog(Chat.State.FailedToConnect)
 		set_physics_process(false)
 
 func SendMessage(written: String) -> bool:
@@ -105,11 +143,12 @@ func HandlePacket(incoming: String) -> void:
 	print("< Got string data from server: %s" % incoming)
 	var Status: PackedStringArray = incoming.split(",")
 	if Status[0] == "K":
-		Callsign = Status[1].to_int()
+		PreviouslyAcceptedCallsign = Status[1].to_int()
+		Callsign = PreviouslyAcceptedCallsign
 		return
 	if Status[0] == "U":
 		Callsign += 1
-		NeedCallsign = true
+		CallsignSet(Callsign, false)
 		return
 	if Status[0] == "R":
 		Chat.NewTransmission(Status.slice(1))
@@ -135,14 +174,19 @@ func _physics_process(_delta):
 
 	# get_ready_state() tells you what state the socket is in.
 	var state: WebSocketPeer.State = socket.get_ready_state()
+	
 	if state != previous_state:
 		if state == WebSocketPeer.STATE_CLOSED:
 			print("CLOSED")
 		elif state == WebSocketPeer.STATE_CLOSING:
+			Chat.NewLog(Chat.State.Disconnecting)
 			print("CLOSING")
 		elif state == WebSocketPeer.STATE_CONNECTING:
 			print("CONNECTING")
 		elif state == WebSocketPeer.STATE_OPEN:
+			Chat.NewLog(Chat.State.Connected)
+			TimeoutTime.stop()
+			ReconnectTime.stop()
 			print("OPEN")
 		else:
 			print("OTHER STATE: %d", state)
@@ -154,11 +198,14 @@ func _physics_process(_delta):
 	# `WebSocketPeer.STATE_OPEN` means the socket is connected and ready
 	# to send and receive data.
 	elif state == WebSocketPeer.STATE_OPEN:
-		if NeedCallsign:
+		if _queuedCallsign.size() > 0:
+			Callsign = _queuedCallsign[0]
 			print("Callsign: %s" % Callsign)
-			socket.send_text(str("S,%s" % Callsign))
-			NeedCallsign = false
-		#socket.send_text("Test packet")
+			var m: String = str("S,%s" % Callsign)
+			if _queuedCallsign[1]:
+				m += ",0"
+			socket.send_text(m)
+			_queuedCallsign = []
 		while socket.get_available_packet_count():
 			var packet = socket.get_packet()
 			if socket.was_string_packet():
@@ -176,8 +223,18 @@ func _physics_process(_delta):
 	elif state == WebSocketPeer.STATE_CLOSED:
 		# The code will be `-1` if the disconnection was not properly notified by the remote peer.
 		var code = socket.get_close_code()
+		if code == -1:
+			Chat.NewLog(Chat.State.FailedToConnect)
+		else:
+			Chat.NewLog(Chat.State.Disconnected)
 		print("WebSocket closed with code: %d. Clean: %s" % [code, code != -1])
 		set_physics_process(false) # Stop processing.
+		if TRYING_TO_QUIT:
+			KillProcess()
+			return
+		if ReconnectCD.is_stopped():
+			Chat.NewLog(Chat.State.WillAutoReconnectSoon, [roundi(ReconnectTime.wait_time / He6HalfLife)])
+			ReconnectTime.start()
 	previous_state = state
 
 func _on_dictionary_save_open_pressed():
@@ -191,4 +248,15 @@ func _on_callsign_edit_callsign_submitted(newValue: int) -> void:
 	Callsign = newValue
 	SettingsHandler.PreferredCallsign = newValue
 	SettingsHandler.Save()
-	NeedCallsign = true
+	CallsignSet(Callsign, false)
+
+func _on_timeout_time_timeout():
+	if socket.get_ready_state() == WebSocketPeer.STATE_CONNECTING:
+		print("Timed out...")
+		socket.close(-1)
+
+func _on_reconnect_time_timeout():
+	if socket.get_ready_state() == WebSocketPeer.STATE_CLOSED and ReconnectCD.is_stopped():
+		print("Attempting auto-reconnect...")
+		ReconnectCD.start()
+		StartConnect()

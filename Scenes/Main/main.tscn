@@ -19,6 +19,21 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6t3k2")
 
+[node name="TimeoutTime" type="Timer" parent="." unique_id=893375808]
+wait_time = 12.907
+one_shot = true
+ignore_time_scale = true
+
+[node name="ReconnectTime" type="Timer" parent="." unique_id=1180998258]
+wait_time = 6.454000000000001
+one_shot = true
+ignore_time_scale = true
+
+[node name="ReconnectCooldown" type="Timer" parent="." unique_id=739487817]
+wait_time = 19.361
+one_shot = true
+ignore_time_scale = true
+
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=71793566]
 layout_mode = 2
 
@@ -129,6 +144,8 @@ script = ExtResource("12_ifk88")
 [node name="DictEditWindow" parent="DictEditPrison" unique_id=1113766720 instance=ExtResource("13_8sujb")]
 layout_mode = 2
 
+[connection signal="timeout" from="TimeoutTime" to="." method="_on_timeout_time_timeout"]
+[connection signal="timeout" from="ReconnectTime" to="." method="_on_reconnect_time_timeout"]
 [connection signal="pressed" from="MarginContainer/MainContainer/Header/DsveButton" to="." method="_on_dsve_button_pressed"]
 [connection signal="CallsignSubmitted" from="MarginContainer/MainContainer/Body/Sidebar/CallsignContainer/CallsignEdit" to="." method="_on_callsign_edit_callsign_submitted"]
 [connection signal="visibility_changed" from="DictEditPrison/DictEditWindow" to="DictEditPrison" method="_on_dict_edit_window_visibility_changed"]
