@@ -19,7 +19,7 @@
 ### Changes
 
 * Parsing no longer allows indefinitely long signal names. They are capped to 20 characters, like the editor. This shouldn't affect very many people and makes parsing a LOT faster on long transmissions.
-* Timestamps are now hidden unless hovering over the message
+* Timestamps are now hidden unless hovering over the message (except for system messages, which always display them)
 * Quartered the tolerance of auto-scroll (reduced range from 100px to 25px)
 * Disabled context menus of various text boxes due to its ability to insert formatting characters
 * Consecutive messages by the same user no longer have a separating dashed line
