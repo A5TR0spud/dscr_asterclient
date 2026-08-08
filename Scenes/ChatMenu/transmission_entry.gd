@@ -12,6 +12,7 @@ var Trans: int = 0
 @onready var ETC: Button = $Body/Corpus/ContextButtons/EtcButton
 
 @onready var IMG: VisualizeNode = $Body/Corpus/VisualizeNode
+@onready var IMGB: Button = $Body/Corpus/ContextButtons/ImageButton
 var HasImage: bool = false
 
 func Ready():
@@ -21,7 +22,9 @@ func Ready():
 	ID.Num = Sender
 	CS.text = Main.base10ToCallsign(Sender)
 	HasImage = IMG.CheckImage(Message)
-	IMG.visible = HasImage
+	IMG.visible = HasImage and SettingsHandler.ImageDefault
+	IMGB.button_pressed = IMG.visible
+	IMGB.visible = HasImage
 
 func _physics_process(_delta):
 	if TI.visible:
@@ -63,3 +66,6 @@ func _on_hover_change(hovering: bool) -> void:
 
 func _on_set_etc_visibility(visiblity: bool) -> void:
 	ETC.visible = visiblity
+
+func _on_image_button_toggled(toggled_on: bool) -> void:
+	IMG.visible = toggled_on

@@ -46,6 +46,10 @@ size_flags_vertical = 3
 layout_mode = 2
 Description = Array[int]([-42, -190, -85, -100, -223])
 
+[node name="ImageVis" parent="ScrollContainer/MarginContainer/Options" unique_id=1916992470 instance=ExtResource("3_0yg8b")]
+layout_mode = 2
+Description = Array[int]([-53, -163, -85])
+
 [node name="TruncMargin" type="MarginContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=730512064]
 layout_mode = 2
 theme_override_constants/margin_left = 2
@@ -107,7 +111,6 @@ TODO:
 - change placement of copy button (find a visible spot that doesn't cause formatting to screw up when it disappears)
 - add confirmation message for deleting dictionary entries
 - add channel system
-- make image rendering a per-transmission toggle
 - websocket address setting
 - add button to manually try to reconnect
 - callsign image on/off setting
@@ -126,4 +129,5 @@ meta_underlined = false
 hint_underlined = false
 
 [connection signal="Set" from="ScrollContainer/MarginContainer/Options/Formatting" to="." method="_on_formatting_set"]
+[connection signal="Set" from="ScrollContainer/MarginContainer/Options/ImageVis" to="." method="_on_image_vis_set"]
 [connection signal="value_changed" from="ScrollContainer/MarginContainer/Options/FontMargin/FontHbox/FontSpinner" to="." method="_on_font_spinner_value_changed"]

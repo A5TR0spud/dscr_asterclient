@@ -54,17 +54,6 @@ scaling_3d_mode = 5
 oversampling = false
 size = Vector2i(200, 128)
 
-[node name="Label" type="Label3D" parent="Intermediate/RenderAndYaw/VisualizerRect/SubViewport" unique_id=238992832]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2450037, 0, 0)
-visible = false
-text = "x y z radius color
--x = left
-+x = right
--y = near
-+y = far
--z = down
-+z = up"
-
 [node name="CameraOrigin" type="Node3D" parent="Intermediate/RenderAndYaw/VisualizerRect/SubViewport" unique_id=1532143772]
 
 [node name="Cam" type="Camera3D" parent="Intermediate/RenderAndYaw/VisualizerRect/SubViewport/CameraOrigin" unique_id=2127089122]

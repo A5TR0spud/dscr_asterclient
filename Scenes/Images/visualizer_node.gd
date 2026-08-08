@@ -75,7 +75,12 @@ func CheckImage(messageToParse: Array) -> bool:
 			decimal = false
 			continue
 		i = i as int
-		if i == IMAGE and currentState == 0:
+		if i == IMAGE:
+			if currentState != 0:
+				builtData.clear()
+				_sphereData.clear()
+				negative = false
+				decimal = false
 			currentState = 1
 			#print("image detected")
 			continue

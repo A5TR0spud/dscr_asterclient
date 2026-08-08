@@ -1,17 +1,18 @@
 # Versions
 
-## --WIP--
+## Build 2: Visual Information
 
 ### Additions
 
 * Images now render. Hell yeah.
   * Colors courtesy of [@elnico56 on Discord and dixonary on Github](https://github.com/dixonary/mfds-server/blob/0d359cef41a64cfe2bddbacb12898f066fa099b8/public/mfds.js#L1009-L1034)
+  * Added a setting for whether new images should be visible by default
 
 ### Fixes
 
 * Disabled context menu in dictionary editor popup
 * Deleting a signal now properly saves
-* Fixed the |-25 button not going away when shooed (changing max length)
+* Fixed the |-25 button not going away when shooed (changing max length setting)
 
 ## Build 1: Some QoL
 
