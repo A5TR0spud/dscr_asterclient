@@ -11,7 +11,7 @@
 
 * Disabled context menu in dictionary editor popup
 * Deleting a signal now properly saves
-* Fix the |-25 button not going away when shooed (changing max length)
+* Fixed the |-25 button not going away when shooed (changing max length)
 
 ## Build 1: Some QoL
 

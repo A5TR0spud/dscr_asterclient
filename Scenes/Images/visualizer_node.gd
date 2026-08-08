@@ -69,8 +69,8 @@ func CheckImage(messageToParse: Array) -> bool:
 	for i in messageToParse:
 		if i is not int:
 			currentState = 0
-			builtData = {}
-			_sphereData = []
+			builtData.clear()
+			_sphereData.clear()
 			negative = false
 			decimal = false
 			continue
@@ -132,7 +132,8 @@ func CheckImage(messageToParse: Array) -> bool:
 				decimal = false
 				#print("sep detected")
 				continue
-		if i == END or SEP and currentState == 7:
+		if (i == END or SEP) and currentState == 7:
+			#print("appending: ", builtData)
 			_sphereData.append(builtData)
 			negative = false
 			decimal = false
@@ -144,13 +145,14 @@ func CheckImage(messageToParse: Array) -> bool:
 				break
 			continue
 		currentState = 0
-		builtData = {}
-		_sphereData = []
+		builtData.clear()
+		_sphereData.clear()
 		negative = false
 		decimal = false
 	if _sphereData.is_empty():
 		return false
-	for p in _sphereData:
+	for p: Dictionary in _sphereData:
+		#print("dat: ", p)
 		var plot: PlotNode = PlotScene.instantiate()
 		plot.Col = calculateColor(p["c"])
 		plot.Radius = p["r"] * 0.5
