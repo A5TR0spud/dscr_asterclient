@@ -18,12 +18,11 @@ const COLORS: Array = [
 	"FF5800", "BBFF00", "00CDFF", "0084FF", "4D00FF",
 	"FB39FF", "FF0FD7", "484848", "636363", "FFFFFF"
 ];
-func calculateColor (value: int):
-	var n: float = value / 64.0 * (COLORS.size() - 1);
-	var lo = floor(n);
-	var hi = ceil(n);
-	var c = lerpColor(Color(COLORS[lo]), Color(COLORS[hi]), fmod(n, 1))
-	return Color(c.r, c.g, c.b);
+func calculateColor (value: int) -> Color:
+	var n: float = value / 64.0 * (COLORS.size() - 1)
+	var lo = floor(n)
+	var hi = ceil(n)
+	return lerpColor(Color(COLORS[lo]), Color(COLORS[hi]), fmod(n, 1))
 
 # i keep reading "larp" instead of "lerp"
 func lerpColor(col1: Color, col2: Color, delta: float) -> Color:
@@ -103,7 +102,7 @@ func CheckImage(messageToParse: Array) -> bool:
 				#print("state = ", currentState)
 				var num: float = i
 				if decimal:
-					num = ("0." + str(roundi(num))).to_float()
+					num = ("0." + str(i)).to_float()
 				if negative:
 					num *= -1
 				if currentState == 3:
