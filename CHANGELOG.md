@@ -5,6 +5,7 @@
 ### Additions
 
 * Images now render. Hell yeah.
+  * Colors courtesy of [@elnico56 on Discord and dixonary on Github](https://github.com/dixonary/mfds-server/blob/0d359cef41a64cfe2bddbacb12898f066fa099b8/public/mfds.js#L1009-L1034)
 
 ### Fixes
 
