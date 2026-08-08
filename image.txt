@@ -1,0 +1,19 @@
+x y z radius color
+-x = left
++x = right
+-y = near
++y = far
+-z = down
++z = up
+
+left slider:
+up: zoom out (full width becomes visible)
+down: zoom in (plane is at about -3, the back 2 corners are barely visible)
+
+bottom slider:
+left: reveals right (from above, go counterclockwise) up to 360 degrees
+right: reveals left (from above, go clockwise) up to 360 degrees
+
+right slider:
+down: look up to about 75 deg (about 3 full rows of square of roof is visible)
+up: look down to about 75 deg (about 3 full rows of square of floor is visible)

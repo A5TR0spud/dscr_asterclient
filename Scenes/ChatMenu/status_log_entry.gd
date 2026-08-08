@@ -14,7 +14,7 @@ func _physics_process(_delta):
 	TI.text = TimeAgo
 
 func Refresh():
-	ETC.visible = IsMessageTruncatable()
+	pass
 
 func SetMessageText(newText: String):
 	MG.text = newText
@@ -24,3 +24,6 @@ func _on_delete_button_pressed():
 
 func _on_etc_button_toggled(toggled_on):
 	Collapsed = not toggled_on
+
+func _on_set_etc_visibility(visibility: bool):
+	ETC.visible = visibility

@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cwvai5p387aaw"]
+
+[ext_resource type="Shader" uid="uid://cufhqyh03k8p1" path="res://Scenes/Images/reverse_fresnel.gdshader" id="2_74wdx"]
+[ext_resource type="Script" uid="uid://c5ej0r0alp1cg" path="res://Scenes/Images/plot_node.gd" id="2_h4eyd"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_g4v7s"]
+resource_local_to_scene = true
+radius = 1.0
+height = 2.0
+radial_segments = 32
+rings = 16
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_74wdx"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_74wdx")
+shader_parameter/col = Color(1, 1, 1, 1)
+
+[node name="PlotNode" type="MeshInstance3D" unique_id=504117874]
+gi_mode = 0
+mesh = SubResource("SphereMesh_g4v7s")
+surface_material_override/0 = SubResource("ShaderMaterial_74wdx")
+script = ExtResource("2_h4eyd")

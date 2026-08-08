@@ -5,6 +5,7 @@
 [ext_resource type="Shader" uid="uid://b7218835sr28v" path="res://Scenes/Common/identicon.gdshader" id="3_kq2tu"]
 [ext_resource type="FontFile" uid="uid://d1qf4i8th7m5o" path="res://fonts/Hack-Bold.ttf" id="4_gt42v"]
 [ext_resource type="Script" uid="uid://dqce42c573ptg" path="res://Scripts/SimpleTranslatable.gd" id="5_wapdh"]
+[ext_resource type="PackedScene" uid="uid://bcqkh2yjqiert" path="res://Scenes/Images/visualizer_node.tscn" id="6_wapdh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wapdh"]
 resource_local_to_scene = true
@@ -124,5 +125,10 @@ alignment = 0
 script = ExtResource("5_wapdh")
 Message = Array[int]([-25])
 
+[node name="VisualizeNode" parent="Body/Corpus" unique_id=1907311917 instance=ExtResource("6_wapdh")]
+visible = false
+layout_mode = 2
+
 [connection signal="hover_change" from="." to="." method="_on_hover_change"]
+[connection signal="set_etc_visibility" from="." to="." method="_on_set_etc_visibility"]
 [connection signal="toggled" from="Body/Corpus/ContextButtons/EtcButton" to="." method="_on_etc_button_toggled"]

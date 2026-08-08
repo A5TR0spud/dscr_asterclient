@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://bcqkh2yjqiert"]
+
+[ext_resource type="Texture2D" uid="uid://cb8hjgvp01r33" path="res://Assets/ImageGrid.png" id="1_42cc5"]
+[ext_resource type="Script" uid="uid://clw6gb5wupvng" path="res://Scenes/Images/visualizer_node.gd" id="1_psu8h"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_kq2tu"]
+viewport_path = NodePath("Intermediate/RenderAndYaw/VisualizerRect/SubViewport")
+
+[sub_resource type="Environment" id="Environment_g4v7s"]
+background_mode = 1
+ambient_light_source = 1
+reflected_light_source = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0mdww"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+shading_mode = 0
+albedo_color = Color(0.11372549, 0.37254903, 0.050980393, 1)
+albedo_texture = ExtResource("1_42cc5")
+texture_filter = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_g4v7s"]
+material = SubResource("StandardMaterial3D_0mdww")
+size = Vector2(32, 32)
+orientation = 1
+
+[node name="VisualizerNode" type="PanelContainer" unique_id=1907311917]
+custom_maximum_size = Vector2(576, -1)
+script = ExtResource("1_psu8h")
+
+[node name="Intermediate" type="HBoxContainer" parent="." unique_id=89764320]
+layout_mode = 2
+
+[node name="ZoomSlider" type="VScrollBar" parent="Intermediate" unique_id=235791851]
+layout_mode = 2
+min_value = -60.0
+page = 40.0
+
+[node name="RenderAndYaw" type="VBoxContainer" parent="Intermediate" unique_id=2113766076]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VisualizerRect" type="TextureRect" parent="Intermediate/RenderAndYaw" unique_id=1823197112]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+texture = SubResource("ViewportTexture_kq2tu")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="SubViewport" type="SubViewport" parent="Intermediate/RenderAndYaw/VisualizerRect" unique_id=626713555]
+own_world_3d = true
+scaling_3d_mode = 5
+oversampling = false
+size = Vector2i(200, 128)
+
+[node name="Label" type="Label3D" parent="Intermediate/RenderAndYaw/VisualizerRect/SubViewport" unique_id=238992832]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2450037, 0, 0)
+visible = false
+text = "x y z radius color
+-x = left
++x = right
+-y = near
++y = far
+-z = down
++z = up"
+
+[node name="CameraOrigin" type="Node3D" parent="Intermediate/RenderAndYaw/VisualizerRect/SubViewport" unique_id=1532143772]
+
+[node name="Cam" type="Camera3D" parent="Intermediate/RenderAndYaw/VisualizerRect/SubViewport/CameraOrigin" unique_id=2127089122]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16)
+current = true
+fov = 60.0
+far = 64.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Intermediate/RenderAndYaw/VisualizerRect/SubViewport" unique_id=1113409715]
+environment = SubResource("Environment_g4v7s")
+
+[node name="Floor" type="MeshInstance3D" parent="Intermediate/RenderAndYaw/VisualizerRect/SubViewport" unique_id=415239029]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
+mesh = SubResource("QuadMesh_g4v7s")
+
+[node name="Ceiling" type="MeshInstance3D" parent="Intermediate/RenderAndYaw/VisualizerRect/SubViewport" unique_id=1973831854]
+transform = Transform3D(1, 0, 0, 0, -1, -1.509958e-07, 0, 1.509958e-07, -1, 0, 8, 0)
+mesh = SubResource("QuadMesh_g4v7s")
+
+[node name="Plots" type="Node3D" parent="Intermediate/RenderAndYaw/VisualizerRect/SubViewport" unique_id=359063276]
+
+[node name="YawSlider" type="HScrollBar" parent="Intermediate/RenderAndYaw" unique_id=2145835859]
+layout_mode = 2
+min_value = -60.0
+page = 40.0
+
+[node name="PitchSlider" type="VScrollBar" parent="Intermediate" unique_id=2089934509]
+layout_mode = 2
+min_value = -60.0
+page = 40.0
+
+[connection signal="value_changed" from="Intermediate/ZoomSlider" to="." method="_on_zoom_slider_value_changed"]
+[connection signal="value_changed" from="Intermediate/RenderAndYaw/YawSlider" to="." method="_on_yaw_slider_value_changed"]
+[connection signal="value_changed" from="Intermediate/PitchSlider" to="." method="_on_pitch_slider_value_changed"]

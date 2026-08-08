@@ -103,10 +103,11 @@ size_flags_vertical = 3
 text = "the todo list will be removed at some point
 TODO:
 - add transmission bookmark option
+- change layout of online users tab to match dictionary and allow option to nickname callsigns (maybe i will finally remember who i am talking with)
 - change placement of copy button (find a visible spot that doesn't cause formatting to screw up when it disappears)
 - add confirmation message for deleting dictionary entries
 - add channel system
-- add image renderer (should be quite simple really) (famous last words)
+- make image rendering a per-transmission toggle
 - websocket address setting
 - add button to manually try to reconnect
 - callsign image on/off setting

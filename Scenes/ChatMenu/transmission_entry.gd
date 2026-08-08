@@ -11,11 +11,17 @@ var Trans: int = 0
 @onready var HOV: HBoxContainer = $Header/HoverBox
 @onready var ETC: Button = $Body/Corpus/ContextButtons/EtcButton
 
+@onready var IMG: VisualizeNode = $Body/Corpus/VisualizeNode
+var HasImage: bool = false
+
 func Ready():
 	TR.get_popup().id_pressed.connect(TRPressed)
 	CS.self_modulate = Main.GetCallsignColor(Sender)
 	TAB.self_modulate = Main.GetCallsignColor(Sender)
 	ID.Num = Sender
+	CS.text = Main.base10ToCallsign(Sender)
+	HasImage = IMG.CheckImage(Message)
+	IMG.visible = HasImage
 
 func _physics_process(_delta):
 	if TI.visible:
@@ -24,13 +30,11 @@ func _physics_process(_delta):
 
 func Refresh():
 	TI.text = TimeAgo
-	CS.text = Main.base10ToCallsign(Sender)
 	TR.set("popup/item_0/text", DictionaryHandler.GetOrDefaultSignalName(-40))
 	var trx: String = str(Trans % 512)
 	while trx.length() < 3:
 		trx = "0" + trx
 	TR.text = trx
-	ETC.visible = IsMessageTruncatable()
 
 func SetMessageText(newText: String):
 	MG.text = newText
@@ -56,3 +60,6 @@ func _on_hover_change(hovering: bool) -> void:
 	TI.text = TimeAgo
 	TI.visible = hovering
 	HOV.visible = hovering
+
+func _on_set_etc_visibility(visiblity: bool) -> void:
+	ETC.visible = visiblity

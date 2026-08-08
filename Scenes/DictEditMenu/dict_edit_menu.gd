@@ -93,6 +93,7 @@ func _on_close_button_pressed():
 func _on_delete_button_pressed():
 	DictionaryHandler.ForgetSignal(CURRENT_SIGNAL)
 	Main.OnDictReload()
+	SaveSystem.SaveDict()
 	hide()
 
 func _on_name_line_edit_text_submitted(_new_text):

@@ -38,6 +38,7 @@ func _refresh():
 
 func _evaluateCorpus():
 	var toShow: Array = Message
+	set_etc_visibility.emit(IsMessageTruncatable())
 	if Collapsed and IsMessageTruncatable():
 		toShow = toShow.slice(0, SettingsHandler.TruncateMessageSize)
 		toShow.append(-25)
@@ -50,3 +51,4 @@ func _evaluateCorpus():
 @abstract func Refresh()
 @abstract func SetMessageText(newText: String)
 signal hover_change(hovering: bool)
+signal set_etc_visibility(visibility: bool)

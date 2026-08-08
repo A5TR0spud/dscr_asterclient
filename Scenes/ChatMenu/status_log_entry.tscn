@@ -86,5 +86,6 @@ alignment = 0
 script = ExtResource("5_v4d2j")
 Message = Array[int]([-25])
 
+[connection signal="set_etc_visibility" from="." to="." method="_on_set_etc_visibility"]
 [connection signal="pressed" from="Body/Corpus/ContextButtons/DeleteButton" to="." method="_on_delete_button_pressed"]
 [connection signal="toggled" from="Body/Corpus/ContextButtons/EtcButton" to="." method="_on_etc_button_toggled"]
