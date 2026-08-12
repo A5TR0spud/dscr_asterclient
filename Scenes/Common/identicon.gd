@@ -24,8 +24,15 @@ func _ready():
 func refresh():
 	icon_size = roundi(16.0 * SettingsHandler.font_size / 18.0)
 
+
+func _xy_to_rect(x: int, y: int) -> Rect2i:
+	var pos: Vector2i = _uv_to_coord(Vector2i(x, y))
+	return Rect2i(pos, _uv_to_coord(Vector2i(x + 1, y + 1)) - pos)
+
+func _uv_to_coord(uv: Vector2i) -> Vector2i:
+	return Vector2i(roundi(icon_size * 0.2 * uv.x), roundi(icon_size * 0.2 * uv.y))
+
 func _draw():
-	var subsize: float = icon_size * 0.2
 	for i: int in range(15):
 		var x: int = i % 3
 		var y: int = floori(i / 3.0)
@@ -55,12 +62,6 @@ func _draw():
 			continue
 		if (idx == 14) and (num % 13) == 1:
 			continue
-		draw_rect(Rect2(
-			Vector2((2 - i % 3) * subsize, floori(i / 3.0) * subsize),
-			Vector2(subsize, subsize)),
-		_col)
+		draw_rect(_xy_to_rect(2 - i % 3, floori(i / 3.0)), _col)
 		if i % 3 != 0:
-			draw_rect(Rect2(
-				Vector2((2 + i % 3) * subsize, floori(i / 3.0) * subsize),
-				Vector2(subsize, subsize)),
-			_col)
+			draw_rect(_xy_to_rect(2 + i % 3, floori(i / 3.0)), _col)

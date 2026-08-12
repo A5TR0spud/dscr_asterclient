@@ -130,8 +130,7 @@ TODO:
 - have dictionary button glow if no dict is loaded or an empty dict is loaded
 - add system message for when changing name of dictionary entry fails due to duplicate name being present
 - make pressing MAKES ELSE SENSE create the dictionary entry instead of only bringing up the menu, or else make that a setting
-- make pressing enter on the search bar attempt to make a dict entry
-- remove identicon anti-aliasing without adding scaling artifacts"
+- make pressing enter on the name search bar count as clicking the button"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
