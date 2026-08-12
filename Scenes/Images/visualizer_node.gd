@@ -18,39 +18,35 @@ const COLORS: Array = [
 	"FF5800", "BBFF00", "00CDFF", "0084FF", "4D00FF",
 	"FB39FF", "FF0FD7", "484848", "636363", "FFFFFF"
 ];
-func calculateColor (value: int) -> Color:
+func calculate_color (value: int) -> Color:
 	var n: float = value / 64.0 * (COLORS.size() - 1)
 	var lo = floor(n)
 	var hi = ceil(n)
-	return lerpColor(Color(COLORS[lo]), Color(COLORS[hi]), fmod(n, 1))
+	return lerp(Color(COLORS[lo]), Color(COLORS[hi]), fmod(n, 1))
 
-# i keep reading "larp" instead of "lerp"
-func lerpColor(col1: Color, col2: Color, delta: float) -> Color:
-	return col1 * (1.0 - delta) + col2 * delta
+static var plot_scene := preload("res://Scenes/Images/plot_node.tscn")
 
-static var PlotScene := preload("res://Scenes/Images/plot_node.tscn")
-
-@onready var camPivot: Node3D = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport/CameraOrigin
+@onready var cam_pivot: Node3D = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport/CameraOrigin
 @onready var cam: Camera3D = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport/CameraOrigin/Cam
 @onready var plots: Node3D = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport/Plots
-@onready var zoomS: Range = $Intermediate/ZoomSlider
-@onready var yawS: Range = $Intermediate/RenderAndYaw/YawSlider
-@onready var pitchS: Range = $Intermediate/PitchSlider
+@onready var zoom_slider: Range = $Intermediate/ZoomSlider
+@onready var yaw_slider: Range = $Intermediate/RenderAndYaw/YawSlider
+@onready var pitch_slider: Range = $Intermediate/PitchSlider
 
-var _sphereData: Array[Dictionary] = []
+var _sphere_data: Array[Dictionary] = []
 
 func _on_zoom_slider_value_changed(value: float):
-	value /= zoomS.min_value
+	value /= zoom_slider.min_value
 	value = value + 1
 	cam.position.z = 2.5 * value * value + 10.5 * value + 3
 
 func _on_yaw_slider_value_changed(value: float):
-	value /= zoomS.min_value
-	camPivot.rotation_degrees.y = value * 360.0
+	value /= zoom_slider.min_value # TODO: figure out if this should divide by yaw slider min value
+	cam_pivot.rotation_degrees.y = value * 360.0
 
 func _on_pitch_slider_value_changed(value: float):
-	value /= zoomS.min_value
-	camPivot.rotation_degrees.x = -value * 70
+	value /= zoom_slider.min_value # TODO: same as above
+	cam_pivot.rotation_degrees.x = -value * 70
 
 const IMAGE: int = -53
 const PLOT : int = -52
@@ -61,39 +57,39 @@ const END  : int = -15
 const NEG  : int = -1
 const FRAC : int = -10
 
-func CheckImage(messageToParse: Array) -> bool:
-	var currentState: int = 0
-	var builtData: Dictionary = {}
+func check_image(message: Array) -> bool:
+	var current_state: int = 0 # TODO: define as enum
+	var build_data: Dictionary = {}
 	var negative: bool = false
 	var decimal: bool = false
-	for i in messageToParse:
+	for i in message:
 		if i is not int:
-			currentState = 0
-			builtData.clear()
-			_sphereData.clear()
+			current_state = 0
+			build_data.clear()
+			_sphere_data.clear()
 			negative = false
 			decimal = false
 			continue
 		i = i as int
 		if i == IMAGE:
-			if currentState != 0:
-				builtData.clear()
-				_sphereData.clear()
+			if current_state != 0:
+				build_data.clear()
+				_sphere_data.clear()
 				negative = false
 				decimal = false
-			currentState = 1
+			current_state = 1
 			#print("image detected")
 			continue
-		if i == START and currentState == 1:
-			currentState = 2
+		if i == START and current_state == 1:
+			current_state = 2
 			#print("start detected")
 			continue
-		if i == PLOT and currentState == 2:
-			currentState = 3
+		if i == PLOT and current_state == 2:
+			current_state = 3
 			#print("plot detected")
 			continue
 		if (
-			currentState >= 3 and currentState <= 7
+			current_state >= 3 and current_state <= 7
 		):
 			if i == NEG:
 				negative = true
@@ -104,63 +100,63 @@ func CheckImage(messageToParse: Array) -> bool:
 				#print("decimal")
 				continue
 			if i >= 0:
-				#print("state = ", currentState)
+				#print("state = ", current_state)
 				var num: float = i
 				if decimal:
 					num = ("0." + str(i)).to_float()
 				if negative:
 					num *= -1
-				if currentState == 3:
-					num += builtData.get("x", 0)
-					builtData.set("x", num)
+				if current_state == 3:
+					num += build_data.get("x", 0)
+					build_data.set("x", num)
 					#print("x = ", num)
-				elif currentState == 4:
-					num += builtData.get("y", 0)
-					builtData.set("y", num)
+				elif current_state == 4:
+					num += build_data.get("y", 0)
+					build_data.set("y", num)
 					#print("y = ", num)
-				elif currentState == 5:
-					num += builtData.get("z", 0)
-					builtData.set("z", num)
+				elif current_state == 5:
+					num += build_data.get("z", 0)
+					build_data.set("z", num)
 					#print("z = ", num)
-				elif currentState == 6:
-					num += builtData.get("r", 0)
-					builtData.set("r", num)
+				elif current_state == 6:
+					num += build_data.get("r", 0)
+					build_data.set("r", num)
 					#print("r = ", num)
-				elif currentState == 7:
-					num += builtData.get("c", 0)
-					builtData.set("c", num)
+				elif current_state == 7:
+					num += build_data.get("c", 0)
+					build_data.set("c", num)
 					#print("c = ", num)
 				continue
-			if i == SEP and currentState < 7:
-				currentState += 1
+			if i == SEP and current_state < 7:
+				current_state += 1
 				negative = false
 				decimal = false
 				#print("sep detected")
 				continue
-		if (i == END or SEP) and currentState == 7:
-			#print("appending: ", builtData)
-			_sphereData.append(builtData)
+		if (i == END or SEP) and current_state == 7:
+			#print("appending: ", build_data)
+			_sphere_data.append(build_data)
 			negative = false
 			decimal = false
-			builtData = {}
-			currentState = 2
+			build_data = {}
+			current_state = 2
 			#print("sep or end detected")
 			if i == END:
 				#print("end detected")
 				break
 			continue
-		currentState = 0
-		builtData.clear()
-		_sphereData.clear()
+		current_state = 0
+		build_data.clear()
+		_sphere_data.clear()
 		negative = false
 		decimal = false
-	if _sphereData.is_empty():
+	if _sphere_data.is_empty():
 		return false
-	for p: Dictionary in _sphereData:
+	for p: Dictionary in _sphere_data:
 		#print("dat: ", p)
-		var plot: PlotNode = PlotScene.instantiate()
-		plot.Col = calculateColor(p["c"])
-		plot.Radius = p["r"] * 0.5
+		var plot: PlotNode = plot_scene.instantiate()
+		plot.col = calculate_color(p["c"])
+		plot.radius = p["r"] * 0.5
 		plot.position.x = p["x"]
 		plot.position.y = p["z"]
 		plot.position.z = -p["y"]

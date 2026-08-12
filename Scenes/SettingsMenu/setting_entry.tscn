@@ -28,7 +28,7 @@ text = "is"
 
 [node name="BoolButton" parent="BoolOption" unique_id=1728394877 instance=ExtResource("2_48t1y")]
 layout_mode = 2
-IsOn = true
+is_on = true
 
 [node name="HSeparator" type="HSeparator" parent="." unique_id=264909740]
 layout_mode = 2

@@ -20,7 +20,7 @@ layout_mode = 2
 text = "signal editor UI Title"
 horizontal_alignment = 1
 script = ExtResource("2_icn0b")
-Message = Array[int]([-42, -38, -77, -174])
+message = Array[int]([-42, -38, -77, -174])
 
 [node name="HSeparator" type="HSeparator" parent="DictEditMainframe" unique_id=2011356045]
 layout_mode = 2
@@ -42,8 +42,8 @@ context_menu_enabled = false
 emoji_menu_enabled = false
 caret_blink = true
 script = ExtResource("2_icn0b")
-Message = Array[int]([-109, -237, -38])
-PropertyName = &"placeholder_text"
+message = Array[int]([-109, -237, -38])
+property_name = &"placeholder_text"
 
 [node name="NotesEdit" type="TextEdit" parent="DictEditMainframe" unique_id=1225501255]
 custom_minimum_size = Vector2(0, 150)
@@ -58,9 +58,9 @@ scroll_fit_content_height = true
 caret_blink = true
 caret_multiple = false
 script = ExtResource("2_icn0b")
-Message = Array[int]([-130, 0, -86, -108, -237, -38, -85])
-Format = true
-PropertyName = &"placeholder_text"
+message = Array[int]([-130, 0, -86, -108, -237, -38, -85])
+format = true
+property_name = &"placeholder_text"
 
 [node name="BeforeAndAfterFormat" type="HBoxContainer" parent="DictEditMainframe" unique_id=96548629]
 layout_mode = 2
@@ -103,7 +103,7 @@ layout_mode = 2
 layout_mode = 2
 text = "bool [2 |-# precedes 1 big repel] ="
 script = ExtResource("2_icn0b")
-Message = Array[int]([-26, -14, 2, -229, -42, -122, 1, -108, -190, -15, -4])
+message = Array[int]([-26, -14, 2, -229, -42, -122, 1, -108, -190, -15, -4])
 
 [node name="BreakOnDouble" parent="DictEditMainframe/BreakSentence" unique_id=1728394877 instance=ExtResource("3_si2t6")]
 layout_mode = 2
@@ -118,28 +118,28 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "change"
 script = ExtResource("2_icn0b")
-Message = Array[int]([-174, -85])
+message = Array[int]([-174, -85])
 
 [node name="CancelButton" type="Button" parent="DictEditMainframe/SubmitElseCancel" unique_id=739614641]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "not"
 script = ExtResource("2_icn0b")
-Message = Array[int]([-174, -29, -85])
+message = Array[int]([-174, -29, -85])
 
 [node name="DeleteButton" type="Button" parent="DictEditMainframe/SubmitElseCancel" unique_id=983743715]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "delete"
 script = ExtResource("2_icn0b")
-Message = Array[int]([-42, -88, -85])
+message = Array[int]([-42, -88, -85])
 
 [node name="CloseButton" type="Button" parent="DictEditMainframe/SubmitElseCancel" unique_id=1956457673]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "close"
 script = ExtResource("2_icn0b")
-Message = Array[int]([-163, -29, -85])
+message = Array[int]([-163, -29, -85])
 
 [connection signal="text_changed" from="DictEditMainframe/SignalNameEdit/NameLineEdit" to="." method="_on_name_line_edit_text_changed"]
 [connection signal="text_submitted" from="DictEditMainframe/SignalNameEdit/NameLineEdit" to="." method="_on_name_line_edit_text_submitted"]

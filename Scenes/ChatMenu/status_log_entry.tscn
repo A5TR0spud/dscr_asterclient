@@ -29,7 +29,7 @@ mouse_filter = 1
 theme_override_fonts/font = ExtResource("4_u1lvt")
 text = "system message"
 script = ExtResource("5_v4d2j")
-Message = Array[int]([-241])
+message = Array[int]([-241])
 
 [node name="Timeago" type="Label" parent="Header" unique_id=1382497997]
 self_modulate = Color(1, 1, 1, 0.49803922)
@@ -73,7 +73,7 @@ layout_mode = 2
 layout_mode = 2
 text = "delete"
 script = ExtResource("5_v4d2j")
-Message = Array[int]([-88])
+message = Array[int]([-88])
 
 [node name="EtcButton" type="Button" parent="Body/Corpus/ContextButtons" unique_id=896475718]
 layout_mode = 2
@@ -84,7 +84,7 @@ toggle_mode = true
 text = "More"
 alignment = 0
 script = ExtResource("5_v4d2j")
-Message = Array[int]([-25])
+message = Array[int]([-25])
 
 [connection signal="set_etc_visibility" from="." to="." method="_on_set_etc_visibility"]
 [connection signal="pressed" from="Body/Corpus/ContextButtons/DeleteButton" to="." method="_on_delete_button_pressed"]

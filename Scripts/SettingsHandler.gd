@@ -1,25 +1,27 @@
 extends Node
 class_name SettingsHandler
 
-static var DoFormatting: bool = true
-static var TruncateMessageSize: int = 63
-static var PreferredCallsign: int = -1
-static var FontSize: int = 18
-static var ImageDefault: bool = false
+static var do_formatting: bool = true
+static var truncate_message_size: int = 63
+static var preferred_callsign: int = -1
+static var font_size: int = 18
+static var image_default: bool = false
 
-static func Initialize() -> void:
-	DoFormatting = SaveSystem.Settings.get_or_add("DoFormatting", true)
-	ImageDefault = SaveSystem.Settings.get_or_add("ImageDefault", false)
-	TruncateMessageSize = SaveSystem.Settings.get_or_add("TruncateMessageSize", 64)
-	PreferredCallsign = SaveSystem.Settings.get_or_add("PreferredCallsign", -1)
-	FontSize = SaveSystem.Settings.get_or_add("FontSize", 18)
+static func initialize() -> void:
+	# Setting names kept in PascalCase to keep backwards compatibility
+	# also for some reason TMfDS uses PascalCase too. blegh.
+	do_formatting = SaveSystem.settings.get_or_add("DoFormatting", true)
+	image_default = SaveSystem.settings.get_or_add("ImageDefault", false)
+	truncate_message_size = SaveSystem.settings.get_or_add("TruncateMessageSize", 64)
+	preferred_callsign = SaveSystem.settings.get_or_add("PreferredCallsign", -1)
+	font_size = SaveSystem.settings.get_or_add("FontSize", 18)
 
-static func Save() -> void:
-	SaveSystem.SaveSettings()
+static func save() -> void:
+	SaveSystem.save_settings()
 
-static func Export() -> void:
-	SaveSystem.Settings.set("DoFormatting", DoFormatting)
-	SaveSystem.Settings.set("ImageDefault", ImageDefault)
-	SaveSystem.Settings.set("TruncateMessageSize", TruncateMessageSize)
-	SaveSystem.Settings.set("PreferredCallsign", PreferredCallsign)
-	SaveSystem.Settings.set("FontSize", FontSize)
+static func export() -> void:
+	SaveSystem.settings.set("DoFormatting", do_formatting)
+	SaveSystem.settings.set("ImageDefault", image_default)
+	SaveSystem.settings.set("TruncateMessageSize", truncate_message_size)
+	SaveSystem.settings.set("PreferredCallsign", preferred_callsign)
+	SaveSystem.settings.set("FontSize", font_size)

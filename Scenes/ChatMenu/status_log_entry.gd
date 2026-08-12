@@ -1,29 +1,29 @@
 extends ChatEntry
 class_name StatusLogEntry
 
-@onready var TI: Label = $Header/Timeago
-@onready var MG: RichTextLabel = $Body/Corpus/Message
-@onready var TAB: VSeparator = $Body/MessageIndent
-@onready var ETC: Button = $Body/Corpus/ContextButtons/EtcButton
+@onready var timeago_node: Label = $Header/Timeago
+@onready var message_node: RichTextLabel = $Body/Corpus/Message
+@onready var tab_node: VSeparator = $Body/MessageIndent
+@onready var etc_button_node: Button = $Body/Corpus/ContextButtons/EtcButton
 
-func Ready():
-	Main.instance.ReloadDict.connect(Refresh)
+func ready():
+	Main.instance.reload_dict.connect(refresh)
 
 func _physics_process(_delta):
-	CalcTime()
-	TI.text = TimeAgo
+	calc_time()
+	timeago_node.text = time_ago
 
-func Refresh():
+func refresh():
 	pass
 
-func SetMessageText(newText: String):
-	MG.text = newText
+func set_message_text(new_text: String):
+	message_node.text = new_text
 
 func _on_delete_button_pressed():
 	queue_free()
 
 func _on_etc_button_toggled(toggled_on):
-	Collapsed = not toggled_on
+	collapsed = not toggled_on
 
 func _on_set_etc_visibility(visibility: bool):
-	ETC.visible = visibility
+	etc_button_node.visible = visibility

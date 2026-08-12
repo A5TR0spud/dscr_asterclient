@@ -1,54 +1,54 @@
 @abstract class_name ChatEntry
 extends VBoxContainer
 
-var Timestamp: int = 0
-var Message: Array = []
-var TimeAgo: String = ""
-var Collapsed: bool = true:
+var timestamp: int = 0
+var message: Array = []
+var time_ago: String = ""
+var collapsed: bool = true:
 	set(value):
-		var oldV: bool = Collapsed
-		Collapsed = value
+		var oldV: bool = collapsed
+		collapsed = value
 		if oldV != value:
-			_evaluateCorpus()
-var Sender: int = 0
+			_evaluate_corpus()
+var sender: int = 0
 
-func IsMessageTruncatable() -> bool:
-	return Message.size() > SettingsHandler.TruncateMessageSize
+func is_message_truncatable() -> bool:
+	return message.size() > SettingsHandler.truncate_message_size
 
-func CalcTime():
-	var timeago: float = absi(Timestamp - Time.get_ticks_msec())
+func calc_time():
+	var timeago: float = absi(timestamp - Time.get_ticks_msec())
 	timeago *= 0.001
-	timeago /= Main.He6HalfLife
-	TimeAgo = DictionaryHandler.Signals2Words([floori(timeago), -69, -118, -121])
+	timeago /= Main.HE6_HALF_LIFE
+	time_ago = DictionaryHandler.signals_to_words([floori(timeago), -69, -118, -121])
 
 func _ready():
-	Ready()
+	ready()
 	hover_change.emit(false)
 	_refresh()
-	Collapsed = true
-	CalcTime()
-	Main.instance.ReloadDict.connect(_refresh)
-	Main.instance.ReloadSettings.connect(_evaluateCorpus)
+	collapsed = true
+	calc_time()
+	Main.instance.reload_dict.connect(_refresh)
+	Main.instance.reload_settings.connect(_evaluate_corpus)
 	self.mouse_entered.connect(hover_change.emit.bind(true))
 	self.mouse_exited.connect(hover_change.emit.bind(false))
 
 func _refresh():
-	Refresh()
-	_evaluateCorpus()
+	refresh()
+	_evaluate_corpus()
 
-func _evaluateCorpus():
-	var toShow: Array = Message
-	set_etc_visibility.emit(IsMessageTruncatable())
-	if Collapsed and IsMessageTruncatable():
-		toShow = toShow.slice(0, SettingsHandler.TruncateMessageSize)
-		toShow.append(-25)
-	SetMessageText(
-		DictionaryHandler.Signals2Words(toShow, SettingsHandler.DoFormatting)
+func _evaluate_corpus():
+	var to_show: Array = message
+	set_etc_visibility.emit(is_message_truncatable())
+	if collapsed and is_message_truncatable():
+		to_show = to_show.slice(0, SettingsHandler.truncate_message_size)
+		to_show.append(-25)
+	set_message_text(
+		DictionaryHandler.signals_to_words(to_show, SettingsHandler.do_formatting)
 	)
 
-@abstract func Ready()
+@abstract func ready()
 ## Called when dictionary is reloaded
-@abstract func Refresh()
-@abstract func SetMessageText(newText: String)
+@abstract func refresh()
+@abstract func set_message_text(new_text: String)
 signal hover_change(hovering: bool)
 signal set_etc_visibility(visibility: bool)

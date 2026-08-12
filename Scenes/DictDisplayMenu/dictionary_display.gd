@@ -1,47 +1,47 @@
 extends VBoxContainer
 class_name DictionaryDisplay
 
-static var dictEntryScene = preload("res://Scenes/DictDisplayMenu/dict_entry.tscn")
+static var dict_entry_scene = preload("res://Scenes/DictDisplayMenu/dict_entry.tscn")
 
-var NumSearch: String = ""
-var NamSearch: String = ""
+var num_search: String = ""
+var nam_search: String = ""
 
 func _ready():
-	Main.instance.ReloadDict.connect(refresh)
+	Main.instance.reload_dict.connect(refresh)
 
 func refresh():
 	for child in self.get_children():
 		child.queue_free()
-	for idx in range(DictionaryHandler.descKeys.size()):
-		var instance: DictEntry = dictEntryScene.instantiate()
-		instance.Sig = DictionaryHandler.descKeys[idx]
+	for idx in range(DictionaryHandler.desc_keys.size()):
+		var instance: DictEntry = dict_entry_scene.instantiate()
+		instance.sig = DictionaryHandler.desc_keys[idx]
 		add_child(instance)
 
-var ReSearch: bool = false
+var re_search: bool = false
 
 func _on_num_edit_text_changed(new_text: String):
-	NumSearch = new_text
-	ReSearch = true
+	num_search = new_text
+	re_search = true
 
 func _on_sig_edit_text_changed(new_text: String):
-	NamSearch = DictionaryHandler.FilterNameInput(new_text)
-	ReSearch = true
+	nam_search = DictionaryHandler.filter_name_input(new_text)
+	re_search = true
 
 var ticker: int = 0
 func _physics_process(_delta: float) -> void:
-	if ReSearch and ticker >= 4:
-		SearchChildren()
+	if re_search and ticker >= 4:
+		search_children()
 		ticker = -1
 	ticker += 1
 
-func SearchChildren() -> void:
+func search_children() -> void:
 	for child: DictEntry in self.get_children():
 		child.visible = (
-			(not NumSearch or str(child.Sig).contains(NumSearch))
+			(not num_search or str(child.sig).contains(num_search))
 			and
-			(not NamSearch or DictionaryHandler.GetOrDefaultSignalName(child.Sig).contains(NamSearch))
+			(not nam_search or DictionaryHandler.get_or_default_signal_name(child.sig).contains(nam_search))
 		)
-	ReSearch = false
+	re_search = false
 
 func _on_dictionary_save_open_pressed():
-	SaveSystem.OpenSaveLocation()
+	SaveSystem.open_save_location()

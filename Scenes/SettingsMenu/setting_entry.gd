@@ -1,31 +1,31 @@
 extends VBoxContainer
 class_name SettingEntry
 
-@export var Description: Array[int] = []
-@export var State: bool:
+@export var description: Array[int] = []
+@export var state: bool:
 	get:
-		return BButton.IsOn
+		return bool_button.is_on
 	set(value):
-		BButton.IsOn = value
+		bool_button.is_on = value
 
-@onready var DescL: Label = $Description
-@onready var Eq: Label = $BoolOption/Equals
-@onready var BButton: BoolButton = $BoolOption/BoolButton
+@onready var description_label: Label = $Description
+@onready var equals_label: Label = $BoolOption/Equals
+@onready var bool_button: BoolButton = $BoolOption/BoolButton
 
 func _ready():
-	Main.instance.ReloadDict.connect(Refresh)
-	BButton.IsOn = State
-	Refresh()
+	Main.instance.reload_dict.connect(refresh)
+	bool_button.is_on = state
+	refresh()
 
-func Refresh():
-	var o: Array[int] = Description.duplicate()
+func refresh():
+	var o: Array[int] = description.duplicate()
 	o.insert(0, -26)
 	o.insert(1, -14)
 	o.append(-15)
-	DescL.text = DictionaryHandler.Signals2Words(o)
-	Eq.text = DictionaryHandler.GetOrDefaultSignalName(-4)
+	description_label.text = DictionaryHandler.signals_to_words(o)
+	equals_label.text = DictionaryHandler.get_or_default_signal_name(-4)
 
 func _on_bool_button_toggled(_toggled_on):
-	emit_signal("Set", State)
+	emit_signal("set", state)
 
-signal Set(new_value: bool)
+signal set(new_value: bool)

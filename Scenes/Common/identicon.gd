@@ -3,33 +3,33 @@ class_name Identicon
 
 var _col: Color = Color.WHITE:
 	get:
-		return Main.GetCallsignColor(Num)
+		return Main.get_callsign_color(num)
 
-@export var Num: int = 0:
+@export var num: int = 0:
 	set(value):
-		Num = value
+		num = value
 		queue_redraw()
 
-@export var Size: int = 16:
+@export var icon_size: int = 16:
 	set(value):
-		Size = value
-		custom_minimum_size.x = Size
+		icon_size = value
+		custom_minimum_size.x = icon_size
 		custom_minimum_size.y = custom_minimum_size.x
 		custom_maximum_size = custom_minimum_size
 		queue_redraw()
 
 func _ready():
-	Main.instance.ReloadSettings.connect(refresh)
+	Main.instance.reload_settings.connect(refresh)
 
 func refresh():
-	Size = roundi(16.0 * SettingsHandler.FontSize / 18.0)
+	icon_size = roundi(16.0 * SettingsHandler.font_size / 18.0)
 
 func _draw():
-	var subsize: float = Size * 0.2
+	var subsize: float = icon_size * 0.2
 	for i: int in range(15):
 		var x: int = i % 3
 		var y: int = floori(i / 3.0)
-		var r: int = Num
+		var r: int = num
 		if r % 2 == 0:
 			y = 4 - y
 		if (r % 3) == 0:
@@ -41,19 +41,19 @@ func _draw():
 			idx += 6
 		if y > 2:
 			idx -= 3
-		var bigSkip: bool = false
+		var big_skip: bool = false
 		for j: int in range(12):
 			if r % 2 == 0 and idx == j:
-				bigSkip = true
+				big_skip = true
 				break
 			r = floori(r * 0.5)
-		if bigSkip:
+		if big_skip:
 			continue
-		if (idx == 12) and (Num % 7) == 1:
+		if (idx == 12) and (num % 7) == 1:
 			continue
-		if (idx == 13) and (Num % 11) == 1:
+		if (idx == 13) and (num % 11) == 1:
 			continue
-		if (idx == 14) and (Num % 13) == 1:
+		if (idx == 14) and (num % 13) == 1:
 			continue
 		draw_rect(Rect2(
 			Vector2((2 - i % 3) * subsize, floori(i / 3.0) * subsize),

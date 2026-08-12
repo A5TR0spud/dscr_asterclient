@@ -1,6 +1,6 @@
 class_name SaveSystem
 
-static var Dict: Dictionary = {
+static var dict: Dictionary = {
 	"wordDict": {
 		"keys": [
 		],
@@ -17,13 +17,13 @@ static var Dict: Dictionary = {
 	"afterUserDefaultMode": 1
 }
 
-static var Settings: Dictionary = {}
+static var settings: Dictionary = {}
 
 const DICT_PATH : String = "user://DICTIONARY-1.save"
 const MACRO_PATH : String = "user://macro.json"
 const SETTINGS_PATH : String = "user://settings.json"
 
-static func OpenSaveLocation() -> void:
+static func open_save_location() -> void:
 	OS.shell_show_in_file_manager(ProjectSettings.globalize_path(DICT_PATH))
 
 # TMFDS DICT.save structure:
@@ -59,13 +59,13 @@ static func OpenSaveLocation() -> void:
 # 2: new line
 # 3: double new line
 
-static func Load() -> void:
-	LoadDict()
-	LoadSettings()
+static func load() -> void:
+	load_dict()
+	load_settings()
 
-static func SaveSettings() -> void:
-	SettingsHandler.Export()
-	var json_string := JSON.stringify(Settings, "\t")
+static func save_settings() -> void:
+	SettingsHandler.export()
+	var json_string := JSON.stringify(settings, "\t")
 	var file_access := FileAccess.open(SETTINGS_PATH, FileAccess.WRITE)
 	if not file_access:
 		print("An error happened while saving data: ", FileAccess.get_open_error())
@@ -74,10 +74,10 @@ static func SaveSettings() -> void:
 	file_access.store_string(json_string)
 	file_access.close()
 
-static func LoadSettings() -> void:
+static func load_settings() -> void:
 	if not FileAccess.file_exists(SETTINGS_PATH):
-		SaveSettings()
-		SettingsHandler.Initialize()
+		save_settings()
+		SettingsHandler.initialize()
 		return
 	var file_access := FileAccess.open(SETTINGS_PATH, FileAccess.READ)
 	var json_string:= FileAccess.get_file_as_string(SETTINGS_PATH)
@@ -87,16 +87,16 @@ static func LoadSettings() -> void:
 	if error:
 		print("JSON Parse Error: ", error)
 		return
-	Settings = json.data
-	SettingsHandler.Initialize()
-	Main.OnSettingsReload()
+	settings = json.data
+	SettingsHandler.initialize()
+	Main.on_settings_reload()
 
-static func LoadDict() -> void:
+static func load_dict() -> void:
 	var file_access := FileAccess.open(DICT_PATH, FileAccess.READ)
 	if not FileAccess.file_exists(DICT_PATH):
-		SaveDict()
-		Main.OnDictReload()
-		OpenSaveLocation()
+		save_dict()
+		Main.on_dict_reload()
+		open_save_location()
 		var orig_json_string := FileAccess.get_file_as_string(DICT_PATH)
 		var tries: int = 0
 		while (
@@ -107,7 +107,7 @@ static func LoadDict() -> void:
 				return
 			await Main.instance.get_tree().create_timer(1).timeout
 			tries += 1
-		LoadDict()
+		load_dict()
 		return
 	var json_string:= FileAccess.get_file_as_string(DICT_PATH)
 	file_access.close()
@@ -116,14 +116,14 @@ static func LoadDict() -> void:
 	if error:
 		print("JSON Parse Error: ", error)
 		return
-	Dict = json.data
-	DictionaryHandler.Initialize()
-	DictionaryHandler.SortDictionary()
-	Main.OnDictReload()
+	dict = json.data
+	DictionaryHandler.initialize()
+	DictionaryHandler.sort_dictionary()
+	Main.on_dict_reload()
 
-static func SaveDict() -> void:
-	DictionaryHandler.Export()
-	var json_string := JSON.stringify(Dict, "\t")
+static func save_dict() -> void:
+	DictionaryHandler.export()
+	var json_string := JSON.stringify(dict, "\t")
 	var file_access := FileAccess.open(DICT_PATH, FileAccess.WRITE)
 	if not file_access:
 		print("An error happened while saving data: ", FileAccess.get_open_error())
