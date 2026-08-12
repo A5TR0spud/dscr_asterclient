@@ -1,15 +1,12 @@
 [gd_scene format=3 uid="uid://dc1vhk1wyejon"]
 
-[ext_resource type="Shader" uid="uid://b7218835sr28v" path="res://Scenes/Common/identicon.gdshader" id="1_tr8sa"]
 [ext_resource type="Script" uid="uid://bj5byqo1egtnk" path="res://Scenes/Common/identicon.gd" id="2_gq0d8"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kd1wj"]
-resource_local_to_scene = true
-shader = ExtResource("1_tr8sa")
-shader_parameter/Value = 0
-
-[node name="Identicon" type="ColorRect" unique_id=1738948121]
-material = SubResource("ShaderMaterial_kd1wj")
+[node name="Identicon" type="Control" unique_id=737220836]
 custom_minimum_size = Vector2(16, 16)
 custom_maximum_size = Vector2(16, 16)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 16.0
+offset_bottom = 16.0
 script = ExtResource("2_gq0d8")

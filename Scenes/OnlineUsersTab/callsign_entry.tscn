@@ -2,12 +2,6 @@
 
 [ext_resource type="Script" uid="uid://c8ye8ghrhpfng" path="res://Scenes/OnlineUsersTab/callsign_entry.gd" id="1_urwyp"]
 [ext_resource type="PackedScene" uid="uid://dc1vhk1wyejon" path="res://Scenes/Common/identicon.tscn" id="2_jurdb"]
-[ext_resource type="Shader" uid="uid://b7218835sr28v" path="res://Scenes/Common/identicon.gdshader" id="3_o3qp7"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_urwyp"]
-resource_local_to_scene = true
-shader = ExtResource("3_o3qp7")
-shader_parameter/Value = 0
 
 [node name="CallsignEntry" type="PanelContainer" unique_id=1863336341]
 anchors_preset = 15
@@ -22,10 +16,11 @@ script = ExtResource("1_urwyp")
 layout_mode = 2
 
 [node name="Identicon" parent="HBoxContainer" unique_id=1738948121 instance=ExtResource("2_jurdb")]
-material = SubResource("ShaderMaterial_urwyp")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+num = null
+icon_size = null
 
 [node name="Label" type="Label" parent="HBoxContainer" unique_id=1407472134]
 layout_mode = 2

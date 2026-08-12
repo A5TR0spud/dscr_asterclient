@@ -2,15 +2,9 @@
 
 [ext_resource type="Script" uid="uid://bni3uvm8h06ws" path="res://Scenes/ChatMenu/transmission_entry.gd" id="1_42owa"]
 [ext_resource type="PackedScene" uid="uid://dc1vhk1wyejon" path="res://Scenes/Common/identicon.tscn" id="2_wapdh"]
-[ext_resource type="Shader" uid="uid://b7218835sr28v" path="res://Scenes/Common/identicon.gdshader" id="3_kq2tu"]
 [ext_resource type="FontFile" uid="uid://d1qf4i8th7m5o" path="res://fonts/Hack-Bold.ttf" id="4_gt42v"]
 [ext_resource type="Script" uid="uid://dqce42c573ptg" path="res://Scripts/SimpleTranslatable.gd" id="5_wapdh"]
 [ext_resource type="PackedScene" uid="uid://bcqkh2yjqiert" path="res://Scenes/Images/visualizer_node.tscn" id="6_wapdh"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wapdh"]
-resource_local_to_scene = true
-shader = ExtResource("3_kq2tu")
-shader_parameter/Value = 0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g4v7s"]
 
@@ -37,7 +31,6 @@ layout_mode = 2
 theme_override_constants/separation = 0
 
 [node name="Identicon" parent="Header/Cbox" unique_id=1738948121 instance=ExtResource("2_wapdh")]
-material = SubResource("ShaderMaterial_wapdh")
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 1

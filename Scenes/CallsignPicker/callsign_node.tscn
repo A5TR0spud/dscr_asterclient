@@ -3,17 +3,13 @@
 [ext_resource type="Script" uid="uid://dqce42c573ptg" path="res://Scripts/SimpleTranslatable.gd" id="1_l64t4"]
 [ext_resource type="Script" uid="uid://com1i3l3kqyrr" path="res://Scenes/CallsignPicker/callsign_node.gd" id="1_pf6dc"]
 [ext_resource type="PackedScene" uid="uid://dc1vhk1wyejon" path="res://Scenes/Common/identicon.tscn" id="3_61est"]
-[ext_resource type="Shader" uid="uid://b7218835sr28v" path="res://Scenes/Common/identicon.gdshader" id="4_s2jau"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_em3l3"]
-resource_local_to_scene = true
-shader = ExtResource("4_s2jau")
-shader_parameter/Value = 0
 
 [node name="CallsignNode" type="HBoxContainer" unique_id=1004165478]
 offset_right = 199.0
 offset_bottom = 71.0
 script = ExtResource("1_pf6dc")
+base10 = null
+callsign = null
 
 [node name="RollerGrid" type="GridContainer" parent="." unique_id=1449477405]
 layout_mode = 2
@@ -63,7 +59,6 @@ size_flags_vertical = 10
 mouse_default_cursor_shape = 2
 
 [node name="Identicon" parent="RollerGrid" unique_id=1738948121 instance=ExtResource("3_61est")]
-material = SubResource("ShaderMaterial_em3l3")
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6

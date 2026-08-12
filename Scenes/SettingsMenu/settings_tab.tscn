@@ -121,7 +121,17 @@ TODO:
 - clean vs clunky UI setting (current UI is in \"clean\" mode)
 - add \"macro-dictionary\" sidebar
 - make sidebar collapsable
-- make callsign picker collapsable"
+- make callsign picker collapsable
+- rerun the search code when the dictionary gets updated so that the search doesnt reset, or else change the way dictionary repopulation works
+- add more formatting options: indent all proceeding, dedent here and all proceeding
+- setting for unknown signals taking the form of \"@-#_UNDEF\" vs \"|-#\"
+- figure out what to do if a transmission is not received (ie a number is skipped)
+- entering signals into notes so that they auto-update
+- have dictionary button glow if no dict is loaded or an empty dict is loaded
+- add system message for when changing name of dictionary entry fails due to duplicate name being present
+- make pressing MAKES ELSE SENSE create the dictionary entry instead of only bringing up the menu, or else make that a setting
+- make pressing enter on the search bar attempt to make a dict entry
+- remove identicon anti-aliasing without adding scaling artifacts"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
