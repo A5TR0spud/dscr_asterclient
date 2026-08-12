@@ -117,3 +117,4 @@ property_name = &"placeholder_text"
 [connection signal="pressed" from="NewSignalButton" to="NewSignalButton" method="_on_pressed"]
 [connection signal="text_changed" from="NewSignalDesig/NumEdit" to="ScrollContainer/MarginContainer/VBoxContainer/Dictionary" method="_on_num_edit_text_changed"]
 [connection signal="text_changed" from="NewSignalDesig/SigEdit" to="ScrollContainer/MarginContainer/VBoxContainer/Dictionary" method="_on_sig_edit_text_changed"]
+[connection signal="text_submitted" from="NewSignalDesig/SigEdit" to="NewSignalButton" method="_on_sig_edit_text_submitted"]

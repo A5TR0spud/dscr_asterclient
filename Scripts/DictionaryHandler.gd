@@ -107,14 +107,17 @@ static func key_sort(keys: Array, vals: Array) -> Array:
 
 	return [sorted_keys, sorted_vals]
 
-static func apply_signal_name(sig: int, name: String = "") -> bool:
+static func apply_signal_name(sig: int, name: String = "", do_logging: bool = false) -> bool:
 	sig = -absi(sig)
 	name = filter_name_input(name)
 	if not name:
 		name = "@"+String.num_int64(sig)+"_UNDEF"
-	if word_names.has(name):
-		return false
 	var idx = word_keys.find(sig)
+	var dupe_idx: int = word_names.find(name)
+	if dupe_idx >= 0 and dupe_idx != idx:
+		if do_logging:
+			Chat.new_log(Chat.State.DUPLICATE_NAME, [word_keys[dupe_idx], sig, name])
+		return false
 	if idx >= 0:
 		word_names[idx] = name
 		return true

@@ -36,7 +36,8 @@ func save() -> void:
 		SaveSystem.save_dict()
 		Main.on_dict_reload()
 		return
-	DictionaryHandler.apply_signal_name(current_signal, name_edit.text)
+	if not DictionaryHandler.apply_signal_name(current_signal, name_edit.text, true):
+		return
 	name_label.text = DictionaryHandler.get_or_default_signal_name(current_signal)
 	DictionaryHandler.apply_signal_desc(current_signal, {
 		DictionaryHandler.desc_key: desc_edit.text,

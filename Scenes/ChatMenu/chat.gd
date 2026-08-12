@@ -80,7 +80,8 @@ enum State {
 	DISCONNECTED,
 	WILL_AUTO_RECONNECT_SOON,
 	UNKNOWN_WORD,
-	INPUT_TOO_LONG
+	INPUT_TOO_LONG,
+	DUPLICATE_NAME
 }
 
 static func new_log(st: State, args: Array = []) -> void:
@@ -116,6 +117,9 @@ static func new_log(st: State, args: Array = []) -> void:
 	elif st == State.INPUT_TOO_LONG:
 		#COMPUTER DOES TRANSMISSION [ SIGNAL COUNT > 2000 ] COMMUNICATE CAN NOT DOST
 		msg = [-241, -86, -43, -14, -42, -23, -32, Main.MAX_MESSAGE_LENGTH, -15, -196, -145, -29, -85]
+	elif st == State.DUPLICATE_NAME:
+		#SIGNAL [ - #] AND SIGNAL [ - #] IS SYMMETRIC; "%s"
+		msg = [-42, -14, -1, absi(int(args[0])), -15, -30, -42, -14, -1, absi(int(args[1])), -15, -100, -229, -2, args[2]]
 	new_message.message = msg
 	new_message.sender = -1574
 	instance.chat_body.add_child(new_message)
