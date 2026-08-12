@@ -3,7 +3,7 @@ class_name Identicon
 
 var _col: Color = Color.WHITE:
 	get:
-		return Main.GetCallsignColor(num)
+		return Main.get_callsign_color(num)
 
 @export var num: int = 0:
 	set(value):
@@ -22,7 +22,7 @@ func _ready():
 	Main.instance.reload_settings.connect(refresh)
 
 func refresh():
-	icon_size = roundi(16.0 * SettingsHandler.FontSize / 18.0)
+	icon_size = roundi(16.0 * SettingsHandler.font_size / 18.0)
 
 func _draw():
 	var subsize: float = icon_size * 0.2
@@ -49,11 +49,11 @@ func _draw():
 			r = floori(r * 0.5)
 		if big_skip:
 			continue
-		if (idx == 12) and (Num % 7) == 1:
+		if (idx == 12) and (num % 7) == 1:
 			continue
-		if (idx == 13) and (Num % 11) == 1:
+		if (idx == 13) and (num % 11) == 1:
 			continue
-		if (idx == 14) and (Num % 13) == 1:
+		if (idx == 14) and (num % 13) == 1:
 			continue
 		draw_rect(Rect2(
 			Vector2((2 - i % 3) * subsize, floori(i / 3.0) * subsize),
