@@ -28,7 +28,7 @@ text = "+"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("1_l64t4")
-Message = Array[int]([-5])
+message = Array[int]([-5])
 
 [node name="Digit512Inc" type="Button" parent="RollerGrid" unique_id=1437929607]
 custom_minimum_size = Vector2(22, 22)
@@ -99,7 +99,7 @@ text = "-"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("1_l64t4")
-Message = Array[int]([-7])
+message = Array[int]([-7])
 
 [node name="Digit512Dec" type="Button" parent="RollerGrid" unique_id=117634177]
 custom_minimum_size = Vector2(22, 22)
@@ -142,7 +142,7 @@ size_flags_vertical = 3
 mouse_default_cursor_shape = 2
 text = "set"
 script = ExtResource("1_l64t4")
-Message = Array[int]([-174])
+message = Array[int]([-174])
 
 [node name="UndoButton" type="Button" parent="ActionButtons" unique_id=113470087]
 layout_mode = 2
@@ -150,7 +150,7 @@ size_flags_vertical = 3
 mouse_default_cursor_shape = 2
 text = "reset"
 script = ExtResource("1_l64t4")
-Message = Array[int]([-29])
+message = Array[int]([-29])
 
 [connection signal="pressed" from="RollerGrid/Digit512Inc" to="." method="_on_digit_512_inc_pressed"]
 [connection signal="pressed" from="RollerGrid/Digit64Inc" to="." method="_on_digit_64_inc_pressed"]

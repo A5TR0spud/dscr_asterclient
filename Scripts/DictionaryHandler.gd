@@ -35,124 +35,120 @@ class_name DictionaryHandler
 
 const MAX_NAME_LENGTH: int = 20
 
-static var descDict: Dictionary:
+static var desc_dict: Dictionary:
 	get:
-		return SaveSystem.Dict.get_or_add("descDict", {
+		return SaveSystem.dict.get_or_add("descDict", {
 		"keys": [], "values": []
 	})
 	set(value):
-		SaveSystem.Dict.set("descDict", value)
-static var wordDict: Dictionary:
+		SaveSystem.dict.set("descDict", value)
+static var word_dict: Dictionary:
 	get:
-		return SaveSystem.Dict.get_or_add("wordDict", {
+		return SaveSystem.dict.get_or_add("wordDict", {
 		"keys": [], "values": []
 	})
 	set(value):
-		SaveSystem.Dict.set("wordDict", value)
-static var descKeys: Array
-static var descV: Array:
+		SaveSystem.dict.set("wordDict", value)
+static var desc_keys: Array
+static var desc_values: Array:
 	get:
-		return descDict.get_or_add("values", []) as Array[Dictionary]
+		return desc_dict.get_or_add("values", []) as Array[Dictionary]
 	set(value):
-		descDict.set("values", value)
-static var wordKeys: Array
-static var wordNames: Array:
+		desc_dict.set("values", value)
+static var word_keys: Array
+static var word_names: Array:
 	get:
-		return wordDict.get_or_add("values", []) as Array[String]
+		return word_dict.get_or_add("values", []) as Array[String]
 	set(value):
-		wordDict.set("values", value)
-static var defaultBeforeMode: int:
+		word_dict.set("values", value)
+static var default_before_mode: int:
 	get:
-		return SaveSystem.Dict.get_or_add("beforeUserDefaultMode", 1)
+		return SaveSystem.dict.get_or_add("beforeUserDefaultMode", 1)
 	set(value):
-		SaveSystem.Dict.set("beforeUserDefaultMode", value)
-static var defaultAfterMode: int:
+		SaveSystem.dict.set("beforeUserDefaultMode", value)
+static var default_after_mode: int:
 	get:
-		return SaveSystem.Dict.get_or_add("afterUserDefaultMode", 1)
+		return SaveSystem.dict.get_or_add("afterUserDefaultMode", 1)
 	set(value):
-		SaveSystem.Dict.set("afterUserDefaultMode", value)
+		SaveSystem.dict.set("afterUserDefaultMode", value)
 
-const descKey: String = "desc"
-const beforeKey: String = "formatMode"
-const afterKey: String = "formatModeAfter"
-const breakKey: String = "breakOnDouble"
+const desc_key: String = "desc"
+const before_key: String = "formatMode"
+const after_key: String = "formatModeAfter"
+const break_key: String = "breakOnDouble"
 
-static func Initialize() -> void:
-	wordKeys = wordDict.get_or_add("keys", []).map(func(v): return int(v)) as Array[int]
-	descKeys = descDict.get_or_add("keys", []).map(func(v): return int(v)) as Array[int]
+static func initialize() -> void:
+	word_keys = word_dict.get_or_add("keys", []).map(func(v): return int(v)) as Array[int]
+	desc_keys = desc_dict.get_or_add("keys", []).map(func(v): return int(v)) as Array[int]
 
-static func Export() -> void:
-	wordDict.set("keys", wordKeys)
-	descDict.set("keys", descKeys)
+static func export() -> void:
+	word_dict.set("keys", word_keys)
+	desc_dict.set("keys", desc_keys)
 
 # Hell is real
-static func SortDictionary() -> void:
-	var tmp = KeySort(wordKeys, wordNames)
-	wordKeys = (tmp[0] as Array[int])
-	wordNames = (tmp[1] as Array[String])
-	tmp = KeySort(descKeys, descV)
-	descKeys = (tmp[0] as Array[int])
-	descV = (tmp[1] as Array[Dictionary])
-static func KeySort(keys: Array, vals: Array) -> Array:
-	#just bubble sort, it's easy
-	var unsorted: bool = true
-	var size: int = keys.size()
-	while unsorted:
-		unsorted = false
-		for idx in range(size - 1):
-			var next: int = idx + 1
-			if int(keys[idx]) < int(keys[next]):
-				var tmp = keys[idx]
-				keys[idx] = keys[next]
-				keys[next] = tmp
-				tmp = vals[idx]
-				vals[idx] = vals[next]
-				vals[next] = tmp
-				unsorted = true
-	return [keys, vals]
+static func sort_dictionary() -> void:
+	var tmp = key_sort(word_keys, word_names)
+	word_keys = (tmp[0] as Array[int])
+	word_names = (tmp[1] as Array[String])
+	tmp = key_sort(desc_keys, desc_values)
+	desc_keys = (tmp[0] as Array[int])
+	desc_values = (tmp[1] as Array[Dictionary])
 
-static func ApplySignalName(sig: int, name: String = "") -> bool:
+static func key_sort(keys: Array, vals: Array) -> Array:
+	var size: int = keys.size()
+	var indices: Array = range(size)
+	indices.sort_custom(func(a, b): return int(keys[a]) > int(keys[b]))
+	
+	var sorted_keys: Array = []
+	var sorted_vals: Array = []
+	for i in indices:
+		sorted_keys.append(keys[i])
+		sorted_vals.append(vals[i])
+
+	return [sorted_keys, sorted_vals]
+
+static func apply_signal_name(sig: int, name: String = "") -> bool:
 	sig = -absi(sig)
-	name = FilterNameInput(name)
+	name = filter_name_input(name)
 	if not name:
 		name = "@"+String.num_int64(sig)+"_UNDEF"
-	if wordNames.has(name):
+	if word_names.has(name):
 		return false
-	var idx = wordKeys.find(sig)
+	var idx = word_keys.find(sig)
 	if idx >= 0:
-		wordNames[idx] = name
+		word_names[idx] = name
 		return true
-	idx = wordKeys.bsearch_custom(sig, func(a, b): return a > b)
-	wordKeys.insert(idx, sig)
-	wordNames.insert(idx, name)
+	idx = word_keys.bsearch_custom(sig, func(a, b): return a > b)
+	word_keys.insert(idx, sig)
+	word_names.insert(idx, name)
 	return true
 
-static func ApplySignalDesc(sig: int, desc: Dictionary) -> void:
+static func apply_signal_desc(sig: int, desc: Dictionary) -> void:
 	sig = -absi(sig)
-	if not desc.has(descKey):
-		desc[descKey] = "??? ADD NOTES HERE ???"
-	if not desc.has(beforeKey):
-		desc[beforeKey] = defaultBeforeMode
-	if not desc.has(afterKey):
-		desc[afterKey] = defaultAfterMode
-	if not desc.has(breakKey):
-		desc[breakKey] = false
-	var idx = descKeys.find(sig)
+	if not desc.has(desc_key):
+		desc[desc_key] = "??? ADD NOTES HERE ???"
+	if not desc.has(before_key):
+		desc[before_key] = default_before_mode
+	if not desc.has(after_key):
+		desc[after_key] = default_after_mode
+	if not desc.has(break_key):
+		desc[break_key] = false
+	var idx = desc_keys.find(sig)
 	if idx >= 0:
-		descV[idx] = desc
+		desc_values[idx] = desc
 		return
-	idx = descKeys.bsearch_custom(sig, func(a, b): return a > b)
-	descKeys.insert(idx, sig)
-	descV.insert(idx, desc)
+	idx = desc_keys.bsearch_custom(sig, func(a, b): return a > b)
+	desc_keys.insert(idx, sig)
+	desc_values.insert(idx, desc)
 	return
 
-static func GetOrDefaultSignalName(sig: int) -> String:
-	var idx: int = wordKeys.find(sig)
-	if idx == -1 or wordNames.size() <= idx:
+static func get_or_default_signal_name(sig: int) -> String:
+	var idx: int = word_keys.find(sig)
+	if idx == -1 or word_names.size() <= idx:
 		return "@"+String.num_int64(sig)+"_UNDEF"
-	return wordNames[idx]
+	return word_names[idx]
 
-static func FilterNameInput(input: String) -> String:
+static func filter_name_input(input: String) -> String:
 	input = input.replace_char(32, 95).remove_char(124)
 	input = input.strip_edges().strip_escapes().to_upper()
 	var o: String = ""
@@ -165,91 +161,91 @@ static func FilterNameInput(input: String) -> String:
 		o = o.left(MAX_NAME_LENGTH)
 	return o
 
-static func ParseTextToSignals(input: String, doLogging: bool = true) -> Array[int]:
+static func parse_text_to_signals(input: String, do_logging: bool = true) -> Array[int]:
 	input = input.strip_edges().strip_escapes()
 	var out: Array[int] = []
 	var failed: Array[String] = []
-	var currentFailure: String = ""
+	var current_failure: String = ""
 	while input:
 		var cap: int = min(input.length(), MAX_NAME_LENGTH)
-		var cutFailure: bool = false
+		var cut_failure: bool = false
 		for i: int in range(cap):
 			var idx: int = cap - i - 1
 			var sub: String = input.left(idx + 1)
 			if sub[0] == " ":
 				input = input.right(-1)
-				cutFailure = true
+				cut_failure = true
 				break
 			if sub[0] == "|":
 				var subsub: String = sub.right(-1)
 				if subsub and subsub.is_valid_int():
 					out.append(subsub.to_int())
 					input = input.right(-idx - 1)
-					cutFailure = true
+					cut_failure = true
 					break
 				continue
-			var found: int = wordNames.find(sub)
+			var found: int = word_names.find(sub)
 			if found >= 0:
-				out.append(wordKeys[found])
+				out.append(word_keys[found])
 				input = input.right(-idx - 1)
-				cutFailure = true
+				cut_failure = true
 				break
 			if (sub[0].is_valid_int() and
 				sub.is_valid_int()
 			):
 				out.append(sub.to_int())
 				input = input.right(-idx - 1)
-				cutFailure = true
+				cut_failure = true
 				break
 			if idx == 0:
-				if not doLogging:
+				if not do_logging:
 					return []
-				currentFailure += input[0]
+				current_failure += input[0]
 				input = input.right(-1)
 		if (
-			not currentFailure.is_empty() and
-			(cutFailure or currentFailure.length() >= MAX_NAME_LENGTH)
+			not current_failure.is_empty() and
+			(cut_failure or current_failure.length() >= MAX_NAME_LENGTH)
 		):
-			failed.append(currentFailure)
-			currentFailure = ""
-		if out.size() > Main.MaxMessageLength:
-			if doLogging:
-				Chat.NewLog(Chat.State.InputTooLong)
+			failed.append(current_failure)
+			current_failure = ""
+		if out.size() > Main.MAX_MESSAGE_LENGTH:
+			if do_logging:
+				Chat.new_log(Chat.State.INPUT_TOO_LONG)
 			return []
-	if not currentFailure.is_empty():
-		failed.append(currentFailure)
+	if not current_failure.is_empty():
+		failed.append(current_failure)
 	if failed.size() > 0:
-		Chat.NewLog(Chat.State.UnknownWord, failed)
+		Chat.new_log(Chat.State.UNKNOWN_WORD, failed)
 		return []
 	return out
 
-static func ContainsSignal(sig: int) -> bool:
-	var idx: int = wordKeys.find(sig)
+static func contains_signal(sig: int) -> bool:
+	var idx: int = word_keys.find(sig)
 	if idx == -1:
 		return false
-	return wordNames.size() > idx
+	return word_names.size() > idx
 
-static func GetOrDefaultSignalDesc(sig: int) -> Dictionary:
-	var idx: int = descKeys.find(sig)
+static func get_or_default_signal_desc(sig: int) -> Dictionary:
+	var idx: int = desc_keys.find(sig)
 	if idx == -1:
 		return {
-			descKey: "??? ADD NOTES HERE ???",
-			beforeKey: defaultBeforeMode,
-			afterKey: defaultAfterMode,
-			breakKey: false
+			desc_key: "??? ADD NOTES HERE ???",
+			before_key: default_before_mode,
+			after_key: default_after_mode,
+			break_key: false
 		}
-	var tmp: Dictionary = descV[idx]
-	if not tmp.has(descKey):
-		tmp[descKey] = "??? ADD NOTES HERE ???"
-	if not tmp.has(beforeKey):
-		tmp[beforeKey] = defaultBeforeMode
-	if not tmp.has(afterKey):
-		tmp[afterKey] = defaultAfterMode
-	if not tmp.has(breakKey):
-		tmp[breakKey] = false
-	return descV[idx]
+	var tmp: Dictionary = desc_values[idx]
+	if not tmp.has(desc_key):
+		tmp[desc_key] = "??? ADD NOTES HERE ???"
+	if not tmp.has(before_key):
+		tmp[before_key] = default_before_mode
+	if not tmp.has(after_key):
+		tmp[after_key] = default_after_mode
+	if not tmp.has(break_key):
+		tmp[break_key] = false
+	return desc_values[idx]
 
-static func Signals2Words(input: Array, format: bool = false) -> String:
+static func signals_to_words(input: Array, format: bool = false) -> String:
 	var o: String = ""
 	for i in input.size():
 		if input[i] is String:
@@ -262,19 +258,19 @@ static func Signals2Words(input: Array, format: bool = false) -> String:
 		if sig >= 0:
 			o += String.num_int64(sig)
 			continue
-		var name: String = GetOrDefaultSignalName(sig)
-		var desc: Dictionary = GetOrDefaultSignalDesc(sig)
-		var formatMode: int = desc[beforeKey]
-		var formatModeAfter: int = desc[afterKey]
-		var brkDouble: bool = desc[breakKey]
+		var name: String = get_or_default_signal_name(sig)
+		var desc: Dictionary = get_or_default_signal_desc(sig)
+		var format_mode: int = desc[before_key]
+		var format_mode_after: int = desc[after_key]
+		var break_double: bool = desc[break_key]
 		if format and i > 0 and o.right(2) != "\n\n":
-			if formatMode == 1 and o.right(1) != " " and o.right(1) != "\n":
+			if format_mode == 1 and o.right(1) != " " and o.right(1) != "\n":
 				o += " "
-			elif formatMode == 2 and o.right(1) != "\n":
+			elif format_mode == 2 and o.right(1) != "\n":
 				if o.right(1) == " ":
 					o = o.left(-1)
 				o += "\n"
-			elif formatMode == 3:
+			elif format_mode == 3:
 				if o.right(1) == " ":
 					o = o.left(-1)
 				o += "\n\n"
@@ -286,27 +282,27 @@ static func Signals2Words(input: Array, format: bool = false) -> String:
 			if next is int and next >= 0:
 				o += " "
 		if format and i < input.size() - 1:
-			if brkDouble and prev == sig:
+			if break_double and prev == sig:
 				o += "\n"
-			elif formatModeAfter == 1:
+			elif format_mode_after == 1:
 				o += " "
-			elif formatModeAfter == 2:
+			elif format_mode_after == 2:
 				o += "\n"
-			elif formatModeAfter == 3:
+			elif format_mode_after == 3:
 				o += "\n\n"
 	return o
 
-static func ForgetSignal(sig: int) -> void:
-	var idx: int = wordKeys.find(sig)
+static func forget_signal(sig: int) -> void:
+	var idx: int = word_keys.find(sig)
 	if idx >= 0:
-		wordKeys.remove_at(idx)
-		if idx < wordNames.size():
-			wordNames.remove_at(idx)
+		word_keys.remove_at(idx)
+		if idx < word_names.size():
+			word_names.remove_at(idx)
 	
-	idx = descKeys.find(sig)
+	idx = desc_keys.find(sig)
 	if idx >= 0:
-		descKeys.remove_at(idx)
-		if idx < descV.size():
-			descV.remove_at(idx)
+		desc_keys.remove_at(idx)
+		if idx < desc_values.size():
+			desc_values.remove_at(idx)
 	
-	Main.OnDictReload()
+	Main.on_dict_reload()

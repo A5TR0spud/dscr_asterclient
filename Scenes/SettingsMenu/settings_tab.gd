@@ -1,40 +1,40 @@
 extends VBoxContainer
 
 func _ready() -> void:
-	Main.instance.ReloadSettings.connect(Refresh)
+	Main.instance.reload_settings.connect(refresh)
 
-@onready var Formatting: SettingEntry = $ScrollContainer/MarginContainer/Options/Formatting
-@onready var ImageVis: SettingEntry = $ScrollContainer/MarginContainer/Options/ImageVis
-@onready var Trunc: SpinBox = $ScrollContainer/MarginContainer/Options/TruncMargin/TruncHbox/TruncationSpinner
-@onready var Fon: SpinBox = $ScrollContainer/MarginContainer/Options/FontMargin/FontHbox/FontSpinner
+@onready var formatting: SettingEntry = $ScrollContainer/MarginContainer/Options/Formatting
+@onready var image_visibility: SettingEntry = $ScrollContainer/MarginContainer/Options/ImageVis
+@onready var truncate: SpinBox = $ScrollContainer/MarginContainer/Options/TruncMargin/TruncHbox/TruncationSpinner
+@onready var font_size: SpinBox = $ScrollContainer/MarginContainer/Options/FontMargin/FontHbox/FontSpinner
 
-func Refresh() -> void:
-	Formatting.State = SettingsHandler.DoFormatting
-	ImageVis.State = SettingsHandler.ImageDefault
-	Trunc.value = SettingsHandler.TruncateMessageSize
-	Fon.value = SettingsHandler.FontSize
+func refresh() -> void:
+	formatting.state = SettingsHandler.do_formatting
+	image_visibility.state = SettingsHandler.image_default
+	truncate.value = SettingsHandler.truncate_message_size
+	font_size.value = SettingsHandler.font_size
 
-func Save() -> void:
-	SettingsHandler.Save()
-	Main.OnSettingsReload()
+func save() -> void:
+	SettingsHandler.save()
+	Main.on_settings_reload()
 
 func _on_formatting_set(new_value):
-	SettingsHandler.DoFormatting = new_value
-	Save()
+	SettingsHandler.do_formatting = new_value
+	save()
 
 func _on_image_vis_set(new_value):
-	SettingsHandler.ImageDefault = new_value
-	Save()
+	SettingsHandler.image_default = new_value
+	save()
 
 var count: int = 0
 func _physics_process(_delta):
 	if count >= 5:
-		if SettingsHandler.TruncateMessageSize != roundi(Trunc.value):
-			SettingsHandler.TruncateMessageSize = roundi(Trunc.value)
-			Save()
+		if SettingsHandler.truncate_message_size != roundi(truncate.value):
+			SettingsHandler.truncate_message_size = roundi(truncate.value)
+			save()
 		count = -1
 	count += 1
 
 func _on_font_spinner_value_changed(value):
-	SettingsHandler.FontSize = value
-	Save()
+	SettingsHandler.font_size = value
+	save()

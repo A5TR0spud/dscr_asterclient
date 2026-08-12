@@ -48,7 +48,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 text = "dscr client"
 script = ExtResource("2_vk4q2")
-Message = Array[int]([-247, -128])
+message = Array[int]([-247, -128])
 
 [node name="Address" type="HBoxContainer" parent="MarginContainer/MainContainer/Header" unique_id=1263877326]
 layout_mode = 2
@@ -59,7 +59,7 @@ visible = false
 layout_mode = 2
 text = "websocket address MOVE THIS TO SETTINGS"
 script = ExtResource("2_vk4q2")
-Message = Array[int]([-257, -41])
+message = Array[int]([-257, -41])
 
 [node name="AddressEdit" type="LineEdit" parent="MarginContainer/MainContainer/Header/Address" unique_id=334873355]
 visible = false
@@ -78,7 +78,7 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "visual editor"
 script = ExtResource("2_vk4q2")
-Message = Array[int]([-53, -38])
+message = Array[int]([-53, -38])
 
 [node name="HSeparator3" type="HSeparator" parent="MarginContainer/MainContainer" unique_id=544634055]
 layout_mode = 2
@@ -129,7 +129,7 @@ layout_mode = 2
 text = "callsign"
 horizontal_alignment = 1
 script = ExtResource("2_vk4q2")
-Message = Array[int]([-128, -260])
+message = Array[int]([-128, -260])
 
 [node name="CallsignEdit" parent="MarginContainer/MainContainer/Body/Sidebar/CallsignContainer" unique_id=965442127 instance=ExtResource("11_4a3kt")]
 layout_mode = 2
@@ -147,5 +147,5 @@ layout_mode = 2
 [connection signal="timeout" from="TimeoutTime" to="." method="_on_timeout_time_timeout"]
 [connection signal="timeout" from="ReconnectTime" to="." method="_on_reconnect_time_timeout"]
 [connection signal="pressed" from="MarginContainer/MainContainer/Header/DsveButton" to="." method="_on_dsve_button_pressed"]
-[connection signal="CallsignSubmitted" from="MarginContainer/MainContainer/Body/Sidebar/CallsignContainer/CallsignEdit" to="." method="_on_callsign_edit_callsign_submitted"]
+[connection signal="callsign_submitted" from="MarginContainer/MainContainer/Body/Sidebar/CallsignContainer/CallsignEdit" to="." method="_on_callsign_edit_callsign_submitted"]
 [connection signal="visibility_changed" from="DictEditPrison/DictEditWindow" to="DictEditPrison" method="_on_dict_edit_window_visibility_changed"]

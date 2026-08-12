@@ -6,100 +6,101 @@ static var instance: DictEditMenu
 func _enter_tree():
 	instance = self
 
-@export var CURRENT_SIGNAL: int = 0:
+@export var current_signal: int = 0:
 	set(value):
-		CURRENT_SIGNAL = min(value, 0)
-		Reload()
+		current_signal = min(value, 0)
+		reload()
 
-@onready var NameLabel: Label = $DictEditMainframe/SignalNameEdit/NameLabel
-@onready var BefLabel: OptionButton = $DictEditMainframe/BeforeAndAfterFormat/BeforeOption
-@onready var BAClearLabel: Label = $DictEditMainframe/BeforeAndAfterFormat/FormatClarity
-@onready var AftLabel: OptionButton = $DictEditMainframe/BeforeAndAfterFormat/AfterOption
-@onready var BrkButton: BoolButton = $DictEditMainframe/BreakSentence/BreakOnDouble
+# TODO: rename these. PascalCase is :(
+@onready var name_label: Label = $DictEditMainframe/SignalNameEdit/NameLabel
+@onready var before_label: OptionButton = $DictEditMainframe/BeforeAndAfterFormat/BeforeOption
+@onready var before_after_clear_label: Label = $DictEditMainframe/BeforeAndAfterFormat/FormatClarity
+@onready var after_label: OptionButton = $DictEditMainframe/BeforeAndAfterFormat/AfterOption
+@onready var break_button: BoolButton = $DictEditMainframe/BreakSentence/BreakOnDouble
 
-@onready var NameEdit: LineEdit = $DictEditMainframe/SignalNameEdit/NameLineEdit
-@onready var DescEdit: TextEdit = $DictEditMainframe/NotesEdit
+@onready var name_edit: LineEdit = $DictEditMainframe/SignalNameEdit/NameLineEdit
+@onready var desc_edit: TextEdit = $DictEditMainframe/NotesEdit
 
-@onready var BreakSentence: HBoxContainer = $DictEditMainframe/BreakSentence
-@onready var NameSentence: HBoxContainer = $DictEditMainframe/SignalNameEdit
-@onready var DeleteButton: Button = $DictEditMainframe/SubmitElseCancel/DeleteButton
+@onready var break_sentence: HBoxContainer = $DictEditMainframe/BreakSentence
+@onready var name_sentence: HBoxContainer = $DictEditMainframe/SignalNameEdit
+@onready var delete_button: Button = $DictEditMainframe/SubmitElseCancel/DeleteButton
 
 func _ready():
-	Main.instance.ReloadDict.connect(Refresh)
+	Main.instance.reload_dict.connect(refresh)
 	hide()
 
-func Save() -> void:
-	if CURRENT_SIGNAL == 0:
-		DictionaryHandler.defaultBeforeMode = BefLabel.selected
-		DictionaryHandler.defaultAfterMode = AftLabel.selected
-		SaveSystem.SaveDict()
-		Main.OnDictReload()
+func save() -> void:
+	if current_signal == 0:
+		DictionaryHandler.default_before_mode = before_label.selected
+		DictionaryHandler.default_after_mode = after_label.selected
+		SaveSystem.save_dict()
+		Main.on_dict_reload()
 		return
-	DictionaryHandler.ApplySignalName(CURRENT_SIGNAL, NameEdit.text)
-	NameLabel.text = DictionaryHandler.GetOrDefaultSignalName(CURRENT_SIGNAL)
-	DictionaryHandler.ApplySignalDesc(CURRENT_SIGNAL, {
-		DictionaryHandler.descKey: DescEdit.text,
-		DictionaryHandler.beforeKey: BefLabel.selected,
-		DictionaryHandler.afterKey: AftLabel.selected,
-		DictionaryHandler.breakKey: BrkButton.IsOn
+	DictionaryHandler.apply_signal_name(current_signal, name_edit.text)
+	name_label.text = DictionaryHandler.get_or_default_signal_name(current_signal)
+	DictionaryHandler.apply_signal_desc(current_signal, {
+		DictionaryHandler.desc_key: desc_edit.text,
+		DictionaryHandler.before_key: before_label.selected,
+		DictionaryHandler.after_key: after_label.selected,
+		DictionaryHandler.break_key: break_button.is_on
 	})
-	SaveSystem.SaveDict()
-	Main.OnDictReload()
+	SaveSystem.save_dict()
+	Main.on_dict_reload()
 
-func Reload() -> void:
-	BreakSentence.visible = CURRENT_SIGNAL != 0
-	NameSentence.visible = CURRENT_SIGNAL != 0
-	DescEdit.visible = CURRENT_SIGNAL != 0
-	DeleteButton.visible = CURRENT_SIGNAL != 0
-	if CURRENT_SIGNAL == 0:
-		BAClearLabel.text = DictionaryHandler.Signals2Words([-122, -124, -42, -122])
-		BefLabel.select(DictionaryHandler.defaultBeforeMode)
-		AftLabel.select(DictionaryHandler.defaultAfterMode)
+func reload() -> void:
+	break_sentence.visible = current_signal != 0
+	name_sentence.visible = current_signal != 0
+	desc_edit.visible = current_signal != 0
+	delete_button.visible = current_signal != 0
+	if current_signal == 0:
+		before_after_clear_label.text = DictionaryHandler.signals_to_words([-122, -124, -42, -122])
+		before_label.select(DictionaryHandler.default_before_mode)
+		after_label.select(DictionaryHandler.default_after_mode)
 		return
-	var desc: Dictionary = DictionaryHandler.GetOrDefaultSignalDesc(CURRENT_SIGNAL)
-	NameLabel.text = DictionaryHandler.Signals2Words([-42, -14, -1, absi(CURRENT_SIGNAL), -15, -4])
-	BAClearLabel.text = DictionaryHandler.Signals2Words([-122, CURRENT_SIGNAL, -122])
-	NameEdit.text = DictionaryHandler.GetOrDefaultSignalName(CURRENT_SIGNAL)
-	DescEdit.text = desc[DictionaryHandler.descKey]
-	BefLabel.select(int(desc[DictionaryHandler.beforeKey]))
-	AftLabel.select(int(desc[DictionaryHandler.afterKey]))
-	BrkButton.IsOn = desc[DictionaryHandler.breakKey]
+	var desc: Dictionary = DictionaryHandler.get_or_default_signal_desc(current_signal)
+	name_label.text = DictionaryHandler.signals_to_words([-42, -14, -1, absi(current_signal), -15, -4])
+	before_after_clear_label.text = DictionaryHandler.signals_to_words([-122, current_signal, -122])
+	name_edit.text = DictionaryHandler.get_or_default_signal_name(current_signal)
+	desc_edit.text = desc[DictionaryHandler.desc_key]
+	before_label.select(int(desc[DictionaryHandler.before_key]))
+	after_label.select(int(desc[DictionaryHandler.after_key]))
+	break_button.is_on = desc[DictionaryHandler.break_key]
 
-func Refresh():
-	Reload()
-	BefLabel.set("popup/item_0/text", DictionaryHandler.Signals2Words([-111]))
-	BefLabel.set("popup/item_1/text", DictionaryHandler.Signals2Words([1, -190]))
-	BefLabel.set("popup/item_2/text", DictionaryHandler.Signals2Words([1, -108, -190]))
-	BefLabel.set("popup/item_3/text", DictionaryHandler.Signals2Words([2, -108, -190]))
-	AftLabel.set("popup/item_0/text", DictionaryHandler.Signals2Words([-111]))
-	AftLabel.set("popup/item_1/text", DictionaryHandler.Signals2Words([1, -190]))
-	AftLabel.set("popup/item_2/text", DictionaryHandler.Signals2Words([1, -108, -190]))
-	AftLabel.set("popup/item_3/text", DictionaryHandler.Signals2Words([2, -108, -190]))
+func refresh():
+	reload()
+	before_label.set("popup/item_0/text", DictionaryHandler.signals_to_words([-111]))
+	before_label.set("popup/item_1/text", DictionaryHandler.signals_to_words([1, -190]))
+	before_label.set("popup/item_2/text", DictionaryHandler.signals_to_words([1, -108, -190]))
+	before_label.set("popup/item_3/text", DictionaryHandler.signals_to_words([2, -108, -190]))
+	after_label.set("popup/item_0/text", DictionaryHandler.signals_to_words([-111]))
+	after_label.set("popup/item_1/text", DictionaryHandler.signals_to_words([1, -190]))
+	after_label.set("popup/item_2/text", DictionaryHandler.signals_to_words([1, -108, -190]))
+	after_label.set("popup/item_3/text", DictionaryHandler.signals_to_words([2, -108, -190]))
 
 func _input(event: InputEvent):
 	if event.is_action_pressed("ui_close_dialog"):
 		hide()
 
 func _on_submit_button_pressed():
-	Save()
+	save()
 	#hide()
 
 func _on_cancel_button_pressed():
-	Reload()
+	reload()
 
 func _on_close_button_pressed():
 	hide()
 
 func _on_delete_button_pressed():
-	DictionaryHandler.ForgetSignal(CURRENT_SIGNAL)
-	Main.OnDictReload()
-	SaveSystem.SaveDict()
+	DictionaryHandler.forget_signal(current_signal)
+	Main.on_dict_reload()
+	SaveSystem.save_dict()
 	hide()
 
 func _on_name_line_edit_text_submitted(_new_text):
-	Save()
+	save()
 
 func _on_name_line_edit_text_changed(new_text):
-	var col := NameEdit.caret_column
-	NameEdit.text = DictionaryHandler.FilterNameInput(new_text)
-	NameEdit.caret_column = col
+	var col := name_edit.caret_column
+	name_edit.text = DictionaryHandler.filter_name_input(new_text)
+	name_edit.caret_column = col

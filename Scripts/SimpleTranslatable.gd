@@ -1,12 +1,12 @@
 extends Control
 class_name TranslatableSimple
-@export var Message: Array[int] = []
-@export var Format: bool = false
-@export var PropertyName: StringName = "text"
+@export var message: Array[int] = []
+@export var format: bool = false
+@export var property_name: StringName = "text"
 
 func _ready():
-	Main.instance.ReloadDict.connect(Refresh)
-	Refresh()
+	Main.instance.reload_dict.connect(refresh)
+	refresh()
 
-func Refresh():
-	set(PropertyName, DictionaryHandler.Signals2Words(Message, Format))
+func refresh():
+	set(property_name, DictionaryHandler.signals_to_words(message, format))

@@ -36,7 +36,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 text = "dscr client"
 script = ExtResource("2_8gbba")
-Message = Array[int]([-247, -128])
+message = Array[int]([-247, -128])
 
 [node name="Address" type="HBoxContainer" parent="MarginContainer/MainContainer/Header" unique_id=1263877326]
 layout_mode = 2
@@ -47,7 +47,7 @@ visible = false
 layout_mode = 2
 text = "websocket address MOVE THIS TO SETTINGS"
 script = ExtResource("2_8gbba")
-Message = Array[int]([-257, -41])
+message = Array[int]([-257, -41])
 
 [node name="AddressEdit" type="LineEdit" parent="MarginContainer/MainContainer/Header/Address" unique_id=334873355]
 visible = false
@@ -66,7 +66,7 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "visual editor"
 script = ExtResource("2_8gbba")
-Message = Array[int]([-53, -38])
+message = Array[int]([-53, -38])
 
 [node name="HSeparator3" type="HSeparator" parent="MarginContainer/MainContainer" unique_id=544634055]
 layout_mode = 2
@@ -146,14 +146,14 @@ size_flags_horizontal = 3
 text = "dict"
 horizontal_alignment = 1
 script = ExtResource("2_8gbba")
-Message = Array[int]([-42, -237])
+message = Array[int]([-42, -237])
 
 [node name="DictionarySaveOpen" type="Button" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/DictionaryHeader" unique_id=2053265305]
 layout_mode = 2
 mouse_default_cursor_shape = 16
 text = "file"
 script = ExtResource("2_8gbba")
-Message = Array[int]([-40])
+message = Array[int]([-40])
 
 [node name="HSeparator2" type="HSeparator" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab" unique_id=1051184365]
 layout_mode = 2
@@ -183,7 +183,7 @@ layout_mode = 2
 text = "unknown signal"
 horizontal_alignment = 1
 script = ExtResource("2_8gbba")
-Message = Array[int]([-110, -124, -42])
+message = Array[int]([-110, -124, -42])
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/ScrollContainer/MarginContainer/VBoxContainer/DictEntry" unique_id=1714625919]
 layout_mode = 2
@@ -198,7 +198,7 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "new signal"
 script = ExtResource("5_344ge")
-Message = Array[int]([-38, -77, -163])
+message = Array[int]([-38, -77, -163])
 
 [node name="NewSignalDesig" type="HBoxContainer" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab" unique_id=479765799]
 layout_mode = 2
@@ -214,8 +214,8 @@ expand_to_text_length = true
 emoji_menu_enabled = false
 caret_blink = true
 script = ExtResource("2_8gbba")
-Message = Array[int]([-260])
-PropertyName = &"placeholder_text"
+message = Array[int]([-260])
+property_name = &"placeholder_text"
 
 [node name="SigEdit" type="LineEdit" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/NewSignalDesig" unique_id=2024505779]
 layout_mode = 2
@@ -227,8 +227,8 @@ expand_to_text_length = true
 emoji_menu_enabled = false
 caret_blink = true
 script = ExtResource("2_8gbba")
-Message = Array[int]([-42])
-PropertyName = &"placeholder_text"
+message = Array[int]([-42])
+property_name = &"placeholder_text"
 
 [node name="OnlinePeopleTab" type="VBoxContainer" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber" unique_id=1359956486]
 visible = false
@@ -274,7 +274,7 @@ layout_mode = 2
 text = "settings"
 horizontal_alignment = 1
 script = ExtResource("2_8gbba")
-Message = Array[int]([-241, -174])
+message = Array[int]([-241, -174])
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/SettingsTab" unique_id=2095612331]
 layout_mode = 2
@@ -328,7 +328,7 @@ layout_mode = 2
 text = "callsign"
 horizontal_alignment = 1
 script = ExtResource("2_8gbba")
-Message = Array[int]([-128, -260])
+message = Array[int]([-128, -260])
 
 [node name="CallsignEdit" parent="MarginContainer/MainContainer/Body/Sidebar/CallsignContainer" unique_id=965442127 instance=ExtResource("1_jjgbg")]
 layout_mode = 2
@@ -350,7 +350,7 @@ layout_mode = 2
 text = "signal editor UI Title"
 horizontal_alignment = 1
 script = ExtResource("2_8gbba")
-Message = Array[int]([-42, -38, -77, -174])
+message = Array[int]([-42, -38, -77, -174])
 
 [node name="HSeparator" type="HSeparator" parent="DictEditMenu/PanelContainer/DictEditMainframe" unique_id=747557822]
 layout_mode = 2
@@ -370,8 +370,8 @@ max_length = 20
 expand_to_text_length = true
 caret_blink = true
 script = ExtResource("2_8gbba")
-Message = Array[int]([-109, -237, -38])
-PropertyName = &"placeholder_text"
+message = Array[int]([-109, -237, -38])
+property_name = &"placeholder_text"
 
 [node name="NotesEdit" type="TextEdit" parent="DictEditMenu/PanelContainer/DictEditMainframe" unique_id=2012997211]
 custom_minimum_size = Vector2(0, 150)
@@ -384,9 +384,9 @@ scroll_fit_content_height = true
 caret_blink = true
 caret_multiple = false
 script = ExtResource("2_8gbba")
-Message = Array[int]([-130, 0, -86, -108, -237, -38, -85])
-Format = true
-PropertyName = &"placeholder_text"
+message = Array[int]([-130, 0, -86, -108, -237, -38, -85])
+format = true
+property_name = &"placeholder_text"
 
 [node name="BeforeAndAfterFormat" type="HBoxContainer" parent="DictEditMenu/PanelContainer/DictEditMainframe" unique_id=1403600552]
 layout_mode = 2
@@ -429,7 +429,7 @@ layout_mode = 2
 layout_mode = 2
 text = "bool [2 |-# precedes 1 big repel] ="
 script = ExtResource("2_8gbba")
-Message = Array[int]([-26, -14, 2, -229, -42, -122, 1, -108, -190, -15, -4])
+message = Array[int]([-26, -14, 2, -229, -42, -122, 1, -108, -190, -15, -4])
 
 [node name="BreakOnDouble" parent="DictEditMenu/PanelContainer/DictEditMainframe/BreakSentence" unique_id=1728394877 instance=ExtResource("6_21xkr")]
 layout_mode = 2
@@ -442,28 +442,28 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "change"
 script = ExtResource("2_8gbba")
-Message = Array[int]([-174, -85])
+message = Array[int]([-174, -85])
 
 [node name="CancelButton" type="Button" parent="DictEditMenu/PanelContainer/DictEditMainframe/SubmitElseCancel" unique_id=1660648352]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "not"
 script = ExtResource("2_8gbba")
-Message = Array[int]([-174, -29, -85])
+message = Array[int]([-174, -29, -85])
 
 [node name="DeleteButton" type="Button" parent="DictEditMenu/PanelContainer/DictEditMainframe/SubmitElseCancel" unique_id=1597325337]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "delete"
 script = ExtResource("2_8gbba")
-Message = Array[int]([-42, -88, -85])
+message = Array[int]([-42, -88, -85])
 
 [node name="CloseButton" type="Button" parent="DictEditMenu/PanelContainer/DictEditMainframe/SubmitElseCancel" unique_id=332941635]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "close"
 script = ExtResource("2_8gbba")
-Message = Array[int]([-163, -29, -85])
+message = Array[int]([-163, -29, -85])
 
 [connection signal="pressed" from="MarginContainer/MainContainer/Header/DsveButton" to="." method="_on_dsve_button_pressed"]
 [connection signal="lines_edited_from" from="MarginContainer/MainContainer/Body/Chat/MessageEdit" to="MarginContainer/MainContainer/Body/Chat/MessageEdit" method="_on_lines_edited_from"]
@@ -472,7 +472,7 @@ Message = Array[int]([-163, -29, -85])
 [connection signal="pressed" from="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/NewSignalButton" to="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/NewSignalButton" method="_on_pressed"]
 [connection signal="text_changed" from="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/NewSignalDesig/NumEdit" to="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/ScrollContainer/MarginContainer/VBoxContainer/Dictionary" method="_on_num_edit_text_changed"]
 [connection signal="text_changed" from="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/NewSignalDesig/SigEdit" to="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber/DictionaryTab/ScrollContainer/MarginContainer/VBoxContainer/Dictionary" method="_on_sig_edit_text_changed"]
-[connection signal="CallsignSubmitted" from="MarginContainer/MainContainer/Body/Sidebar/CallsignContainer/CallsignEdit" to="." method="_on_callsign_edit_callsign_submitted"]
+[connection signal="callsign_submitted" from="MarginContainer/MainContainer/Body/Sidebar/CallsignContainer/CallsignEdit" to="." method="_on_callsign_edit_callsign_submitted"]
 [connection signal="text_changed" from="DictEditMenu/PanelContainer/DictEditMainframe/SignalNameEdit/NameLineEdit" to="DictEditMenu" method="_on_name_line_edit_text_changed"]
 [connection signal="text_submitted" from="DictEditMenu/PanelContainer/DictEditMainframe/SignalNameEdit/NameLineEdit" to="DictEditMenu" method="_on_name_line_edit_text_submitted"]
 [connection signal="pressed" from="DictEditMenu/PanelContainer/DictEditMainframe/SubmitElseCancel/SubmitButton" to="DictEditMenu" method="_on_submit_button_pressed"]

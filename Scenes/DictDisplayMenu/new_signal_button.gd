@@ -1,17 +1,17 @@
 extends TranslatableSimple
 
-@onready var NumChooser: LineEdit = $"../NewSignalDesig/NumEdit"
-@onready var NameChooser: LineEdit = $"../NewSignalDesig/SigEdit"
+@onready var num_chooser: LineEdit = $"../NewSignalDesig/NumEdit"
+@onready var name_chooser: LineEdit = $"../NewSignalDesig/SigEdit"
 
 func _on_pressed() -> void:
-	var sig: int = -absi(int(NumChooser.text.to_int()))
+	var sig: int = -absi(int(num_chooser.text.to_int()))
 	if sig >= 0:
 		return
-	if NameChooser.text and not DictionaryHandler.ContainsSignal(sig):
-		DictionaryHandler.ApplySignalName(sig, NameChooser.text)
-	DictEditMenu.instance.CURRENT_SIGNAL = sig
+	if name_chooser.text and not DictionaryHandler.contains_signal(sig):
+		DictionaryHandler.apply_signal_name(sig, name_chooser.text)
+	DictEditMenu.instance.current_signal = sig
 	DictEditMenu.instance.show()
-	NameChooser.text = ""
-	NameChooser.emit_signal("text_changed", "")
-	NumChooser.text = ""
-	NumChooser.emit_signal("text_changed", "")
+	name_chooser.text = ""
+	name_chooser.emit_signal("text_changed", "")
+	num_chooser.text = ""
+	num_chooser.emit_signal("text_changed", "")

@@ -123,7 +123,7 @@ toggle_mode = true
 text = "Visualize"
 alignment = 0
 script = ExtResource("5_wapdh")
-Message = Array[int]([-53])
+message = Array[int]([-53])
 
 [node name="EtcButton" type="Button" parent="Body/Corpus/ContextButtons" unique_id=109864259]
 layout_mode = 2
@@ -134,7 +134,7 @@ toggle_mode = true
 text = "More"
 alignment = 0
 script = ExtResource("5_wapdh")
-Message = Array[int]([-25])
+message = Array[int]([-25])
 
 [node name="VisualizeNode" parent="Body/Corpus" unique_id=1907311917 instance=ExtResource("6_wapdh")]
 visible = false

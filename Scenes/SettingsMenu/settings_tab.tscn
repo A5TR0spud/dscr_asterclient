@@ -20,7 +20,7 @@ layout_mode = 2
 text = "settings"
 horizontal_alignment = 1
 script = ExtResource("1_1gwgo")
-Message = Array[int]([-241, -174])
+message = Array[int]([-241, -174])
 
 [node name="HSeparator" type="HSeparator" parent="." unique_id=482587478]
 layout_mode = 2
@@ -44,11 +44,11 @@ size_flags_vertical = 3
 
 [node name="Formatting" parent="ScrollContainer/MarginContainer/Options" unique_id=1141489488 instance=ExtResource("3_0yg8b")]
 layout_mode = 2
-Description = Array[int]([-42, -190, -85, -100, -223])
+description = Array[int]([-42, -190, -85, -100, -223])
 
 [node name="ImageVis" parent="ScrollContainer/MarginContainer/Options" unique_id=1916992470 instance=ExtResource("3_0yg8b")]
 layout_mode = 2
-Description = Array[int]([-53, -163, -85])
+description = Array[int]([-53, -163, -85])
 
 [node name="TruncMargin" type="MarginContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=730512064]
 layout_mode = 2
@@ -70,7 +70,7 @@ rounded = true
 layout_mode = 2
 text = "they say flowers fade and their beauty can't be weighed with flowers so fake"
 script = ExtResource("1_1gwgo")
-Message = Array[int]([-42, -122, -25])
+message = Array[int]([-42, -122, -25])
 
 [node name="HSeparator2" type="HSeparator" parent="ScrollContainer/MarginContainer/Options" unique_id=2092124219]
 layout_mode = 2
@@ -87,7 +87,7 @@ theme_override_constants/separation = 8
 layout_mode = 2
 text = "la dee da dee da"
 script = ExtResource("1_1gwgo")
-Message = Array[int]([-42, -22, -4])
+message = Array[int]([-42, -22, -4])
 
 [node name="FontSpinner" type="SpinBox" parent="ScrollContainer/MarginContainer/Options/FontMargin/FontHbox" unique_id=897245892]
 layout_mode = 2
@@ -128,6 +128,6 @@ shortcut_keys_enabled = false
 meta_underlined = false
 hint_underlined = false
 
-[connection signal="Set" from="ScrollContainer/MarginContainer/Options/Formatting" to="." method="_on_formatting_set"]
-[connection signal="Set" from="ScrollContainer/MarginContainer/Options/ImageVis" to="." method="_on_image_vis_set"]
+[connection signal="set" from="ScrollContainer/MarginContainer/Options/Formatting" to="." method="_on_formatting_set"]
+[connection signal="set" from="ScrollContainer/MarginContainer/Options/ImageVis" to="." method="_on_image_vis_set"]
 [connection signal="value_changed" from="ScrollContainer/MarginContainer/Options/FontMargin/FontHbox/FontSpinner" to="." method="_on_font_spinner_value_changed"]

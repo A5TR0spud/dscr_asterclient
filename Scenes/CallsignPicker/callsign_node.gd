@@ -4,7 +4,7 @@ class_name CallsignSelector
 @onready var dig64: Label = $RollerGrid/Digit64
 @onready var dig8: Label = $RollerGrid/Digit8
 @onready var dig1: Label = $RollerGrid/Digit1
-@onready var ID: Identicon  = $RollerGrid/Identicon
+@onready var identicon_node: Identicon  = $RollerGrid/Identicon
 
 @export_range(0, 4095, 1, "prefer_slider") var base10: int = 0:
 	set (value):
@@ -23,18 +23,18 @@ class_name CallsignSelector
 		dig8.text = String.num_int64(floori(rem / 8))
 		rem = rem % 8
 		dig1.text = String.num_int64(rem)
-		dig1.self_modulate = Main.GetCallsignColor(base10)
-		dig8.self_modulate = Main.GetCallsignColor(base10)
-		dig64.self_modulate = Main.GetCallsignColor(base10)
-		dig512.self_modulate = Main.GetCallsignColor(base10)
-		ID.Num = base10
+		dig1.self_modulate = Main.get_callsign_color(base10)
+		dig8.self_modulate = Main.get_callsign_color(base10)
+		dig64.self_modulate = Main.get_callsign_color(base10)
+		dig512.self_modulate = Main.get_callsign_color(base10)
+		identicon_node.num = base10
 
-@export var CALLSIGN: int = 0:
+@export var callsign: int = 0:
 	set(value):
-		CALLSIGN = clamp(value, 0, 4095) #be extra sure
-		base10 = CALLSIGN
+		callsign = clamp(value, 0, 4095) #be extra sure
+		base10 = callsign
 
-signal CallsignSubmitted(newValue: int)
+signal callsign_submitted(new_value: int)
 
 func _on_digit_512_inc_pressed():
 	base10 += 512
@@ -55,8 +55,8 @@ func _on_digit_1_dec_pressed():
 	base10 -= 1
 
 func _on_submit_button_pressed():
-	CALLSIGN = base10
-	emit_signal("CallsignSubmitted", CALLSIGN)
+	callsign = base10
+	emit_signal("callsign_submitted", callsign)
 
 func _on_undo_button_pressed():
-	base10 = CALLSIGN
+	base10 = callsign
