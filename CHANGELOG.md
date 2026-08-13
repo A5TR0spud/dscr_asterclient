@@ -1,5 +1,17 @@
 # Versions
 
+## --WIP--
+
+### Additions
+
+* Channels have been implemented thanks to [@nikzapp](https://github.com/A5TR0spud/dscr_asterclient/commits?author=NikZapp) on Discord
+* Added computer message for failure to name something identically to an existing signal
+
+### Changes
+
+* Identicons no longer render via shader
+* Pressing enter on the signal name search/create bar now acts as though the button has been pressed
+
 ## Build 2: Visual Information
 
 ### Additions

@@ -6,10 +6,6 @@ var socket: WebSocketPeer = WebSocketPeer.new()
 
 const MAX_MESSAGE_LENGTH: int = 2000
 const HE6_HALF_LIFE: float = 0.8067
-const CHANNEL_LEAVE: int = -65533
-const CHANNEL_JOIN: int = -65534
-const CHANNEL_AT: int = -65535
-const SKELETON_KEY: int = -65536
 
 @onready var callsign_node: CallsignSelector = $MarginContainer/MainContainer/Body/Sidebar/CallsignContainer/CallsignEdit
 var callsign: int = 0:

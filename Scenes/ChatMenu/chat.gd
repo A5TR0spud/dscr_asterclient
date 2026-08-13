@@ -8,9 +8,10 @@ static var separator_scene = preload("res://Scenes/Common/dashed_h_separator.tsc
 static var chat_channel_scene = preload("res://Scenes/ChatMenu/chat_channel.tscn")
 @onready var channel_container: TabContainer = $TabContainer
 
-const CHANNEL_SELECTOR = -65535
-const COMMAND_JOIN = -65534
-const COMMAND_LEAVE = -65533
+const CHANNEL_SELECTOR: int = -65535
+const COMMAND_JOIN: int = -65534
+const COMMAND_LEAVE: int = -65533
+const SKELETON_KEY: int = -65536
 
 func _enter_tree():
 	instance = self

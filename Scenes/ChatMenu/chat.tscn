@@ -25,6 +25,7 @@ script = ExtResource("1_iy605")
 layout_mode = 2
 size_flags_vertical = 3
 current_tab = 0
+drag_to_rearrange_enabled = true
 
 [node name="Main" parent="TabContainer" unique_id=1576279140 instance=ExtResource("2_iy605")]
 layout_mode = 2
