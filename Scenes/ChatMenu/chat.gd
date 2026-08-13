@@ -202,7 +202,7 @@ static func new_log(state: State, args: Array = []) -> void:
 				msg = [-241, -86, -43, -14, -42, -23, -4, -29, int(args[0]), -15, -196, -145, -29, -85]
 		State.DUPLICATE_NAME:
 			#SIGNAL [ - #] AND SIGNAL [ - #] IS SYMMETRIC; "%s"
-		  msg = [-42, -14, -1, absi(int(args[0])), -15, -30, -42, -14, -1, absi(int(args[1])), -15, -100, -229, -2, args[2]]
+			msg = [-42, -14, -1, absi(int(args[0])), -15, -30, -42, -14, -1, absi(int(args[1])), -15, -100, -229, -2, args[2]]
 
 	new_message.message = msg
 	new_message.sender = -1574
