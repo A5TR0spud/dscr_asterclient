@@ -132,6 +132,31 @@ func send_message(written: String) -> bool:
 	var sig: Array[int] = DictionaryHandler.parse_text_to_signals(written)
 	if sig.size() == 0:
 		return false
+	# handle commands
+	# TODO: move to its own class
+	if sig[0] == Chat.COMMAND_JOIN:
+		if len(sig) != 2:
+			Chat.new_log(Chat.State.INPUT_LENGTH_INVALID, [2])
+		else:
+			Chat.enable_channel(sig[1])
+			Chat.focus_channel(sig[1])
+		return true
+	if sig[0] == Chat.COMMAND_LEAVE:
+		if len(sig) != 2:
+			Chat.new_log(Chat.State.INPUT_LENGTH_INVALID, [2])
+		else:
+			Chat.disable_channel(sig[1])
+		return true
+	if sig[0] == Chat.CHANNEL_SELECTOR:
+		if len(sig) < 2:
+			Chat.new_log(Chat.State.INPUT_TOO_SHORT)
+			return true
+		else:
+			Chat.enable_channel(sig[1])
+	
+	var prefix: Array[int] = Chat.get_current_channel_node().get_prefix()
+	sig = prefix + sig
+	
 	var strig: Array = sig.map(func (a): return str(a)) as Array[String]
 	strig.insert(0, "M")
 	var o: String = ",".join(strig)

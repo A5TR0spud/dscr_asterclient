@@ -6,6 +6,8 @@ static var truncate_message_size: int = 63
 static var preferred_callsign: int = -1
 static var font_size: int = 18
 static var image_default: bool = false
+# godot does not have a Set datatype. lame!
+static var opened_channels: Array = []
 
 static func initialize() -> void:
 	# Setting names kept in PascalCase to keep backwards compatibility
@@ -15,6 +17,7 @@ static func initialize() -> void:
 	truncate_message_size = SaveSystem.settings.get_or_add("TruncateMessageSize", 64)
 	preferred_callsign = SaveSystem.settings.get_or_add("PreferredCallsign", -1)
 	font_size = SaveSystem.settings.get_or_add("FontSize", 18)
+	opened_channels = SaveSystem.settings.get_or_add("OpenedChannels", [])
 
 static func save() -> void:
 	SaveSystem.save_settings()
@@ -25,3 +28,4 @@ static func export() -> void:
 	SaveSystem.settings.set("TruncateMessageSize", truncate_message_size)
 	SaveSystem.settings.set("PreferredCallsign", preferred_callsign)
 	SaveSystem.settings.set("FontSize", font_size)
+	SaveSystem.settings.set("OpenedChannels", opened_channels)

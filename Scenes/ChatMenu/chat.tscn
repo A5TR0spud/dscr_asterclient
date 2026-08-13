@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bmqd6twlnn8dk"]
 
 [ext_resource type="Script" uid="uid://dr2cb7q6mysjs" path="res://Scenes/ChatMenu/chat.gd" id="1_iy605"]
-[ext_resource type="Script" uid="uid://b17wh5igsahay" path="res://Scripts/auto_scroll.gd" id="2_md8bx"]
+[ext_resource type="PackedScene" uid="uid://c7bn3w1ijabx4" path="res://Scenes/ChatMenu/chat_channel.tscn" id="2_iy605"]
 [ext_resource type="Script" uid="uid://eyonivvk3glk" path="res://Scenes/ChatMenu/message_edit.gd" id="3_ttrms"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iy605"]
@@ -21,27 +21,14 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_iy605")
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1886248044]
+[node name="TabContainer" type="TabContainer" parent="." unique_id=616289097]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_bottom = 12
+current_tab = 0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer" unique_id=18972742]
+[node name="Main" parent="TabContainer" unique_id=1576279140 instance=ExtResource("2_iy605")]
 layout_mode = 2
-size_flags_vertical = 3
-horizontal_scroll_mode = 0
-vertical_scroll_mode = 2
-script = ExtResource("2_md8bx")
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer" unique_id=2076998585]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_right = 15
-
-[node name="ChatDisplay" type="VBoxContainer" parent="MarginContainer/ScrollContainer/MarginContainer" unique_id=1752267889]
-layout_mode = 2
-alignment = 2
+metadata/_tab_index = 0
 
 [node name="MessageEdit" type="TextEdit" parent="." unique_id=838416481]
 custom_maximum_size = Vector2(-1, 400)
@@ -58,7 +45,6 @@ caret_blink = true
 caret_multiple = false
 script = ExtResource("3_ttrms")
 
-[connection signal="child_entered_tree" from="MarginContainer/ScrollContainer/MarginContainer/ChatDisplay" to="." method="_on_chat_display_child_entered_tree"]
-[connection signal="child_exiting_tree" from="MarginContainer/ScrollContainer/MarginContainer/ChatDisplay" to="." method="_on_chat_display_child_exiting_tree"]
+[connection signal="tab_changed" from="TabContainer" to="." method="_on_tab_container_tab_changed"]
 [connection signal="lines_edited_from" from="MessageEdit" to="MessageEdit" method="_on_lines_edited_from"]
 [connection signal="text_changed" from="MessageEdit" to="MessageEdit" method="_on_text_changed"]
