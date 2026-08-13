@@ -6,9 +6,9 @@ var message: Array = []
 var time_ago: String = ""
 var collapsed: bool = true:
 	set(value):
-		var oldV: bool = collapsed
+		var old_value: bool = collapsed
 		collapsed = value
-		if oldV != value:
+		if old_value != value:
 			_evaluate_corpus()
 var sender: int = 0
 

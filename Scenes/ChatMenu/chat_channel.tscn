@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://c7bn3w1ijabx4"]
+
+[ext_resource type="Script" uid="uid://b17wh5igsahay" path="res://Scripts/auto_scroll.gd" id="1_fsvsf"]
+[ext_resource type="Script" uid="uid://ceobqq1usipvh" path="res://Scenes/ChatMenu/chat_display.gd" id="2_b6sdv"]
+
+[node name="MarginContainer" type="MarginContainer" unique_id=1576279140]
+size_flags_vertical = 3
+theme_override_constants/margin_bottom = 12
+script = ExtResource("2_b6sdv")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1344835550]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+script = ExtResource("1_fsvsf")
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer" unique_id=1235315218]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_right = 15
+
+[node name="ChatDisplay" type="VBoxContainer" parent="ScrollContainer/MarginContainer" unique_id=185948828]
+layout_mode = 2
+alignment = 2
