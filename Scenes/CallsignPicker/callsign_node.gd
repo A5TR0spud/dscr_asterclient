@@ -56,7 +56,7 @@ func _on_digit_1_dec_pressed():
 
 func _on_submit_button_pressed():
 	callsign = base10
-	emit_signal("callsign_submitted", callsign)
+	callsign_submitted.emit(callsign)
 
 func _on_undo_button_pressed():
 	base10 = callsign

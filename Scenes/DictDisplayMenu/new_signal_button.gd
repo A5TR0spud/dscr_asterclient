@@ -4,11 +4,18 @@ extends TranslatableSimple
 @onready var name_chooser: LineEdit = $"../NewSignalDesig/SigEdit"
 
 func _on_pressed() -> void:
+	_try_make(name_chooser.text)
+
+func _on_sig_edit_text_submitted(new_text):
+	_try_make(new_text)
+
+func _try_make(new_text: String) -> void:
 	var sig: int = -absi(int(num_chooser.text.to_int()))
 	if sig >= 0:
 		return
-	if name_chooser.text and not DictionaryHandler.contains_signal(sig):
-		DictionaryHandler.apply_signal_name(sig, name_chooser.text)
+	if new_text and not DictionaryHandler.contains_signal(sig):
+		DictionaryHandler.apply_signal_name(sig, new_text)
+		SaveSystem.save_dict()
 	DictEditMenu.instance.current_signal = sig
 	DictEditMenu.instance.show()
 	name_chooser.text = ""

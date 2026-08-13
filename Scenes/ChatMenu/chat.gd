@@ -112,6 +112,7 @@ enum State {
 	INPUT_TOO_LONG,
 	INPUT_TOO_SHORT,
 	INPUT_LENGTH_INVALID,
+	DUPLICATE_NAME,
 }
 
 ## gets channel node given an id.
@@ -199,7 +200,10 @@ static func new_log(state: State, args: Array = []) -> void:
 			# two args -> range 
 			if len(args) == 1:
 				msg = [-241, -86, -43, -14, -42, -23, -4, -29, int(args[0]), -15, -196, -145, -29, -85]
-				
+		State.DUPLICATE_NAME:
+			#SIGNAL [ - #] AND SIGNAL [ - #] IS SYMMETRIC; "%s"
+		  msg = [-42, -14, -1, absi(int(args[0])), -15, -30, -42, -14, -1, absi(int(args[1])), -15, -100, -229, -2, args[2]]
+
 	new_message.message = msg
 	new_message.sender = -1574
 	get_current_channel_node().add_message_node(new_message)
