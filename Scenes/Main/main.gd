@@ -125,6 +125,7 @@ func start_connect(is_reconnect_attempt: bool = false) -> void:
 		set_physics_process(false)
 
 func send_message(written: String) -> bool:
+	# Return true to clear the input box
 	var sig: Array[int] = DictionaryHandler.parse_text_to_signals(written)
 	if sig.size() == 0:
 		return false
@@ -132,26 +133,27 @@ func send_message(written: String) -> bool:
 	# TODO: move to its own class
 	if sig[0] == Chat.COMMAND_JOIN:
 		if len(sig) != 2:
-			Chat.new_log(Chat.State.INPUT_LENGTH_INVALID, [2])
-		else:
-			Chat.enable_channel(sig[1])
-			Chat.focus_channel(sig[1])
+			Chat.new_log(Chat.State.INPUT_COMMAND_LENGTH_INVALID, [Chat.COMMAND_JOIN, 2])
+			return false
+		Chat.enable_channel(sig[1])
+		Chat.focus_channel(sig[1])
 		return true
 	if sig[0] == Chat.COMMAND_LEAVE:
 		if len(sig) != 2:
-			Chat.new_log(Chat.State.INPUT_LENGTH_INVALID, [2])
-		else:
-			Chat.disable_channel(sig[1])
+			Chat.new_log(Chat.State.INPUT_COMMAND_LENGTH_INVALID, [Chat.COMMAND_LEAVE, 2])
+			return false
+		Chat.disable_channel(sig[1])
 		return true
 	if sig[0] == Chat.CHANNEL_SELECTOR:
-		if len(sig) < 2:
-			Chat.new_log(Chat.State.INPUT_TOO_SHORT)
-			return true
-		else:
-			Chat.enable_channel(sig[1])
-	
-	var prefix: Array[int] = Chat.get_current_channel_node().get_prefix()
-	sig = prefix + sig
+		if len(sig) < 3:
+			Chat.new_log(Chat.State.INPUT_ENCRYPT_TOO_SHORT, [Chat.CHANNEL_SELECTOR])
+			return false
+		Chat.enable_channel(sig[1])
+		Chat.focus_channel(sig[1])
+	else:
+		#only apply prefix if not manually setting a prefix
+		var prefix: Array[int] = Chat.get_current_channel_node().get_prefix()
+		sig = prefix + sig
 	
 	var strig: Array = sig.map(func (a): return str(a)) as Array[String]
 	strig.insert(0, "M")

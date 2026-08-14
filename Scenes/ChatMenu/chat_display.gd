@@ -16,10 +16,10 @@ func add_message_node(message: Node):
 	if Chat.instance.channel_container.current_tab != get_index():
 		set_notification()
 
-func set_channel_name(id):
-	self.name = str(id)
+func set_channel_name(_id):
+	self.name = str(_id)
 	default_channel = false
-	self.id = id
+	self.id = _id
 	update_name()
 
 func set_notification():

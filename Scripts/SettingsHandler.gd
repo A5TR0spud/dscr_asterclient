@@ -17,7 +17,7 @@ static func initialize() -> void:
 	truncate_message_size = SaveSystem.settings.get_or_add("TruncateMessageSize", 64)
 	preferred_callsign = SaveSystem.settings.get_or_add("PreferredCallsign", -1)
 	font_size = SaveSystem.settings.get_or_add("FontSize", 18)
-	opened_channels = SaveSystem.settings.get_or_add("OpenedChannels", [])
+	opened_channels = SaveSystem.settings.get_or_add("OpenedChannels", []).map(func (a): return int(a))
 
 static func save() -> void:
 	SaveSystem.save_settings()

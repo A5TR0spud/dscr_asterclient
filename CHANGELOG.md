@@ -4,7 +4,7 @@
 
 ### Additions
 
-* Channels have been implemented thanks to [@nikzapp](https://github.com/A5TR0spud/dscr_asterclient/commits?author=NikZapp) on Discord
+* Channels have been implemented by [@nikzapp](https://github.com/A5TR0spud/dscr_asterclient/commits?author=NikZapp) on Discord
 * Added computer message for failure to name something identically to an existing signal
 
 ### Changes
