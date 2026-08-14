@@ -115,7 +115,6 @@ TODO:
 - callsign image on/off setting
 - new transmission makes a noise setting
 - lone confetti signal makes confetti setting (only visible if the confetti signal is defined)
-- add autocomplete
 - clean vs clunky UI setting (current UI is in \"clean\" mode)
 - add \"macro-dictionary\" sidebar
 - make sidebar collapsable
@@ -128,7 +127,8 @@ TODO:
 - have dictionary button glow if no dict is loaded or an empty dict is loaded
 - make pressing MAKES ELSE SENSE create the dictionary entry instead of only bringing up the menu, or else make that a setting
 - hover over translated words to get the signal
-- hover over negative numbers to get the translation"
+- hover over negative numbers to get the translation
+- implement message history so you can use arrow keys to access your previous transmissions"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
