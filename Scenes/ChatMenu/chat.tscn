@@ -11,6 +11,12 @@ content_margin_right = 10.0
 content_margin_bottom = 10.0
 bg_color = Color(0.10073931, 0.10073931, 0.10073926, 1)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iy605"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_md8bx"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+corner_detail = 1
+
 [node name="Chat" type="VBoxContainer" unique_id=2068892274]
 anchors_preset = 15
 anchor_right = 1.0
@@ -31,7 +37,7 @@ drag_to_rearrange_enabled = true
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="MessageEdit" type="TextEdit" parent="." unique_id=838416481]
+[node name="MessageEdit" type="CodeEdit" parent="." unique_id=1965766343]
 custom_maximum_size = Vector2(-1, 400)
 layout_mode = 2
 size_flags_vertical = 8
@@ -44,8 +50,24 @@ tab_input_mode = false
 scroll_fit_content_height = true
 caret_blink = true
 caret_multiple = false
+auto_brace_completion_enabled = true
 script = ExtResource("3_ttrms")
 
+[node name="PopupPanel" type="PopupPanel" parent="MessageEdit" unique_id=1145944373]
+oversampling_override = 1.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_iy605")
+
+[node name="ItemList" type="ItemList" parent="MessageEdit/PopupPanel" unique_id=6191075]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+theme_override_constants/line_separation = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_md8bx")
+allow_search = false
+
 [connection signal="tab_changed" from="TabContainer" to="." method="_on_tab_container_tab_changed"]
-[connection signal="lines_edited_from" from="MessageEdit" to="MessageEdit" method="_on_lines_edited_from"]
 [connection signal="text_changed" from="MessageEdit" to="MessageEdit" method="_on_text_changed"]
