@@ -1,10 +1,16 @@
 # Versions
 
-## --WIP--
+## Build 3: Channels
 
 ### Additions
 
-* Channels have been implemented by [@nikzapp](https://github.com/A5TR0spud/dscr_asterclient/commits?author=NikZapp) on Discord
+* Channels have been implemented primarily by [@nikzapp](https://github.com/A5TR0spud/dscr_asterclient/commits?author=NikZapp) on Discord
+* As a reminder:
+  * Sending "|-65535 (key) (message)" will hide the message from normal chat
+  * Sending "|-65534 (key)" will display messages otherwise hidden via the above method, for that specific key
+  * Sending "|-65533 (key)" will stop displaying messages from that key
+  * |-65536 is a special key that will show all available channels when shown via |-65534
+* Note: if a channel is selected, "|-65535 (key)" will automatically be prepended, unless the sent message starts with |-65535
 * Added computer message for failure to name something identically to an existing signal
 
 ### Changes
