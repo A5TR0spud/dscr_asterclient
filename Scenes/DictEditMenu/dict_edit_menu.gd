@@ -81,6 +81,8 @@ func refresh():
 func _input(event: InputEvent):
 	if event.is_action_pressed("ui_close_dialog"):
 		hide()
+	if event.is_action_pressed("ui_text_submit") and not event.is_action_pressed("ui_text_newline"):
+		save()
 
 func _on_submit_button_pressed():
 	save()

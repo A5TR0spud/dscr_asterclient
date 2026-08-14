@@ -16,6 +16,7 @@ func refresh():
 		var instance: DictEntry = dict_entry_scene.instantiate()
 		instance.sig = DictionaryHandler.desc_keys[idx]
 		add_child(instance)
+	search_children()
 
 var re_search: bool = false
 

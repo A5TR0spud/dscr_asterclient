@@ -1,5 +1,12 @@
 # Versions
 
+## --WIP--
+
+### Changes
+
+* Pressing enter (but not shift+enter) will now count as pressing save in the dictionary edit popup
+* Changing dictionary entries no longer resets the search
+
 ## Build 3: Channels
 
 ### Additions

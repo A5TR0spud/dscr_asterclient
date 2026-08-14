@@ -49,7 +49,7 @@ property_name = &"placeholder_text"
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 size_flags_vertical = 3
-placeholder_text = "human 0 does big meaning makes dost"
+placeholder_text = "CURRENT HUMAN DOES BIG MEANING MAKES DOST"
 context_menu_enabled = false
 emoji_menu_enabled = false
 wrap_mode = 1
@@ -58,7 +58,7 @@ scroll_fit_content_height = true
 caret_blink = true
 caret_multiple = false
 script = ExtResource("2_icn0b")
-message = Array[int]([-130, 0, -86, -108, -237, -38, -85])
+message = Array[int]([-119, -130, -86, -108, -237, -38, -85])
 format = true
 property_name = &"placeholder_text"
 
