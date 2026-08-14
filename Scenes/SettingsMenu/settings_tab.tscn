@@ -106,7 +106,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "the todo list will be removed at some point
 TODO:
-- add transmission bookmark option
+- add transmission bookmark option and browse menu
 - change layout of online users tab to match dictionary and allow option to nickname callsigns (maybe i will finally remember who i am talking with)
 - change placement of copy button (find a visible spot that doesn't cause formatting to screw up when it disappears)
 - add confirmation message for deleting dictionary entries
@@ -119,7 +119,6 @@ TODO:
 - add \"macro-dictionary\" sidebar
 - make sidebar collapsable
 - make callsign picker collapsable
-- rerun the search code when the dictionary gets updated so that the search doesnt reset, or else change the way dictionary repopulation works
 - add more formatting options: indent all proceeding, dedent here and all proceeding, prior attract, next attract (attract removes space)
 - setting for unknown signals taking the form of \"@-#_UNDEF\" vs \"|-#\"
 - figure out what to do if a transmission is not received (ie a number is skipped)

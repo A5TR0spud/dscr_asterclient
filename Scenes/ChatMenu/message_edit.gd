@@ -1,18 +1,10 @@
 extends CodeEdit
 
-@onready var popup_node: PopupPanel = $PopupPanel
-@onready var autocomplete_list: ItemList = $PopupPanel/ItemList
-
-func _input(event: InputEvent):
-	if event.is_action_pressed("ui_text_submit") and not event.is_action_pressed("ui_text_newline"):
-		if Main.instance.send_message(text):
-			text = ""
-	if event.is_action_pressed("ui_text_completion_accept"):
-		pass
+@onready var autocomplete_list: ItemList = $ItemList
 
 func _ready():
 	Main.instance.reload_dict.connect(refresh)
-	popup_node.unfocusable = true
+	autocomplete_list.hide()
 
 func refresh():
 	placeholder_text = DictionaryHandler.signals_to_words([-43, -38])
@@ -20,7 +12,7 @@ func refresh():
 func _request_code_completion(force: bool) -> void:
 	var word_under_caret = get_signal_under_caret()
 	if word_under_caret.is_empty() and not force:
-		popup_node.hide()
+		autocomplete_list.hide()
 		return
 	
 	# TODO: make this better
@@ -32,7 +24,7 @@ func _request_code_completion(force: bool) -> void:
 	
 	var options: Array[Dictionary] = get_code_completion_options()
 	if options.is_empty():
-		popup_node.hide()
+		autocomplete_list.hide()
 		#print("NO OPTIONS FOR ", word_under_caret)
 		return
 	cancel_code_completion()
@@ -80,25 +72,12 @@ func _show_custom_popup(options: Array[Dictionary]):
 	var caret_global: Vector2 = global_position + caret_local
 	var line_h: float = get_line_height()
 	
-	var visible_items = min(options.size(), 8)
-	
-	# i hate this, but the separator height changes with font size.
-	# this was found through trial and error
-	var item_height: int = floori(1.2 * SettingsHandler.font_size + 0.6)
-	# "it just works"
-	#   - Todd Howard
-	
-	var popup_height = visible_items * item_height
-	var popup_width = 240
-	
-	popup_node.size = Vector2i(popup_width, popup_height)
-	
-	popup_node.position = Vector2i(
+	autocomplete_list.position = Vector2i(
 			int(caret_global.x),
-			int(caret_global.y - popup_height - line_h)
+			int(caret_global.y - line_h)
 	)
-	
-	popup_node.popup()
+	autocomplete_list.reset_size.call_deferred()
+	autocomplete_list.show()
 
 func _on_text_changed():
 	var col := get_caret_column()
@@ -126,32 +105,45 @@ func _confirm_selection(index: int) -> void:
 	# especially since it needs to autocomplete whatever comes after!
 	# so i just add a space and ignore it.
 	insert_text_at_caret(chosen + " ")
-	popup_node.hide()
+	autocomplete_list.hide()
+	autocomplete_list.get_v_scroll_bar().value = 0
 
 func _gui_input(event: InputEvent) -> void:
-	if not autocomplete_list.visible:
+	if event.is_action_pressed("ui_text_newline"):
 		return
-	
-	if event is InputEventKey and event.pressed:
+	if autocomplete_list.visible:
 		var selected = autocomplete_list.get_selected_items()
 		var idx = selected[0] if not selected.is_empty() else 0
 
-		if popup_node.visible:
-			match event.keycode:
-				KEY_DOWN:
-					idx = min(idx + 1, autocomplete_list.item_count - 1)
-					autocomplete_list.select(idx)
-					accept_event()
-				KEY_UP:
-					idx = max(idx - 1, 0)
-					autocomplete_list.select(idx)
-					accept_event()
-				KEY_ENTER, KEY_KP_ENTER, KEY_TAB:
-					_confirm_selection(idx)
-					accept_event()
-				KEY_ESCAPE:
-					autocomplete_list.hide()
-					accept_event()
-		else:
-			pass
-			# TODO: history implementation here	
+		if autocomplete_list.visible:
+			if event.is_action_pressed("ui_down"):
+				idx = min(idx + 1, autocomplete_list.item_count - 1)
+				autocomplete_list.select(idx)
+				accept_event()
+				return
+			if event.is_action_pressed("ui_up"):
+				idx = max(idx - 1, 0)
+				autocomplete_list.select(idx)
+				accept_event()
+				return
+			if event.is_action_pressed("ui_accept"):
+				_confirm_selection(idx)
+				accept_event()
+				return
+			if event.is_action_pressed("ui_close_dialog"):
+				autocomplete_list.hide()
+				accept_event()
+				return
+	
+	# TODO: history implementation here
+	
+	if event.is_action_pressed("ui_text_submit"):
+		if Main.instance.send_message(text):
+			text = ""
+		accept_event()
+		return
+
+func _on_item_list_item_clicked(index, _at_position, mouse_button_index):
+	if mouse_button_index != MOUSE_BUTTON_LEFT:
+		return
+	_confirm_selection(index)

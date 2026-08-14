@@ -2,6 +2,11 @@
 
 ## --WIP--
 
+### Additions
+
+* Added autocomplete! Hell yeah (NikZapp)
+* Added icon (NikZapp)
+
 ### Changes
 
 * Pressing enter (but not shift+enter) will now count as pressing save in the dictionary edit popup

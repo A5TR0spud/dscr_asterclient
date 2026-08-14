@@ -68,6 +68,30 @@ border_width_left = 5
 border_width_right = 5
 border_color = Color(0.8, 0.8, 0.8, 0)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bsxcp"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_detail = 1
+expand_margin_left = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kry3j"]
+content_margin_left = 10.0
+content_margin_top = 8.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
+bg_color = Color(0, 0.039215688, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.49803922, 0.49803922, 0.49803922, 1)
+corner_detail = 1
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yf5fn"]
 draw_center = false
 border_width_left = 2
@@ -96,19 +120,6 @@ colors = PackedColorArray(0, 0, 0, 0)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_ttirq"]
 gradient = SubResource("Gradient_yoflm")
 width = 1
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kry3j"]
-content_margin_left = 10.0
-content_margin_top = 8.0
-content_margin_right = 10.0
-content_margin_bottom = 8.0
-bg_color = Color(0, 0.039215688, 0, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.49803922, 0.49803922, 0.49803922, 1)
-corner_detail = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nkfox"]
 draw_center = false
@@ -203,6 +214,15 @@ HScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_lyb8g")
 HScrollBar/styles/scroll = SubResource("StyleBoxFlat_37gq2")
 HSplitContainer/constants/autohide = 0
 HSplitContainer/styles/split_bar_background = SubResource("StyleBoxFlat_i66g5")
+ItemList/styles/cursor = SubResource("StyleBoxFlat_bsxcp")
+ItemList/styles/cursor_unfocused = SubResource("StyleBoxFlat_bsxcp")
+ItemList/styles/focus = SubResource("StyleBoxFlat_bsxcp")
+ItemList/styles/hovered = SubResource("StyleBoxFlat_bsxcp")
+ItemList/styles/hovered_selected = SubResource("StyleBoxFlat_bsxcp")
+ItemList/styles/hovered_selected_focus = SubResource("StyleBoxFlat_bsxcp")
+ItemList/styles/panel = SubResource("StyleBoxFlat_kry3j")
+ItemList/styles/selected = SubResource("StyleBoxFlat_bsxcp")
+ItemList/styles/selected_focus = SubResource("StyleBoxFlat_bsxcp")
 Label/styles/focus = SubResource("StyleBoxFlat_j2q5q")
 LineEdit/constants/caret_width = 2
 LineEdit/styles/focus = SubResource("StyleBoxFlat_yf5fn")
