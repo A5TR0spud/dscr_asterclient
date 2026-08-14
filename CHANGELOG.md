@@ -5,7 +5,7 @@
 ### Additions
 
 * Added autocomplete! Hell yeah (NikZapp)
-* Added icon (NikZapp)
+* Added icon (NikZapp and A5TR0spud)
 
 ### Changes
 
