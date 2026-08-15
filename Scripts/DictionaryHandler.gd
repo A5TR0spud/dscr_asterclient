@@ -279,12 +279,13 @@ static func parse_text_to_signals(input: String, do_logging: bool = true) -> Arr
 	if parsed.state == ParseResult.FailureState.ALL_GOOD:
 		return parsed.output
 	
-	match parsed.state:
-		ParseResult.FailureState.TOO_LONG:
-			Chat.new_log(Chat.State.INPUT_TOO_LONG)
-		ParseResult.FailureState.UNKNOWN_STRING:
-			Chat.new_log(Chat.State.UNKNOWN_WORD, parsed.failures)
-	
+	if do_logging:
+		match parsed.state:
+			ParseResult.FailureState.TOO_LONG:
+				Chat.new_log(Chat.State.INPUT_TOO_LONG)
+			ParseResult.FailureState.UNKNOWN_STRING:
+				Chat.new_log(Chat.State.UNKNOWN_WORD, parsed.failures)
+		
 	return []
 
 static func contains_signal(sig: int) -> bool:
