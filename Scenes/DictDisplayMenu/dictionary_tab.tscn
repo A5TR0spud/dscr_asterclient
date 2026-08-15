@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://cwf16ujxnodbv" path="res://Scenes/DictDisplayMenu/default_format_option.gd" id="2_wphnd"]
 [ext_resource type="Script" uid="uid://b6d5ucfwdeqjh" path="res://Scenes/DictDisplayMenu/dictionary_display.gd" id="3_b08ua"]
 [ext_resource type="Script" uid="uid://cyqng7nb5maao" path="res://Scenes/DictDisplayMenu/new_signal_button.gd" id="4_1mk6h"]
+[ext_resource type="Script" uid="uid://baps22n1gapas" path="res://Scenes/DictDisplayMenu/num_edit.gd" id="5_wphnd"]
+[ext_resource type="Script" uid="uid://ukxt5yo8cbcp" path="res://Scenes/DictDisplayMenu/sig_edit.gd" id="6_b08ua"]
 
 [node name="DictionaryTab" type="VBoxContainer" unique_id=1745367524]
 anchors_preset = 15
@@ -95,9 +97,7 @@ expand_to_text_length = true
 context_menu_enabled = false
 emoji_menu_enabled = false
 caret_blink = true
-script = ExtResource("1_tpcp0")
-message = Array[int]([-260])
-property_name = &"placeholder_text"
+script = ExtResource("5_wphnd")
 
 [node name="SigEdit" type="LineEdit" parent="NewSignalDesig" unique_id=804966430]
 layout_mode = 2
@@ -109,9 +109,7 @@ expand_to_text_length = true
 context_menu_enabled = false
 emoji_menu_enabled = false
 caret_blink = true
-script = ExtResource("1_tpcp0")
-message = Array[int]([-42])
-property_name = &"placeholder_text"
+script = ExtResource("6_b08ua")
 
 [connection signal="pressed" from="DictionaryHeader/DictionarySaveOpen" to="ScrollContainer/MarginContainer/VBoxContainer/Dictionary" method="_on_dictionary_save_open_pressed"]
 [connection signal="pressed" from="NewSignalButton" to="NewSignalButton" method="_on_pressed"]

@@ -102,8 +102,3 @@ func _on_delete_button_pressed():
 
 func _on_name_line_edit_text_submitted(_new_text):
 	save()
-
-func _on_name_line_edit_text_changed(new_text):
-	var col := name_edit.caret_column
-	name_edit.text = DictionaryHandler.filter_name_input(new_text)
-	name_edit.caret_column = col

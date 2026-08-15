@@ -12,11 +12,14 @@
 
 * Pressing enter (but not shift+enter) will now count as pressing save in the dictionary edit popup
 * Changing dictionary entries no longer resets the search
+* Potentially improved signal name editing
+* @ and $ are now blacklisted from signal names. This matches the game itself, so it shouldn't affect many people. I have plans for these symbols.
 
 ### Fixes
 
 * Fixed the root cause of janky multiline in the chat entry. This means automatic word wrapping is back!
 * Fix maybe-long-standing bug where sending a pipe (|) without a valid number following it causes a crash
+* Can no longer type non-numbers into the number search or blacklisted characters into the name search
 
 ## Build 3: Channels
 

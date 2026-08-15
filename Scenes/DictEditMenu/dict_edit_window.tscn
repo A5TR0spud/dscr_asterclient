@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ciogfbq06qv56" path="res://Scenes/DictEditMenu/dict_edit_menu.gd" id="1_wmq72"]
 [ext_resource type="Script" uid="uid://dqce42c573ptg" path="res://Scripts/SimpleTranslatable.gd" id="2_icn0b"]
+[ext_resource type="Script" uid="uid://bp5hjifr8ny2x" path="res://Scenes/DictEditMenu/name_line_edit.gd" id="3_f8ufa"]
 [ext_resource type="PackedScene" uid="uid://bw4nasduhbqkb" path="res://Scenes/Common/bool_toggle_button.tscn" id="3_si2t6"]
 
 [node name="DictEditWindow" type="PanelContainer" unique_id=1113766720]
@@ -41,9 +42,7 @@ expand_to_text_length = true
 context_menu_enabled = false
 emoji_menu_enabled = false
 caret_blink = true
-script = ExtResource("2_icn0b")
-message = Array[int]([-109, -237, -38])
-property_name = &"placeholder_text"
+script = ExtResource("3_f8ufa")
 
 [node name="NotesEdit" type="TextEdit" parent="DictEditMainframe" unique_id=1225501255]
 custom_minimum_size = Vector2(0, 150)
@@ -141,7 +140,6 @@ text = "close"
 script = ExtResource("2_icn0b")
 message = Array[int]([-163, -29, -85])
 
-[connection signal="text_changed" from="DictEditMainframe/SignalNameEdit/NameLineEdit" to="." method="_on_name_line_edit_text_changed"]
 [connection signal="text_submitted" from="DictEditMainframe/SignalNameEdit/NameLineEdit" to="." method="_on_name_line_edit_text_submitted"]
 [connection signal="pressed" from="DictEditMainframe/SubmitElseCancel/SubmitButton" to="." method="_on_submit_button_pressed"]
 [connection signal="pressed" from="DictEditMainframe/SubmitElseCancel/CancelButton" to="." method="_on_cancel_button_pressed"]

@@ -152,7 +152,7 @@ static func get_or_default_signal_name(sig: int) -> String:
 	return word_names[idx]
 
 static func filter_name_input(input: String) -> String:
-	input = input.replace_char(32, 95).remove_char(124)
+	input = input.replace_char(ord(" "), ord("_")).remove_chars("|@$")
 	input = input.strip_edges().strip_escapes().to_upper()
 	var o: String = ""
 	for i in range(input.length()):
