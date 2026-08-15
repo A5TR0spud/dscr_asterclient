@@ -4,13 +4,19 @@
 
 ### Additions
 
-* Added autocomplete! Hell yeah (NikZapp)
-* Added icon (NikZapp and A5TR0spud)
+* NikZapp is now a contributor!
+* Added autocomplete! Hell yeah
+* Added icon
 
 ### Changes
 
 * Pressing enter (but not shift+enter) will now count as pressing save in the dictionary edit popup
 * Changing dictionary entries no longer resets the search
+
+### Fixes
+
+* Fixed the root cause of janky multiline in the chat entry. This means automatic word wrapping is back!
+* Fix maybe-long-standing bug where sending a pipe (|) without a valid number following it causes a crash
 
 ## Build 3: Channels
 

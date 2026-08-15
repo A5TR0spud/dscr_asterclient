@@ -31,7 +31,7 @@ drag_to_rearrange_enabled = true
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="MessageEdit" type="CodeEdit" parent="." unique_id=1965766343]
+[node name="MessageEdit" type="TextEdit" parent="." unique_id=379895064]
 custom_maximum_size = Vector2(-1, 400)
 layout_mode = 2
 size_flags_vertical = 8
@@ -40,12 +40,19 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_iy605")
 placeholder_text = "type here"
 context_menu_enabled = false
 emoji_menu_enabled = false
+wrap_mode = 1
 tab_input_mode = false
 scroll_fit_content_height = true
 caret_blink = true
 caret_multiple = false
-auto_brace_completion_enabled = true
 script = ExtResource("3_ttrms")
+
+[node name="AutocompleteFinder" type="CodeEdit" parent="MessageEdit" unique_id=893543974]
+visible = false
+layout_mode = 0
+offset_top = 38.0
+offset_right = 1152.0
+offset_bottom = 46.0
 
 [node name="ItemList" type="ItemList" parent="MessageEdit" unique_id=6191075]
 visible = false
@@ -67,5 +74,6 @@ auto_height = true
 text_overrun_behavior = 1
 
 [connection signal="tab_changed" from="TabContainer" to="." method="_on_tab_container_tab_changed"]
+[connection signal="caret_changed" from="MessageEdit" to="MessageEdit" method="_on_caret_changed"]
 [connection signal="text_changed" from="MessageEdit" to="MessageEdit" method="_on_text_changed"]
 [connection signal="item_clicked" from="MessageEdit/ItemList" to="MessageEdit" method="_on_item_list_item_clicked"]
