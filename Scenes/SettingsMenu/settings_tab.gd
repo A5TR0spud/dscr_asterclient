@@ -7,6 +7,7 @@ func _ready() -> void:
 @onready var image_visibility: SettingEntry = $ScrollContainer/MarginContainer/Options/ImageVis
 @onready var truncate: SpinBox = $ScrollContainer/MarginContainer/Options/TruncMargin/TruncHbox/TruncationSpinner
 @onready var font_size: SpinBox = $ScrollContainer/MarginContainer/Options/FontMargin/FontHbox/FontSpinner
+@onready var address_edit: LineEdit = $ScrollContainer/MarginContainer/Options/Address/AdressEdit
 
 func refresh() -> void:
 	formatting.state = SettingsHandler.do_formatting
@@ -38,3 +39,12 @@ func _physics_process(_delta):
 func _on_font_spinner_value_changed(value):
 	SettingsHandler.font_size = value
 	save()
+
+func _try_address():
+	Main.reconnect_or_change_url(address_edit.text)
+
+func _on_adress_edit_text_submitted(_new_text):
+	_try_address()
+
+func _on_address_connect_pressed():
+	_try_address()

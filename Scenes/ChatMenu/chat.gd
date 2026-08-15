@@ -13,6 +13,8 @@ const COMMAND_JOIN: int = -65534
 const COMMAND_LEAVE: int = -65533
 const SKELETON_KEY: int = -65536
 
+static var ten_most_recent_transmissions: Array[int] = [] as Array[int]
+
 func _enter_tree():
 	instance = self
 
@@ -77,6 +79,14 @@ static func new_transmission(packet: PackedStringArray) -> void:
 	new_message.sender = packet[0].to_int()
 	new_message.trans = transmission_number
 	
+	# avoid adding duplicate entries if transmission number has already been received recently
+	# this is for reconnecting, since the server sends/resends the 10 most recent messages
+	if transmission_number in ten_most_recent_transmissions:
+		return
+	ten_most_recent_transmissions.append(transmission_number)
+	if ten_most_recent_transmissions.size() > 10:
+		ten_most_recent_transmissions.remove_at(0)
+	
 	var channel_id = null
 	if (len(integer_message) >= 2 and integer_message[0] == CHANNEL_SELECTOR):
 		channel_id = integer_message[1]
@@ -86,18 +96,6 @@ static func new_transmission(packet: PackedStringArray) -> void:
 	new_message.message = integer_message
 	
 	var channel: Node = get_channel_node(channel_id)
-	var child_count: int = channel.get_child_count()
-	var idx: int = 0
-	var i: int = 0
-	# avoid adding duplicate entries if transmission number has already been received recently
-	# this is for reconnecting, since the server sends/resends the 10 most recent messages
-	while idx < child_count and i <= 25:
-		var end = channel.get_child(-idx)
-		if end is TransEntry:
-			if end.trans == transmission_number:
-				return
-			i += 1
-		idx += 1
 	
 	channel.add_message_node(new_message)
 

@@ -42,6 +42,22 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="Address" type="VBoxContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=1602527487]
+layout_mode = 2
+
+[node name="AdressEdit" type="LineEdit" parent="ScrollContainer/MarginContainer/Options/Address" unique_id=29234447]
+layout_mode = 2
+placeholder_text = "wss://dscr-relay.dixonary.co.uk"
+
+[node name="AddressConnect" type="Button" parent="ScrollContainer/MarginContainer/Options/Address" unique_id=1760540175]
+layout_mode = 2
+text = "connect"
+script = ExtResource("1_1gwgo")
+message = Array[int]([-247, -196])
+
+[node name="HSeparator3" type="HSeparator" parent="ScrollContainer/MarginContainer/Options" unique_id=1456062547]
+layout_mode = 2
+
 [node name="Formatting" parent="ScrollContainer/MarginContainer/Options" unique_id=1141489488 instance=ExtResource("3_0yg8b")]
 layout_mode = 2
 description = Array[int]([-42, -190, -85, -100, -223])
@@ -134,6 +150,8 @@ shortcut_keys_enabled = false
 meta_underlined = false
 hint_underlined = false
 
+[connection signal="text_submitted" from="ScrollContainer/MarginContainer/Options/Address/AdressEdit" to="." method="_on_adress_edit_text_submitted"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/Options/Address/AddressConnect" to="." method="_on_address_connect_pressed"]
 [connection signal="set" from="ScrollContainer/MarginContainer/Options/Formatting" to="." method="_on_formatting_set"]
 [connection signal="set" from="ScrollContainer/MarginContainer/Options/ImageVis" to="." method="_on_image_vis_set"]
 [connection signal="value_changed" from="ScrollContainer/MarginContainer/Options/FontMargin/FontHbox/FontSpinner" to="." method="_on_font_spinner_value_changed"]

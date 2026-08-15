@@ -45,36 +45,15 @@ layout_mode = 2
 
 [node name="Title" type="Label" parent="MarginContainer/MainContainer/Header" unique_id=1283547797]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 2
 text = "dscr client"
 script = ExtResource("2_vk4q2")
 message = Array[int]([-247, -128])
 
-[node name="Address" type="HBoxContainer" parent="MarginContainer/MainContainer/Header" unique_id=1263877326]
-layout_mode = 2
-size_flags_horizontal = 6
-
-[node name="AddressLabel" type="Label" parent="MarginContainer/MainContainer/Header/Address" unique_id=1194611740]
-visible = false
-layout_mode = 2
-text = "websocket address MOVE THIS TO SETTINGS"
-script = ExtResource("2_vk4q2")
-message = Array[int]([-257, -41])
-
-[node name="AddressEdit" type="LineEdit" parent="MarginContainer/MainContainer/Header/Address" unique_id=334873355]
-visible = false
-layout_mode = 2
-size_flags_vertical = 4
-placeholder_text = "wss://dscr-relay.dixonary.co.uk"
-expand_to_text_length = true
-emoji_menu_enabled = false
-clear_button_enabled = true
-draw_control_chars = true
-select_all_on_focus = true
-caret_blink = true
-
 [node name="DsveButton" type="Button" parent="MarginContainer/MainContainer/Header" unique_id=408009820]
 layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
 mouse_default_cursor_shape = 2
 text = "visual editor"
 script = ExtResource("2_vk4q2")

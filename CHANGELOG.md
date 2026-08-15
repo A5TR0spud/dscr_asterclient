@@ -7,6 +7,7 @@
 * NikZapp is now a contributor!
 * Added autocomplete! Hell yeah
 * Added icon
+* Settings tab now has an option to change websocket and/or attempt manual reconnect
 
 ### Changes
 

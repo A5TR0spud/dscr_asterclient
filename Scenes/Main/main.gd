@@ -1,7 +1,8 @@
 extends Control
 class_name Main
 
-@export var websocket_url: String = "wss://dscr-relay.dixonary.co.uk"
+const DSCR_URL: String = "wss://dscr-relay.dixonary.co.uk"
+var websocket_url: String = DSCR_URL
 var socket: WebSocketPeer = WebSocketPeer.new()
 
 const MAX_MESSAGE_LENGTH: int = 2000
@@ -59,6 +60,7 @@ func _ready():
 	SaveSystem.load()
 	trying_to_quit = false
 	get_tree().set_auto_accept_quit(false)
+	websocket_url = SettingsHandler.websocket_address
 	start_connect()
 
 static func get_callsign_color(value: int) -> Color:
@@ -102,6 +104,23 @@ func set_callsign(cs: int, is_reconnect: bool = false) -> void:
 			cs += 1
 			cs %= 4096
 	_queued_callsign = [cs, is_reconnect]
+
+static func reconnect_or_change_url(wss: String) -> void:
+	instance._reconnect_or_change_url(wss)
+
+func _reconnect_or_change_url(wss: String) -> void:
+	if trying_to_quit: return
+	if wss.is_empty(): wss = DSCR_URL
+	SettingsHandler.websocket_address = wss
+	SettingsHandler.save()
+	websocket_url = wss
+	if socket.get_ready_state() == WebSocketPeer.STATE_CONNECTING or socket.get_ready_state() == WebSocketPeer.STATE_OPEN:
+		set_physics_process(true)
+		reconnect_cooldown.stop()
+		reconnect_time.stop()
+		socket.close(1001)
+		return
+	start_connect()
 
 func start_connect(is_reconnect_attempt: bool = false) -> void:
 	if trying_to_quit: return
