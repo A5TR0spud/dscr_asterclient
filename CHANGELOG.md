@@ -18,7 +18,7 @@
 ### Fixes
 
 * Fixed the root cause of janky multiline in the chat entry. This means automatic word wrapping is back!
-* Fix maybe-long-standing bug where sending a pipe (|) without a valid number following it causes a crash
+* Fixed maybe-long-standing bug where sending a pipe (|) without a valid number following it causes a crash
 * Can no longer type non-numbers into the number search or blacklisted characters into the name search
 
 ## Build 3: Channels
