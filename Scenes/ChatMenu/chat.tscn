@@ -11,6 +11,21 @@ content_margin_right = 10.0
 content_margin_bottom = 10.0
 bg_color = Color(0.10073931, 0.10073931, 0.10073926, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_md8bx"]
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0, 0.039215688, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.49803922, 0.49803922, 0.49803922, 1)
+corner_detail = 1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_amlv4"]
+
 [node name="Chat" type="VBoxContainer" unique_id=2068892274]
 anchors_preset = 15
 anchor_right = 1.0
@@ -31,7 +46,7 @@ drag_to_rearrange_enabled = true
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="MessageEdit" type="TextEdit" parent="." unique_id=379895064]
+[node name="MessageEdit" type="CodeEdit" parent="." unique_id=130523933]
 custom_maximum_size = Vector2(-1, 400)
 layout_mode = 2
 size_flags_vertical = 8
@@ -45,6 +60,8 @@ tab_input_mode = false
 scroll_fit_content_height = true
 caret_blink = true
 caret_multiple = false
+auto_brace_completion_enabled = true
+auto_brace_completion_highlight_matching = true
 script = ExtResource("3_ttrms")
 
 [node name="AutocompleteFinder" type="CodeEdit" parent="MessageEdit" unique_id=893543974]
@@ -54,21 +71,27 @@ offset_top = 38.0
 offset_right = 1152.0
 offset_bottom = 46.0
 
-[node name="ItemList" type="ItemList" parent="MessageEdit" unique_id=6191075]
+[node name="PanelContainer" type="PanelContainer" parent="MessageEdit" unique_id=116044956]
 visible = false
 top_level = true
-custom_minimum_size = Vector2(240, 0)
-custom_maximum_size = Vector2(240, 240)
-layout_mode = 1
-offset_right = 240.0
-offset_bottom = 104.0
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 16.0
 offset_transform_enabled = true
 offset_transform_position_ratio = Vector2(0, -1)
 offset_transform_visual_only = false
+theme_override_styles/panel = SubResource("StyleBoxFlat_md8bx")
+
+[node name="ItemList" type="ItemList" parent="MessageEdit/PanelContainer" unique_id=6191075]
+custom_minimum_size = Vector2(240, 0)
+custom_maximum_size = Vector2(240, 240)
+clip_contents = false
+layout_mode = 2
 focus_mode = 0
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 theme_override_constants/line_separation = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_amlv4")
 allow_search = false
 auto_height = true
 text_overrun_behavior = 1
@@ -76,4 +99,4 @@ text_overrun_behavior = 1
 [connection signal="tab_changed" from="TabContainer" to="." method="_on_tab_container_tab_changed"]
 [connection signal="caret_changed" from="MessageEdit" to="MessageEdit" method="_on_caret_changed"]
 [connection signal="text_changed" from="MessageEdit" to="MessageEdit" method="_on_text_changed"]
-[connection signal="item_clicked" from="MessageEdit/ItemList" to="MessageEdit" method="_on_item_list_item_clicked"]
+[connection signal="item_clicked" from="MessageEdit/PanelContainer/ItemList" to="MessageEdit" method="_on_item_list_item_clicked"]

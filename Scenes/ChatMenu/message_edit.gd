@@ -1,12 +1,14 @@
 extends TextEdit
 
-@onready var autocomplete_list: ItemList = $ItemList
+@onready var autocomplete_list: ItemList = $PanelContainer/ItemList
+@onready var auto_list_panel: PanelContainer = $PanelContainer
 #CodeEdit hates trying to autocomplete things without spaces, so use a nested one which contains only the word to try
 @onready var autocomplete_finder: CodeEdit = $AutocompleteFinder
 
 func _ready():
 	Main.instance.reload_dict.connect(refresh)
-	autocomplete_list.hide()
+	Main.instance.reload_settings.connect(_set_popup_size.call_deferred)
+	auto_list_panel.hide()
 	autocomplete_finder.hide()
 
 func refresh():
@@ -17,7 +19,7 @@ func _request_code_completion(force: bool) -> void:
 	var word_under_caret: String = result_under_caret[0]
 	var col_under_caret: int = result_under_caret[1]
 	if word_under_caret.is_empty() and not force:
-		autocomplete_list.hide()
+		auto_list_panel.hide()
 		return
 	if col_under_caret < 0:
 		return
@@ -35,13 +37,12 @@ func _request_code_completion(force: bool) -> void:
 
 	var options: Array[Dictionary] = autocomplete_finder.get_code_completion_options()
 	if options.is_empty():
-		autocomplete_list.hide()
+		auto_list_panel.hide()
 		#print("NO OPTIONS FOR ", word_under_caret)
 		return
 	autocomplete_finder.cancel_code_completion()
 	
 	_show_custom_popup(options)
-	autocomplete_list.reset_size.call_deferred()
 
 func get_signal_under_caret(expected: String = "") -> Array:
 	var line_text = get_line(get_caret_line())
@@ -66,8 +67,16 @@ func _show_custom_popup(options: Array[Dictionary]):
 	var caret_local: Vector2i = get_rect_at_line_column(caret_line, word_start_col).position
 	var caret_global: Vector2i = Vector2i(global_position) + caret_local
 	
-	autocomplete_list.position = caret_global
-	autocomplete_list.show()
+	auto_list_panel.position = caret_global
+	auto_list_panel.show()
+	_set_popup_size.call_deferred()
+
+func _set_popup_size():
+	if not auto_list_panel.visible:
+		return
+	autocomplete_list.custom_maximum_size.y = autocomplete_list.get_item_rect(0).size.y * 8 - 1
+	autocomplete_list.reset_size()
+	auto_list_panel.reset_size()
 
 func _on_text_changed():
 	_request_code_completion(false)
@@ -103,7 +112,7 @@ func _confirm_selection(index: int) -> void:
 	# especially since it needs to autocomplete whatever comes after!
 	# so i just add a space and ignore it.
 	insert_text_at_caret(chosen + " ")
-	autocomplete_list.hide()
+	auto_list_panel.hide()
 	autocomplete_list.get_v_scroll_bar().value = 0
 
 func _gui_input(event: InputEvent) -> void:
@@ -112,11 +121,11 @@ func _gui_input(event: InputEvent) -> void:
 		accept_event()
 		return
 	if event.is_action_pressed("ui_paste"):
-		autocomplete_list.hide()
+		auto_list_panel.hide()
 		insert_text_at_caret(DisplayServer.clipboard_get().to_upper())
 		accept_event()
 		return
-	if autocomplete_list.visible:
+	if auto_list_panel.visible:
 		var selected = autocomplete_list.get_selected_items()
 		var idx = selected[0] if not selected.is_empty() else 0
 		if event.is_action_pressed("ui_down"):
@@ -136,7 +145,7 @@ func _gui_input(event: InputEvent) -> void:
 			accept_event()
 			return
 		if event.is_action_pressed("ui_close_dialog"):
-			autocomplete_list.hide()
+			auto_list_panel.hide()
 			accept_event()
 			return
 	

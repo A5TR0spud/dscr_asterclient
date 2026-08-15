@@ -176,27 +176,29 @@ static func find_incomplete_signal(line: String, caret_column: int, expected: St
 			if sub.is_empty():
 				break
 			var result: ParseResult = parse_text(sub)
-			if result.state != ParseResult.FailureState.UNKNOWN_STRING:
+			if (result.state == ParseResult.FailureState.TOO_LONG
+				or result.state == ParseResult.FailureState.UNPARSED
+			):
 				break
-			#print("sub: ", sub)
-			#print("indices: ", result.stopping_indices)
-			#print("fails: ", result.failures)
-			var start: int = result.stopping_indices[0]
-			var prefix: String = sub.left(start)
-			# TODO: make this check more forgiving
-			if not prefix.is_empty():
-				if expected.begins_with(prefix):
-					start -= prefix.length()
-			var end: int = result.stopping_indices[result.stopping_indices.size() - 1]
-			var end_length: int = result.failures[result.stopping_indices.size() - 1].length()
-			var length: int = end - start + end_length
-			if caret_column < start or caret_column > end + end_length:
-				return ["", -1]
-			#print("start: ", start)
-			#print("end: ", end)
-			#print("endlength: ", end_length)
-			#print("filtered: ", sub.substr(start, end - start + end_length))
-			return [sub.substr(start, length), broken_column + start]
+			
+			# TODO: make this not suck
+			
+			if result.state == ParseResult.FailureState.ALL_GOOD:
+				if caret_column <= 5:
+					return [sub, 0]
+			
+			if result.state == ParseResult.FailureState.UNKNOWN_STRING:
+				var start: int = result.stopping_indices[0]
+				var prefix: String = sub.left(start)
+				if not prefix.is_empty():
+					if expected.begins_with(prefix):
+						start -= prefix.length()
+				var end: int = result.stopping_indices[result.stopping_indices.size() - 1]
+				var end_length: int = result.failures[result.stopping_indices.size() - 1].length()
+				var length: int = end - start + end_length
+				if caret_column < start or caret_column > end + end_length:
+					return ["", -1]
+				return [sub.substr(start, length), broken_column + start]
 		caret_column -= sub.length() + 1
 		broken_column += sub.length() + 1
 	return ["", -1]
@@ -204,7 +206,7 @@ static func find_incomplete_signal(line: String, caret_column: int, expected: St
 ## Takes a string input and outputs a ParseResult object
 ## The returned object contains information about failure and parsed numerical signals
 static func parse_text(input: String, earlyReturn: bool = false) -> ParseResult:
-	input = input.strip_edges().strip_escapes()
+	input = input.strip_edges().strip_escapes().to_upper()
 	var result: ParseResult = ParseResult.new()
 	result.state = ParseResult.FailureState.ALL_GOOD
 	var current_failure: String = ""
