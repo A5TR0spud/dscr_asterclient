@@ -4,7 +4,7 @@ class_name ParseResult
 enum FailureState {
 	## Not yet initialized.
 	UNPARSED,
-	## Nothing has gone wrong, the output is safe to map to integers
+	## Nothing has gone wrong, the output is whole
 	ALL_GOOD,
 	## Array size exceeds maximum transmission signal quantity
 	TOO_LONG,

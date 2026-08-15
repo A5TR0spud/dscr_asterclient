@@ -168,7 +168,7 @@ static func filter_name_input(input: String) -> String:
 ## Returns an array with 2 values:
 ## 0: The string that failed to parse. Empty if nothing was found at the caret.
 ## 1: The index the failed string starts at. -1 if successful.
-static func find_incomplete_signal(line: String, caret_column: int) -> Array:
+static func find_incomplete_signal(line: String, caret_column: int, expected: String = "") -> Array:
 	var delimited: PackedStringArray = line.split(" ")
 	var broken_column: int = 0
 	for sub in delimited:
@@ -182,6 +182,11 @@ static func find_incomplete_signal(line: String, caret_column: int) -> Array:
 			#print("indices: ", result.stopping_indices)
 			#print("fails: ", result.failures)
 			var start: int = result.stopping_indices[0]
+			var prefix: String = sub.left(start)
+			# TODO: make this check more forgiving
+			if not prefix.is_empty():
+				if expected.begins_with(prefix):
+					start -= prefix.length()
 			var end: int = result.stopping_indices[result.stopping_indices.size() - 1]
 			var end_length: int = result.failures[result.stopping_indices.size() - 1].length()
 			var length: int = end - start + end_length

@@ -43,10 +43,14 @@ func _request_code_completion(force: bool) -> void:
 	_show_custom_popup(options)
 	autocomplete_list.reset_size.call_deferred()
 
-func get_signal_under_caret() -> Array:
+func get_signal_under_caret(expected: String = "") -> Array:
 	var line_text = get_line(get_caret_line())
 	var caret_col = get_caret_column()
-	return DictionaryHandler.find_incomplete_signal(line_text, caret_col)
+	if expected.is_empty():
+		var idxs: PackedInt32Array = autocomplete_list.get_selected_items()
+		if idxs.size() > 0:
+			expected = autocomplete_list.get_item_text(idxs[0])
+	return DictionaryHandler.find_incomplete_signal(line_text, caret_col, expected)
 
 func _show_custom_popup(options: Array[Dictionary]):
 	autocomplete_list.clear()
@@ -74,7 +78,7 @@ func _on_caret_changed():
 func _confirm_selection(index: int) -> void:
 	var chosen: String = autocomplete_list.get_item_text(index)
 	var caret_line: int = get_caret_line()
-	var minced_result: Array = get_signal_under_caret()
+	var minced_result: Array = get_signal_under_caret(chosen)
 	var start_col: int = minced_result[1]
 	while not chosen.contains(get_line(caret_line)[start_col]):
 		start_col += 1
