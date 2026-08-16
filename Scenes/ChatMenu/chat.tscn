@@ -43,7 +43,6 @@ scroll_fit_content_height = true
 caret_blink = true
 caret_multiple = false
 auto_brace_completion_enabled = true
-auto_brace_completion_highlight_matching = true
 script = ExtResource("3_ttrms")
 
 [node name="AutocompleteFinder" type="CodeEdit" parent="MessageEdit" unique_id=893543974]

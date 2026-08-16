@@ -31,18 +31,18 @@ func _request_code_completion(force: bool) -> void:
 	autocomplete_finder.set_caret_column(word_under_caret.length() + 1)
 	for word: String in (DictionaryHandler.word_names as Array[String]):
 		autocomplete_finder.add_code_completion_option(CodeEdit.KIND_PLAIN_TEXT, word, word)
-	autocomplete_finder.update_code_completion_options(false)
+	autocomplete_finder.update_code_completion_options(true)
 
 	var options: Array[Dictionary] = autocomplete_finder.get_code_completion_options()
 	if options.is_empty():
-		auto_list_panel.hide()
 		#print("NO OPTIONS FOR ", word_under_caret)
+		auto_list_panel.hide()
+		if DictionaryHandler.word_names.has(word_under_caret):
+			#print("BUT IT IS VALID")
+			insert_text(DELIMITER_CHARACTER, get_caret_line(), get_signal_bounds_under_caret()[1])
 		return
 	autocomplete_finder.cancel_code_completion()
 	
-	if options.size() == 1 and word_under_caret == options[0]["display_text"]:
-		auto_list_panel.hide()
-		return
 	_show_custom_popup(options)
 
 func is_signal_separating_character(character: String) -> bool:
@@ -126,6 +126,7 @@ func find_delimiter_near(line: String, col: int) -> int:
 	return -1
 
 func _gui_input(event: InputEvent) -> void:
+	# TODO: implement brace matching (handling), so that it can parse |-14 and |-15 if they are group symbols
 	if event.is_action_pressed("ui_text_newline"):
 		insert_text_at_caret("\n")
 		accept_event()
