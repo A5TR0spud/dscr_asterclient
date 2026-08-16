@@ -5,6 +5,8 @@ extends TextEdit
 #CodeEdit hates trying to autocomplete things without spaces, so use a nested one which contains only the word to try
 @onready var autocomplete_finder: CodeEdit = $AutocompleteFinder
 
+const DELIMITER_CHARACTER = "\u001f"
+
 func _ready():
 	Main.instance.reload_dict.connect(refresh)
 	Main.instance.reload_settings.connect(_set_popup_size.call_deferred)
@@ -15,13 +17,9 @@ func refresh():
 	placeholder_text = DictionaryHandler.signals_to_words([-43, -38])
 
 func _request_code_completion(force: bool) -> void:
-	var result_under_caret: Array = get_signal_under_caret()
-	var word_under_caret: String = result_under_caret[0]
-	var col_under_caret: int = result_under_caret[1]
+	var word_under_caret: String = get_signal_under_caret()
 	if word_under_caret.is_empty() and not force:
 		auto_list_panel.hide()
-		return
-	if col_under_caret < 0:
 		return
 	
 	#print("CHECKING: ", word_under_caret)
@@ -47,14 +45,32 @@ func _request_code_completion(force: bool) -> void:
 		return
 	_show_custom_popup(options)
 
-func get_signal_under_caret(expected: String = "") -> Array:
+func is_signal_separating_character(character: String) -> bool:
+	return (character == DELIMITER_CHARACTER) or (character in " \n\t\r")
+
+## gets signal under the caret
+## returns starting column and ending column as an array
+func get_signal_bounds_under_caret() -> Array:
 	var line_text = get_line(get_caret_line())
 	var caret_col = get_caret_column()
-	if expected.is_empty():
-		var idxs: PackedInt32Array = autocomplete_list.get_selected_items()
-		if idxs.size() > 0:
-			expected = autocomplete_list.get_item_text(idxs[0])
-	return DictionaryHandler.find_incomplete_signal(line_text, caret_col, expected)
+	if caret_col == 0:
+		return [0, 0]
+		
+	var start = caret_col - 1
+	while start >= 0 and not is_signal_separating_character(line_text[start]):
+		start -= 1
+	
+	var end = caret_col
+	while end < line_text.length() and not is_signal_separating_character(line_text[end]):
+		end += 1
+	
+	start += 1
+	return [start, end]
+
+func get_signal_under_caret() -> String:
+	var line_text = get_line(get_caret_line())
+	var bounds = get_signal_bounds_under_caret()
+	return line_text.substr(bounds[0], bounds[1] - bounds[0])
 
 func _show_custom_popup(options: Array[Dictionary]):
 	autocomplete_list.clear()
@@ -62,7 +78,7 @@ func _show_custom_popup(options: Array[Dictionary]):
 		autocomplete_list.add_item(option["display_text"])
 	autocomplete_list.select(0)
 	
-	var word = get_signal_under_caret()[0]
+	var word = get_signal_under_caret()
 	var caret_line = get_caret_line()
 	var caret_col = max(0, get_caret_column())
 	var word_start_col = max(0, caret_col - word.length() + 1)
@@ -77,6 +93,7 @@ func _show_custom_popup(options: Array[Dictionary]):
 func _set_popup_size():
 	if not auto_list_panel.visible:
 		return
+	# TODO: add option for max autocomplete entry amount
 	autocomplete_list.custom_maximum_size.y = autocomplete_list.get_item_rect(0).size.y * 8 - 1
 	autocomplete_list.reset_size()
 	auto_list_panel.reset_size()
@@ -90,37 +107,40 @@ func _on_caret_changed():
 func _confirm_selection(index: int) -> void:
 	var chosen: String = autocomplete_list.get_item_text(index)
 	var caret_line: int = get_caret_line()
-	var minced_result: Array = get_signal_under_caret(chosen)
-	var start_col: int = minced_result[1]
-	while not chosen.contains(get_line(caret_line)[start_col]):
-		start_col += 1
-		if start_col >= get_line(caret_line).length():
-			start_col = minced_result[1]
-			break
-	var end_col: int = start_col + minced_result[0].length()
-	while not chosen.contains(get_line(caret_line)[end_col - 1]):
-		end_col -= 1
-		if end_col <= 0:
-			end_col = start_col + minced_result[0].length()
-			break
-
-	remove_text(caret_line, start_col, caret_line, end_col)
-	#set_caret_column(start_col)
+	var bounds = get_signal_bounds_under_caret()
 	
-	# this deliberately ignores preferred signal formatting
-	# because figuring out whatever signal comes before is 
-	# too annoying. for example:
-	# MOLECULE(1ATOM is clearly 4 signals
-	# but its hard to find for a computer
-	# especially since it needs to autocomplete whatever comes after!
-	# so i just add a space and ignore it.
-	insert_text_at_caret(chosen + " ")
+	remove_text(caret_line, bounds[0], caret_line, bounds[1])
+	
+	# TODO: get the correct signal formatting here
+	var end_formatting = " "
+	insert_text_at_caret(chosen + DELIMITER_CHARACTER + end_formatting)
 	auto_list_panel.hide()
 	autocomplete_list.get_v_scroll_bar().value = 0
+
+## find delimiter index near the caret, -1 if not found
+func find_delimiter_near(line: String, col: int) -> int:
+	if col > 0 and line[col - 1] == DELIMITER_CHARACTER:
+		return col - 1 # thing@|thing@
+	if col < line.length() and line[col] == DELIMITER_CHARACTER:
+		return col     # thing|@thing@
+	return -1
 
 func _gui_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_text_newline"):
 		insert_text_at_caret("\n")
+		accept_event()
+		return
+	if event.is_action_pressed("ui_copy"):
+		var selected_text = get_selected_text().remove_char(ord(DELIMITER_CHARACTER))
+		DisplayServer.clipboard_set(selected_text)
+		accept_event()
+		return
+	if event.is_action_pressed("ui_cut"):
+		var selected_text = get_selected_text().remove_char(ord(DELIMITER_CHARACTER))
+		if selected_text != "":
+			DisplayServer.clipboard_set(selected_text)
+			delete_selection()
+			text_changed.emit()
 		accept_event()
 		return
 	if event.is_action_pressed("ui_paste"):
@@ -155,13 +175,63 @@ func _gui_input(event: InputEvent) -> void:
 	# TODO: history implementation here
 	
 	if event.is_action_pressed("ui_text_submit"):
-		if Main.instance.send_message(text):
+		if Main.instance.send_message(text.remove_char(ord(DELIMITER_CHARACTER))):
 			text = ""
 		accept_event()
 		return
 	
 	if event is InputEventKey:
 		event = event as InputEventKey
+		
+		var line = get_caret_line()
+		var line_text = get_line(line)
+		var col = get_caret_column()
+		
+		if event.is_action_pressed("ui_text_caret_right"):
+			if col < line_text.length() and line_text[col] == DELIMITER_CHARACTER:
+				set_caret_column(min(col + 2, line_text.length()))
+				accept_event()
+				return
+		if event.is_action_pressed("ui_text_caret_left"):
+			if col > 0 and line_text[col - 1] == DELIMITER_CHARACTER:
+				set_caret_column(max(col - 2, 0))
+				accept_event()
+				return
+		
+		if event.is_action_pressed("ui_text_backspace") and get_selected_text() == "":
+			var delimiter_index = find_delimiter_near(line_text, col)
+			if delimiter_index != -1 and delimiter_index > 0:
+				# erase delimiter character as well
+				var start = delimiter_index - 1
+				remove_text(line, start, line, delimiter_index + 1)
+				set_caret_column(start)
+				text_changed.emit()
+				accept_event()
+				return
+		if event.is_action_pressed("ui_text_delete") and get_selected_text() == "":
+			var delimiter_index = find_delimiter_near(line_text, col + 1)
+			if delimiter_index != -1 and delimiter_index > 0:
+				# erase delimiter character as well
+				var start = delimiter_index - 1
+				remove_text(line, start, line, delimiter_index + 1)
+				set_caret_column(start)
+				text_changed.emit()
+				accept_event()
+				return
+		# do not put ui_accept here! this is tab specific! ui_accept includes enter and space too
+		# removes the delimiter and brings up the autocomplete menu
+		# TODO:
+		# this is still not exactly what i want, it should remove the whitespace that comes before it too,
+		# so the caret points to the signal you wanted to edit
+		if event.keycode == KEY_TAB and not event.shift_pressed:
+			var delimiter_index = find_delimiter_near(line_text, col)
+			if delimiter_index != -1:
+				remove_text(line, delimiter_index, line, delimiter_index + 1)
+				set_caret_column(delimiter_index if col > delimiter_index else col)
+				text_changed.emit()
+			accept_event()
+			return
+			
 		if ord("a") <= event.unicode and event.unicode <= ord("z"):
 			if event.ctrl_pressed or event.meta_pressed or event.alt_pressed:
 				return
@@ -169,7 +239,6 @@ func _gui_input(event: InputEvent) -> void:
 			text_changed.emit()
 			accept_event()
 			return
-		
 
 func _on_item_list_item_clicked(index, _at_position, mouse_button_index):
 	if mouse_button_index != MOUSE_BUTTON_LEFT:
