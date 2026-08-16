@@ -185,7 +185,7 @@ static func find_incomplete_signal(line: String, caret_column: int, expected: St
 			
 			if result.state == ParseResult.FailureState.ALL_GOOD:
 				if caret_column <= 5:
-					return [sub, 0]
+					return [sub, broken_column]
 			
 			if result.state == ParseResult.FailureState.UNKNOWN_STRING:
 				var start: int = result.stopping_indices[0]
