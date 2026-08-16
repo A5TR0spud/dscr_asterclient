@@ -18,7 +18,7 @@ const COLORS: Array = [
 	"FF5800", "BBFF00", "00CDFF", "0084FF", "4D00FF",
 	"FB39FF", "FF0FD7", "484848", "636363", "FFFFFF"
 ];
-func calculate_color (value: int) -> Color:
+static func calculate_color (value: int) -> Color:
 	var n: float = value / 64.0 * (COLORS.size() - 1)
 	var lo = floor(n)
 	var hi = ceil(n)

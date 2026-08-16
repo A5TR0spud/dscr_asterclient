@@ -29,12 +29,13 @@ static var instance : Main
 
 signal reload_dict
 signal reload_settings
-static var new_theme = preload("uid://c0reghmcwiqpy")
+
 static func on_dict_reload() -> void:
 	instance.reload_dict.emit()
 static func on_settings_reload() -> void:
-	new_theme.default_font_size = SettingsHandler.font_size
+	ThemeManager.set_font_size()
 	instance.reload_settings.emit()
+	ThemeManager.set_theme_color()
 
 signal connected_user_change
 

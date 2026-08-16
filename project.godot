@@ -38,6 +38,7 @@ folder_colors={
 "res://Scenes/OnlineUsersTab/": "pink",
 "res://Scenes/SettingsMenu/": "orange",
 "res://Scripts/": "gray",
+"res://Styling/": "purple",
 "res://fonts/": "red"
 }
 

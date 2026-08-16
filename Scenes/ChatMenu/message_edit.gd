@@ -42,6 +42,9 @@ func _request_code_completion(force: bool) -> void:
 		return
 	autocomplete_finder.cancel_code_completion()
 	
+	if options.size() == 1 and word_under_caret == options[0]["display_text"]:
+		auto_list_panel.hide()
+		return
 	_show_custom_popup(options)
 
 func get_signal_under_caret(expected: String = "") -> Array:

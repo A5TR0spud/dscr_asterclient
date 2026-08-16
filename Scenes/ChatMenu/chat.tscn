@@ -2,27 +2,9 @@
 
 [ext_resource type="Script" uid="uid://dr2cb7q6mysjs" path="res://Scenes/ChatMenu/chat.gd" id="1_iy605"]
 [ext_resource type="PackedScene" uid="uid://c7bn3w1ijabx4" path="res://Scenes/ChatMenu/chat_channel.tscn" id="2_iy605"]
+[ext_resource type="StyleBox" uid="uid://cem7hlj42ccbd" path="res://Styling/TransmissionMaker/text_edit.tres" id="3_md8bx"]
 [ext_resource type="Script" uid="uid://eyonivvk3glk" path="res://Scenes/ChatMenu/message_edit.gd" id="3_ttrms"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iy605"]
-content_margin_left = 10.0
-content_margin_top = 10.0
-content_margin_right = 10.0
-content_margin_bottom = 10.0
-bg_color = Color(0.10073931, 0.10073931, 0.10073926, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_md8bx"]
-content_margin_left = 12.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(0, 0.039215688, 0, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.49803922, 0.49803922, 0.49803922, 1)
-corner_detail = 1
+[ext_resource type="StyleBox" uid="uid://bca1ief1qema3" path="res://Styling/TransmissionMaker/autocomplete_panel.tres" id="5_ttrms"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_amlv4"]
 
@@ -51,7 +33,7 @@ custom_maximum_size = Vector2(-1, 400)
 layout_mode = 2
 size_flags_vertical = 8
 localize_numeral_system = false
-theme_override_styles/normal = SubResource("StyleBoxFlat_iy605")
+theme_override_styles/normal = ExtResource("3_md8bx")
 placeholder_text = "type here"
 context_menu_enabled = false
 emoji_menu_enabled = false
@@ -80,7 +62,7 @@ offset_bottom = 16.0
 offset_transform_enabled = true
 offset_transform_position_ratio = Vector2(0, -1)
 offset_transform_visual_only = false
-theme_override_styles/panel = SubResource("StyleBoxFlat_md8bx")
+theme_override_styles/panel = ExtResource("5_ttrms")
 
 [node name="ItemList" type="ItemList" parent="MessageEdit/PanelContainer" unique_id=6191075]
 custom_minimum_size = Vector2(240, 0)

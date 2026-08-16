@@ -66,15 +66,11 @@ description = Array[int]([-42, -190, -85, -100, -223])
 layout_mode = 2
 description = Array[int]([-53, -163, -85])
 
-[node name="TruncMargin" type="MarginContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=730512064]
-layout_mode = 2
-theme_override_constants/margin_left = 2
-
-[node name="TruncHbox" type="HBoxContainer" parent="ScrollContainer/MarginContainer/Options/TruncMargin" unique_id=720322280]
+[node name="TruncHbox" type="HBoxContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=720322280]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="TruncationSpinner" type="SpinBox" parent="ScrollContainer/MarginContainer/Options/TruncMargin/TruncHbox" unique_id=1798054392]
+[node name="TruncationSpinner" type="SpinBox" parent="ScrollContainer/MarginContainer/Options/TruncHbox" unique_id=1798054392]
 layout_mode = 2
 size_flags_horizontal = 0
 min_value = 31.0
@@ -82,30 +78,26 @@ max_value = 511.0
 value = 63.0
 rounded = true
 
-[node name="TruncLabel" type="Label" parent="ScrollContainer/MarginContainer/Options/TruncMargin/TruncHbox" unique_id=1597931858]
+[node name="TruncLabel" type="Label" parent="ScrollContainer/MarginContainer/Options/TruncHbox" unique_id=1597931858]
 layout_mode = 2
-text = "they say flowers fade and their beauty can't be weighed with flowers so fake"
+text = "transmission truncation setting"
 script = ExtResource("1_1gwgo")
 message = Array[int]([-42, -122, -25])
 
 [node name="HSeparator2" type="HSeparator" parent="ScrollContainer/MarginContainer/Options" unique_id=2092124219]
 layout_mode = 2
 
-[node name="FontMargin" type="MarginContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=816504442]
-layout_mode = 2
-theme_override_constants/margin_left = 2
-
-[node name="FontHbox" type="HBoxContainer" parent="ScrollContainer/MarginContainer/Options/FontMargin" unique_id=90540622]
+[node name="FontHbox" type="HBoxContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=90540622]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="FontSizeLabel" type="Label" parent="ScrollContainer/MarginContainer/Options/FontMargin/FontHbox" unique_id=110664921]
+[node name="FontSizeLabel" type="Label" parent="ScrollContainer/MarginContainer/Options/FontHbox" unique_id=110664921]
 layout_mode = 2
-text = "la dee da dee da"
+text = "font size setting"
 script = ExtResource("1_1gwgo")
 message = Array[int]([-42, -22, -4])
 
-[node name="FontSpinner" type="SpinBox" parent="ScrollContainer/MarginContainer/Options/FontMargin/FontHbox" unique_id=897245892]
+[node name="FontSpinner" type="SpinBox" parent="ScrollContainer/MarginContainer/Options/FontHbox" unique_id=897245892]
 layout_mode = 2
 size_flags_horizontal = 0
 min_value = 15.0
@@ -114,6 +106,46 @@ value = 18.0
 rounded = true
 
 [node name="HSeparator" type="HSeparator" parent="ScrollContainer/MarginContainer/Options" unique_id=1571308958]
+layout_mode = 2
+
+[node name="ThemeColor" type="HBoxContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=243570277]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ColorLabel" type="Label" parent="ScrollContainer/MarginContainer/Options/ThemeColor" unique_id=1858344240]
+layout_mode = 2
+text = "color theme setting"
+script = ExtResource("1_1gwgo")
+message = Array[int]([-110, -54, -100])
+
+[node name="ColorPicker" type="SpinBox" parent="ScrollContainer/MarginContainer/Options/ThemeColor" unique_id=423506351]
+layout_mode = 2
+size_flags_horizontal = 0
+max_value = 64.0
+value = 50.0
+
+[node name="ColorRect" type="ColorRect" parent="ScrollContainer/MarginContainer/Options" unique_id=376741741]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+
+[node name="ThemeColorSubmitElse" type="HBoxContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=1782643435]
+layout_mode = 2
+
+[node name="ColorSubmitButton" type="Button" parent="ScrollContainer/MarginContainer/Options/ThemeColorSubmitElse" unique_id=1914408651]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "submit color"
+script = ExtResource("1_1gwgo")
+message = Array[int]([-174])
+
+[node name="ColorCancelButton" type="Button" parent="ScrollContainer/MarginContainer/Options/ThemeColorSubmitElse" unique_id=307673388]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "cancel"
+script = ExtResource("1_1gwgo")
+message = Array[int]([-29])
+
+[node name="HSeparator4" type="HSeparator" parent="ScrollContainer/MarginContainer/Options" unique_id=113793633]
 layout_mode = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/MarginContainer/Options" unique_id=1987941446]
@@ -152,4 +184,7 @@ hint_underlined = false
 [connection signal="pressed" from="ScrollContainer/MarginContainer/Options/Address/AddressConnect" to="." method="_on_address_connect_pressed"]
 [connection signal="set" from="ScrollContainer/MarginContainer/Options/Formatting" to="." method="_on_formatting_set"]
 [connection signal="set" from="ScrollContainer/MarginContainer/Options/ImageVis" to="." method="_on_image_vis_set"]
-[connection signal="value_changed" from="ScrollContainer/MarginContainer/Options/FontMargin/FontHbox/FontSpinner" to="." method="_on_font_spinner_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/MarginContainer/Options/FontHbox/FontSpinner" to="." method="_on_font_spinner_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/MarginContainer/Options/ThemeColor/ColorPicker" to="." method="_on_color_picker_value_changed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/Options/ThemeColorSubmitElse/ColorSubmitButton" to="." method="_on_color_submit_button_pressed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/Options/ThemeColorSubmitElse/ColorCancelButton" to="." method="_on_color_cancel_button_pressed"]
