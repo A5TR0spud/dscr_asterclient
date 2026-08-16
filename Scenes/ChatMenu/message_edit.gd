@@ -163,6 +163,8 @@ func _gui_input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		event = event as InputEventKey
 		if ord("a") <= event.unicode and event.unicode <= ord("z"):
+			if event.ctrl_pressed or event.meta_pressed or event.alt_pressed:
+				return
 			insert_text_at_caret(char(event.unicode).to_upper())
 			text_changed.emit()
 			accept_event()
