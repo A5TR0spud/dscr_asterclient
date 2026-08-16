@@ -46,9 +46,9 @@ layout_mode = 2
 [node name="Title" type="Label" parent="MarginContainer/MainContainer/Header" unique_id=1283547797]
 layout_mode = 2
 size_flags_horizontal = 2
-text = "dscr client"
+text = "computer client"
 script = ExtResource("2_vk4q2")
-message = Array[int]([-247, -128])
+message = Array[int]([-241, -128])
 
 [node name="DsveButton" type="Button" parent="MarginContainer/MainContainer/Header" unique_id=408009820]
 layout_mode = 2
@@ -108,7 +108,7 @@ layout_mode = 2
 text = "callsign"
 horizontal_alignment = 1
 script = ExtResource("2_vk4q2")
-message = Array[int]([-128, -260])
+message = Array[int]([-128, -42])
 
 [node name="CallsignEdit" parent="MarginContainer/MainContainer/Body/Sidebar/CallsignContainer" unique_id=965442127 instance=ExtResource("11_4a3kt")]
 layout_mode = 2

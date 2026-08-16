@@ -4,7 +4,7 @@ func _ready():
 	refresh()
 
 func refresh():
-	placeholder_text = DictionaryHandler.get_or_default_signal_name(-42)
+	placeholder_text = DictionaryHandler.get_or_default_signal_name(-237)
 
 func _gui_input(event):
 	if event is InputEventKey:

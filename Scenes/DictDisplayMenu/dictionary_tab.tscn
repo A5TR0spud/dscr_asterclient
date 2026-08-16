@@ -22,10 +22,10 @@ layout_mode = 2
 [node name="DictionaryLabel" type="Label" parent="DictionaryHeader" unique_id=1474423653]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "dict"
+text = "meaning change"
 horizontal_alignment = 1
 script = ExtResource("1_tpcp0")
-message = Array[int]([-42, -237])
+message = Array[int]([-237, -174])
 
 [node name="DictionarySaveOpen" type="Button" parent="DictionaryHeader" unique_id=1945237576]
 layout_mode = 2
@@ -102,7 +102,7 @@ script = ExtResource("5_wphnd")
 [node name="SigEdit" type="LineEdit" parent="NewSignalDesig" unique_id=804966430]
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "signal"
+placeholder_text = "name"
 alignment = 2
 max_length = 20
 expand_to_text_length = true

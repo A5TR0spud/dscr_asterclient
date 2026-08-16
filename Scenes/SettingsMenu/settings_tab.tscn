@@ -53,7 +53,7 @@ placeholder_text = "wss://dscr-relay.dixonary.co.uk"
 layout_mode = 2
 text = "connect"
 script = ExtResource("1_1gwgo")
-message = Array[int]([-247, -196])
+message = Array[int]([-241, 0, -40])
 
 [node name="HSeparator3" type="HSeparator" parent="ScrollContainer/MarginContainer/Options" unique_id=1456062547]
 layout_mode = 2
