@@ -12,7 +12,7 @@
 * Added theme color setting
 * Active users tab can now set nicknames
 * Added a boot splash
-* Added sounds for: opening, closing, sending, compilation failure, showing channel, hiding channel, message gets sent in different channel
+* Added sounds for: opening, closing, sending, compilation failure, showing/hiding channel, unseen message is received, saving/cancelling dictionary changes
 * Added a setting for sound volume
 
 ### Changes

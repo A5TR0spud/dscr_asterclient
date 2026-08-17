@@ -4,11 +4,6 @@ extends TextEdit
 @onready var auto_list_panel: PanelContainer = $PanelContainer
 #CodeEdit hates trying to autocomplete things without spaces, so use a nested one which contains only the word to try
 @onready var autocomplete_finder: CodeEdit = $AutocompleteFinder
-@onready var send_sound: AudioStreamPlayer = $"../MessageSend"
-@onready var fail_sound: AudioStreamPlayer = $"../CompilationFailed"
-@onready var command_sound: AudioStreamPlayer = $"../CommandSend"
-@onready var join_sound: AudioStreamPlayer = $"../ChannelJoin"
-@onready var leave_sound: AudioStreamPlayer = $"../ChannelLeave"
 
 const DELIMITER_CHARACTER = "\u001f"
 
@@ -27,17 +22,17 @@ func submit_text() -> void:
 		text = ""
 	match send_result[1]:
 		Main.MessageCompilationResult.MESSAGE_SENT:
-			send_sound.play()
+			SoundManager.play_sound(SoundManager.Sounds.MESSAGE_SENT)
 		Main.MessageCompilationResult.MESSAGE_FAILED:
-			fail_sound.play()
+			SoundManager.play_sound(SoundManager.Sounds.FAIL)
 		Main.MessageCompilationResult.COMMAND_SENT:
-			command_sound.play()
+			SoundManager.play_sound(SoundManager.Sounds.COMMAND_ACCEPTED)
 		Main.MessageCompilationResult.SHOW_SENT:
-			join_sound.play()
+			SoundManager.play_sound(SoundManager.Sounds.OPEN_UI)
 		Main.MessageCompilationResult.HIDE_SENT:
-			leave_sound.play()
+			SoundManager.play_sound(SoundManager.Sounds.CLOSE_UI)
 		Main.MessageCompilationResult.REDUNDANT:
-			fail_sound.play()
+			SoundManager.play_sound(SoundManager.Sounds.REDUNDANT)
 
 func _request_code_completion(force: bool) -> void:
 	var word_under_caret: String = get_signal_under_caret()

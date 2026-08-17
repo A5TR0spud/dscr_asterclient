@@ -1,16 +1,10 @@
 [gd_scene format=3 uid="uid://bmqd6twlnn8dk"]
 
 [ext_resource type="Script" uid="uid://dr2cb7q6mysjs" path="res://Scenes/ChatMenu/chat.gd" id="1_iy605"]
-[ext_resource type="AudioStream" uid="uid://d372frnw84240" path="res://Assets/Sounds/acknowledge.ogg" id="2_h1vnn"]
 [ext_resource type="PackedScene" uid="uid://c7bn3w1ijabx4" path="res://Scenes/ChatMenu/chat_channel.tscn" id="2_iy605"]
-[ext_resource type="AudioStream" uid="uid://b36ck1raxw5vh" path="res://Assets/Sounds/double_dial.ogg" id="2_rtbsa"]
 [ext_resource type="StyleBox" uid="uid://cem7hlj42ccbd" path="res://Styling/TransmissionMaker/text_edit.tres" id="3_md8bx"]
-[ext_resource type="AudioStream" uid="uid://q27rk7sfk50e" path="res://Assets/Sounds/dial.ogg" id="3_msoqc"]
 [ext_resource type="Script" uid="uid://eyonivvk3glk" path="res://Scenes/ChatMenu/message_edit.gd" id="3_ttrms"]
-[ext_resource type="AudioStream" uid="uid://dokxqms87xtdo" path="res://Assets/Sounds/triple_dial.ogg" id="3_u07hx"]
 [ext_resource type="StyleBox" uid="uid://bca1ief1qema3" path="res://Styling/TransmissionMaker/autocomplete_panel.tres" id="5_ttrms"]
-[ext_resource type="AudioStream" uid="uid://bkatec5ejvfsy" path="res://Assets/Sounds/open.ogg" id="6_ucnpa"]
-[ext_resource type="AudioStream" uid="uid://db3eo0jfl0qow" path="res://Assets/Sounds/close.ogg" id="7_mt2h5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_amlv4"]
 
@@ -23,29 +17,6 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_iy605")
-
-[node name="MessageSend" type="AudioStreamPlayer" parent="." unique_id=319034477]
-stream = ExtResource("2_rtbsa")
-volume_db = -5.0
-pitch_scale = 1.1
-
-[node name="CommandSend" type="AudioStreamPlayer" parent="." unique_id=1202013052]
-stream = ExtResource("3_u07hx")
-
-[node name="CompilationFailed" type="AudioStreamPlayer" parent="." unique_id=284384821]
-stream = ExtResource("2_h1vnn")
-
-[node name="MessageGet" type="AudioStreamPlayer" parent="." unique_id=775090595]
-stream = ExtResource("3_msoqc")
-max_polyphony = 2
-
-[node name="ChannelJoin" type="AudioStreamPlayer" parent="." unique_id=863363789]
-stream = ExtResource("6_ucnpa")
-max_polyphony = 2
-
-[node name="ChannelLeave" type="AudioStreamPlayer" parent="." unique_id=1921024991]
-stream = ExtResource("7_mt2h5")
-max_polyphony = 2
 
 [node name="TabContainer" type="TabContainer" parent="." unique_id=616289097]
 layout_mode = 2

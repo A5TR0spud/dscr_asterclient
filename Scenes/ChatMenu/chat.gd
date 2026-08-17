@@ -7,7 +7,6 @@ static var status_log_entry_scene = preload("res://Scenes/ChatMenu/status_log_en
 static var separator_scene = preload("res://Scenes/Common/dashed_h_separator.tscn")
 static var chat_channel_scene = preload("res://Scenes/ChatMenu/chat_channel.tscn")
 @onready var channel_container: TabContainer = $TabContainer
-@onready var message_get_sound: AudioStreamPlayer = $MessageGet
 
 const CHANNEL_SELECTOR: int = -65535
 const COMMAND_JOIN: int = -65534
@@ -103,7 +102,7 @@ static func new_transmission(packet: PackedStringArray) -> void:
 		and (not channel.visible or not instance.get_window().has_focus())
 		and channel_is_visible(channel_id)
 	):
-		instance.message_get_sound.play()
+		SoundManager.play_sound(SoundManager.Sounds.NOTIFICATION)
 	
 	channel.add_message_node(new_message)
 

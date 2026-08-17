@@ -25,6 +25,11 @@ func refresh_name():
 func _on_nickname_editing_toggled(toggled_on):
 	if not toggled_on:
 		refresh_name()
+		SoundManager.play_sound(SoundManager.Sounds.CANCEL)
 
 func _on_nickname_text_submitted(new_text):
-	NicknamesHandler.set_nick(callsign, new_text)
+	var b: bool = NicknamesHandler.set_nick(callsign, new_text)
+	if b:
+		SoundManager.play_sound(SoundManager.Sounds.SUCCESS)
+	else:
+		SoundManager.play_sound(SoundManager.Sounds.REDUNDANT)

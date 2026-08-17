@@ -24,8 +24,8 @@ var connected_users: Array[int] = []
 @onready var timeout_time: Timer = $TimeoutTime
 @onready var reconnect_time: Timer = $ReconnectTime
 @onready var reconnect_cooldown: Timer = $ReconnectCooldown
-@onready var boot_sound: AudioStreamPlayer = $BootSound
-@onready var shut_down_sound: AudioStreamPlayer = $ShutDownSound
+@onready var boot_sound: AudioStreamPlayer = $BootUp
+@onready var shut_down_sound: AudioStreamPlayer = $ShutDown
 
 static var instance : Main
 
@@ -318,6 +318,7 @@ func _on_dictionary_save_open_pressed():
 
 func _on_dsve_button_pressed():
 	OS.shell_open("https://dsve.akqqa.dev/")
+	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 
 func _on_callsign_edit_callsign_submitted(new_value: int) -> void:
 	callsign = new_value

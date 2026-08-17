@@ -14,12 +14,13 @@ func _ready() -> void:
 @onready var sound_sample: AudioStreamPlayer = $AudioPreview
 
 func refresh() -> void:
-	formatting.state = SettingsHandler.do_formatting
-	image_visibility.state = SettingsHandler.image_default
-	truncate.value = SettingsHandler.truncate_message_size
-	font_size.value = SettingsHandler.font_size
-	color_edit.value = SettingsHandler.theme_color
+	formatting.set_state_no_signal(SettingsHandler.do_formatting)
+	image_visibility.set_state_no_signal(SettingsHandler.image_default)
+	truncate.set_value_no_signal(SettingsHandler.truncate_message_size)
+	font_size.set_value_no_signal(SettingsHandler.font_size)
+	color_edit.set_value_no_signal(SettingsHandler.theme_color)
 	sound_slider.set_value_no_signal(_volume_linear_to_slider())
+	_sample_color()
 
 func _volume_linear_to_slider(value: float = -1) -> float:
 	if value < 0:
@@ -62,21 +63,26 @@ func _physics_process(_delta):
 
 func _on_formatting_set(new_value):
 	SettingsHandler.do_formatting = new_value
+	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	save()
 
 func _on_image_vis_set(new_value):
 	SettingsHandler.image_default = new_value
+	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	save(false)
 
 func _on_truncation_spinner_value_changed(value):
 	SettingsHandler.truncate_message_size = roundi(value)
+	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	save(true, true)
 
 func _on_font_spinner_value_changed(value):
 	SettingsHandler.font_size = value
+	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	save(true, true)
 
 func _try_address():
+	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	Main.reconnect_or_change_url(address_edit.text)
 
 func _on_adress_edit_text_submitted(_new_text):
@@ -91,13 +97,16 @@ func _sample_color(val: int = -1):
 	color_sample.color = VisualizeNode.calculate_color(val)
 
 func _on_color_submit_button_pressed():
+	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	ThemeManager.set_theme_color(roundi(color_edit.value))
 
 func _on_color_cancel_button_pressed():
+	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	color_edit.value = SettingsHandler.theme_color
 	_sample_color()
 
 func _on_color_picker_value_changed(value):
+	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	_sample_color(value)
 
 func _on_volume_slider_value_changed(value):
