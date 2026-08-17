@@ -209,16 +209,21 @@ func _gui_input(event: InputEvent) -> void:
 		var line = get_caret_line()
 		var line_text = get_line(line)
 		var col = get_caret_column()
+		var no_selection = get_selected_text().is_empty()
 		
-		if event.is_action_pressed("ui_text_caret_right"):
+		if event.is_action_pressed("ui_text_caret_right") and (no_selection or event.shift_pressed):
 			if col < line_text.length() and line_text[col] == DELIMITER_CHARACTER:
 				set_caret_column(min(col + 2, line_text.length()))
 				accept_event()
+				if no_selection and event.shift_pressed:
+					select(line, col, line, col + 2)
 				return
-		if event.is_action_pressed("ui_text_caret_left"):
+		if event.is_action_pressed("ui_text_caret_left") and (no_selection or event.shift_pressed):
 			if col > 0 and line_text[col - 1] == DELIMITER_CHARACTER:
 				set_caret_column(max(col - 2, 0))
 				accept_event()
+				if no_selection and event.shift_pressed:
+					select(line, col, line, col - 2)
 				return
 		
 		if event.is_action_pressed("ui_text_backspace") and get_selected_text() == "":
