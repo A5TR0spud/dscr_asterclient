@@ -28,14 +28,16 @@ var connected_users: Array[int] = []
 static var instance : Main
 
 signal reload_dict
-signal reload_settings
-
 static func on_dict_reload() -> void:
 	instance.reload_dict.emit()
+signal reload_settings
 static func on_settings_reload() -> void:
 	ThemeManager.set_font_size()
 	instance.reload_settings.emit()
 	ThemeManager.set_theme_color()
+signal reload_nicknames
+static func on_nicknames_reload() -> void:
+	instance.reload_nicknames.emit()
 
 signal connected_user_change
 

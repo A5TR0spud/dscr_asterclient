@@ -24,6 +24,8 @@ static var h_sep = preload("uid://dgjcahl47q10n")
 static var v_sep = preload("uid://db3k5eiovgegq")
 static var h_split = preload("uid://b1t3fn13p4807")
 
+static var old_color: int = -1
+
 static func set_font_size(size: int = -1) -> void:
 	if size < 12 or size > 32:
 		size = SettingsHandler.font_size
@@ -42,6 +44,9 @@ static func set_theme_color(col: int = -1) -> void:
 	if SettingsHandler.theme_color != col:
 		SettingsHandler.theme_color = col
 		SettingsHandler.save()
+	if old_color == col:
+		return
+	old_color = col
 	var new_color: Color = VisualizeNode.calculate_color(col)
 	if col == 0:
 		new_color.r += 0.1

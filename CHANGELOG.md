@@ -9,6 +9,7 @@
 * Added icon
 * Settings tab now has an option to change websocket and/or attempt manual reconnect
 * Added theme color setting
+* Active users tab now can set nicknames
 
 ### Changes
 
@@ -16,6 +17,7 @@
 * Changing dictionary entries no longer resets the search
 * Potentially improved signal name editing
 * @ and $ are now blacklisted from signal names. This matches the game itself, so it shouldn't affect many people. I have plans for these symbols.
+* Active users tab is more vertical
 
 ### Fixes
 
