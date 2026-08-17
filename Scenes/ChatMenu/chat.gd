@@ -100,7 +100,7 @@ static func new_transmission(packet: PackedStringArray) -> void:
 	
 	if (
 		(new_message.sender != Main.instance.previously_accepted_callsign)
-		and (not channel.visible)
+		and (not channel.visible or not instance.get_window().has_focus())
 		and channel_is_visible(channel_id)
 	):
 		instance.message_get_sound.play()

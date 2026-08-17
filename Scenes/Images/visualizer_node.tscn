@@ -44,6 +44,9 @@ size_flags_horizontal = 3
 [node name="VisualizerRect" type="TextureRect" parent="Intermediate/RenderAndYaw" unique_id=1823197112]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = false
+mouse_default_cursor_shape = 13
 texture = SubResource("ViewportTexture_kq2tu")
 expand_mode = 5
 stretch_mode = 5
@@ -86,5 +89,6 @@ min_value = -60.0
 page = 40.0
 
 [connection signal="value_changed" from="Intermediate/ZoomSlider" to="." method="_on_zoom_slider_value_changed"]
+[connection signal="gui_input" from="Intermediate/RenderAndYaw/VisualizerRect" to="." method="_on_visualizer_rect_gui_input"]
 [connection signal="value_changed" from="Intermediate/RenderAndYaw/YawSlider" to="." method="_on_yaw_slider_value_changed"]
 [connection signal="value_changed" from="Intermediate/PitchSlider" to="." method="_on_pitch_slider_value_changed"]

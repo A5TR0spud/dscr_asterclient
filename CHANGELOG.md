@@ -25,6 +25,7 @@
   * Signals with these in the name will stop working when macros are added.
 * Active users tab is more vertical
 * If no dictionary or an empty dictionary is loaded, the "open/load dictionary" button will throw a rave
+* Images can now be dragged to control the pitch/yaw sliders indirectly. Hovering over one and scrolling zooms.
 
 ### Fixes
 
