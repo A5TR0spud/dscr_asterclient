@@ -211,17 +211,15 @@ TODO:
 - change placement of copy button (find a visible spot that doesn't cause formatting to screw up when it disappears)
 - add confirmation message for deleting dictionary entries
 - callsign image on/off setting
-- new transmission makes a noise setting
-- lone confetti signal makes confetti setting (only visible if the confetti signal is defined)
+- lone confetti signal makes confetti setting (configurable \"confetti\" signal)
 - clean vs clunky UI setting (current UI is in \"clean\" mode)
 - add \"macro-dictionary\" sidebar
 - make sidebar collapsable
 - make callsign picker collapsable
-- add more formatting options: indent all proceeding, dedent here and all proceeding, prior attract, next attract (attract removes space)
+- add more formatting options: indent all proceeding, dedent here and all proceeding, prior attract, next attract (attract removes space), auto-group-with-other-signal
 - setting for unknown signals taking the form of \"@-#_UNDEF\" vs \"|-#\"
 - figure out what to do if a transmission is not received (ie a number is skipped)
 - entering signals into notes so that they auto-update
-- have dictionary button glow if no dict is loaded or an empty dict is loaded
 - make pressing MAKES ELSE SENSE create the dictionary entry instead of only bringing up the menu, or else make that a setting
 - hover over translated words to get the signal
 - hover over negative numbers to get the translation

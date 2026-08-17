@@ -34,6 +34,7 @@ class_name DictionaryHandler
 # 3: double new line
 
 const MAX_NAME_LENGTH: int = 20
+static var bad_dict: bool = true
 
 static var desc_dict: Dictionary:
 	get:

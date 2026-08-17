@@ -46,3 +46,4 @@ func search_children() -> void:
 
 func _on_dictionary_save_open_pressed():
 	SaveSystem.open_save_location()
+	SaveSystem.load()

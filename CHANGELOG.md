@@ -6,6 +6,7 @@
 
 * NikZapp is now a contributor!
 * Added autocomplete! Hell yeah
+  * Please let us know about bugs!
 * Added icon
 * Settings tab now has an option to change websocket and/or attempt manual reconnect
 * Added theme color setting
@@ -23,12 +24,14 @@
   * To be clear: signals with these characters in their names still work. New signals or name-changing no longer allows these characters.
   * Signals with these in the name will stop working when macros are added.
 * Active users tab is more vertical
+* If no dictionary or an empty dictionary is loaded, the "open/load dictionary" button will throw a rave
 
 ### Fixes
 
 * Fixed the root cause of janky multiline in the chat entry. This means automatic word wrapping is back!
 * Fixed maybe-long-standing bug where sending a pipe (|) without a valid number following it causes a crash
 * Can no longer type non-numbers into the number search or blacklisted characters into the name search
+* Pressing the dictionary source button correctly reloads the dictionary again
 
 ## Build 3: Channels
 

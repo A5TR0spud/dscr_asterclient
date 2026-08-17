@@ -127,6 +127,7 @@ static func load_dict() -> void:
 		open_save_location()
 		var orig_json_string := FileAccess.get_file_as_string(DICT_PATH)
 		var tries: int = 0
+		DictionaryHandler.bad_dict = true
 		while (
 			(not FileAccess.file_exists(DICT_PATH)) or
 			orig_json_string == FileAccess.get_file_as_string(DICT_PATH)
@@ -147,7 +148,11 @@ static func load_dict() -> void:
 	dict = json.data
 	DictionaryHandler.initialize()
 	DictionaryHandler.sort_dictionary()
+	eval_bad_dict()
 	Main.on_dict_reload()
+
+static func eval_bad_dict() -> void:
+	DictionaryHandler.bad_dict = dict.is_empty() or DictionaryHandler.word_keys.is_empty() or DictionaryHandler.word_names.is_empty()
 
 static func save_dict() -> void:
 	DictionaryHandler.export()

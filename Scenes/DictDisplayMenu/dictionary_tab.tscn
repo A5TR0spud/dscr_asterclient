@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://tpn8p2apuh1t"]
 
 [ext_resource type="Script" uid="uid://dqce42c573ptg" path="res://Scripts/SimpleTranslatable.gd" id="1_tpcp0"]
+[ext_resource type="Script" uid="uid://du2luaidhxiem" path="res://Scenes/DictDisplayMenu/dictionary_save_open.gd" id="2_b08ua"]
 [ext_resource type="Script" uid="uid://cwf16ujxnodbv" path="res://Scenes/DictDisplayMenu/default_format_option.gd" id="2_wphnd"]
 [ext_resource type="Script" uid="uid://b6d5ucfwdeqjh" path="res://Scenes/DictDisplayMenu/dictionary_display.gd" id="3_b08ua"]
 [ext_resource type="Script" uid="uid://cyqng7nb5maao" path="res://Scenes/DictDisplayMenu/new_signal_button.gd" id="4_1mk6h"]
@@ -27,11 +28,12 @@ script = ExtResource("1_tpcp0")
 message = Array[int]([-237, -174])
 
 [node name="DictionarySaveOpen" type="Button" parent="DictionaryHeader" unique_id=1945237576]
+self_modulate = Color(0.8784314, 0.8784314, 0.8784314, 1)
 layout_mode = 2
-mouse_default_cursor_shape = 16
-text = "file"
-script = ExtResource("1_tpcp0")
-message = Array[int]([-40])
+offset_transform_enabled = true
+mouse_default_cursor_shape = 2
+text = "file source"
+script = ExtResource("2_b08ua")
 
 [node name="HSeparator2" type="HSeparator" parent="." unique_id=1377386859]
 layout_mode = 2
