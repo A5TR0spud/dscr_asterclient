@@ -4,6 +4,11 @@ extends TextEdit
 @onready var auto_list_panel: PanelContainer = $PanelContainer
 #CodeEdit hates trying to autocomplete things without spaces, so use a nested one which contains only the word to try
 @onready var autocomplete_finder: CodeEdit = $AutocompleteFinder
+@onready var send_sound: AudioStreamPlayer = $"../MessageSend"
+@onready var fail_sound: AudioStreamPlayer = $"../CompilationFailed"
+@onready var command_sound: AudioStreamPlayer = $"../CommandSend"
+@onready var join_sound: AudioStreamPlayer = $"../ChannelJoin"
+@onready var leave_sound: AudioStreamPlayer = $"../ChannelLeave"
 
 const DELIMITER_CHARACTER = "\u001f"
 
@@ -15,6 +20,24 @@ func _ready():
 
 func refresh():
 	placeholder_text = DictionaryHandler.signals_to_words([-43, -38])
+
+func submit_text() -> void:
+	var send_result: Array = Main.instance.send_message(text.remove_char(ord(DELIMITER_CHARACTER)))
+	if send_result[0]:
+		text = ""
+	match send_result[1]:
+		Main.MessageCompilationResult.MESSAGE_SENT:
+			send_sound.play()
+		Main.MessageCompilationResult.MESSAGE_FAILED:
+			fail_sound.play()
+		Main.MessageCompilationResult.COMMAND_SENT:
+			command_sound.play()
+		Main.MessageCompilationResult.SHOW_SENT:
+			join_sound.play()
+		Main.MessageCompilationResult.HIDE_SENT:
+			leave_sound.play()
+		Main.MessageCompilationResult.REDUNDANT:
+			fail_sound.play()
 
 func _request_code_completion(force: bool) -> void:
 	var word_under_caret: String = get_signal_under_caret()
@@ -176,8 +199,7 @@ func _gui_input(event: InputEvent) -> void:
 	# TODO: history implementation here
 	
 	if event.is_action_pressed("ui_text_submit"):
-		if Main.instance.send_message(text.remove_char(ord(DELIMITER_CHARACTER))):
-			text = ""
+		submit_text()
 		accept_event()
 		return
 	

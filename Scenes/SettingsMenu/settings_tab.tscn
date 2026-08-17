@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bx77kcm12yq8h" path="res://Scenes/SettingsMenu/settings_tab.gd" id="1_0yg8b"]
 [ext_resource type="Script" uid="uid://dqce42c573ptg" path="res://Scripts/SimpleTranslatable.gd" id="1_1gwgo"]
 [ext_resource type="PackedScene" uid="uid://dnd1u3xl3gie1" path="res://Scenes/SettingsMenu/setting_entry.tscn" id="3_0yg8b"]
+[ext_resource type="AudioStream" uid="uid://q27rk7sfk50e" path="res://Assets/Sounds/dial.ogg" id="3_nlym6"]
 
 [node name="SettingsTab" type="VBoxContainer" unique_id=1649791393]
 anchors_preset = 15
@@ -21,6 +22,9 @@ text = "settings"
 horizontal_alignment = 1
 script = ExtResource("1_1gwgo")
 message = Array[int]([-241, -174])
+
+[node name="AudioPreview" type="AudioStreamPlayer" parent="." unique_id=576191493]
+stream = ExtResource("3_nlym6")
 
 [node name="HSeparator" type="HSeparator" parent="." unique_id=482587478]
 layout_mode = 2
@@ -148,6 +152,55 @@ message = Array[int]([-29])
 [node name="HSeparator4" type="HSeparator" parent="ScrollContainer/MarginContainer/Options" unique_id=113793633]
 layout_mode = 2
 
+[node name="GlobalVolume" type="VBoxContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=970437208]
+layout_mode = 2
+
+[node name="VolumeLabel" type="Label" parent="ScrollContainer/MarginContainer/Options/GlobalVolume" unique_id=187059848]
+layout_mode = 2
+text = "sound volume"
+autowrap_mode = 2
+script = ExtResource("1_1gwgo")
+message = Array[int]([-110, -172, -39, -22, -100])
+
+[node name="VolumeSlider" type="HScrollBar" parent="ScrollContainer/MarginContainer/Options/GlobalVolume" unique_id=336024893]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 144.0
+step = 4.0
+page = 16.0
+value = 64.0
+rounded = true
+
+[node name="SliderLabelGrid" type="HBoxContainer" parent="ScrollContainer/MarginContainer/Options/GlobalVolume" unique_id=1443703006]
+layout_mode = 2
+
+[node name="Silent" type="Label" parent="ScrollContainer/MarginContainer/Options/GlobalVolume/SliderLabelGrid" unique_id=1261588972]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "silent"
+horizontal_alignment = 3
+script = ExtResource("1_1gwgo")
+message = Array[int]([-111])
+
+[node name="Normal" type="Label" parent="ScrollContainer/MarginContainer/Options/GlobalVolume/SliderLabelGrid" unique_id=1887747570]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "normal"
+horizontal_alignment = 3
+script = ExtResource("1_1gwgo")
+message = Array[int]([-114])
+
+[node name="Deafening" type="Label" parent="ScrollContainer/MarginContainer/Options/GlobalVolume/SliderLabelGrid" unique_id=1679507505]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "deafening"
+horizontal_alignment = 3
+script = ExtResource("1_1gwgo")
+message = Array[int]([-108])
+
+[node name="HSeparator5" type="HSeparator" parent="ScrollContainer/MarginContainer/Options" unique_id=1134833940]
+layout_mode = 2
+
 [node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/MarginContainer/Options" unique_id=1987941446]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -183,7 +236,9 @@ hint_underlined = false
 [connection signal="pressed" from="ScrollContainer/MarginContainer/Options/Address/AddressConnect" to="." method="_on_address_connect_pressed"]
 [connection signal="set" from="ScrollContainer/MarginContainer/Options/Formatting" to="." method="_on_formatting_set"]
 [connection signal="set" from="ScrollContainer/MarginContainer/Options/ImageVis" to="." method="_on_image_vis_set"]
+[connection signal="value_changed" from="ScrollContainer/MarginContainer/Options/TruncHbox/TruncationSpinner" to="." method="_on_truncation_spinner_value_changed"]
 [connection signal="value_changed" from="ScrollContainer/MarginContainer/Options/FontHbox/FontSpinner" to="." method="_on_font_spinner_value_changed"]
 [connection signal="value_changed" from="ScrollContainer/MarginContainer/Options/ThemeColor/ColorPicker" to="." method="_on_color_picker_value_changed"]
 [connection signal="pressed" from="ScrollContainer/MarginContainer/Options/ThemeColorSubmitElse/ColorSubmitButton" to="." method="_on_color_submit_button_pressed"]
 [connection signal="pressed" from="ScrollContainer/MarginContainer/Options/ThemeColorSubmitElse/ColorCancelButton" to="." method="_on_color_cancel_button_pressed"]
+[connection signal="value_changed" from="ScrollContainer/MarginContainer/Options/GlobalVolume/VolumeSlider" to="." method="_on_volume_slider_value_changed"]

@@ -1,0 +1,18 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+	<style>
+		.s0 { fill: #e600ff } 
+		.s1 { fill: #f493ff } 
+		.s2 { fill: #a200ff } 
+		.s3 { fill: #ffffff } 
+	</style>
+	<g id="Layer 1">
+		<path id="Shape 1 copy" fill-rule="evenodd" class="s0" d="m189.66 60.38v70h-40v-70z"/>
+		<path id="Shape 5" fill-rule="evenodd" class="s0" d="m149.66 60.38l-35 70h-40l35-70z"/>
+		<path id="Shape 1 copy 2" fill-rule="evenodd" class="s1" d="m189.66 150.38v70h-40v-70z"/>
+		<path id="Shape 1" fill-rule="evenodd" class="s2" d="m189.66 20.38v50h-40v-50z"/>
+		<path id="Shape 2" fill-rule="evenodd" class="s2" d="m169.66 20.38l-25 50h-40l25-50z"/>
+		<path id="Shape 5 copy" fill-rule="evenodd" class="s1" d="m104.66 150.38l-35 70h-40l35-70z"/>
+		<path id="Shape 3" fill-rule="evenodd" class="s0" d="m219.66 120.38v40h-200l20-40z"/>
+		<path id="Shape 9" fill-rule="evenodd" class="s3" d="m170 190l-10-40-40-10 40-10 10-40 10 40 40 10-40 10"/>
+	</g>
+</svg>

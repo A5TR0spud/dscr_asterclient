@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://bft3wuvruhqvw"]
 
 [ext_resource type="Script" uid="uid://1aqi7v8d5nf0" path="res://Scenes/Main/main.gd" id="1_6t3k2"]
+[ext_resource type="AudioStream" uid="uid://bvuts6f2essww" path="res://Assets/Sounds/boot_up.ogg" id="2_hfg1r"]
 [ext_resource type="Script" uid="uid://dqce42c573ptg" path="res://Scripts/SimpleTranslatable.gd" id="2_vk4q2"]
+[ext_resource type="AudioStream" uid="uid://bspyt735rxcbt" path="res://Assets/Sounds/shut_down.ogg" id="3_4e4y2"]
 [ext_resource type="PackedScene" uid="uid://bmqd6twlnn8dk" path="res://Scenes/ChatMenu/chat.tscn" id="3_imbg2"]
 [ext_resource type="Script" uid="uid://bft2883q6jmm7" path="res://Scenes/Main/sidebar_tabber.gd" id="6_es6iu"]
 [ext_resource type="PackedScene" uid="uid://tpn8p2apuh1t" path="res://Scenes/DictDisplayMenu/dictionary_tab.tscn" id="7_hfg1r"]
@@ -18,6 +20,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6t3k2")
+
+[node name="BootSound" type="AudioStreamPlayer" parent="." unique_id=927185845]
+stream = ExtResource("2_hfg1r")
+
+[node name="ShutDownSound" type="AudioStreamPlayer" parent="." unique_id=737853012]
+stream = ExtResource("3_4e4y2")
 
 [node name="TimeoutTime" type="Timer" parent="." unique_id=893375808]
 wait_time = 12.907

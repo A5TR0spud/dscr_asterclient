@@ -24,6 +24,8 @@ var connected_users: Array[int] = []
 @onready var timeout_time: Timer = $TimeoutTime
 @onready var reconnect_time: Timer = $ReconnectTime
 @onready var reconnect_cooldown: Timer = $ReconnectCooldown
+@onready var boot_sound: AudioStreamPlayer = $BootSound
+@onready var shut_down_sound: AudioStreamPlayer = $ShutDownSound
 
 static var instance : Main
 
@@ -48,6 +50,8 @@ var trying_to_quit: bool = false
 
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		get_window().mode = Window.MODE_MINIMIZED
+		shut_down_sound.play()
 		if socket.get_ready_state() == WebSocketPeer.STATE_CLOSED:
 			kill_process()
 			return
@@ -57,6 +61,11 @@ func _notification(what):
 		get_tree().create_timer(10).timeout.connect(kill_process)
 
 func kill_process():
+	if not AudioServer.is_bus_mute(AudioServer.get_bus_index("Master")):
+		if shut_down_sound.playing:
+			await shut_down_sound.finished
+			#pad a little to avoid audio clipping issues
+			await get_tree().create_timer(0.05).timeout
 	get_tree().quit()
 
 func _ready():
@@ -65,6 +74,8 @@ func _ready():
 	get_tree().set_auto_accept_quit(false)
 	websocket_url = SettingsHandler.websocket_address
 	start_connect()
+	boot_sound.play()
+	boot_sound.finished.connect(boot_sound.queue_free)
 
 static func get_callsign_color(value: int) -> Color:
 	var hue: float = fmod(137.5 * value, 360) / 360.0;
@@ -146,30 +157,48 @@ func start_connect(is_reconnect_attempt: bool = false) -> void:
 		Chat.new_log(Chat.State.FAILED_TO_CONNECT)
 		set_physics_process(false)
 
-func send_message(written: String) -> bool:
+enum MessageCompilationResult {
+	MESSAGE_SENT,
+	MESSAGE_FAILED,
+	COMMAND_SENT,
+	COMMAND_FAILED,
+	SHOW_SENT,
+	HIDE_SENT,
+	REDUNDANT
+}
+# Returns an array
+# 0: Generic boolean for success
+# 1: More detailed MessageCompilationResult
+func send_message(written: String) -> Array:
 	# Return true to clear the input box
 	var sig: Array[int] = DictionaryHandler.parse_text_to_signals(written)
 	if sig.size() == 0:
-		return false
+		return [false, MessageCompilationResult.MESSAGE_FAILED]
 	# handle commands
 	# TODO: move to its own class
 	if sig[0] == Chat.COMMAND_JOIN:
 		if len(sig) != 2:
 			Chat.new_log(Chat.State.INPUT_COMMAND_LENGTH_INVALID, [Chat.COMMAND_JOIN, 2])
-			return false
+			return [false, MessageCompilationResult.COMMAND_FAILED]
+		var res := MessageCompilationResult.REDUNDANT
+		if not Chat.channel_is_visible(sig[1]):
+			res = MessageCompilationResult.SHOW_SENT
 		Chat.enable_channel(sig[1])
 		Chat.focus_channel(sig[1])
-		return true
+		return [true, res]
 	if sig[0] == Chat.COMMAND_LEAVE:
 		if len(sig) != 2:
 			Chat.new_log(Chat.State.INPUT_COMMAND_LENGTH_INVALID, [Chat.COMMAND_LEAVE, 2])
-			return false
+			return [false, MessageCompilationResult.COMMAND_FAILED]
+		var res := MessageCompilationResult.REDUNDANT
+		if Chat.channel_is_visible(sig[1]):
+			res = MessageCompilationResult.HIDE_SENT
 		Chat.disable_channel(sig[1])
-		return true
+		return [true, res]
 	if sig[0] == Chat.CHANNEL_SELECTOR:
 		if len(sig) < 3:
 			Chat.new_log(Chat.State.INPUT_ENCRYPT_TOO_SHORT, [Chat.CHANNEL_SELECTOR])
-			return false
+			return [false, MessageCompilationResult.COMMAND_FAILED]
 		Chat.get_channel_node(sig[1])
 		Chat.focus_channel(sig[1])
 	else:
@@ -181,8 +210,8 @@ func send_message(written: String) -> bool:
 	strig.insert(0, "M")
 	var o: String = ",".join(strig)
 	if o and socket.send_text(o) == Error.OK:
-		return true
-	return false
+		return [true, MessageCompilationResult.MESSAGE_SENT]
+	return [false, MessageCompilationResult.MESSAGE_FAILED]
 
 func handle_packet(incoming: String) -> void:
 	print("< Got string data from server: %s" % incoming)

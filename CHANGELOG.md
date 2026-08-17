@@ -9,7 +9,10 @@
 * Added icon
 * Settings tab now has an option to change websocket and/or attempt manual reconnect
 * Added theme color setting
-* Active users tab now can set nicknames
+* Active users tab can now set nicknames
+* Added a boot splash
+* Added sounds for: opening, closing, sending, compilation failure, showing channel, hiding channel, message gets sent in different channel
+* Added a setting for sound volume
 
 ### Changes
 
@@ -17,6 +20,8 @@
 * Changing dictionary entries no longer resets the search
 * Potentially improved signal name editing
 * @ and $ are now blacklisted from signal names. This matches the game itself, so it shouldn't affect many people. I have plans for these symbols.
+  * To be clear: signals with these characters in their names still work. New signals or name-changing no longer allows these characters.
+  * Signals with these in the name will stop working when macros are added.
 * Active users tab is more vertical
 
 ### Fixes

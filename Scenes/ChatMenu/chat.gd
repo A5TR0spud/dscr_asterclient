@@ -7,6 +7,7 @@ static var status_log_entry_scene = preload("res://Scenes/ChatMenu/status_log_en
 static var separator_scene = preload("res://Scenes/Common/dashed_h_separator.tscn")
 static var chat_channel_scene = preload("res://Scenes/ChatMenu/chat_channel.tscn")
 @onready var channel_container: TabContainer = $TabContainer
+@onready var message_get_sound: AudioStreamPlayer = $MessageGet
 
 const CHANNEL_SELECTOR: int = -65535
 const COMMAND_JOIN: int = -65534
@@ -95,7 +96,14 @@ static func new_transmission(packet: PackedStringArray) -> void:
 	
 	new_message.message = integer_message
 	
-	var channel: Node = get_channel_node(channel_id)
+	var channel: Control = get_channel_node(channel_id)
+	
+	if (
+		(new_message.sender != Main.instance.previously_accepted_callsign)
+		and (not channel.visible)
+		and channel_is_visible(channel_id)
+	):
+		instance.message_get_sound.play()
 	
 	channel.add_message_node(new_message)
 
@@ -114,24 +122,31 @@ enum State {
 	DUPLICATE_NAME,
 }
 
+static func channel_is_visible(id = null) -> bool:
+	if id == null:
+		return true
+	var has: bool = instance.channel_container.has_node(str(id))
+	if not has:
+		return false
+	var node = instance.channel_container.get_node(str(id))
+	return not (instance.channel_container as TabContainer).is_tab_hidden(node.get_index())
+
 ## gets channel node given an id.
 ## if an id is not provided, the default channel is used
 ## if a channel does not exist, its scene will be instantiated and set up
 static func get_channel_node(id = null) -> Node:
 	if id == null:
 		return instance.channel_container.get_child(0)
-	else:
-		if instance.channel_container.has_node(str(id)):
-			return instance.channel_container.get_node(str(id))
-		else:
-			var channel_node = chat_channel_scene.instantiate()
-			instance.channel_container.add_child(channel_node)
-			var tab_id = channel_node.get_index()
-			channel_node.set_channel_name(id)
-			
-			(instance.channel_container as TabContainer).set_tab_hidden(tab_id, not SettingsHandler.opened_channels.has(SKELETON_KEY))
-			
-			return channel_node
+	if instance.channel_container.has_node(str(id)):
+		return instance.channel_container.get_node(str(id))
+	var channel_node = chat_channel_scene.instantiate()
+	instance.channel_container.add_child(channel_node)
+	var tab_id = channel_node.get_index()
+	channel_node.set_channel_name(id)
+	
+	(instance.channel_container as TabContainer).set_tab_hidden(tab_id, not SettingsHandler.opened_channels.has(SKELETON_KEY))
+	
+	return channel_node
 
 static func get_current_channel_node() -> Node:
 	return instance.channel_container.get_child(instance.channel_container.current_tab)

@@ -10,6 +10,7 @@ static var image_default: bool = false
 static var opened_channels: Array = []
 static var websocket_address: String = Main.DSCR_URL
 static var theme_color: int = 57
+static var master_volume: float = 1.0
 
 static func initialize() -> void:
 	# Setting names kept in PascalCase to keep backwards compatibility
@@ -22,6 +23,18 @@ static func initialize() -> void:
 	opened_channels = SaveSystem.settings.get_or_add("OpenedChannels", []).map(func (a): return int(a))
 	websocket_address = SaveSystem.settings.get_or_add("WebsocketAddress", Main.DSCR_URL)
 	theme_color = SaveSystem.settings.get_or_add("ThemeColor", theme_color)
+	master_volume = SaveSystem.settings.get_or_add("MasterVolume", master_volume)
+	evaluate_volume()
+
+static func evaluate_volume() -> void:
+	AudioServer.set_bus_volume_linear(
+		AudioServer.get_bus_index("Master"),
+		master_volume * 0.667
+	)
+	AudioServer.set_bus_mute(
+		AudioServer.get_bus_index("Master"),
+		master_volume <= 0.01
+	)
 
 static func save() -> void:
 	SaveSystem.save_settings()
@@ -35,3 +48,4 @@ static func export() -> void:
 	SaveSystem.settings.set("OpenedChannels", opened_channels)
 	SaveSystem.settings.set("WebsocketAddress", websocket_address)
 	SaveSystem.settings.set("ThemeColor", theme_color)
+	SaveSystem.settings.set("MasterVolume", master_volume)
