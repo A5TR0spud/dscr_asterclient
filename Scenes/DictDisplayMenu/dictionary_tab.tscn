@@ -1,11 +1,9 @@
 [gd_scene format=3 uid="uid://tpn8p2apuh1t"]
 
 [ext_resource type="Script" uid="uid://dqce42c573ptg" path="res://Scripts/SimpleTranslatable.gd" id="1_tpcp0"]
-[ext_resource type="Script" uid="uid://du2luaidhxiem" path="res://Scenes/DictDisplayMenu/dictionary_save_open.gd" id="2_b08ua"]
 [ext_resource type="Script" uid="uid://cwf16ujxnodbv" path="res://Scenes/DictDisplayMenu/default_format_option.gd" id="2_wphnd"]
 [ext_resource type="Script" uid="uid://b6d5ucfwdeqjh" path="res://Scenes/DictDisplayMenu/dictionary_display.gd" id="3_b08ua"]
 [ext_resource type="Script" uid="uid://cyqng7nb5maao" path="res://Scenes/DictDisplayMenu/new_signal_button.gd" id="4_1mk6h"]
-[ext_resource type="Script" uid="uid://gtpqlwktlalr" path="res://Scripts/FilteredLineEdit.gd" id="6_b08ua"]
 
 [node name="DictionaryTab" type="VBoxContainer" unique_id=1745367524]
 anchors_preset = 15
@@ -22,18 +20,17 @@ layout_mode = 2
 [node name="DictionaryLabel" type="Label" parent="DictionaryHeader" unique_id=1474423653]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "meaning change"
+text = "dict"
 horizontal_alignment = 1
 script = ExtResource("1_tpcp0")
-message = Array[int]([-237, -174])
+message = Array[int]([-42, -237])
 
 [node name="DictionarySaveOpen" type="Button" parent="DictionaryHeader" unique_id=1945237576]
-self_modulate = Color(0.8784314, 0.8784314, 0.8784314, 1)
 layout_mode = 2
-offset_transform_enabled = true
-mouse_default_cursor_shape = 2
-text = "file source"
-script = ExtResource("2_b08ua")
+mouse_default_cursor_shape = 16
+text = "file"
+script = ExtResource("1_tpcp0")
+message = Array[int]([-40])
 
 [node name="HSeparator2" type="HSeparator" parent="." unique_id=1377386859]
 layout_mode = 2
@@ -98,23 +95,23 @@ expand_to_text_length = true
 context_menu_enabled = false
 emoji_menu_enabled = false
 caret_blink = true
-script = ExtResource("6_b08ua")
-deny_list = "-0123456789"
-allow_list = true
-placeholder = Array[int]([-42])
+script = ExtResource("1_tpcp0")
+message = Array[int]([-260])
+property_name = &"placeholder_text"
 
 [node name="SigEdit" type="LineEdit" parent="NewSignalDesig" unique_id=804966430]
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "name"
+placeholder_text = "signal"
 alignment = 2
 max_length = 20
 expand_to_text_length = true
 context_menu_enabled = false
 emoji_menu_enabled = false
 caret_blink = true
-script = ExtResource("6_b08ua")
-placeholder = Array[int]([-237])
+script = ExtResource("1_tpcp0")
+message = Array[int]([-42])
+property_name = &"placeholder_text"
 
 [connection signal="pressed" from="DictionaryHeader/DictionarySaveOpen" to="ScrollContainer/MarginContainer/VBoxContainer/Dictionary" method="_on_dictionary_save_open_pressed"]
 [connection signal="pressed" from="NewSignalButton" to="NewSignalButton" method="_on_pressed"]

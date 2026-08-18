@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://bx77kcm12yq8h" path="res://Scenes/SettingsMenu/settings_tab.gd" id="1_0yg8b"]
 [ext_resource type="Script" uid="uid://dqce42c573ptg" path="res://Scripts/SimpleTranslatable.gd" id="1_1gwgo"]
 [ext_resource type="PackedScene" uid="uid://dnd1u3xl3gie1" path="res://Scenes/SettingsMenu/setting_entry.tscn" id="3_0yg8b"]
-[ext_resource type="AudioStream" uid="uid://q27rk7sfk50e" path="res://Assets/Sounds/dial.ogg" id="3_nlym6"]
 
 [node name="SettingsTab" type="VBoxContainer" unique_id=1649791393]
 anchors_preset = 15
@@ -22,9 +21,6 @@ text = "settings"
 horizontal_alignment = 1
 script = ExtResource("1_1gwgo")
 message = Array[int]([-241, -174])
-
-[node name="AudioPreview" type="AudioStreamPlayer" parent="." unique_id=576191493]
-stream = ExtResource("3_nlym6")
 
 [node name="HSeparator" type="HSeparator" parent="." unique_id=482587478]
 layout_mode = 2
@@ -46,22 +42,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Address" type="VBoxContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=1602527487]
-layout_mode = 2
-
-[node name="AdressEdit" type="LineEdit" parent="ScrollContainer/MarginContainer/Options/Address" unique_id=29234447]
-layout_mode = 2
-placeholder_text = "wss://dscr-relay.dixonary.co.uk"
-
-[node name="AddressConnect" type="Button" parent="ScrollContainer/MarginContainer/Options/Address" unique_id=1760540175]
-layout_mode = 2
-text = "connect"
-script = ExtResource("1_1gwgo")
-message = Array[int]([-241, 0, -40])
-
-[node name="HSeparator3" type="HSeparator" parent="ScrollContainer/MarginContainer/Options" unique_id=1456062547]
-layout_mode = 2
-
 [node name="Formatting" parent="ScrollContainer/MarginContainer/Options" unique_id=1141489488 instance=ExtResource("3_0yg8b")]
 layout_mode = 2
 description = Array[int]([-42, -190, -85, -100, -223])
@@ -70,11 +50,15 @@ description = Array[int]([-42, -190, -85, -100, -223])
 layout_mode = 2
 description = Array[int]([-53, -163, -85])
 
-[node name="TruncHbox" type="HBoxContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=720322280]
+[node name="TruncMargin" type="MarginContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=730512064]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+
+[node name="TruncHbox" type="HBoxContainer" parent="ScrollContainer/MarginContainer/Options/TruncMargin" unique_id=720322280]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="TruncationSpinner" type="SpinBox" parent="ScrollContainer/MarginContainer/Options/TruncHbox" unique_id=1798054392]
+[node name="TruncationSpinner" type="SpinBox" parent="ScrollContainer/MarginContainer/Options/TruncMargin/TruncHbox" unique_id=1798054392]
 layout_mode = 2
 size_flags_horizontal = 0
 min_value = 31.0
@@ -82,26 +66,30 @@ max_value = 511.0
 value = 63.0
 rounded = true
 
-[node name="TruncLabel" type="Label" parent="ScrollContainer/MarginContainer/Options/TruncHbox" unique_id=1597931858]
+[node name="TruncLabel" type="Label" parent="ScrollContainer/MarginContainer/Options/TruncMargin/TruncHbox" unique_id=1597931858]
 layout_mode = 2
-text = "transmission truncation setting"
+text = "they say flowers fade and their beauty can't be weighed with flowers so fake"
 script = ExtResource("1_1gwgo")
 message = Array[int]([-42, -122, -25])
 
 [node name="HSeparator2" type="HSeparator" parent="ScrollContainer/MarginContainer/Options" unique_id=2092124219]
 layout_mode = 2
 
-[node name="FontHbox" type="HBoxContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=90540622]
+[node name="FontMargin" type="MarginContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=816504442]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+
+[node name="FontHbox" type="HBoxContainer" parent="ScrollContainer/MarginContainer/Options/FontMargin" unique_id=90540622]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="FontSizeLabel" type="Label" parent="ScrollContainer/MarginContainer/Options/FontHbox" unique_id=110664921]
+[node name="FontSizeLabel" type="Label" parent="ScrollContainer/MarginContainer/Options/FontMargin/FontHbox" unique_id=110664921]
 layout_mode = 2
-text = "font size setting"
+text = "la dee da dee da"
 script = ExtResource("1_1gwgo")
 message = Array[int]([-42, -22, -4])
 
-[node name="FontSpinner" type="SpinBox" parent="ScrollContainer/MarginContainer/Options/FontHbox" unique_id=897245892]
+[node name="FontSpinner" type="SpinBox" parent="ScrollContainer/MarginContainer/Options/FontMargin/FontHbox" unique_id=897245892]
 layout_mode = 2
 size_flags_horizontal = 0
 min_value = 15.0
@@ -112,114 +100,31 @@ rounded = true
 [node name="HSeparator" type="HSeparator" parent="ScrollContainer/MarginContainer/Options" unique_id=1571308958]
 layout_mode = 2
 
-[node name="ThemeColor" type="HBoxContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=243570277]
-layout_mode = 2
-theme_override_constants/separation = 8
-
-[node name="ColorLabel" type="Label" parent="ScrollContainer/MarginContainer/Options/ThemeColor" unique_id=1858344240]
-layout_mode = 2
-text = "color theme setting"
-script = ExtResource("1_1gwgo")
-message = Array[int]([-110, -54, -100])
-
-[node name="ColorPicker" type="SpinBox" parent="ScrollContainer/MarginContainer/Options/ThemeColor" unique_id=423506351]
-layout_mode = 2
-size_flags_horizontal = 0
-max_value = 64.0
-value = 50.0
-
-[node name="ColorRect" type="ColorRect" parent="ScrollContainer/MarginContainer/Options" unique_id=376741741]
-custom_minimum_size = Vector2(0, 4)
-layout_mode = 2
-
-[node name="ThemeColorSubmitElse" type="HBoxContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=1782643435]
-layout_mode = 2
-
-[node name="ColorSubmitButton" type="Button" parent="ScrollContainer/MarginContainer/Options/ThemeColorSubmitElse" unique_id=1914408651]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "submit color"
-script = ExtResource("1_1gwgo")
-message = Array[int]([-174])
-
-[node name="ColorCancelButton" type="Button" parent="ScrollContainer/MarginContainer/Options/ThemeColorSubmitElse" unique_id=307673388]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "cancel"
-script = ExtResource("1_1gwgo")
-message = Array[int]([-29])
-
-[node name="HSeparator4" type="HSeparator" parent="ScrollContainer/MarginContainer/Options" unique_id=113793633]
-layout_mode = 2
-
-[node name="GlobalVolume" type="VBoxContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=970437208]
-layout_mode = 2
-
-[node name="VolumeLabel" type="Label" parent="ScrollContainer/MarginContainer/Options/GlobalVolume" unique_id=187059848]
-layout_mode = 2
-text = "sound volume"
-autowrap_mode = 2
-script = ExtResource("1_1gwgo")
-message = Array[int]([-110, -172, -39, -22, -100])
-
-[node name="VolumeSlider" type="HScrollBar" parent="ScrollContainer/MarginContainer/Options/GlobalVolume" unique_id=336024893]
-layout_mode = 2
-size_flags_horizontal = 3
-max_value = 144.0
-step = 4.0
-page = 16.0
-value = 64.0
-rounded = true
-
-[node name="SliderLabelGrid" type="HBoxContainer" parent="ScrollContainer/MarginContainer/Options/GlobalVolume" unique_id=1443703006]
-layout_mode = 2
-
-[node name="Silent" type="Label" parent="ScrollContainer/MarginContainer/Options/GlobalVolume/SliderLabelGrid" unique_id=1261588972]
-layout_mode = 2
-size_flags_horizontal = 2
-text = "silent"
-horizontal_alignment = 3
-script = ExtResource("1_1gwgo")
-message = Array[int]([-111])
-
-[node name="Normal" type="Label" parent="ScrollContainer/MarginContainer/Options/GlobalVolume/SliderLabelGrid" unique_id=1887747570]
-layout_mode = 2
-size_flags_horizontal = 6
-text = "normal"
-horizontal_alignment = 3
-script = ExtResource("1_1gwgo")
-message = Array[int]([-114])
-
-[node name="Deafening" type="Label" parent="ScrollContainer/MarginContainer/Options/GlobalVolume/SliderLabelGrid" unique_id=1679507505]
-layout_mode = 2
-size_flags_horizontal = 10
-text = "deafening"
-horizontal_alignment = 3
-script = ExtResource("1_1gwgo")
-message = Array[int]([-108])
-
-[node name="HSeparator5" type="HSeparator" parent="ScrollContainer/MarginContainer/Options" unique_id=1134833940]
-layout_mode = 2
-
 [node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/MarginContainer/Options" unique_id=1987941446]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "the todo list will be removed at some point
 TODO:
-- add transmission bookmark option and browse menu
+- add transmission bookmark option
+- change layout of online users tab to match dictionary and allow option to nickname callsigns (maybe i will finally remember who i am talking with)
 - change placement of copy button (find a visible spot that doesn't cause formatting to screw up when it disappears)
 - add confirmation message for deleting dictionary entries
+- websocket address setting
+- add button to manually try to reconnect
 - callsign image on/off setting
-- lone confetti signal makes confetti setting (configurable \"confetti\" signal)
+- new transmission makes a noise setting
+- lone confetti signal makes confetti setting (only visible if the confetti signal is defined)
 - clean vs clunky UI setting (current UI is in \"clean\" mode)
 - add \"macro-dictionary\" sidebar
 - make sidebar collapsable
 - make callsign picker collapsable
-- add more formatting options: indent all proceeding, dedent here and all proceeding, prior attract, next attract (attract removes space), auto-group-with-other-signal
+- rerun the search code when the dictionary gets updated so that the search doesnt reset, or else change the way dictionary repopulation works
+- add more formatting options: indent all proceeding, dedent here and all proceeding, prior attract, next attract (attract removes space)
 - setting for unknown signals taking the form of \"@-#_UNDEF\" vs \"|-#\"
 - figure out what to do if a transmission is not received (ie a number is skipped)
 - entering signals into notes so that they auto-update
+- have dictionary button glow if no dict is loaded or an empty dict is loaded
 - make pressing MAKES ELSE SENSE create the dictionary entry instead of only bringing up the menu, or else make that a setting
 - hover over translated words to get the signal
 - hover over negative numbers to get the translation
@@ -230,13 +135,6 @@ shortcut_keys_enabled = false
 meta_underlined = false
 hint_underlined = false
 
-[connection signal="text_submitted" from="ScrollContainer/MarginContainer/Options/Address/AdressEdit" to="." method="_on_adress_edit_text_submitted"]
-[connection signal="pressed" from="ScrollContainer/MarginContainer/Options/Address/AddressConnect" to="." method="_on_address_connect_pressed"]
 [connection signal="set" from="ScrollContainer/MarginContainer/Options/Formatting" to="." method="_on_formatting_set"]
 [connection signal="set" from="ScrollContainer/MarginContainer/Options/ImageVis" to="." method="_on_image_vis_set"]
-[connection signal="value_changed" from="ScrollContainer/MarginContainer/Options/TruncHbox/TruncationSpinner" to="." method="_on_truncation_spinner_value_changed"]
-[connection signal="value_changed" from="ScrollContainer/MarginContainer/Options/FontHbox/FontSpinner" to="." method="_on_font_spinner_value_changed"]
-[connection signal="value_changed" from="ScrollContainer/MarginContainer/Options/ThemeColor/ColorPicker" to="." method="_on_color_picker_value_changed"]
-[connection signal="pressed" from="ScrollContainer/MarginContainer/Options/ThemeColorSubmitElse/ColorSubmitButton" to="." method="_on_color_submit_button_pressed"]
-[connection signal="pressed" from="ScrollContainer/MarginContainer/Options/ThemeColorSubmitElse/ColorCancelButton" to="." method="_on_color_cancel_button_pressed"]
-[connection signal="value_changed" from="ScrollContainer/MarginContainer/Options/GlobalVolume/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/MarginContainer/Options/FontMargin/FontHbox/FontSpinner" to="." method="_on_font_spinner_value_changed"]

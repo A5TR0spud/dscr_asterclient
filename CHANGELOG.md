@@ -1,50 +1,10 @@
 # Versions
 
-## Build 4: Autocomplete
+## --WIP--
 
 ### Additions
 
-* NikZapp is now a contributor!
-* Added autocomplete! Hell yeah
-  * Please let us know about bugs!
-* Added icon
-* Settings tab now has an option to change websocket and/or attempt manual reconnect
-* Added theme color setting
-* Active users tab can now set nicknames
-* Added a boot splash
-* Added sounds for: opening, closing, sending, compilation failure, showing/hiding channel, unseen message is received, saving/cancelling dictionary changes
-* Added a setting for sound volume
-
-### Changes
-
-* Pressing enter (but not shift+enter) will now count as pressing save in the dictionary edit popup
-* Changing dictionary entries no longer resets the search
-* Potentially improved signal name editing
-* @ and $ are now blacklisted from signal names. This matches the game itself, so it shouldn't affect many people. I have plans for these symbols.
-  * To be clear: signals with these characters in their names still work. New signals or name-changing no longer allows these characters.
-  * Signals with these in the name will stop working when macros are added.
-* Active users tab is more vertical
-* If no dictionary or an empty dictionary is loaded, the "open/load dictionary" button will throw a rave
-* Images can now be dragged to control the pitch/yaw sliders indirectly. Hovering over one and scrolling zooms.
-
-### Fixes
-
-* Fixed the root cause of janky multiline in the chat entry. This means automatic word wrapping is back!
-* Fixed maybe-long-standing bug where sending a pipe (|) without a valid number following it causes a crash
-* Can no longer type non-numbers into the number search or blacklisted characters into the name search
-* Pressing the dictionary source button correctly reloads the dictionary again
-
-## Build 3: Channels
-
-### Additions
-
-* Channels have been implemented primarily by [@nikzapp](https://github.com/A5TR0spud/dscr_asterclient/commits?author=NikZapp) on Discord. Hell yeah
-* As a reminder:
-  * Sending "|-65535 (key) (message)" will hide the message from normal chat
-  * Sending "|-65534 (key)" will display messages otherwise hidden via the above method, for that specific key
-  * Sending "|-65533 (key)" will stop displaying messages from that key
-  * |-65536 is a special key that will show all available channels when enabled via |-65534
-* Note: if a channel is selected, "|-65535 (key)" will automatically be prepended, unless the sent message starts with |-65535
+* Channels have been implemented thanks to [@nikzapp](https://github.com/A5TR0spud/dscr_asterclient/commits?author=NikZapp) on Discord
 * Added computer message for failure to name something identically to an existing signal
 
 ### Changes

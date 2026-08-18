@@ -33,14 +33,11 @@ func save() -> void:
 	if current_signal == 0:
 		DictionaryHandler.default_before_mode = before_label.selected
 		DictionaryHandler.default_after_mode = after_label.selected
-		SoundManager.play_sound(SoundManager.Sounds.CONFIRMED)
 		SaveSystem.save_dict()
 		Main.on_dict_reload()
 		return
 	if not DictionaryHandler.apply_signal_name(current_signal, name_edit.text, true):
-		SoundManager.play_sound(SoundManager.Sounds.FAIL)
 		return
-	SoundManager.play_sound(SoundManager.Sounds.CONFIRMED)
 	name_label.text = DictionaryHandler.get_or_default_signal_name(current_signal)
 	DictionaryHandler.apply_signal_desc(current_signal, {
 		DictionaryHandler.desc_key: desc_edit.text,
@@ -81,33 +78,21 @@ func refresh():
 	after_label.set("popup/item_2/text", DictionaryHandler.signals_to_words([1, -108, -190]))
 	after_label.set("popup/item_3/text", DictionaryHandler.signals_to_words([2, -108, -190]))
 
-
-func _on_notes_edit_gui_input(event):
-	if event.is_action_pressed("ui_text_submit") and not event.is_action_pressed("ui_text_newline"):
-		save()
-		accept_event()
-
-func _input(event):
-	if not visible:
-		return
+func _input(event: InputEvent):
 	if event.is_action_pressed("ui_close_dialog"):
 		hide()
-		accept_event()
 
 func _on_submit_button_pressed():
 	save()
 	#hide()
 
 func _on_cancel_button_pressed():
-	SoundManager.play_sound(SoundManager.Sounds.DISCARD)
 	reload()
 
 func _on_close_button_pressed():
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	hide()
 
 func _on_delete_button_pressed():
-	SoundManager.play_sound(SoundManager.Sounds.DISCARD)
 	DictionaryHandler.forget_signal(current_signal)
 	Main.on_dict_reload()
 	SaveSystem.save_dict()
@@ -115,3 +100,8 @@ func _on_delete_button_pressed():
 
 func _on_name_line_edit_text_submitted(_new_text):
 	save()
+
+func _on_name_line_edit_text_changed(new_text):
+	var col := name_edit.caret_column
+	name_edit.text = DictionaryHandler.filter_name_input(new_text)
+	name_edit.caret_column = col

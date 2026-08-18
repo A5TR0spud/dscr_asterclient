@@ -16,7 +16,6 @@ func refresh():
 		var instance: DictEntry = dict_entry_scene.instantiate()
 		instance.sig = DictionaryHandler.desc_keys[idx]
 		add_child(instance)
-	search_children()
 
 var re_search: bool = false
 
@@ -45,6 +44,4 @@ func search_children() -> void:
 	re_search = false
 
 func _on_dictionary_save_open_pressed():
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	SaveSystem.open_save_location()
-	SaveSystem.load()

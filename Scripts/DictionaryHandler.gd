@@ -34,7 +34,6 @@ class_name DictionaryHandler
 # 3: double new line
 
 const MAX_NAME_LENGTH: int = 20
-static var bad_dict: bool = true
 
 static var desc_dict: Dictionary:
 	get:
@@ -153,7 +152,7 @@ static func get_or_default_signal_name(sig: int) -> String:
 	return word_names[idx]
 
 static func filter_name_input(input: String) -> String:
-	input = input.replace_char(ord(" "), ord("_")).remove_chars("|@$")
+	input = input.replace_char(32, 95).remove_char(124)
 	input = input.strip_edges().strip_escapes().to_upper()
 	var o: String = ""
 	for i in range(input.length()):
@@ -165,131 +164,63 @@ static func filter_name_input(input: String) -> String:
 		o = o.left(MAX_NAME_LENGTH)
 	return o
 
-## Checks a string to see if the location at the caret is an invalid signal.
-## Returns an array with 2 values:
-## 0: The string that failed to parse. Empty if nothing was found at the caret.
-## 1: The index the failed string starts at. -1 if successful.
-static func find_incomplete_signal(line: String, caret_column: int, expected: String = "") -> Array:
-	var delimited: PackedStringArray = line.split(" ")
-	var broken_column: int = 0
-	for sub in delimited:
-		if caret_column <= sub.length():
-			if sub.is_empty():
-				break
-			var result: ParseResult = parse_text(sub)
-			if (result.state == ParseResult.FailureState.TOO_LONG
-				or result.state == ParseResult.FailureState.UNPARSED
-			):
-				break
-			
-			# TODO: make this not suck
-			
-			if result.state == ParseResult.FailureState.ALL_GOOD:
-				if caret_column <= 5:
-					return [sub, broken_column]
-			
-			if result.state == ParseResult.FailureState.UNKNOWN_STRING:
-				var start: int = result.stopping_indices[0]
-				var prefix: String = sub.left(start)
-				if not prefix.is_empty():
-					if expected.begins_with(prefix):
-						start -= prefix.length()
-				var end: int = result.stopping_indices[result.stopping_indices.size() - 1]
-				var end_length: int = result.failures[result.stopping_indices.size() - 1].length()
-				var length: int = end - start + end_length
-				if caret_column < start or caret_column > end + end_length:
-					return ["", -1]
-				return [sub.substr(start, length), broken_column + start]
-		caret_column -= sub.length() + 1
-		broken_column += sub.length() + 1
-	return ["", -1]
-
-## Takes a string input and outputs a ParseResult object
-## The returned object contains information about failure and parsed numerical signals
-static func parse_text(input: String, earlyReturn: bool = false) -> ParseResult:
-	input = input.strip_edges().strip_escapes().to_upper()
-	var result: ParseResult = ParseResult.new()
-	result.state = ParseResult.FailureState.ALL_GOOD
+static func parse_text_to_signals(input: String, do_logging: bool = true) -> Array[int]:
+	input = input.strip_edges().strip_escapes()
+	var out: Array[int] = []
+	var failed: Array[String] = []
 	var current_failure: String = ""
-	var halting_index: int = 0
-	var last_halting_index: int = -1
 	while input:
 		var cap: int = min(input.length(), MAX_NAME_LENGTH)
 		var cut_failure: bool = false
 		for i: int in range(cap):
-			var subsize: int = cap - i
-			var sub: String = input.left(subsize)
+			var idx: int = cap - i - 1
+			var sub: String = input.left(idx + 1)
 			if sub[0] == " ":
 				input = input.right(-1)
-				halting_index += 1
 				cut_failure = true
 				break
 			if sub[0] == "|":
 				var subsub: String = sub.right(-1)
-				if not subsub.is_empty() and subsub.is_valid_int():
-					result.output.append(subsub.to_int())
-					input = input.right(-subsize)
+				if subsub and subsub.is_valid_int():
+					out.append(subsub.to_int())
+					input = input.right(-idx - 1)
 					cut_failure = true
-					halting_index += subsize
 					break
-				if not subsub.is_empty():
-					continue
+				continue
 			var found: int = word_names.find(sub)
 			if found >= 0:
-				result.output.append(word_keys[found])
-				input = input.right(-subsize)
+				out.append(word_keys[found])
+				input = input.right(-idx - 1)
 				cut_failure = true
-				halting_index += subsize
 				break
 			if (sub[0].is_valid_int() and
 				sub.is_valid_int()
 			):
-				result.output.append(sub.to_int())
-				input = input.right(-subsize)
+				out.append(sub.to_int())
+				input = input.right(-idx - 1)
 				cut_failure = true
-				halting_index += subsize
 				break
-			if i == cap - 1:
+			if idx == 0:
+				if not do_logging:
+					return []
 				current_failure += input[0]
 				input = input.right(-1)
-				if last_halting_index == -1:
-					last_halting_index = halting_index
-				last_halting_index = min(halting_index, last_halting_index)
-				halting_index += 1
 		if (
 			not current_failure.is_empty() and
 			(cut_failure or current_failure.length() >= MAX_NAME_LENGTH)
 		):
-			result.failures.append(current_failure)
-			result.state = ParseResult.FailureState.UNKNOWN_STRING
-			result.stopping_indices.append(last_halting_index)
-			last_halting_index = -1
+			failed.append(current_failure)
 			current_failure = ""
-			if earlyReturn:
-				return result
-		if result.output.size() > Main.MAX_MESSAGE_LENGTH:
-			result.state = ParseResult.FailureState.TOO_LONG
-			return result
-	if not current_failure.is_empty():
-		result.failures.append(current_failure)
-		result.stopping_indices.append(last_halting_index)
-		result.state = ParseResult.FailureState.UNKNOWN_STRING
-	return result
-
-static func parse_text_to_signals(input: String, do_logging: bool = true) -> Array[int]:
-	var parsed: ParseResult = parse_text(input, not do_logging)
-	
-	if parsed.state == ParseResult.FailureState.ALL_GOOD:
-		return parsed.output
-	
-	if do_logging:
-		match parsed.state:
-			ParseResult.FailureState.TOO_LONG:
+		if out.size() > Main.MAX_MESSAGE_LENGTH:
+			if do_logging:
 				Chat.new_log(Chat.State.INPUT_TOO_LONG)
-			ParseResult.FailureState.UNKNOWN_STRING:
-				Chat.new_log(Chat.State.UNKNOWN_WORD, parsed.failures)
-		
-	return []
+			return []
+	if not current_failure.is_empty():
+		failed.append(current_failure)
+	if failed.size() > 0:
+		Chat.new_log(Chat.State.UNKNOWN_WORD, failed)
+		return []
+	return out
 
 static func contains_signal(sig: int) -> bool:
 	var idx: int = word_keys.find(sig)

@@ -21,20 +21,11 @@ func ready():
 	callsign_node.self_modulate = Main.get_callsign_color(sender)
 	tab_node.self_modulate = Main.get_callsign_color(sender)
 	identicon_node.num = sender
+	callsign_node.text = Main.base_10_to_callsign(sender)
 	has_image = image_node.check_image(message)
 	image_node.visible = has_image and SettingsHandler.image_default
 	image_button_node.button_pressed = image_node.visible
 	image_button_node.visible = has_image
-	if not has_image:
-		image_node.queue_free()
-		image_button_node.queue_free()
-	refresh_callsign()
-	Main.instance.reload_nicknames.connect(refresh_callsign)
-
-func refresh_callsign():
-	callsign_node.text = Main.base_10_to_callsign(sender)
-	if not NicknamesHandler.get_nick(sender).is_empty():
-		callsign_node.text += " \'" + NicknamesHandler.get_nick(sender) + "\'"
 
 func _physics_process(_delta):
 	if timeago_node.visible:

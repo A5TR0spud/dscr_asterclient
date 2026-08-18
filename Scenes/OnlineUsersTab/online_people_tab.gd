@@ -6,20 +6,14 @@ func _ready():
 
 var entry = preload("res://Scenes/OnlineUsersTab/callsign_entry.tscn")
 
-@onready var list_node: VBoxContainer = $ScrollContainer/Margins/List
+@onready var list_node: FlowContainer = $ScrollContainer/Margins/List
 @onready var header_node: Label = $Label
 
 func reload() -> void:
 	refresh()
-	var known_callsigns: Array[int] = []
-	for i: CallsignEntry in list_node.get_children():
-		if i.callsign not in Main.instance.connected_users:
-			i.queue_free()
-		else:
-			known_callsigns.append(i.callsign)
+	for i in list_node.get_children():
+		i.queue_free()
 	for i in Main.instance.connected_users:
-		if i in known_callsigns:
-			continue
 		var inst: CallsignEntry = entry.instantiate()
 		inst.callsign = i
 		list_node.add_child(inst)

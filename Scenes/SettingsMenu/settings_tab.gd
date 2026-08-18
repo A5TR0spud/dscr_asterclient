@@ -5,113 +5,36 @@ func _ready() -> void:
 
 @onready var formatting: SettingEntry = $ScrollContainer/MarginContainer/Options/Formatting
 @onready var image_visibility: SettingEntry = $ScrollContainer/MarginContainer/Options/ImageVis
-@onready var truncate: SpinBox = $ScrollContainer/MarginContainer/Options/TruncHbox/TruncationSpinner
-@onready var font_size: SpinBox = $ScrollContainer/MarginContainer/Options/FontHbox/FontSpinner
-@onready var address_edit: LineEdit = $ScrollContainer/MarginContainer/Options/Address/AdressEdit
-@onready var color_edit: SpinBox = $ScrollContainer/MarginContainer/Options/ThemeColor/ColorPicker
-@onready var color_sample: ColorRect = $ScrollContainer/MarginContainer/Options/ColorRect
-@onready var sound_slider: HScrollBar = $ScrollContainer/MarginContainer/Options/GlobalVolume/VolumeSlider
-@onready var sound_sample: AudioStreamPlayer = $AudioPreview
+@onready var truncate: SpinBox = $ScrollContainer/MarginContainer/Options/TruncMargin/TruncHbox/TruncationSpinner
+@onready var font_size: SpinBox = $ScrollContainer/MarginContainer/Options/FontMargin/FontHbox/FontSpinner
 
 func refresh() -> void:
-	formatting.set_state_no_signal(SettingsHandler.do_formatting)
-	image_visibility.set_state_no_signal(SettingsHandler.image_default)
-	truncate.set_value_no_signal(SettingsHandler.truncate_message_size)
-	font_size.set_value_no_signal(SettingsHandler.font_size)
-	color_edit.set_value_no_signal(SettingsHandler.theme_color)
-	sound_slider.set_value_no_signal(_volume_linear_to_slider())
-	_sample_color()
+	formatting.state = SettingsHandler.do_formatting
+	image_visibility.state = SettingsHandler.image_default
+	truncate.value = SettingsHandler.truncate_message_size
+	font_size.value = SettingsHandler.font_size
 
-func _volume_linear_to_slider(value: float = -1) -> float:
-	if value < 0:
-		value = SettingsHandler.master_volume
-	if value > 1:
-		value = (value - 1) * 2 + 1
-	value *= 0.5 * (sound_slider.max_value - sound_slider.page)
-	return value
-
-func _volume_slider_to_linear(value: float = -1) -> float:
-	if value < 0:
-		value = sound_slider.value
-	value /= sound_slider.max_value - sound_slider.page
-	value *= 2
-	if value > 1:
-		value = 1 + (value - 1) * 0.5
-	return value
-
-var queued_save: bool = false
-var queued_reload: bool = false
-
-func save(requires_reload: bool = true, spammy: bool = false) -> void:
-	if spammy:
-		queued_save = true
-		queued_reload = requires_reload or queued_reload
-		return
+func save() -> void:
 	SettingsHandler.save()
-	if requires_reload:
-		Main.on_settings_reload()
-	queued_reload = false
-	queued_save = false
-
-var count: int = 0
-func _physics_process(_delta):
-	if count >= 5:
-		if queued_save:
-			save(queued_reload)
-		count = -1
-	count += 1
+	Main.on_settings_reload()
 
 func _on_formatting_set(new_value):
 	SettingsHandler.do_formatting = new_value
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	save()
 
 func _on_image_vis_set(new_value):
 	SettingsHandler.image_default = new_value
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
-	save(false)
+	save()
 
-func _on_truncation_spinner_value_changed(value):
-	SettingsHandler.truncate_message_size = roundi(value)
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
-	save(true, true)
+var count: int = 0
+func _physics_process(_delta):
+	if count >= 5:
+		if SettingsHandler.truncate_message_size != roundi(truncate.value):
+			SettingsHandler.truncate_message_size = roundi(truncate.value)
+			save()
+		count = -1
+	count += 1
 
 func _on_font_spinner_value_changed(value):
 	SettingsHandler.font_size = value
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
-	save(true, true)
-
-func _try_address():
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
-	Main.reconnect_or_change_url(address_edit.text)
-
-func _on_adress_edit_text_submitted(_new_text):
-	_try_address()
-
-func _on_address_connect_pressed():
-	_try_address()
-
-func _sample_color(val: int = -1):
-	if val < 0 or val > 64:
-		val = roundi(color_edit.value)
-	color_sample.color = VisualizeNode.calculate_color(val)
-
-func _on_color_submit_button_pressed():
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
-	ThemeManager.set_theme_color(roundi(color_edit.value))
-
-func _on_color_cancel_button_pressed():
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
-	color_edit.value = SettingsHandler.theme_color
-	_sample_color()
-
-func _on_color_picker_value_changed(value):
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
-	_sample_color(value)
-
-func _on_volume_slider_value_changed(value):
-	SettingsHandler.master_volume = _volume_slider_to_linear(value)
-	SettingsHandler.evaluate_volume()
-	if not sound_sample.playing:
-		sound_sample.play()
-	save(false, true)
+	save()

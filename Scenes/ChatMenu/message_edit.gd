@@ -1,99 +1,69 @@
-extends TextEdit
+extends CodeEdit
 
-@onready var autocomplete_list: ItemList = $PanelContainer/ItemList
-@onready var auto_list_panel: PanelContainer = $PanelContainer
-#CodeEdit hates trying to autocomplete things without spaces, so use a nested one which contains only the word to try
-@onready var autocomplete_finder: CodeEdit = $AutocompleteFinder
+@onready var popup_node: PopupPanel = $PopupPanel
+@onready var autocomplete_list: ItemList = $PopupPanel/ItemList
 
-const DELIMITER_CHARACTER = "\u001f"
+func _input(event: InputEvent):
+	if event.is_action_pressed("ui_text_submit") and not event.is_action_pressed("ui_text_newline"):
+		if Main.instance.send_message(text):
+			text = ""
+	if event.is_action_pressed("ui_text_completion_accept"):
+		pass
 
 func _ready():
 	Main.instance.reload_dict.connect(refresh)
-	Main.instance.reload_settings.connect(_set_popup_size.call_deferred)
-	auto_list_panel.hide()
-	autocomplete_finder.hide()
+	popup_node.unfocusable = true
 
 func refresh():
 	placeholder_text = DictionaryHandler.signals_to_words([-43, -38])
 
-func submit_text() -> void:
-	var send_result: Array = Main.instance.send_message(text.remove_char(ord(DELIMITER_CHARACTER)))
-	if send_result[0]:
-		text = ""
-	match send_result[1]:
-		Main.MessageCompilationResult.MESSAGE_SENT:
-			SoundManager.play_sound(SoundManager.Sounds.MESSAGE_SENT)
-		Main.MessageCompilationResult.MESSAGE_FAILED:
-			SoundManager.play_sound(SoundManager.Sounds.FAIL)
-		Main.MessageCompilationResult.COMMAND_SENT:
-			SoundManager.play_sound(SoundManager.Sounds.COMMAND_ACCEPTED)
-		Main.MessageCompilationResult.SHOW_SENT:
-			SoundManager.play_sound(SoundManager.Sounds.OPEN_UI)
-		Main.MessageCompilationResult.HIDE_SENT:
-			SoundManager.play_sound(SoundManager.Sounds.CLOSE_UI)
-		Main.MessageCompilationResult.REDUNDANT:
-			SoundManager.play_sound(SoundManager.Sounds.REDUNDANT)
-
 func _request_code_completion(force: bool) -> void:
-	var word_under_caret: String = get_signal_under_caret()
+	var word_under_caret = get_signal_under_caret()
 	if word_under_caret.is_empty() and not force:
-		auto_list_panel.hide()
+		popup_node.hide()
 		return
-	
-	#print("CHECKING: ", word_under_caret)
 	
 	# TODO: make this better
 	# dont add every word?
 	# but only if it makes it lag
-	autocomplete_finder.text = word_under_caret
-	autocomplete_finder.set_caret_column(word_under_caret.length() + 1)
 	for word: String in (DictionaryHandler.word_names as Array[String]):
-		autocomplete_finder.add_code_completion_option(CodeEdit.KIND_PLAIN_TEXT, word, word)
-	autocomplete_finder.update_code_completion_options(true)
-
-	var options: Array[Dictionary] = autocomplete_finder.get_code_completion_options()
+		add_code_completion_option(CodeEdit.KIND_PLAIN_TEXT, word, word)
+	update_code_completion_options(true)
+	
+	var options: Array[Dictionary] = get_code_completion_options()
 	if options.is_empty():
+		popup_node.hide()
 		#print("NO OPTIONS FOR ", word_under_caret)
-		auto_list_panel.hide()
-		var bounds: Array = get_signal_bounds_under_caret()
-		var line: String = get_line(get_caret_line())
-		if bounds[1] < line.length():
-			if is_signal_separating_character(line[bounds[1]]):
-				return
-		if DictionaryHandler.word_names.has(word_under_caret):
-			#print("BUT IT IS VALID")
-			insert_text(DELIMITER_CHARACTER, get_caret_line(), bounds[1])
 		return
-	autocomplete_finder.cancel_code_completion()
+	cancel_code_completion()
 	
 	_show_custom_popup(options)
 
-func is_signal_separating_character(character: String) -> bool:
-	return (character == DELIMITER_CHARACTER) or (character in " \n\t\r")
-
-## gets signal under the caret
-## returns starting column and ending column as an array
-func get_signal_bounds_under_caret() -> Array:
+func get_signal_under_caret():
+	# go back until you hit a space
+	
+	# TODO: implement the following, but its too annoying
+	# if there is a signal there already
+	# like VAR_0 and the 0 isnt typed yet,
+	# ignore the signal
 	var line_text = get_line(get_caret_line())
 	var caret_col = get_caret_column()
-	if caret_col == 0:
-		return [0, 0]
-		
+	
+	var best = ""
 	var start = caret_col - 1
-	while start >= 0 and not is_signal_separating_character(line_text[start]):
+	while start >= 0 and line_text[start] != " ":
+		var potential_signal = line_text.substr(start, caret_col - start)
+		#print("pot",start, potential_signal)
+		#if potential_signal in DictionaryHandler.word_names:
+		#	start += potential_signal.length()
+		#	best = line_text.substr(start, caret_col - start)
+		#	
+		#	print("found signal ", potential_signal, " replaced ", best)
+		#	break
+		best = potential_signal
 		start -= 1
-	
-	var end = caret_col
-	while end < line_text.length() and not is_signal_separating_character(line_text[end]):
-		end += 1
-	
-	start += 1
-	return [start, end]
-
-func get_signal_under_caret() -> String:
-	var line_text = get_line(get_caret_line())
-	var bounds = get_signal_bounds_under_caret()
-	return line_text.substr(bounds[0], bounds[1] - bounds[0])
+	#print("'",best,"'")
+	return best
 
 func _show_custom_popup(options: Array[Dictionary]):
 	autocomplete_list.clear()
@@ -103,172 +73,85 @@ func _show_custom_popup(options: Array[Dictionary]):
 	
 	var word = get_signal_under_caret()
 	var caret_line = get_caret_line()
-	var caret_col = max(0, get_caret_column())
-	var word_start_col = max(0, caret_col - word.length() + 1)
+	var caret_col = get_caret_column()
+	var word_start_col = caret_col - word.length() + 1
 	
-	var caret_local: Vector2i = get_rect_at_line_column(caret_line, word_start_col).position
-	var caret_global: Vector2i = Vector2i(global_position) + caret_local
+	var caret_local: Vector2 = get_pos_at_line_column(caret_line, word_start_col)
+	var caret_global: Vector2 = global_position + caret_local
+	var line_h: float = get_line_height()
 	
-	auto_list_panel.position = caret_global
-	auto_list_panel.show()
-	_set_popup_size.call_deferred()
-
-func _set_popup_size():
-	if not auto_list_panel.visible:
-		return
-	# TODO: add option for max autocomplete entry amount
-	autocomplete_list.custom_maximum_size.y = autocomplete_list.get_item_rect(0).size.y * 8 - 1
-	autocomplete_list.reset_size()
-	auto_list_panel.reset_size()
+	var visible_items = min(options.size(), 8)
+	
+	# i hate this, but the separator height changes with font size.
+	# this was found through trial and error
+	var item_height: int = floori(1.2 * SettingsHandler.font_size + 0.6)
+	# "it just works"
+	#   - Todd Howard
+	
+	var popup_height = visible_items * item_height
+	var popup_width = 240
+	
+	popup_node.size = Vector2i(popup_width, popup_height)
+	
+	popup_node.position = Vector2i(
+			int(caret_global.x),
+			int(caret_global.y - popup_height - line_h)
+	)
+	
+	popup_node.popup()
 
 func _on_text_changed():
-	_request_code_completion(false)
-
-func _on_caret_changed():
+	var col := get_caret_column()
+	var lin := get_caret_line()
+	text = text.to_upper()
+	set_caret_column(col)
+	set_caret_line(lin)
 	_request_code_completion(false)
 
 func _confirm_selection(index: int) -> void:
-	var chosen: String = autocomplete_list.get_item_text(index)
-	var caret_line: int = get_caret_line()
-	var bounds = get_signal_bounds_under_caret()
-	
-	remove_text(caret_line, bounds[0], caret_line, bounds[1])
-	
-	# TODO: get the correct signal formatting here
-	var end_formatting = " "
-	insert_text_at_caret(chosen + DELIMITER_CHARACTER + end_formatting)
-	auto_list_panel.hide()
-	autocomplete_list.get_v_scroll_bar().value = 0
+	var chosen = autocomplete_list.get_item_text(index)
+	var word = get_signal_under_caret()
+	var caret_line = get_caret_line()
+	var caret_col = get_caret_column()
+	var start_col = caret_col - word.length()
 
-## find delimiter index near the caret, -1 if not found
-func find_delimiter_near(line: String, col: int) -> int:
-	if col > 0 and line[col - 1] == DELIMITER_CHARACTER:
-		return col - 1 # thing@|thing@
-	if col < line.length() and line[col] == DELIMITER_CHARACTER:
-		return col     # thing|@thing@
-	return -1
+	remove_text(caret_line, start_col, caret_line, caret_col)
+	set_caret_column(start_col)
+	
+	# this deliberately ignores preferred signal formatting
+	# because figuring out whatever signal comes before is 
+	# too annoying. for example:
+	# MOLECULE(1ATOM is clearly 4 signals
+	# but its hard to find for a computer
+	# especially since it needs to autocomplete whatever comes after!
+	# so i just add a space and ignore it.
+	insert_text_at_caret(chosen + " ")
+	popup_node.hide()
 
 func _gui_input(event: InputEvent) -> void:
-	# TODO: implement brace matching (handling), so that it can parse |-14 and |-15 if they are group symbols
-	if event.is_action_pressed("ui_text_newline"):
-		insert_text_at_caret("\n")
-		accept_event()
+	if not autocomplete_list.visible:
 		return
-	if event.is_action_pressed("ui_copy"):
-		var selected_text = get_selected_text().remove_char(ord(DELIMITER_CHARACTER))
-		DisplayServer.clipboard_set(selected_text)
-		accept_event()
-		return
-	if event.is_action_pressed("ui_cut"):
-		var selected_text = get_selected_text().remove_char(ord(DELIMITER_CHARACTER))
-		if selected_text != "":
-			DisplayServer.clipboard_set(selected_text)
-			delete_selection()
-			text_changed.emit()
-		accept_event()
-		return
-	if event.is_action_pressed("ui_paste"):
-		auto_list_panel.hide()
-		insert_text_at_caret(DisplayServer.clipboard_get().to_upper())
-		accept_event()
-		return
-	if auto_list_panel.visible:
+	
+	if event is InputEventKey and event.pressed:
 		var selected = autocomplete_list.get_selected_items()
 		var idx = selected[0] if not selected.is_empty() else 0
-		if event.is_action_pressed("ui_down"):
-			idx = min(idx + 1, autocomplete_list.item_count - 1)
-			autocomplete_list.select(idx)
-			accept_event()
-			autocomplete_list.get_v_scroll_bar().value += autocomplete_list.get_item_rect(idx).size.y
-			return
-		if event.is_action_pressed("ui_up"):
-			idx = max(idx - 1, 0)
-			autocomplete_list.select(idx)
-			accept_event()
-			autocomplete_list.get_v_scroll_bar().value -= autocomplete_list.get_item_rect(idx).size.y
-			return
-		if event.is_action_pressed("ui_accept"):
-			_confirm_selection(idx)
-			accept_event()
-			return
-		if event.is_action_pressed("ui_close_dialog"):
-			auto_list_panel.hide()
-			accept_event()
-			return
-	
-	# TODO: history implementation here
-	
-	if event.is_action_pressed("ui_text_submit"):
-		submit_text()
-		accept_event()
-		return
-	
-	if event is InputEventKey:
-		event = event as InputEventKey
-		
-		var line = get_caret_line()
-		var line_text = get_line(line)
-		var col = get_caret_column()
-		var no_selection = get_selected_text().is_empty()
-		
-		if event.is_action_pressed("ui_text_caret_right") and (no_selection or event.shift_pressed):
-			if col < line_text.length() and line_text[col] == DELIMITER_CHARACTER:
-				set_caret_column(min(col + 2, line_text.length()))
-				accept_event()
-				if no_selection and event.shift_pressed:
-					select(line, col, line, col + 2)
-				return
-		if event.is_action_pressed("ui_text_caret_left") and (no_selection or event.shift_pressed):
-			if col > 0 and line_text[col - 1] == DELIMITER_CHARACTER:
-				set_caret_column(max(col - 2, 0))
-				accept_event()
-				if no_selection and event.shift_pressed:
-					select(line, col, line, col - 2)
-				return
-		
-		if event.is_action_pressed("ui_text_backspace") and get_selected_text() == "":
-			var delimiter_index = find_delimiter_near(line_text, col)
-			if delimiter_index != -1 and delimiter_index > 0:
-				# erase delimiter character as well
-				var start = delimiter_index - 1
-				remove_text(line, start, line, delimiter_index + 1)
-				set_caret_column(start)
-				text_changed.emit()
-				accept_event()
-				return
-		if event.is_action_pressed("ui_text_delete") and get_selected_text() == "":
-			var delimiter_index = find_delimiter_near(line_text, col + 1)
-			if delimiter_index != -1 and delimiter_index > 0:
-				# erase delimiter character as well
-				var start = delimiter_index - 1
-				remove_text(line, start, line, delimiter_index + 1)
-				set_caret_column(start)
-				text_changed.emit()
-				accept_event()
-				return
-		# do not put ui_accept here! this is tab specific! ui_accept includes enter and space too
-		# removes the delimiter and brings up the autocomplete menu
-		# TODO:
-		# this is still not exactly what i want, it should remove the whitespace that comes before it too,
-		# so the caret points to the signal you wanted to edit
-		if event.keycode == KEY_TAB and not event.shift_pressed:
-			var delimiter_index = find_delimiter_near(line_text, col)
-			if delimiter_index != -1:
-				remove_text(line, delimiter_index, line, delimiter_index + 1)
-				set_caret_column(delimiter_index if col > delimiter_index else col)
-				text_changed.emit()
-			accept_event()
-			return
-			
-		if ord("a") <= event.unicode and event.unicode <= ord("z"):
-			if event.ctrl_pressed or event.meta_pressed or event.alt_pressed:
-				return
-			insert_text_at_caret(char(event.unicode).to_upper())
-			text_changed.emit()
-			accept_event()
-			return
 
-func _on_item_list_item_clicked(index, _at_position, mouse_button_index):
-	if mouse_button_index != MOUSE_BUTTON_LEFT:
-		return
-	_confirm_selection(index)
+		if popup_node.visible:
+			match event.keycode:
+				KEY_DOWN:
+					idx = min(idx + 1, autocomplete_list.item_count - 1)
+					autocomplete_list.select(idx)
+					accept_event()
+				KEY_UP:
+					idx = max(idx - 1, 0)
+					autocomplete_list.select(idx)
+					accept_event()
+				KEY_ENTER, KEY_KP_ENTER, KEY_TAB:
+					_confirm_selection(idx)
+					accept_event()
+				KEY_ESCAPE:
+					autocomplete_list.hide()
+					accept_event()
+		else:
+			pass
+			# TODO: history implementation here	
