@@ -1,5 +1,13 @@
 # Versions
 
+## 0.4.1
+
+### Changes
+
+* Autocomplete only applies when pressing TAB
+* Added 3 image control inversion settings, one for each slider
+* Inverted default image zoom in/out to match the slider
+
 ## Build 4: Autocomplete
 
 ### Additions

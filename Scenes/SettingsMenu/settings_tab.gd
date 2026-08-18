@@ -12,10 +12,17 @@ func _ready() -> void:
 @onready var color_sample: ColorRect = $ScrollContainer/MarginContainer/Options/ColorRect
 @onready var sound_slider: HScrollBar = $ScrollContainer/MarginContainer/Options/GlobalVolume/VolumeSlider
 @onready var sound_sample: AudioStreamPlayer = $AudioPreview
+@onready var invert_pitch: SettingEntry = $ScrollContainer/MarginContainer/Options/ImageMovement/VBoxContainer/InvertPitch
+@onready var invert_yaw: SettingEntry = $ScrollContainer/MarginContainer/Options/ImageMovement/VBoxContainer/InvertYaw
+@onready var invert_zoom: SettingEntry = $ScrollContainer/MarginContainer/Options/ImageMovement/VBoxContainer/InvertZoom
+
 
 func refresh() -> void:
 	formatting.set_state_no_signal(SettingsHandler.do_formatting)
 	image_visibility.set_state_no_signal(SettingsHandler.image_default)
+	invert_pitch.set_state_no_signal(SettingsHandler.img_invert_pitch)
+	invert_yaw.set_state_no_signal(SettingsHandler.img_invert_yaw)
+	invert_zoom.set_state_no_signal(SettingsHandler.img_invert_zoom)
 	truncate.set_value_no_signal(SettingsHandler.truncate_message_size)
 	font_size.set_value_no_signal(SettingsHandler.font_size)
 	color_edit.set_value_no_signal(SettingsHandler.theme_color)
@@ -115,3 +122,19 @@ func _on_volume_slider_value_changed(value):
 	if not sound_sample.playing:
 		sound_sample.play()
 	save(false, true)
+
+
+func _on_invert_pitch_set(new_value):
+	SettingsHandler.img_invert_pitch = new_value
+	Main.on_image_inversion_reload()
+	save(false, false)
+
+func _on_invert_yaw_set(new_value):
+	SettingsHandler.img_invert_yaw = new_value
+	Main.on_image_inversion_reload()
+	save(false, false)
+
+func _on_invert_zoom_set(new_value):
+	SettingsHandler.img_invert_zoom = new_value
+	Main.on_image_inversion_reload()
+	save(false, false)

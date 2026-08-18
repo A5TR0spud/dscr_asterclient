@@ -4,21 +4,22 @@ class_name SettingEntry
 @export var description: Array[int] = []
 @export var state: bool:
 	get:
-		return bool_button.is_on
+		return bool_button.button_pressed
 	set(value):
-		bool_button.is_on = value
+		bool_button.button_pressed = value
 
 @onready var description_label: Label = $Description
 @onready var equals_label: Label = $BoolOption/Equals
-@onready var bool_button: BoolButton = $BoolOption/BoolButton
+@onready var bool_button: Button = $BoolOption/BoolButton
 
 func set_state_no_signal(val: bool):
-	bool_button.set_pressed_no_signal(not val)
+	bool_button.set_pressed_no_signal(val)
 	bool_button.refresh()
 
 func _ready():
 	Main.instance.reload_dict.connect(refresh)
-	bool_button.is_on = state
+	bool_button.set_pressed_no_signal(state)
+	bool_button.refresh()
 	refresh()
 
 func refresh():

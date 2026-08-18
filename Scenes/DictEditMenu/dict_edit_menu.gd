@@ -16,7 +16,7 @@ func _enter_tree():
 @onready var before_label: OptionButton = $DictEditMainframe/BeforeAndAfterFormat/BeforeOption
 @onready var before_after_clear_label: Label = $DictEditMainframe/BeforeAndAfterFormat/FormatClarity
 @onready var after_label: OptionButton = $DictEditMainframe/BeforeAndAfterFormat/AfterOption
-@onready var break_button: BoolButton = $DictEditMainframe/BreakSentence/BreakOnDouble
+@onready var break_button: Button = $DictEditMainframe/BreakSentence/BreakOnDouble
 
 @onready var name_edit: LineEdit = $DictEditMainframe/SignalNameEdit/NameLineEdit
 @onready var desc_edit: TextEdit = $DictEditMainframe/NotesEdit
@@ -46,7 +46,7 @@ func save() -> void:
 		DictionaryHandler.desc_key: desc_edit.text,
 		DictionaryHandler.before_key: before_label.selected,
 		DictionaryHandler.after_key: after_label.selected,
-		DictionaryHandler.break_key: break_button.is_on
+		DictionaryHandler.break_key: break_button.button_pressed
 	})
 	SaveSystem.save_dict()
 	Main.on_dict_reload()
@@ -68,7 +68,7 @@ func reload() -> void:
 	desc_edit.text = desc[DictionaryHandler.desc_key]
 	before_label.select(int(desc[DictionaryHandler.before_key]))
 	after_label.select(int(desc[DictionaryHandler.after_key]))
-	break_button.is_on = desc[DictionaryHandler.break_key]
+	break_button.set_pressed_no_signal(desc[DictionaryHandler.break_key])
 
 func refresh():
 	reload()

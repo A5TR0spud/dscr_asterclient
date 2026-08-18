@@ -36,18 +36,53 @@ static var plot_scene := preload("res://Scenes/Images/plot_node.tscn")
 
 var _sphere_data: Array[Dictionary] = []
 
-func _on_zoom_slider_value_changed(value: float):
-	value /= zoom_slider.min_value
-	value = value + 1
+func _enter_tree():
+	Main.instance.reload_image_inversion.connect(_refresh_inversions)
+
+func _set_zoom(value: float) -> void:
+	if SettingsHandler.img_invert_zoom:
+		value *= -1
+	value += 1
 	cam.position.z = 2.5 * value * value + 10.5 * value + 3
 
-func _on_yaw_slider_value_changed(value: float):
-	value /= zoom_slider.min_value # TODO: figure out if this should divide by yaw slider min value
+func _set_yaw(value: float) -> void:
+	if SettingsHandler.img_invert_yaw:
+		value *= -1
 	cam_pivot.rotation_degrees.y = value * 360.0
 
-func _on_pitch_slider_value_changed(value: float):
-	value /= zoom_slider.min_value # TODO: same as above
+func _set_pitch(value: float) -> void:
+	if SettingsHandler.img_invert_pitch:
+		value *= -1
 	cam_pivot.rotation_degrees.x = -value * 70
+
+# untested but probably
+# Returns the value of a scrollbar mapped to the interval [-1, 1]
+#func _get_mapped_value(scroll: Range) -> float:
+#	var _min: float = scroll.min_value
+#	var _max: float = scroll.max_value - scroll.page
+#	var mid: float = 0.5 * (_min + _max)
+#	var v: float = (scroll.value - mid) / (_max - mid)
+#	return v
+
+func _refresh_inversions():
+	_set_zoom(zoom_slider.value / zoom_slider.min_value)
+	_set_pitch(pitch_slider.value / pitch_slider.min_value)
+	_set_yaw(yaw_slider.value / yaw_slider.min_value)
+
+func _on_zoom_slider_value_changed(value: float):
+	# dividing by min value gets the ratio between -1 and 1
+	# .ratio doesn't work in this case because it doesn't account for page size
+	# this formula is a simplification that is correct for the current min, max, and page values
+	value /= zoom_slider.min_value
+	_set_zoom(value)
+
+func _on_yaw_slider_value_changed(value: float):
+	value /= zoom_slider.min_value
+	_set_yaw(value)
+
+func _on_pitch_slider_value_changed(value: float):
+	value /= zoom_slider.min_value
+	_set_pitch(value)
 
 const IMAGE: int = -53
 const PLOT : int = -52

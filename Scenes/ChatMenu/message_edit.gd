@@ -199,6 +199,7 @@ func _gui_input(event: InputEvent) -> void:
 	# TODO: history implementation here
 	
 	if event.is_action_pressed("ui_text_submit"):
+		auto_list_panel.hide()
 		submit_text()
 		accept_event()
 		return

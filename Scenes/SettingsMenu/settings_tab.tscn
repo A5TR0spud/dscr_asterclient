@@ -201,6 +201,30 @@ message = Array[int]([-108])
 [node name="HSeparator5" type="HSeparator" parent="ScrollContainer/MarginContainer/Options" unique_id=1134833940]
 layout_mode = 2
 
+[node name="ImageMovement" type="FoldableContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=1922610066]
+layout_mode = 2
+script = ExtResource("1_1gwgo")
+message = Array[int]([-53, -39])
+property_name = &"title"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer/Options/ImageMovement" unique_id=93656462]
+layout_mode = 2
+
+[node name="InvertPitch" parent="ScrollContainer/MarginContainer/Options/ImageMovement/VBoxContainer" unique_id=540540814 instance=ExtResource("3_0yg8b")]
+layout_mode = 2
+description = Array[int]([-49, -92, -100, -87])
+
+[node name="InvertYaw" parent="ScrollContainer/MarginContainer/Options/ImageMovement/VBoxContainer" unique_id=2014048263 instance=ExtResource("3_0yg8b")]
+layout_mode = 2
+description = Array[int]([-51, -92, -100, -87])
+
+[node name="InvertZoom" parent="ScrollContainer/MarginContainer/Options/ImageMovement/VBoxContainer" unique_id=663214121 instance=ExtResource("3_0yg8b")]
+layout_mode = 2
+description = Array[int]([-50, -39, -100, -87])
+
+[node name="HSeparator6" type="HSeparator" parent="ScrollContainer/MarginContainer/Options" unique_id=455988048]
+layout_mode = 2
+
 [node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/MarginContainer/Options" unique_id=1987941446]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -240,3 +264,6 @@ hint_underlined = false
 [connection signal="pressed" from="ScrollContainer/MarginContainer/Options/ThemeColorSubmitElse/ColorSubmitButton" to="." method="_on_color_submit_button_pressed"]
 [connection signal="pressed" from="ScrollContainer/MarginContainer/Options/ThemeColorSubmitElse/ColorCancelButton" to="." method="_on_color_cancel_button_pressed"]
 [connection signal="value_changed" from="ScrollContainer/MarginContainer/Options/GlobalVolume/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="set" from="ScrollContainer/MarginContainer/Options/ImageMovement/VBoxContainer/InvertPitch" to="." method="_on_invert_pitch_set"]
+[connection signal="set" from="ScrollContainer/MarginContainer/Options/ImageMovement/VBoxContainer/InvertYaw" to="." method="_on_invert_yaw_set"]
+[connection signal="set" from="ScrollContainer/MarginContainer/Options/ImageMovement/VBoxContainer/InvertZoom" to="." method="_on_invert_zoom_set"]

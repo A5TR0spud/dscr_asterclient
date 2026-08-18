@@ -11,6 +11,9 @@ static var opened_channels: Array = []
 static var websocket_address: String = Main.DSCR_URL
 static var theme_color: int = 57
 static var master_volume: float = 1.0
+static var img_invert_yaw: bool = false
+static var img_invert_pitch: bool = false
+static var img_invert_zoom: bool = false
 
 static func initialize() -> void:
 	# Setting names kept in PascalCase to keep backwards compatibility
@@ -25,6 +28,9 @@ static func initialize() -> void:
 	theme_color = SaveSystem.settings.get_or_add("ThemeColor", theme_color)
 	master_volume = SaveSystem.settings.get_or_add("MasterVolume", master_volume)
 	evaluate_volume()
+	img_invert_pitch = SaveSystem.settings.get_or_add("img_invert_pitch", img_invert_pitch)
+	img_invert_yaw = SaveSystem.settings.get_or_add("img_invert_yaw", img_invert_yaw)
+	img_invert_zoom = SaveSystem.settings.get_or_add("img_invert_zoom", img_invert_zoom)
 
 static func evaluate_volume() -> void:
 	AudioServer.set_bus_volume_linear(
@@ -49,3 +55,6 @@ static func export() -> void:
 	SaveSystem.settings.set("WebsocketAddress", websocket_address)
 	SaveSystem.settings.set("ThemeColor", theme_color)
 	SaveSystem.settings.set("MasterVolume", master_volume)
+	SaveSystem.settings.set("img_invert_pitch", img_invert_pitch)
+	SaveSystem.settings.set("img_invert_zoom", img_invert_zoom)
+	SaveSystem.settings.set("img_invert_yaw", img_invert_yaw)

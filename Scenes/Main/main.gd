@@ -41,6 +41,9 @@ static func on_settings_reload() -> void:
 signal reload_nicknames
 static func on_nicknames_reload() -> void:
 	instance.reload_nicknames.emit()
+signal reload_image_inversion
+static func on_image_inversion_reload() -> void:
+	instance.reload_image_inversion.emit()
 
 signal connected_user_change
 
