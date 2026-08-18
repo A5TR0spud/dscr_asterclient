@@ -22,7 +22,7 @@
 * Potentially improved signal name editing
 * @ and $ are now blacklisted from signal names. This matches the game itself, so it shouldn't affect many people. I have plans for these symbols.
   * To be clear: signals with these characters in their names still work. New signals or name-changing no longer allows these characters.
-  * Signals with these in the name will stop working when macros are added.
+  * Signals with these in the name may stop being supported in the future.
 * Active users tab is more vertical
 * If no dictionary or an empty dictionary is loaded, the "open/load dictionary" button will throw a rave
 * Images can now be dragged to control the pitch/yaw sliders indirectly. Hovering over one and scrolling zooms.
