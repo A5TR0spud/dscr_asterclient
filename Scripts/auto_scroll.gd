@@ -1,4 +1,5 @@
 extends ScrollContainer
+class_name AutoScrollContainer
 
 var old_bottom: float = 0
 @export var tolerance: int = 25

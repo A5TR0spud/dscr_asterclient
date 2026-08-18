@@ -18,10 +18,12 @@ static var dict: Dictionary = {
 }
 
 static var settings: Dictionary = {}
+static var nicknames: Dictionary = {}
 
 const DICT_PATH : String = "user://DICTIONARY-1.save"
 const MACRO_PATH : String = "user://macro.json"
 const SETTINGS_PATH : String = "user://settings.json"
+const NICKNAMES_PATH : String = "user://nicknames.json"
 
 static func open_save_location() -> void:
 	OS.shell_show_in_file_manager(ProjectSettings.globalize_path(DICT_PATH))
@@ -62,6 +64,32 @@ static func open_save_location() -> void:
 static func load() -> void:
 	load_dict()
 	load_settings()
+	load_nicknames()
+
+static func save_nicknames() -> void:
+	var json_string := JSON.stringify(nicknames, "\t")
+	var file_access := FileAccess.open(NICKNAMES_PATH, FileAccess.WRITE)
+	if not file_access:
+		print("An error happened while saving data: ", FileAccess.get_open_error())
+		return
+
+	file_access.store_string(json_string)
+	file_access.close()
+
+static func load_nicknames() -> void:
+	if not FileAccess.file_exists(NICKNAMES_PATH):
+		save_nicknames()
+		return
+	var file_access := FileAccess.open(NICKNAMES_PATH, FileAccess.READ)
+	var json_string:= FileAccess.get_file_as_string(NICKNAMES_PATH)
+	file_access.close()
+	var json := JSON.new()
+	var error := json.parse(json_string)
+	if error:
+		print("JSON Parse Error: ", error)
+		return
+	nicknames = json.data
+	Main.on_nicknames_reload()
 
 static func save_settings() -> void:
 	SettingsHandler.export()
@@ -99,6 +127,7 @@ static func load_dict() -> void:
 		open_save_location()
 		var orig_json_string := FileAccess.get_file_as_string(DICT_PATH)
 		var tries: int = 0
+		DictionaryHandler.bad_dict = true
 		while (
 			(not FileAccess.file_exists(DICT_PATH)) or
 			orig_json_string == FileAccess.get_file_as_string(DICT_PATH)
@@ -119,7 +148,11 @@ static func load_dict() -> void:
 	dict = json.data
 	DictionaryHandler.initialize()
 	DictionaryHandler.sort_dictionary()
+	eval_bad_dict()
 	Main.on_dict_reload()
+
+static func eval_bad_dict() -> void:
+	DictionaryHandler.bad_dict = dict.is_empty() or DictionaryHandler.word_keys.is_empty() or DictionaryHandler.word_names.is_empty()
 
 static func save_dict() -> void:
 	DictionaryHandler.export()

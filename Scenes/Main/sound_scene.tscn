@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://bs6sllfdwwwmx"]
+
+[ext_resource type="Script" uid="uid://ck4u8ds6d6065" path="res://Scenes/Main/sound_scene.gd" id="1_pkawr"]
+[ext_resource type="AudioStream" uid="uid://b36ck1raxw5vh" path="res://Assets/Sounds/double_dial.ogg" id="1_sib8k"]
+[ext_resource type="AudioStream" uid="uid://q27rk7sfk50e" path="res://Assets/Sounds/dial.ogg" id="2_pkawr"]
+[ext_resource type="AudioStream" uid="uid://db3eo0jfl0qow" path="res://Assets/Sounds/close.ogg" id="3_etekg"]
+[ext_resource type="AudioStream" uid="uid://d372frnw84240" path="res://Assets/Sounds/acknowledge.ogg" id="4_5lc5d"]
+[ext_resource type="AudioStream" uid="uid://bkatec5ejvfsy" path="res://Assets/Sounds/open.ogg" id="5_f0xvj"]
+[ext_resource type="AudioStream" uid="uid://dokxqms87xtdo" path="res://Assets/Sounds/triple_dial.ogg" id="6_jfsv2"]
+
+[node name="SoundManager" type="Node" unique_id=467419252]
+script = ExtResource("1_pkawr")
+
+[node name="notification" type="AudioStreamPlayer" parent="." unique_id=1327540687]
+stream = ExtResource("2_pkawr")
+max_polyphony = 2
+
+[node name="click" type="AudioStreamPlayer" parent="." unique_id=648408352]
+stream = ExtResource("2_pkawr")
+volume_db = -15.0
+pitch_scale = 2.0
+max_polyphony = 2
+
+[node name="cancel_close" type="AudioStreamPlayer" parent="." unique_id=491395782]
+stream = ExtResource("3_etekg")
+
+[node name="open_ui" type="AudioStreamPlayer" parent="." unique_id=697278787]
+stream = ExtResource("5_f0xvj")
+
+[node name="fail_redundant" type="AudioStreamPlayer" parent="." unique_id=1345462948]
+stream = ExtResource("4_5lc5d")
+
+[node name="confirm_success" type="AudioStreamPlayer" parent="." unique_id=987292686]
+stream = ExtResource("1_sib8k")
+pitch_scale = 1.1
+
+[node name="message_send" type="AudioStreamPlayer" parent="." unique_id=489663487]
+stream = ExtResource("1_sib8k")
+pitch_scale = 1.25
+
+[node name="command_send" type="AudioStreamPlayer" parent="." unique_id=2025775238]
+stream = ExtResource("6_jfsv2")
+pitch_scale = 1.25

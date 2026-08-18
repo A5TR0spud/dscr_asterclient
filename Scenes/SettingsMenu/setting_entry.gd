@@ -12,6 +12,10 @@ class_name SettingEntry
 @onready var equals_label: Label = $BoolOption/Equals
 @onready var bool_button: BoolButton = $BoolOption/BoolButton
 
+func set_state_no_signal(val: bool):
+	bool_button.set_pressed_no_signal(not val)
+	bool_button.refresh()
+
 func _ready():
 	Main.instance.reload_dict.connect(refresh)
 	bool_button.is_on = state

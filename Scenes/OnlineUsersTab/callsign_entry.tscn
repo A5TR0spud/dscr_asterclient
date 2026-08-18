@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c8ye8ghrhpfng" path="res://Scenes/OnlineUsersTab/callsign_entry.gd" id="1_urwyp"]
 [ext_resource type="PackedScene" uid="uid://dc1vhk1wyejon" path="res://Scenes/Common/identicon.tscn" id="2_jurdb"]
+[ext_resource type="Script" uid="uid://dqce42c573ptg" path="res://Scripts/SimpleTranslatable.gd" id="3_urwyp"]
 
 [node name="CallsignEntry" type="PanelContainer" unique_id=1863336341]
 anchors_preset = 15
@@ -14,6 +15,7 @@ script = ExtResource("1_urwyp")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1787242212]
 layout_mode = 2
+theme_override_constants/separation = 8
 
 [node name="Identicon" parent="HBoxContainer" unique_id=1738948121 instance=ExtResource("2_jurdb")]
 layout_mode = 2
@@ -22,7 +24,20 @@ size_flags_vertical = 4
 num = null
 icon_size = null
 
-[node name="Label" type="Label" parent="HBoxContainer" unique_id=1407472134]
+[node name="Number" type="Label" parent="HBoxContainer" unique_id=1407472134]
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 0
 text = "1574"
+
+[node name="Nickname" type="LineEdit" parent="HBoxContainer" unique_id=836475461]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Bobert"
+alignment = 2
+max_length = 16
+script = ExtResource("3_urwyp")
+message = Array[int]([-111])
+property_name = &"placeholder_text"
+
+[connection signal="editing_toggled" from="HBoxContainer/Nickname" to="." method="_on_nickname_editing_toggled"]
+[connection signal="text_submitted" from="HBoxContainer/Nickname" to="." method="_on_nickname_text_submitted"]

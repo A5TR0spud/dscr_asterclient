@@ -13,11 +13,12 @@ const COMMAND_JOIN: int = -65534
 const COMMAND_LEAVE: int = -65533
 const SKELETON_KEY: int = -65536
 
+static var ten_most_recent_transmissions: Array[int] = [] as Array[int]
+
 func _enter_tree():
 	instance = self
-	call_deferred("_post_ready")
 
-func _post_ready():
+func _ready():
 	Main.instance.reload_settings.connect(open_loaded_channels)
 	open_loaded_channels()
 
@@ -72,33 +73,36 @@ static func new_transmission(packet: PackedStringArray) -> void:
 	var integer_message: Array[int] = []
 	for part in packet.slice(2):
 		integer_message.append(part.to_int())
-		
+	
 	var new_message: TransEntry = transmission_entry_scene.instantiate()
 	new_message.timestamp = Time.get_ticks_msec()
 	new_message.sender = packet[0].to_int()
 	new_message.trans = transmission_number
-	new_message.message = integer_message
+	
+	# avoid adding duplicate entries if transmission number has already been received recently
+	# this is for reconnecting, since the server sends/resends the 10 most recent messages
+	if transmission_number in ten_most_recent_transmissions:
+		return
+	ten_most_recent_transmissions.append(transmission_number)
+	if ten_most_recent_transmissions.size() > 10:
+		ten_most_recent_transmissions.remove_at(0)
 	
 	var channel_id = null
-	if (len(integer_message) > 2 and integer_message[0] == CHANNEL_SELECTOR):
+	if (len(integer_message) >= 2 and integer_message[0] == CHANNEL_SELECTOR):
 		channel_id = integer_message[1]
-		new_message.message = integer_message.slice(2)
-		print(integer_message.slice(2))
+		integer_message = integer_message.slice(2)
+		print(integer_message)
 	
+	new_message.message = integer_message
 	
-	var channel: Node = get_channel_node(channel_id)
-	var child_count: int = channel.get_child_count()
-	var idx: int = 0
-	var i: int = 0
-	# what the [pakala] is this‽‽‽
-	# i tried giving it better names, didnt help much
-	while idx < child_count and i <= 25:
-		var end = channel.get_child(-idx)
-		if end is TransEntry:
-			if end.trans == transmission_number:
-				return
-			i += 1
-		idx += 1
+	var channel: Control = get_channel_node(channel_id)
+	
+	if (
+		(new_message.sender != Main.instance.previously_accepted_callsign)
+		and (not channel.visible or not instance.get_window().has_focus())
+		and channel_is_visible(channel_id)
+	):
+		SoundManager.play_sound(SoundManager.Sounds.NOTIFICATION)
 	
 	channel.add_message_node(new_message)
 
@@ -111,10 +115,20 @@ enum State {
 	WILL_AUTO_RECONNECT_SOON,
 	UNKNOWN_WORD,
 	INPUT_TOO_LONG,
-	INPUT_TOO_SHORT,
+	INPUT_ENCRYPT_TOO_SHORT,
+	INPUT_COMMAND_LENGTH_INVALID,
 	INPUT_LENGTH_INVALID,
 	DUPLICATE_NAME,
 }
+
+static func channel_is_visible(id = null) -> bool:
+	if id == null:
+		return true
+	var has: bool = instance.channel_container.has_node(str(id))
+	if not has:
+		return false
+	var node = instance.channel_container.get_node(str(id))
+	return not (instance.channel_container as TabContainer).is_tab_hidden(node.get_index())
 
 ## gets channel node given an id.
 ## if an id is not provided, the default channel is used
@@ -122,36 +136,50 @@ enum State {
 static func get_channel_node(id = null) -> Node:
 	if id == null:
 		return instance.channel_container.get_child(0)
-	else:
-		if instance.channel_container.has_node(str(id)):
-			return instance.channel_container.get_node(str(id))
-		else:
-			var channel_node = chat_channel_scene.instantiate()
-			instance.channel_container.add_child(channel_node)
-			var tab_id = channel_node.get_index()
-			channel_node.set_channel_name(id)
-			
-			# TODO: add a setting to enable channels by default when a message is sent
-			(instance.channel_container as TabContainer).set_tab_hidden(tab_id, true)
-			
-			return channel_node
+	if instance.channel_container.has_node(str(id)):
+		return instance.channel_container.get_node(str(id))
+	var channel_node = chat_channel_scene.instantiate()
+	instance.channel_container.add_child(channel_node)
+	var tab_id = channel_node.get_index()
+	channel_node.set_channel_name(id)
+	
+	(instance.channel_container as TabContainer).set_tab_hidden(tab_id, not SettingsHandler.opened_channels.has(SKELETON_KEY))
+	
+	return channel_node
 
 static func get_current_channel_node() -> Node:
 	return instance.channel_container.get_child(instance.channel_container.current_tab)
 
 static func enable_channel(id: int):
+	var tabber: TabContainer = instance.channel_container as TabContainer
 	var tab_id = get_channel_node(id).get_index()
-	(instance.channel_container as TabContainer).set_tab_hidden(tab_id, false)
+	tabber.set_tab_hidden(tab_id, false)
 	if id not in SettingsHandler.opened_channels:
 		SettingsHandler.opened_channels.append(id)
 		SettingsHandler.save()
+	if id == SKELETON_KEY:
+		for tab_to_bone in range(tabber.get_tab_count()):
+			tabber.set_tab_hidden(tab_to_bone, false)
 
 static func disable_channel(id: int):
+	var tabber: TabContainer = instance.channel_container as TabContainer
 	var tab_id = get_channel_node(id).get_index()
-	(instance.channel_container as TabContainer).set_tab_hidden(tab_id, true)
+	tabber.set_tab_hidden(tab_id, true)
 	if id in SettingsHandler.opened_channels:
 		SettingsHandler.opened_channels.erase(id)
 		SettingsHandler.save()
+	if id == SKELETON_KEY:
+		for tab_to_bone in range(tabber.get_tab_count()):
+			var tab_to_check: Control = tabber.get_tab_control(tab_to_bone)
+			if tab_to_check is not ChatChannel:
+				continue
+			tab_to_check = tab_to_check as ChatChannel
+			var signal_key = tab_to_check.id
+			if signal_key is not int:
+				continue
+			signal_key = signal_key as int
+			if not SettingsHandler.opened_channels.has(signal_key):
+				tabber.set_tab_hidden(tab_to_bone, true)
 
 static func focus_channel(id: int):
 	get_channel_node(id).visible = true
@@ -165,25 +193,25 @@ static func new_log(state: State, args: Array = []) -> void:
 	var msg: Array = []
 	match state:
 		State.CONNECTING:
-			#COMPUTER DOES [ DSCR COMMUNICATE ] WANT DOST
-			msg = [-241, -86, -14, -247, -196, -15, -127, -85]
+			# CURRENT COMPUTER DOES [ COMPUTER 0 COMMUNICATE ] WANT DOST
+			msg = [-119, -241, -86, -14, -241, 0, -196, -15, -127, -85]
 		State.CONNECTED:
-			#GOOD ; COMPUTER DOES DSCR COMMUNICATE CAN DOST
-			msg = [-154, -2, -241, -86, -247, -196, -145, -85]
+			# GOOD ; CURRENT COMPUTER DOES COMPUTER 0 COMMUNICATE CAN DOST
+			msg = [-154, -2, -119, -241, -86, -241, 0, -196, -145, -85]
 		State.FAILED_TO_CONNECT:
-			#BAD ; COMPUTER DOES DSCR COMMUNICATE CAN NOT DOST
-			msg = [-155, -2, -241, -86, -247, -196, -145, -29, -85]
+			# BAD ; CURRENT COMPUTER DOES COMPUTER 0 COMMUNICATE CAN NOT DOST
+			msg = [-155, -2, -119, -241, -86, -241, 0, -196, -145, -29, -85]
 		State.DISCONNECTING:
-			#DSCR AND COMPUTER DOES [ COMMUNICATE ] WANT NOT MUTUAL DOST SMALL NEXT TIME WHEN
-			msg = [-247, -30, -241, -86, -14, -196, -15, -127, -29, -186, -85, -109, -120, -65, -121]
+			# CURRENT COMPUTER AND COMPUTER 0 DOES [ COMMUNICATE ] WANT NOT MUTUAL DOST SMALL NEXT TIME WHEN
+			msg = [-119, -241, -30, -241, 0, -86, -14, -196, -15, -127, -29, -186, -85, -109, -120, -65, -121]
 		State.DISCONNECTED:
-			#DSCR DOES COMPUTER COMMUNICATE NOT DOST
-			msg = [-247, -86, -241, -196, -29, -85]
+			# COMPUTER 0 DOES CURRENT COMPUTER COMMUNICATE NOT DOST
+			msg = [-241, 0, -86, -119, -241, -196, -29, -85]
 		State.WILL_AUTO_RECONNECT_SOON:
-			#COMPUTER DOES [ DSCR COMMUNICATE ] WANT DOST $x ASEC NEXT WHEN
-			msg = [-241, -86, -14, -247, -196, -15, -127, -85, int(args[0]), -69, -120, -121]
+			# CURRENT COMPUTER DOES [ COMPUTER 0 COMMUNICATE ] WANT DOST $x ASEC NEXT WHEN
+			msg = [-119, -241, -86, -14, -241, 0, -196, -15, -127, -85, int(args[0]), -69, -120, -121]
 		State.UNKNOWN_WORD:
-			#UNKNOWN SIGNAL IS [ %x, %x, %x, ETC ]
+			# UNKNOWN SIGNAL IS [ %s, %s, %s, etc ]
 			msg = [-124, -42, -100, -14]
 			for idx in range(args.size()):
 				if idx > 0:
@@ -191,20 +219,25 @@ static func new_log(state: State, args: Array = []) -> void:
 				msg.append(str(args[idx]))
 			msg.append(-15)
 		State.INPUT_TOO_LONG:
-			#COMPUTER DOES TRANSMISSION [ SIGNAL COUNT > 2000 ] COMMUNICATE CAN NOT DOST
+			# COMPUTER DOES TRANSMISSION [ SIGNAL COUNT > 2000 ] COMMUNICATE CAN NOT DOST
 			msg = [-241, -86, -43, -14, -42, -23, -32, Main.MAX_MESSAGE_LENGTH, -15, -196, -145, -29, -85]
-		State.INPUT_TOO_SHORT:
-			#COMPUTER DOES TRANSMISSION [ SIGNAL COUNT < 2 ] COMMUNICATE CAN NOT DOST
-			msg = [-241, -86, -43, -14, -42, -23, -33, 2, -15, -196, -145, -29, -85]
+		State.INPUT_ENCRYPT_TOO_SHORT:
+			# COMPUTER DOES TRANSMISSION [ arg AND SIGNAL COUNT < 3 ] COMMUNICATE CAN NOT DOST
+			msg = [-241, -86, -43, -14, args[0], -30, -42, -23, -33, 3, -15, -196, -145, -29, -85]
+		State.INPUT_COMMAND_LENGTH_INVALID:
+			# COMPUTER DOES TRANSMISSION [ arg AND SIGNAL COUNT = NOT 2 ] COMMUNICATE CAN NOT DOST
+			msg = [-241, -86, -43, -14, args[0], -30, -42, -23, -4, -29, 2, -15, -196, -145, -29, -85]
 		State.INPUT_LENGTH_INVALID:
 			# one arg -> must be equal
 			# two args -> range 
 			if len(args) == 1:
+				# COMPUTER DOES TRANSMISSION [ SIGNAL COUNT = NOT # ] COMMUNICATE CAN NOT DOST
 				msg = [-241, -86, -43, -14, -42, -23, -4, -29, int(args[0]), -15, -196, -145, -29, -85]
 		State.DUPLICATE_NAME:
-			#SIGNAL [ - #] AND SIGNAL [ - #] IS SYMMETRIC; "%s"
+			# SIGNAL [ - #] AND SIGNAL [ - #] IS SYMMETRIC; "%s"
 			msg = [-42, -14, -1, absi(int(args[0])), -15, -30, -42, -14, -1, absi(int(args[1])), -15, -100, -229, -2, args[2]]
 
 	new_message.message = msg
+	# arbitrary impossible sender for purposes of chat seperators
 	new_message.sender = -1574
 	get_current_channel_node().add_message_node(new_message)

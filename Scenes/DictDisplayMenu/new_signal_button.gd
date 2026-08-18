@@ -5,6 +5,7 @@ extends TranslatableSimple
 
 func _on_pressed() -> void:
 	_try_make(name_chooser.text)
+	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 
 func _on_sig_edit_text_submitted(new_text):
 	_try_make(new_text)

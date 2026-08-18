@@ -1,8 +1,11 @@
 [gd_scene format=3 uid="uid://bft3wuvruhqvw"]
 
 [ext_resource type="Script" uid="uid://1aqi7v8d5nf0" path="res://Scenes/Main/main.gd" id="1_6t3k2"]
+[ext_resource type="AudioStream" uid="uid://bvuts6f2essww" path="res://Assets/Sounds/boot_up.ogg" id="2_hfg1r"]
 [ext_resource type="Script" uid="uid://dqce42c573ptg" path="res://Scripts/SimpleTranslatable.gd" id="2_vk4q2"]
+[ext_resource type="AudioStream" uid="uid://bspyt735rxcbt" path="res://Assets/Sounds/shut_down.ogg" id="3_4e4y2"]
 [ext_resource type="PackedScene" uid="uid://bmqd6twlnn8dk" path="res://Scenes/ChatMenu/chat.tscn" id="3_imbg2"]
+[ext_resource type="PackedScene" uid="uid://bs6sllfdwwwmx" path="res://Scenes/Main/sound_scene.tscn" id="4_6t3k2"]
 [ext_resource type="Script" uid="uid://bft2883q6jmm7" path="res://Scenes/Main/sidebar_tabber.gd" id="6_es6iu"]
 [ext_resource type="PackedScene" uid="uid://tpn8p2apuh1t" path="res://Scenes/DictDisplayMenu/dictionary_tab.tscn" id="7_hfg1r"]
 [ext_resource type="PackedScene" uid="uid://bunet4g0aqi5h" path="res://Scenes/OnlineUsersTab/online_people_tab.tscn" id="8_hfg1r"]
@@ -34,6 +37,14 @@ wait_time = 19.361
 one_shot = true
 ignore_time_scale = true
 
+[node name="BootUp" type="AudioStreamPlayer" parent="." unique_id=927185845]
+stream = ExtResource("2_hfg1r")
+
+[node name="ShutDown" type="AudioStreamPlayer" parent="." unique_id=737853012]
+stream = ExtResource("3_4e4y2")
+
+[node name="SoundManager" parent="." unique_id=467419252 instance=ExtResource("4_6t3k2")]
+
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=71793566]
 layout_mode = 2
 
@@ -45,36 +56,15 @@ layout_mode = 2
 
 [node name="Title" type="Label" parent="MarginContainer/MainContainer/Header" unique_id=1283547797]
 layout_mode = 2
-size_flags_horizontal = 0
-text = "dscr client"
+size_flags_horizontal = 2
+text = "computer client"
 script = ExtResource("2_vk4q2")
-message = Array[int]([-247, -128])
-
-[node name="Address" type="HBoxContainer" parent="MarginContainer/MainContainer/Header" unique_id=1263877326]
-layout_mode = 2
-size_flags_horizontal = 6
-
-[node name="AddressLabel" type="Label" parent="MarginContainer/MainContainer/Header/Address" unique_id=1194611740]
-visible = false
-layout_mode = 2
-text = "websocket address MOVE THIS TO SETTINGS"
-script = ExtResource("2_vk4q2")
-message = Array[int]([-257, -41])
-
-[node name="AddressEdit" type="LineEdit" parent="MarginContainer/MainContainer/Header/Address" unique_id=334873355]
-visible = false
-layout_mode = 2
-size_flags_vertical = 4
-placeholder_text = "wss://dscr-relay.dixonary.co.uk"
-expand_to_text_length = true
-emoji_menu_enabled = false
-clear_button_enabled = true
-draw_control_chars = true
-select_all_on_focus = true
-caret_blink = true
+message = Array[int]([-241, -128])
 
 [node name="DsveButton" type="Button" parent="MarginContainer/MainContainer/Header" unique_id=408009820]
 layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
 mouse_default_cursor_shape = 2
 text = "visual editor"
 script = ExtResource("2_vk4q2")
@@ -129,7 +119,7 @@ layout_mode = 2
 text = "callsign"
 horizontal_alignment = 1
 script = ExtResource("2_vk4q2")
-message = Array[int]([-128, -260])
+message = Array[int]([-128, -42])
 
 [node name="CallsignEdit" parent="MarginContainer/MainContainer/Body/Sidebar/CallsignContainer" unique_id=965442127 instance=ExtResource("11_4a3kt")]
 layout_mode = 2
