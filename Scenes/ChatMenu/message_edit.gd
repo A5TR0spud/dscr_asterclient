@@ -187,7 +187,7 @@ func _gui_input(event: InputEvent) -> void:
 			accept_event()
 			autocomplete_list.get_v_scroll_bar().value -= autocomplete_list.get_item_rect(idx).size.y
 			return
-		if event.is_action_pressed("ui_accept"):
+		if event.is_action_pressed("autocomplete_accept"):
 			_confirm_selection(idx)
 			accept_event()
 			return
