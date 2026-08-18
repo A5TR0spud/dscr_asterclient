@@ -25,6 +25,9 @@ func ready():
 	image_node.visible = has_image and SettingsHandler.image_default
 	image_button_node.button_pressed = image_node.visible
 	image_button_node.visible = has_image
+	if not has_image:
+		image_node.queue_free()
+		image_button_node.queue_free()
 	refresh_callsign()
 	Main.instance.reload_nicknames.connect(refresh_callsign)
 
