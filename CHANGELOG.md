@@ -2,6 +2,11 @@
 
 ## --WIP--
 
+### Changes
+
+* Swapped autocomplete for a custom implementation that doesn't betray symbols such as "-"
+  * As a result, the order, quantity, and quality of results has changed
+
 ### Fixes
 
 * Fixed the join channel command playing the "redundant" sound if the channel is already shown temporarily via /key or /join skeleton_key
