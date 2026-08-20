@@ -19,6 +19,8 @@
 [ext_resource type="StyleBox" uid="uid://bcpf14e281kyl" path="res://Styling/Tabber/tab_unselected.tres" id="12_k7nka"]
 [ext_resource type="StyleBox" uid="uid://db3k5eiovgegq" path="res://Styling/Seps/v_sep.tres" id="15_k7nka"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gt42v"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pfqjd"]
 bg_color = Color(0.8758882, 0.8758883, 0.87588835, 1)
 corner_detail = 1
@@ -71,6 +73,8 @@ Button/styles/hover = ExtResource("1_pkgym")
 Button/styles/hover_pressed = ExtResource("1_nhcih")
 Button/styles/normal = ExtResource("2_2dlxw")
 Button/styles/pressed = ExtResource("3_08nyo")
+CodeEdit/colors/font_readonly_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
+CodeEdit/styles/read_only = SubResource("StyleBoxEmpty_gt42v")
 FoldableContainer/styles/focus = ExtResource("1_pkgym")
 FoldableContainer/styles/panel = ExtResource("1_tvtlr")
 FoldableContainer/styles/title_collapsed_hover_panel = ExtResource("1_pkgym")

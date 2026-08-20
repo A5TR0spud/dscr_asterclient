@@ -89,20 +89,14 @@ theme_override_styles/separator = SubResource("StyleBoxLine_i75l1")
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Message" type="RichTextLabel" parent="Body/Corpus" unique_id=698847018]
+[node name="Message" type="RichTextLabel" parent="Body/Corpus" unique_id=1518872245]
 layout_mode = 2
 size_flags_horizontal = 3
 localize_numeral_system = false
-focus_mode = 2
 mouse_filter = 1
-mouse_default_cursor_shape = 1
 text = "test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test "
 fit_content = true
-scroll_active = false
 autowrap_mode = 2
-meta_underlined = false
-hint_underlined = false
-selection_enabled = true
 
 [node name="ContextButtons" type="HBoxContainer" parent="Body/Corpus" unique_id=1473986858]
 layout_mode = 2

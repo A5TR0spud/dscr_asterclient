@@ -1,4 +1,5 @@
 extends Button
+class_name BoolButton
 
 func _ready():
 	Main.instance.reload_dict.connect(refresh)

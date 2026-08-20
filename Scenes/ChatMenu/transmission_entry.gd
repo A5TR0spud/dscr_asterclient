@@ -57,9 +57,9 @@ func _on_etc_button_toggled(_toggled_on):
 
 func transmit_pressed(id: int) -> void:
 	if id == 0:
-		copy()
+		copy_as_signals()
 
-func copy():
+func copy_as_signals():
 	var o: Array[String] = []
 	for i in message:
 		if i >= 0:

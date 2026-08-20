@@ -54,6 +54,9 @@ var trying_to_quit: bool = false
 
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		if trying_to_quit:
+			kill_process()
+			return
 		get_window().mode = Window.MODE_MINIMIZED
 		shut_down_sound.play()
 		if socket.get_ready_state() == WebSocketPeer.STATE_CLOSED:
@@ -75,7 +78,6 @@ func kill_process():
 func _ready():
 	SaveSystem.load()
 	trying_to_quit = false
-	get_tree().set_auto_accept_quit(false)
 	websocket_url = SettingsHandler.websocket_address
 	start_connect()
 	boot_sound.play()
@@ -185,7 +187,7 @@ func send_message(written: String) -> Array:
 			Chat.new_log(Chat.State.INPUT_COMMAND_LENGTH_INVALID, [Chat.COMMAND_JOIN, 2])
 			return [false, MessageCompilationResult.COMMAND_FAILED]
 		var res := MessageCompilationResult.REDUNDANT
-		if not Chat.channel_is_visible(sig[1]):
+		if not SettingsHandler.opened_channels.has(sig[1]):
 			res = MessageCompilationResult.SHOW_SENT
 		Chat.enable_channel(sig[1])
 		Chat.focus_channel(sig[1])

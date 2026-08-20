@@ -14,7 +14,27 @@ func _ready():
 func refresh():
 	placeholder_text = DictionaryHandler.signals_to_words(placeholder)
 
-func _gui_input(event):
+func _filter_paste() -> void:
+	var new_text: String = text
+	var column: int = caret_column
+	if capitalize:
+		new_text = new_text.to_upper()
+	for key in replace_list.keys():
+		new_text.replace_char(ord(key), ord(replace_list[key]))
+	if allow_list:
+		for idx in range(new_text.length() - 1, -1, -1):
+			if not deny_list.contains(new_text[idx]):
+				new_text = new_text.erase(idx)
+	else:
+		new_text = new_text.remove_chars(deny_list)
+	if new_text != text:
+		text = new_text
+		caret_column = column
+
+func _gui_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_paste"):
+		_filter_paste.call_deferred()
+		return
 	if event is InputEventKey and event.is_pressed():
 		event = event as InputEventKey
 		var uni: int = event.unicode

@@ -1,5 +1,13 @@
 # Versions
 
+## --WIP--
+
+### Fixes
+
+* Fixed the join channel command playing the "redundant" sound if the channel is already shown temporarily via /key or /join skeleton_key
+* Fixed being able to paste in disallowed characters to filtered line edits (dictionary edit, search signal & word)
+* Fixed "break on double" true/false not refreshing
+
 ## 0.4.1
 
 ### Changes

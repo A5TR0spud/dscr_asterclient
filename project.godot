@@ -14,6 +14,7 @@ config/name="DSCR Asterclient"
 config/version="0.4.1"
 config/tags=PackedStringArray("2d", "effort", "ui")
 run/main_scene="uid://bft3wuvruhqvw"
+config/auto_accept_quit=false
 config/features=PackedStringArray("4.7", "Forward Plus")
 boot_splash/bg_color=Color(0.07058824, 0, 0.10980392, 1)
 boot_splash/stretch_mode=0

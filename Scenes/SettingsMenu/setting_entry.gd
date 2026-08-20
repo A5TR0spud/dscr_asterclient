@@ -10,7 +10,7 @@ class_name SettingEntry
 
 @onready var description_label: Label = $Description
 @onready var equals_label: Label = $BoolOption/Equals
-@onready var bool_button: Button = $BoolOption/BoolButton
+@onready var bool_button: BoolButton = $BoolOption/BoolButton
 
 func set_state_no_signal(val: bool):
 	bool_button.set_pressed_no_signal(val)
