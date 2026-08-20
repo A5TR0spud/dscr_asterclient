@@ -1,11 +1,13 @@
 # Versions
 
-## --WIP--
+## 0.4.2
 
 ### Changes
 
 * Swapped autocomplete for a custom implementation that doesn't betray symbols such as "-"
   * As a result, the order, quantity, and quality of results has changed
+* Adjusted channel open/close and discard sound to be more distinct from the redundant sound
+* Reimplemented online user sorting
 
 ### Fixes
 

@@ -59,6 +59,7 @@ offset_transform_visual_only = false
 clip_contents = true
 layout_mode = 2
 theme_override_constants/margin_left = 4
+theme_override_constants/margin_bottom = 2
 
 [node name="ItemList" type="ItemList" parent="MessageEdit/PanelContainer/MarginContainer" unique_id=6191075]
 custom_minimum_size = Vector2(240, 0)

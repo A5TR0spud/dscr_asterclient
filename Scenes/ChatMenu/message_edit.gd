@@ -40,14 +40,15 @@ func _request_code_completion(force: bool) -> void:
 	if options.is_empty():
 		#print("NO OPTIONS FOR ", word_under_caret)
 		auto_list_panel.hide()
+		return
+	if options.size() == 1 and options[0] == word_under_caret:
+		auto_list_panel.hide()
 		var bounds: Array = get_signal_bounds_under_caret()
 		var line: String = get_line(get_caret_line())
 		if bounds[1] < line.length():
 			if is_signal_separating_character(line[bounds[1]]):
 				return
-		if DictionaryHandler.word_names.has(word_under_caret):
-			#print("BUT IT IS VALID")
-			insert_text(DELIMITER_CHARACTER, get_caret_line(), bounds[1])
+		insert_text(DELIMITER_CHARACTER, get_caret_line(), bounds[1])
 		return
 	
 	_show_custom_popup(options)

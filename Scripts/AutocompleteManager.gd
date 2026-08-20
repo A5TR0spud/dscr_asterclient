@@ -44,6 +44,7 @@ const _DL_SWP_COST: float = 1.6
 ## Damerau-Levenshtein Distance
 ## A is the base string and B is the target string
 ## Returns cost to convert a to b, by operating on a
+# Code harvested from wikipedia https://en.wikipedia.org/w/index.php?title=Damerau%E2%80%93Levenshtein_distance&oldid=1369217619#Optimal_string_alignment_distance
 static func _dl(a: String, b: String) -> float:
 	var d: Array[Array] = []
 	for i in range(a.length() + 1):
