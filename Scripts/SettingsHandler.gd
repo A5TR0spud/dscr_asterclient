@@ -6,8 +6,6 @@ static var truncate_message_size: int = 63
 static var preferred_callsign: int = -1
 static var font_size: int = 18
 static var image_default: bool = false
-static var signal_color: bool = false
-# godot does not have a Set datatype. lame!
 static var opened_channels: Array = []
 static var websocket_address: String = Main.DSCR_URL
 static var theme_color: int = 57
@@ -15,13 +13,13 @@ static var master_volume: float = 1.0
 static var img_invert_yaw: bool = false
 static var img_invert_pitch: bool = false
 static var img_invert_zoom: bool = false
+static var do_bbcode: bool = false
 
 static func initialize() -> void:
 	# Setting names kept in PascalCase to keep backwards compatibility
 	# also for some reason TMfDS uses PascalCase too. blegh.
 	do_formatting = SaveSystem.settings.get_or_add("DoFormatting", do_formatting)
 	image_default = SaveSystem.settings.get_or_add("ImageDefault", image_default)
-	signal_color = SaveSystem.settings.get_or_add("SignalColor", signal_color)
 	truncate_message_size = SaveSystem.settings.get_or_add("TruncateMessageSize", truncate_message_size)
 	preferred_callsign = SaveSystem.settings.get_or_add("PreferredCallsign", preferred_callsign)
 	font_size = SaveSystem.settings.get_or_add("FontSize", font_size)
@@ -33,6 +31,7 @@ static func initialize() -> void:
 	img_invert_pitch = SaveSystem.settings.get_or_add("img_invert_pitch", img_invert_pitch)
 	img_invert_yaw = SaveSystem.settings.get_or_add("img_invert_yaw", img_invert_yaw)
 	img_invert_zoom = SaveSystem.settings.get_or_add("img_invert_zoom", img_invert_zoom)
+	do_bbcode = SaveSystem.settings.get_or_add("do_bbcode", do_bbcode)
 
 static func evaluate_volume() -> void:
 	AudioServer.set_bus_volume_linear(
@@ -50,7 +49,6 @@ static func save() -> void:
 static func export() -> void:
 	SaveSystem.settings.set("DoFormatting", do_formatting)
 	SaveSystem.settings.set("ImageDefault", image_default)
-	SaveSystem.settings.set("SignalColor", signal_color)
 	SaveSystem.settings.set("TruncateMessageSize", truncate_message_size)
 	SaveSystem.settings.set("PreferredCallsign", preferred_callsign)
 	SaveSystem.settings.set("FontSize", font_size)
@@ -61,3 +59,4 @@ static func export() -> void:
 	SaveSystem.settings.set("img_invert_pitch", img_invert_pitch)
 	SaveSystem.settings.set("img_invert_zoom", img_invert_zoom)
 	SaveSystem.settings.set("img_invert_yaw", img_invert_yaw)
+	SaveSystem.settings.set("do_bbcode", do_bbcode)

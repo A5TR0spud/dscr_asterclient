@@ -5,7 +5,7 @@ func _ready() -> void:
 
 @onready var formatting: SettingEntry = $ScrollContainer/MarginContainer/Options/Formatting
 @onready var image_visibility: SettingEntry = $ScrollContainer/MarginContainer/Options/ImageVis
-@onready var signal_color: SettingEntry = $ScrollContainer/MarginContainer/Options/SignalColor
+@onready var do_bbcode: SettingEntry = $ScrollContainer/MarginContainer/Options/DoBBCode
 @onready var truncate: SpinBox = $ScrollContainer/MarginContainer/Options/TruncHbox/TruncationSpinner
 @onready var font_size: SpinBox = $ScrollContainer/MarginContainer/Options/FontHbox/FontSpinner
 @onready var address_edit: LineEdit = $ScrollContainer/MarginContainer/Options/Address/AdressEdit
@@ -21,7 +21,7 @@ func _ready() -> void:
 func refresh() -> void:
 	formatting.set_state_no_signal(SettingsHandler.do_formatting)
 	image_visibility.set_state_no_signal(SettingsHandler.image_default)
-	signal_color.set_state_no_signal(SettingsHandler.signal_color)
+	do_bbcode.set_state_no_signal(SettingsHandler.do_bbcode)
 	invert_pitch.set_state_no_signal(SettingsHandler.img_invert_pitch)
 	invert_yaw.set_state_no_signal(SettingsHandler.img_invert_yaw)
 	invert_zoom.set_state_no_signal(SettingsHandler.img_invert_zoom)
@@ -81,7 +81,7 @@ func _on_image_vis_set(new_value):
 	save(false)
 
 func _on_signal_color_set(new_value):
-	SettingsHandler.signal_color = new_value
+	SettingsHandler.do_bbcode = new_value
 	Main.on_dict_reload()
 	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	save(false)
@@ -131,18 +131,17 @@ func _on_volume_slider_value_changed(value):
 		sound_sample.play()
 	save(false, true)
 
-
 func _on_invert_pitch_set(new_value):
 	SettingsHandler.img_invert_pitch = new_value
 	Main.on_image_inversion_reload()
-	save(false, false)
+	save(false)
 
 func _on_invert_yaw_set(new_value):
 	SettingsHandler.img_invert_yaw = new_value
 	Main.on_image_inversion_reload()
-	save(false, false)
+	save(false)
 
 func _on_invert_zoom_set(new_value):
 	SettingsHandler.img_invert_zoom = new_value
 	Main.on_image_inversion_reload()
-	save(false, false)
+	save(false)

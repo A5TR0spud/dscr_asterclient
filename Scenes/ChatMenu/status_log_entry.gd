@@ -19,7 +19,7 @@ func refresh():
 func set_message_text(new_text: String):
 	message_node.text = new_text
 
-func supports_color() -> bool:
+func supports_bbcode() -> bool:
 	return false
 
 func _on_delete_button_pressed():

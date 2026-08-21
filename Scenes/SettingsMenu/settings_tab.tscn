@@ -70,7 +70,7 @@ description = Array[int]([-42, -190, -85, -100, -223])
 layout_mode = 2
 description = Array[int]([-53, -163, -85])
 
-[node name="SignalColor" parent="ScrollContainer/MarginContainer/Options" unique_id=1844422194 instance=ExtResource("3_0yg8b")]
+[node name="DoBBCode" parent="ScrollContainer/MarginContainer/Options" unique_id=1844422194 instance=ExtResource("3_0yg8b")]
 layout_mode = 2
 description = Array[int]([-42, -54, -163, -85])
 
@@ -264,7 +264,7 @@ hint_underlined = false
 [connection signal="pressed" from="ScrollContainer/MarginContainer/Options/Address/AddressConnect" to="." method="_on_address_connect_pressed"]
 [connection signal="set" from="ScrollContainer/MarginContainer/Options/Formatting" to="." method="_on_formatting_set"]
 [connection signal="set" from="ScrollContainer/MarginContainer/Options/ImageVis" to="." method="_on_image_vis_set"]
-[connection signal="set" from="ScrollContainer/MarginContainer/Options/SignalColor" to="." method="_on_signal_color_set"]
+[connection signal="set" from="ScrollContainer/MarginContainer/Options/DoBBCode" to="." method="_on_signal_color_set"]
 [connection signal="value_changed" from="ScrollContainer/MarginContainer/Options/TruncHbox/TruncationSpinner" to="." method="_on_truncation_spinner_value_changed"]
 [connection signal="value_changed" from="ScrollContainer/MarginContainer/Options/FontHbox/FontSpinner" to="." method="_on_font_spinner_value_changed"]
 [connection signal="value_changed" from="ScrollContainer/MarginContainer/Options/ThemeColor/ColorPicker" to="." method="_on_color_picker_value_changed"]

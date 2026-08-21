@@ -25,8 +25,10 @@ func _enter_tree():
 @onready var name_sentence: HBoxContainer = $DictEditMainframe/SignalNameEdit
 @onready var delete_button: Button = $DictEditMainframe/SubmitElseCancel/DeleteButton
 
-@onready var color_edit: SpinBox = $DictEditMainframe/ColorPicker/SpinBox
-@onready var color_sample: ColorRect = $DictEditMainframe/ColorPicker/ColorRect
+@onready var bbcode_options: Control = $DictEditMainframe/BBCodeOptions
+@onready var color_edit: SpinBox = $DictEditMainframe/BBCodeOptions/ColorPicker/SpinBox
+@onready var color_sample: ColorRect = $DictEditMainframe/BBCodeOptions/ColorPicker/ColorRect
+@onready var underline_edit: Button = $DictEditMainframe/BBCodeOptions/UnderlineSentence/DoUnderlineButton
 
 @onready var delete_confirm: bool = false
 @onready var delete_time_window: Timer = $DeleteConfirm
@@ -49,13 +51,17 @@ func save() -> void:
 		return
 	SoundManager.play_sound(SoundManager.Sounds.CONFIRMED)
 	name_label.text = DictionaryHandler.get_or_default_signal_name(current_signal)
-	DictionaryHandler.apply_signal_desc(current_signal, {
+	var desc: Dictionary = {
 		DictionaryHandler.desc_key: desc_edit.text,
 		DictionaryHandler.before_key: before_label.selected,
 		DictionaryHandler.after_key: after_label.selected,
 		DictionaryHandler.break_key: break_button.button_pressed
-	})
-	DictionaryHandler.apply_signal_color(current_signal, int(color_edit.value))
+	}
+	if int(color_edit.value) != DictionaryHandler.default_color:
+		desc.set(DictionaryHandler.color_key, int(color_edit.value))
+	if underline_edit.button_pressed != false:
+		desc.set(DictionaryHandler.underline_key, true)
+	DictionaryHandler.apply_signal_desc(current_signal, desc)
 	SaveSystem.save_dict()
 	Main.on_dict_reload()
 
@@ -65,6 +71,8 @@ func reload() -> void:
 	name_sentence.visible = current_signal != 0
 	desc_edit.visible = current_signal != 0
 	delete_button.visible = current_signal != 0
+	bbcode_options.visible = SettingsHandler.do_bbcode
+	underline_edit.visible = current_signal != 0
 	if current_signal == 0:
 		before_after_clear_label.text = DictionaryHandler.signals_to_words([-122, -124, -42, -122])
 		before_label.select(DictionaryHandler.default_before_mode)
@@ -72,7 +80,6 @@ func reload() -> void:
 		color_edit.value = DictionaryHandler.default_color
 		return
 	var desc: Dictionary = DictionaryHandler.get_or_default_signal_desc(current_signal)
-	var color_value: int = DictionaryHandler.get_or_default_signal_color(current_signal)
 	name_label.text = DictionaryHandler.signals_to_words([-42, -14, -1, absi(current_signal), -15, -4])
 	before_after_clear_label.text = DictionaryHandler.signals_to_words([-122, current_signal, -122])
 	name_edit.text = DictionaryHandler.get_or_default_signal_name(current_signal)
@@ -83,8 +90,12 @@ func reload() -> void:
 	break_button.refresh()
 	_set_delete_button_state(false)
 	delete_button.disabled = not DictionaryHandler.word_keys.has(current_signal)
+	var color_value: int = desc.get(DictionaryHandler.color_key, DictionaryHandler.default_color)
+	var underline_value: bool = desc.get(DictionaryHandler.underline_key, false)
 	color_edit.value = color_value
 	_sample_color(int(color_edit.value))
+	underline_edit.set_pressed_no_signal(underline_value)
+	underline_edit.refresh()
 	#delete_button.remove_theme_color_override("font_color")
 	#delete_button.remove_theme_color_override("font_hover_color")
 

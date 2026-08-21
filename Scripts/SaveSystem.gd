@@ -13,12 +13,6 @@ static var dict: Dictionary = {
 		"values": [
 		]
 	},
-	"colorDict": {
-		"keys": [
-		],
-		"values": [
-		]
-	},
 	"beforeUserDefaultMode": 1,
 	"afterUserDefaultMode": 1
 }

@@ -90,8 +90,8 @@ func copy_as_signals():
 			o.append("|" + str(i))
 	DisplayServer.clipboard_set(" ".join(o))
 
-func supports_color() -> bool:
-	return SettingsHandler.signal_color
+func supports_bbcode() -> bool:
+	return SettingsHandler.do_bbcode
 
 func _on_hover_change(hovering: bool) -> void:
 	calc_time()
