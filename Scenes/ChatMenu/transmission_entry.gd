@@ -62,10 +62,13 @@ func set_message_text(new_text: String):
 	# shouldn't happen normally and defining them will show the rest
 	# ergo a setting isn't warranted
 	var unknown_cap: int = 8
+	var unknowns: Array[int] = []
 	for sig in message:
 		if unknown_cap <= 0:
 			break
 		if sig >= 0:
+			continue
+		if unknowns.has(sig):
 			continue
 		if not DictionaryHandler.word_keys.has(sig):
 			var new_button: UnknownSignalButton = unknown_button.instantiate()
@@ -73,6 +76,7 @@ func set_message_text(new_text: String):
 			new_button.sig = sig
 			context_buttons.add_child(new_button)
 			unknown_cap -= 1
+			unknowns.append(sig)
 
 func _on_etc_button_toggled(_toggled_on):
 	collapsed = not _toggled_on

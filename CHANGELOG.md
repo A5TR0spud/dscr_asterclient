@@ -6,7 +6,7 @@
 
 * Deleting dictionary entries now prompts confirmation. Courtesy of [Eearslya](https://github.com/A5TR0spud/dscr_asterclient/commits?author=Eearslya) on Discord. Hell yeah
 * Added a setting to enable the following (Eearslya)
-  * Signals can now be colored! Courtesy of Eearslya
+  * Signals can now be colored! (Eearslya)
   * Signals can now be underlined
 * Added buttons to quickly define an unknown frequency when it's used in a transmission
 * Added setting to disable "@_UNDEF" (instead using pipes (|))
