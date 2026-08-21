@@ -5,6 +5,7 @@ func _ready() -> void:
 
 @onready var formatting: SettingEntry = $ScrollContainer/MarginContainer/Options/Formatting
 @onready var image_visibility: SettingEntry = $ScrollContainer/MarginContainer/Options/ImageVis
+@onready var do_bbcode: SettingEntry = $ScrollContainer/MarginContainer/Options/DoBBCode
 @onready var truncate: SpinBox = $ScrollContainer/MarginContainer/Options/TruncHbox/TruncationSpinner
 @onready var font_size: SpinBox = $ScrollContainer/MarginContainer/Options/FontHbox/FontSpinner
 @onready var address_edit: LineEdit = $ScrollContainer/MarginContainer/Options/Address/AdressEdit
@@ -20,6 +21,7 @@ func _ready() -> void:
 func refresh() -> void:
 	formatting.set_state_no_signal(SettingsHandler.do_formatting)
 	image_visibility.set_state_no_signal(SettingsHandler.image_default)
+	do_bbcode.set_state_no_signal(SettingsHandler.do_bbcode)
 	invert_pitch.set_state_no_signal(SettingsHandler.img_invert_pitch)
 	invert_yaw.set_state_no_signal(SettingsHandler.img_invert_yaw)
 	invert_zoom.set_state_no_signal(SettingsHandler.img_invert_zoom)
@@ -79,6 +81,12 @@ func _on_image_vis_set(new_value):
 	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	save(false)
 
+func _on_signal_color_set(new_value):
+	SettingsHandler.do_bbcode = new_value
+	Main.on_dict_reload()
+	SoundManager.play_sound(SoundManager.Sounds.CLICK)
+	save(false)
+
 func _on_truncation_spinner_value_changed(value):
 	SettingsHandler.truncate_message_size = roundi(value)
 	SoundManager.play_sound(SoundManager.Sounds.CLICK)
@@ -128,25 +136,25 @@ func _on_invert_pitch_set(new_value):
 	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	SettingsHandler.img_invert_pitch = new_value
 	Main.on_image_inversion_reload()
-	save(false, false)
+	save(false)
 
 func _on_invert_yaw_set(new_value):
 	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	SettingsHandler.img_invert_yaw = new_value
 	Main.on_image_inversion_reload()
-	save(false, false)
+	save(false)
 
 func _on_invert_zoom_set(new_value):
 	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	SettingsHandler.img_invert_zoom = new_value
 	Main.on_image_inversion_reload()
-	save(false, false)
+	save(false)
 
 func _on_undef_setting_set(new_value):
 	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	SettingsHandler.use_at_undef = new_value
 	Main.on_dict_reload()
-	save(false, false)
+	save(false)
 
 func _on_directory_button_pressed():
 	SaveSystem.open_directory_location()

@@ -6,7 +6,6 @@ static var truncate_message_size: int = 63
 static var preferred_callsign: int = -1
 static var font_size: int = 18
 static var image_default: bool = false
-# godot does not have a Set datatype. lame!
 static var opened_channels: Array = []
 static var websocket_address: String = Main.DSCR_URL
 static var theme_color: int = 57
@@ -14,6 +13,7 @@ static var master_volume: float = 1.0
 static var img_invert_yaw: bool = false
 static var img_invert_pitch: bool = false
 static var img_invert_zoom: bool = false
+static var do_bbcode: bool = false
 static var use_at_undef: bool = true
 
 static func initialize() -> void:
@@ -32,6 +32,7 @@ static func initialize() -> void:
 	img_invert_pitch = SaveSystem.settings.get_or_add("img_invert_pitch", img_invert_pitch)
 	img_invert_yaw = SaveSystem.settings.get_or_add("img_invert_yaw", img_invert_yaw)
 	img_invert_zoom = SaveSystem.settings.get_or_add("img_invert_zoom", img_invert_zoom)
+	do_bbcode = SaveSystem.settings.get_or_add("do_bbcode", do_bbcode)
 	use_at_undef = SaveSystem.settings.get_or_add("use_at_undef", use_at_undef)
 
 static func evaluate_volume() -> void:
@@ -60,4 +61,5 @@ static func export() -> void:
 	SaveSystem.settings.set("img_invert_pitch", img_invert_pitch)
 	SaveSystem.settings.set("img_invert_zoom", img_invert_zoom)
 	SaveSystem.settings.set("img_invert_yaw", img_invert_yaw)
+	SaveSystem.settings.set("do_bbcode", do_bbcode)
 	SaveSystem.settings.set("use_at_undef", use_at_undef)

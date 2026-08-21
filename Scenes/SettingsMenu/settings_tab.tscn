@@ -79,6 +79,10 @@ description = [-42, -190, -85, -100, -223]
 layout_mode = 2
 description = [-53, -163, -85]
 
+[node name="DoBBCode" parent="ScrollContainer/MarginContainer/Options" unique_id=1844422194 instance=ExtResource("3_0yg8b")]
+layout_mode = 2
+description = Array[int]([-42, -54, -163, -85])
+
 [node name="TruncHbox" type="HBoxContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=720322280]
 layout_mode = 2
 theme_override_constants/separation = 8
@@ -277,6 +281,7 @@ hint_underlined = false
 [connection signal="pressed" from="ScrollContainer/MarginContainer/Options/Address/AddressConnect" to="." method="_on_address_connect_pressed"]
 [connection signal="set" from="ScrollContainer/MarginContainer/Options/Formatting" to="." method="_on_formatting_set"]
 [connection signal="set" from="ScrollContainer/MarginContainer/Options/ImageVis" to="." method="_on_image_vis_set"]
+[connection signal="set" from="ScrollContainer/MarginContainer/Options/DoBBCode" to="." method="_on_signal_color_set"]
 [connection signal="value_changed" from="ScrollContainer/MarginContainer/Options/TruncHbox/TruncationSpinner" to="." method="_on_truncation_spinner_value_changed"]
 [connection signal="value_changed" from="ScrollContainer/MarginContainer/Options/FontHbox/FontSpinner" to="." method="_on_font_spinner_value_changed"]
 [connection signal="set" from="ScrollContainer/MarginContainer/Options/UndefSetting" to="." method="_on_undef_setting_set"]

@@ -64,19 +64,26 @@ static var word_names: Array:
 		word_dict.set("values", value)
 static var default_before_mode: int:
 	get:
-		return SaveSystem.dict.get_or_add("beforeUserDefaultMode", 1)
+		return SaveSystem.dict.get_or_add("beforeUserDefaultMode", int(1))
 	set(value):
-		SaveSystem.dict.set("beforeUserDefaultMode", value)
+		SaveSystem.dict.set("beforeUserDefaultMode", int(value))
 static var default_after_mode: int:
 	get:
-		return SaveSystem.dict.get_or_add("afterUserDefaultMode", 1)
+		return SaveSystem.dict.get_or_add("afterUserDefaultMode", int(1))
 	set(value):
-		SaveSystem.dict.set("afterUserDefaultMode", value)
+		SaveSystem.dict.set("afterUserDefaultMode", int(value))
+static var default_color: int:
+	get:
+		return SaveSystem.dict.get_or_add("defaultColor", int(64))
+	set(value):
+		SaveSystem.dict.set("defaultColor", int(value))
 
 const desc_key: String = "desc"
 const before_key: String = "formatMode"
 const after_key: String = "formatModeAfter"
 const break_key: String = "breakOnDouble"
+const color_key: String = "color"
+const underline_key: String = "underline"
 
 static func initialize() -> void:
 	word_keys = word_dict.get_or_add("keys", []).map(func(v): return int(v)) as Array[int]
@@ -312,13 +319,15 @@ static func get_or_default_signal_desc(sig: int) -> Dictionary:
 		tmp[desc_key] = "??? ADD NOTES HERE ???"
 	if not tmp.has(before_key):
 		tmp[before_key] = default_before_mode
+	tmp[before_key] = int(tmp[before_key])
 	if not tmp.has(after_key):
 		tmp[after_key] = default_after_mode
+	tmp[after_key] = int(tmp[after_key])
 	if not tmp.has(break_key):
 		tmp[break_key] = false
 	return desc_values[idx]
 
-static func signals_to_words(input: Array, format: bool = false) -> String:
+static func signals_to_words(input: Array, format: bool = false, do_bbcode: bool = false) -> String:
 	var o: String = ""
 	for i in input.size():
 		if input[i] is String:
@@ -333,6 +342,10 @@ static func signals_to_words(input: Array, format: bool = false) -> String:
 			continue
 		var name: String = get_or_default_signal_name(sig)
 		var desc: Dictionary = get_or_default_signal_desc(sig)
+		var color_value: int = desc.get(color_key, default_color)
+		var underline: bool = desc.get(underline_key, false)
+		# Don't bother adding a bunch of color tags for every normal colored word
+		var colorize_signal: bool = do_bbcode && color_value != 64
 		var format_mode: int = desc[before_key]
 		var format_mode_after: int = desc[after_key]
 		var break_double: bool = desc[break_key]
@@ -349,7 +362,18 @@ static func signals_to_words(input: Array, format: bool = false) -> String:
 				o += "\n\n"
 		if not format and i > 0 and o.right(1) != " ":
 			o += " "
+		if underline and do_bbcode:
+			o += "[u]"
+		if colorize_signal:
+			var color: Color = VisualizeNode.calculate_color(color_value)
+			o += "[color=#" + color.to_html(false) + "]"
+			# Avoid formatting issues if users put [ in their signal names
+			name = name.replace("[", "[lb]")
 		o += name
+		if colorize_signal:
+			o += "[/color]"
+		if do_bbcode and underline:
+			o += "[/u]"
 		if not format and i < input.size() - 1:
 			var next = input[i + 1]
 			if next is int and next >= 0:
@@ -377,5 +401,5 @@ static func forget_signal(sig: int) -> void:
 		desc_keys.remove_at(idx)
 		if idx < desc_values.size():
 			desc_values.remove_at(idx)
-	
+
 	Main.on_dict_reload()

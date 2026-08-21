@@ -121,6 +121,7 @@ static func load_settings() -> void:
 	settings = json.data
 	SettingsHandler.initialize()
 	Main.on_settings_reload()
+	Main.on_dict_reload()
 
 # TMFDS DICT.save structure:
 #{

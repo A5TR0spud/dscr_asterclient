@@ -4,11 +4,11 @@ class_name DictEntry
 var sig: int = 0
 
 @onready var signal_label: Label = $Entry/Signal
-@onready var meaning_label: Label = $Entry/Meaning
+@onready var meaning_label: RichTextLabel = $Entry/Meaning
 
 func _ready():
 	signal_label.text = String.num_int64(sig)
-	meaning_label.text = DictionaryHandler.get_or_default_signal_name(sig)
+	meaning_label.text = DictionaryHandler.signals_to_words([sig], false, SettingsHandler.do_bbcode)
 
 func _gui_input(event: InputEvent):
 	if event is InputEventMouse:
