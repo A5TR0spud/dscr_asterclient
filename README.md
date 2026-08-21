@@ -2,6 +2,8 @@ An alternative interface for [DSCR](https://dscr.dixonary.co.uk/).
 Chatters run on the assumption the user has completed [TMfDS](https://store.steampowered.com/app/4080030/The_Message_from_Deep_Space/).
 The UI also runs on the same assumption.
 
+[Downloads](https://github.com/A5TR0spud/dscr_asterclient/releases/latest)
+
 ### Supported DSCR Features
 
 * Send and receive messages with a choosable callsign
