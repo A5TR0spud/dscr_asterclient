@@ -101,7 +101,7 @@ fit_content = true
 autowrap_mode = 2
 selection_enabled = true
 
-[node name="ContextButtons" type="HBoxContainer" parent="Body/Corpus" unique_id=1473986858]
+[node name="ContextButtons" type="HFlowContainer" parent="Body/Corpus" unique_id=1127365251]
 layout_mode = 2
 
 [node name="ImageButton" type="Button" parent="Body/Corpus/ContextButtons" unique_id=1869377505]

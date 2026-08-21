@@ -75,6 +75,7 @@ func reload() -> void:
 	break_button.set_pressed_no_signal(desc[DictionaryHandler.break_key])
 	break_button.refresh()
 	_set_delete_button_state(false)
+	delete_button.disabled = not DictionaryHandler.word_keys.has(current_signal)
 	#delete_button.remove_theme_color_override("font_color")
 	#delete_button.remove_theme_color_override("font_hover_color")
 
@@ -101,6 +102,16 @@ func _input(event):
 	if event.is_action_pressed("ui_close_dialog"):
 		close()
 		accept_event()
+
+static func is_open() -> bool:
+	return instance.visible
+
+static func open(sig: int = 0, repeat_to_close: bool = false) -> void:
+	if instance.current_signal == sig and repeat_to_close and is_open():
+		close()
+		return
+	instance.current_signal = sig
+	instance.show()
 
 static func close():
 	instance._set_delete_button_state(false)

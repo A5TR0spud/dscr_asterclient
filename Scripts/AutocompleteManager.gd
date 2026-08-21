@@ -5,6 +5,8 @@ class_name AutocompleteManager
 static func get_candidates(written: String) -> Array[String]:
 	if written.is_valid_int():
 		return []
+	if written.length() > DictionaryHandler.MAX_NAME_LENGTH + 2:
+		return []
 	var strings: Array[String] = []
 	var costs: Array[float] = []
 	for sig in DictionaryHandler.word_names:

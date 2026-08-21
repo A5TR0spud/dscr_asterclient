@@ -16,6 +16,10 @@ var trans: int = 0
 @onready var image_button_node: Button = $Body/Corpus/ContextButtons/ImageButton
 var has_image: bool = false
 
+@onready var context_buttons: HFlowContainer = $Body/Corpus/ContextButtons
+
+var unknown_button = preload("res://Scenes/Common/unknown_signal_button.tscn")
+
 func ready():
 	transmission_node.get_popup().id_pressed.connect(transmit_pressed)
 	callsign_node.self_modulate = Main.get_callsign_color(sender)
@@ -51,6 +55,24 @@ func refresh():
 
 func set_message_text(new_text: String):
 	message_node.text = new_text
+	for but in context_buttons.get_children():
+		if but is UnknownSignalButton:
+			but.queue_free()
+	# failsafe cap of 8 unknown signals just in case
+	# shouldn't happen normally and defining them will show the rest
+	# ergo a setting isn't warranted
+	var unknown_cap: int = 8
+	for sig in message:
+		if unknown_cap <= 0:
+			break
+		if sig >= 0:
+			continue
+		if not DictionaryHandler.word_keys.has(sig):
+			var new_button: UnknownSignalButton = unknown_button.instantiate()
+			new_button.text = DictionaryHandler.get_or_default_signal_name(sig)
+			new_button.sig = sig
+			context_buttons.add_child(new_button)
+			unknown_cap -= 1
 
 func _on_etc_button_toggled(_toggled_on):
 	collapsed = not _toggled_on

@@ -15,8 +15,4 @@ func _gui_input(event: InputEvent):
 		event = event as InputEventMouse
 		if event.button_mask != MouseButton.MOUSE_BUTTON_LEFT or not event.is_pressed():
 			return
-		if DictEditMenu.instance.current_signal == sig:
-			DictEditMenu.instance.visible = not DictEditMenu.instance.visible
-			return
-		DictEditMenu.instance.current_signal = sig
-		DictEditMenu.instance.show()
+		DictEditMenu.open(sig, true)

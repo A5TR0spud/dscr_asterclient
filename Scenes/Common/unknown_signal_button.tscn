@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://b88uuwq81j702"]
+
+[ext_resource type="Script" uid="uid://dy2rfe2nijgbc" path="res://Scenes/Common/unknown_signal_button.gd" id="1_jlrvu"]
+
+[node name="ButtonPreset" type="Button" unique_id=325004607]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+alignment = 0
+script = ExtResource("1_jlrvu")
