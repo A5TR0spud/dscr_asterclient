@@ -155,7 +155,9 @@ static func apply_signal_desc(sig: int, desc: Dictionary) -> void:
 static func get_or_default_signal_name(sig: int) -> String:
 	var idx: int = word_keys.find(sig)
 	if idx == -1 or word_names.size() <= idx:
-		return "@"+String.num_int64(sig)+"_UNDEF"
+		if SettingsHandler.use_at_undef:
+			return "@"+String.num_int64(sig)+"_UNDEF"
+		return "|"+String.num_int64(sig)
 	return word_names[idx]
 
 static func filter_name_input(input: String) -> String:

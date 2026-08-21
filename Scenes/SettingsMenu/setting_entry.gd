@@ -1,11 +1,15 @@
 extends VBoxContainer
 class_name SettingEntry
 
-@export var description: Array[int] = []
+@export var description: Array = []
 @export var state: bool:
 	get:
+		if bool_button == null:
+			return false
 		return bool_button.button_pressed
 	set(value):
+		if bool_button == null:
+			return
 		bool_button.button_pressed = value
 
 @onready var description_label: Label = $Description
@@ -23,7 +27,7 @@ func _ready():
 	refresh()
 
 func refresh():
-	var o: Array[int] = description.duplicate()
+	var o: Array = description.duplicate()
 	o.insert(0, -26)
 	o.insert(1, -14)
 	o.append(-15)

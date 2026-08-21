@@ -6,6 +6,13 @@
 
 * Deleting dictionary entries now prompts confirmation. Courtesy of [Eearslya](https://github.com/A5TR0spud/dscr_asterclient/commits?author=Eearslya) on Discord. Hell yeah
 * Added buttons to quickly define an unknown frequency when it's used in a transmission
+* Added setting to disabled "@_UNDEF" (instead using pipes (|))
+
+### Fixes
+
+* Reloading settings no longer deselects the current channel
+
+* Changing
 
 ## 0.4.2
 
