@@ -249,7 +249,9 @@ TODO:
 - make pressing MAKES ELSE SENSE create the dictionary entry instead of only bringing up the menu, or else make that a setting
 - hover over translated words to get the signal
 - hover over negative numbers to get the translation
-- implement message history so you can use arrow keys to access your previous transmissions"
+- implement message history so you can use arrow keys to access your previous transmissions
+- drag and drop dictionary
+- change save directory setting"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
