@@ -26,6 +26,7 @@ func _enter_tree():
 @onready var delete_button: Button = $DictEditMainframe/SubmitElseCancel/DeleteButton
 
 @onready var delete_confirm: bool = false
+@onready var delete_time_window: Timer = $DeleteConfirm
 
 func _ready():
 	Main.instance.reload_dict.connect(refresh)
@@ -73,9 +74,9 @@ func reload() -> void:
 	after_label.select(int(desc[DictionaryHandler.after_key]))
 	break_button.set_pressed_no_signal(desc[DictionaryHandler.break_key])
 	break_button.refresh()
-	delete_button.text = DictionaryHandler.signals_to_words([-42, -88, -85])
-	delete_button.remove_theme_color_override("font_color")
-	delete_button.remove_theme_color_override("font_hover_color")
+	_set_delete_button_state(false)
+	#delete_button.remove_theme_color_override("font_color")
+	#delete_button.remove_theme_color_override("font_hover_color")
 
 func refresh():
 	reload()
@@ -112,6 +113,19 @@ func _on_cancel_button_pressed():
 func _on_close_button_pressed():
 	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	hide()
+	_set_delete_button_state(false)
+
+func _set_delete_button_state(confirmation = null) -> void:
+	if confirmation is bool:
+		delete_confirm = confirmation
+	if delete_confirm:
+		delete_button.text = DictionaryHandler.signals_to_words([-42, -88, -85])
+		delete_button.self_modulate = Color(1, .4, .475)
+		delete_time_window.start()
+	else:
+		delete_button.text = DictionaryHandler.signals_to_words([-88, -127, -85])
+		delete_button.self_modulate = Color(1., 1., 1.)
+		delete_time_window.stop()
 
 func _on_delete_button_pressed():
 	if delete_confirm:
@@ -122,10 +136,10 @@ func _on_delete_button_pressed():
 		hide()
 	else:
 		SoundManager.play_sound(SoundManager.Sounds.COMMAND_ACCEPTED)
-		delete_confirm = true
-		delete_button.text = DictionaryHandler.signals_to_words([-88, -107, -127])
-		delete_button.add_theme_color_override("font_color", Color.INDIAN_RED)
-		delete_button.add_theme_color_override("font_hover_color", Color.INDIAN_RED)
+		_set_delete_button_state(true)
 
 func _on_name_line_edit_text_submitted(_new_text):
 	save()
+
+func _on_delete_confirm_timeout():
+	_set_delete_button_state(false)
