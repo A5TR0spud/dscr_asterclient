@@ -66,6 +66,9 @@ static func load_directory() -> void:
 static func open_save_location() -> void:
 	OS.shell_show_in_file_manager(dict_path)
 
+static func open_directory_location() -> void:
+	OS.shell_show_in_file_manager(ProjectSettings.globalize_path(DIRECTORY_PATH))
+
 static func save_nicknames() -> void:
 	var json_string := JSON.stringify(nicknames, "\t")
 	var file_access := FileAccess.open(nicknames_path, FileAccess.WRITE)

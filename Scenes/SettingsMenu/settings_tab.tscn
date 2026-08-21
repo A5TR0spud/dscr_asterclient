@@ -46,6 +46,15 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="DirectoryButton" type="Button" parent="ScrollContainer/MarginContainer/Options" unique_id=901871438]
+layout_mode = 2
+text = "open directory"
+script = ExtResource("1_1gwgo")
+message = Array[int]([-40])
+
+[node name="HSeparator8" type="HSeparator" parent="ScrollContainer/MarginContainer/Options" unique_id=1000904488]
+layout_mode = 2
+
 [node name="Address" type="VBoxContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=1602527487]
 layout_mode = 2
 
@@ -263,6 +272,7 @@ shortcut_keys_enabled = false
 meta_underlined = false
 hint_underlined = false
 
+[connection signal="pressed" from="ScrollContainer/MarginContainer/Options/DirectoryButton" to="." method="_on_directory_button_pressed"]
 [connection signal="text_submitted" from="ScrollContainer/MarginContainer/Options/Address/AdressEdit" to="." method="_on_adress_edit_text_submitted"]
 [connection signal="pressed" from="ScrollContainer/MarginContainer/Options/Address/AddressConnect" to="." method="_on_address_connect_pressed"]
 [connection signal="set" from="ScrollContainer/MarginContainer/Options/Formatting" to="." method="_on_formatting_set"]

@@ -5,11 +5,11 @@ class_name SettingEntry
 @export var state: bool:
 	get:
 		if bool_button == null:
-			await ready
+			return false
 		return bool_button.button_pressed
 	set(value):
 		if bool_button == null:
-			await ready
+			return
 		bool_button.button_pressed = value
 
 @onready var description_label: Label = $Description

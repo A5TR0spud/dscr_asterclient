@@ -147,3 +147,6 @@ func _on_undef_setting_set(new_value):
 	SettingsHandler.use_at_undef = new_value
 	Main.on_dict_reload()
 	save(false, false)
+
+func _on_directory_button_pressed():
+	SaveSystem.open_directory_location()
