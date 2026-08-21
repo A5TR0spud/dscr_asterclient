@@ -137,6 +137,10 @@ static func close():
 	instance._set_delete_button_state(false)
 	instance.hide()
 
+static func select_signal_name():
+	instance.name_edit.grab_focus()
+	instance.name_edit.select_all()
+
 func _on_submit_button_pressed():
 	save()
 	#hide()
