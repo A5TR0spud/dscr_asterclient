@@ -120,9 +120,9 @@ layout_mode = 2
 
 [node name="UnderlineLabel" type="Label" parent="DictEditMainframe/BBCodeOptions/UnderlineSentence" unique_id=1832529931]
 layout_mode = 2
-text = "bool [small z line] ="
+text = "bool [ signal line [ all y ] ] ="
 script = ExtResource("2_icn0b")
-message = Array[int]([-26, -14, -109, -51, -17, -15, -4])
+message = Array[int]([-26, -14, -42, -17, -14, -110, -50, -15, -15, -4])
 
 [node name="DoUnderlineButton" parent="DictEditMainframe/BBCodeOptions/UnderlineSentence" unique_id=1625235116 instance=ExtResource("3_si2t6")]
 layout_mode = 2
