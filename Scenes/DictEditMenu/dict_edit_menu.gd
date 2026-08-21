@@ -25,6 +25,8 @@ func _enter_tree():
 @onready var name_sentence: HBoxContainer = $DictEditMainframe/SignalNameEdit
 @onready var delete_button: Button = $DictEditMainframe/SubmitElseCancel/DeleteButton
 
+@onready var delete_confirm: bool = false
+
 func _ready():
 	Main.instance.reload_dict.connect(refresh)
 	hide()
@@ -52,6 +54,7 @@ func save() -> void:
 	Main.on_dict_reload()
 
 func reload() -> void:
+	delete_confirm = false
 	break_sentence.visible = current_signal != 0
 	name_sentence.visible = current_signal != 0
 	desc_edit.visible = current_signal != 0
@@ -70,6 +73,9 @@ func reload() -> void:
 	after_label.select(int(desc[DictionaryHandler.after_key]))
 	break_button.set_pressed_no_signal(desc[DictionaryHandler.break_key])
 	break_button.refresh()
+	delete_button.text = DictionaryHandler.signals_to_words([-42, -88, -85])
+	delete_button.remove_theme_color_override("font_color")
+	delete_button.remove_theme_color_override("font_hover_color")
 
 func refresh():
 	reload()
@@ -108,11 +114,18 @@ func _on_close_button_pressed():
 	hide()
 
 func _on_delete_button_pressed():
-	SoundManager.play_sound(SoundManager.Sounds.DISCARD)
-	DictionaryHandler.forget_signal(current_signal)
-	Main.on_dict_reload()
-	SaveSystem.save_dict()
-	hide()
+	if delete_confirm:
+		SoundManager.play_sound(SoundManager.Sounds.DISCARD)
+		DictionaryHandler.forget_signal(current_signal)
+		Main.on_dict_reload()
+		SaveSystem.save_dict()
+		hide()
+	else:
+		SoundManager.play_sound(SoundManager.Sounds.COMMAND_ACCEPTED)
+		delete_confirm = true
+		delete_button.text = DictionaryHandler.signals_to_words([-88, -107, -127])
+		delete_button.add_theme_color_override("font_color", Color.INDIAN_RED)
+		delete_button.add_theme_color_override("font_hover_color", Color.INDIAN_RED)
 
 func _on_name_line_edit_text_submitted(_new_text):
 	save()

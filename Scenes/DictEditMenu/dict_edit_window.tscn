@@ -131,8 +131,6 @@ message = Array[int]([-174, -29, -85])
 layout_mode = 2
 size_flags_horizontal = 3
 text = "delete"
-script = ExtResource("2_icn0b")
-message = Array[int]([-42, -88, -85])
 
 [node name="CloseButton" type="Button" parent="DictEditMainframe/SubmitElseCancel" unique_id=1956457673]
 layout_mode = 2
