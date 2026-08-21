@@ -50,6 +50,13 @@ static var word_dict: Dictionary:
 	})
 	set(value):
 		SaveSystem.dict.set("wordDict", value)
+static var color_dict: Dictionary:
+	get:
+		return SaveSystem.dict.get_or_add("colorDict", {
+		"keys": [], "values": []
+	})
+	set(value):
+		SaveSystem.dict.set("colorDict", value)
 static var desc_keys: Array
 static var desc_values: Array:
 	get:
@@ -62,6 +69,12 @@ static var word_names: Array:
 		return word_dict.get_or_add("values", []) as Array[String]
 	set(value):
 		word_dict.set("values", value)
+static var color_keys: Array
+static var color_values: Array:
+	get:
+		return color_dict.get_or_add("values", []) as Array[int]
+	set(value):
+		color_dict.set("values", value)
 static var default_before_mode: int:
 	get:
 		return SaveSystem.dict.get_or_add("beforeUserDefaultMode", 1)
@@ -72,6 +85,11 @@ static var default_after_mode: int:
 		return SaveSystem.dict.get_or_add("afterUserDefaultMode", 1)
 	set(value):
 		SaveSystem.dict.set("afterUserDefaultMode", value)
+static var default_color: int:
+	get:
+		return SaveSystem.dict.get_or_add("defaultColor", 64)
+	set(value):
+		SaveSystem.dict.set("defaultColor", value)
 
 const desc_key: String = "desc"
 const before_key: String = "formatMode"
@@ -81,10 +99,12 @@ const break_key: String = "breakOnDouble"
 static func initialize() -> void:
 	word_keys = word_dict.get_or_add("keys", []).map(func(v): return int(v)) as Array[int]
 	desc_keys = desc_dict.get_or_add("keys", []).map(func(v): return int(v)) as Array[int]
+	color_keys = color_dict.get_or_add("keys", []).map(func(v): return int(v)) as Array[int]
 
 static func export() -> void:
 	word_dict.set("keys", word_keys)
 	desc_dict.set("keys", desc_keys)
+	color_dict.set("keys", color_keys)
 
 # Hell is real
 static func sort_dictionary() -> void:
@@ -94,6 +114,9 @@ static func sort_dictionary() -> void:
 	tmp = key_sort(desc_keys, desc_values)
 	desc_keys = (tmp[0] as Array[int])
 	desc_values = (tmp[1] as Array[Dictionary])
+	tmp = key_sort(color_keys, color_values)
+	color_keys = (tmp[0] as Array[int])
+	color_values = (tmp[1] as Array[int])
 
 static func key_sort(keys: Array, vals: Array) -> Array:
 	var size: int = keys.size()
@@ -146,11 +169,27 @@ static func apply_signal_desc(sig: int, desc: Dictionary) -> void:
 	desc_values.insert(idx, desc)
 	return
 
+static func apply_signal_color(sig: int, color: int) -> void:
+	sig = -absi(sig)
+	var idx = color_keys.find(sig)
+	if idx >= 0:
+		color_values[idx] = color
+		return
+	idx = color_keys.bsearch_custom(sig, func(a, b): return a > b)
+	color_keys.insert(idx, sig)
+	color_values.insert(idx, color)
+
 static func get_or_default_signal_name(sig: int) -> String:
 	var idx: int = word_keys.find(sig)
 	if idx == -1 or word_names.size() <= idx:
 		return "@"+String.num_int64(sig)+"_UNDEF"
 	return word_names[idx]
+
+static func get_or_default_signal_color(sig: int) -> int:
+	var idx: int = color_keys.find(sig)
+	if idx == -1 or color_values.size() <= idx:
+		return default_color
+	return color_values[idx]
 
 static func filter_name_input(input: String) -> String:
 	input = input.replace_char(ord(" "), ord("_")).remove_chars("|@$")
@@ -317,7 +356,7 @@ static func get_or_default_signal_desc(sig: int) -> Dictionary:
 		tmp[break_key] = false
 	return desc_values[idx]
 
-static func signals_to_words(input: Array, format: bool = false) -> String:
+static func signals_to_words(input: Array, format: bool = false, colorize: bool = false) -> String:
 	var o: String = ""
 	for i in input.size():
 		if input[i] is String:
@@ -332,6 +371,9 @@ static func signals_to_words(input: Array, format: bool = false) -> String:
 			continue
 		var name: String = get_or_default_signal_name(sig)
 		var desc: Dictionary = get_or_default_signal_desc(sig)
+		var color_value: int = get_or_default_signal_color(sig)
+		# Don't bother adding a bunch of color tags for every normal colored word
+		var colorize_signal: bool = colorize && color_value != 64
 		var format_mode: int = desc[before_key]
 		var format_mode_after: int = desc[after_key]
 		var break_double: bool = desc[break_key]
@@ -348,7 +390,13 @@ static func signals_to_words(input: Array, format: bool = false) -> String:
 				o += "\n\n"
 		if not format and i > 0 and o.right(1) != " ":
 			o += " "
-		o += name
+		if colorize_signal:
+			var color: Color = VisualizeNode.calculate_color(color_value)
+			o += "[color=#" + color.to_html(false) + "]"
+		# Avoid formatting issues if users put [ in their signal names
+		o += name.replace("[", "[lb]")
+		if colorize_signal:
+			o += "[/color]"
 		if not format and i < input.size() - 1:
 			var next = input[i + 1]
 			if next is int and next >= 0:
@@ -377,4 +425,10 @@ static func forget_signal(sig: int) -> void:
 		if idx < desc_values.size():
 			desc_values.remove_at(idx)
 	
+	idx = color_keys.find(sig)
+	if idx >= 0:
+		color_keys.remove_at(idx)
+		if idx < color_values.size():
+			color_values.remove_at(idx)
+
 	Main.on_dict_reload()

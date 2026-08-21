@@ -25,6 +25,9 @@ func _enter_tree():
 @onready var name_sentence: HBoxContainer = $DictEditMainframe/SignalNameEdit
 @onready var delete_button: Button = $DictEditMainframe/SubmitElseCancel/DeleteButton
 
+@onready var color_edit: SpinBox = $DictEditMainframe/ColorPicker/SpinBox
+@onready var color_sample: ColorRect = $DictEditMainframe/ColorPicker/ColorRect
+
 @onready var delete_confirm: bool = false
 @onready var delete_time_window: Timer = $DeleteConfirm
 
@@ -36,6 +39,7 @@ func save() -> void:
 	if current_signal == 0:
 		DictionaryHandler.default_before_mode = before_label.selected
 		DictionaryHandler.default_after_mode = after_label.selected
+		DictionaryHandler.default_color = int(color_edit.value)
 		SoundManager.play_sound(SoundManager.Sounds.CONFIRMED)
 		SaveSystem.save_dict()
 		Main.on_dict_reload()
@@ -51,6 +55,7 @@ func save() -> void:
 		DictionaryHandler.after_key: after_label.selected,
 		DictionaryHandler.break_key: break_button.button_pressed
 	})
+	DictionaryHandler.apply_signal_color(current_signal, int(color_edit.value))
 	SaveSystem.save_dict()
 	Main.on_dict_reload()
 
@@ -64,8 +69,10 @@ func reload() -> void:
 		before_after_clear_label.text = DictionaryHandler.signals_to_words([-122, -124, -42, -122])
 		before_label.select(DictionaryHandler.default_before_mode)
 		after_label.select(DictionaryHandler.default_after_mode)
+		color_edit.value = DictionaryHandler.default_color
 		return
 	var desc: Dictionary = DictionaryHandler.get_or_default_signal_desc(current_signal)
+	var color_value: int = DictionaryHandler.get_or_default_signal_color(current_signal)
 	name_label.text = DictionaryHandler.signals_to_words([-42, -14, -1, absi(current_signal), -15, -4])
 	before_after_clear_label.text = DictionaryHandler.signals_to_words([-122, current_signal, -122])
 	name_edit.text = DictionaryHandler.get_or_default_signal_name(current_signal)
@@ -76,6 +83,8 @@ func reload() -> void:
 	break_button.refresh()
 	_set_delete_button_state(false)
 	delete_button.disabled = not DictionaryHandler.word_keys.has(current_signal)
+	color_edit.value = color_value
+	_sample_color(int(color_edit.value))
 	#delete_button.remove_theme_color_override("font_color")
 	#delete_button.remove_theme_color_override("font_hover_color")
 
@@ -157,3 +166,12 @@ func _on_name_line_edit_text_submitted(_new_text):
 
 func _on_delete_confirm_timeout():
 	_set_delete_button_state(false)
+
+func _sample_color(val: int = -1):
+	if val < 0 or val > 64:
+		val = roundi(color_edit.value)
+	color_sample.color = VisualizeNode.calculate_color(val)
+
+func _on_color_picker_value_changed(value):
+	SoundManager.play_sound(SoundManager.Sounds.CLICK)
+	_sample_color(value)

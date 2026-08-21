@@ -43,12 +43,13 @@ func _evaluate_corpus():
 		to_show = to_show.slice(0, SettingsHandler.truncate_message_size)
 		to_show.append(-25)
 	set_message_text(
-		DictionaryHandler.signals_to_words(to_show, SettingsHandler.do_formatting)
+		DictionaryHandler.signals_to_words(to_show, SettingsHandler.do_formatting, supports_color())
 	)
 
 @abstract func ready()
 ## Called when dictionary is reloaded
 @abstract func refresh()
 @abstract func set_message_text(new_text: String)
+@abstract func supports_color()
 signal hover_change(hovering: bool)
 signal set_etc_visibility(visibility: bool)

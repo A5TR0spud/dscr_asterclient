@@ -6,6 +6,7 @@ static var truncate_message_size: int = 63
 static var preferred_callsign: int = -1
 static var font_size: int = 18
 static var image_default: bool = false
+static var signal_color: bool = false
 # godot does not have a Set datatype. lame!
 static var opened_channels: Array = []
 static var websocket_address: String = Main.DSCR_URL
@@ -20,6 +21,7 @@ static func initialize() -> void:
 	# also for some reason TMfDS uses PascalCase too. blegh.
 	do_formatting = SaveSystem.settings.get_or_add("DoFormatting", do_formatting)
 	image_default = SaveSystem.settings.get_or_add("ImageDefault", image_default)
+	signal_color = SaveSystem.settings.get_or_add("SignalColor", signal_color)
 	truncate_message_size = SaveSystem.settings.get_or_add("TruncateMessageSize", truncate_message_size)
 	preferred_callsign = SaveSystem.settings.get_or_add("PreferredCallsign", preferred_callsign)
 	font_size = SaveSystem.settings.get_or_add("FontSize", font_size)
@@ -48,6 +50,7 @@ static func save() -> void:
 static func export() -> void:
 	SaveSystem.settings.set("DoFormatting", do_formatting)
 	SaveSystem.settings.set("ImageDefault", image_default)
+	SaveSystem.settings.set("SignalColor", signal_color)
 	SaveSystem.settings.set("TruncateMessageSize", truncate_message_size)
 	SaveSystem.settings.set("PreferredCallsign", preferred_callsign)
 	SaveSystem.settings.set("FontSize", font_size)

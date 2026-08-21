@@ -13,6 +13,12 @@ static var dict: Dictionary = {
 		"values": [
 		]
 	},
+	"colorDict": {
+		"keys": [
+		],
+		"values": [
+		]
+	},
 	"beforeUserDefaultMode": 1,
 	"afterUserDefaultMode": 1
 }
@@ -118,6 +124,7 @@ static func load_settings() -> void:
 	settings = json.data
 	SettingsHandler.initialize()
 	Main.on_settings_reload()
+	Main.on_dict_reload()
 
 # TMFDS DICT.save structure:
 #{
