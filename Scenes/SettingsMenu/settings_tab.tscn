@@ -233,7 +233,6 @@ text = "the todo list will be removed at some point
 TODO:
 - add transmission bookmark option and browse menu
 - change placement of copy button (find a visible spot that doesn't cause formatting to screw up when it appears/disappears)
-- add confirmation message for deleting dictionary entries
 - callsign image on/off setting
 - lone confetti signal makes confetti setting (configurable \"confetti\" signal)
 - clean vs clunky UI setting (current UI is in \"clean\" mode)
