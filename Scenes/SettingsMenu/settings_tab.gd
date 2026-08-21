@@ -15,7 +15,7 @@ func _ready() -> void:
 @onready var invert_pitch: SettingEntry = $ScrollContainer/MarginContainer/Options/ImageMovement/VBoxContainer/InvertPitch
 @onready var invert_yaw: SettingEntry = $ScrollContainer/MarginContainer/Options/ImageMovement/VBoxContainer/InvertYaw
 @onready var invert_zoom: SettingEntry = $ScrollContainer/MarginContainer/Options/ImageMovement/VBoxContainer/InvertZoom
-
+@onready var undef_setting: SettingEntry = $ScrollContainer/MarginContainer/Options/UndefSetting
 
 func refresh() -> void:
 	formatting.set_state_no_signal(SettingsHandler.do_formatting)
@@ -28,6 +28,7 @@ func refresh() -> void:
 	color_edit.set_value_no_signal(SettingsHandler.theme_color)
 	sound_slider.set_value_no_signal(_volume_linear_to_slider())
 	_sample_color()
+	undef_setting.set_state_no_signal(SettingsHandler.use_at_undef)
 
 func _volume_linear_to_slider(value: float = -1) -> float:
 	if value < 0:
@@ -123,18 +124,26 @@ func _on_volume_slider_value_changed(value):
 		sound_sample.play()
 	save(false, true)
 
-
 func _on_invert_pitch_set(new_value):
+	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	SettingsHandler.img_invert_pitch = new_value
 	Main.on_image_inversion_reload()
 	save(false, false)
 
 func _on_invert_yaw_set(new_value):
+	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	SettingsHandler.img_invert_yaw = new_value
 	Main.on_image_inversion_reload()
 	save(false, false)
 
 func _on_invert_zoom_set(new_value):
+	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	SettingsHandler.img_invert_zoom = new_value
 	Main.on_image_inversion_reload()
+	save(false, false)
+
+func _on_undef_setting_set(new_value):
+	SoundManager.play_sound(SoundManager.Sounds.CLICK)
+	SettingsHandler.use_at_undef = new_value
+	Main.on_dict_reload()
 	save(false, false)

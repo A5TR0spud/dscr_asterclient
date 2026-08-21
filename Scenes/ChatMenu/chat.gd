@@ -23,8 +23,11 @@ func _ready():
 	open_loaded_channels()
 
 func open_loaded_channels():
-	for tab_id in range(1, channel_container.get_child_count()):
-		(instance.channel_container as TabContainer).set_tab_hidden(tab_id, true)
+	for tab_idx in range(1, channel_container.get_child_count()):
+		var tab: ChatChannel = channel_container.get_child(tab_idx)
+		if tab.id in SettingsHandler.opened_channels or SettingsHandler.opened_channels.has(SKELETON_KEY):
+			continue
+		instance.channel_container.set_tab_hidden(tab_idx, true)
 	for channel_id in SettingsHandler.opened_channels:
 		enable_channel(channel_id)
 
@@ -128,7 +131,7 @@ static func channel_is_visible(id = null) -> bool:
 	if not has:
 		return false
 	var node = instance.channel_container.get_node(str(id))
-	return not (instance.channel_container as TabContainer).is_tab_hidden(node.get_index())
+	return not instance.channel_container.is_tab_hidden(node.get_index())
 
 ## gets channel node given an id.
 ## if an id is not provided, the default channel is used
@@ -143,7 +146,7 @@ static func get_channel_node(id = null) -> Node:
 	var tab_id = channel_node.get_index()
 	channel_node.set_channel_name(id)
 	
-	(instance.channel_container as TabContainer).set_tab_hidden(tab_id, not SettingsHandler.opened_channels.has(SKELETON_KEY))
+	instance.channel_container.set_tab_hidden(tab_id, not SettingsHandler.opened_channels.has(SKELETON_KEY))
 	
 	return channel_node
 
@@ -151,7 +154,7 @@ static func get_current_channel_node() -> Node:
 	return instance.channel_container.get_child(instance.channel_container.current_tab)
 
 static func enable_channel(id: int):
-	var tabber: TabContainer = instance.channel_container as TabContainer
+	var tabber: TabContainer = instance.channel_container
 	var tab_id = get_channel_node(id).get_index()
 	tabber.set_tab_hidden(tab_id, false)
 	if id not in SettingsHandler.opened_channels:
@@ -162,7 +165,7 @@ static func enable_channel(id: int):
 			tabber.set_tab_hidden(tab_to_bone, false)
 
 static func disable_channel(id: int):
-	var tabber: TabContainer = instance.channel_container as TabContainer
+	var tabber: TabContainer = instance.channel_container
 	var tab_id = get_channel_node(id).get_index()
 	tabber.set_tab_hidden(tab_id, true)
 	if id in SettingsHandler.opened_channels:

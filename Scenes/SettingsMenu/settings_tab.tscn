@@ -64,11 +64,11 @@ layout_mode = 2
 
 [node name="Formatting" parent="ScrollContainer/MarginContainer/Options" unique_id=1141489488 instance=ExtResource("3_0yg8b")]
 layout_mode = 2
-description = Array[int]([-42, -190, -85, -100, -223])
+description = [-42, -190, -85, -100, -223]
 
 [node name="ImageVis" parent="ScrollContainer/MarginContainer/Options" unique_id=1916992470 instance=ExtResource("3_0yg8b")]
 layout_mode = 2
-description = Array[int]([-53, -163, -85])
+description = [-53, -163, -85]
 
 [node name="TruncHbox" type="HBoxContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=720322280]
 layout_mode = 2
@@ -110,6 +110,14 @@ value = 18.0
 rounded = true
 
 [node name="HSeparator" type="HSeparator" parent="ScrollContainer/MarginContainer/Options" unique_id=1571308958]
+layout_mode = 2
+
+[node name="UndefSetting" parent="ScrollContainer/MarginContainer/Options" unique_id=1683413919 instance=ExtResource("3_0yg8b")]
+layout_mode = 2
+description = [-124, -42, -100, " @_UNDEF"]
+state = true
+
+[node name="HSeparator7" type="HSeparator" parent="ScrollContainer/MarginContainer/Options" unique_id=1499822315]
 layout_mode = 2
 
 [node name="ThemeColor" type="HBoxContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=243570277]
@@ -212,15 +220,15 @@ layout_mode = 2
 
 [node name="InvertPitch" parent="ScrollContainer/MarginContainer/Options/ImageMovement/VBoxContainer" unique_id=540540814 instance=ExtResource("3_0yg8b")]
 layout_mode = 2
-description = Array[int]([-49, -92, -100, -87])
+description = [-49, -92, -100, -87]
 
 [node name="InvertYaw" parent="ScrollContainer/MarginContainer/Options/ImageMovement/VBoxContainer" unique_id=2014048263 instance=ExtResource("3_0yg8b")]
 layout_mode = 2
-description = Array[int]([-51, -92, -100, -87])
+description = [-51, -92, -100, -87]
 
 [node name="InvertZoom" parent="ScrollContainer/MarginContainer/Options/ImageMovement/VBoxContainer" unique_id=663214121 instance=ExtResource("3_0yg8b")]
 layout_mode = 2
-description = Array[int]([-50, -39, -100, -87])
+description = [-50, -39, -100, -87]
 
 [node name="HSeparator6" type="HSeparator" parent="ScrollContainer/MarginContainer/Options" unique_id=455988048]
 layout_mode = 2
@@ -240,7 +248,6 @@ TODO:
 - make sidebar collapsable
 - make callsign picker collapsable
 - add more formatting options: indent all proceeding, dedent here and all proceeding, prior attract, next attract (attract removes space), auto-group-with-other-signal
-- setting for unknown signals taking the form of \"@-#_UNDEF\" vs \"|-#\"
 - setting for received COLOR # to display that color, somewhere
 - figure out what to do if a transmission is not received (ie a number is skipped)
 - entering signals into notes so that they auto-update
@@ -262,6 +269,7 @@ hint_underlined = false
 [connection signal="set" from="ScrollContainer/MarginContainer/Options/ImageVis" to="." method="_on_image_vis_set"]
 [connection signal="value_changed" from="ScrollContainer/MarginContainer/Options/TruncHbox/TruncationSpinner" to="." method="_on_truncation_spinner_value_changed"]
 [connection signal="value_changed" from="ScrollContainer/MarginContainer/Options/FontHbox/FontSpinner" to="." method="_on_font_spinner_value_changed"]
+[connection signal="set" from="ScrollContainer/MarginContainer/Options/UndefSetting" to="." method="_on_undef_setting_set"]
 [connection signal="value_changed" from="ScrollContainer/MarginContainer/Options/ThemeColor/ColorPicker" to="." method="_on_color_picker_value_changed"]
 [connection signal="pressed" from="ScrollContainer/MarginContainer/Options/ThemeColorSubmitElse/ColorSubmitButton" to="." method="_on_color_submit_button_pressed"]
 [connection signal="pressed" from="ScrollContainer/MarginContainer/Options/ThemeColorSubmitElse/ColorCancelButton" to="." method="_on_color_cancel_button_pressed"]
