@@ -1,5 +1,11 @@
 # Versions
 
+## --WIP--
+
+### Changes
+
+* Deleting dictionary entries now prompts confirmation. Courtesy of [Eearslya](https://github.com/A5TR0spud/dscr_asterclient/commits?author=Eearslya) on Discord. Hell yeah
+
 ## 0.4.2
 
 ### Changes

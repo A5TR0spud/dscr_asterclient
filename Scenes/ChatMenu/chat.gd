@@ -33,7 +33,7 @@ func _gui_input(event: InputEvent):
 		event = event as InputEventMouse
 		if event.button_mask != MouseButton.MOUSE_BUTTON_LEFT or not event.is_pressed():
 			return
-		DictEditMenu.instance.hide()
+		DictEditMenu.close()
 
 static func on_chat_display_child_entered_tree(node: Node, chat_body: VBoxContainer):
 	if node is Separator:

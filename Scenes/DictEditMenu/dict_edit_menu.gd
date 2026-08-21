@@ -99,8 +99,12 @@ func _input(event):
 	if not visible:
 		return
 	if event.is_action_pressed("ui_close_dialog"):
-		hide()
+		close()
 		accept_event()
+
+static func close():
+	instance._set_delete_button_state(false)
+	instance.hide()
 
 func _on_submit_button_pressed():
 	save()
@@ -112,8 +116,7 @@ func _on_cancel_button_pressed():
 
 func _on_close_button_pressed():
 	SoundManager.play_sound(SoundManager.Sounds.CLICK)
-	hide()
-	_set_delete_button_state(false)
+	close()
 
 func _set_delete_button_state(confirmation = null) -> void:
 	if confirmation is bool:
@@ -133,7 +136,7 @@ func _on_delete_button_pressed():
 		DictionaryHandler.forget_signal(current_signal)
 		Main.on_dict_reload()
 		SaveSystem.save_dict()
-		hide()
+		close()
 	else:
 		SoundManager.play_sound(SoundManager.Sounds.COMMAND_ACCEPTED)
 		_set_delete_button_state(true)
