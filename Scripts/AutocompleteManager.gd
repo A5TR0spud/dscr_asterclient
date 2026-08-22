@@ -34,15 +34,30 @@ static func _candidate_cost(written: String, candidate: String) -> float:
 	
 	var cost: float = _THRESHOLD * 2
 	
+	if written.length() > candidate.length():
+		cost += _THRESHOLD
 	#var length_score_0: int = candidate.length() - written.length()
 	#var length_score_1: int = candidate.length()
 	#var score_length: float = minf(length_score_0, length_score_1) / maxf(length_score_0, length_score_1)
 	
-	var letter_score: int = 0
 	for c in written:
 		if c in candidate:
-			letter_score += 1
-	cost -= letter_score
+			cost = (cost - _THRESHOLD) * 0.9 + _THRESHOLD
+			cost -= 0.2
+	
+	var order_a: String = written
+	var order_b: String = candidate
+	
+	while not order_a.is_empty() and not order_b.is_empty():
+		if order_a[0] == order_b[0]:
+			cost -= 1.5
+			order_a = order_a.right(-1)
+			order_b = order_b.right(-1)
+		elif order_a[0] in order_b:
+			cost -= 0.75
+			order_a = order_a.right(-1)
+		else:
+			order_b = order_b.right(-1)
 	
 	if candidate.begins_with(written):
 		cost -= _THRESHOLD
