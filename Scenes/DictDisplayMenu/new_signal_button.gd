@@ -18,7 +18,3 @@ func _try_make(new_text: String) -> void:
 		DictionaryHandler.apply_signal_name(sig, new_text)
 		SaveSystem.save_dict()
 	DictEditMenu.open(sig)
-	name_chooser.text = ""
-	name_chooser.emit_signal("text_changed", "")
-	num_chooser.text = ""
-	num_chooser.emit_signal("text_changed", "")

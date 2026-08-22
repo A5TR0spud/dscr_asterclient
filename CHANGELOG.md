@@ -10,6 +10,7 @@
   * Signals can now be underlined
 * Added buttons to quickly define an unknown frequency when it's used in a transmission
 * Added setting to disable "@_UNDEF" (instead using pipes (|))
+* Pressing the create dictionary entry button no longer clears the input fields
 
 ### Fixes
 

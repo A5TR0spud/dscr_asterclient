@@ -81,7 +81,7 @@ description = [-53, -163, -85]
 
 [node name="DoBBCode" parent="ScrollContainer/MarginContainer/Options" unique_id=1844422194 instance=ExtResource("3_0yg8b")]
 layout_mode = 2
-description = Array[int]([-42, -54, -163, -85])
+description = [-42, -54, -163, -85]
 
 [node name="TruncHbox" type="HBoxContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=720322280]
 layout_mode = 2
@@ -246,17 +246,15 @@ description = [-50, -39, -100, -87]
 [node name="HSeparator6" type="HSeparator" parent="ScrollContainer/MarginContainer/Options" unique_id=455988048]
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/MarginContainer/Options" unique_id=1987941446]
+[node name="todo" type="RichTextLabel" parent="ScrollContainer/MarginContainer/Options" unique_id=1987941446]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "the todo list will be removed at some point
 TODO:
-- add transmission bookmark option and browse menu
+- add transmission editor and library window
 - change placement of copy button (find a visible spot that doesn't cause formatting to screw up when it appears/disappears)
-- callsign image on/off setting
 - lone confetti signal makes confetti setting (configurable \"confetti\" signal)
-- clean vs clunky UI setting (current UI is in \"clean\" mode)
 - add \"macro-dictionary\" sidebar
 - make sidebar collapsable
 - make callsign picker collapsable
