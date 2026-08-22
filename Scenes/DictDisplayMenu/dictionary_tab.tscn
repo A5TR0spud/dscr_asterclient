@@ -64,12 +64,33 @@ script = ExtResource("2_wphnd")
 layout_mode = 2
 mouse_filter = 1
 mouse_default_cursor_shape = 2
-text = "unknown signal"
-horizontal_alignment = 3
+text = "unknown precedes known"
+horizontal_alignment = 2
+script = ExtResource("1_tpcp0")
+message = Array[int]([-124, -122, -123])
+
+[node name="HSeparator" type="HSeparator" parent="ScrollContainer/MarginContainer/VBoxContainer/DefaultFormatOption" unique_id=384322409]
+layout_mode = 2
+
+[node name="UnknownFormatOption" type="VBoxContainer" parent="ScrollContainer/MarginContainer/VBoxContainer" unique_id=1425646915]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+script = ExtResource("2_wphnd")
+to_open = 1
+
+[node name="Signal" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer/UnknownFormatOption" unique_id=661817630]
+layout_mode = 2
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+text = "unknown"
+horizontal_alignment = 2
 script = ExtResource("1_tpcp0")
 message = Array[int]([-110, -124])
 
-[node name="HSeparator" type="HSeparator" parent="ScrollContainer/MarginContainer/VBoxContainer/DefaultFormatOption" unique_id=384322409]
+[node name="HSeparator" type="HSeparator" parent="ScrollContainer/MarginContainer/VBoxContainer/UnknownFormatOption" unique_id=2080187884]
 layout_mode = 2
 
 [node name="Dictionary" type="VBoxContainer" parent="ScrollContainer/MarginContainer/VBoxContainer" unique_id=2102306008]

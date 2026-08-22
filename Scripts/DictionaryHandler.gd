@@ -342,7 +342,8 @@ static func signals_to_words(input: Array, format: bool = false, do_bbcode: bool
 			continue
 		var name: String = get_or_default_signal_name(sig)
 		var desc: Dictionary = get_or_default_signal_desc(sig)
-		var color_value: int = desc.get(color_key, default_color)
+		var color_value: int = desc.get(color_key, 64)
+		if not word_keys.has(sig): color_value = default_color
 		var underline: bool = desc.get(underline_key, false)
 		# Don't bother adding a bunch of color tags for every normal colored word
 		var colorize_signal: bool = do_bbcode && color_value != 64

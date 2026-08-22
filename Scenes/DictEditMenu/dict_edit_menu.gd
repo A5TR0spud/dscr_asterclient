@@ -6,10 +6,7 @@ static var instance: DictEditMenu
 func _enter_tree():
 	instance = self
 
-@export var current_signal: int = 0:
-	set(value):
-		current_signal = min(value, 0)
-		reload()
+@export var current_signal: int = 0
 
 # TODO: rename these. PascalCase is :(
 @onready var name_label: Label = $DictEditMainframe/SignalNameEdit/NameLabel
@@ -57,24 +54,25 @@ func save() -> void:
 		DictionaryHandler.after_key: after_label.selected,
 		DictionaryHandler.break_key: break_button.button_pressed
 	}
-	if int(color_edit.value) != DictionaryHandler.default_color:
-		desc.set(DictionaryHandler.color_key, int(color_edit.value))
-	if underline_edit.button_pressed != false:
-		desc.set(DictionaryHandler.underline_key, true)
+	if SettingsHandler.do_bbcode:
+		if int(color_edit.value) != 64:
+			desc.set(DictionaryHandler.color_key, int(color_edit.value))
+		if underline_edit.button_pressed:
+			desc.set(DictionaryHandler.underline_key, true)
 	DictionaryHandler.apply_signal_desc(current_signal, desc)
 	SaveSystem.save_dict()
 	Main.on_dict_reload()
 
 func reload() -> void:
 	delete_confirm = false
-	break_sentence.visible = current_signal != 0
-	name_sentence.visible = current_signal != 0
-	desc_edit.visible = current_signal != 0
-	delete_button.visible = current_signal != 0
+	break_sentence.visible = current_signal < 0
+	name_sentence.visible = current_signal < 0
+	desc_edit.visible = current_signal < 0
+	delete_button.visible = current_signal < 0
 	bbcode_options.visible = SettingsHandler.do_bbcode
 	underline_edit.visible = current_signal != 0
 	if current_signal == 0:
-		before_after_clear_label.text = DictionaryHandler.signals_to_words([-122, -124, -42, -122])
+		before_after_clear_label.text = DictionaryHandler.signals_to_words([-122, -42, -122])
 		before_label.select(DictionaryHandler.default_before_mode)
 		after_label.select(DictionaryHandler.default_after_mode)
 		color_edit.value = DictionaryHandler.default_color
@@ -96,8 +94,6 @@ func reload() -> void:
 	_sample_color(int(color_edit.value))
 	underline_edit.set_pressed_no_signal(underline_value)
 	underline_edit.refresh()
-	#delete_button.remove_theme_color_override("font_color")
-	#delete_button.remove_theme_color_override("font_hover_color")
 
 func refresh():
 	reload()
@@ -109,7 +105,6 @@ func refresh():
 	after_label.set("popup/item_1/text", DictionaryHandler.signals_to_words([1, -190]))
 	after_label.set("popup/item_2/text", DictionaryHandler.signals_to_words([1, -108, -190]))
 	after_label.set("popup/item_3/text", DictionaryHandler.signals_to_words([2, -108, -190]))
-
 
 func _on_notes_edit_gui_input(event):
 	if event.is_action_pressed("ui_text_submit") and not event.is_action_pressed("ui_text_newline"):
@@ -131,6 +126,7 @@ static func open(sig: int = 0, repeat_to_close: bool = false) -> void:
 		close()
 		return
 	instance.current_signal = sig
+	instance.reload()
 	instance.show()
 
 static func close():
