@@ -267,7 +267,8 @@ TODO:
 - hover over negative numbers to get the translation
 - implement message history so you can use arrow keys to access your previous transmissions
 - drag and drop dictionary
-- change save directory setting?"
+- change save directory setting?
+- optimize (old transmissions queue free but are saved as a string. scrolling up will load old stuff and unload new stuff)"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
