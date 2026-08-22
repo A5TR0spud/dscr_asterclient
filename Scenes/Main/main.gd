@@ -213,6 +213,10 @@ func send_message(written: String) -> Array:
 		sig = prefix + sig
 	
 	var strig: Array = sig.map(func (a): return str(a)) as Array[String]
+	# extra check here to account for auto-channel-prefix
+	if strig.size() > MAX_MESSAGE_LENGTH:
+		Chat.new_log(Chat.State.INPUT_TOO_LONG)
+		return [false, MessageCompilationResult.MESSAGE_FAILED]
 	strig.insert(0, "M")
 	var o: String = ",".join(strig)
 	if o and socket.send_text(o) == Error.OK:
