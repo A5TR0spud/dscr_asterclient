@@ -31,14 +31,16 @@ static func get_candidates(written: String) -> Array[String]:
 static func _candidate_cost(written: String, candidate: String) -> float:
 	written = written.to_upper()
 	candidate = candidate.to_upper()
+	if written == candidate:
+		return 0
 	
 	var cost: float = _THRESHOLD * 2
 	
-	if written.length() > candidate.length():
-		cost += _THRESHOLD
-	#var length_score_0: int = candidate.length() - written.length()
-	#var length_score_1: int = candidate.length()
-	#var score_length: float = minf(length_score_0, length_score_1) / maxf(length_score_0, length_score_1)
+	var length_score_0: int = candidate.length() - written.length()
+	var length_score_1: int = candidate.length()
+	var score_length: float = minf(length_score_0, length_score_1) / maxf(length_score_0, length_score_1)
+	
+	cost -= score_length
 	
 	for c in written:
 		if c in candidate:
@@ -64,7 +66,7 @@ static func _candidate_cost(written: String, candidate: String) -> float:
 	if candidate.contains(written):
 		cost *= 0.5
 	
-	return cost
+	return maxf(cost, 0.5)
 
 const _THRESHOLD: float = 4
 const _DL_ADD_COST: float = 0.25
