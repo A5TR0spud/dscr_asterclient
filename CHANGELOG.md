@@ -16,8 +16,6 @@
 
 * Reloading settings no longer deselects the current channel
 
-* Changing
-
 ## 0.4.2
 
 ### Changes
