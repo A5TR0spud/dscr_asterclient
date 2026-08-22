@@ -32,11 +32,24 @@ static func _candidate_cost(written: String, candidate: String) -> float:
 	written = written.to_upper()
 	candidate = candidate.to_upper()
 	
+	var cost: float = _THRESHOLD * 2
+	
 	#var length_score_0: int = candidate.length() - written.length()
 	#var length_score_1: int = candidate.length()
 	#var score_length: float = minf(length_score_0, length_score_1) / maxf(length_score_0, length_score_1)
 	
-	return _dl(written, candidate)
+	var letter_score: int = 0
+	for c in written:
+		if c in candidate:
+			letter_score += 1
+	cost -= letter_score
+	
+	if candidate.begins_with(written):
+		cost -= _THRESHOLD
+	if candidate.contains(written):
+		cost *= 0.5
+	
+	return cost
 
 const _THRESHOLD: float = 4
 const _DL_ADD_COST: float = 0.25
