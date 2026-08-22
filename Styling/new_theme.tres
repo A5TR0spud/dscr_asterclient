@@ -68,6 +68,7 @@ expand_margin_bottom = 2.0
 [resource]
 default_font = ExtResource("2_llmqu")
 default_font_size = 18
+Button/styles/disabled = ExtResource("3_08nyo")
 Button/styles/focus = ExtResource("1_pkgym")
 Button/styles/hover = ExtResource("1_pkgym")
 Button/styles/hover_pressed = ExtResource("1_nhcih")

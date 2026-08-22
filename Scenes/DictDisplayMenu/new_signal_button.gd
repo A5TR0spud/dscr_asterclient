@@ -17,8 +17,7 @@ func _try_make(new_text: String) -> void:
 	if new_text and not DictionaryHandler.contains_signal(sig):
 		DictionaryHandler.apply_signal_name(sig, new_text)
 		SaveSystem.save_dict()
-	DictEditMenu.instance.current_signal = sig
-	DictEditMenu.instance.show()
+	DictEditMenu.open(sig)
 	name_chooser.text = ""
 	name_chooser.emit_signal("text_changed", "")
 	num_chooser.text = ""

@@ -88,7 +88,7 @@ func reload() -> void:
 	break_button.refresh()
 	_set_delete_button_state(false)
 	delete_button.disabled = not DictionaryHandler.word_keys.has(current_signal)
-	var color_value: int = desc.get(DictionaryHandler.color_key, DictionaryHandler.default_color)
+	var color_value: int = desc.get(DictionaryHandler.color_key, 64)
 	var underline_value: bool = desc.get(DictionaryHandler.underline_key, false)
 	color_edit.value = color_value
 	_sample_color(int(color_edit.value))
@@ -171,6 +171,8 @@ func _on_delete_button_pressed():
 	else:
 		SoundManager.play_sound(SoundManager.Sounds.COMMAND_ACCEPTED)
 		_set_delete_button_state(true)
+		delete_button.disabled = true
+		get_tree().create_timer(Main.HE6_HALF_LIFE * 0.5).timeout.connect(func(): delete_button.disabled = false)
 
 func _on_name_line_edit_text_submitted(_new_text):
 	save()
