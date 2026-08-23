@@ -363,13 +363,14 @@ static func signals_to_words(input: Array, format: bool = false, do_bbcode: bool
 				o += "\n\n"
 		if not format and i > 0 and o.right(1) != " ":
 			o += " "
+		if do_bbcode:
+			# Avoid formatting issues if users put [ in their signal names
+			name = name.replace("[", "[lb]")
 		if underline and do_bbcode:
 			o += "[u]"
 		if colorize_signal:
 			var color: Color = VisualizeNode.calculate_color(color_value)
 			o += "[color=#" + color.to_html(false) + "]"
-			# Avoid formatting issues if users put [ in their signal names
-			name = name.replace("[", "[lb]")
 		o += name
 		if colorize_signal:
 			o += "[/color]"
