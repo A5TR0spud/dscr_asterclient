@@ -98,6 +98,7 @@ func check_image(message: Array) -> bool:
 	var build_data: Dictionary = {}
 	var negative: bool = false
 	var decimal: bool = false
+	var data_present: bool = false
 	for i in message:
 		if i is not int:
 			current_state = 0
@@ -162,18 +163,21 @@ func check_image(message: Array) -> bool:
 					num += build_data.get("c", 0)
 					build_data.set("c", num)
 					#print("c = ", num)
+				data_present = true
 				continue
-			if i == SEP and current_state < 7:
+			if i == SEP and current_state < 7 and data_present:
 				current_state += 1
 				negative = false
 				decimal = false
+				data_present = false
 				#print("sep detected")
 				continue
-		if (i == END or SEP) and current_state == 7:
+		if (i == END or SEP) and current_state == 7 and data_present:
 			#print("appending: ", build_data)
 			_sphere_data.append(build_data)
 			negative = false
 			decimal = false
+			data_present = false
 			build_data = {}
 			current_state = 2
 			#print("sep or end detected")
