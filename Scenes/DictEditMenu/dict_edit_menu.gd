@@ -25,7 +25,7 @@ func _enter_tree():
 @onready var bbcode_options: Control = $DictEditMainframe/BBCodeOptions
 @onready var color_edit: SpinBox = $DictEditMainframe/BBCodeOptions/ColorPicker/SpinBox
 @onready var color_sample: ColorRect = $DictEditMainframe/BBCodeOptions/ColorPicker/ColorRect
-@onready var underline_label: Label = $DictEditMainframe/BBCodeOptions/UnderlineSentence/UnderlineLabel
+@onready var underline_parent: Control = $DictEditMainframe/BBCodeOptions/UnderlineSentence
 @onready var underline_edit: Button = $DictEditMainframe/BBCodeOptions/UnderlineSentence/DoUnderlineButton
 
 @onready var delete_confirm: bool = false
@@ -71,8 +71,7 @@ func reload() -> void:
 	desc_edit.visible = current_signal < 0
 	delete_button.visible = current_signal < 0
 	bbcode_options.visible = SettingsHandler.do_bbcode
-	underline_label.visible = current_signal != 0
-	underline_edit.visible = current_signal != 0
+	underline_parent.visible = current_signal != 0
 	if current_signal == 0:
 		before_after_clear_label.text = DictionaryHandler.signals_to_words([-122, -42, -122])
 		before_label.select(DictionaryHandler.default_before_mode)
