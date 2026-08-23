@@ -57,9 +57,9 @@ static func _candidate_cost(written: String, candidate: String) -> float:
 			order_b = order_b.right(-1)
 		elif order_a[0] in order_b:
 			cost -= 0.75
-			order_a = order_a.right(-1)
-		else:
 			order_b = order_b.right(-1)
+		else:
+			order_a = order_a.right(-1)
 	
 	if candidate.begins_with(written):
 		cost -= _THRESHOLD
