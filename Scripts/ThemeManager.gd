@@ -53,9 +53,9 @@ static func set_theme_color(col: int = -1) -> void:
 		new_color.g *= 0.97
 	var ratio: Color = new_color * 0.2 + Color(0.9, 0.9, 0.9)
 	var green_correction: float = 0
-	if col >= 6 and col <= 8:
-		green_correction = (col - 5) * 0.333
-	if col == 0:
+	if col >= 7 and col <= 9:
+		green_correction = (col - 6) * 0.333
+	if col == 9:
 		green_correction = 0.5
 	green_correction *= 0.5
 	if green_correction > 0:
