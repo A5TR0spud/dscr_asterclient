@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c7bn3w1ijabx4" path="res://Scenes/ChatMenu/chat_channel.tscn" id="2_iy605"]
 [ext_resource type="StyleBox" uid="uid://cem7hlj42ccbd" path="res://Styling/TransmissionMaker/text_edit.tres" id="3_md8bx"]
 [ext_resource type="Script" uid="uid://eyonivvk3glk" path="res://Scenes/ChatMenu/message_edit.gd" id="3_ttrms"]
+[ext_resource type="StyleBox" uid="uid://bca1ief1qema3" path="res://Styling/TransmissionMaker/autocomplete_panel.tres" id="5_ttrms"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_amlv4"]
 
@@ -44,6 +45,27 @@ caret_multiple = false
 use_default_word_separators = false
 script = ExtResource("3_ttrms")
 
+[node name="AutocompleteFinder" type="CodeEdit" parent="MessageEdit" unique_id=893543974]
+visible = false
+layout_mode = 0
+offset_top = 38.0
+offset_right = 1152.0
+offset_bottom = 46.0
+focus_mode = 0
+editable = false
+context_menu_enabled = false
+emoji_menu_enabled = false
+shortcut_keys_enabled = false
+selecting_enabled = false
+drag_and_drop_selection_enabled = false
+middle_mouse_paste_enabled = false
+empty_selection_clipboard_enabled = false
+virtual_keyboard_enabled = false
+use_default_word_separators = false
+use_custom_word_separators = true
+delimiter_strings = Array[String]([])
+code_completion_enabled = true
+
 [node name="PanelContainer" type="PanelContainer" parent="MessageEdit" unique_id=116044956]
 visible = false
 top_level = true
@@ -54,6 +76,7 @@ offset_transform_enabled = true
 offset_transform_position = Vector2(-12, 0)
 offset_transform_position_ratio = Vector2(0, -1)
 offset_transform_visual_only = false
+theme_override_styles/panel = ExtResource("5_ttrms")
 
 [node name="MarginContainer" type="MarginContainer" parent="MessageEdit/PanelContainer" unique_id=2067040739]
 clip_contents = true
@@ -78,4 +101,4 @@ text_overrun_behavior = 1
 [connection signal="tab_changed" from="TabContainer" to="." method="_on_tab_container_tab_changed"]
 [connection signal="caret_changed" from="MessageEdit" to="MessageEdit" method="_on_caret_changed"]
 [connection signal="text_changed" from="MessageEdit" to="MessageEdit" method="_on_text_changed"]
-[connection signal="item_clicked" from="MessageEdit/PanelContainer/MarginContainer/ItemList" to="MessageEdit" method="_on_item_list_item_clicked"]
+[connection signal="item_clicked" from="MessageEdit/PanelContainer/ItemList" to="MessageEdit" method="_on_item_list_item_clicked"]

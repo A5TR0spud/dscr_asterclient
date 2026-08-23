@@ -2,12 +2,16 @@ extends TextEdit
 
 @onready var autocomplete_list: ItemList = $PanelContainer/MarginContainer/ItemList
 @onready var auto_list_panel: PanelContainer = $PanelContainer
+#CodeEdit hates trying to autocomplete things without spaces, so use a nested one which contains only the word to try
+@onready var autocomplete_finder: CodeEdit = $AutocompleteFinder
+
 const DELIMITER_CHARACTER = "\u001f"
 
 func _ready():
 	Main.instance.reload_dict.connect(refresh)
 	Main.instance.reload_settings.connect(_set_popup_size.call_deferred)
 	auto_list_panel.hide()
+	autocomplete_finder.hide()
 
 func refresh():
 	placeholder_text = DictionaryHandler.signals_to_words([-43, -38])
@@ -32,16 +36,34 @@ func submit_text() -> void:
 
 func _request_code_completion(force: bool) -> void:
 	var word_under_caret: String = get_signal_under_caret()
+	word_under_caret = AutocompleteManager.encode_special_chars(word_under_caret)
+	
 	if word_under_caret.is_empty() and not force:
 		auto_list_panel.hide()
 		return
 	
-	var options: Array[String] = AutocompleteManager.get_candidates(word_under_caret)
+	#print("CHECKING: ", word_under_caret)
+	
+	# TODO: make this better
+	# dont add every word?
+	# but only if it makes it lag
+	autocomplete_finder.text = word_under_caret
+	autocomplete_finder.set_caret_column(word_under_caret.length() + 1)
+	for word: String in (DictionaryHandler.word_names as Array[String]):
+		word = AutocompleteManager.encode_special_chars(word)
+		#print(word)
+		#print(AutocompleteManager.decode_special_chars(word))
+		autocomplete_finder.add_code_completion_option(CodeEdit.KIND_PLAIN_TEXT, word, word)
+	autocomplete_finder.update_code_completion_options(true)
+
+	var options: Array[Dictionary] = autocomplete_finder.get_code_completion_options()
 	if options.is_empty():
 		#print("NO OPTIONS FOR ", word_under_caret)
 		auto_list_panel.hide()
 		return
-	if options.size() == 1 and options[0] == word_under_caret:
+	print(options)
+	
+	if options.size() == 1 and options[0]["display_text"] == word_under_caret:
 		auto_list_panel.hide()
 		var bounds: Array = get_signal_bounds_under_caret()
 		var line: String = get_line(get_caret_line())
@@ -50,6 +72,7 @@ func _request_code_completion(force: bool) -> void:
 				return
 		insert_text(DELIMITER_CHARACTER, get_caret_line(), bounds[1])
 		return
+	autocomplete_finder.cancel_code_completion()
 	
 	_show_custom_popup(options)
 
@@ -80,10 +103,10 @@ func get_signal_under_caret() -> String:
 	var bounds = get_signal_bounds_under_caret()
 	return line_text.substr(bounds[0], bounds[1] - bounds[0])
 
-func _show_custom_popup(options: Array[String]):
+func _show_custom_popup(options: Array[Dictionary]):
 	autocomplete_list.clear()
 	for option in options:
-		autocomplete_list.add_item(option)
+		autocomplete_list.add_item(AutocompleteManager.decode_special_chars(option["display_text"]))
 	autocomplete_list.select(0)
 	
 	var word = get_signal_under_caret()
@@ -114,6 +137,7 @@ func _on_caret_changed():
 
 func _confirm_selection(index: int) -> void:
 	var chosen: String = autocomplete_list.get_item_text(index)
+	chosen = AutocompleteManager.decode_special_chars(chosen)
 	var caret_line: int = get_caret_line()
 	var bounds = get_signal_bounds_under_caret()
 	
