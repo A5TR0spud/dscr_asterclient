@@ -11,6 +11,10 @@
 * Added buttons to quickly define an unknown frequency when it's used in a transmission
 * Added setting to disable "@_UNDEF" (instead using pipes (|))
 * Pressing the create dictionary entry button no longer clears the input fields
+* Reverted to old autocomplete system, with symbol escaping. This is the best of both worlds! (NikZapp)
+* Adjusted image parsing to be more robust:
+  * Now supports leading zeroes/separated digits (0.0 0 42 -> 0.0042 as opposed to 0.42)
+  * The |-3 seperator between each |-52 is now optional
 
 ### Fixes
 
