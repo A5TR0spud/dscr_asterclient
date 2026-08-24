@@ -43,7 +43,7 @@ func _evaluate_corpus():
 		to_show = to_show.slice(0, SettingsHandler.truncate_message_size)
 		to_show.append(-25)
 	set_message_text(
-		DictionaryHandler.signals_to_words(to_show, SettingsHandler.do_formatting, supports_bbcode())
+		DictionaryHandler.signals_to_words(to_show, SettingsHandler.do_formatting, supports_bbcode(), SettingsHandler.do_bbcode)
 	)
 
 @abstract func ready()

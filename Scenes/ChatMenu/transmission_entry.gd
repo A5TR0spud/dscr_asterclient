@@ -55,6 +55,7 @@ func refresh():
 
 func set_message_text(new_text: String):
 	message_node.text = new_text
+	is_clickable = false
 	for but in context_buttons.get_children():
 		if but is UnknownSignalButton:
 			but.queue_free()
@@ -95,13 +96,14 @@ func copy_as_signals():
 	DisplayServer.clipboard_set(" ".join(o))
 
 func supports_bbcode() -> bool:
-	return SettingsHandler.do_bbcode
+	return true
 
 func _on_hover_change(hovering: bool) -> void:
 	calc_time()
 	timeago_node.text = time_ago
 	timeago_node.visible = hovering
 	hover_node.visible = hovering
+	is_hovering = hovering
 
 func _on_set_etc_visibility(visiblity: bool) -> void:
 	etc_button_node.visible = visiblity
@@ -110,5 +112,24 @@ func _on_image_button_toggled(toggled_on: bool) -> void:
 	image_node.visible = toggled_on
 
 func _on_message_meta_clicked(meta: Variant) -> void:
-	if Input.is_key_pressed(KEY_CTRL):
+	if Input.is_action_pressed("click_signal_modifier"):
 		DictEditMenu.open(meta as int)
+
+var is_hovering: bool = false
+var is_clickable: bool = false
+
+func _input(event):
+	if event.is_action_pressed("click_signal_modifier") and is_hovering and not is_clickable:
+		set_message_text(
+			DictionaryHandler.signals_to_words(message, SettingsHandler.do_formatting, true, SettingsHandler.do_bbcode, true)
+		)
+		if DisplayServer.cursor_get_shape() == DisplayServer.CURSOR_IBEAM:
+			DisplayServer.cursor_set_shape(DisplayServer.CURSOR_POINTING_HAND)
+		is_clickable = true
+	if (event.is_action_released("click_signal_modifier") or not is_hovering) and is_clickable:
+		set_message_text(
+			DictionaryHandler.signals_to_words(message, SettingsHandler.do_formatting, true, SettingsHandler.do_bbcode, false)
+		)
+		if DisplayServer.cursor_get_shape() == DisplayServer.CURSOR_POINTING_HAND:
+			DisplayServer.cursor_set_shape(DisplayServer.CURSOR_IBEAM)
+		is_clickable = false
