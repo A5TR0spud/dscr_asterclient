@@ -93,104 +93,106 @@ const END  : int = -15
 const NEG  : int = -1
 const FRAC : int = -10
 
+var _currently_failed: bool = false
+
+func _basic_find(message: Array, sig: int):
+	if _currently_failed:
+		return
+	if message.pop_front() != sig:
+		_currently_failed = true
+
+func _parse_number(message: Array, data: Dictionary, key: String, is_color: bool = false):
+	if _currently_failed or message.is_empty():
+		return
+	var is_negative = message[0] == NEG
+	var fractional = false
+	var integer_part: String = ""
+	var decimal_part: String = ""
+	var validated: bool = false
+	if is_negative:
+		if is_color:
+			_currently_failed = true
+			return
+		message.pop_front()
+	while true:
+		if message[0] == FRAC:
+			if fractional or is_color:
+				_currently_failed = true
+				return
+			fractional = true
+			message.pop_front()
+		if message[0] is int and message[0] >= 0:
+			validated = true
+			if not fractional:
+				integer_part += str(message[0])
+			else:
+				decimal_part += str(message[0])
+			message.pop_front()
+		else:
+			break
+	if (
+		(is_color and (integer_part.to_int() < 0 or integer_part.to_int() > 64))
+		or not validated
+	):
+		_currently_failed = true
+		return
+	var o
+	if fractional:
+		o = (integer_part + "." + decimal_part).to_float()
+	else:
+		o = integer_part.to_int()
+	if is_negative:
+		o *= -1
+	data.set(key, o)
+
 func check_image(message: Array) -> bool:
-	var current_state: int = 0 # TODO: define as enum
-	var build_data: Dictionary = {}
-	var negative: bool = false
-	var decimal: bool = false
-	var data_present: bool = false
-	for i in message:
-		if i is not int:
-			current_state = 0
-			build_data.clear()
-			_sphere_data.clear()
-			negative = false
-			decimal = false
-			continue
-		i = i as int
-		if i == IMAGE:
-			if current_state != 0:
-				build_data.clear()
-				_sphere_data.clear()
-				negative = false
-				decimal = false
-			current_state = 1
-			#print("image detected")
-			continue
-		if i == START and current_state == 1:
-			current_state = 2
-			#print("start detected")
-			continue
-		if i == PLOT and current_state == 2:
-			current_state = 3
-			#print("plot detected")
-			continue
-		if (
-			current_state >= 3 and current_state <= 7
-		):
-			if i == NEG:
-				negative = true
-				#print("negative")
+	message = message.duplicate()
+	while message:
+		#print(message)
+		_currently_failed = false
+		_basic_find(message, IMAGE)
+		_basic_find(message, START)
+		#print(message)
+		while message:
+			var build_data: Dictionary = {}
+			_basic_find(message, PLOT)
+			#print("post-plot ", message)
+			_parse_number(message, build_data, "x")
+			#print("post-x ", message)
+			#print("build: ", build_data)
+			_basic_find(message, SEP)
+			#print("post-sep ", message)
+			_parse_number(message, build_data, "y")
+			#print(message)
+			_basic_find(message, SEP)
+			_parse_number(message, build_data, "z")
+			_basic_find(message, SEP)
+			_parse_number(message, build_data, "r")
+			_basic_find(message, SEP)
+			_parse_number(message, build_data, "c", true)
+			#print("post-c", message)
+			#print("build: ", build_data)
+			#print("succ: ", not _currently_failed)
+			var f = message[0] if message.size() > 0 else null
+			if (f == PLOT or f == SEP or f == END) and not _currently_failed:
+				_sphere_data.append(build_data)
+				print("data ", _sphere_data)
+			if f == PLOT:
 				continue
-			if i == FRAC:
-				decimal = true
-				#print("decimal")
+			message.pop_front()
+			if f == SEP:
+				#print("sep found ", message)
 				continue
-			if i >= 0:
-				#print("state = ", current_state)
-				var num: float = i
-				if decimal:
-					num = ("0." + str(i)).to_float()
-				if negative:
-					num *= -1
-				if current_state == 3:
-					num += build_data.get("x", 0)
-					build_data.set("x", num)
-					#print("x = ", num)
-				elif current_state == 4:
-					num += build_data.get("y", 0)
-					build_data.set("y", num)
-					#print("y = ", num)
-				elif current_state == 5:
-					num += build_data.get("z", 0)
-					build_data.set("z", num)
-					#print("z = ", num)
-				elif current_state == 6:
-					num += build_data.get("r", 0)
-					build_data.set("r", num)
-					#print("r = ", num)
-				elif current_state == 7:
-					num += build_data.get("c", 0)
-					build_data.set("c", num)
-					#print("c = ", num)
-				data_present = true
-				continue
-			if i == SEP and current_state < 7 and data_present:
-				current_state += 1
-				negative = false
-				decimal = false
-				data_present = false
-				#print("sep detected")
-				continue
-		if (i == END or SEP) and current_state == 7 and data_present:
-			#print("appending: ", build_data)
-			_sphere_data.append(build_data)
-			negative = false
-			decimal = false
-			data_present = false
-			build_data = {}
-			current_state = 2
-			#print("sep or end detected")
-			if i == END:
-				#print("end detected")
+			if f == END:
+				#print("end found ", message)
+				message = []
 				break
-			continue
-		current_state = 0
-		build_data.clear()
-		_sphere_data.clear()
-		negative = false
-		decimal = false
+			#print("unexpected token. clearing")
+			_sphere_data.clear()
+			break
+	
 	if _sphere_data.is_empty():
+		#print("empty image")
 		return false
 	for p: Dictionary in _sphere_data:
 		#print("dat: ", p)

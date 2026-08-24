@@ -61,7 +61,7 @@ func _request_code_completion(force: bool) -> void:
 		#print("NO OPTIONS FOR ", word_under_caret)
 		auto_list_panel.hide()
 		return
-	print(options)
+	#print(options)
 	
 	if options.size() == 1 and options[0]["display_text"] == word_under_caret:
 		auto_list_panel.hide()
