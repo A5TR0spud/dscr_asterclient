@@ -2,14 +2,14 @@ extends AudioStreamPlayer
 
 const sample_hz: float = 22050.0
 
-@export var song_button: TranslatableSimple
+@export var song_button: Node
 
-var active_notes: Array = []
-var current_note: int = 0
 var current_song: Array = []
-var playback_time: float = 0.0
-var phase: float = 0.0
 var song_length: float = 0.0
+
+var _build_thread: Thread = null
+
+signal song_built
 
 const NEG = -1
 const SEP = -3
@@ -25,17 +25,13 @@ func play_music() -> void:
 		return
 
 	if current_song.size() > 0:
-		active_notes = []
-		current_note = 0
-		playback_time = 0.0
-		phase = 0.0
 		play()
-		song_button.message = [-577, -29]
+		(song_button as TranslatableSimple).message = [-577, -29]
 		song_button.refresh()
 
 func stop_music() -> void:
 	stop()
-	song_button.message = [-577]
+	(song_button as TranslatableSimple).message = [-577]
 	song_button.refresh()
 
 func check_song(message: Array) -> bool:
@@ -53,19 +49,37 @@ func check_song(message: Array) -> bool:
 	current_song = _parse_song(song_notes)
 	if current_song.is_empty():
 		return false
-	stream = _build_song()
+	_start_build_song()
+	song_button.disabled = true
 	return true
 
-func _build_song() -> AudioStreamWAV:
-	var sample_count: int = int(sample_hz * song_length)
+func _start_build_song() -> void:
+	if _build_thread != null and _build_thread.is_alive():
+		_build_thread.wait_to_finish()
+	
+	_build_thread = Thread.new()
+	_build_thread.start(_build_song.bind(current_song, song_length))
+	pass
+
+func _build_song(song: Array, length: float) -> void:
+	var active_notes: Array = []
+	var current_note: int = 0
+	var playback_time: float = 0.0
+	var sample_count: int = int(sample_hz * length)
 	var time_step: float = 1.0 / sample_hz
 	var wav_data: PackedByteArray = PackedByteArray()
 	wav_data.resize(sample_count * 2 * 2)
 	
 	for i in range(sample_count):
-		while current_note < current_song.size() and playback_time >= current_song[current_note].start_time:
-			var note_data = current_song[current_note]
-			_add_note(note_data.duration, note_data.frequency)
+		while current_note < song.size() and playback_time >= song[current_note].start_time:
+			var note_data = song[current_note]
+			var note = {
+				"frequency": note_data.frequency,
+				"phase": 0.0,
+				"time_left": note_data.duration,
+				"total_duration": note_data.duration
+			}
+			active_notes.append(note)
 			current_note += 1
 		
 		var mixed_sample = 0.0
@@ -88,6 +102,7 @@ func _build_song() -> AudioStreamWAV:
 			
 			j -= 1
 
+		mixed_sample = clamp(mixed_sample, -1.0, 1.0)
 		var int_sample: int = int(mixed_sample * 32767.0)
 		var byte_index: int = i * 4
 		wav_data.encode_s16(byte_index, int_sample)
@@ -100,7 +115,12 @@ func _build_song() -> AudioStreamWAV:
 	wav_stream.stereo = true
 	wav_stream.data = wav_data
 	
-	return wav_stream
+	_on_song_built.call_deferred(wav_stream)
+
+func _on_song_built(wav_stream: AudioStreamWAV) -> void:
+	stream = wav_stream
+	song_built.emit()
+	song_button.disabled = false
 
 func _parse_song(message: Array) -> Array:
 	var notes: Array = []
@@ -129,6 +149,7 @@ func _parse_song(message: Array) -> Array:
 
 		note_start = message.find(NOTE, note_start + 1)
 
+	notes.sort_custom(func(a, b): return a.start_time < b.start_time)
 	song_length = length
 
 	return notes
@@ -172,57 +193,6 @@ func _ready() -> void:
 	stream = AudioStreamGenerator.new()
 	stream.mix_rate = sample_hz
 	stream.buffer_length = 0.5
-
-func _process(_delta: float) -> void:
-	pass
-	#if playback:
-	#	_fill_buffer()
-
-func _add_note(duration: float, frequency: float) -> void:
-	var note = {
-		"frequency": frequency,
-		"phase": 0.0,
-		"time_left": duration,
-		"total_duration": duration
-	}
-	active_notes.append(note)
-
-func _fill_buffer() -> void:
-	#var frames_available = playback.get_frames_available()
-	var frames_available = 0
-	var time_step = 1.0 / sample_hz
-
-	for i in range(frames_available):
-		while current_note < current_song.size() and playback_time >= current_song[current_note].start_time:
-			var note_data = current_song[current_note]
-			_add_note(note_data.duration, note_data.frequency)
-			current_note += 1
-		
-		var mixed_sample = 0.0
-		
-		var j = active_notes.size() - 1
-		while j >= 0:
-			var note = active_notes[j]
-			
-			var increment = note.frequency / sample_hz
-			var sample = sin(note.phase * TAU)
-			
-			var volume_envelope = clamp(note.time_left / 0.05, 0.0, 1.0)
-			mixed_sample += sample * 0.2 * volume_envelope
-			
-			note.phase = fmod(note.phase + increment, 1.0)
-			note.time_left -= time_step
-			
-			if note.time_left <= 0:
-				active_notes.remove_at(j)
-			
-			j -= 1
-
-		#playback.push_frame(Vector2.ONE * mixed_sample)
-		playback_time += time_step
-
-	#if playback.get_playback_position() >= song_length:
-	#	stop_music()
 
 func _on_finished() -> void:
 	stop_music()
