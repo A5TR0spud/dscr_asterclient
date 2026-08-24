@@ -272,7 +272,8 @@ TODO:
 nikzapp todo:
 - confetti
 - arbitrary parsing
-- lua modules"
+- lua modules
+- android support"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
