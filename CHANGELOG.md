@@ -1,6 +1,6 @@
 # Versions
 
-## --WIP--
+## 0.5.1
 
 ### Changes
 
