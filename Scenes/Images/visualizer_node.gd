@@ -95,7 +95,7 @@ const FRAC : int = -10
 
 var _currently_failed: bool = false
 
-func _basic_find(message: Array, sig: int):
+func _basic_find(message: Array, sig: int, optional: bool = false):
 	if _currently_failed:
 		return
 	if message.is_empty():
@@ -104,9 +104,10 @@ func _basic_find(message: Array, sig: int):
 	if message[0] == sig:
 		message.pop_front()
 		return
-	if message[0] != IMAGE:
-		message.pop_front()
-	_currently_failed = true
+	if not optional:
+		if message[0] != IMAGE:
+			message.pop_front()
+		_currently_failed = true
 
 func _parse_number(message: Array, data: Dictionary, key: String, is_color: bool = false):
 	if _currently_failed:
@@ -162,10 +163,12 @@ func check_image(message: Array) -> bool:
 		_currently_failed = false
 		_basic_find(message, IMAGE)
 		_basic_find(message, START)
+		var first_go_around: bool = true
 		#print(message)
 		while message and not _currently_failed:
 			var build_data: Dictionary = {}
-			_basic_find(message, PLOT)
+			_basic_find(message, PLOT, first_go_around)
+			first_go_around = false
 			#print("post-plot ", message)
 			_parse_number(message, build_data, "x")
 			#print("post-x ", message)
