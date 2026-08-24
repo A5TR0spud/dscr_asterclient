@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://d4neakrhevfia"]
 
 [ext_resource type="Script" uid="uid://bni3uvm8h06ws" path="res://Scenes/ChatMenu/transmission_entry.gd" id="1_42owa"]
+[ext_resource type="Script" uid="uid://dwecb5ysrhmc8" path="res://Scenes/ChatMenu/music.gd" id="2_kq2tu"]
 [ext_resource type="PackedScene" uid="uid://dc1vhk1wyejon" path="res://Scenes/Common/identicon.tscn" id="2_wapdh"]
 [ext_resource type="FontFile" uid="uid://cwbj6dro36xa3" path="res://fonts/CascadiaMono-Bold.ttf" id="3_42owa"]
 [ext_resource type="StyleBox" uid="uid://4hbvf66ek6pl" path="res://Styling/transmission_indent.tres" id="4_wapdh"]
@@ -19,6 +20,10 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 script = ExtResource("1_42owa")
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=177581278 node_paths=PackedStringArray("song_button")]
+script = ExtResource("2_kq2tu")
+song_button = NodePath("../Body/Corpus/ContextButtons/SongButton")
 
 [node name="Header" type="HBoxContainer" parent="." unique_id=1945409952]
 layout_mode = 2
@@ -132,6 +137,17 @@ translations = Dictionary[StringName, String]({
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
+[node name="SongButton" type="Button" parent="Body/Corpus/ContextButtons" unique_id=704477525]
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+toggle_mode = true
+text = "Hear"
+alignment = 0
+script = ExtResource("5_wapdh")
+message = Array[int]([-577])
+
 [node name="EtcButton" type="Button" parent="Body/Corpus/ContextButtons" unique_id=109864259]
 layout_mode = 2
 size_flags_horizontal = 0
@@ -155,5 +171,7 @@ layout_mode = 2
 [connection signal="hover_change" from="." to="." method="_on_hover_change"]
 [connection signal="set_etc_visibility" from="." to="." method="_on_set_etc_visibility"]
 [connection signal="meta_clicked" from="Body/Corpus/Message" to="." method="_on_message_meta_clicked"]
+[connection signal="finished" from="Music" to="Music" method="_on_finished"]
 [connection signal="toggled" from="Body/Corpus/ContextButtons/ImageButton" to="." method="_on_image_button_toggled"]
+[connection signal="pressed" from="Body/Corpus/ContextButtons/SongButton" to="Music" method="play_music"]
 [connection signal="toggled" from="Body/Corpus/ContextButtons/EtcButton" to="." method="_on_etc_button_toggled"]
