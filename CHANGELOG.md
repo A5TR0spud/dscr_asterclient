@@ -1,31 +1,43 @@
 # Versions
 
-## --WIP--
+## 0.5.0
+
+### Additions
+
+* Added a button in settings to open the save directory
+  * If the OS allows it, it will also select a directory.txt file
+	* This file can be edited to change where the program will look for the following:
+	  * DICTIONARY-1.save
+	  * nicknames.json
+	  * settings.json
+	* The files must be manually moved to the new directory
+	* For anything to change, the client must be re-launched
+* Added buttons to quickly define an unknown frequency when it's used in a transmission
+* Added setting to disable "@_UNDEF" (instead using pipes (|))
+* Added a setting to enable the following (Eearslya)
+  * Signals can now be colored! (Eearslya)
+  * Signals can now be underlined
+* Ctrl or alt-clicking a signal now opens its dictionary edit menu (Eearslya)
+  * This only applies to received transmissions
 
 ### Changes
 
 * Deleting dictionary entries now prompts confirmation. Courtesy of [Eearslya](https://github.com/A5TR0spud/dscr_asterclient/commits?author=Eearslya) on Discord. Hell yeah
-* Added a setting to enable the following (Eearslya)
-  * Signals can now be colored! (Eearslya)
-  * Signals can now be underlined
-* Added buttons to quickly define an unknown frequency when it's used in a transmission
-* Added setting to disable "@_UNDEF" (instead using pipes (|))
 * Pressing the create dictionary entry button no longer clears the input fields
-* Reverted to old autocomplete system, with symbol escaping. This is the best of both worlds! (NikZapp)
+* Reverted autocomplete to the 0.4.1 system, with symbol escaping. This is the best of both worlds! (NikZapp)
 * Adjusted image parsing to be more robust:
-  * Now supports leading zeroes/separated digits (0.0 0 42 -> 0.0042 as opposed to 0.42)
+  * Now supports leading zeroes/separated digits (0.0 0 42 -> 0.0042 as opposed to 0.42 or an error)
   * The |-3 seperator between each |-52 is now optional
   * The very first |-52 signal is now optional
-* Sending numbers:
-  * Starting a number with 0 no longer eats it
+* Starting a number with 0 no longer eats it
     * Sending a positive number prefixed with a pipe still parses it (|05 -> 5)
-  * Sent numbers are capped to 18 digits long to avoid the signed 64-bit integer limit
-    * Going beyond this will send the full number, they will just be invisibly "separated" every 18 digits
-    * This causes artifacts in other numerical bases, unfortunately
 
 ### Fixes
 
 * Reloading settings no longer deselects the current channel
+* Sent numbers are capped to 18 digits long to avoid the signed 64-bit integer limit
+  * Going beyond this will send the full number, they will just be invisibly "separated" every 18 digits
+  * This causes artifacts in other numerical bases, unfortunately
 
 ## 0.4.2
 

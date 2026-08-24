@@ -120,16 +120,12 @@ var is_clickable: bool = false
 
 func _input(event):
 	if event.is_action_pressed("click_signal_modifier") and is_hovering and not is_clickable:
-		set_message_text(
-			DictionaryHandler.signals_to_words(message, SettingsHandler.do_formatting, true, SettingsHandler.do_bbcode, true)
-		)
+		request_rewrite(true)
 		if DisplayServer.cursor_get_shape() == DisplayServer.CURSOR_IBEAM:
 			DisplayServer.cursor_set_shape(DisplayServer.CURSOR_POINTING_HAND)
 		is_clickable = true
 	if (event.is_action_released("click_signal_modifier") or not is_hovering) and is_clickable:
-		set_message_text(
-			DictionaryHandler.signals_to_words(message, SettingsHandler.do_formatting, true, SettingsHandler.do_bbcode, false)
-		)
+		request_rewrite(false)
 		if DisplayServer.cursor_get_shape() == DisplayServer.CURSOR_POINTING_HAND:
 			DisplayServer.cursor_set_shape(DisplayServer.CURSOR_IBEAM)
 		is_clickable = false

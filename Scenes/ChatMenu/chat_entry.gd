@@ -36,14 +36,23 @@ func _refresh():
 	refresh()
 	_evaluate_corpus()
 
-func _evaluate_corpus():
+func request_rewrite(clickable: bool):
+	_evaluate_corpus(clickable)
+
+func _evaluate_corpus(clickable: bool = false):
 	var to_show: Array = message
 	set_etc_visibility.emit(is_message_truncatable())
 	if collapsed and is_message_truncatable():
 		to_show = to_show.slice(0, SettingsHandler.truncate_message_size)
 		to_show.append(-25)
 	set_message_text(
-		DictionaryHandler.signals_to_words(to_show, SettingsHandler.do_formatting, supports_bbcode(), SettingsHandler.do_bbcode)
+		DictionaryHandler.signals_to_words(
+			to_show,
+			SettingsHandler.do_formatting,
+			supports_bbcode(),
+			SettingsHandler.do_bbcode,
+			clickable
+		)
 	)
 
 @abstract func ready()
