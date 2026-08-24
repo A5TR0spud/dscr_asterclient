@@ -82,6 +82,9 @@ func reload() -> void:
 	name_label.text = DictionaryHandler.signals_to_words([-42, -14, -1, absi(current_signal), -15, -4])
 	before_after_clear_label.text = DictionaryHandler.signals_to_words([-122, current_signal, -122])
 	name_edit.text = DictionaryHandler.get_or_default_signal_name(current_signal)
+	if not DictionaryHandler.word_keys.has(current_signal):
+		name_edit.grab_focus()
+		name_edit.select_all()
 	desc_edit.text = desc[DictionaryHandler.desc_key]
 	before_label.select(int(desc[DictionaryHandler.before_key]))
 	after_label.select(int(desc[DictionaryHandler.after_key]))

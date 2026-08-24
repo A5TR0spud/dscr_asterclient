@@ -1,5 +1,11 @@
 # Versions
 
+## --WIP--
+
+### Changes
+
+* Editing an entry you don't have defined now auto-selects the name
+
 ## 0.5.1
 
 ### Changes
@@ -40,7 +46,7 @@
   * The |-3 seperator between each |-52 is now optional
   * The very first |-52 signal is now optional
 * Starting a number with 0 no longer eats it
-    * Sending a positive number prefixed with a pipe still parses it (|05 -> 5)
+	* Sending a positive number prefixed with a pipe still parses it (|05 -> 5)
 
 ### Fixes
 
