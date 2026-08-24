@@ -15,7 +15,7 @@
 * Adjusted image parsing to be more robust:
   * Now supports leading zeroes/separated digits (0.0 0 42 -> 0.0042 as opposed to 0.42)
   * The |-3 seperator between each |-52 is now optional
-  * The very first |-52 is now optional
+  * The very first |-52 signal is now optional
 
 ### Fixes
 
