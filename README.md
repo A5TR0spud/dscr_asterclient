@@ -33,3 +33,6 @@ The dictionary must be named "DICTIONARY-1.save", it will not recognize the file
 * Multi-line transmission editor (hold shift and press enter for a newline; enter on its own tries to send the message)
 * Dictionary-chat split can be resized
 * Autocomplete
+* Image parsing is more robust
+* Numbers keep their leading zeroes
+* Signals can have their colors changed and can be underlined (setting defaults to off)
