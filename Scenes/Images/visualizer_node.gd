@@ -98,11 +98,21 @@ var _currently_failed: bool = false
 func _basic_find(message: Array, sig: int):
 	if _currently_failed:
 		return
-	if message.pop_front() != sig:
+	if message.is_empty():
 		_currently_failed = true
+		return
+	if message[0] == sig:
+		message.pop_front()
+		return
+	if message[0] != IMAGE:
+		message.pop_front()
+	_currently_failed = true
 
 func _parse_number(message: Array, data: Dictionary, key: String, is_color: bool = false):
-	if _currently_failed or message.is_empty():
+	if _currently_failed:
+		return
+	if message.is_empty():
+		_currently_failed = true
 		return
 	var is_negative = message[0] == NEG
 	var fractional = false
@@ -110,17 +120,17 @@ func _parse_number(message: Array, data: Dictionary, key: String, is_color: bool
 	var decimal_part: String = ""
 	var validated: bool = false
 	if is_negative:
+		message.pop_front()
 		if is_color:
 			_currently_failed = true
 			return
-		message.pop_front()
 	while true:
 		if message[0] == FRAC:
+			message.pop_front()
 			if fractional or is_color:
 				_currently_failed = true
 				return
 			fractional = true
-			message.pop_front()
 		if message[0] is int and message[0] >= 0:
 			validated = true
 			if not fractional:
@@ -153,7 +163,7 @@ func check_image(message: Array) -> bool:
 		_basic_find(message, IMAGE)
 		_basic_find(message, START)
 		#print(message)
-		while message:
+		while message and not _currently_failed:
 			var build_data: Dictionary = {}
 			_basic_find(message, PLOT)
 			#print("post-plot ", message)
@@ -173,20 +183,22 @@ func check_image(message: Array) -> bool:
 			#print("post-c", message)
 			#print("build: ", build_data)
 			#print("succ: ", not _currently_failed)
-			var f = message[0] if message.size() > 0 else null
-			if (f == PLOT or f == SEP or f == END) and not _currently_failed:
-				_sphere_data.append(build_data)
-				print("data ", _sphere_data)
-			if f == PLOT:
-				continue
-			message.pop_front()
-			if f == SEP:
-				#print("sep found ", message)
-				continue
-			if f == END:
-				#print("end found ", message)
-				message = []
-				break
+			if not _currently_failed:
+				var f = message[0] if message.size() > 0 else null
+				if f == PLOT or f == SEP or f == END:
+					_sphere_data.append(build_data)
+					#print("data ", _sphere_data)
+				if f == PLOT:
+					continue
+				if f != IMAGE:
+					message.pop_front()
+				if f == SEP:
+					#print("sep found ", message)
+					continue
+				if f == END:
+					#print("end found ", message)
+					message = []
+					break
 			#print("unexpected token. clearing")
 			_sphere_data.clear()
 			break
