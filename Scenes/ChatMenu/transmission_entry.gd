@@ -96,6 +96,10 @@ var is_hovering: bool = false
 var is_clickable: bool = false
 
 func _handle_clickables():
+	var selected_from: int = message_node.get_selection_from()
+	var selected_to: int = message_node.get_selection_to()
+	if selected_from >= 0 and selected_to >= 0:
+		return
 	if Input.is_action_pressed("click_signal_modifier") and is_hovering and not is_clickable:
 		request_rewrite(true)
 		if DisplayServer.cursor_get_shape() == DisplayServer.CURSOR_IBEAM:

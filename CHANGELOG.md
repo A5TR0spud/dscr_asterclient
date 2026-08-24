@@ -6,6 +6,10 @@
 
 * Removed unknown signal buttons
 
+### Fixes
+
+* Fixed pressing CTRL deselecting received transmissions when hovering over them
+
 ## 0.5.0
 
 ### Additions
