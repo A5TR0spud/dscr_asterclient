@@ -22,6 +22,7 @@ size_flags_vertical = 8
 script = ExtResource("1_42owa")
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=177581278 node_paths=PackedStringArray("song_button")]
+bus = &"Music"
 script = ExtResource("2_kq2tu")
 song_button = NodePath("../Body/Corpus/ContextButtons/SongButton")
 
@@ -170,7 +171,6 @@ layout_mode = 2
 
 [connection signal="hover_change" from="." to="." method="_on_hover_change"]
 [connection signal="set_etc_visibility" from="." to="." method="_on_set_etc_visibility"]
-[connection signal="meta_clicked" from="Body/Corpus/Message" to="." method="_on_message_meta_clicked"]
 [connection signal="finished" from="Music" to="Music" method="_on_finished"]
 [connection signal="meta_clicked" from="Body/Corpus/Message" to="." method="_on_message_meta_clicked"]
 [connection signal="toggled" from="Body/Corpus/ContextButtons/ImageButton" to="." method="_on_image_button_toggled"]

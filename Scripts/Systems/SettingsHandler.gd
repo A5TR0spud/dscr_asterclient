@@ -9,6 +9,7 @@ static var image_default: bool = false
 static var opened_channels: Array = []
 static var theme_color: int = 57
 static var master_volume: float = 1.0
+static var music_volume: float = 1.0
 static var img_invert_yaw: bool = false
 static var img_invert_pitch: bool = false
 static var img_invert_zoom: bool = false
@@ -55,6 +56,7 @@ static func initialize() -> void:
 	opened_channels = SaveSystem.settings.get_or_add("OpenedChannels", []).map(func (a): return int(a))
 	theme_color = SaveSystem.settings.get_or_add("ThemeColor", theme_color)
 	master_volume = SaveSystem.settings.get_or_add("MasterVolume", master_volume)
+	music_volume = SaveSystem.settings.get_or_add("music_volume", music_volume)
 	evaluate_volume()
 	img_invert_pitch = SaveSystem.settings.get_or_add("img_invert_pitch", img_invert_pitch)
 	img_invert_yaw = SaveSystem.settings.get_or_add("img_invert_yaw", img_invert_yaw)
@@ -82,6 +84,15 @@ static func evaluate_volume() -> void:
 		master_volume <= 0.01
 	)
 
+	AudioServer.set_bus_volume_linear(
+		AudioServer.get_bus_index("Music"),
+		music_volume * 0.667
+	)
+	AudioServer.set_bus_mute(
+		AudioServer.get_bus_index("Music"),
+		music_volume <= 0.01
+	)
+
 static func save() -> void:
 	SaveSystem.save_settings()
 
@@ -104,3 +115,4 @@ static func export() -> void:
 	SaveSystem.settings.set("WebsocketAddress", websocket_address)
 	SaveSystem.settings.set("current_dictionary", current_dictionary)
 	SaveSystem.settings.set("confetti", confetti)
+	SaveSystem.settings.set("music_volume", music_volume)

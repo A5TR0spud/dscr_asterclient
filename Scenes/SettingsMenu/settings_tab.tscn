@@ -244,6 +244,52 @@ translations = Dictionary[StringName, String]({
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
+[node name="MusicVolume" type="VBoxContainer" parent="ScrollContainer/Options" unique_id=324051399]
+layout_mode = 2
+
+[node name="VolumeLabel" type="Label" parent="ScrollContainer/Options/MusicVolume" unique_id=1561581926]
+layout_mode = 2
+text = "sound volume"
+autowrap_mode = 2
+script = ExtResource("1_1gwgo")
+message = Array[int]([-577, -172, -39, -22, -100])
+
+[node name="VolumeSlider" type="HScrollBar" parent="ScrollContainer/Options/MusicVolume" unique_id=1026432478]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 144.0
+step = 4.0
+page = 16.0
+value = 64.0
+rounded = true
+
+[node name="SliderLabelGrid" type="HBoxContainer" parent="ScrollContainer/Options/MusicVolume" unique_id=907088586]
+layout_mode = 2
+
+[node name="Silent" type="Label" parent="ScrollContainer/Options/MusicVolume/SliderLabelGrid" unique_id=184313052]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "silent"
+horizontal_alignment = 3
+script = ExtResource("1_1gwgo")
+message = Array[int]([-111])
+
+[node name="Normal" type="Label" parent="ScrollContainer/Options/MusicVolume/SliderLabelGrid" unique_id=1879375728]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "normal"
+horizontal_alignment = 3
+script = ExtResource("1_1gwgo")
+message = Array[int]([-114])
+
+[node name="Deafening" type="Label" parent="ScrollContainer/Options/MusicVolume/SliderLabelGrid" unique_id=569715250]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "deafening"
+horizontal_alignment = 3
+script = ExtResource("1_1gwgo")
+message = Array[int]([-108])
+
 [node name="HSeparator5" type="HSeparator" parent="ScrollContainer/Options" unique_id=1134833940]
 layout_mode = 2
 
@@ -287,3 +333,4 @@ description = "SETTINGS_INVERT_ZOOM"
 [connection signal="set" from="ScrollContainer/Options/ImageMovement/VBoxContainer/InvertPitch" to="." method="_on_invert_pitch_set"]
 [connection signal="set" from="ScrollContainer/Options/ImageMovement/VBoxContainer/InvertYaw" to="." method="_on_invert_yaw_set"]
 [connection signal="set" from="ScrollContainer/Options/ImageMovement/VBoxContainer/InvertZoom" to="." method="_on_invert_zoom_set"]
+[connection signal="value_changed" from="ScrollContainer/Options/MusicVolume/VolumeSlider" to="." method="_on_music_slider_value_changed"]
