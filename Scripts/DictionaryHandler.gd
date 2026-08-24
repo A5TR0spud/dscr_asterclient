@@ -249,8 +249,14 @@ static func parse_text(input: String, earlyReturn: bool = false) -> ParseResult:
 				cut_failure = true
 				halting_index += subsize
 				break
+			if (sub[0] == "0"):
+				result.output.append(0)
+				input = input.right(-1)
+				cut_failure = true
+				halting_index += 1
+				break
 			if (sub[0].is_valid_int() and
-				sub.is_valid_int()
+				sub.is_valid_int() and subsize <= 18
 			):
 				result.output.append(sub.to_int())
 				input = input.right(-subsize)

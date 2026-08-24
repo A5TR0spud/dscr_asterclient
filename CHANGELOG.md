@@ -16,6 +16,12 @@
   * Now supports leading zeroes/separated digits (0.0 0 42 -> 0.0042 as opposed to 0.42)
   * The |-3 seperator between each |-52 is now optional
   * The very first |-52 signal is now optional
+* Sending numbers:
+  * Starting a number with 0 no longer eats it
+    * Sending a positive number prefixed with a pipe still parses it (|05 -> 5)
+  * Sent numbers are capped to 18 digits long to avoid the signed 64-bit integer limit
+    * Going beyond this will send the full number, they will just be invisibly "separated" every 18 digits
+    * This causes artifacts in other numerical bases, unfortunately
 
 ### Fixes
 
