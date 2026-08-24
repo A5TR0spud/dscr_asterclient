@@ -1,5 +1,11 @@
 # Versions
 
+## --WIP--
+
+### Changes
+
+* Removed unknown signal buttons
+
 ## 0.5.0
 
 ### Additions
