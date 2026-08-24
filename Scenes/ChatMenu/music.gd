@@ -7,7 +7,6 @@ const sample_hz: float = 22050.0
 var active_notes: Array = []
 var current_note: int = 0
 var current_song: Array = []
-var playback: AudioStreamGeneratorPlayback
 var playback_time: float = 0.0
 var phase: float = 0.0
 var song_length: float = 0.0
@@ -31,13 +30,11 @@ func play_music() -> void:
 		playback_time = 0.0
 		phase = 0.0
 		play()
-		playback = get_stream_playback()
 		song_button.message = [-577, -29]
 		song_button.refresh()
 
 func stop_music() -> void:
 	stop()
-	playback = null
 	song_button.message = [-577]
 	song_button.refresh()
 
@@ -51,10 +48,59 @@ func check_song(message: Array) -> bool:
 	var group_end = message.find(GROUP_END, song_index + 1)
 	if group_end == -1:
 		return false
-	
+
 	var song_notes = message.slice(song_index + 2, group_end)
 	current_song = _parse_song(song_notes)
-	return current_song.size() > 0
+	if current_song.is_empty():
+		return false
+	stream = _build_song()
+	return true
+
+func _build_song() -> AudioStreamWAV:
+	var sample_count: int = int(sample_hz * song_length)
+	var time_step: float = 1.0 / sample_hz
+	var wav_data: PackedByteArray = PackedByteArray()
+	wav_data.resize(sample_count * 2 * 2)
+	
+	for i in range(sample_count):
+		while current_note < current_song.size() and playback_time >= current_song[current_note].start_time:
+			var note_data = current_song[current_note]
+			_add_note(note_data.duration, note_data.frequency)
+			current_note += 1
+		
+		var mixed_sample = 0.0
+		
+		var j = active_notes.size() - 1
+		while j >= 0:
+			var note = active_notes[j]
+			
+			var increment = note.frequency / sample_hz
+			var sample = sin(note.phase * TAU)
+			
+			var volume_envelope = clamp(note.time_left / 0.05, 0.0, 1.0)
+			mixed_sample += sample * 0.2 * volume_envelope
+			
+			note.phase = fmod(note.phase + increment, 1.0)
+			note.time_left -= time_step
+			
+			if note.time_left <= 0:
+				active_notes.remove_at(j)
+			
+			j -= 1
+
+		var int_sample: int = int(mixed_sample * 32767.0)
+		var byte_index: int = i * 4
+		wav_data.encode_s16(byte_index, int_sample)
+		wav_data.encode_s16(byte_index + 2, int_sample)
+		playback_time += time_step
+	
+	var wav_stream: AudioStreamWAV = AudioStreamWAV.new()
+	wav_stream.format = AudioStreamWAV.FORMAT_16_BITS
+	wav_stream.mix_rate = int(sample_hz)
+	wav_stream.stereo = true
+	wav_stream.data = wav_data
+	
+	return wav_stream
 
 func _parse_song(message: Array) -> Array:
 	var notes: Array = []
@@ -128,8 +174,9 @@ func _ready() -> void:
 	stream.buffer_length = 0.5
 
 func _process(_delta: float) -> void:
-	if playback:
-		_fill_buffer()
+	pass
+	#if playback:
+	#	_fill_buffer()
 
 func _add_note(duration: float, frequency: float) -> void:
 	var note = {
@@ -141,7 +188,8 @@ func _add_note(duration: float, frequency: float) -> void:
 	active_notes.append(note)
 
 func _fill_buffer() -> void:
-	var frames_available = playback.get_frames_available()
+	#var frames_available = playback.get_frames_available()
+	var frames_available = 0
 	var time_step = 1.0 / sample_hz
 
 	for i in range(frames_available):
@@ -170,11 +218,11 @@ func _fill_buffer() -> void:
 			
 			j -= 1
 
-		playback.push_frame(Vector2.ONE * mixed_sample)
+		#playback.push_frame(Vector2.ONE * mixed_sample)
 		playback_time += time_step
 
-	if playback.get_playback_position() >= song_length:
-		stop_music()
+	#if playback.get_playback_position() >= song_length:
+	#	stop_music()
 
 func _on_finished() -> void:
 	stop_music()
