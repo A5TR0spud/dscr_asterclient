@@ -190,7 +190,6 @@ func _parse_value(message: Array) -> float:
 			continue
 		elif i == DECIMAL:
 			decimal = true
-			multiplier = 0.1
 			continue
 		elif i == 0:
 			if decimal:
@@ -200,6 +199,7 @@ func _parse_value(message: Array) -> float:
 			if negative:
 				num = -num
 			if decimal:
+				num = str("0." + str(i)).to_float()
 				num *= multiplier
 			value += num
 
