@@ -100,6 +100,7 @@ bbcode_enabled = true
 text = "test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test "
 fit_content = true
 autowrap_mode = 2
+meta_underlined = false
 selection_enabled = true
 
 [node name="ContextButtons" type="HFlowContainer" parent="Body/Corpus" unique_id=1127365251]
@@ -133,5 +134,6 @@ layout_mode = 2
 
 [connection signal="hover_change" from="." to="." method="_on_hover_change"]
 [connection signal="set_etc_visibility" from="." to="." method="_on_set_etc_visibility"]
+[connection signal="meta_clicked" from="Body/Corpus/Message" to="." method="_on_message_meta_clicked"]
 [connection signal="toggled" from="Body/Corpus/ContextButtons/ImageButton" to="." method="_on_image_button_toggled"]
 [connection signal="toggled" from="Body/Corpus/ContextButtons/EtcButton" to="." method="_on_etc_button_toggled"]

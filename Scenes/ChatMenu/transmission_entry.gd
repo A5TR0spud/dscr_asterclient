@@ -108,3 +108,7 @@ func _on_set_etc_visibility(visiblity: bool) -> void:
 
 func _on_image_button_toggled(toggled_on: bool) -> void:
 	image_node.visible = toggled_on
+
+func _on_message_meta_clicked(meta: Variant) -> void:
+	if Input.is_key_pressed(KEY_CTRL):
+		DictEditMenu.open(meta as int)

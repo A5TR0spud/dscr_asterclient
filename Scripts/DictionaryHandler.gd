@@ -377,7 +377,11 @@ static func signals_to_words(input: Array, format: bool = false, do_bbcode: bool
 		if colorize_signal:
 			var color: Color = VisualizeNode.calculate_color(color_value)
 			o += "[color=#" + color.to_html(false) + "]"
+		if do_bbcode:
+			o += "[url=" + str(sig) + "]"
 		o += name
+		if do_bbcode:
+			o += "[/url]"
 		if colorize_signal:
 			o += "[/color]"
 		if do_bbcode and underline:
