@@ -172,6 +172,7 @@ layout_mode = 2
 [connection signal="set_etc_visibility" from="." to="." method="_on_set_etc_visibility"]
 [connection signal="meta_clicked" from="Body/Corpus/Message" to="." method="_on_message_meta_clicked"]
 [connection signal="finished" from="Music" to="Music" method="_on_finished"]
+[connection signal="meta_clicked" from="Body/Corpus/Message" to="." method="_on_message_meta_clicked"]
 [connection signal="toggled" from="Body/Corpus/ContextButtons/ImageButton" to="." method="_on_image_button_toggled"]
 [connection signal="pressed" from="Body/Corpus/ContextButtons/SongButton" to="Music" method="play_music"]
 [connection signal="toggled" from="Body/Corpus/ContextButtons/EtcButton" to="." method="_on_etc_button_toggled"]
