@@ -39,19 +39,29 @@ func check_song(message: Array) -> bool:
 	var song_index = message.find(SONG)
 	if song_index == -1 || message_len <= (song_index + 2):
 		return false
-	if message[song_index + 1] != GROUP_BEGIN:
-		return false
-	var group_end = message.find(GROUP_END, song_index + 1)
-	if group_end == -1:
-		return false
 
-	var song_notes = message.slice(song_index + 2, group_end)
-	current_song = _parse_song(song_notes)
-	if current_song.is_empty():
-		return false
-	_start_build_song()
-	song_button.disabled = true
-	return true
+	while song_index < (message_len - 1):
+		if message[song_index + 1] != GROUP_BEGIN:
+			song_index += 1
+			continue
+		var group_end = message.find(GROUP_END, song_index + 1)
+		if group_end == -1:
+			song_index += 1
+			continue
+
+		var song_notes = message.slice(song_index + 2, group_end)
+		if song_notes.is_empty():
+			song_index += 1
+			continue
+		current_song = _parse_song(song_notes)
+		if current_song.is_empty():
+			song_index += 1
+			continue
+		_start_build_song()
+		song_button.disabled = true
+		return true
+
+	return false
 
 func _start_build_song() -> void:
 	if _build_thread != null and _build_thread.is_alive():
