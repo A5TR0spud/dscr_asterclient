@@ -25,6 +25,7 @@ func play_music() -> void:
 		return
 
 	if current_song.size() > 0:
+		print(current_song)
 		play()
 		(song_button as TranslatableSimple).message = [-577, -29]
 		song_button.refresh()
@@ -181,6 +182,7 @@ func _parse_value(message: Array) -> float:
 	var negative: bool = false
 	var decimal: bool = false
 	var value: float = 0.0
+	var multiplier: float = 1.0
 	
 	for i in message:
 		if i == NEG:
@@ -188,13 +190,17 @@ func _parse_value(message: Array) -> float:
 			continue
 		elif i == DECIMAL:
 			decimal = true
+			multiplier = 0.1
 			continue
+		elif i == 0:
+			if decimal:
+				multiplier /= 10
 		else:
 			var num = i as float
 			if negative:
 				num = -num
 			if decimal:
-				num = ("0." + str(i)).to_float()
+				num *= multiplier
 			value += num
 
 	return value
