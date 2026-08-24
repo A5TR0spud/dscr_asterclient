@@ -15,29 +15,36 @@ script = ExtResource("1_pkawr")
 [node name="notification" type="AudioStreamPlayer" parent="." unique_id=1327540687]
 stream = ExtResource("2_pkawr")
 max_polyphony = 2
+bus = &"System"
 
 [node name="click" type="AudioStreamPlayer" parent="." unique_id=648408352]
 stream = ExtResource("2_pkawr")
 volume_db = -15.0
 pitch_scale = 2.0
 max_polyphony = 2
+bus = &"System"
 
 [node name="cancel_close" type="AudioStreamPlayer" parent="." unique_id=491395782]
 stream = ExtResource("3_pkawr")
+bus = &"System"
 
 [node name="open_ui" type="AudioStreamPlayer" parent="." unique_id=697278787]
 stream = ExtResource("4_etekg")
+bus = &"System"
 
 [node name="fail_redundant" type="AudioStreamPlayer" parent="." unique_id=1345462948]
 stream = ExtResource("4_5lc5d")
+bus = &"System"
 
 [node name="confirm_success" type="AudioStreamPlayer" parent="." unique_id=987292686]
 stream = ExtResource("1_sib8k")
 pitch_scale = 1.1
+bus = &"System"
 
 [node name="message_send" type="AudioStreamPlayer" parent="." unique_id=489663487]
 stream = ExtResource("1_sib8k")
 pitch_scale = 1.25
+bus = &"System"
 
 [node name="command_send" type="AudioStreamPlayer" parent="." unique_id=2025775238]
 stream = ExtResource("6_jfsv2")
@@ -47,3 +54,4 @@ pitch_scale = 1.25
 stream = ExtResource("8_etekg")
 volume_db = -7.0
 pitch_scale = 1.49
+bus = &"System"

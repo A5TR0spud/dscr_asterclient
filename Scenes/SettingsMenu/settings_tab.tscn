@@ -30,6 +30,11 @@ metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="AudioPreview" type="AudioStreamPlayer" parent="." unique_id=576191493]
 stream = ExtResource("3_nlym6")
+bus = &"System"
+
+[node name="MusicAudioPreview" type="AudioStreamPlayer" parent="." unique_id=1995521877]
+stream = ExtResource("3_nlym6")
+bus = &"Music"
 
 [node name="HSeparator" type="HSeparator" parent="." unique_id=482587478]
 layout_mode = 2

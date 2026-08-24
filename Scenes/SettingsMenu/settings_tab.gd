@@ -21,6 +21,7 @@ func _ready() -> void:
 @onready var undef_setting: SettingEntry = $ScrollContainer/Options/UndefSetting
 @onready var confetti_setting: SettingEntry = $ScrollContainer/Options/Confetti
 @onready var image_setting_group: FoldableContainer = $ScrollContainer/Options/ImageMovement
+@onready var music_sample: AudioStreamPlayer = $MusicAudioPreview
 
 func refresh() -> void:
 	formatting.set_state_no_signal(SettingsHandler.do_formatting)
@@ -132,6 +133,8 @@ func _on_volume_slider_value_changed(value):
 func _on_music_slider_value_changed(value):
 	SettingsHandler.music_volume = _volume_slider_to_linear(music_slider, value)
 	SettingsHandler.evaluate_volume()
+	if not music_sample.playing:
+		music_sample.play()
 	save(false, true)
 	pass
 

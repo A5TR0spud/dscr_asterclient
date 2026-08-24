@@ -76,11 +76,11 @@ static func initialize() -> void:
 
 static func evaluate_volume() -> void:
 	AudioServer.set_bus_volume_linear(
-		AudioServer.get_bus_index("Master"),
+		AudioServer.get_bus_index("System"),
 		master_volume * 0.667
 	)
 	AudioServer.set_bus_mute(
-		AudioServer.get_bus_index("Master"),
+		AudioServer.get_bus_index("System"),
 		master_volume <= 0.01
 	)
 
