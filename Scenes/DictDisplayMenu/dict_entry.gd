@@ -8,7 +8,7 @@ var sig: int = 0
 
 func _ready():
 	signal_label.text = String.num_int64(sig)
-	meaning_label.text = DictionaryHandler.signals_to_words([sig], false, SettingsHandler.do_bbcode)
+	meaning_label.text = DictionaryHandler.signals_to_words([sig], false, true, SettingsHandler.do_bbcode, false)
 
 func _gui_input(event: InputEvent):
 	if event is InputEventMouse:
