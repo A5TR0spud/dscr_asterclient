@@ -352,12 +352,15 @@ static func signals_to_words(input: Array, format: bool = false, do_bbcode: bool
 		var desc: Dictionary = get_or_default_signal_desc(sig)
 		var color_value = desc.get(color_key)
 		var color: Color
-		if (color_value is int or color_value is float) and color_value >= 0 and color_value <= 64:
-			color = VisualizeNode.calculate_color(color_value)
-		elif color_value is String:
-			color = Color.from_string(color_value, color)
+		if sig not in word_keys:
+			color = default_color
 		else:
-			color = Color.WHITE
+			if (color_value is int or color_value is float) and color_value >= 0 and color_value <= 64:
+				color = VisualizeNode.calculate_color(color_value)
+			elif color_value is String:
+				color = Color.from_string(color_value, Color.WHITE)
+			else:
+				color = Color.WHITE
 		if not word_keys.has(sig): color_value = default_color
 		var underline: bool = desc.get(underline_key, false)
 		var colorize_signal: bool = do_bbcode && do_colorline
