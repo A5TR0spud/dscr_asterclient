@@ -19,6 +19,8 @@ const GROUP_END = -15
 const SONG = -577
 const NOTE = -605003
 
+enum NoteType { SINE, SQUARE, SAWTOOTH }
+
 func play_music() -> void:
 	if is_playing():
 		stop_music()
@@ -88,7 +90,8 @@ func _build_song(song: Array, length: float) -> void:
 				"frequency": note_data.frequency,
 				"phase": 0.0,
 				"time_left": note_data.duration,
-				"total_duration": note_data.duration
+				"total_duration": note_data.duration,
+				"type": NoteType.SINE
 			}
 			active_notes.append(note)
 			current_note += 1
@@ -100,7 +103,14 @@ func _build_song(song: Array, length: float) -> void:
 			var note = active_notes[j]
 			
 			var increment = note.frequency / sample_hz
-			var sample = sin(note.phase * TAU)
+			
+			var sample = 0.0
+			if note.type == NoteType.SINE:
+				sample = sin(note.phase * TAU)
+			elif note.type == NoteType.SAWTOOTH:
+				sample = 2.0 * note.phase - 1.0
+			elif note.type == NoteType.SQUARE:
+				sample = 1.0 if note.phase < 0.5 else -1.0
 			
 			var volume_envelope = clamp(note.time_left / 0.05, 0.0, 1.0)
 			mixed_sample += sample * 0.2 * volume_envelope
