@@ -21,15 +21,20 @@ func _enter_tree():
 @onready var break_sentence: HBoxContainer = $DictEditMainframe/BreakSentence
 @onready var name_sentence: HBoxContainer = $DictEditMainframe/SignalNameEdit
 @onready var delete_button: Button = $DictEditMainframe/SubmitElseCancel/DeleteButton
+@onready var delete_confirm: bool = false
+@onready var delete_time_window: Timer = $DeleteConfirm
 
 @onready var bbcode_options: Control = $DictEditMainframe/BBCodeOptions
-@onready var color_edit: SpinBox = $DictEditMainframe/BBCodeOptions/ColorPicker/SpinBox
-@onready var color_sample: ColorRect = $DictEditMainframe/BBCodeOptions/ColorPicker/ColorRect
 @onready var underline_parent: Control = $DictEditMainframe/BBCodeOptions/UnderlineSentence
 @onready var underline_edit: Button = $DictEditMainframe/BBCodeOptions/UnderlineSentence/DoUnderlineButton
 
-@onready var delete_confirm: bool = false
-@onready var delete_time_window: Timer = $DeleteConfirm
+@onready var hue: SpinBox = $DictEditMainframe/BBCodeOptions/ColorPicker/GridContainer/HueSpinner
+@onready var val: SpinBox = $DictEditMainframe/BBCodeOptions/ColorPicker/GridContainer/ValueSpinner
+@onready var sat: SpinBox = $DictEditMainframe/BBCodeOptions/ColorPicker/GridContainer/SatSpinner
+@onready var hue_rect: ColorRect = $DictEditMainframe/BBCodeOptions/ColorPicker/GridContainer/HueColor
+@onready var val_rect: ColorRect = $DictEditMainframe/BBCodeOptions/ColorPicker/GridContainer/ValueColor
+@onready var sat_rect: ColorRect = $DictEditMainframe/BBCodeOptions/ColorPicker/GridContainer/SatColor
+@onready var prv_rect: ColorRect = $DictEditMainframe/BBCodeOptions/ColorPicker/PreviewColor
 
 func _ready():
 	Main.instance.reload_dict.connect(refresh)
@@ -39,7 +44,7 @@ func save() -> void:
 	if current_signal == 0:
 		DictionaryHandler.default_before_mode = before_label.selected
 		DictionaryHandler.default_after_mode = after_label.selected
-		DictionaryHandler.default_color = int(color_edit.value)
+		DictionaryHandler.default_color = _get_spinners_as_color().to_html(false)
 		SoundManager.play_sound(SoundManager.Sounds.CONFIRMED)
 		SaveSystem.save_dict()
 		Main.on_dict_reload()
@@ -56,8 +61,8 @@ func save() -> void:
 		DictionaryHandler.break_key: break_button.button_pressed
 	}
 	if SettingsHandler.do_bbcode:
-		if int(color_edit.value) != 64:
-			desc.set(DictionaryHandler.color_key, "#"+VisualizeNode.calculate_color(int(color_edit.value)).to_html(false))
+		if "ffffff" not in _get_spinners_as_color().to_html(false):
+			desc.set(DictionaryHandler.color_key, "#"+_get_spinners_as_color().to_html(false))
 		if underline_edit.button_pressed:
 			desc.set(DictionaryHandler.underline_key, true)
 	DictionaryHandler.apply_signal_desc(current_signal, desc)
@@ -76,7 +81,7 @@ func reload() -> void:
 		before_after_clear_label.text = DictionaryHandler.signals_to_words([-122, -42, -122])
 		before_label.select(DictionaryHandler.default_before_mode)
 		after_label.select(DictionaryHandler.default_after_mode)
-		color_edit.value = DictionaryHandler.default_color
+		_push_color_to_spinners(Color.from_string(DictionaryHandler.default_color, Color.WHITE))
 		return
 	var desc: Dictionary = DictionaryHandler.get_or_default_signal_desc(current_signal)
 	name_label.text = DictionaryHandler.signals_to_words([-42, -14, -1, absi(current_signal), -15, -4])
@@ -92,22 +97,43 @@ func reload() -> void:
 	break_button.refresh()
 	_set_delete_button_state(false)
 	delete_button.disabled = not DictionaryHandler.word_keys.has(current_signal)
-	var color_value = desc.get(DictionaryHandler.color_key, 64)
-	if color_value is String:
-		color_value = color_value.trim_prefix("#")
-		# TODO: make signals colors not evil
-		#evil.
-		for i in range(65):
-			if VisualizeNode.calculate_color(i).to_html(false) == color_value:
-				color_value = i
-				break
-		if color_value is String:
-			color_value = 0
 	var underline_value: bool = desc.get(DictionaryHandler.underline_key, false)
-	color_edit.value = color_value
-	_sample_color(int(color_edit.value))
+
 	underline_edit.set_pressed_no_signal(underline_value)
 	underline_edit.refresh()
+	
+	var color_value = desc.get(DictionaryHandler.color_key, 64)
+	if color_value is int or color_value is float:
+		color_value = VisualizeNode.calculate_color(color_value as int)
+	elif color_value is String:
+		color_value = Color.from_string(color_value as String, Color.WHITE)
+	_push_color_to_spinners(color_value as Color)
+	#_sample_color(int(color_edit.value))
+
+func _get_spinners_as_color() -> Color:
+	var H: float = hue.value
+	if H <= 8.5:
+		H = remap(H, 0, 8, 0, 10)
+	elif H <= 13.5:
+		H = remap(H, 8, 13, 10, 21)
+	elif H <= 25.5:
+		H = remap(H, 13, 25, 21, 25)
+	var h: float = H / 40.0
+	var s: float = (50 - sat.value) * 0.1
+	var v: float = (val.value - 50) / 14.0
+	return Color.from_hsv(h, s, v)
+
+func _push_color_to_spinners(col: Color):
+	var h: float = col.h * 40
+	if h <= 10.5:
+		h = remap(h, 0, 10, 0, 8)
+	elif h <= 21.5:
+		h = remap(h, 10, 21, 8, 13)
+	elif h <= 25.5:
+		h = remap(h, 21, 25, 13, 25)
+	hue.value = h
+	sat.value = 50 - col.s * 10
+	val.value = col.v * 14 + 50
 
 func refresh():
 	reload()
@@ -194,11 +220,20 @@ func _on_name_line_edit_text_submitted(_new_text):
 func _on_delete_confirm_timeout():
 	_set_delete_button_state(false)
 
-func _sample_color(val: int = -1):
-	if val < 0 or val > 64:
-		val = roundi(color_edit.value)
-	color_sample.color = VisualizeNode.calculate_color(val)
+func _sample_color():
+	var h: int = roundi(hue.value)
+	var s: int = roundi(sat.value)
+	var v: int = roundi(val.value)
+	hue_rect.color = VisualizeNode.calculate_color(h)
+	sat_rect.color = VisualizeNode.calculate_color(s)
+	val_rect.color = VisualizeNode.calculate_color(v)
+	prv_rect.color = _get_spinners_as_color()
 
-func _on_color_picker_value_changed(value):
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
-	_sample_color(value)
+func _on_hue_spinner_value_changed(_value):
+	_sample_color()
+
+func _on_value_spinner_value_changed(_value):
+	_sample_color()
+
+func _on_sat_spinner_value_changed(_value):
+	_sample_color()

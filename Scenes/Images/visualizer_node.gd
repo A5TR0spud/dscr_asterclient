@@ -2,16 +2,16 @@ extends Control
 class_name VisualizeNode
 # Helper method for calculating the sphere colors
 # Visual Object colors are evaluated on a gradient [0, 64] to get RGB values. The full gradient linearly blends between keys. In the game, the keys are: 
-# 0 - #FF5800 0-7
-# 1 - #BBFF00 7-14
-# 2 - #00CDFF 14-21
-# 3 - #0084FF 21-28
-# 4 - #4D00FF
-# 5 - #FB39FF
-# 6 - #FF0FD7
-# 7 - #484848
-# 8 - #636363
-# 9 - #FFFFFF
+# 0 - #FF5800  0.00 red-orange
+# 1 - #BBFF00  7.11 yellow-green
+# 2 - #00CDFF 14.22 cyan
+# 3 - #0084FF 21.33 light blue
+# 4 - #4D00FF 28.44 blurple
+# 5 - #FB39FF 35.56 bubblegum pink
+# 6 - #FF0FD7 42.67 hot pink
+# 7 - #484848 49.78 black
+# 8 - #636363 56.89 grey
+# 9 - #FFFFFF 64.00 white
 # Code thanks to @elnico56 in discord!!!!
 # Code adapted from https://github.com/dixonary/mfds-server/blob/0d359cef41a64cfe2bddbacb12898f066fa099b8/public/mfds.js#L1009-L1034
 const COLORS: Array = [

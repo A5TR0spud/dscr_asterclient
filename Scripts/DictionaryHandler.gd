@@ -72,11 +72,13 @@ static var default_after_mode: int:
 		return SaveSystem.dict.get_or_add("afterUserDefaultMode", int(1))
 	set(value):
 		SaveSystem.dict.set("afterUserDefaultMode", int(value))
-static var default_color: int:
+static var default_color: String:
 	get:
-		return SaveSystem.dict.get_or_add("defaultColor", int(64))
+		if SaveSystem.dict.get("defaultColor") is not String:
+			SaveSystem.dict.set("defaultColor", "#ffffff")
+		return SaveSystem.dict.get_or_add("defaultColor", "#ffffff")
 	set(value):
-		SaveSystem.dict.set("defaultColor", int(value))
+		SaveSystem.dict.set("defaultColor", value)
 
 const desc_key: String = "desc"
 const before_key: String = "formatMode"
