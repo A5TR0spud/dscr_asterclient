@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://ce8n4p5da202i"
-path="res://.godot/imported/code-new-roman.regular.otf-812f11e720c916151fbdb17fa784cf20.fontdata"
+uid="uid://dwurqit207ybc"
+path="res://.godot/imported/CascadiaMono-Light.ttf-f8a3f0d4da1528f1bf3790cad7d70a3f.fontdata"
 
 [deps]
 
-source_file="res://fonts/code-new-roman.regular.otf"
-dest_files=["res://.godot/imported/code-new-roman.regular.otf-812f11e720c916151fbdb17fa784cf20.fontdata"]
+source_file="res://fonts/CascadiaMono-Light.ttf"
+dest_files=["res://.godot/imported/CascadiaMono-Light.ttf-f8a3f0d4da1528f1bf3790cad7d70a3f.fontdata"]
 
 [params]
 

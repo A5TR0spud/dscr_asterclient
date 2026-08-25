@@ -5,7 +5,6 @@
 [ext_resource type="StyleBox" uid="uid://dcmofilgg82h2" path="res://Styling/panel_style.tres" id="1_tvtlr"]
 [ext_resource type="StyleBox" uid="uid://2awcl5rgmg3n" path="res://Styling/Button/outline_box.tres" id="2_2dlxw"]
 [ext_resource type="StyleBox" uid="uid://chd3p7o56iqny" path="res://Styling/text_edit_style.tres" id="2_5vjxe"]
-[ext_resource type="FontFile" uid="uid://cknwbegu80h5i" path="res://fonts/Hack-Regular.ttf" id="2_llmqu"]
 [ext_resource type="StyleBox" uid="uid://da5ge6d3pcwlc" path="res://Styling/Button/pressed_box.tres" id="3_08nyo"]
 [ext_resource type="StyleBox" uid="uid://6bx0nrubukdd" path="res://Styling/HScrollBar/grabber.tres" id="4_u5f6s"]
 [ext_resource type="StyleBox" uid="uid://d2w74s2vi088d" path="res://Styling/HScrollBar/grabber_pressed.tres" id="5_em145"]
@@ -18,6 +17,7 @@
 [ext_resource type="StyleBox" uid="uid://8mg0wvheihvx" path="res://Styling/Tabber/tab_selected.tres" id="11_fqkxe"]
 [ext_resource type="StyleBox" uid="uid://bcpf14e281kyl" path="res://Styling/Tabber/tab_unselected.tres" id="12_k7nka"]
 [ext_resource type="StyleBox" uid="uid://db3k5eiovgegq" path="res://Styling/Seps/v_sep.tres" id="15_k7nka"]
+[ext_resource type="FontFile" uid="uid://kx3rrq8lr2ar" path="res://fonts/CascadiaMono-Regular.ttf" id="18_pkgym"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gt42v"]
 
@@ -66,7 +66,7 @@ expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
 [resource]
-default_font = ExtResource("2_llmqu")
+default_font = ExtResource("18_pkgym")
 default_font_size = 18
 Button/styles/disabled = ExtResource("3_08nyo")
 Button/styles/focus = ExtResource("1_pkgym")

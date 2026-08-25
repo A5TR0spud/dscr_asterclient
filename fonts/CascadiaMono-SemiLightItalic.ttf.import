@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://d28oteanplbkv"
-path="res://.godot/imported/source-code-pro.bold.ttf-c1605251a13dd31eacfa2a684303f65a.fontdata"
+uid="uid://ck0wwbxgq44g2"
+path="res://.godot/imported/CascadiaMono-SemiLightItalic.ttf-d767e8f83e401278c916b601b151c772.fontdata"
 
 [deps]
 
-source_file="res://fonts/source-code-pro.bold.ttf"
-dest_files=["res://.godot/imported/source-code-pro.bold.ttf-c1605251a13dd31eacfa2a684303f65a.fontdata"]
+source_file="res://fonts/CascadiaMono-SemiLightItalic.ttf"
+dest_files=["res://.godot/imported/CascadiaMono-SemiLightItalic.ttf-d767e8f83e401278c916b601b151c772.fontdata"]
 
 [params]
 

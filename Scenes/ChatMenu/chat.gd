@@ -96,7 +96,7 @@ static func new_transmission(packet: PackedStringArray) -> void:
 	if (len(integer_message) >= 2 and integer_message[0] == CHANNEL_SELECTOR):
 		channel_id = integer_message[1]
 		integer_message = integer_message.slice(2)
-		print(integer_message)
+		#print(integer_message)
 	
 	new_message.message = integer_message
 	

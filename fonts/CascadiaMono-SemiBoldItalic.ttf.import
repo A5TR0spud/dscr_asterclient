@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://b8jmewslwu4si"
-path="res://.godot/imported/code-new-roman.bold.otf-5f6cea142d310272734e3ff2ad044a9a.fontdata"
+uid="uid://cs0li18xywraf"
+path="res://.godot/imported/CascadiaMono-SemiBoldItalic.ttf-58461572507468edbffefad551a443bf.fontdata"
 
 [deps]
 
-source_file="res://fonts/code-new-roman.bold.otf"
-dest_files=["res://.godot/imported/code-new-roman.bold.otf-5f6cea142d310272734e3ff2ad044a9a.fontdata"]
+source_file="res://fonts/CascadiaMono-SemiBoldItalic.ttf"
+dest_files=["res://.godot/imported/CascadiaMono-SemiBoldItalic.ttf-58461572507468edbffefad551a443bf.fontdata"]
 
 [params]
 

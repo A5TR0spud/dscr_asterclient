@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bni3uvm8h06ws" path="res://Scenes/ChatMenu/transmission_entry.gd" id="1_42owa"]
 [ext_resource type="PackedScene" uid="uid://dc1vhk1wyejon" path="res://Scenes/Common/identicon.tscn" id="2_wapdh"]
-[ext_resource type="FontFile" uid="uid://d1qf4i8th7m5o" path="res://fonts/Hack-Bold.ttf" id="4_gt42v"]
+[ext_resource type="FontFile" uid="uid://cwbj6dro36xa3" path="res://fonts/CascadiaMono-Bold.ttf" id="3_42owa"]
 [ext_resource type="Script" uid="uid://dqce42c573ptg" path="res://Scripts/SimpleTranslatable.gd" id="5_wapdh"]
 [ext_resource type="PackedScene" uid="uid://bcqkh2yjqiert" path="res://Scenes/Images/visualizer_node.tscn" id="6_wapdh"]
 
@@ -44,7 +44,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_g4v7s")
 layout_mode = 2
 size_flags_horizontal = 0
 mouse_filter = 1
-theme_override_fonts/font = ExtResource("4_gt42v")
+theme_override_fonts/font = ExtResource("3_42owa")
 text = "1574"
 
 [node name="Control" type="Control" parent="Header" unique_id=1847686898]

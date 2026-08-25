@@ -348,11 +348,17 @@ static func signals_to_words(input: Array, format: bool = false, do_bbcode: bool
 			continue
 		var name: String = get_or_default_signal_name(sig)
 		var desc: Dictionary = get_or_default_signal_desc(sig)
-		var color_value: int = desc.get(color_key, 64)
+		var color_value = desc.get(color_key)
+		var color: Color
+		if (color_value is int or color_value is float) and color_value >= 0 and color_value <= 64:
+			color = VisualizeNode.calculate_color(color_value)
+		elif color_value is String:
+			color = Color.from_string(color_value, color)
+		else:
+			color = Color.WHITE
 		if not word_keys.has(sig): color_value = default_color
 		var underline: bool = desc.get(underline_key, false)
-		# Don't bother adding a bunch of color tags for every normal colored word
-		var colorize_signal: bool = do_bbcode && do_colorline && color_value != 64
+		var colorize_signal: bool = do_bbcode && do_colorline
 		var format_mode: int = desc[before_key]
 		var format_mode_after: int = desc[after_key]
 		var break_double: bool = desc[break_key]
@@ -375,7 +381,6 @@ static func signals_to_words(input: Array, format: bool = false, do_bbcode: bool
 		if underline and do_bbcode:
 			o += "[u]"
 		if colorize_signal:
-			var color: Color = VisualizeNode.calculate_color(color_value)
 			o += "[color=#" + color.to_html(false) + "]"
 		if do_bbcode and do_clickable:
 			o += "[url=" + str(sig) + "]"

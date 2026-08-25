@@ -57,7 +57,7 @@ func save() -> void:
 	}
 	if SettingsHandler.do_bbcode:
 		if int(color_edit.value) != 64:
-			desc.set(DictionaryHandler.color_key, int(color_edit.value))
+			desc.set(DictionaryHandler.color_key, "#"+VisualizeNode.calculate_color(int(color_edit.value)).to_html(false))
 		if underline_edit.button_pressed:
 			desc.set(DictionaryHandler.underline_key, true)
 	DictionaryHandler.apply_signal_desc(current_signal, desc)
@@ -92,7 +92,17 @@ func reload() -> void:
 	break_button.refresh()
 	_set_delete_button_state(false)
 	delete_button.disabled = not DictionaryHandler.word_keys.has(current_signal)
-	var color_value: int = desc.get(DictionaryHandler.color_key, 64)
+	var color_value = desc.get(DictionaryHandler.color_key, 64)
+	if color_value is String:
+		color_value = color_value.trim_prefix("#")
+		# TODO: make signals colors not evil
+		#evil.
+		for i in range(65):
+			if VisualizeNode.calculate_color(i).to_html(false) == color_value:
+				color_value = i
+				break
+		if color_value is String:
+			color_value = 0
 	var underline_value: bool = desc.get(DictionaryHandler.underline_key, false)
 	color_edit.value = color_value
 	_sample_color(int(color_edit.value))

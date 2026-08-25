@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://dmvlyonptp7rc"
-path="res://.godot/imported/source-code-pro.semibold.ttf-49d774fe41bdb07c0f1bbf3cd502968e.fontdata"
+uid="uid://54m0eq0wj855"
+path="res://.godot/imported/CascadiaMono-SemiBold.ttf-e9c79a4d2a89394a8a46b767c72af330.fontdata"
 
 [deps]
 
-source_file="res://fonts/source-code-pro.semibold.ttf"
-dest_files=["res://.godot/imported/source-code-pro.semibold.ttf-49d774fe41bdb07c0f1bbf3cd502968e.fontdata"]
+source_file="res://fonts/CascadiaMono-SemiBold.ttf"
+dest_files=["res://.godot/imported/CascadiaMono-SemiBold.ttf-e9c79a4d2a89394a8a46b767c72af330.fontdata"]
 
 [params]
 

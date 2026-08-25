@@ -5,6 +5,9 @@
 ### Changes
 
 * Editing an entry you don't have defined now auto-selects the name
+* Signal colors now save and load as hex for compatibility with Relay3544
+* Theme colors are less washed out
+* Changed font
 
 ## 0.5.1
 

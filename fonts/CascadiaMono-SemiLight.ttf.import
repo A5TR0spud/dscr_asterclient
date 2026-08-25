@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://dcbvttalrrhnq"
-path="res://.godot/imported/droid-sans-mono.regular.ttf-b1497f4dcb6956f4f566f5d4a7794ea8.fontdata"
+uid="uid://3h0v18474ifm"
+path="res://.godot/imported/CascadiaMono-SemiLight.ttf-8aabed5d33627047b51a07ca03bf34f5.fontdata"
 
 [deps]
 
-source_file="res://fonts/droid-sans-mono.regular.ttf"
-dest_files=["res://.godot/imported/droid-sans-mono.regular.ttf-b1497f4dcb6956f4f566f5d4a7794ea8.fontdata"]
+source_file="res://fonts/CascadiaMono-SemiLight.ttf"
+dest_files=["res://.godot/imported/CascadiaMono-SemiLight.ttf-8aabed5d33627047b51a07ca03bf34f5.fontdata"]
 
 [params]
 
