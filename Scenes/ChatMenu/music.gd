@@ -62,7 +62,7 @@ func cancel_chain() -> void:
 
 func stop_music() -> void:
 	stop()
-	now_playing = null
+	if now_playing == self: now_playing = null
 	cancel_chain()
 	chained_songs.clear()
 	song_button.refresh()
@@ -200,4 +200,5 @@ func _on_finished() -> void:
 		for chain in remain:
 			next.chain_music(chain)
 		next.play_music()
+		chained_songs.clear()
 	stop_music()
