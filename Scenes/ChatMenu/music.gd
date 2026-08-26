@@ -45,33 +45,40 @@ func stop_music() -> void:
 	song_button.refresh()
 
 func check_song(message: Array) -> bool:
-	var message_len = message.size()
-	var song_index = message.find(SONG)
-	if song_index == -1 || message_len <= (song_index + 2):
-		return false
+	var parser = TransmissionParser.new(message)
+	while not parser.is_at_end():
+		if not parser.skip_to(SONG): return false
+		parser.expect(SONG)
+		var pos := parser.save_state()
+		var notes := parser.read_group_items(parse_note)
 
-	while song_index < (message_len - 1):
-		if message[song_index + 1] != GROUP_BEGIN:
-			song_index += 1
-			continue
-		var group_end = message.find(GROUP_END, song_index + 1)
-		if group_end == -1:
-			song_index += 1
+		if parser.has_error():
+			print(parser.get_error_message())
+			parser.restore_state(pos, true)
 			continue
 
-		var song_notes = message.slice(song_index + 2, group_end)
-		if song_notes.is_empty():
-			song_index += 1
-			continue
-		current_song = _parse_song(song_notes)
-		if current_song.is_empty():
-			song_index += 1
-			continue
-		_start_build_song()
+		notes.sort_custom(func(a, b): return a.start_time < b.start_time)
+		song_length = 0
+		for note in notes:
+			song_length = maxf(note.start_time + note.duration, song_length)
+		current_song = notes
 		song_button.disabled = true
+		_start_build_song()
+
 		return true
 
 	return false
+
+func parse_note(parser: TransmissionParser) -> Dictionary:
+	parser.expect(NOTE)
+	var start_time = parser.read_number()
+	parser.expect(SEP)
+	var duration = parser.read_number()
+	parser.expect(SEP)
+	var frequency = parser.read_number()
+	parser.try_consume(SEP)
+
+	return {"start_time": start_time, "duration": duration, "frequency": frequency}
 
 func _start_build_song() -> void:
 	if _build_thread != null and _build_thread.is_alive():
@@ -149,80 +156,6 @@ func _on_song_built(wav_stream: AudioStreamWAV) -> void:
 	stream = wav_stream
 	song_built.emit()
 	song_button.disabled = false
-
-func _parse_song(message: Array) -> Array:
-	var notes: Array = []
-	var note_start: int = 0
-	var length: float = 0.0
-	
-	while note_start >= 0:
-		if message[note_start] != NOTE:
-			return []
-
-		var note_message: Array = []
-		var end_index = message.find(NOTE, note_start + 1)
-		if end_index >= 0:
-			note_message = message.slice(note_start + 1, end_index)
-		else:
-			note_message = message.slice(note_start + 1)
-		if note_message.back() == SEP:
-			note_message.pop_back()
-
-		var note = _parse_note(note_message)
-		if note.has("error"):
-			print("SONG: Failed to parse note: ", note.error)
-			return []
-		notes.append(note)
-		length = max(length, note.start_time + note.duration)
-
-		note_start = message.find(NOTE, note_start + 1)
-
-	notes.sort_custom(func(a, b): return a.start_time < b.start_time)
-	song_length = length
-
-	return notes
-
-func _parse_note(message: Array) -> Dictionary:
-	if message.count(SEP) != 2:
-		return {"error": "Invalid value count"}
-
-	var sep_1 = message.find(SEP)
-	var sep_2 = message.find(SEP, sep_1 + 1)
-
-	var start_time = _parse_value(message.slice(0, sep_1))
-	var duration = _parse_value(message.slice(sep_1 + 1, sep_2))
-	var frequency = _parse_value(message.slice(sep_2 + 1))
-
-	return {"start_time": start_time, "duration": duration, "frequency": frequency}
-
-func _parse_value(message: Array) -> float:
-	var negative: bool = false
-	var decimal: bool = false
-	var value: float = 0.0
-	var multiplier: float = 1.0
-	
-	for i in message:
-		if i == NEG:
-			negative = true
-			continue
-		elif i == DECIMAL:
-			decimal = true
-			continue
-		elif i == 0:
-			if decimal:
-				multiplier /= 10
-		else:
-			var num = i as float
-			if negative:
-				num = -num
-			if decimal:
-				num = str("0." + str(i)).to_float()
-				num *= multiplier
-			else:
-				value *= 10
-			value += num
-
-	return value
 
 func _ready() -> void:
 	stream = AudioStreamGenerator.new()
