@@ -1,16 +1,21 @@
 extends AudioStreamPlayer
+class_name Music
 
-const conversion_factor: float = 1.0 / 0.8066
+const conversion_factor: float = 0.8066
 const sample_hz: float = 22050.0
+
+static var now_playing: Music = null
 
 @export var song_button: Node
 
+var chained_songs: Array[Music] = []
 var current_song: Array = []
 var song_length: float = 0.0
 
 var _build_thread: Thread = null
 
 signal song_built
+signal song_end
 
 const NEG = -1
 const SEP = -3
@@ -20,11 +25,17 @@ const GROUP_END = -15
 const SONG = -577
 const NOTE = -605003
 
-enum NoteType { SINE, SQUARE, SAWTOOTH }
+enum NoteType { SINE, SQUARE, SAWTOOTH, TRIANGLE }
 
 func play_music() -> void:
 	if is_playing():
 		stop_music()
+		return
+
+	if now_playing:
+		now_playing.chain_music(self)
+		(song_button as TranslatableSimple).message = [-577, -25]
+		song_button.refresh()
 		return
 
 	if Input.is_key_pressed(KEY_CTRL):
@@ -35,13 +46,25 @@ func play_music() -> void:
 
 	if current_song.size() > 0:
 		print(current_song)
+		now_playing = self
 		play()
 		(song_button as TranslatableSimple).message = [-577, -29]
 		song_button.refresh()
 
+func chain_music(next: Music) -> void:
+	chained_songs.append(next)
+
+func cancel_chain() -> void:
+	(song_button as TranslatableSimple).message = [-577]
+	song_button.refresh()
+	for i in chained_songs:
+		i.cancel_chain()
+
 func stop_music() -> void:
 	stop()
-	(song_button as TranslatableSimple).message = [-577]
+	now_playing = null
+	cancel_chain()
+	chained_songs.clear()
 	song_button.refresh()
 
 func check_song(message: Array) -> bool:
@@ -78,7 +101,11 @@ func parse_note(parser: TransmissionParser) -> Dictionary:
 	var frequency = parser.read_number()
 	parser.try_consume(SEP)
 
-	return {"start_time": start_time, "duration": duration, "frequency": frequency}
+	return {
+		"start_time": start_time * conversion_factor,
+		"duration": duration * conversion_factor,
+		"frequency": frequency / conversion_factor
+	}
 
 func _start_build_song() -> void:
 	if _build_thread != null and _build_thread.is_alive():
@@ -101,10 +128,10 @@ func _build_song(song: Array, length: float) -> void:
 		while current_note < song.size() and playback_time >= song[current_note].start_time:
 			var note_data = song[current_note]
 			var note = {
-				"frequency": note_data.frequency * conversion_factor,
+				"frequency": note_data.frequency,
 				"phase": 0.0,
-				"time_left": note_data.duration * conversion_factor,
-				"total_duration": note_data.duration * conversion_factor,
+				"time_left": note_data.duration,
+				"total_duration": note_data.duration,
 				"type": NoteType.SINE
 			}
 			active_notes.append(note)
@@ -125,6 +152,8 @@ func _build_song(song: Array, length: float) -> void:
 				sample = 2.0 * note.phase - 1.0
 			elif note.type == NoteType.SQUARE:
 				sample = 1.0 if note.phase < 0.5 else -1.0
+			elif note.type == NoteType.TRIANGLE:
+				sample = 4.0 * abs(fmod(note.phase + 0.75, 1.0) - 0.5) - 1.0
 			
 			var volume_envelope = clamp(note.time_left / 0.05, 0.0, 1.0)
 			mixed_sample += sample * 0.2 * volume_envelope
@@ -163,4 +192,12 @@ func _ready() -> void:
 	stream.buffer_length = 0.5
 
 func _on_finished() -> void:
+	now_playing = null
+	song_end.emit()
+	if not chained_songs.is_empty():
+		var next = chained_songs[0]
+		var remain = chained_songs.slice(1)
+		for chain in remain:
+			next.chain_music(chain)
+		next.play_music()
 	stop_music()
