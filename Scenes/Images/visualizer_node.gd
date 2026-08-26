@@ -88,8 +88,11 @@ const IMAGE: int = -53
 const PLOT : int = -52
 const SEP  : int = -3
 
+var first_sphere: bool = true
+
 func _parse_sphere(parser: TransmissionParser) -> Dictionary:
-	parser.expect(PLOT)
+	if (first_sphere and parser.peek() == PLOT) or not first_sphere:
+		parser.expect(PLOT)
 	var x = parser.read_number()
 	parser.expect(SEP)
 	var y = parser.read_number()
@@ -100,14 +103,22 @@ func _parse_sphere(parser: TransmissionParser) -> Dictionary:
 	parser.expect(SEP)
 	var c = parser.read_number()
 	parser.try_consume(SEP)
+	first_sphere = false
 
 	return {"x": x, "y": y, "z": z, "r": r, "c": c}
 
-func check_image(message: Array) -> bool:
+func check_image(message0: Array) -> bool:
+	var message: Array[int] = []
+	for u in message0:
+		if u is int:
+			message.append(u)
+		else:
+			return false
 	var parser = TransmissionParser.new(message)
 	while not parser.is_at_end():
 		if not parser.skip_to(IMAGE): return false
 		parser.expect(IMAGE)
+		first_sphere = true
 		var pos := parser.save_state()
 		var spheres = parser.read_group_items(_parse_sphere)
 
