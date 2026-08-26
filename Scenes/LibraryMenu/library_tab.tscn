@@ -48,6 +48,7 @@ split_offset = -26
 
 [node name="TabContainer" type="TabContainer" parent="Body/Editor/GridContainer" unique_id=395675504]
 layout_mode = 2
+size_flags_vertical = 3
 current_tab = 0
 
 [node name="SignalDisplay" type="RichTextLabel" parent="Body/Editor/GridContainer/TabContainer" unique_id=838642603]
@@ -61,14 +62,18 @@ mouse_default_cursor_shape = 1
 selection_enabled = true
 metadata/_tab_index = 0
 
-[node name="TransHolder" type="VBoxContainer" parent="Body/Editor/GridContainer/TabContainer" unique_id=1449200161]
+[node name="TransHolder" type="ScrollContainer" parent="Body/Editor/GridContainer/TabContainer" unique_id=1711900185]
 visible = false
 clip_children = 2
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
 metadata/_tab_index = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Body/Editor/GridContainer" unique_id=1079951294]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Body/Editor/GridContainer/VBoxContainer" unique_id=340990848]
 layout_mode = 2
@@ -87,10 +92,17 @@ text = "copy sigs"
 script = ExtResource("1_yegc8")
 message = Array[int]([-42, -40])
 
-[node name="TransmissionEdit" parent="Body/Editor/GridContainer/VBoxContainer" unique_id=48211048 instance=ExtResource("1_i5m64")]
+[node name="ScrollContainer" type="ScrollContainer" parent="Body/Editor/GridContainer/VBoxContainer" unique_id=1018313947]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 2.0
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="TransmissionEdit" parent="Body/Editor/GridContainer/VBoxContainer/ScrollContainer" unique_id=48211048 instance=ExtResource("1_i5m64")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Buttons" type="HBoxContainer" parent="Body/Editor" unique_id=1269378282]
 layout_mode = 2
@@ -132,7 +144,7 @@ size_flags_vertical = 3
 [connection signal="tab_changed" from="Body/Editor/GridContainer/TabContainer" to="." method="_on_tab_container_tab_changed"]
 [connection signal="pressed" from="Body/Editor/GridContainer/VBoxContainer/HBoxContainer/CopySignals" to="." method="_on_copy_signals_pressed"]
 [connection signal="pressed" from="Body/Editor/GridContainer/VBoxContainer/HBoxContainer/CopyWords" to="." method="_on_copy_words_pressed"]
-[connection signal="text_changed" from="Body/Editor/GridContainer/VBoxContainer/TransmissionEdit" to="." method="_on_transmission_edit_text_changed"]
+[connection signal="text_changed" from="Body/Editor/GridContainer/VBoxContainer/ScrollContainer/TransmissionEdit" to="." method="_on_transmission_edit_text_changed"]
 [connection signal="pressed" from="Body/Editor/Buttons/Submit" to="." method="_on_submit_pressed"]
 [connection signal="pressed" from="Body/Editor/Buttons/Cancel" to="." method="_on_cancel_pressed"]
 [connection signal="confirmed" from="Body/Editor/Buttons/Delete" to="." method="_on_delete_confirmed"]

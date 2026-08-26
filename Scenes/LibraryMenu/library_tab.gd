@@ -3,7 +3,7 @@ class_name Library
 
 @onready var name_edit: LineEdit = $Body/Editor/Header/LineEdit
 @onready var signals_display: RichTextLabel = $Body/Editor/GridContainer/TabContainer/SignalDisplay
-@onready var words_edit: TransmissionEdit = $Body/Editor/GridContainer/VBoxContainer/TransmissionEdit
+@onready var words_edit: TransmissionEdit = $Body/Editor/GridContainer/VBoxContainer/ScrollContainer/TransmissionEdit
 @onready var delete_button: ConfirmationButton = $Body/Editor/Buttons/Delete
 @onready var tabber: TabContainer = $Body/Editor/GridContainer/TabContainer
 @onready var t_holder: Control = $Body/Editor/GridContainer/TabContainer/TransHolder
