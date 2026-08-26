@@ -34,7 +34,7 @@ static var plot_scene := preload("res://Scenes/Images/plot_node.tscn")
 @onready var pitch_slider: Range = $Intermediate/PitchSlider
 @onready var visualizer: TextureRect = $Intermediate/RenderAndYaw/VisualizerRect
 
-var _sphere_data: Array[Dictionary] = []
+var _sphere_data: Array = []
 
 func _enter_tree():
 	Main.instance.reload_image_inversion.connect(_refresh_inversions)
@@ -87,125 +87,38 @@ func _on_pitch_slider_value_changed(value: float):
 const IMAGE: int = -53
 const PLOT : int = -52
 const SEP  : int = -3
-const START: int = -14
-const END  : int = -15
 
-const NEG  : int = -1
-const FRAC : int = -10
+func _parse_sphere(parser: TransmissionParser) -> Dictionary:
+	parser.expect(PLOT)
+	var x = parser.read_number()
+	parser.expect(SEP)
+	var y = parser.read_number()
+	parser.expect(SEP)
+	var z = parser.read_number()
+	parser.expect(SEP)
+	var r = parser.read_number()
+	parser.expect(SEP)
+	var c = parser.read_number()
+	parser.try_consume(SEP)
 
-var _currently_failed: bool = false
-
-func _basic_find(message: Array, sig: int, optional: bool = false):
-	if _currently_failed:
-		return
-	if message.is_empty():
-		_currently_failed = true
-		return
-	if message[0] == sig:
-		message.pop_front()
-		return
-	if not optional:
-		if message[0] != IMAGE:
-			message.pop_front()
-		_currently_failed = true
-
-func _parse_number(message: Array, data: Dictionary, key: String, is_color: bool = false):
-	if _currently_failed:
-		return
-	if message.is_empty():
-		_currently_failed = true
-		return
-	var is_negative = message[0] == NEG
-	var fractional = false
-	var integer_part: String = ""
-	var decimal_part: String = ""
-	var validated: bool = false
-	if is_negative:
-		message.pop_front()
-		if is_color:
-			_currently_failed = true
-			return
-	while true:
-		if message[0] == FRAC:
-			message.pop_front()
-			if fractional or is_color:
-				_currently_failed = true
-				return
-			fractional = true
-		if message[0] is int and message[0] >= 0:
-			validated = true
-			if not fractional:
-				integer_part += str(message[0])
-			else:
-				decimal_part += str(message[0])
-			message.pop_front()
-		else:
-			break
-	if (
-		(is_color and (integer_part.to_int() < 0 or integer_part.to_int() > 64))
-		or not validated
-	):
-		_currently_failed = true
-		return
-	var o
-	if fractional:
-		o = (integer_part + "." + decimal_part).to_float()
-	else:
-		o = integer_part.to_int()
-	if is_negative:
-		o *= -1
-	data.set(key, o)
+	return {"x": x, "y": y, "z": z, "r": r, "c": c}
 
 func check_image(message: Array) -> bool:
-	message = message.duplicate()
-	while message:
-		#print(message)
-		_currently_failed = false
-		_basic_find(message, IMAGE)
-		_basic_find(message, START)
-		var first_go_around: bool = true
-		#print(message)
-		while message and not _currently_failed:
-			var build_data: Dictionary = {}
-			_basic_find(message, PLOT, first_go_around)
-			first_go_around = false
-			#print("post-plot ", message)
-			_parse_number(message, build_data, "x")
-			#print("post-x ", message)
-			#print("build: ", build_data)
-			_basic_find(message, SEP)
-			#print("post-sep ", message)
-			_parse_number(message, build_data, "y")
-			#print(message)
-			_basic_find(message, SEP)
-			_parse_number(message, build_data, "z")
-			_basic_find(message, SEP)
-			_parse_number(message, build_data, "r")
-			_basic_find(message, SEP)
-			_parse_number(message, build_data, "c", true)
-			#print("post-c", message)
-			#print("build: ", build_data)
-			#print("succ: ", not _currently_failed)
-			if not _currently_failed:
-				var f = message[0] if message.size() > 0 else null
-				if f == PLOT or f == SEP or f == END:
-					_sphere_data.append(build_data)
-					#print("data ", _sphere_data)
-				if f == PLOT:
-					continue
-				if f != IMAGE:
-					message.pop_front()
-				if f == SEP:
-					#print("sep found ", message)
-					continue
-				if f == END:
-					#print("end found ", message)
-					message = []
-					break
-			#print("unexpected token. clearing")
-			_sphere_data.clear()
-			break
-	
+	var parser = TransmissionParser.new(message)
+	while not parser.is_at_end():
+		if not parser.skip_to(IMAGE): return false
+		parser.expect(IMAGE)
+		var pos := parser.save_state()
+		var spheres = parser.read_group_items(_parse_sphere)
+
+		if parser.has_error():
+			print(parser.get_error_message())
+			parser.restore_state(pos, true)
+			continue
+
+		_sphere_data = spheres
+		break
+
 	if _sphere_data.is_empty():
 		#print("empty image")
 		return false
