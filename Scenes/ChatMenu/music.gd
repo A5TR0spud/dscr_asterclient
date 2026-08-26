@@ -27,6 +27,11 @@ const NOTE = -605003
 
 enum NoteType { SINE, SQUARE, SAWTOOTH, TRIANGLE }
 
+func _exit_tree() -> void:
+	if _build_thread and _build_thread.is_alive():
+		_build_thread.wait_to_finish()
+		_build_thread = null
+
 func play_music() -> void:
 	if is_playing():
 		stop_music()
@@ -182,6 +187,8 @@ func _build_song(song: Array, length: float) -> void:
 	_on_song_built.call_deferred(wav_stream)
 
 func _on_song_built(wav_stream: AudioStreamWAV) -> void:
+	_build_thread.wait_to_finish()
+	_build_thread = null
 	stream = wav_stream
 	song_built.emit()
 	song_button.disabled = false

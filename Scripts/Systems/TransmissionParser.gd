@@ -6,13 +6,13 @@ const GROUP_START = -14
 const GROUP_END = -15
 const NEGATIVE = -1
 
-var _data: Array[int]
+var _data: Array
 var _error: bool = false
 var _error_pos: int = 0
 var _error_msg: String
 var _pos: int = 0
 
-func _init(data: Array[int]) -> void:
+func _init(data: Array) -> void:
 	_data = data
 
 ## Return the signal at the current cursor position and advance the cursor forward.
