@@ -80,7 +80,7 @@ func read_number() -> Variant:
 	while peek() == 0: skip()
 
 	var val_str: String = ""
-	while not _error:
+	while not _error and not is_at_end():
 		var i = peek()
 		if i == DECIMAL:
 			val_str += "."
