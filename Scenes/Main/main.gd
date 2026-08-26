@@ -44,6 +44,9 @@ static func on_nicknames_reload() -> void:
 signal reload_image_inversion
 static func on_image_inversion_reload() -> void:
 	instance.reload_image_inversion.emit()
+signal reload_library
+static func on_library_reload() -> void:
+	instance.reload_library.emit()
 
 signal connected_user_change
 
@@ -215,7 +218,7 @@ func send_message(written: String) -> Array:
 	var strig: Array = sig.map(func (a): return str(a)) as Array[String]
 	# extra check here to account for auto-channel-prefix
 	if strig.size() > MAX_MESSAGE_LENGTH:
-		Chat.new_log(Chat.State.INPUT_TOO_LONG)
+		Chat.new_log(Chat.State.INPUT_TOO_LONG, [strig.size()])
 		return [false, MessageCompilationResult.MESSAGE_FAILED]
 	strig.insert(0, "M")
 	var o: String = ",".join(strig)

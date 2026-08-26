@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://c6kmkupmer6fn"]
+
+[ext_resource type="StyleBox" uid="uid://cem7hlj42ccbd" path="res://Styling/TransmissionMaker/text_edit.tres" id="1_2sule"]
+[ext_resource type="Script" uid="uid://eyonivvk3glk" path="res://Scenes/ChatMenu/message_edit.gd" id="2_omlj0"]
+[ext_resource type="StyleBox" uid="uid://bca1ief1qema3" path="res://Styling/TransmissionMaker/autocomplete_panel.tres" id="3_2sh44"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_amlv4"]
+
+[node name="TransmissionEdit" type="CodeEdit" unique_id=48211048]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+mouse_filter = 1
+theme_override_styles/normal = ExtResource("1_2sule")
+placeholder_text = "type here"
+context_menu_enabled = false
+emoji_menu_enabled = false
+wrap_mode = 1
+tab_input_mode = false
+scroll_fit_content_height = true
+caret_blink = true
+caret_multiple = false
+use_default_word_separators = false
+script = ExtResource("2_omlj0")
+
+[node name="AutocompleteFinder" type="CodeEdit" parent="." unique_id=1050007635]
+visible = false
+layout_mode = 0
+offset_top = 38.0
+offset_right = 1152.0
+offset_bottom = 46.0
+focus_mode = 0
+editable = false
+context_menu_enabled = false
+emoji_menu_enabled = false
+shortcut_keys_enabled = false
+selecting_enabled = false
+drag_and_drop_selection_enabled = false
+middle_mouse_paste_enabled = false
+empty_selection_clipboard_enabled = false
+virtual_keyboard_enabled = false
+use_default_word_separators = false
+use_custom_word_separators = true
+delimiter_strings = Array[String]([])
+code_completion_enabled = true
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1605796078]
+visible = false
+top_level = true
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 16.0
+offset_transform_enabled = true
+offset_transform_position = Vector2(-12, 0)
+offset_transform_position_ratio = Vector2(0, -1)
+offset_transform_visual_only = false
+theme_override_styles/panel = ExtResource("3_2sh44")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1130763178]
+clip_contents = true
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_bottom = 2
+
+[node name="ItemList" type="ItemList" parent="PanelContainer/MarginContainer" unique_id=80658763]
+custom_minimum_size = Vector2(240, 0)
+custom_maximum_size = Vector2(240, 240)
+clip_contents = false
+layout_mode = 2
+focus_mode = 0
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+theme_override_constants/line_separation = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_amlv4")
+allow_search = false
+auto_height = true
+text_overrun_behavior = 1
+
+[connection signal="caret_changed" from="." to="." method="_on_caret_changed"]
+[connection signal="text_changed" from="." to="." method="_on_text_changed"]

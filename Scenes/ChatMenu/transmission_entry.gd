@@ -102,8 +102,7 @@ func _handle_clickables():
 		return
 	if Input.is_action_pressed("click_signal_modifier") and is_hovering and not is_clickable:
 		request_rewrite(true)
-		if DisplayServer.cursor_get_shape() == DisplayServer.CURSOR_IBEAM:
-			DisplayServer.cursor_set_shape(DisplayServer.CURSOR_POINTING_HAND)
+		warp_mouse.call_deferred(get_local_mouse_position())
 		is_clickable = true
 	if (not Input.is_action_pressed("click_signal_modifier") or not is_hovering) and is_clickable:
 		request_rewrite(false)

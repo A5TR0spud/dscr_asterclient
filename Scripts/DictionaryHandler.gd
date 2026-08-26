@@ -283,9 +283,12 @@ static func parse_text(input: String, earlyReturn: bool = false) -> ParseResult:
 			current_failure = ""
 			if earlyReturn:
 				return result
-		if result.output.size() > Main.MAX_MESSAGE_LENGTH:
+		if result.output.size() > Main.MAX_MESSAGE_LENGTH and (earlyReturn or result.output.size() >= 4096):
 			result.state = ParseResult.FailureState.TOO_LONG
 			return result
+	if result.output.size() > Main.MAX_MESSAGE_LENGTH:
+		result.state = ParseResult.FailureState.TOO_LONG
+		return result
 	if not current_failure.is_empty():
 		result.failures.append(current_failure)
 		result.stopping_indices.append(last_halting_index)
@@ -301,7 +304,7 @@ static func parse_text_to_signals(input: String, do_logging: bool = true) -> Arr
 	if do_logging:
 		match parsed.state:
 			ParseResult.FailureState.TOO_LONG:
-				Chat.new_log(Chat.State.INPUT_TOO_LONG)
+				Chat.new_log(Chat.State.INPUT_TOO_LONG, [parsed.output.size()])
 			ParseResult.FailureState.UNKNOWN_STRING:
 				Chat.new_log(Chat.State.UNKNOWN_WORD, parsed.failures)
 		

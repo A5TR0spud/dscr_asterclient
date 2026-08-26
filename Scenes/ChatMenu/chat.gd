@@ -91,7 +91,7 @@ static func new_transmission(packet: PackedStringArray) -> void:
 	
 	new_message.message = integer_message
 	
-	var channel: Control = get_channel_node(channel_id)
+	var channel: ChatChannel = get_channel_node(channel_id)
 	
 	if (
 		(new_message.sender != Main.instance.previously_accepted_callsign)
@@ -214,8 +214,8 @@ static func new_log(state: State, args: Array = []) -> void:
 				msg.append(str(args[idx]))
 			msg.append(-15)
 		State.INPUT_TOO_LONG:
-			# COMPUTER DOES TRANSMISSION [ SIGNAL COUNT > 2000 ] COMMUNICATE CAN NOT DOST
-			msg = [-241, -86, -43, -14, -42, -23, -32, Main.MAX_MESSAGE_LENGTH, -15, -196, -145, -29, -85]
+			# COMPUTER DOES TRANSMISSION [ SIGNAL COUNT > 2000 ] COMMUNICATE CAN NOT DOST ; SIGNAL COUNT = $x
+			msg = [-241, -86, -43, -14, -42, -23, -32, Main.MAX_MESSAGE_LENGTH, -15, -196, -145, -29, -85, -2, -42, -23, -4, args[0]]
 		State.INPUT_ENCRYPT_TOO_SHORT:
 			# COMPUTER DOES TRANSMISSION [ arg AND SIGNAL COUNT < 3 ] COMMUNICATE CAN NOT DOST
 			msg = [-241, -86, -43, -14, args[0], -30, -42, -23, -33, 3, -15, -196, -145, -29, -85]
@@ -236,3 +236,22 @@ static func new_log(state: State, args: Array = []) -> void:
 	# arbitrary impossible sender for purposes of chat seperators
 	new_message.sender = -1574
 	get_current_channel_node().add_message_node(new_message)
+
+@onready var medit: TransmissionEdit = $MessageEdit
+func _on_message_edit_submit_text(message: String):
+	var send_result: Array = Main.instance.send_message(message.remove_char(ord(TransmissionEdit.DELIMITER_CHARACTER)))
+	if send_result[0]:
+		medit.text = ""
+	match send_result[1]:
+		Main.MessageCompilationResult.MESSAGE_SENT:
+			SoundManager.play_sound(SoundManager.Sounds.MESSAGE_SENT)
+		Main.MessageCompilationResult.MESSAGE_FAILED:
+			SoundManager.play_sound(SoundManager.Sounds.FAIL)
+		Main.MessageCompilationResult.COMMAND_SENT:
+			SoundManager.play_sound(SoundManager.Sounds.COMMAND_ACCEPTED)
+		Main.MessageCompilationResult.SHOW_SENT:
+			SoundManager.play_sound(SoundManager.Sounds.OPEN_UI)
+		Main.MessageCompilationResult.HIDE_SENT:
+			SoundManager.play_sound(SoundManager.Sounds.CLOSE_UI)
+		Main.MessageCompilationResult.REDUNDANT:
+			SoundManager.play_sound(SoundManager.Sounds.REDUNDANT)

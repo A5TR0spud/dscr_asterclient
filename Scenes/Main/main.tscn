@@ -49,9 +49,7 @@ stream = ExtResource("3_4e4y2")
 
 [node name="Body" type="HSplitContainer" parent="." unique_id=116522902]
 layout_mode = 2
-split_offsets = PackedInt32Array(-444)
 dragger_visibility = 1
-split_offset = -444
 
 [node name="Corpus" type="VBoxContainer" parent="Body" unique_id=1313970636]
 layout_mode = 2
