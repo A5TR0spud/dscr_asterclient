@@ -2,6 +2,7 @@ extends Node
 class_name AutocompleteManager
 
 # kept for sentimental value
+# lol
 static func get_candidates(written: String) -> Array[String]:
 	if written.is_valid_int():
 		return []

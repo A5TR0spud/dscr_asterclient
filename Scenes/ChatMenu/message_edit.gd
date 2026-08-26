@@ -1,9 +1,12 @@
 extends TextEdit
+class_name TransmissionEdit
 
 @onready var autocomplete_list: ItemList = $PanelContainer/MarginContainer/ItemList
 @onready var auto_list_panel: PanelContainer = $PanelContainer
 #CodeEdit hates trying to autocomplete things without spaces, so use a nested one which contains only the word to try
 @onready var autocomplete_finder: CodeEdit = $AutocompleteFinder
+
+@export var placeholder: Array[int] = [-43, -38]
 
 const DELIMITER_CHARACTER = "\u001f"
 
@@ -14,25 +17,9 @@ func _ready():
 	autocomplete_finder.hide()
 
 func refresh():
-	placeholder_text = DictionaryHandler.signals_to_words([-43, -38])
+	placeholder_text = DictionaryHandler.signals_to_words(placeholder)
 
-func submit_text() -> void:
-	var send_result: Array = Main.instance.send_message(text.remove_char(ord(DELIMITER_CHARACTER)))
-	if send_result[0]:
-		text = ""
-	match send_result[1]:
-		Main.MessageCompilationResult.MESSAGE_SENT:
-			SoundManager.play_sound(SoundManager.Sounds.MESSAGE_SENT)
-		Main.MessageCompilationResult.MESSAGE_FAILED:
-			SoundManager.play_sound(SoundManager.Sounds.FAIL)
-		Main.MessageCompilationResult.COMMAND_SENT:
-			SoundManager.play_sound(SoundManager.Sounds.COMMAND_ACCEPTED)
-		Main.MessageCompilationResult.SHOW_SENT:
-			SoundManager.play_sound(SoundManager.Sounds.OPEN_UI)
-		Main.MessageCompilationResult.HIDE_SENT:
-			SoundManager.play_sound(SoundManager.Sounds.CLOSE_UI)
-		Main.MessageCompilationResult.REDUNDANT:
-			SoundManager.play_sound(SoundManager.Sounds.REDUNDANT)
+signal submit_text(message: String)
 
 func _request_code_completion(force: bool) -> void:
 	var word_under_caret: String = get_signal_under_caret()
@@ -209,7 +196,7 @@ func _gui_input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("ui_text_submit"):
 		auto_list_panel.hide()
-		submit_text()
+		submit_text.emit(text)
 		accept_event()
 		return
 	

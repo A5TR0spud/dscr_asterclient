@@ -45,6 +45,5 @@ func search_children() -> void:
 	re_search = false
 
 func _on_dictionary_save_open_pressed():
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	SaveSystem.open_save_location()
 	SaveSystem.load()

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cdwvxll5uy32e"]
+
+[ext_resource type="StyleBox" uid="uid://dcmofilgg82h2" path="res://Styling/panel_style.tres" id="1_nk15b"]
+[ext_resource type="Script" uid="uid://c8btulsry70gn" path="res://Scenes/LibraryMenu/library_entry.gd" id="2_hc70a"]
+
+[node name="LibraryEntry" type="Label" unique_id=130380178]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = ExtResource("1_nk15b")
+text = "transmission name"
+script = ExtResource("2_hc70a")

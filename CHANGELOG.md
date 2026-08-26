@@ -2,6 +2,11 @@
 
 ## --WIP--
 
+### Additions
+
+* Added the transmission library tab
+  * You can edit, preview, save, load, and copy transmissions
+
 ### Changes
 
 * Editing an entry you don't have defined now auto-selects the name
@@ -9,6 +14,12 @@
 * Signal colors now have hue, saturation, and value available
 * Theme colors are less washed out
 * Changed font
+* Removed button click noises
+* Reaching the signal cap now displays how many signals are in the message, up to 4096
+
+### Fixes
+
+* Fixed leaving the skeleton key channel hiding main chat
 
 ## 0.5.1
 

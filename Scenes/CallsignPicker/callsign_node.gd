@@ -38,29 +38,21 @@ signal callsign_submitted(new_value: int)
 
 func _on_digit_512_inc_pressed():
 	base10 += 512
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 func _on_digit_64_inc_pressed():
 	base10 += 64
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 func _on_digit_8_inc_pressed():
 	base10 += 8
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 func _on_digit_1_inc_pressed():
 	base10 += 1
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 
 func _on_digit_512_dec_pressed():
 	base10 -= 512
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 func _on_digit_64_dec_pressed():
 	base10 -= 64
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 func _on_digit_8_dec_pressed():
 	base10 -= 8
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 func _on_digit_1_dec_pressed():
 	base10 -= 1
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 
 func _on_submit_button_pressed():
 	callsign = base10

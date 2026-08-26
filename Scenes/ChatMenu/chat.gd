@@ -31,15 +31,6 @@ func open_loaded_channels():
 	for channel_id in SettingsHandler.opened_channels:
 		enable_channel(channel_id)
 
-func _gui_input(event: InputEvent):
-	if event is InputEventMouse:
-		event = event as InputEventMouse
-		if event.button_mask != MouseButton.MOUSE_BUTTON_LEFT or not event.is_pressed():
-			return
-		if DictEditMenu.is_open():
-			DictEditMenu.close()
-			accept_event()
-
 static func on_chat_display_child_entered_tree(node: Node, chat_body: VBoxContainer):
 	if node is Separator:
 		return
@@ -100,15 +91,14 @@ static func new_transmission(packet: PackedStringArray) -> void:
 	
 	new_message.message = integer_message
 	
-	var channel: Control = get_channel_node(channel_id)
+	var channel: ChatChannel = get_channel_node(channel_id)
 	
 	if (
 		(new_message.sender != Main.instance.previously_accepted_callsign)
-		and (not channel.visible or not instance.get_window().has_focus())
+		and (not channel.visible or not instance.get_window().has_focus() or not instance.is_visible_in_tree())
 		and channel_is_visible(channel_id)
 	):
 		SoundManager.play_sound(SoundManager.Sounds.NOTIFICATION)
-	
 	channel.add_message_node(new_message)
 
 enum State {
@@ -179,8 +169,8 @@ static func disable_channel(id: int):
 			if tab_to_check is not ChatChannel:
 				continue
 			tab_to_check = tab_to_check as ChatChannel
-			var signal_key = tab_to_check.id
-			if signal_key is not int:
+			var signal_key: int = tab_to_check.id
+			if signal_key < 0:
 				continue
 			signal_key = signal_key as int
 			if not SettingsHandler.opened_channels.has(signal_key):
@@ -224,8 +214,8 @@ static func new_log(state: State, args: Array = []) -> void:
 				msg.append(str(args[idx]))
 			msg.append(-15)
 		State.INPUT_TOO_LONG:
-			# COMPUTER DOES TRANSMISSION [ SIGNAL COUNT > 2000 ] COMMUNICATE CAN NOT DOST
-			msg = [-241, -86, -43, -14, -42, -23, -32, Main.MAX_MESSAGE_LENGTH, -15, -196, -145, -29, -85]
+			# COMPUTER DOES TRANSMISSION [ SIGNAL COUNT > 2000 ] COMMUNICATE CAN NOT DOST ; SIGNAL COUNT = $x
+			msg = [-241, -86, -43, -14, -42, -23, -32, Main.MAX_MESSAGE_LENGTH, -15, -196, -145, -29, -85, -2, -42, -23, -4, args[0]]
 		State.INPUT_ENCRYPT_TOO_SHORT:
 			# COMPUTER DOES TRANSMISSION [ arg AND SIGNAL COUNT < 3 ] COMMUNICATE CAN NOT DOST
 			msg = [-241, -86, -43, -14, args[0], -30, -42, -23, -33, 3, -15, -196, -145, -29, -85]
@@ -246,3 +236,22 @@ static func new_log(state: State, args: Array = []) -> void:
 	# arbitrary impossible sender for purposes of chat seperators
 	new_message.sender = -1574
 	get_current_channel_node().add_message_node(new_message)
+
+@onready var medit: TransmissionEdit = $MessageEdit
+func _on_message_edit_submit_text(message: String):
+	var send_result: Array = Main.instance.send_message(message.remove_char(ord(TransmissionEdit.DELIMITER_CHARACTER)))
+	if send_result[0]:
+		medit.text = ""
+	match send_result[1]:
+		Main.MessageCompilationResult.MESSAGE_SENT:
+			SoundManager.play_sound(SoundManager.Sounds.MESSAGE_SENT)
+		Main.MessageCompilationResult.MESSAGE_FAILED:
+			SoundManager.play_sound(SoundManager.Sounds.FAIL)
+		Main.MessageCompilationResult.COMMAND_SENT:
+			SoundManager.play_sound(SoundManager.Sounds.COMMAND_ACCEPTED)
+		Main.MessageCompilationResult.SHOW_SENT:
+			SoundManager.play_sound(SoundManager.Sounds.OPEN_UI)
+		Main.MessageCompilationResult.HIDE_SENT:
+			SoundManager.play_sound(SoundManager.Sounds.CLOSE_UI)
+		Main.MessageCompilationResult.REDUNDANT:
+			SoundManager.play_sound(SoundManager.Sounds.REDUNDANT)

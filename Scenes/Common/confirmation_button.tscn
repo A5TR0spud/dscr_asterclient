@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://2emnji0ns3x2"]
+
+[ext_resource type="Script" uid="uid://dbvyvpj6id1sv" path="res://Scenes/Common/confirmation_button.gd" id="1_uuehu"]
+
+[node name="ConfirmationButton" type="Button" unique_id=1499947826]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+text = "delete"
+script = ExtResource("1_uuehu")
+
+[node name="ConfirmTimer" type="Timer" parent="." unique_id=406820111]
+wait_time = 5.0
+
+[connection signal="timeout" from="ConfirmTimer" to="." method="_on_confirm_timeout"]

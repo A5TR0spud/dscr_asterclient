@@ -20,9 +20,7 @@ func _enter_tree():
 
 @onready var break_sentence: HBoxContainer = $DictEditMainframe/BreakSentence
 @onready var name_sentence: HBoxContainer = $DictEditMainframe/SignalNameEdit
-@onready var delete_button: Button = $DictEditMainframe/SubmitElseCancel/DeleteButton
-@onready var delete_confirm: bool = false
-@onready var delete_time_window: Timer = $DeleteConfirm
+@onready var delete_button: ConfirmationButton = $DictEditMainframe/SubmitElseCancel/DeleteButton
 
 @onready var bbcode_options: Control = $DictEditMainframe/BBCodeOptions
 @onready var underline_parent: Control = $DictEditMainframe/BBCodeOptions/UnderlineSentence
@@ -44,7 +42,7 @@ func save() -> void:
 	if current_signal == 0:
 		DictionaryHandler.default_before_mode = before_label.selected
 		DictionaryHandler.default_after_mode = after_label.selected
-		DictionaryHandler.default_color = _get_spinners_as_color().to_html(false)
+		DictionaryHandler.default_color = "#"+_get_spinners_as_color().to_html(false)
 		SoundManager.play_sound(SoundManager.Sounds.CONFIRMED)
 		SaveSystem.save_dict()
 		Main.on_dict_reload()
@@ -70,7 +68,6 @@ func save() -> void:
 	Main.on_dict_reload()
 
 func reload() -> void:
-	delete_confirm = false
 	break_sentence.visible = current_signal < 0
 	name_sentence.visible = current_signal < 0
 	desc_edit.visible = current_signal < 0
@@ -95,7 +92,7 @@ func reload() -> void:
 	after_label.select(int(desc[DictionaryHandler.after_key]))
 	break_button.set_pressed_no_signal(desc[DictionaryHandler.break_key])
 	break_button.refresh()
-	_set_delete_button_state(false)
+	delete_button.set_confirm_state(false)
 	delete_button.disabled = not DictionaryHandler.word_keys.has(current_signal)
 	var underline_value: bool = desc.get(DictionaryHandler.underline_key, false)
 
@@ -166,11 +163,12 @@ static func open(sig: int = 0, repeat_to_close: bool = false) -> void:
 		close()
 		return
 	instance.current_signal = sig
+	instance.grab_click_focus()
 	instance.reload()
 	instance.show()
 
 static func close():
-	instance._set_delete_button_state(false)
+	instance.delete_button.set_confirm_state(false)
 	instance.hide()
 
 static func select_signal_name():
@@ -186,39 +184,12 @@ func _on_cancel_button_pressed():
 	reload()
 
 func _on_close_button_pressed():
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	close()
 
-func _set_delete_button_state(confirmation = null) -> void:
-	if confirmation is bool:
-		delete_confirm = confirmation
-	if delete_confirm:
-		delete_button.text = DictionaryHandler.signals_to_words([-42, -88, -85])
-		delete_button.self_modulate = Color(1, .4, .475)
-		delete_time_window.start()
-	else:
-		delete_button.text = DictionaryHandler.signals_to_words([-88, -127, -85])
-		delete_button.self_modulate = Color(1., 1., 1.)
-		delete_time_window.stop()
 
-func _on_delete_button_pressed():
-	if delete_confirm:
-		SoundManager.play_sound(SoundManager.Sounds.DISCARD)
-		DictionaryHandler.forget_signal(current_signal)
-		Main.on_dict_reload()
-		SaveSystem.save_dict()
-		close()
-	else:
-		SoundManager.play_sound(SoundManager.Sounds.COMMAND_ACCEPTED)
-		_set_delete_button_state(true)
-		delete_button.disabled = true
-		get_tree().create_timer(Main.HE6_HALF_LIFE * 0.5).timeout.connect(func(): delete_button.disabled = false)
 
 func _on_name_line_edit_text_submitted(_new_text):
 	save()
-
-func _on_delete_confirm_timeout():
-	_set_delete_button_state(false)
 
 func _sample_color():
 	var h: int = roundi(hue.value)
@@ -237,3 +208,9 @@ func _on_value_spinner_value_changed(_value):
 
 func _on_sat_spinner_value_changed(_value):
 	_sample_color()
+
+func _on_delete_button_confirmed():
+	DictionaryHandler.forget_signal(current_signal)
+	Main.on_dict_reload()
+	SaveSystem.save_dict()
+	close()

@@ -19,11 +19,13 @@ static var dict: Dictionary = {
 
 static var settings: Dictionary = {}
 static var nicknames: Dictionary = {}
+static var library: Dictionary = {}
 
 const _DICT_PATH: String = "DICTIONARY-1.save"
 const _MACRO_PATH: String = "macro.json"
 const _SETTINGS_PATH: String = "settings.json"
 const _NICKNAMES_PATH: String = "nicknames.json"
+const _LIBRARY_PATH: String = "library.json"
 const DIRECTORY_PATH: String = "user://directory.txt"
 static var directory: String = ProjectSettings.globalize_path("user://")
 static var dict_path: String:
@@ -38,12 +40,16 @@ static var settings_path: String:
 static var nicknames_path: String:
 	get:
 		return directory.path_join(_NICKNAMES_PATH)
+static var library_path: String:
+	get:
+		return directory.path_join(_LIBRARY_PATH)
 
 static func load() -> void:
 	load_directory()
 	load_dict()
 	load_settings()
 	load_nicknames()
+	load_library()
 
 static func save_directory() -> void:
 	var file_access := FileAccess.open(DIRECTORY_PATH, FileAccess.WRITE)
@@ -93,6 +99,31 @@ static func load_nicknames() -> void:
 		return
 	nicknames = json.data
 	Main.on_nicknames_reload()
+
+static func save_library() -> void:
+	var json_string := JSON.stringify(library, "\t")
+	var file_access := FileAccess.open(library_path, FileAccess.WRITE)
+	if not file_access:
+		print("An error happened while saving data: ", FileAccess.get_open_error())
+		return
+
+	file_access.store_string(json_string)
+	file_access.close()
+
+static func load_library() -> void:
+	if not FileAccess.file_exists(library_path):
+		save_nicknames()
+		return
+	var file_access := FileAccess.open(library_path, FileAccess.READ)
+	var json_string:= FileAccess.get_file_as_string(library_path)
+	file_access.close()
+	var json := JSON.new()
+	var error := json.parse(json_string)
+	if error:
+		print("JSON Parse Error: ", error)
+		return
+	library = json.data
+	Main.on_library_reload()
 
 static func save_settings() -> void:
 	SettingsHandler.export()

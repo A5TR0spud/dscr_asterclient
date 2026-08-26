@@ -6,10 +6,12 @@
 [ext_resource type="AudioStream" uid="uid://bspyt735rxcbt" path="res://Assets/Sounds/shut_down.ogg" id="3_4e4y2"]
 [ext_resource type="PackedScene" uid="uid://bmqd6twlnn8dk" path="res://Scenes/ChatMenu/chat.tscn" id="3_imbg2"]
 [ext_resource type="PackedScene" uid="uid://bs6sllfdwwwmx" path="res://Scenes/Main/sound_scene.tscn" id="4_6t3k2"]
+[ext_resource type="Script" uid="uid://4obb1ushbfji" path="res://Scenes/Main/corpus.gd" id="5_wliom"]
 [ext_resource type="Script" uid="uid://bft2883q6jmm7" path="res://Scenes/Main/sidebar_tabber.gd" id="6_es6iu"]
 [ext_resource type="PackedScene" uid="uid://tpn8p2apuh1t" path="res://Scenes/DictDisplayMenu/dictionary_tab.tscn" id="7_hfg1r"]
 [ext_resource type="PackedScene" uid="uid://bunet4g0aqi5h" path="res://Scenes/OnlineUsersTab/online_people_tab.tscn" id="8_hfg1r"]
 [ext_resource type="PackedScene" uid="uid://bvo2gxc2kcenm" path="res://Scenes/SettingsMenu/settings_tab.tscn" id="9_4e4y2"]
+[ext_resource type="PackedScene" uid="uid://iblx4x1lwahd" path="res://Scenes/LibraryMenu/library_tab.tscn" id="9_koken"]
 [ext_resource type="PackedScene" uid="uid://c1h04iufkd28w" path="res://Scenes/CallsignPicker/callsign_node.tscn" id="11_4a3kt"]
 [ext_resource type="Script" uid="uid://cmdmiuvan8h1p" path="res://Scenes/Main/dict_edit_prison.gd" id="12_ifk88"]
 [ext_resource type="PackedScene" uid="uid://crn4b5wrwilbc" path="res://Scenes/DictEditMenu/dict_edit_window.tscn" id="13_8sujb"]
@@ -45,83 +47,87 @@ stream = ExtResource("3_4e4y2")
 
 [node name="SoundManager" parent="." unique_id=467419252 instance=ExtResource("4_6t3k2")]
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=71793566]
+[node name="Body" type="HSplitContainer" parent="." unique_id=116522902]
+layout_mode = 2
+dragger_visibility = 1
+
+[node name="Corpus" type="VBoxContainer" parent="Body" unique_id=1313970636]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("5_wliom")
+
+[node name="Header" type="HBoxContainer" parent="Body/Corpus" unique_id=73104091]
 layout_mode = 2
 
-[node name="MainContainer" type="VBoxContainer" parent="MarginContainer" unique_id=651321224]
+[node name="Tabber" type="TabBar" parent="Body/Corpus/Header" unique_id=153868783]
+layout_mode = 2
+current_tab = 0
+clip_tabs = false
+close_with_middle_mouse = false
+tab_count = 2
+tab_0/title = "chat"
+tab_1/title = "library"
+
+[node name="VSeparator" type="VSeparator" parent="Body/Corpus/Header" unique_id=1447746975]
 layout_mode = 2
 
-[node name="Header" type="HBoxContainer" parent="MarginContainer/MainContainer" unique_id=1305811835]
+[node name="DSVE_Button" type="Button" parent="Body/Corpus/Header" unique_id=1672549758]
 layout_mode = 2
-
-[node name="Title" type="Label" parent="MarginContainer/MainContainer/Header" unique_id=1283547797]
-layout_mode = 2
-size_flags_horizontal = 2
-text = "computer client"
-script = ExtResource("2_vk4q2")
-message = Array[int]([-241, -128])
-
-[node name="DsveButton" type="Button" parent="MarginContainer/MainContainer/Header" unique_id=408009820]
-layout_mode = 2
-size_flags_horizontal = 10
-size_flags_vertical = 4
-mouse_default_cursor_shape = 2
-text = "visual editor"
+text = "dsve"
 script = ExtResource("2_vk4q2")
 message = Array[int]([-53, -38])
 
-[node name="HSeparator3" type="HSeparator" parent="MarginContainer/MainContainer" unique_id=544634055]
-layout_mode = 2
-
-[node name="Body" type="HSplitContainer" parent="MarginContainer/MainContainer" unique_id=116522902]
+[node name="TabContainer" type="Container" parent="Body/Corpus" unique_id=1155907715]
 layout_mode = 2
 size_flags_vertical = 3
-split_offsets = PackedInt32Array(600)
-split_offset = 600
 
-[node name="Chat" parent="MarginContainer/MainContainer/Body" unique_id=2068892274 instance=ExtResource("3_imbg2")]
+[node name="Chat" parent="Body/Corpus/TabContainer" unique_id=2068892274 instance=ExtResource("3_imbg2")]
 layout_mode = 2
 
-[node name="Sidebar" type="VBoxContainer" parent="MarginContainer/MainContainer/Body" unique_id=2052290855]
+[node name="Library" parent="Body/Corpus/TabContainer" unique_id=1052642948 instance=ExtResource("9_koken")]
+visible = false
 layout_mode = 2
-size_flags_horizontal = 3
+mouse_filter = 1
 
-[node name="SidebarTabber" type="TabContainer" parent="MarginContainer/MainContainer/Body/Sidebar" unique_id=853955400]
+[node name="Sidebar" type="VBoxContainer" parent="Body" unique_id=2052290855]
+layout_mode = 2
+
+[node name="SidebarTabber" type="TabContainer" parent="Body/Sidebar" unique_id=853955400]
 layout_mode = 2
 size_flags_vertical = 3
-current_tab = 2
+current_tab = 0
 clip_tabs = false
 use_hidden_tabs_for_min_size = true
 tab_0/title = "Dict"
 tab_1/title = "Human"
 script = ExtResource("6_es6iu")
 
-[node name="DictionaryTab" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber" unique_id=1745367524 instance=ExtResource("7_hfg1r")]
+[node name="DictionaryTab" parent="Body/Sidebar/SidebarTabber" unique_id=1745367524 instance=ExtResource("7_hfg1r")]
+layout_mode = 2
+
+[node name="OnlinePeopleTab" parent="Body/Sidebar/SidebarTabber" unique_id=1445824947 instance=ExtResource("8_hfg1r")]
 visible = false
 layout_mode = 2
 
-[node name="OnlinePeopleTab" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber" unique_id=1445824947 instance=ExtResource("8_hfg1r")]
+[node name="SettingsTab" parent="Body/Sidebar/SidebarTabber" unique_id=1649791393 instance=ExtResource("9_4e4y2")]
 visible = false
 layout_mode = 2
 
-[node name="SettingsTab" parent="MarginContainer/MainContainer/Body/Sidebar/SidebarTabber" unique_id=1649791393 instance=ExtResource("9_4e4y2")]
+[node name="HSeparator" type="HSeparator" parent="Body/Sidebar" unique_id=1590731449]
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/MainContainer/Body/Sidebar" unique_id=1590731449]
-layout_mode = 2
-
-[node name="CallsignContainer" type="VBoxContainer" parent="MarginContainer/MainContainer/Body/Sidebar" unique_id=90528685]
+[node name="CallsignContainer" type="VBoxContainer" parent="Body/Sidebar" unique_id=90528685]
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="CallsignLabel" type="Label" parent="MarginContainer/MainContainer/Body/Sidebar/CallsignContainer" unique_id=1998627814]
+[node name="CallsignLabel" type="Label" parent="Body/Sidebar/CallsignContainer" unique_id=1998627814]
 layout_mode = 2
 text = "callsign"
 horizontal_alignment = 1
 script = ExtResource("2_vk4q2")
 message = Array[int]([-128, -42])
 
-[node name="CallsignEdit" parent="MarginContainer/MainContainer/Body/Sidebar/CallsignContainer" unique_id=965442127 instance=ExtResource("11_4a3kt")]
+[node name="CallsignEdit" parent="Body/Sidebar/CallsignContainer" unique_id=965442127 instance=ExtResource("11_4a3kt")]
 layout_mode = 2
 size_flags_horizontal = 4
 
@@ -136,6 +142,9 @@ layout_mode = 2
 
 [connection signal="timeout" from="TimeoutTime" to="." method="_on_timeout_time_timeout"]
 [connection signal="timeout" from="ReconnectTime" to="." method="_on_reconnect_time_timeout"]
-[connection signal="pressed" from="MarginContainer/MainContainer/Header/DsveButton" to="." method="_on_dsve_button_pressed"]
-[connection signal="callsign_submitted" from="MarginContainer/MainContainer/Body/Sidebar/CallsignContainer/CallsignEdit" to="." method="_on_callsign_edit_callsign_submitted"]
+[connection signal="mouse_entered" from="Body/Corpus" to="Body/Corpus" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Body/Corpus" to="Body/Corpus" method="_on_mouse_exited"]
+[connection signal="tab_changed" from="Body/Corpus/Header/Tabber" to="Body/Corpus" method="_on_tabber_tab_changed"]
+[connection signal="pressed" from="Body/Corpus/Header/DSVE_Button" to="." method="_on_dsve_button_pressed"]
+[connection signal="callsign_submitted" from="Body/Sidebar/CallsignContainer/CallsignEdit" to="." method="_on_callsign_edit_callsign_submitted"]
 [connection signal="visibility_changed" from="DictEditPrison/DictEditWindow" to="DictEditPrison" method="_on_dict_edit_window_visibility_changed"]

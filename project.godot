@@ -41,6 +41,7 @@ folder_colors={
 "res://Scenes/DictDisplayMenu/": "orange",
 "res://Scenes/DictEditMenu/": "yellow",
 "res://Scenes/Images/": "red",
+"res://Scenes/LibraryMenu/": "blue",
 "res://Scenes/OnlineUsersTab/": "pink",
 "res://Scenes/SettingsMenu/": "orange",
 "res://Scripts/": "gray",

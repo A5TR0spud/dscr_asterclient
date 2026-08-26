@@ -16,6 +16,10 @@
 [ext_resource type="StyleBox" uid="uid://c72inj02naxqg" path="res://Styling/Tabber/tab_hovered.tres" id="10_gwgd7"]
 [ext_resource type="StyleBox" uid="uid://8mg0wvheihvx" path="res://Styling/Tabber/tab_selected.tres" id="11_fqkxe"]
 [ext_resource type="StyleBox" uid="uid://bcpf14e281kyl" path="res://Styling/Tabber/tab_unselected.tres" id="12_k7nka"]
+[ext_resource type="StyleBox" uid="uid://dupyap3qde3fv" path="res://Styling/Tabber/ButtonLookalike/tab_focus.tres" id="12_rvmd7"]
+[ext_resource type="StyleBox" uid="uid://03se03qmxl1l" path="res://Styling/Tabber/ButtonLookalike/tab_hovered.tres" id="13_3jl28"]
+[ext_resource type="StyleBox" uid="uid://bud12urn6xcjr" path="res://Styling/Tabber/ButtonLookalike/tab_selected.tres" id="14_f5bgc"]
+[ext_resource type="StyleBox" uid="uid://10juafvr3ky1" path="res://Styling/Tabber/ButtonLookalike/tab_unselected.tres" id="15_d5xg6"]
 [ext_resource type="StyleBox" uid="uid://db3k5eiovgegq" path="res://Styling/Seps/v_sep.tres" id="15_k7nka"]
 [ext_resource type="FontFile" uid="uid://kx3rrq8lr2ar" path="res://fonts/CascadiaMono-Regular.ttf" id="18_pkgym"]
 
@@ -137,10 +141,10 @@ SpinBox/styles/up_background = ExtResource("2_2dlxw")
 SpinBox/styles/up_background_hovered = ExtResource("1_pkgym")
 SpinBox/styles/up_background_pressed = ExtResource("3_08nyo")
 TabBar/colors/font_unselected_color = Color(0.69803923, 0.69803923, 0.69803923, 0.7647059)
-TabBar/styles/tab_focus = ExtResource("9_i4omk")
-TabBar/styles/tab_hovered = ExtResource("10_gwgd7")
-TabBar/styles/tab_selected = ExtResource("11_fqkxe")
-TabBar/styles/tab_unselected = ExtResource("12_k7nka")
+TabBar/styles/tab_focus = ExtResource("12_rvmd7")
+TabBar/styles/tab_hovered = ExtResource("13_3jl28")
+TabBar/styles/tab_selected = ExtResource("14_f5bgc")
+TabBar/styles/tab_unselected = ExtResource("15_d5xg6")
 TabContainer/colors/font_unselected_color = Color(0.69803923, 0.69803923, 0.69803923, 0.7647059)
 TabContainer/constants/side_margin = 0
 TabContainer/styles/panel = ExtResource("1_tvtlr")

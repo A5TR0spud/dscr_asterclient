@@ -73,32 +73,26 @@ func _physics_process(_delta):
 
 func _on_formatting_set(new_value):
 	SettingsHandler.do_formatting = new_value
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	save()
 
 func _on_image_vis_set(new_value):
 	SettingsHandler.image_default = new_value
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	save(false)
 
 func _on_signal_color_set(new_value):
 	SettingsHandler.do_bbcode = new_value
 	Main.on_dict_reload()
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	save(false)
 
 func _on_truncation_spinner_value_changed(value):
 	SettingsHandler.truncate_message_size = roundi(value)
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	save(true, true)
 
 func _on_font_spinner_value_changed(value):
 	SettingsHandler.font_size = value
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	save(true, true)
 
 func _try_address():
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	Main.reconnect_or_change_url(address_edit.text)
 
 func _on_adress_edit_text_submitted(_new_text):
@@ -113,16 +107,13 @@ func _sample_color(val: int = -1):
 	color_sample.color = VisualizeNode.calculate_color(val)
 
 func _on_color_submit_button_pressed():
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	ThemeManager.set_theme_color(roundi(color_edit.value))
 
 func _on_color_cancel_button_pressed():
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	color_edit.value = SettingsHandler.theme_color
 	_sample_color()
 
 func _on_color_picker_value_changed(value):
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	_sample_color(value)
 
 func _on_volume_slider_value_changed(value):
@@ -133,25 +124,21 @@ func _on_volume_slider_value_changed(value):
 	save(false, true)
 
 func _on_invert_pitch_set(new_value):
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	SettingsHandler.img_invert_pitch = new_value
 	Main.on_image_inversion_reload()
 	save(false)
 
 func _on_invert_yaw_set(new_value):
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	SettingsHandler.img_invert_yaw = new_value
 	Main.on_image_inversion_reload()
 	save(false)
 
 func _on_invert_zoom_set(new_value):
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	SettingsHandler.img_invert_zoom = new_value
 	Main.on_image_inversion_reload()
 	save(false)
 
 func _on_undef_setting_set(new_value):
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	SettingsHandler.use_at_undef = new_value
 	Main.on_dict_reload()
 	save(false)
