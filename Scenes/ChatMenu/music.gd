@@ -101,10 +101,10 @@ func _build_song(song: Array, length: float) -> void:
 		while current_note < song.size() and playback_time >= song[current_note].start_time:
 			var note_data = song[current_note]
 			var note = {
-				"frequency": note_data.frequency,
+				"frequency": note_data.frequency * conversion_factor,
 				"phase": 0.0,
-				"time_left": note_data.duration,
-				"total_duration": note_data.duration,
+				"time_left": note_data.duration * conversion_factor,
+				"total_duration": note_data.duration * conversion_factor,
 				"type": NoteType.SINE
 			}
 			active_notes.append(note)
