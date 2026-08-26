@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://iblx4x1lwahd"]
+
+[node name="Library" type="PanelContainer" unique_id=1052642948]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Body" type="HSplitContainer" parent="." unique_id=281498039]
+layout_mode = 2
+size_flags_vertical = 3
+dragger_visibility = 1
+
+[node name="Editor" type="VBoxContainer" parent="Body" unique_id=708605876]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="Body/Editor" unique_id=57657579]
+layout_mode = 2
+text = "title go here!"
+
+[node name="GridContainer" type="VBoxContainer" parent="Body/Editor" unique_id=164151498]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SignalEdit" type="CodeEdit" parent="Body/Editor/GridContainer" unique_id=1604328965]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+placeholder_text = "signal editor"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Body/Editor/GridContainer" unique_id=340990848]
+layout_mode = 2
+
+[node name="CopySignals" type="Button" parent="Body/Editor/GridContainer/HBoxContainer" unique_id=920528551]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "copy words"
+
+[node name="CopyWords" type="Button" parent="Body/Editor/GridContainer/HBoxContainer" unique_id=1682179097]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "copy sigs"
+
+[node name="WordEdit" type="CodeEdit" parent="Body/Editor/GridContainer" unique_id=1756341508]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+placeholder_text = "word editor"
+delimiter_strings = Array[String](["\" \"", "' '"])
+
+[node name="Buttons" type="HBoxContainer" parent="Body/Editor" unique_id=1269378282]
+layout_mode = 2
+
+[node name="Submit" type="Button" parent="Body/Editor/Buttons" unique_id=749166699]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "submit"
+
+[node name="Cancel" type="Button" parent="Body/Editor/Buttons" unique_id=1029250237]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "cancel"
+
+[node name="Delete" type="Button" parent="Body/Editor/Buttons" unique_id=1682248664]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "delete"
+
+[node name="Catalogue" type="VBoxContainer" parent="Body" unique_id=969511644]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Body/Catalogue" unique_id=255123090]
+layout_mode = 2
+text = "title go here!"
+
+[node name="Listicle" type="VBoxContainer" parent="Body/Catalogue" unique_id=249558692]
+layout_mode = 2

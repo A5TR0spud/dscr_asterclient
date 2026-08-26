@@ -8,7 +8,7 @@ var socket: WebSocketPeer = WebSocketPeer.new()
 const MAX_MESSAGE_LENGTH: int = 2000
 const HE6_HALF_LIFE: float = 0.8067
 
-@onready var callsign_node: CallsignSelector = $MarginContainer/MainContainer/Body/Sidebar/CallsignContainer/CallsignEdit
+@onready var callsign_node: CallsignSelector = $Body/Sidebar/CallsignContainer/CallsignEdit
 var callsign: int = 0:
 	set(value):
 		if value < 0:
@@ -327,7 +327,6 @@ func _on_dictionary_save_open_pressed():
 
 func _on_dsve_button_pressed():
 	OS.shell_open("https://dsve.akqqa.dev/")
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 
 func _on_callsign_edit_callsign_submitted(new_value: int) -> void:
 	callsign = new_value

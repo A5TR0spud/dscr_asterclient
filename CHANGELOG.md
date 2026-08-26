@@ -9,6 +9,11 @@
 * Signal colors now have hue, saturation, and value available
 * Theme colors are less washed out
 * Changed font
+* Removed button click noises
+
+### Fixes
+
+* Fixed leaving the skeleton key channel hiding main chat
 
 ## 0.5.1
 

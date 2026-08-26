@@ -31,15 +31,6 @@ func open_loaded_channels():
 	for channel_id in SettingsHandler.opened_channels:
 		enable_channel(channel_id)
 
-func _gui_input(event: InputEvent):
-	if event is InputEventMouse:
-		event = event as InputEventMouse
-		if event.button_mask != MouseButton.MOUSE_BUTTON_LEFT or not event.is_pressed():
-			return
-		if DictEditMenu.is_open():
-			DictEditMenu.close()
-			accept_event()
-
 static func on_chat_display_child_entered_tree(node: Node, chat_body: VBoxContainer):
 	if node is Separator:
 		return
@@ -104,11 +95,10 @@ static func new_transmission(packet: PackedStringArray) -> void:
 	
 	if (
 		(new_message.sender != Main.instance.previously_accepted_callsign)
-		and (not channel.visible or not instance.get_window().has_focus())
+		and (not channel.visible or not instance.get_window().has_focus() or not instance.is_visible_in_tree())
 		and channel_is_visible(channel_id)
 	):
 		SoundManager.play_sound(SoundManager.Sounds.NOTIFICATION)
-	
 	channel.add_message_node(new_message)
 
 enum State {
@@ -179,8 +169,8 @@ static func disable_channel(id: int):
 			if tab_to_check is not ChatChannel:
 				continue
 			tab_to_check = tab_to_check as ChatChannel
-			var signal_key = tab_to_check.id
-			if signal_key is not int:
+			var signal_key: int = tab_to_check.id
+			if signal_key < 0:
 				continue
 			signal_key = signal_key as int
 			if not SettingsHandler.opened_channels.has(signal_key):

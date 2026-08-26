@@ -33,6 +33,7 @@ custom_maximum_size = Vector2(-1, 400)
 layout_mode = 2
 size_flags_vertical = 8
 localize_numeral_system = false
+mouse_filter = 1
 theme_override_styles/normal = ExtResource("3_md8bx")
 placeholder_text = "type here"
 context_menu_enabled = false
@@ -101,4 +102,3 @@ text_overrun_behavior = 1
 [connection signal="tab_changed" from="TabContainer" to="." method="_on_tab_container_tab_changed"]
 [connection signal="caret_changed" from="MessageEdit" to="MessageEdit" method="_on_caret_changed"]
 [connection signal="text_changed" from="MessageEdit" to="MessageEdit" method="_on_text_changed"]
-[connection signal="item_clicked" from="MessageEdit/PanelContainer/ItemList" to="MessageEdit" method="_on_item_list_item_clicked"]

@@ -19,6 +19,8 @@ static var v_grabber_back_style = preload("uid://8g63ltkd03h1")
 # Tabbers
 static var tab_selected = preload("uid://8mg0wvheihvx")
 static var tab_unselected = preload("uid://bcpf14e281kyl")
+static var tab_but_selected = preload("uid://bud12urn6xcjr")
+static var tab_but_unselected = preload("uid://10juafvr3ky1")
 # Seps
 static var h_sep = preload("uid://dgjcahl47q10n")
 static var v_sep = preload("uid://db3k5eiovgegq")
@@ -100,12 +102,14 @@ static func set_theme_color(col: int = -1) -> void:
 	new_color.b += 0.2 * ratio.b
 	press_style.border_color = new_color
 	tab_unselected.border_color = new_color
+	tab_but_unselected.border_color = new_color
 	# normal outline
 	new_color.r += 0.2 * ratio.r
 	new_color.g += 0.2 * ratio.g
 	new_color.b += 0.2 * ratio.b
 	outline_style.border_color = new_color
 	tab_selected.border_color = new_color
+	tab_but_selected.border_color = new_color
 	panel_style.border_color = new_color
 	code_autocomplete_style.border_color = new_color
 	h_sep.color = new_color

@@ -44,7 +44,7 @@ func save() -> void:
 	if current_signal == 0:
 		DictionaryHandler.default_before_mode = before_label.selected
 		DictionaryHandler.default_after_mode = after_label.selected
-		DictionaryHandler.default_color = _get_spinners_as_color().to_html(false)
+		DictionaryHandler.default_color = "#"+_get_spinners_as_color().to_html(false)
 		SoundManager.play_sound(SoundManager.Sounds.CONFIRMED)
 		SaveSystem.save_dict()
 		Main.on_dict_reload()
@@ -166,6 +166,7 @@ static func open(sig: int = 0, repeat_to_close: bool = false) -> void:
 		close()
 		return
 	instance.current_signal = sig
+	instance.grab_click_focus()
 	instance.reload()
 	instance.show()
 
@@ -186,7 +187,6 @@ func _on_cancel_button_pressed():
 	reload()
 
 func _on_close_button_pressed():
-	SoundManager.play_sound(SoundManager.Sounds.CLICK)
 	close()
 
 func _set_delete_button_state(confirmation = null) -> void:

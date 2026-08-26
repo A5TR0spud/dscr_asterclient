@@ -2,4 +2,6 @@
 
 [resource]
 color = Color(0.5, 0.5, 0.5, 1)
+grow_begin = 0.0
+grow_end = 0.0
 thickness = 2
