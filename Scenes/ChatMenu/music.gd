@@ -1,5 +1,6 @@
 extends AudioStreamPlayer
 
+const conversion_factor: float = 1.0 / 0.8066
 const sample_hz: float = 22050.0
 
 @export var song_button: Node
@@ -24,6 +25,12 @@ enum NoteType { SINE, SQUARE, SAWTOOTH }
 func play_music() -> void:
 	if is_playing():
 		stop_music()
+		return
+
+	if Input.is_key_pressed(KEY_CTRL):
+		stop_music()
+		song_button.disabled = true
+		_start_build_song()
 		return
 
 	if current_song.size() > 0:
@@ -211,6 +218,8 @@ func _parse_value(message: Array) -> float:
 			if decimal:
 				num = str("0." + str(i)).to_float()
 				num *= multiplier
+			else:
+				value *= 10
 			value += num
 
 	return value
