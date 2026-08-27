@@ -1,6 +1,10 @@
 extends ChatEntry
 class_name TransEntry
 var trans: int = 0
+var is_image_open: bool = false
+@export var image_open_override: bool = false
+@export var stasis: bool = false
+@export var delete_empty_parses: bool = true
 
 # evil
 @onready var callsign_node: Label = $Header/Cbox/Callsign
@@ -14,42 +18,47 @@ var trans: int = 0
 
 @onready var image_node: VisualizeNode = $Body/Corpus/VisualizeNode
 @onready var image_button_node: Button = $Body/Corpus/ContextButtons/ImageButton
-var has_image: bool = false
 
 @onready var context_buttons: HFlowContainer = $Body/Corpus/ContextButtons
 
 func ready():
 	transmission_node.get_popup().id_pressed.connect(transmit_pressed)
-	callsign_node.self_modulate = Main.get_callsign_color(sender)
-	tab_node.self_modulate = Main.get_callsign_color(sender)
-	identicon_node.num = sender
-	has_image = image_node.check_image(message)
-	image_node.visible = has_image and SettingsHandler.image_default
-	image_button_node.button_pressed = image_node.visible
-	image_button_node.visible = has_image
-	if not has_image:
-		image_node.queue_free()
-		image_button_node.queue_free()
+	is_image_open = SettingsHandler.image_default or image_open_override
+	try_parses()
 	refresh_callsign()
 	Main.instance.reload_nicknames.connect(refresh_callsign)
+	if stasis:
+		hover_node.visible = false
+
+func try_parses():
+	var has_image: bool = image_node.check_image(message)
+	image_node.visible = has_image and is_image_open
+	image_button_node.set_pressed_no_signal(image_node.visible)
+	image_button_node.visible = has_image
+	if not has_image and delete_empty_parses:
+		image_node.queue_free()
+		image_button_node.queue_free()
 
 func refresh_callsign():
 	callsign_node.text = Main.base_10_to_callsign(sender)
 	if not NicknamesHandler.get_nick(sender).is_empty():
 		callsign_node.text += " \'" + NicknamesHandler.get_nick(sender) + "\'"
+	callsign_node.self_modulate = Main.get_callsign_color(sender)
+	tab_node.self_modulate = Main.get_callsign_color(sender)
+	identicon_node.num = sender
 
 func _physics_process(_delta):
 	if timeago_node.visible:
 		calc_time()
 		timeago_node.text = time_ago
 
+func override_transmission_label(text: String):
+	transmission_node.text = text
+
 func refresh():
 	timeago_node.text = time_ago
 	transmission_node.set("popup/item_0/text", DictionaryHandler.get_or_default_signal_name(-40))
-	var trx: String = str(trans % 512)
-	while trx.length() < 3:
-		trx = "0" + trx
-	transmission_node.text = trx
+	transmission_node.text = str(trans % 512).pad_zeros(3)
 
 func set_message_text(new_text: String):
 	message_node.text = new_text
@@ -75,9 +84,10 @@ func supports_bbcode() -> bool:
 	return true
 
 func _on_hover_change(hovering: bool) -> void:
+	if stasis:
+		return
 	calc_time()
 	timeago_node.text = time_ago
-	timeago_node.visible = hovering
 	hover_node.visible = hovering
 	is_hovering = hovering
 	_handle_clickables()
@@ -87,6 +97,7 @@ func _on_set_etc_visibility(visiblity: bool) -> void:
 
 func _on_image_button_toggled(toggled_on: bool) -> void:
 	image_node.visible = toggled_on
+	is_image_open = toggled_on
 
 func _on_message_meta_clicked(meta: Variant) -> void:
 	if Input.is_action_pressed("click_signal_modifier"):

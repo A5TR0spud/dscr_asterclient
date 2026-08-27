@@ -226,12 +226,14 @@ func send_message(written: String) -> Array:
 		return [true, MessageCompilationResult.MESSAGE_SENT]
 	return [false, MessageCompilationResult.MESSAGE_FAILED]
 
+signal on_callsign_changed(cs: int)
 func handle_packet(incoming: String) -> void:
 	print("< Got string data from server: %s" % incoming)
 	var status: PackedStringArray = incoming.split(",")
 	if status[0] == "K":
 		previously_accepted_callsign = status[1].to_int()
 		callsign = previously_accepted_callsign
+		on_callsign_changed.emit(previously_accepted_callsign)
 		return
 	if status[0] == "U":
 		callsign += 1
@@ -244,7 +246,13 @@ func handle_packet(incoming: String) -> void:
 		connected_users.clear()
 		for i in status.slice(1):
 			connected_users.append(i.to_int())
-		emit_signal("connected_user_change")
+		connected_user_change.emit()
+		if SettingsHandler.preferred_callsign <= 4095 and SettingsHandler.preferred_callsign >= 0:
+			if (
+				previously_accepted_callsign != SettingsHandler.preferred_callsign
+				and SettingsHandler.preferred_callsign not in connected_users
+			):
+				set_callsign(SettingsHandler.preferred_callsign)
 		return
 	print("UNKNOWN STRING PACKET: %s" % incoming)
 

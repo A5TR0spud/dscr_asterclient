@@ -108,6 +108,9 @@ func _parse_sphere(parser: TransmissionParser) -> Dictionary:
 	return {"x": x, "y": y, "z": z, "r": r, "c": c}
 
 func check_image(message0: Array) -> bool:
+	for c in plots.get_children():
+		c.queue_free()
+	_sphere_data.clear()
 	var message: Array[int] = []
 	for u in message0:
 		if u is int:

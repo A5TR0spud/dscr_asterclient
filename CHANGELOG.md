@@ -16,6 +16,7 @@
 * Changed font
 * Removed button click noises
 * Reaching the signal cap now displays how many signals are in the message, up to 4096
+* Now "reserves" callsign, that is, if your callsign is taken and the taker leaves, you will automatically get your callsign back
 
 ### Fixes
 

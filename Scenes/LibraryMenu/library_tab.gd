@@ -2,16 +2,12 @@ extends Control
 class_name Library
 
 @onready var name_edit: LineEdit = $Body/Editor/Header/LineEdit
-@onready var signals_display: RichTextLabel = $Body/Editor/GridContainer/TabContainer/SignalDisplay
 @onready var words_edit: TransmissionEdit = $Body/Editor/GridContainer/VBoxContainer/ScrollContainer/TransmissionEdit
 @onready var delete_button: ConfirmationButton = $Body/Editor/Buttons/Delete
-@onready var tabber: TabContainer = $Body/Editor/GridContainer/TabContainer
-@onready var t_holder: Control = $Body/Editor/GridContainer/TabContainer/TransHolder
-@onready var signal_count: Label = $Body/Editor/GridContainer/VBoxContainer/SignalCount
+@onready var t_preview: TransEntry = $Body/Editor/GridContainer/TransHolder/TransmissionEntry
 
 @onready var catalog: Control = $Body/ScrollContainer/MarginContainer/Catalogue
 
-var trans_entry = preload("res://Scenes/ChatMenu/transmission_entry.tscn")
 var lib_entry = preload("res://Scenes/LibraryMenu/library_entry.tscn")
 
 var pre_name: String = ""
@@ -37,37 +33,28 @@ func _on_transmission_edit_text_changed():
 	unsaved_changes = true
 
 func _set_sig_text():
-	var o: Array[String] = []
-	for sig in current_transmission:
-		var s: String = "|" if sig < 0 else ""
-		s += str(sig)
-		o.append(s)
-	signals_display.text = " ".join(o)
-	signal_count.text = DictionaryHandler.signals_to_words([-42, -23, -4, current_transmission.size()])
-	_hard_refresh_transmission()
+	t_preview.message = current_transmission
+	t_preview.request_rewrite(false)
+	t_preview.try_parses()
+	t_preview.override_transmission_label(DictionaryHandler.signals_to_words([-42, -23, -4, current_transmission.size()]))
 
 func _ready():
 	Main.instance.reload_dict.connect(_reload)
 	Main.instance.reload_library.connect(_reload)
-	tabber.current_tab = 0
+	Main.instance.reload_nicknames.connect(_refresh_preview)
+	Main.instance.on_callsign_changed.connect(func (_a): _refresh_preview())
 
-func _hard_refresh_transmission():
-	for c in t_holder.get_children():
-		if c is TransEntry:
-			c.queue_free()
-	var new: TransEntry = trans_entry.instantiate()
-	new.message = current_transmission
-	new.sender = Main.instance.previously_accepted_callsign
-	new.timestamp = Time.get_ticks_msec()
-	t_holder.add_child(new)
+func _refresh_preview():
+	t_preview.refresh()
+	t_preview.sender = Main.instance.previously_accepted_callsign
+	t_preview.refresh_callsign()
+	_set_sig_text()
 
 func _reload():
 	_set_sig_text()
 	delete_button.set_confirm_state(false)
 	words_edit.text = DictionaryHandler.signals_to_words(current_transmission, true)
-	tabber.set_tab_title(0, DictionaryHandler.get_or_default_signal_name(-42))
-	tabber.set_tab_title(1, DictionaryHandler.get_or_default_signal_name(-163))
-	_hard_refresh_transmission()
+	_refresh_preview()
 	var known: Array[String] = []
 	for idx in range(catalog.get_child_count()):
 		var c = catalog.get_child(idx)
@@ -105,17 +92,21 @@ func _on_delete_confirmed():
 	LibraryHandler.forget_transmission(_get_name())
 	name_edit.text = ""
 	words_edit.text = ""
-	signals_display.text = ""
 	current_transmission = []
 	unsaved_changes = false
 	_reload()
 
 func _on_copy_signals_pressed():
-	DisplayServer.clipboard_set(signals_display.text)
+	var o: Array[String] = []
+	for sig in current_transmission:
+		var s: String = "|" if sig < 0 else ""
+		s += str(sig)
+		o.append(s)
+	DisplayServer.clipboard_set(" ".join(o))
 
 func _on_copy_words_pressed():
 	DisplayServer.clipboard_set(DictionaryHandler.signals_to_words(current_transmission, true))
 
-func _on_tab_container_tab_changed(tab):
-	if tab == 1:
-		_hard_refresh_transmission()
+func _on_visibility_changed():
+	if visible:
+		_refresh_preview()
