@@ -2,7 +2,7 @@ extends MarginContainer
 class_name ChatChannel
 @onready var chat_display = $ScrollContainer/MarginContainer/ChatDisplay
 var default_channel: bool = true
-var id: int = -1
+var id = null
 var enable_notification: bool = false
 
 func _ready() -> void:

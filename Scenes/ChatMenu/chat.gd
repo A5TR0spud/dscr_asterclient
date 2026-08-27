@@ -169,8 +169,8 @@ static func disable_channel(id: int):
 			if tab_to_check is not ChatChannel:
 				continue
 			tab_to_check = tab_to_check as ChatChannel
-			var signal_key: int = tab_to_check.id
-			if signal_key < 0:
+			var signal_key = tab_to_check.id
+			if signal_key is not int:
 				continue
 			signal_key = signal_key as int
 			if not SettingsHandler.opened_channels.has(signal_key):
