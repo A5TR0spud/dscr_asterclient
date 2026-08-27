@@ -75,6 +75,11 @@ metadata/_tab_index = 1
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="SignalCount" type="Label" parent="Body/Editor/GridContainer/VBoxContainer" unique_id=1252250551]
+layout_mode = 2
+text = "signal count = ?"
+horizontal_alignment = 2
+
 [node name="HBoxContainer" type="HBoxContainer" parent="Body/Editor/GridContainer/VBoxContainer" unique_id=340990848]
 layout_mode = 2
 
