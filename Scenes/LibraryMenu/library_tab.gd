@@ -7,6 +7,7 @@ class_name Library
 @onready var delete_button: ConfirmationButton = $Body/Editor/Buttons/Delete
 @onready var tabber: TabContainer = $Body/Editor/GridContainer/TabContainer
 @onready var t_holder: Control = $Body/Editor/GridContainer/TabContainer/TransHolder
+@onready var signal_count: Label = $Body/Editor/GridContainer/VBoxContainer/SignalCount
 
 @onready var catalog: Control = $Body/ScrollContainer/MarginContainer/Catalogue
 
@@ -42,6 +43,7 @@ func _set_sig_text():
 		s += str(sig)
 		o.append(s)
 	signals_display.text = " ".join(o)
+	signal_count.text = DictionaryHandler.signals_to_words([-42, -23, -4, current_transmission.size()])
 	_hard_refresh_transmission()
 
 func _ready():
