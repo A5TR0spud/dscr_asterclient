@@ -14,6 +14,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ntelf")
 
+[node name="RefreshDebounce" type="Timer" parent="." unique_id=1198453371]
+wait_time = 0.8
+
 [node name="Body" type="HSplitContainer" parent="." unique_id=281498039]
 layout_mode = 2
 size_flags_vertical = 3
@@ -132,6 +135,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="timeout" from="RefreshDebounce" to="." method="_on_refresh_debounce_timeout"]
 [connection signal="pressed" from="Body/Editor/GridContainer/VBoxContainer/HBoxContainer/CopySignals" to="." method="_on_copy_signals_pressed"]
 [connection signal="pressed" from="Body/Editor/GridContainer/VBoxContainer/HBoxContainer/CopyWords" to="." method="_on_copy_words_pressed"]
 [connection signal="text_changed" from="Body/Editor/GridContainer/VBoxContainer/ScrollContainer/TransmissionEdit" to="." method="_on_transmission_edit_text_changed"]

@@ -1,6 +1,6 @@
 # Versions
 
-## --WIP--
+## 0.6.0: The Library
 
 ### Additions
 

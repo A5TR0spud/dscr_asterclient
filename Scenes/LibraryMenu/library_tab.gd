@@ -5,6 +5,7 @@ class_name Library
 @onready var words_edit: TransmissionEdit = $Body/Editor/GridContainer/VBoxContainer/ScrollContainer/TransmissionEdit
 @onready var delete_button: ConfirmationButton = $Body/Editor/Buttons/Delete
 @onready var t_preview: TransEntry = $Body/Editor/GridContainer/TransHolder/TransmissionEntry
+@onready var debounce: Timer = $RefreshDebounce
 
 @onready var catalog: Control = $Body/ScrollContainer/MarginContainer/Catalogue
 
@@ -26,6 +27,10 @@ static func open_transmission(trx: String):
 	instance._reload()
 
 func _on_transmission_edit_text_changed():
+	debounce.stop()
+	debounce.start()
+
+func _on_refresh_debounce_timeout():
 	var parsed: ParseResult = DictionaryHandler.parse_text(words_edit.text, false)
 	if current_transmission != parsed.output:
 		current_transmission = parsed.output

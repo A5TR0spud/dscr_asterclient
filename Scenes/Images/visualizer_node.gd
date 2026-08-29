@@ -138,6 +138,8 @@ func check_image(message0: Array) -> bool:
 		#print("empty image")
 		return false
 	for p: Dictionary in _sphere_data:
+		if p["r"] <= 0:
+			continue
 		#print("dat: ", p)
 		var plot: PlotNode = plot_scene.instantiate()
 		plot.col = calculate_color(p["c"])
