@@ -383,7 +383,13 @@ static func signals_to_words(input: Array, format: bool = false, do_bbcode: bool
 			if o.right(1) == "\n":
 				for abcd in range(indent):
 					o += "\t"
+			var color_num: bool = do_bbcode and do_colorline and prev == -54 and sig >= 0 and sig <= 64
+			if color_num:
+				var color0: Color = VisualizeNode.calculate_color(sig)
+				o += "[bgcolor=#" + color0.to_html(false) + "][color="+("black" if color0.v > 0.5 else "white") + "]"
 			o += String.num_int64(sig)
+			if color_num:
+				o += "[/color][/bgcolor]"
 			continue
 		var name: String = get_or_default_signal_name(sig)
 		var desc: Dictionary = get_or_default_signal_desc(sig)
@@ -450,7 +456,7 @@ static func signals_to_words(input: Array, format: bool = false, do_bbcode: bool
 				if strike:
 					o += "[s]"
 				if invert:
-					o += "[bgcolor=#" + color.to_html(false) + "][color=black]"
+					o += "[bgcolor=#" + color.to_html(false) + "][color="+("black" if color.v > 0.5 else "white") + "]"
 				elif color != Color.WHITE:
 					o += "[color=#" + color.to_html(false) + "]"
 		o += name

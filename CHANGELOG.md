@@ -8,6 +8,7 @@
   * You can edit, preview, save, load, and copy transmissions
 * New formatting option: indent/dedent
 * New signal display options added to match Relay3544: bold, italic, strikethrough, background
+* Numbers will be colored if preceded by |-54
 
 ### Changes
 

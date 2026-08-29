@@ -19,6 +19,7 @@ const COLORS: Array = [
 	"FB39FF", "FF0FD7", "484848", "636363", "FFFFFF"
 ];
 static func calculate_color (value: int) -> Color:
+	value = clampi(value, 0, 64)
 	var n: float = value / 64.0 * (COLORS.size() - 1)
 	var lo = floor(n)
 	var hi = ceil(n)
