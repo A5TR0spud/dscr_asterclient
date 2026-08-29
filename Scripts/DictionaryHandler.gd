@@ -341,7 +341,8 @@ static func get_or_default_signal_desc(sig: int) -> Dictionary:
 
 static func signals_to_words(input: Array, format: bool = false, do_bbcode: bool = false, do_colorline: bool = false, do_clickable: bool = false) -> String:
 	var o: String = ""
-	var indent: int = 0
+	var desired_indent: int = 0
+	var actual_indent: int = 0
 	for i in input.size():
 		if input[i] is String:
 			o += input[i]
@@ -352,8 +353,9 @@ static func signals_to_words(input: Array, format: bool = false, do_bbcode: bool
 		var sig: int = str(input[i]).to_int()
 		if sig >= 0:
 			if o.right(1) == "\n":
-				for abcd in range(indent):
+				for abcd in range(desired_indent):
 					o += "\t"
+				actual_indent = desired_indent
 			o += String.num_int64(sig)
 			continue
 		var name: String = get_or_default_signal_name(sig)
@@ -387,11 +389,10 @@ static func signals_to_words(input: Array, format: bool = false, do_bbcode: bool
 					o = o.left(-1)
 				o += "\n\n"
 		var format_indent: int = desc.get(indent_key, 0)
-		if indent > 0 and format_indent < 0:
-			indent = maxi(0, indent + format_indent)
-		if o.right(1) == "\n":
-			for abcd in range(indent):
+		if o.right(1) == "\n" and format:
+			for abcd in range(desired_indent):
 				o += "\t"
+			actual_indent = desired_indent
 		if not format and i > 0 and o.right(1) != " ":
 			o += " "
 		if do_bbcode:
@@ -404,8 +405,18 @@ static func signals_to_words(input: Array, format: bool = false, do_bbcode: bool
 		if do_bbcode and do_clickable:
 			o += "[url=" + str(sig) + "]"
 		o += name
-		if format_indent > 0:
-			indent += format_indent
+		if format_indent > 0 and format:
+			desired_indent += format_indent
+		if format_indent < 0 and format:
+			desired_indent = maxi(0, desired_indent + format_indent)
+			if actual_indent > desired_indent:
+				var newline_idx = o.rfind("\n")
+				var indent_str: String = ""
+				for abcd in actual_indent:
+					indent_str += "\t"
+				var indent_idx = o.rfind(indent_str)
+				if indent_idx >= 0 and newline_idx >= 0 and newline_idx + 1 == indent_idx:
+					o = o.erase(indent_idx)
 		if do_bbcode and do_clickable:
 			o += "[/url]"
 		if colorize_signal:
