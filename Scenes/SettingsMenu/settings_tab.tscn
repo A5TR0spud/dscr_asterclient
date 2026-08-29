@@ -259,7 +259,6 @@ TODO:
 - add \"macro-dictionary\" sidebar
 - make sidebar collapsable
 - make callsign picker collapsable
-- setting for received COLOR # to display that color, somewhere
 - figure out what to do if a transmission is not received (ie a number is skipped)
 - entering signals into notes so that they auto-update
 - make pressing MAKES ELSE SENSE create the dictionary entry instead of only bringing up the menu, or else make that a setting

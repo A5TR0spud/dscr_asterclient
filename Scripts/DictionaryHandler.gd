@@ -368,6 +368,9 @@ static func get_or_default_signal_desc(sig: int) -> Dictionary:
 		tmp[break_key] = false
 	return desc_values[idx]
 
+static func calc_luminosity(c: Color) -> float:
+	return sqrt(0.299*(c.r*c.r) + 0.587*(c.g*c.g) + 0.114*(c.b*c.b))
+
 static func signals_to_words(input: Array, format: bool = false, do_bbcode: bool = false, do_colorline: bool = false, do_clickable: bool = false) -> String:
 	var o: String = ""
 	var indent: int = 0
@@ -386,7 +389,7 @@ static func signals_to_words(input: Array, format: bool = false, do_bbcode: bool
 			var color_num: bool = do_bbcode and do_colorline and prev == -54 and sig >= 0 and sig <= 64
 			if color_num:
 				var color0: Color = VisualizeNode.calculate_color(sig)
-				o += "[bgcolor=#" + color0.to_html(false) + "][color="+("black" if color0.v > 0.5 else "white") + "]"
+				o += "[bgcolor=#" + color0.to_html(false) + "][color="+("black" if calc_luminosity(color0) > 0.5 else "white") + "]"
 			o += String.num_int64(sig)
 			if color_num:
 				o += "[/color][/bgcolor]"
@@ -456,7 +459,7 @@ static func signals_to_words(input: Array, format: bool = false, do_bbcode: bool
 				if strike:
 					o += "[s]"
 				if invert:
-					o += "[bgcolor=#" + color.to_html(false) + "][color="+("black" if color.v > 0.5 else "white") + "]"
+					o += "[bgcolor=#" + color.to_html(false) + "][color="+("black" if calc_luminosity(color) > 0.5 else "white") + "]"
 				elif color != Color.WHITE:
 					o += "[color=#" + color.to_html(false) + "]"
 		o += name
