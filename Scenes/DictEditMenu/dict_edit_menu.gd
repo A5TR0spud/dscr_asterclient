@@ -22,6 +22,9 @@ func _enter_tree():
 @onready var name_sentence: HBoxContainer = $DictEditMainframe/SignalNameEdit
 @onready var delete_button: ConfirmationButton = $DictEditMainframe/SubmitElseCancel/DeleteButton
 
+@onready var indentation: Control = $DictEditMainframe/Indentation
+@onready var indent_option: OptionButton = $DictEditMainframe/Indentation/IndentOption
+
 @onready var bbcode_options: Control = $DictEditMainframe/BBCodeOptions
 @onready var underline_parent: Control = $DictEditMainframe/BBCodeOptions/UnderlineSentence
 @onready var underline_edit: Button = $DictEditMainframe/BBCodeOptions/UnderlineSentence/DoUnderlineButton
@@ -63,6 +66,8 @@ func save() -> void:
 			desc.set(DictionaryHandler.color_key, "#"+_get_spinners_as_color().to_html(false))
 		if underline_edit.button_pressed:
 			desc.set(DictionaryHandler.underline_key, true)
+	if indent_option.selected != 0:
+		desc.set(DictionaryHandler.indent_key, 1 if indent_option.selected == 1 else -1)
 	DictionaryHandler.apply_signal_desc(current_signal, desc)
 	SaveSystem.save_dict()
 	Main.on_dict_reload()
@@ -74,6 +79,7 @@ func reload() -> void:
 	delete_button.visible = current_signal < 0
 	bbcode_options.visible = SettingsHandler.do_bbcode
 	underline_parent.visible = current_signal != 0
+	indentation.visible = current_signal < 0
 	if current_signal == 0:
 		before_after_clear_label.text = DictionaryHandler.signals_to_words([-122, -42, -122])
 		before_label.select(DictionaryHandler.default_before_mode)
@@ -94,8 +100,16 @@ func reload() -> void:
 	break_button.refresh()
 	delete_button.set_confirm_state(false)
 	delete_button.disabled = not DictionaryHandler.word_keys.has(current_signal)
+	
+	var indent_format: int = int(desc.get(DictionaryHandler.indent_key, 0))
+	if indent_format == 0:
+		indent_option.select(0)
+	elif indent_format > 0:
+		indent_option.select(1)
+	else:
+		indent_option.select(2)
+	
 	var underline_value: bool = desc.get(DictionaryHandler.underline_key, false)
-
 	underline_edit.set_pressed_no_signal(underline_value)
 	underline_edit.refresh()
 	

@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://gtpqlwktlalr" path="res://Scripts/FilteredLineEdit.gd" id="3_f8ufa"]
 [ext_resource type="PackedScene" uid="uid://bw4nasduhbqkb" path="res://Scenes/Common/bool_toggle_button.tscn" id="3_si2t6"]
 [ext_resource type="PackedScene" uid="uid://2emnji0ns3x2" path="res://Scenes/Common/confirmation_button.tscn" id="5_2h3m4"]
+[ext_resource type="Script" uid="uid://dgdrelr1yg18f" path="res://Scripts/MultiTranslatable.gd" id="5_uladm"]
 
 [node name="DictEditWindow" type="PanelContainer" unique_id=1113766720]
 anchors_preset = 15
@@ -103,13 +104,39 @@ layout_mode = 2
 
 [node name="BreakClarity" type="Label" parent="DictEditMainframe/BreakSentence" unique_id=999523653]
 layout_mode = 2
-text = "bool [2 |-# precedes 1 big repel] ="
+text = "break on double"
 script = ExtResource("2_icn0b")
 message = Array[int]([-26, -14, 2, -229, -42, -122, 1, -108, -190, -15, -4])
 
 [node name="BreakOnDouble" parent="DictEditMainframe/BreakSentence" unique_id=1728394877 instance=ExtResource("3_si2t6")]
 layout_mode = 2
 size_flags_horizontal = 1
+
+[node name="Indentation" type="HBoxContainer" parent="DictEditMainframe" unique_id=133626626]
+layout_mode = 2
+
+[node name="IndentLabel" type="Label" parent="DictEditMainframe/Indentation" unique_id=1965001691]
+layout_mode = 2
+text = "how to indent?"
+script = ExtResource("2_icn0b")
+message = Array[int]([-42, -86, -190])
+
+[node name="IndentOption" type="OptionButton" parent="DictEditMainframe/Indentation" unique_id=84928034]
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "nothing"
+popup/item_0/id = 0
+popup/item_1/text = "start indent"
+popup/item_1/id = 1
+popup/item_2/text = "end indent"
+popup/item_2/id = 2
+script = ExtResource("5_uladm")
+messages = Dictionary[StringName, Array]({
+&"popup/item_0/text": [-38, -29, -85],
+&"popup/item_1/text": [-38, -85],
+&"popup/item_2/text": [-88, -85]
+})
 
 [node name="BBCodeOptions" type="VBoxContainer" parent="DictEditMainframe" unique_id=1953522590]
 layout_mode = 2
@@ -119,7 +146,7 @@ layout_mode = 2
 
 [node name="UnderlineLabel" type="Label" parent="DictEditMainframe/BBCodeOptions/UnderlineSentence" unique_id=1832529931]
 layout_mode = 2
-text = "bool [ signal line ] ="
+text = "underline"
 script = ExtResource("2_icn0b")
 message = Array[int]([-26, -14, -42, -17, -15, -4])
 
@@ -200,7 +227,6 @@ text = "close"
 script = ExtResource("2_icn0b")
 message = Array[int]([-163, -29, -85])
 
-[connection signal="focus_exited" from="." to="." method="_on_focus_exited"]
 [connection signal="text_submitted" from="DictEditMainframe/SignalNameEdit/NameLineEdit" to="." method="_on_name_line_edit_text_submitted"]
 [connection signal="gui_input" from="DictEditMainframe/NotesEdit" to="." method="_on_notes_edit_gui_input"]
 [connection signal="value_changed" from="DictEditMainframe/BBCodeOptions/ColorPicker/GridContainer/HueSpinner" to="." method="_on_hue_spinner_value_changed"]
@@ -209,5 +235,4 @@ message = Array[int]([-163, -29, -85])
 [connection signal="pressed" from="DictEditMainframe/SubmitElseCancel/SubmitButton" to="." method="_on_submit_button_pressed"]
 [connection signal="pressed" from="DictEditMainframe/SubmitElseCancel/CancelButton" to="." method="_on_cancel_button_pressed"]
 [connection signal="confirmed" from="DictEditMainframe/SubmitElseCancel/DeleteButton" to="." method="_on_delete_button_confirmed"]
-[connection signal="pressed" from="DictEditMainframe/SubmitElseCancel/DeleteButton" to="." method="_on_delete_button_pressed"]
 [connection signal="pressed" from="DictEditMainframe/SubmitElseCancel/CloseButton" to="." method="_on_close_button_pressed"]

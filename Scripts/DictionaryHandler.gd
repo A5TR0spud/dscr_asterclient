@@ -86,6 +86,7 @@ const after_key: String = "formatModeAfter"
 const break_key: String = "breakOnDouble"
 const color_key: String = "color"
 const underline_key: String = "underline"
+const indent_key: String = "indentation"
 
 static func initialize() -> void:
 	word_keys = word_dict.get_or_add("keys", []).map(func(v): return int(v)) as Array[int]
@@ -340,6 +341,7 @@ static func get_or_default_signal_desc(sig: int) -> Dictionary:
 
 static func signals_to_words(input: Array, format: bool = false, do_bbcode: bool = false, do_colorline: bool = false, do_clickable: bool = false) -> String:
 	var o: String = ""
+	var indent: int = 0
 	for i in input.size():
 		if input[i] is String:
 			o += input[i]
@@ -349,6 +351,9 @@ static func signals_to_words(input: Array, format: bool = false, do_bbcode: bool
 		else: prev = prev as int
 		var sig: int = str(input[i]).to_int()
 		if sig >= 0:
+			if o.right(1) == "\n":
+				for abcd in range(indent):
+					o += "\t"
 			o += String.num_int64(sig)
 			continue
 		var name: String = get_or_default_signal_name(sig)
@@ -381,6 +386,12 @@ static func signals_to_words(input: Array, format: bool = false, do_bbcode: bool
 				if o.right(1) == " ":
 					o = o.left(-1)
 				o += "\n\n"
+		var format_indent: int = desc.get(indent_key, 0)
+		if indent > 0 and format_indent < 0:
+			indent = maxi(0, indent + format_indent)
+		if o.right(1) == "\n":
+			for abcd in range(indent):
+				o += "\t"
 		if not format and i > 0 and o.right(1) != " ":
 			o += " "
 		if do_bbcode:
@@ -393,6 +404,8 @@ static func signals_to_words(input: Array, format: bool = false, do_bbcode: bool
 		if do_bbcode and do_clickable:
 			o += "[url=" + str(sig) + "]"
 		o += name
+		if format_indent > 0:
+			indent += format_indent
 		if do_bbcode and do_clickable:
 			o += "[/url]"
 		if colorize_signal:

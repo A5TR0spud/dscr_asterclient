@@ -6,6 +6,7 @@
 
 * Added the transmission library tab
   * You can edit, preview, save, load, and copy transmissions
+* New formatting option: indent/dedent
 
 ### Changes
 
