@@ -7,5 +7,3 @@ size_flags_horizontal = 3
 toggle_mode = true
 text = "Bool"
 script = ExtResource("1_a5o7m")
-
-[connection signal="toggled" from="." to="." method="_on_toggled"]

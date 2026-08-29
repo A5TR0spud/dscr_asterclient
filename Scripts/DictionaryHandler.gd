@@ -79,13 +79,42 @@ static var default_color: String:
 		return SaveSystem.dict.get_or_add("defaultColor", "#ffffff")
 	set(value):
 		SaveSystem.dict.set("defaultColor", value)
+static var default_bold: bool:
+	get:
+		return SaveSystem.dict.get_or_add("defaultBold", false)
+	set(value):
+		SaveSystem.dict.set("defaultBold", value)
+static var default_italic: bool:
+	get:
+		return SaveSystem.dict.get_or_add("defaultItalic", false)
+	set(value):
+		SaveSystem.dict.set("defaultItalic", value)
+static var default_underline: bool:
+	get:
+		return SaveSystem.dict.get_or_add("defaultUnderline", false)
+	set(value):
+		SaveSystem.dict.set("defaultUnderline", value)
+static var default_strikethrough: bool:
+	get:
+		return SaveSystem.dict.get_or_add("defaultStrikethrough", false)
+	set(value):
+		SaveSystem.dict.set("defaultStrikethrough", value)
+static var default_background: bool:
+	get:
+		return SaveSystem.dict.get_or_add("defaultInvert", false)
+	set(value):
+		SaveSystem.dict.set("defaultInvert", value)
 
 const desc_key: String = "desc"
 const before_key: String = "formatMode"
 const after_key: String = "formatModeAfter"
 const break_key: String = "breakOnDouble"
 const color_key: String = "color"
+const bold_key: String = "bold"
+const italic_key: String = "italic"
 const underline_key: String = "underline"
+const strikethrough_key: String = "strikethrough"
+const background_key: String = "invert"
 const indent_key: String = "indentation"
 
 static func initialize() -> void:
@@ -369,9 +398,18 @@ static func signals_to_words(input: Array, format: bool = false, do_bbcode: bool
 				color = Color.from_string(color_value, Color.WHITE)
 			else:
 				color = Color.WHITE
-		if not word_keys.has(sig): color_value = default_color
+		var bold: bool = desc.get(bold_key, false)
+		var italic: bool = desc.get(italic_key, false)
 		var underline: bool = desc.get(underline_key, false)
-		var colorize_signal: bool = do_bbcode && do_colorline
+		var strike: bool = desc.get(strikethrough_key, false)
+		var invert: bool = desc.get(background_key, false)
+		if not word_keys.has(sig):
+			color_value = default_color
+			bold = default_bold
+			italic = default_italic
+			underline = default_underline
+			strike = default_strikethrough
+			invert = default_background
 		var format_mode: int = desc[before_key]
 		var format_mode_after: int = desc[after_key]
 		var break_double: bool = desc[break_key]
@@ -400,19 +438,39 @@ static func signals_to_words(input: Array, format: bool = false, do_bbcode: bool
 		if do_bbcode:
 			# Avoid formatting issues if users put [ in their signal names
 			name = name.replace("[", "[lb]")
-		if underline and do_bbcode:
-			o += "[u]"
-		if colorize_signal:
-			o += "[color=#" + color.to_html(false) + "]"
-		if do_bbcode and do_clickable:
-			o += "[url=" + str(sig) + "]"
+			if do_clickable:
+				o += "[url=" + str(sig) + "]"
+			if do_colorline:
+				if bold:
+					o += "[b]"
+				if italic:
+					o += "[i]"
+				if underline:
+					o += "[u]"
+				if strike:
+					o += "[s]"
+				if invert:
+					o += "[bgcolor=#" + color.to_html(false) + "][color=black]"
+				elif color != Color.WHITE:
+					o += "[color=#" + color.to_html(false) + "]"
 		o += name
-		if do_bbcode and do_clickable:
-			o += "[/url]"
-		if colorize_signal:
-			o += "[/color]"
-		if do_bbcode and underline:
-			o += "[/u]"
+		if do_bbcode:
+			if do_colorline:
+				if invert:
+					o += "[/color][/bgcolor]" 
+				elif color != Color.WHITE:
+					o += "[/color]"
+				if strike:
+					o += "[/s]"
+				if underline:
+					o += "[/u]"
+				if italic:
+					o += "[/i]"
+				if bold:
+					o += "[/b]"
+			if do_clickable:
+				o += "[/url]"
+
 		if not format and i < input.size() - 1:
 			var next = input[i + 1]
 			if next is int and next >= 0:

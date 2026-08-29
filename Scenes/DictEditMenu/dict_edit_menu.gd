@@ -26,8 +26,11 @@ func _enter_tree():
 @onready var indent_option: OptionButton = $DictEditMainframe/Indentation/IndentOption
 
 @onready var bbcode_options: Control = $DictEditMainframe/BBCodeOptions
-@onready var underline_parent: Control = $DictEditMainframe/BBCodeOptions/UnderlineSentence
-@onready var underline_edit: Button = $DictEditMainframe/BBCodeOptions/UnderlineSentence/DoUnderlineButton
+@onready var bold_edit: BoolButton = $DictEditMainframe/BBCodeOptions/GridContainer/Bold/Button
+@onready var italic_edit: BoolButton = $DictEditMainframe/BBCodeOptions/GridContainer/Italic/Button
+@onready var underline_edit: BoolButton = $DictEditMainframe/BBCodeOptions/GridContainer/Underline/Button
+@onready var strikethrough_edit: BoolButton = $DictEditMainframe/BBCodeOptions/GridContainer/Strikethrough/Button
+@onready var background_edit: BoolButton = $DictEditMainframe/BBCodeOptions/ColorPicker/BG
 
 @onready var hue: SpinBox = $DictEditMainframe/BBCodeOptions/ColorPicker/GridContainer/HueSpinner
 @onready var val: SpinBox = $DictEditMainframe/BBCodeOptions/ColorPicker/GridContainer/ValueSpinner
@@ -41,11 +44,18 @@ func _ready():
 	Main.instance.reload_dict.connect(refresh)
 	hide()
 
+const UNKNOWN_SIGNAL: int = 0
+
 func save() -> void:
-	if current_signal == 0:
+	if current_signal == UNKNOWN_SIGNAL:
 		DictionaryHandler.default_before_mode = before_label.selected
 		DictionaryHandler.default_after_mode = after_label.selected
 		DictionaryHandler.default_color = "#"+_get_spinners_as_color().to_html(false)
+		DictionaryHandler.default_bold = bold_edit.button_pressed
+		DictionaryHandler.default_italic = italic_edit.button_pressed
+		DictionaryHandler.default_underline = underline_edit.button_pressed
+		DictionaryHandler.default_italic = italic_edit.button_pressed
+		DictionaryHandler.default_background = background_edit.button_pressed
 		SoundManager.play_sound(SoundManager.Sounds.CONFIRMED)
 		SaveSystem.save_dict()
 		Main.on_dict_reload()
@@ -61,11 +71,12 @@ func save() -> void:
 		DictionaryHandler.after_key: after_label.selected,
 		DictionaryHandler.break_key: break_button.button_pressed
 	}
-	if SettingsHandler.do_bbcode:
-		if "ffffff" not in _get_spinners_as_color().to_html(false):
-			desc.set(DictionaryHandler.color_key, "#"+_get_spinners_as_color().to_html(false))
-		if underline_edit.button_pressed:
-			desc.set(DictionaryHandler.underline_key, true)
+	desc.set(DictionaryHandler.color_key, "#"+_get_spinners_as_color().to_html(false))
+	desc.set(DictionaryHandler.bold_key, bold_edit.button_pressed)
+	desc.set(DictionaryHandler.italic_key, italic_edit.button_pressed)
+	desc.set(DictionaryHandler.underline_key, underline_edit.button_pressed)
+	desc.set(DictionaryHandler.strikethrough_key, strikethrough_edit.button_pressed)
+	desc.set(DictionaryHandler.background_key, background_edit.button_pressed)
 	if indent_option.selected != 0:
 		desc.set(DictionaryHandler.indent_key, 1 if indent_option.selected == 1 else -1)
 	DictionaryHandler.apply_signal_desc(current_signal, desc)
@@ -78,13 +89,17 @@ func reload() -> void:
 	desc_edit.visible = current_signal < 0
 	delete_button.visible = current_signal < 0
 	bbcode_options.visible = SettingsHandler.do_bbcode
-	underline_parent.visible = current_signal != 0
 	indentation.visible = current_signal < 0
-	if current_signal == 0:
+	if current_signal == UNKNOWN_SIGNAL:
 		before_after_clear_label.text = DictionaryHandler.signals_to_words([-122, -42, -122])
 		before_label.select(DictionaryHandler.default_before_mode)
 		after_label.select(DictionaryHandler.default_after_mode)
 		_push_color_to_spinners(Color.from_string(DictionaryHandler.default_color, Color.WHITE))
+		bold_edit.button_pressed = DictionaryHandler.default_bold
+		italic_edit.button_pressed = DictionaryHandler.default_italic
+		underline_edit.button_pressed = DictionaryHandler.default_underline
+		strikethrough_edit.button_pressed = DictionaryHandler.default_strikethrough
+		background_edit.button_pressed = DictionaryHandler.default_background
 		return
 	var desc: Dictionary = DictionaryHandler.get_or_default_signal_desc(current_signal)
 	name_label.text = DictionaryHandler.signals_to_words([-42, -14, -1, absi(current_signal), -15, -4])
@@ -109,9 +124,16 @@ func reload() -> void:
 	else:
 		indent_option.select(2)
 	
-	var underline_value: bool = desc.get(DictionaryHandler.underline_key, false)
-	underline_edit.set_pressed_no_signal(underline_value)
-	underline_edit.refresh()
+	var b_value: bool = desc.get(DictionaryHandler.bold_key, false)
+	bold_edit.button_pressed = b_value
+	var i_value: bool = desc.get(DictionaryHandler.italic_key, false)
+	italic_edit.button_pressed = i_value
+	var s_value: bool = desc.get(DictionaryHandler.strikethrough_key, false)
+	strikethrough_edit.button_pressed = s_value
+	var u_value: bool = desc.get(DictionaryHandler.underline_key, false)
+	underline_edit.button_pressed = u_value
+	var bg_value: bool = desc.get(DictionaryHandler.background_key, false)
+	background_edit.button_pressed = bg_value
 	
 	var color_value = desc.get(DictionaryHandler.color_key, 64)
 	if color_value is int or color_value is float:

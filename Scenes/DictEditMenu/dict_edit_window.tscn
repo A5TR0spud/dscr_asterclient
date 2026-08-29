@@ -141,18 +141,76 @@ messages = Dictionary[StringName, Array]({
 [node name="BBCodeOptions" type="VBoxContainer" parent="DictEditMainframe" unique_id=1953522590]
 layout_mode = 2
 
-[node name="UnderlineSentence" type="HBoxContainer" parent="DictEditMainframe/BBCodeOptions" unique_id=1975299222]
+[node name="HSeparator" type="HSeparator" parent="DictEditMainframe/BBCodeOptions" unique_id=1124612843]
 layout_mode = 2
 
-[node name="UnderlineLabel" type="Label" parent="DictEditMainframe/BBCodeOptions/UnderlineSentence" unique_id=1832529931]
+[node name="GridContainer" type="GridContainer" parent="DictEditMainframe/BBCodeOptions" unique_id=1004617679]
+layout_mode = 2
+columns = 2
+
+[node name="Bold" type="HBoxContainer" parent="DictEditMainframe/BBCodeOptions/GridContainer" unique_id=214866891]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="DictEditMainframe/BBCodeOptions/GridContainer/Bold" unique_id=584600921]
+layout_mode = 2
+text = "bold"
+script = ExtResource("2_icn0b")
+message = Array[int]([-42, -22, -100])
+
+[node name="Button" parent="DictEditMainframe/BBCodeOptions/GridContainer/Bold" unique_id=391121514 instance=ExtResource("3_si2t6")]
+layout_mode = 2
+size_flags_horizontal = 1
+off_text = Array[int]([-114])
+on_text = Array[int]([-108])
+
+[node name="Italic" type="HBoxContainer" parent="DictEditMainframe/BBCodeOptions/GridContainer" unique_id=482233777]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="DictEditMainframe/BBCodeOptions/GridContainer/Italic" unique_id=1911758676]
+layout_mode = 2
+text = "italic"
+script = ExtResource("2_icn0b")
+message = Array[int]([-42, -49, -86, -51])
+
+[node name="Button" parent="DictEditMainframe/BBCodeOptions/GridContainer/Italic" unique_id=1312886222 instance=ExtResource("3_si2t6")]
+layout_mode = 2
+size_flags_horizontal = 1
+off_text = Array[int]([-174, -29, -85])
+on_text = Array[int]([-174, -85])
+
+[node name="Underline" type="HBoxContainer" parent="DictEditMainframe/BBCodeOptions/GridContainer" unique_id=1975299222]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="DictEditMainframe/BBCodeOptions/GridContainer/Underline" unique_id=1832529931]
 layout_mode = 2
 text = "underline"
 script = ExtResource("2_icn0b")
-message = Array[int]([-26, -14, -42, -17, -15, -4])
+message = Array[int]([-109, -51, -17])
 
-[node name="DoUnderlineButton" parent="DictEditMainframe/BBCodeOptions/UnderlineSentence" unique_id=1625235116 instance=ExtResource("3_si2t6")]
+[node name="Button" parent="DictEditMainframe/BBCodeOptions/GridContainer/Underline" unique_id=1625235116 instance=ExtResource("3_si2t6")]
 layout_mode = 2
 size_flags_horizontal = 1
+off_text = Array[int]([-100, -29])
+on_text = Array[int]([-100])
+
+[node name="Strikethrough" type="HBoxContainer" parent="DictEditMainframe/BBCodeOptions/GridContainer" unique_id=69063760]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="DictEditMainframe/BBCodeOptions/GridContainer/Strikethrough" unique_id=462434326]
+layout_mode = 2
+text = "strikethrough"
+script = ExtResource("2_icn0b")
+message = Array[int]([-114, -51, -17])
+
+[node name="Button" parent="DictEditMainframe/BBCodeOptions/GridContainer/Strikethrough" unique_id=1065103595 instance=ExtResource("3_si2t6")]
+layout_mode = 2
+size_flags_horizontal = 1
+off_text = Array[int]([-100, -29])
+on_text = Array[int]([-100])
 
 [node name="ColorPicker" type="HBoxContainer" parent="DictEditMainframe/BBCodeOptions" unique_id=422787390]
 layout_mode = 2
@@ -193,11 +251,18 @@ layout_mode = 2
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="ColorLabel" type="Label" parent="DictEditMainframe/BBCodeOptions/ColorPicker" unique_id=997935581]
+[node name="IsLabel" type="Label" parent="DictEditMainframe/BBCodeOptions/ColorPicker" unique_id=665122511]
 layout_mode = 2
-text = "signal color"
+text = "is"
 script = ExtResource("2_icn0b")
-message = Array[int]([-42, -54])
+message = Array[int]([-100])
+
+[node name="BG" parent="DictEditMainframe/BBCodeOptions/ColorPicker" unique_id=1780354143 instance=ExtResource("3_si2t6")]
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 4
+off_text = Array[int]([-42, -54])
+on_text = Array[int]([-22, -54])
 
 [node name="SubmitElseCancel" type="GridContainer" parent="DictEditMainframe" unique_id=1177023276]
 layout_mode = 2

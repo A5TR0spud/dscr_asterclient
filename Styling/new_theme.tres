@@ -15,9 +15,12 @@
 [ext_resource type="StyleBox" uid="uid://bcjd652kvj2ue" path="res://Styling/Tabber/tab_focus.tres" id="9_i4omk"]
 [ext_resource type="StyleBox" uid="uid://c72inj02naxqg" path="res://Styling/Tabber/tab_hovered.tres" id="10_gwgd7"]
 [ext_resource type="StyleBox" uid="uid://8mg0wvheihvx" path="res://Styling/Tabber/tab_selected.tres" id="11_fqkxe"]
+[ext_resource type="FontFile" uid="uid://cwbj6dro36xa3" path="res://fonts/CascadiaMono-Bold.ttf" id="12_d5xg6"]
 [ext_resource type="StyleBox" uid="uid://bcpf14e281kyl" path="res://Styling/Tabber/tab_unselected.tres" id="12_k7nka"]
 [ext_resource type="StyleBox" uid="uid://dupyap3qde3fv" path="res://Styling/Tabber/ButtonLookalike/tab_focus.tres" id="12_rvmd7"]
+[ext_resource type="FontFile" uid="uid://di3o60e8vwo33" path="res://fonts/CascadiaMono-BoldItalic.ttf" id="13_00ekq"]
 [ext_resource type="StyleBox" uid="uid://03se03qmxl1l" path="res://Styling/Tabber/ButtonLookalike/tab_hovered.tres" id="13_3jl28"]
+[ext_resource type="FontFile" uid="uid://dlbnwnjcw76kn" path="res://fonts/CascadiaMono-Italic.ttf" id="14_3a2p8"]
 [ext_resource type="StyleBox" uid="uid://bud12urn6xcjr" path="res://Styling/Tabber/ButtonLookalike/tab_selected.tres" id="14_f5bgc"]
 [ext_resource type="StyleBox" uid="uid://10juafvr3ky1" path="res://Styling/Tabber/ButtonLookalike/tab_unselected.tres" id="15_d5xg6"]
 [ext_resource type="StyleBox" uid="uid://db3k5eiovgegq" path="res://Styling/Seps/v_sep.tres" id="15_k7nka"]
@@ -125,6 +128,9 @@ PopupMenu/icons/unchecked = SubResource("GradientTexture1D_ttirq")
 PopupMenu/icons/unchecked_disabled = SubResource("GradientTexture1D_ttirq")
 PopupMenu/styles/hover = ExtResource("1_pkgym")
 PopupMenu/styles/panel = ExtResource("1_tvtlr")
+RichTextLabel/fonts/bold_font = ExtResource("12_d5xg6")
+RichTextLabel/fonts/bold_italics_font = ExtResource("13_00ekq")
+RichTextLabel/fonts/italics_font = ExtResource("14_3a2p8")
 RichTextLabel/styles/focus = SubResource("StyleBoxFlat_nkfox")
 SpinBox/icons/down = SubResource("GradientTexture1D_ttirq")
 SpinBox/icons/down_disabled = SubResource("GradientTexture1D_ttirq")
