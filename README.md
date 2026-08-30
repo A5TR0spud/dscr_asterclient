@@ -35,4 +35,5 @@ The dictionary must be named "DICTIONARY-1.save", it will not recognize the file
 * Autocomplete
 * Image parsing is more robust
 * Numbers keep their leading zeroes
-* Signals can have their colors changed and can be underlined (setting defaults to off)
+* Signals can have their colors changed and can be underlined, bolded, italicized (setting defaults to off)
+* Transmission library tab lets you create, edit, save, load, and preview transmissions without sending them
