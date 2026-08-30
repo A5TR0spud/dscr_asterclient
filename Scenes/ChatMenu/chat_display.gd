@@ -22,7 +22,7 @@ func _ready() -> void:
 func add_message_node(message: ChatEntry):
 	if message is TransEntry:
 		logged_history.append({
-			"m": message.message,
+			"m": PackedInt64Array(message.message),
 			"time": message.timestamp,
 			"sender": message.sender,
 			"trx": message.trans
