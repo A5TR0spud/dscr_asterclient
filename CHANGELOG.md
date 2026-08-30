@@ -1,5 +1,12 @@
 # Versions
 
+## --WIP--
+
+### ???
+
+* Old messages now unload if scrolled to the bottom and a new message is received
+  * Scrolling up will reload them
+
 ## 0.6.0: The Library
 
 ### Additions

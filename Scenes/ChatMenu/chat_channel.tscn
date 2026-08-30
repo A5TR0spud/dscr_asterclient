@@ -24,3 +24,5 @@ theme_override_constants/margin_right = 15
 [node name="ChatDisplay" type="VBoxContainer" parent="ScrollContainer/MarginContainer" unique_id=185948828]
 layout_mode = 2
 alignment = 2
+
+[connection signal="child_entered_tree" from="ScrollContainer/MarginContainer/ChatDisplay" to="." method="_on_chat_display_child_entered_tree"]
