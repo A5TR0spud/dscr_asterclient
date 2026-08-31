@@ -4,9 +4,15 @@
 
 ### Changes
 
-* Old messages now unload if scrolled to the bottom and a new message is received
+* Old messages now unload if scrolled to the bottom
   * Scrolling up will reload them
 * Notification sound now plays if you're in the tab and not scrolled down
+* Page up and page down now scroll chat by 80% of the page height instead of not at all
+
+### Fixes
+
+* Clicking an autocomplete option works again
+* Fixed holding certain keys not working if using autocomplete
 
 ## 0.6.0: The Library
 

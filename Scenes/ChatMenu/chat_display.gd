@@ -35,6 +35,16 @@ func add_message_node(message: ChatEntry):
 	if Chat.instance.channel_container.current_tab != get_index():
 		set_notification()
 
+func _input(event):
+	if not is_visible_in_tree():
+		return
+	if event.is_action_pressed("ui_page_up", true):
+		scroll_bar.value -= scroll_bar.page * 0.8
+		accept_event()
+	elif event.is_action_pressed("ui_page_down", true):
+		scroll_bar.value += scroll_bar.page * 0.8
+		accept_event()
+
 func _on_scroll(val):
 	if val < 0.01:
 		try_show_history()
@@ -42,9 +52,9 @@ func _on_scroll(val):
 		try_hide_history()
 	scroll_down_button.visible = not scroll_container.bottom_is_visible()
 
-func try_show_history():
+func try_show_history() -> bool:
 	if logged_history.size() <= shown_transmissions:
-		return
+		return false
 	var unshown_to_add: Dictionary = logged_history[logged_history.size() - shown_transmissions - 1]
 	var trx: TransEntry = trx_scene.instantiate()
 	trx.message = unshown_to_add["m"]
@@ -55,6 +65,7 @@ func try_show_history():
 	chat_display.move_child(trx, 0)
 	scroll_bar.set_value_no_signal.call_deferred(0.1)
 	shown_transmissions += 1
+	return true
 
 func try_hide_history():
 	if shown_transmissions > HIDE_EXCESS_TRANSMISSIONS and scroll_container.is_scrolled_to_bottom():

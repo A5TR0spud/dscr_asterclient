@@ -252,6 +252,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "the todo list will be removed at some point
 TODO:
+- ability to resize image-render window
+- ability to send received transmission direct to library
 - add more formatting options:  prior attract, next attract (attract removes space)
 - add signal-matching options (eg recolor matching pairs of -14 and -15, autocompleting -14 also types -15)
 - change placement of copy button (find a visible spot that doesn't cause formatting to screw up when it appears/disappears)
@@ -267,7 +269,6 @@ TODO:
 - implement message history so you can use arrow keys to access your previous transmissions
 - drag and drop dictionary
 - change save directory setting?
-- optimize (old transmissions queue free but are saved as a string. scrolling up will load old stuff and unload new stuff)
 nikzapp todo:
 - confetti
 - arbitrary parsing

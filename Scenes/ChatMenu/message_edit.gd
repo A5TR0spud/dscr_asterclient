@@ -208,14 +208,14 @@ func _gui_input(event: InputEvent) -> void:
 		var col = get_caret_column()
 		var no_selection = get_selected_text().is_empty()
 		
-		if event.is_action_pressed("ui_text_caret_right") and (no_selection or event.shift_pressed):
+		if event.is_action_pressed("ui_text_caret_right", true) and (no_selection or event.shift_pressed):
 			if col < line_text.length() and line_text[col] == DELIMITER_CHARACTER:
 				set_caret_column(min(col + 2, line_text.length()))
 				accept_event()
 				if no_selection and event.shift_pressed:
 					select(line, col, line, col + 2)
 				return
-		if event.is_action_pressed("ui_text_caret_left") and (no_selection or event.shift_pressed):
+		if event.is_action_pressed("ui_text_caret_left", true) and (no_selection or event.shift_pressed):
 			if col > 0 and line_text[col - 1] == DELIMITER_CHARACTER:
 				set_caret_column(max(col - 2, 0))
 				accept_event()
@@ -223,7 +223,7 @@ func _gui_input(event: InputEvent) -> void:
 					select(line, col, line, col - 2)
 				return
 		
-		if event.is_action_pressed("ui_text_backspace") and get_selected_text() == "":
+		if event.is_action_pressed("ui_text_backspace", true) and get_selected_text() == "":
 			var delimiter_index = find_delimiter_near(line_text, col)
 			if delimiter_index != -1 and delimiter_index > 0:
 				# erase delimiter character as well
@@ -233,7 +233,7 @@ func _gui_input(event: InputEvent) -> void:
 				text_changed.emit()
 				accept_event()
 				return
-		if event.is_action_pressed("ui_text_delete") and get_selected_text() == "":
+		if event.is_action_pressed("ui_text_delete", true) and get_selected_text() == "":
 			var delimiter_index = find_delimiter_near(line_text, col + 1)
 			if delimiter_index != -1 and delimiter_index > 0:
 				# erase delimiter character as well
