@@ -2,10 +2,11 @@
 
 ## --WIP--
 
-### ???
+### Changes
 
 * Old messages now unload if scrolled to the bottom and a new message is received
   * Scrolling up will reload them
+* Notification sound now plays if you're in the tab and not scrolled down
 
 ## 0.6.0: The Library
 

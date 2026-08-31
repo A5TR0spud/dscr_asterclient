@@ -106,7 +106,7 @@ static func new_transmission(packet: PackedStringArray) -> void:
 	
 	if (
 		(new_message.sender != Main.instance.previously_accepted_callsign)
-		and (not channel.visible or not instance.get_window().has_focus() or not instance.is_visible_in_tree())
+		and (not instance.get_window().has_focus() or not channel.is_visible_in_tree() or not channel.scroll_container.bottom_is_visible())
 		and channel_is_visible(channel_id)
 	):
 		SoundManager.play_sound(SoundManager.Sounds.NOTIFICATION)

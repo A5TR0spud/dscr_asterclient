@@ -81,3 +81,4 @@ text_overrun_behavior = 1
 
 [connection signal="caret_changed" from="." to="." method="_on_caret_changed"]
 [connection signal="text_changed" from="." to="." method="_on_text_changed"]
+[connection signal="item_clicked" from="PanelContainer/MarginContainer/ItemList" to="." method="_on_item_list_item_clicked"]

@@ -3,6 +3,7 @@ class_name ChatChannel
 @onready var chat_display = $ScrollContainer/MarginContainer/ChatDisplay
 @onready var scroll_container: AutoScrollContainer = $ScrollContainer
 @onready var scroll_bar: VScrollBar = $ScrollContainer.get_v_scroll_bar()
+@onready var scroll_down_button: Button = $ScrollToNew
 static var trx_scene = preload("res://Scenes/ChatMenu/transmission_entry.tscn")
 var default_channel: bool = true
 var id = null
@@ -17,7 +18,8 @@ func _ready() -> void:
 	chat_display.child_entered_tree.connect(Chat.on_chat_display_child_entered_tree.bind(chat_display))
 	chat_display.child_exiting_tree.connect(Chat.on_chat_display_child_exiting_tree.bind(chat_display))
 	Main.instance.reload_dict.connect(update_name)
-	scroll_bar.value_changed.connect(try_show_history)
+	scroll_bar.value_changed.connect(_on_scroll)
+	scroll_down_button.hide()
 
 func add_message_node(message: ChatEntry):
 	if message is TransEntry:
@@ -33,8 +35,15 @@ func add_message_node(message: ChatEntry):
 	if Chat.instance.channel_container.current_tab != get_index():
 		set_notification()
 
-func try_show_history(_ignoreme):
-	if logged_history.size() <= shown_transmissions or scroll_bar.value > 0.01:
+func _on_scroll(val):
+	if val < 0.01:
+		try_show_history()
+	elif scroll_container.is_scrolled_to_bottom():
+		try_hide_history()
+	scroll_down_button.visible = not scroll_container.bottom_is_visible()
+
+func try_show_history():
+	if logged_history.size() <= shown_transmissions:
 		return
 	var unshown_to_add: Dictionary = logged_history[logged_history.size() - shown_transmissions - 1]
 	var trx: TransEntry = trx_scene.instantiate()
@@ -47,16 +56,21 @@ func try_show_history(_ignoreme):
 	scroll_bar.set_value_no_signal.call_deferred(0.1)
 	shown_transmissions += 1
 
-func _on_chat_display_child_entered_tree(_node):
-	if scroll_bar.page + 64 >= scroll_bar.max_value:
-		return
+func try_hide_history():
 	if shown_transmissions > HIDE_EXCESS_TRANSMISSIONS and scroll_container.is_scrolled_to_bottom():
 		for c in chat_display.get_children():
+			if scroll_bar.page + 64 >= scroll_bar.max_value:
+				return
+			if c is StatusLogEntry:
+				c.queue_free()
 			if c is TransEntry:
 				c.queue_free()
 				shown_transmissions -= 1
 				if shown_transmissions <= HIDE_EXCESS_TRANSMISSIONS:
 					break
+
+func _on_chat_display_child_entered_tree(_node):
+	try_hide_history()
 
 func set_channel_name(_id):
 	self.name = str(_id)
@@ -92,3 +106,8 @@ func get_prefix() -> Array[int]:
 		return []
 	else:
 		return [Chat.CHANNEL_SELECTOR, id]
+
+
+func _on_scroll_to_new_pressed():
+	scroll_container.scroll_to_bottom()
+	try_hide_history()
