@@ -74,16 +74,16 @@ layout_mode = 2
 [node name="CopySignals" type="Button" parent="Body/Editor/GridContainer/VBoxContainer/HBoxContainer" unique_id=920528551]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "copy words"
+text = "copy sigs"
 script = ExtResource("1_yegc8")
-message = Array[int]([-237, -40])
+message = Array[int]([-42, -40])
 
 [node name="CopyWords" type="Button" parent="Body/Editor/GridContainer/VBoxContainer/HBoxContainer" unique_id=1682179097]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "copy sigs"
+text = "copy words"
 script = ExtResource("1_yegc8")
-message = Array[int]([-42, -40])
+message = Array[int]([-237, -40])
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Body/Editor/GridContainer/VBoxContainer" unique_id=1018313947]
 custom_minimum_size = Vector2(0, 32)

@@ -8,11 +8,13 @@
   * Scrolling up will reload them
 * Notification sound now plays if you're in the tab and not scrolled down
 * Page up and page down now scroll chat by 80% of the page height instead of not at all
+* If someone leaves while you are editing their nickname, it will now wait before disappearing
 
 ### Fixes
 
 * Clicking an autocomplete option works again
 * Fixed holding certain keys not working if using autocomplete
+* Fixed the copy buttons in the library being mislabeled and/or reversed
 
 ## 0.6.0: The Library
 

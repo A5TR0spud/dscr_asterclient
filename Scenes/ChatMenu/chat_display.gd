@@ -70,7 +70,7 @@ func try_show_history() -> bool:
 func try_hide_history():
 	if shown_transmissions > HIDE_EXCESS_TRANSMISSIONS and scroll_container.is_scrolled_to_bottom():
 		for c in chat_display.get_children():
-			if scroll_bar.page + 64 >= scroll_bar.max_value:
+			if scroll_bar.page + 64 >= scroll_bar.max_value - scroll_bar.min_value:
 				return
 			if c is StatusLogEntry:
 				c.queue_free()
