@@ -174,6 +174,7 @@ func refresh():
 	before_label.set("popup/item_1/text", DictionaryHandler.signals_to_words([1, -190]))
 	before_label.set("popup/item_2/text", DictionaryHandler.signals_to_words([1, -108, -190]))
 	before_label.set("popup/item_3/text", DictionaryHandler.signals_to_words([2, -108, -190]))
+	before_label.set("popup/item_4/text", DictionaryHandler.signals_to_words([1, -189]))
 	after_label.set("popup/item_0/text", DictionaryHandler.signals_to_words([-111]))
 	after_label.set("popup/item_1/text", DictionaryHandler.signals_to_words([1, -190]))
 	after_label.set("popup/item_2/text", DictionaryHandler.signals_to_words([1, -108, -190]))

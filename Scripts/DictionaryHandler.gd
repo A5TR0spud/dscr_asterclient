@@ -423,7 +423,9 @@ static func signals_to_words(input: Array, format: bool = false, do_bbcode: bool
 		var format_mode_after: int = desc[after_key]
 		var break_double: bool = desc[break_key]
 		if format and i > 0 and o.right(2) != "\n\n":
-			if format_mode == 1 and o.right(1) != " " and o.right(1) != "\n":
+			if format_mode == 4 and o.right(1) == " ":
+				o = o.substr(0, o.length() - 1)
+			elif format_mode == 1 and o.right(1) != " " and o.right(1) != "\n":
 				o += " "
 			elif format_mode == 2 and o.right(1) != "\n":
 				if o.right(1) == " ":
