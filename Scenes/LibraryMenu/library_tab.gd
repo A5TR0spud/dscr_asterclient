@@ -12,6 +12,7 @@ class_name Library
 var lib_entry = preload("res://Scenes/LibraryMenu/library_entry.tscn")
 
 var pre_name: String = ""
+var current_input: String = ""
 var current_transmission: Array = []
 var unsaved_changes: bool = false
 
@@ -25,14 +26,18 @@ static func open_transmission(trx: String):
 	instance.name_edit.text = trx
 	instance.current_transmission = LibraryHandler.get_transmission(trx)
 	instance._reload()
+	instance.current_input = instance.words_edit.text
 
 func _on_transmission_edit_text_changed():
 	debounce.stop()
 	debounce.start()
 
 func _on_refresh_debounce_timeout():
+	if current_input == words_edit.text: return
+
 	var parsed: ParseResult = DictionaryHandler.parse_text(words_edit.text, false)
 	if current_transmission != parsed.output:
+		current_input = words_edit.text
 		current_transmission = parsed.output
 		_set_sig_text()
 	unsaved_changes = true
