@@ -373,6 +373,14 @@ static func get_or_default_signal_desc(sig: int) -> Dictionary:
 static func calc_luminosity(c: Color) -> float:
 	return sqrt(0.299*(c.r*c.r) + 0.587*(c.g*c.g) + 0.114*(c.b*c.b))
 
+static func calc_desc_color(color_value: Variant) -> Color:
+	if (color_value is int or color_value is float) and color_value >= 0 and color_value <= 64:
+		return VisualizeNode.calculate_color(color_value)
+	elif color_value is String:
+		return Color.from_string(color_value, Color.WHITE)
+	else:
+		return Color.WHITE
+
 static func signals_to_words(input: Array, do_whitespace_format: bool = false, can_do_bbcode: bool = false, do_appearance_format: bool = false, do_clickable: bool = false) -> String:
 	var o: String = ""
 	var indent: int = 0
@@ -414,13 +422,7 @@ static func signals_to_words(input: Array, do_whitespace_format: bool = false, c
 				underline = desc.get(underline_key, false)
 				strike = desc.get(strikethrough_key, false)
 				invert = desc.get(background_key, false)
-				var color_value = desc.get(color_key)
-				if (color_value is int or color_value is float) and color_value >= 0 and color_value <= 64:
-					color = VisualizeNode.calculate_color(color_value)
-				elif color_value is String:
-					color = Color.from_string(color_value, Color.WHITE)
-				else:
-					color = Color.WHITE
+				color = calc_desc_color(desc.get(color_key))
 		elif is_number:
 			word = str(sig)
 			if prev is int and prev == -54 and sig >= 0 and sig <= 64:
