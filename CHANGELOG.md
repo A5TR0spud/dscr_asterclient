@@ -7,6 +7,7 @@
 * Added formatting option to remove spaces (Eearslya)
 * Signals now color in the transmission editor(s). Unknown signals are red. (Eearslya)
 * Callsigns tab now has a section at the bottom for named users even if they're offline
+* Dictionary files can be loaded by dragging them onto the client. (Eearslya)
 
 ### Changes
 

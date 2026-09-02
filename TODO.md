@@ -12,7 +12,6 @@
 * hover over translated words to get the signal
 * hover over negative numbers to get the translation
 * implement message history so you can use arrow keys to access your previous transmissions
-* drag and drop dictionary
 * change save directory button?
 
 ### nikzapp
@@ -21,3 +20,4 @@
 * arbitrary parsing
 * lua modules
 * android support
+

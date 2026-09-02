@@ -85,6 +85,7 @@ func _ready():
 	start_connect()
 	boot_sound.play()
 	boot_sound.finished.connect(boot_sound.queue_free)
+	get_window().files_dropped.connect(_on_files_dropped)
 
 static func get_callsign_color(value: int) -> Color:
 	var hue: float = fmod(137.5 * value, 360) / 360.0;
@@ -355,3 +356,11 @@ func _on_reconnect_time_timeout():
 		print("Attempting auto-reconnect...")
 		reconnect_cooldown.start()
 		start_connect()
+
+func _on_files_dropped(files: PackedStringArray):
+	if files.size() > 1: return
+	if await SaveSystem.load_dict(files[0]):
+		SaveSystem.save_dict()
+		SoundManager.play_sound(SoundManager.Sounds.SUCCESS)
+	else:
+		SoundManager.play_sound(SoundManager.Sounds.FAIL)

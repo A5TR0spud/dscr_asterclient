@@ -187,37 +187,47 @@ static func load_settings() -> void:
 # 2: new line
 # 3: double new line
 
-static func load_dict() -> void:
-	var file_access := FileAccess.open(dict_path, FileAccess.READ)
-	if not FileAccess.file_exists(dict_path):
+static func load_dict(path: String = dict_path) -> bool:
+	var file_access := FileAccess.open(path, FileAccess.READ)
+	if not FileAccess.file_exists(path):
 		save_dict()
 		Main.on_dict_reload()
 		open_save_location()
-		var orig_json_string := FileAccess.get_file_as_string(dict_path)
+		var orig_json_string := FileAccess.get_file_as_string(path)
 		var tries: int = 0
 		DictionaryHandler.bad_dict = true
 		while (
-			(not FileAccess.file_exists(dict_path)) or
-			orig_json_string == FileAccess.get_file_as_string(dict_path)
+			(not FileAccess.file_exists(path)) or
+			orig_json_string == FileAccess.get_file_as_string(path)
 		):
 			if tries > 60:
-				return
+				return false
 			await Main.instance.get_tree().create_timer(1).timeout
 			tries += 1
 		load_dict()
-		return
-	var json_string:= FileAccess.get_file_as_string(dict_path)
+		return false
+	var json_string:= FileAccess.get_file_as_string(path)
 	file_access.close()
 	var json := JSON.new()
 	var error := json.parse(json_string)
 	if error:
 		print("JSON Parse Error: ", error)
-		return
+		return false
+	
+	var old_dict := dict
 	dict = json.data
 	DictionaryHandler.initialize()
 	DictionaryHandler.sort_dictionary()
 	eval_bad_dict()
+	if DictionaryHandler.bad_dict:
+		dict = old_dict
+		DictionaryHandler.initialize()
+		DictionaryHandler.sort_dictionary()
+		eval_bad_dict()
+		return false
+
 	Main.on_dict_reload()
+	return true
 
 static func eval_bad_dict() -> void:
 	DictionaryHandler.bad_dict = dict.is_empty() or DictionaryHandler.word_keys.is_empty() or DictionaryHandler.word_names.is_empty()
