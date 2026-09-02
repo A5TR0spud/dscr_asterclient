@@ -4,13 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://dc1vhk1wyejon" path="res://Scenes/Common/identicon.tscn" id="2_jurdb"]
 [ext_resource type="Script" uid="uid://dqce42c573ptg" path="res://Scripts/SimpleTranslatable.gd" id="3_urwyp"]
 
-[node name="CallsignEntry" type="PanelContainer" unique_id=1863336341]
+[node name="CallsignEntry" type="VBoxContainer" unique_id=1464278328]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
+size_flags_vertical = 0
 script = ExtResource("1_urwyp")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1787242212]
@@ -38,6 +39,9 @@ max_length = 16
 script = ExtResource("3_urwyp")
 message = Array[int]([-111])
 property_name = &"placeholder_text"
+
+[node name="HSeparator" type="HSeparator" parent="." unique_id=625636416]
+layout_mode = 2
 
 [connection signal="editing_toggled" from="HBoxContainer/Nickname" to="." method="_on_nickname_editing_toggled"]
 [connection signal="text_submitted" from="HBoxContainer/Nickname" to="." method="_on_nickname_text_submitted"]

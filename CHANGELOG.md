@@ -6,6 +6,7 @@
 
 * Added formatting option to remove spaces (Eearslya)
 * Signals now color in the transmission editor(s). Unknown signals are red. (Eearslya)
+* Callsigns tab now has a section at the bottom for named users even if they're offline
 
 ### Changes
 
@@ -14,6 +15,8 @@
 * Notification sound now plays if you're in the tab and not scrolled down
 * Page up and page down now scroll chat by 80% of the page height instead of not at all
 * If someone leaves while you are editing their nickname, it will now wait before disappearing
+* Moved todo out of in-program
+* Callsign tab entries are more compact
 
 ### Fixes
 

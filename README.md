@@ -8,7 +8,7 @@ The UI also runs on the same assumption.
 
 |Supported DSCR Features|Other Features|
 |-|-|
-|Basic functionality: sending, receiving, changing callsigns, truncation, etc|Complete editing of the dictionary. Additional indenting and negative spacing options. Optional color and bold/italic/etc settings. Mostly compatible with Relay3544. Safe to use with TMfDS (though TMfDS will destroy additional options).|
+|Basic functionality: sending, receiving, changing callsigns, truncation, etc|Complete editing of the dictionary. Additional indenting and negative spacing options. Optional color and bold/italic/etc settings. Mostly compatible with [Relay3544](https://github.com/electraminer/relay3544). Safe to use with TMfDS (though TMfDS will destroy additional options).|
 |Send unknown signals by "pipe escaping" (\|-#### -> @-####\_UNDEF)|Searching the dictionary by number and/or name|
 |Colored callsigns and identicons|Multi-line transmission editor (shift+enter for newline) with autocomplete|
 |Display of online user count|Display of currently online users' callsigns and ability to set nicknames|

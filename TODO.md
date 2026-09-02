@@ -16,7 +16,7 @@
 * hover over negative numbers to get the translation
 * implement message history so you can use arrow keys to access your previous transmissions
 * drag and drop dictionary
-* change save directory setting?
+* change save directory button?
 
 ### nikzapp
 

@@ -22,3 +22,11 @@ static func get_nick(callsign) -> String:
 	if callsign is int:
 		callsign = Main.base_10_to_callsign(callsign)
 	return SaveSystem.nicknames.get(callsign, "")
+
+static func get_all_nicknames() -> Array[int]:
+	var o: Array[int] = []
+	for i:String in SaveSystem.nicknames.keys():
+		if get_nick(i).is_empty():
+			continue
+		o.append(64 * 8 * int(i[0]) + 64 * int(i[1]) + 8 * int(i[2]) + int(i[3]))
+	return o
