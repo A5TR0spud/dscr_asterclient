@@ -5,6 +5,7 @@
 ### Additions
 
 * Added formatting option to remove spaces (Eearslya)
+* Signals now color in the transmission editor(s). Unknown signals are red. (Eearslya)
 
 ### Changes
 
