@@ -48,7 +48,7 @@ func refresh_callsign():
 	identicon_node.num = sender
 
 func _physics_process(_delta):
-	if timeago_node.visible:
+	if timeago_node.is_visible_in_tree():
 		calc_time()
 		timeago_node.text = time_ago
 
