@@ -15,6 +15,7 @@ func _ready():
 	Main.instance.reload_settings.connect(_set_popup_size.call_deferred)
 	auto_list_panel.hide()
 	autocomplete_finder.hide()
+	syntax_highlighter = TransmissionHighlighter.new()
 
 func refresh():
 	placeholder_text = DictionaryHandler.signals_to_words(placeholder)
