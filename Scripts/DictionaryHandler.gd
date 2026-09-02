@@ -399,8 +399,8 @@ static func signals_to_words(input: Array, do_whitespace_format: bool = false, c
 				format_indent = desc.get(indent_key, 0)
 				format_mode = desc[before_key] - desc.get(extra_before_key, 0)
 				format_mode_after = desc[after_key] - desc.get(extra_after_key, 0)
-				if desc[break_key] and prev == sig:
-					format_mode_after = 3
+				if prev is int and desc[break_key] and prev == sig:
+					format_mode_after = 2
 			if sig not in word_keys:
 				color = default_color
 				bold = default_bold

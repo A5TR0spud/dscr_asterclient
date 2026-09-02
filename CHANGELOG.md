@@ -2,6 +2,10 @@
 
 ## --WIP--
 
+### Additions
+
+* Added formatting option to remove spaces (Eearslya)
+
 ### Changes
 
 * Old messages now unload if scrolled to the bottom

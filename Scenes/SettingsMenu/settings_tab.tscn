@@ -254,7 +254,7 @@ text = "the todo list will be removed at some point
 TODO:
 - ability to resize image-render window
 - ability to send received transmission direct to library
-- add more formatting options:  prior attract, next attract (attract removes space)
+- ability to see saved nicknames without opening save directory
 - add signal-matching options (eg recolor matching pairs of -14 and -15, autocompleting -14 also types -15)
 - change placement of copy button (find a visible spot that doesn't cause formatting to screw up when it appears/disappears)
 - lone confetti signal makes confetti setting (configurable \"confetti\" signal)
