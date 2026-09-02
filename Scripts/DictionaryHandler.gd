@@ -107,7 +107,9 @@ static var default_background: bool:
 
 const desc_key: String = "desc"
 const before_key: String = "formatMode"
+const extra_before_key: String = "extraFormatMode"
 const after_key: String = "formatModeAfter"
+const extra_after_key: String = "extraFormatModeAfter"
 const break_key: String = "breakOnDouble"
 const color_key: String = "color"
 const bold_key: String = "bold"
@@ -371,85 +373,83 @@ static func get_or_default_signal_desc(sig: int) -> Dictionary:
 static func calc_luminosity(c: Color) -> float:
 	return sqrt(0.299*(c.r*c.r) + 0.587*(c.g*c.g) + 0.114*(c.b*c.b))
 
-static func signals_to_words(input: Array, format: bool = false, do_bbcode: bool = false, do_colorline: bool = false, do_clickable: bool = false) -> String:
+static func signals_to_words(input: Array, do_whitespace_format: bool = false, can_do_bbcode: bool = false, do_appearance_format: bool = false, do_clickable: bool = false) -> String:
 	var o: String = ""
 	var indent: int = 0
-	for i in input.size():
-		if input[i] is String:
-			o += input[i]
-			continue
-		var prev = input[i - 1] if i > 0 else 1
-		if prev is String: prev = 1
-		else: prev = prev as int
-		var sig: int = str(input[i]).to_int()
-		if sig >= 0:
-			if o.right(1) == "\n":
-				for abcd in range(indent):
-					o += "\t"
-			var color_num: bool = do_bbcode and do_colorline and prev == -54 and sig >= 0 and sig <= 64
-			if color_num:
-				var color0: Color = VisualizeNode.calculate_color(sig)
-				o += "[bgcolor=#" + color0.to_html(false) + "][color="+("black" if calc_luminosity(color0) > 0.5 else "white") + "]"
-			o += String.num_int64(sig)
-			if color_num:
-				o += "[/color][/bgcolor]"
-			continue
-		var name: String = get_or_default_signal_name(sig)
-		var desc: Dictionary = get_or_default_signal_desc(sig)
-		var color_value = desc.get(color_key)
-		var color: Color
-		if sig not in word_keys:
-			color = default_color
-		else:
-			if (color_value is int or color_value is float) and color_value >= 0 and color_value <= 64:
-				color = VisualizeNode.calculate_color(color_value)
-			elif color_value is String:
-				color = Color.from_string(color_value, Color.WHITE)
+	var ws: int = 0
+	var prev = 1
+	for sig in input:
+		var format_mode: int = 0
+		var format_mode_after: int = 0 if do_whitespace_format else 1
+		var format_indent: int = 0
+		var word: String = str(sig)
+		var bold: bool = false
+		var italic: bool = false
+		var underline: bool = false
+		var strike: bool = false
+		var invert: bool = false
+		var color: Color = Color.WHITE
+		var is_signal: bool = sig is int and sig < 0
+		var is_number: bool = sig is int and sig >= 0
+		
+		if is_signal:
+			word = get_or_default_signal_name(sig)
+			var desc: Dictionary = get_or_default_signal_desc(sig)
+			if do_whitespace_format:
+				format_indent = desc.get(indent_key, 0)
+				format_mode = desc[before_key] - desc.get(extra_before_key, 0)
+				format_mode_after = desc[after_key] - desc.get(extra_after_key, 0)
+				if desc[break_key] and prev == sig:
+					format_mode_after = 3
+			if sig not in word_keys:
+				color = default_color
+				bold = default_bold
+				italic = default_italic
+				underline = default_underline
+				strike = default_strikethrough
+				invert = default_background
 			else:
-				color = Color.WHITE
-		var bold: bool = desc.get(bold_key, false)
-		var italic: bool = desc.get(italic_key, false)
-		var underline: bool = desc.get(underline_key, false)
-		var strike: bool = desc.get(strikethrough_key, false)
-		var invert: bool = desc.get(background_key, false)
-		if not word_keys.has(sig):
-			color_value = default_color
-			bold = default_bold
-			italic = default_italic
-			underline = default_underline
-			strike = default_strikethrough
-			invert = default_background
-		var format_mode: int = desc[before_key]
-		var format_mode_after: int = desc[after_key]
-		var break_double: bool = desc[break_key]
-		if format and i > 0 and o.right(2) != "\n\n":
-			if format_mode == 1 and o.right(1) != " " and o.right(1) != "\n":
-				o += " "
-			elif format_mode == 2 and o.right(1) != "\n":
-				if o.right(1) == " ":
-					o = o.left(-1)
-				o += "\n"
-			elif format_mode == 3:
-				if o.right(1) == " ":
-					o = o.left(-1)
-				o += "\n\n"
-		var format_indent: int = desc.get(indent_key, 0)
-		if format:
-			if format_indent < 0:
-				indent = maxi(0, indent + format_indent)
-			if o.right(1) == "\n":
-				for abcd in range(indent):
-					o += "\t"
-			if format_indent > 0:
-				indent += format_indent
-		if not format and i > 0 and o.right(1) != " ":
+				bold = desc.get(bold_key, false)
+				italic = desc.get(italic_key, false)
+				underline = desc.get(underline_key, false)
+				strike = desc.get(strikethrough_key, false)
+				invert = desc.get(background_key, false)
+				var color_value = desc.get(color_key)
+				if (color_value is int or color_value is float) and color_value >= 0 and color_value <= 64:
+					color = VisualizeNode.calculate_color(color_value)
+				elif color_value is String:
+					color = Color.from_string(color_value, Color.WHITE)
+				else:
+					color = Color.WHITE
+		elif is_number:
+			word = str(sig)
+			if prev is int and prev == -54 and sig >= 0 and sig <= 64:
+				color = VisualizeNode.calculate_color(sig)
+				invert = true
+		
+		if -format_mode >= ws:
+			ws = 0
+		else:
+			ws = maxi(ws, format_mode)
+		if format_indent < 0:
+			indent = maxi(0, indent + format_indent)
+		
+		if ws == 1:
 			o += " "
-		if do_bbcode:
+		elif ws == 2 or ws == 3:
+			o += "\n".repeat(ws - 1)
+			if indent > 0:
+				o += "\t".repeat(indent)
+		ws = format_mode_after
+		if format_indent > 0:
+			indent += format_indent
+		
+		if can_do_bbcode:
 			# Avoid formatting issues if users put [ in their signal names
-			name = name.replace("[", "[lb]")
+			word = word.replace("[", "[lb]")
 			if do_clickable:
 				o += "[url=" + str(sig) + "]"
-			if do_colorline:
+			if do_appearance_format:
 				if bold:
 					o += "[b]"
 				if italic:
@@ -462,9 +462,9 @@ static func signals_to_words(input: Array, format: bool = false, do_bbcode: bool
 					o += "[bgcolor=#" + color.to_html(false) + "][color="+("black" if calc_luminosity(color) > 0.5 else "white") + "]"
 				elif color != Color.WHITE:
 					o += "[color=#" + color.to_html(false) + "]"
-		o += name
-		if do_bbcode:
-			if do_colorline:
+		o += word
+		if can_do_bbcode:
+			if do_appearance_format:
 				if invert:
 					o += "[/color][/bgcolor]" 
 				elif color != Color.WHITE:
@@ -479,21 +479,9 @@ static func signals_to_words(input: Array, format: bool = false, do_bbcode: bool
 					o += "[/b]"
 			if do_clickable:
 				o += "[/url]"
-
-		if not format and i < input.size() - 1:
-			var next = input[i + 1]
-			if next is int and next >= 0:
-				o += " "
-		if format and i < input.size() - 1:
-			if break_double and prev == sig:
-				o += "\n"
-			elif format_mode_after == 1:
-				o += " "
-			elif format_mode_after == 2:
-				o += "\n"
-			elif format_mode_after == 3:
-				o += "\n\n"
-	return o
+		
+		prev = sig
+	return o.strip_edges()
 
 static func forget_signal(sig: int) -> void:
 	var idx: int = word_keys.find(sig)

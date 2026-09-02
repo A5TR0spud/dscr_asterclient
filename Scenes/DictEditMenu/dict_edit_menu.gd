@@ -67,10 +67,21 @@ func save() -> void:
 	name_label.text = DictionaryHandler.get_or_default_signal_name(current_signal)
 	var desc: Dictionary = {
 		DictionaryHandler.desc_key: desc_edit.text,
-		DictionaryHandler.before_key: before_label.selected,
-		DictionaryHandler.after_key: after_label.selected,
 		DictionaryHandler.break_key: break_button.button_pressed
 	}
+	if before_label.selected < 4:
+		desc.set(DictionaryHandler.before_key, before_label.selected)
+		desc.set(DictionaryHandler.extra_before_key, 0)
+	else:
+		desc.set(DictionaryHandler.before_key, 0)
+		desc.set(DictionaryHandler.extra_before_key, before_label.selected - 3)
+	if after_label.selected < 4:
+		desc.set(DictionaryHandler.after_key, after_label.selected)
+		desc.set(DictionaryHandler.extra_after_key, 0)
+	else:
+		desc.set(DictionaryHandler.after_key, 0)
+		desc.set(DictionaryHandler.extra_after_key, after_label.selected - 3)
+	
 	desc.set(DictionaryHandler.color_key, "#"+_get_spinners_as_color().to_html(false))
 	desc.set(DictionaryHandler.bold_key, bold_edit.button_pressed)
 	desc.set(DictionaryHandler.italic_key, italic_edit.button_pressed)
@@ -90,6 +101,8 @@ func reload() -> void:
 	delete_button.visible = current_signal < 0
 	bbcode_options.visible = SettingsHandler.do_bbcode
 	indentation.visible = current_signal < 0
+	before_label.set_item_disabled(4, current_signal >= 0)
+	after_label.set_item_disabled(4, current_signal >= 0)
 	if current_signal == UNKNOWN_SIGNAL:
 		before_after_clear_label.text = DictionaryHandler.signals_to_words([-122, -42, -122])
 		before_label.select(DictionaryHandler.default_before_mode)
@@ -109,8 +122,18 @@ func reload() -> void:
 		name_edit.grab_focus()
 		name_edit.select_all()
 	desc_edit.text = desc[DictionaryHandler.desc_key]
-	before_label.select(int(desc[DictionaryHandler.before_key]))
-	after_label.select(int(desc[DictionaryHandler.after_key]))
+	var tmp0: int = desc[DictionaryHandler.before_key]
+	var tmp1: int = desc.get(DictionaryHandler.extra_before_key, 0)
+	if tmp1 > 0:
+		before_label.select(tmp1 + 3)
+	else:
+		before_label.select(tmp0)
+	tmp0 = desc[DictionaryHandler.after_key]
+	tmp1 = desc.get(DictionaryHandler.extra_after_key, 0)
+	if tmp1 > 0:
+		after_label.select(tmp1 + 3)
+	else:
+		after_label.select(tmp0)
 	break_button.set_pressed_no_signal(desc[DictionaryHandler.break_key])
 	break_button.refresh()
 	delete_button.set_confirm_state(false)
@@ -170,14 +193,16 @@ func _push_color_to_spinners(col: Color):
 
 func refresh():
 	reload()
-	before_label.set("popup/item_0/text", DictionaryHandler.signals_to_words([-111]))
-	before_label.set("popup/item_1/text", DictionaryHandler.signals_to_words([1, -190]))
-	before_label.set("popup/item_2/text", DictionaryHandler.signals_to_words([1, -108, -190]))
-	before_label.set("popup/item_3/text", DictionaryHandler.signals_to_words([2, -108, -190]))
-	after_label.set("popup/item_0/text", DictionaryHandler.signals_to_words([-111]))
-	after_label.set("popup/item_1/text", DictionaryHandler.signals_to_words([1, -190]))
-	after_label.set("popup/item_2/text", DictionaryHandler.signals_to_words([1, -108, -190]))
-	after_label.set("popup/item_3/text", DictionaryHandler.signals_to_words([2, -108, -190]))
+	before_label.set_item_text(0, DictionaryHandler.signals_to_words([-111]))
+	before_label.set_item_text(1, DictionaryHandler.signals_to_words([1, -190]))
+	before_label.set_item_text(2, DictionaryHandler.signals_to_words([1, -108, -190]))
+	before_label.set_item_text(3, DictionaryHandler.signals_to_words([2, -108, -190]))
+	before_label.set_item_text(4, DictionaryHandler.signals_to_words([1, -189]))
+	after_label.set_item_text(0, DictionaryHandler.signals_to_words([-111]))
+	after_label.set_item_text(1, DictionaryHandler.signals_to_words([1, -190]))
+	after_label.set_item_text(2, DictionaryHandler.signals_to_words([1, -108, -190]))
+	after_label.set_item_text(3, DictionaryHandler.signals_to_words([2, -108, -190]))
+	after_label.set_item_text(4, DictionaryHandler.signals_to_words([1, -189]))
 
 func _on_notes_edit_gui_input(event):
 	if event.is_action_pressed("ui_text_submit") and not event.is_action_pressed("ui_text_newline"):
