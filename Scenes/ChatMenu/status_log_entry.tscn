@@ -2,12 +2,8 @@
 
 [ext_resource type="Script" uid="uid://k010sonc4dg5" path="res://Scenes/ChatMenu/status_log_entry.gd" id="1_4wbxh"]
 [ext_resource type="FontFile" uid="uid://cwbj6dro36xa3" path="res://fonts/CascadiaMono-Bold.ttf" id="2_w0uyb"]
+[ext_resource type="StyleBox" uid="uid://4hbvf66ek6pl" path="res://Styling/transmission_indent.tres" id="4_4wbxh"]
 [ext_resource type="Script" uid="uid://dqce42c573ptg" path="res://Scripts/SimpleTranslatable.gd" id="5_v4d2j"]
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_i75l1"]
-color = Color(1, 1, 1, 1)
-thickness = 6
-vertical = true
 
 [node name="StatusLogEntry" type="VBoxContainer" unique_id=822668353]
 anchors_preset = 15
@@ -45,7 +41,7 @@ layout_mode = 2
 layout_mode = 2
 mouse_filter = 1
 theme_override_constants/separation = 10
-theme_override_styles/separator = SubResource("StyleBoxLine_i75l1")
+theme_override_styles/separator = ExtResource("4_4wbxh")
 
 [node name="Corpus" type="VBoxContainer" parent="Body" unique_id=1576697985]
 layout_mode = 2

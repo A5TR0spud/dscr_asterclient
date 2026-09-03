@@ -30,6 +30,9 @@ func ready():
 	if stasis:
 		hover_node.visible = false
 
+func get_color() -> Color:
+	return Main.get_callsign_color(sender)
+
 func try_parses():
 	var has_image: bool = image_node.check_image(message)
 	image_node.visible = has_image and is_image_open

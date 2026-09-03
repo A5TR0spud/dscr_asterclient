@@ -55,6 +55,22 @@ func _evaluate_corpus(clickable: bool = false):
 		)
 	)
 
+var _seperator_visible: bool = true
+var _spacer: Control = null
+func set_sep_visibility(visibility: bool):
+	_seperator_visible = visibility
+	if visibility and _spacer == null:
+		_spacer = add_spacer(false)
+		_spacer.custom_minimum_size.y = 4
+	if _spacer != null:
+		_spacer.visible = visibility
+	queue_redraw()
+
+func _draw():
+	if _seperator_visible:
+		draw_dashed_line(Vector2(2, size.y - 1), Vector2(size.x, size.y - 1), get_color() * 0.8, 2, 8, false)
+
+@abstract func get_color() -> Color
 @abstract func ready()
 ## Called when dictionary is reloaded
 @abstract func refresh()

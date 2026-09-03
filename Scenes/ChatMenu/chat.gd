@@ -4,7 +4,6 @@ class_name Chat
 static var instance: Chat
 static var transmission_entry_scene = preload("res://Scenes/ChatMenu/transmission_entry.tscn")
 static var status_log_entry_scene = preload("res://Scenes/ChatMenu/status_log_entry.tscn")
-static var separator_scene = preload("res://Scenes/Common/dashed_h_separator.tscn")
 static var chat_channel_scene = preload("res://Scenes/ChatMenu/chat_channel.tscn")
 @onready var channel_container: TabContainer = $TabContainer
 
@@ -30,50 +29,6 @@ func open_loaded_channels():
 		instance.channel_container.set_tab_hidden(tab_idx, true)
 	for channel_id in SettingsHandler.opened_channels:
 		enable_channel(channel_id)
-
-static func on_chat_display_child_entered_tree(node: Node, chat_body: VBoxContainer):
-	if node is Separator:
-		return
-	order_add.call_deferred(node, chat_body)
-
-static func order_add(node: Node, chat_body: VBoxContainer):
-	var idx: int = node.get_index()
-	var prev: Node = chat_body.get_child(idx - 1) if idx - 1 >= 0 else null
-	var prev2: Node = chat_body.get_child(idx - 2) if idx - 2 >= 0 else null
-	var next: Node = chat_body.get_child(idx + 1) if idx + 1 < chat_body.get_child_count() else null
-	var next2: Node = chat_body.get_child(idx + 2) if idx + 2 < chat_body.get_child_count() else null
-	var prev_sep: Separator = prev if prev is Separator else null
-	var next_sep: Separator = next if next is Separator else null
-	var prev_msg: ChatEntry = prev2 if prev2 is ChatEntry else (prev if prev is ChatEntry else null)
-	var next_msg: ChatEntry = next2 if next2 is ChatEntry else (next if next is ChatEntry else null)
-	
-	if prev_sep and prev_msg and node is ChatEntry and prev_msg.sender == node.sender:
-		prev_sep.queue_free()
-	if (not next_msg or (node is ChatEntry and node.sender != next_msg.sender)) and not next_sep:
-		var s = separator_scene.instantiate()
-		chat_body.add_child(s)
-		chat_body.move_child(s, idx + 1)
-
-static func on_chat_display_child_exiting_tree(node: Node, chat_body: VBoxContainer):
-	if node is Separator:
-		return
-	order_remove.call_deferred(node.get_index(), chat_body)
-
-static func order_remove(idx: int, chat_body: VBoxContainer):
-	var prev: Node = chat_body.get_child(idx - 1) if idx - 1 >= 0 else null
-	var prev2: Node = chat_body.get_child(idx - 2) if idx - 2 >= 0 else null
-	var next: Node = chat_body.get_child(idx) if idx < chat_body.get_child_count() else null
-	var next2: Node = chat_body.get_child(idx + 1) if idx + 1 < chat_body.get_child_count() else null
-	var prev_sep: Separator = prev if prev is Separator else null
-	var next_sep: Separator = next if next is Separator else null
-	var prev_msg: ChatEntry = prev2 if prev2 is ChatEntry else null
-	var next_msg: ChatEntry = next2 if next2 is ChatEntry else null
-	if prev_sep and next_sep:
-		prev_sep.queue_free()
-	if next_sep and prev_msg and next_msg and prev_msg.sender == next_msg.sender:
-		next_sep.queue_free()
-	elif next_sep and idx == 0:
-		next_sep.queue_free()
 
 static func new_transmission(packet: PackedStringArray) -> void:
 	var transmission_number: int = packet[1].to_int()

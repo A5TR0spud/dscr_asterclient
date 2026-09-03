@@ -13,6 +13,9 @@ func _physics_process(_delta):
 	calc_time()
 	timeago_node.text = time_ago
 
+func get_color() -> Color:
+	return Color.WHITE
+
 func refresh():
 	pass
 

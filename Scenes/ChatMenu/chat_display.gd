@@ -15,11 +15,36 @@ var shown_transmissions: int = 0
 var logged_history: Array[Dictionary] = []
 
 func _ready() -> void:
-	chat_display.child_entered_tree.connect(Chat.on_chat_display_child_entered_tree.bind(chat_display))
-	chat_display.child_exiting_tree.connect(Chat.on_chat_display_child_exiting_tree.bind(chat_display))
 	Main.instance.reload_dict.connect(update_name)
 	scroll_bar.value_changed.connect(_on_scroll)
+	scroll_bar.changed.connect(set_scroll_down_vis)
 	scroll_down_button.hide()
+
+func _recalculate_sep(node: ChatEntry, adding: bool):
+	var idx: int = node.get_index()
+	var count: int = chat_display.get_child_count()
+	if count == 1:
+		node.set_sep_visibility(true)
+		return
+	var has_before: bool = idx > 0
+	var has_after: bool = idx < count - 1
+	var before_message: ChatEntry = chat_display.get_child(idx - 1) if has_before else null
+	var after_message: ChatEntry = chat_display.get_child(idx + 1) if has_after else null
+	var before_sender: int = before_message.sender if before_message is ChatEntry else -1
+	var after_sender: int = after_message.sender if after_message is ChatEntry else -2
+	var sender: int = node.sender
+	if adding:
+		if has_before:
+			before_message.set_sep_visibility(before_sender != sender)
+		if has_after:
+			node.set_sep_visibility(after_sender != sender)
+		else:
+			node.set_sep_visibility(true)
+	else:
+		if has_before and has_after:
+			before_message.set_sep_visibility(before_sender != after_sender)
+		elif has_before and not has_after:
+			before_message.set_sep_visibility(true)
 
 func add_message_node(message: ChatEntry):
 	if message is TransEntry:
@@ -29,8 +54,10 @@ func add_message_node(message: ChatEntry):
 			"sender": message.sender,
 			"trx": message.trans
 		})
-	shown_transmissions += 1
+		shown_transmissions += 1
+	message.tree_exiting.connect(_recalculate_sep.bind(message, false))
 	chat_display.add_child(message)
+	_recalculate_sep(message, true)
 	
 	if Chat.instance.channel_container.current_tab != get_index():
 		set_notification()
@@ -50,6 +77,9 @@ func _on_scroll(val):
 		try_show_history()
 	elif scroll_container.is_scrolled_to_bottom():
 		try_hide_history()
+	set_scroll_down_vis()
+
+func set_scroll_down_vis():
 	scroll_down_button.visible = not scroll_container.bottom_is_visible()
 
 func try_show_history() -> bool:
@@ -63,6 +93,7 @@ func try_show_history() -> bool:
 	trx.trans = unshown_to_add["trx"]
 	chat_display.add_child(trx)
 	chat_display.move_child(trx, 0)
+	_recalculate_sep(trx, true)
 	scroll_bar.set_value_no_signal.call_deferred(0.1)
 	shown_transmissions += 1
 	return true

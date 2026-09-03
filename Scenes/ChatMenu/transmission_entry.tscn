@@ -3,15 +3,11 @@
 [ext_resource type="Script" uid="uid://bni3uvm8h06ws" path="res://Scenes/ChatMenu/transmission_entry.gd" id="1_42owa"]
 [ext_resource type="PackedScene" uid="uid://dc1vhk1wyejon" path="res://Scenes/Common/identicon.tscn" id="2_wapdh"]
 [ext_resource type="FontFile" uid="uid://cwbj6dro36xa3" path="res://fonts/CascadiaMono-Bold.ttf" id="3_42owa"]
+[ext_resource type="StyleBox" uid="uid://4hbvf66ek6pl" path="res://Styling/transmission_indent.tres" id="4_wapdh"]
 [ext_resource type="Script" uid="uid://dqce42c573ptg" path="res://Scripts/SimpleTranslatable.gd" id="5_wapdh"]
 [ext_resource type="PackedScene" uid="uid://bcqkh2yjqiert" path="res://Scenes/Images/visualizer_node.tscn" id="6_wapdh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g4v7s"]
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_i75l1"]
-color = Color(1, 1, 1, 1)
-thickness = 6
-vertical = true
 
 [node name="TransmissionEntry" type="VBoxContainer" unique_id=822668353]
 anchors_preset = 15
@@ -83,7 +79,7 @@ layout_mode = 2
 layout_mode = 2
 mouse_filter = 1
 theme_override_constants/separation = 10
-theme_override_styles/separator = SubResource("StyleBoxLine_i75l1")
+theme_override_styles/separator = ExtResource("4_wapdh")
 
 [node name="Corpus" type="VBoxContainer" parent="Body" unique_id=805018228]
 layout_mode = 2
