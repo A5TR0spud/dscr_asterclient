@@ -55,7 +55,7 @@ func _evaluate_corpus(clickable: bool = false):
 		)
 	)
 
-var _seperator_visible: bool = true
+var _seperator_visible: bool = false
 var _spacer: Control = null
 func set_sep_visibility(visibility: bool):
 	_seperator_visible = visibility
