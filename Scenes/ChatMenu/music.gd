@@ -1,21 +1,7 @@
 extends AudioStreamPlayer
 class_name Music
 
-const conversion_factor: float = 0.8066
-const sample_hz: float = 22050.0
-
-static var now_playing: Music = null
-
-@export var song_button: Node
-
-var chained_songs: Array[Music] = []
-var current_song: Array = []
-var song_length: float = 0.0
-
-var _build_thread: Thread = null
-
-signal song_built
-signal song_end
+enum NoteType { SINE, SQUARE, SAWTOOTH, TRIANGLE }
 
 const NEG = -1
 const SEP = -3
@@ -24,13 +10,22 @@ const GROUP_BEGIN = -14
 const GROUP_END = -15
 const SONG = -577
 const NOTE = -605003
+const conversion_factor: float = 0.8066
+const sample_hz: float = 22050.0
 
-enum NoteType { SINE, SQUARE, SAWTOOTH, TRIANGLE }
+static var now_playing: Music = null
 
-func _exit_tree() -> void:
-	if _build_thread and _build_thread.is_alive():
-		_build_thread.wait_to_finish()
-		_build_thread = null
+@export var song_button: Node
+
+var active_notes: Array = []
+var current_note: int = 0
+var chained_songs: Array[Music] = []
+var current_song: Array = []
+var playback: AudioStreamGeneratorPlayback
+var playback_time: float = 0.0
+var song_length: float = 0.0
+
+signal song_end
 
 func play_music() -> void:
 	if is_playing():
@@ -43,16 +38,14 @@ func play_music() -> void:
 		song_button.refresh()
 		return
 
-	if Input.is_key_pressed(KEY_CTRL):
-		stop_music()
-		song_button.disabled = true
-		_start_build_song()
-		return
-
 	if current_song.size() > 0:
 		print(current_song)
+		active_notes = []
+		current_note = 0
+		playback_time = 0.0
 		now_playing = self
 		play()
+		playback = get_stream_playback()
 		(song_button as TranslatableSimple).message = [-577, -29]
 		song_button.refresh()
 
@@ -73,6 +66,8 @@ func stop_music() -> void:
 	song_button.refresh()
 
 func check_song(message: Array) -> bool:
+	if playback: stop_music()
+
 	var parser = TransmissionParser.new(message)
 	while not parser.is_at_end():
 		if not parser.skip_to(SONG): return false
@@ -90,8 +85,6 @@ func check_song(message: Array) -> bool:
 		for note in notes:
 			song_length = maxf(note.start_time + note.duration, song_length)
 		current_song = notes
-		song_button.disabled = true
-		_start_build_song()
 
 		return true
 
@@ -112,26 +105,13 @@ func parse_note(parser: TransmissionParser) -> Dictionary:
 		"frequency": frequency / conversion_factor
 	}
 
-func _start_build_song() -> void:
-	if _build_thread != null and _build_thread.is_alive():
-		_build_thread.wait_to_finish()
-	
-	_build_thread = Thread.new()
-	_build_thread.start(_build_song.bind(current_song, song_length))
-	pass
-
-func _build_song(song: Array, length: float) -> void:
-	var active_notes: Array = []
-	var current_note: int = 0
-	var playback_time: float = 0.0
-	var sample_count: int = int(sample_hz * length)
+func _fill_buffer() -> void:
+	var frames_available := playback.get_frames_available()
 	var time_step: float = 1.0 / sample_hz
-	var wav_data: PackedByteArray = PackedByteArray()
-	wav_data.resize(sample_count * 2 * 2)
-	
-	for i in range(sample_count):
-		while current_note < song.size() and playback_time >= song[current_note].start_time:
-			var note_data = song[current_note]
+
+	for i in range(frames_available):
+		while current_note < current_song.size() and playback_time >= current_song[current_note].start_time:
+			var note_data = current_song[current_note]
 			var note = {
 				"frequency": note_data.frequency,
 				"phase": 0.0,
@@ -172,33 +152,23 @@ func _build_song(song: Array, length: float) -> void:
 			j -= 1
 
 		mixed_sample = clamp(mixed_sample, -1.0, 1.0)
-		var int_sample: int = int(mixed_sample * 32767.0)
-		var byte_index: int = i * 4
-		wav_data.encode_s16(byte_index, int_sample)
-		wav_data.encode_s16(byte_index + 2, int_sample)
+		playback.push_frame(Vector2.ONE * mixed_sample)
 		playback_time += time_step
-	
-	var wav_stream: AudioStreamWAV = AudioStreamWAV.new()
-	wav_stream.format = AudioStreamWAV.FORMAT_16_BITS
-	wav_stream.mix_rate = int(sample_hz)
-	wav_stream.stereo = true
-	wav_stream.data = wav_data
-	
-	_on_song_built.call_deferred(wav_stream)
 
-func _on_song_built(wav_stream: AudioStreamWAV) -> void:
-	_build_thread.wait_to_finish()
-	_build_thread = null
-	stream = wav_stream
-	song_built.emit()
-	song_button.disabled = false
+	if playback.get_playback_position() >= song_length:
+		stop()
+		_on_finished()
 
 func _ready() -> void:
 	stream = AudioStreamGenerator.new()
 	stream.mix_rate = sample_hz
 	stream.buffer_length = 0.5
 
+func _process(_delta: float) -> void:
+	if playback: _fill_buffer()
+
 func _on_finished() -> void:
+	playback = null
 	now_playing = null
 	song_end.emit()
 	if not chained_songs.is_empty():
