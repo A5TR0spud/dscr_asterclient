@@ -53,13 +53,13 @@ func refresh_callsign():
 func _physics_process(_delta):
 	if timeago_node.is_visible_in_tree():
 		calc_time()
-		timeago_node.text = time_ago
+		timeago_node.text = get_timeago_string()
 
 func override_transmission_label(text: String):
 	transmission_node.text = text
 
 func refresh():
-	timeago_node.text = time_ago
+	timeago_node.text = get_timeago_string()
 	transmission_node.set("popup/item_0/text", DictionaryHandler.get_or_default_signal_name(-40))
 	transmission_node.text = str(trans % 512).pad_zeros(3)
 
@@ -90,7 +90,7 @@ func _on_hover_change(hovering: bool) -> void:
 	if stasis:
 		return
 	calc_time()
-	timeago_node.text = time_ago
+	timeago_node.text = get_timeago_string()
 	hover_node.visible = hovering
 	is_hovering = hovering
 	_handle_clickables()

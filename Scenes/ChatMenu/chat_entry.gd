@@ -3,7 +3,8 @@ extends VBoxContainer
 
 var timestamp: int = 0
 var message: Array = []
-var time_ago: String = ""
+var _time_ago: int = 0
+var _time_ago_string: String = ""
 var collapsed: bool = true:
 	set(value):
 		var old_value: bool = collapsed
@@ -16,10 +17,12 @@ func is_message_truncatable() -> bool:
 	return message.size() > SettingsHandler.truncate_message_size
 
 func calc_time():
-	var timeago: float = absi(timestamp - Time.get_ticks_msec())
+	var timeago: float = Time.get_ticks_msec() - timestamp
 	timeago *= 0.001
-	timeago /= Main.HE6_HALF_LIFE
-	time_ago = DictionaryHandler.signals_to_words([floori(timeago), -69, -118, -121])
+	_time_ago = floori(timeago / Main.HE6_HALF_LIFE)
+
+func get_timeago_string():
+	return _time_ago_string.format([_time_ago])
 
 func _ready():
 	ready()
@@ -34,6 +37,7 @@ func _ready():
 
 func _refresh():
 	refresh()
+	_time_ago_string = DictionaryHandler.signals_to_words(["{0}", -69, -118, -121])
 	_evaluate_corpus()
 
 func request_rewrite(clickable: bool):

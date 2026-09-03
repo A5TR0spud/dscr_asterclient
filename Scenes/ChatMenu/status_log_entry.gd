@@ -11,7 +11,7 @@ func ready():
 
 func _physics_process(_delta):
 	calc_time()
-	timeago_node.text = time_ago
+	timeago_node.text = get_timeago_string()
 
 func get_color() -> Color:
 	return Color.WHITE
