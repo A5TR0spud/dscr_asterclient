@@ -12,7 +12,10 @@
 * hover over translated words to get the signal
 * hover over negative numbers to get the translation
 * implement message history so you can use arrow keys to access your previous transmissions
-* change save directory button?
+* "change save directory" button (and put all moveable stuff into a folder)
+* "change current dictionary" button (overhaul the dictionary save structure)
+* "load dictionary from file" button
+* saved websocket address list
 
 ### nikzapp
 
