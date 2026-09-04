@@ -79,7 +79,7 @@ func kill_process():
 	get_tree().quit()
 
 func _ready():
-	SaveSystem.load()
+	SaveSystem.load_all()
 	trying_to_quit = false
 	websocket_url = SettingsHandler.websocket_address
 	start_connect()

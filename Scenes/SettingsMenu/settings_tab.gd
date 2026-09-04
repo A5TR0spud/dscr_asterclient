@@ -144,4 +144,4 @@ func _on_undef_setting_set(new_value):
 	save(false)
 
 func _on_directory_button_pressed():
-	SaveSystem.open_directory_location()
+	SaveSystem.change_directory_location()

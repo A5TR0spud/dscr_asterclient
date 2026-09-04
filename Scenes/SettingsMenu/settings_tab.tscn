@@ -48,9 +48,9 @@ size_flags_vertical = 3
 
 [node name="DirectoryButton" type="Button" parent="ScrollContainer/MarginContainer/Options" unique_id=901871438]
 layout_mode = 2
-text = "open directory"
+text = "change save directory"
 script = ExtResource("1_1gwgo")
-message = Array[int]([-40])
+message = Array[int]([-40, -174])
 
 [node name="HSeparator8" type="HSeparator" parent="ScrollContainer/MarginContainer/Options" unique_id=1000904488]
 layout_mode = 2

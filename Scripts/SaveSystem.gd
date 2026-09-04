@@ -21,31 +21,19 @@ static var settings: Dictionary = {}
 static var nicknames: Dictionary = {}
 static var library: Dictionary = {}
 
-const _DICT_PATH: String = "DICTIONARY-1.save"
-const _MACRO_PATH: String = "macro.json"
+const _DICT_FOLDER: String = "/dictionaries/"
+static var _current_dictionary_filename: String = "DICTIONARY-1.save"
 const _SETTINGS_PATH: String = "settings.json"
 const _NICKNAMES_PATH: String = "nicknames.json"
 const _LIBRARY_PATH: String = "library.json"
 const DIRECTORY_PATH: String = "user://directory.txt"
-static var directory: String = ProjectSettings.globalize_path("user://")
-static var dict_path: String:
-	get:
-		return directory.path_join(_DICT_PATH)
-static var macro_path: String:
-	get:
-		return directory.path_join(_MACRO_PATH)
-static var settings_path: String:
-	get:
-		return directory.path_join(_SETTINGS_PATH)
-static var nicknames_path: String:
-	get:
-		return directory.path_join(_NICKNAMES_PATH)
-static var library_path: String:
-	get:
-		return directory.path_join(_LIBRARY_PATH)
+static var opened_save_folder: String = ProjectSettings.globalize_path("user://save/")
 
-static func load() -> void:
+static func load_all() -> void:
 	load_directory()
+	var dicts: String = opened_save_folder.path_join(_DICT_FOLDER)
+	if not DirAccess.dir_exists_absolute(dicts):
+		DirAccess.make_dir_recursive_absolute(dicts)
 	load_dict()
 	load_settings()
 	load_nicknames()
@@ -56,28 +44,84 @@ static func save_directory() -> void:
 	if not file_access:
 		print("An error happened while saving data: ", FileAccess.get_open_error())
 		return
-
-	file_access.store_string(directory)
+	
+	file_access.store_string(opened_save_folder)
 	file_access.close()
 
 static func load_directory() -> void:
 	if not FileAccess.file_exists(DIRECTORY_PATH):
+		DirAccess.make_dir_recursive_absolute(opened_save_folder.path_join(_DICT_FOLDER))
 		save_directory()
 		return
 	var file_access := FileAccess.open(DIRECTORY_PATH, FileAccess.READ)
 	var strig := FileAccess.get_file_as_string(DIRECTORY_PATH)
 	file_access.close()
-	directory = strig
+	opened_save_folder = strig
 
 static func open_save_location() -> void:
-	OS.shell_show_in_file_manager(dict_path)
+	OS.shell_show_in_file_manager(opened_save_folder.path_join(_DICT_FOLDER).path_join(_current_dictionary_filename))
+
+static var _file_dialog: FileDialog
+static func change_directory_location() -> void:
+	if _file_dialog == null:
+		_file_dialog = FileDialog.new()
+		_file_dialog.set_file_mode(FileDialog.FILE_MODE_OPEN_DIR)
+		_file_dialog.set_access(FileDialog.ACCESS_FILESYSTEM)
+		_file_dialog.set_use_native_dialog(true)
+		_file_dialog.dir_selected.connect(_on_dir_selected)
+		Main.instance.add_child(_file_dialog)
+	_file_dialog.current_dir = opened_save_folder
+	_file_dialog.popup_centered_ratio()
+
+static func _on_dir_selected(new_path):
+	var old_path: String = opened_save_folder
+	opened_save_folder = new_path
+	save_directory()
+	var old_dir := DirAccess.open(old_path)
+	var new_dir := DirAccess.open(new_path)
+	if old_dir and old_dir.file_exists(_LIBRARY_PATH) and not new_dir.file_exists(_LIBRARY_PATH):
+		var tmp := FileAccess.open(new_path.path_join(_LIBRARY_PATH), FileAccess.WRITE)
+		if tmp:
+			tmp.store_string(FileAccess.get_file_as_string(old_path.path_join(_LIBRARY_PATH)))
+			old_dir.remove(_LIBRARY_PATH)
+			tmp.close()
+	if old_dir and old_dir.file_exists(_NICKNAMES_PATH) and not new_dir.file_exists(_NICKNAMES_PATH):
+		var tmp := FileAccess.open(new_path.path_join(_NICKNAMES_PATH), FileAccess.WRITE)
+		if tmp:
+			tmp.store_string(FileAccess.get_file_as_string(old_path.path_join(_NICKNAMES_PATH)))
+			old_dir.remove(_NICKNAMES_PATH)
+			tmp.close()
+	if old_dir and old_dir.file_exists(_SETTINGS_PATH) and not new_dir.file_exists(_SETTINGS_PATH):
+		var tmp := FileAccess.open(new_path.path_join(_SETTINGS_PATH), FileAccess.WRITE)
+		if tmp:
+			tmp.store_string(FileAccess.get_file_as_string(old_path.path_join(_SETTINGS_PATH)))
+			old_dir.remove(_SETTINGS_PATH)
+			tmp.close()
+	var old_dict_dir := DirAccess.open(old_path.path_join(_DICT_FOLDER))
+	new_dir.make_dir(_DICT_FOLDER)
+	if old_dict_dir:
+		var arr: PackedStringArray = old_dict_dir.get_files()
+		for old_dict_file: String in arr:
+			if FileAccess.file_exists(new_path.path_join(_DICT_FOLDER).path_join(old_dict_file)):
+				continue
+			var tmp0 := FileAccess.open(old_path.path_join(_DICT_FOLDER).path_join(old_dict_file), FileAccess.READ)
+			var tmp := FileAccess.open(new_path.path_join(_DICT_FOLDER).path_join(old_dict_file), FileAccess.WRITE)
+			var strig: String = FileAccess.get_file_as_string(old_path.path_join(_DICT_FOLDER).path_join(old_dict_file))
+			tmp0.close()
+			if tmp:
+				tmp.store_string(strig)
+				tmp.close()
+				old_dict_dir.remove(old_dict_file)
+	if old_dict_dir and old_dict_dir.get_files().size() == 0:
+		old_dir.remove(_DICT_FOLDER)
+	load_all()
 
 static func open_directory_location() -> void:
 	OS.shell_show_in_file_manager(ProjectSettings.globalize_path(DIRECTORY_PATH))
 
 static func save_nicknames() -> void:
 	var json_string := JSON.stringify(nicknames, "\t")
-	var file_access := FileAccess.open(nicknames_path, FileAccess.WRITE)
+	var file_access: FileAccess = FileAccess.open(opened_save_folder.path_join(_NICKNAMES_PATH), FileAccess.WRITE)
 	if not file_access:
 		print("An error happened while saving data: ", FileAccess.get_open_error())
 		return
@@ -86,11 +130,10 @@ static func save_nicknames() -> void:
 	file_access.close()
 
 static func load_nicknames() -> void:
-	if not FileAccess.file_exists(nicknames_path):
-		save_nicknames()
+	if not FileAccess.file_exists(opened_save_folder.path_join(_NICKNAMES_PATH)):
 		return
-	var file_access := FileAccess.open(nicknames_path, FileAccess.READ)
-	var json_string:= FileAccess.get_file_as_string(nicknames_path)
+	var file_access := FileAccess.open(opened_save_folder.path_join(_NICKNAMES_PATH), FileAccess.READ)
+	var json_string:= FileAccess.get_file_as_string(opened_save_folder.path_join(_NICKNAMES_PATH))
 	file_access.close()
 	var json := JSON.new()
 	var error := json.parse(json_string)
@@ -102,7 +145,7 @@ static func load_nicknames() -> void:
 
 static func save_library() -> void:
 	var json_string := JSON.stringify(library, "\t")
-	var file_access := FileAccess.open(library_path, FileAccess.WRITE)
+	var file_access := FileAccess.open(opened_save_folder.path_join(_LIBRARY_PATH), FileAccess.WRITE)
 	if not file_access:
 		print("An error happened while saving data: ", FileAccess.get_open_error())
 		return
@@ -111,11 +154,10 @@ static func save_library() -> void:
 	file_access.close()
 
 static func load_library() -> void:
-	if not FileAccess.file_exists(library_path):
-		save_nicknames()
+	if not FileAccess.file_exists(opened_save_folder.path_join(_LIBRARY_PATH)):
 		return
-	var file_access := FileAccess.open(library_path, FileAccess.READ)
-	var json_string:= FileAccess.get_file_as_string(library_path)
+	var file_access := FileAccess.open(opened_save_folder.path_join(_LIBRARY_PATH), FileAccess.READ)
+	var json_string:= FileAccess.get_file_as_string(opened_save_folder.path_join(_LIBRARY_PATH))
 	file_access.close()
 	var json := JSON.new()
 	var error := json.parse(json_string)
@@ -128,7 +170,7 @@ static func load_library() -> void:
 static func save_settings() -> void:
 	SettingsHandler.export()
 	var json_string := JSON.stringify(settings, "\t")
-	var file_access := FileAccess.open(settings_path, FileAccess.WRITE)
+	var file_access := FileAccess.open(opened_save_folder.path_join(_SETTINGS_PATH), FileAccess.WRITE)
 	if not file_access:
 		print("An error happened while saving data: ", FileAccess.get_open_error())
 		return
@@ -137,12 +179,12 @@ static func save_settings() -> void:
 	file_access.close()
 
 static func load_settings() -> void:
-	if not FileAccess.file_exists(settings_path):
+	if not FileAccess.file_exists(opened_save_folder.path_join(_SETTINGS_PATH)):
 		save_settings()
 		SettingsHandler.initialize()
 		return
-	var file_access := FileAccess.open(settings_path, FileAccess.READ)
-	var json_string:= FileAccess.get_file_as_string(settings_path)
+	var file_access := FileAccess.open(opened_save_folder.path_join(_SETTINGS_PATH), FileAccess.READ)
+	var json_string:= FileAccess.get_file_as_string(opened_save_folder.path_join(_SETTINGS_PATH))
 	file_access.close()
 	var json := JSON.new()
 	var error := json.parse(json_string)
@@ -187,7 +229,18 @@ static func load_settings() -> void:
 # 2: new line
 # 3: double new line
 
-static func load_dict(path: String = dict_path) -> bool:
+static func load_dict(path: String = "") -> bool:
+	if path.is_empty():
+		path = opened_save_folder.path_join(_DICT_FOLDER).path_join(_current_dictionary_filename)
+		var dir := DirAccess.open(opened_save_folder)
+		if (
+			dir.file_exists("DICTIONARY-1.save")
+			and path != opened_save_folder.path_join("DICTIONARY-1.save")
+		):
+			load_dict(opened_save_folder.path_join("DICTIONARY-1.save"))
+			save_dict()
+			dir.remove("DICTIONARY-1.save")
+			return true
 	var file_access := FileAccess.open(path, FileAccess.READ)
 	if not FileAccess.file_exists(path):
 		save_dict()
@@ -235,7 +288,7 @@ static func eval_bad_dict() -> void:
 static func save_dict() -> void:
 	DictionaryHandler.export()
 	var json_string := JSON.stringify(dict, "\t")
-	var file_access := FileAccess.open(dict_path, FileAccess.WRITE)
+	var file_access := FileAccess.open(opened_save_folder.path_join(_DICT_FOLDER.path_join(_current_dictionary_filename)), FileAccess.WRITE)
 	if not file_access:
 		print("An error happened while saving data: ", FileAccess.get_open_error())
 		return

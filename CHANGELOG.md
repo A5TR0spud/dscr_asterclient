@@ -18,6 +18,8 @@
 * If someone leaves while you are editing their nickname, it will now wait before disappearing
 * Moved todo out of in-program
 * Callsign tab entries are more compact
+* Replaced "open directory button" in settings with "change directory button" that should handle nigh everything on its own
+  * Valid files that already exist at the new location will not be overwritten
 
 ### Fixes
 
