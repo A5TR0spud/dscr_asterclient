@@ -1,9 +1,5 @@
 extends Button
 
-func _ready():
-	Main.instance.reload_dict.connect(refresh)
-	refresh()
-
 var cycle: float = 0
 func _process(delta):
 	offset_transform_enabled = DictionaryHandler.bad_dict
@@ -18,6 +14,3 @@ func _process(delta):
 		cycle += delta
 	else:
 		self_modulate = Color(1.0, 1.0, 1.0)
-
-func refresh():
-	text = DictionaryHandler.get_or_default_signal_name(-40)

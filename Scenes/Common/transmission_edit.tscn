@@ -3,6 +3,7 @@
 [ext_resource type="StyleBox" uid="uid://cem7hlj42ccbd" path="res://Styling/TransmissionMaker/text_edit.tres" id="1_2sule"]
 [ext_resource type="Script" uid="uid://eyonivvk3glk" path="res://Scenes/ChatMenu/message_edit.gd" id="2_omlj0"]
 [ext_resource type="StyleBox" uid="uid://bca1ief1qema3" path="res://Styling/TransmissionMaker/autocomplete_panel.tres" id="3_2sh44"]
+[ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="4_omlj0"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_amlv4"]
 
@@ -78,6 +79,13 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_amlv4")
 allow_search = false
 auto_height = true
 text_overrun_behavior = 1
+
+[node name="LocaleNode" type="Node" parent="." unique_id=570082727]
+script = ExtResource("4_omlj0")
+translations = Dictionary[StringName, String]({
+&"placeholder_text": "PLACEHOLDER_ENTRY"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [connection signal="caret_changed" from="." to="." method="_on_caret_changed"]
 [connection signal="text_changed" from="." to="." method="_on_text_changed"]

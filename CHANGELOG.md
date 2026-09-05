@@ -8,6 +8,8 @@
 * Signals now color in the transmission editor(s). Unknown signals are red. (Eearslya)
 * Callsigns tab now has a section at the bottom for named users even if they're offline
 * Dictionary files can be loaded by dragging them onto the client. (Eearslya)
+* Added localization. On opening for the first time, a prompt will block spoilers and ask for desired language.
+  * This can be changed at any time by the button near the top right
 
 ### Changes
 

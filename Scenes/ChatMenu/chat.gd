@@ -151,54 +151,51 @@ func _on_tab_container_tab_changed(tab: int) -> void:
 static func new_log(state: State, args: Array = []) -> void:
 	var new_message: StatusLogEntry = status_log_entry_scene.instantiate()
 	new_message.timestamp = Time.get_ticks_msec()
-	var msg: Array = []
 	match state:
 		State.CONNECTING:
-			# CURRENT COMPUTER DOES [ COMPUTER 0 COMMUNICATE ] WANT DOST
-			msg = [-119, -241, -86, -14, -241, 0, -196, -15, -127, -85]
+			new_message.translation_key = "SYSTEM_CONNECTING"
 		State.CONNECTED:
-			# GOOD ; CURRENT COMPUTER DOES COMPUTER 0 COMMUNICATE CAN DOST
-			msg = [-154, -2, -119, -241, -86, -241, 0, -196, -145, -85]
+			new_message.translation_key = "SYSTEM_CONNECTED"
 		State.FAILED_TO_CONNECT:
-			# BAD ; CURRENT COMPUTER DOES COMPUTER 0 COMMUNICATE CAN NOT DOST
-			msg = [-155, -2, -119, -241, -86, -241, 0, -196, -145, -29, -85]
+			new_message.translation_key = "SYSTEM_CONNECTION_FAILED"
 		State.DISCONNECTING:
-			# CURRENT COMPUTER AND COMPUTER 0 DOES [ COMMUNICATE ] WANT NOT MUTUAL DOST SMALL NEXT TIME WHEN
-			msg = [-119, -241, -30, -241, 0, -86, -14, -196, -15, -127, -29, -186, -85, -109, -120, -65, -121]
+			new_message.translation_key = "SYSTEM_DISCONNECTING"
 		State.DISCONNECTED:
-			# COMPUTER 0 DOES CURRENT COMPUTER COMMUNICATE NOT DOST
-			msg = [-241, 0, -86, -119, -241, -196, -29, -85]
+			new_message.translation_key = "SYSTEM_DISCONNECTED"
 		State.WILL_AUTO_RECONNECT_SOON:
-			# CURRENT COMPUTER DOES [ COMPUTER 0 COMMUNICATE ] WANT DOST $x ASEC NEXT WHEN
-			msg = [-119, -241, -86, -14, -241, 0, -196, -15, -127, -85, int(args[0]), -69, -120, -121]
+			new_message.translation_key = "SYSTEM_WILL_RECONNECT"
 		State.UNKNOWN_WORD:
 			# UNKNOWN SIGNAL IS [ %s, %s, %s, etc ]
-			msg = [-124, -42, -100, -14]
+			var inner: String = ""
 			for idx in range(args.size()):
 				if idx > 0:
-					msg.append(-3)
-				msg.append(str(args[idx]))
-			msg.append(-15)
+					inner += " "
+				inner += str(args[idx])
+			new_message.translation_key = "SYSTEM_UNKNOWN_SIGNAL"
+			new_message.arguments = [inner]
 		State.INPUT_TOO_LONG:
-			# COMPUTER DOES TRANSMISSION [ SIGNAL COUNT > 2000 ] COMMUNICATE CAN NOT DOST ; SIGNAL COUNT = $x
-			msg = [-241, -86, -43, -14, -42, -23, -32, Main.MAX_MESSAGE_LENGTH, -15, -196, -145, -29, -85, -2, -42, -23, -4, args[0]]
+			new_message.translation_key = "SYSTEM_TOO_LONG"
+			new_message.arguments = {"maxLength": Main.MAX_MESSAGE_LENGTH, "trxSize": args[0]}
 		State.INPUT_ENCRYPT_TOO_SHORT:
-			# COMPUTER DOES TRANSMISSION [ arg AND SIGNAL COUNT < 3 ] COMMUNICATE CAN NOT DOST
-			msg = [-241, -86, -43, -14, args[0], -30, -42, -23, -33, 3, -15, -196, -145, -29, -85]
+			new_message.translation_key = "SYSTEM_CHANNEL_INPUT_TOO_SHORT"
+			new_message.arguments = args
 		State.INPUT_COMMAND_LENGTH_INVALID:
-			# COMPUTER DOES TRANSMISSION [ arg AND SIGNAL COUNT = NOT 2 ] COMMUNICATE CAN NOT DOST
-			msg = [-241, -86, -43, -14, args[0], -30, -42, -23, -4, -29, 2, -15, -196, -145, -29, -85]
+			new_message.translation_key = "SYSTEM_INPUT_LENGTH_INVALID_TWO"
+			new_message.arguments = args
 		State.INPUT_LENGTH_INVALID:
 			# one arg -> must be equal
 			# two args -> range 
 			if len(args) == 1:
-				# COMPUTER DOES TRANSMISSION [ SIGNAL COUNT = NOT # ] COMMUNICATE CAN NOT DOST
-				msg = [-241, -86, -43, -14, -42, -23, -4, -29, int(args[0]), -15, -196, -145, -29, -85]
+				new_message.translation_key = "SYSTEM_INPUT_LENGTH_INVALID_VAR"
+				new_message.arguments = args
 		State.DUPLICATE_NAME:
-			# SIGNAL [ - #] AND SIGNAL [ - #] IS SYMMETRIC; "%s"
-			msg = [-42, -14, -1, absi(int(args[0])), -15, -30, -42, -14, -1, absi(int(args[1])), -15, -100, -229, -2, args[2]]
-
-	new_message.message = msg
+			new_message.translation_key = "SYSTEM_DUPLICATE_NAME"
+			new_message.arguments = {
+				"sig0": absi(int(args[0])),
+				"sig1": absi(int(args[1])),
+				"name": args[2]
+			}
+	
 	# arbitrary impossible sender for purposes of chat seperators
 	new_message.sender = -1574
 	get_current_channel_node().add_message_node(new_message)

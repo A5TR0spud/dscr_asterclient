@@ -7,12 +7,6 @@ extends VBoxContainer
 func _ready():
 	tabber.current_tab = 0
 	_show_tab(0)
-	Main.instance.reload_dict.connect(refresh)
-	refresh()
-
-func refresh():
-	tabber.set_tab_title(0, DictionaryHandler.get_or_default_signal_name(-214))
-	tabber.set_tab_title(1, DictionaryHandler.get_or_default_signal_name(-43))
 
 func _on_tabber_tab_changed(tab: int):
 	_show_tab(tab)

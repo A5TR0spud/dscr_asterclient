@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bunet4g0aqi5h"]
 
 [ext_resource type="Script" uid="uid://b5s8ghwqkgph2" path="res://Scenes/OnlineUsersTab/online_people_tab.gd" id="1_o3t4p"]
-[ext_resource type="Script" uid="uid://dqce42c573ptg" path="res://Scripts/SimpleTranslatable.gd" id="2_gvvro"]
+[ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="2_gvvro"]
 
 [node name="OnlinePeopleTab" type="VBoxContainer" unique_id=1445824947]
 anchors_preset = 15
@@ -43,9 +43,13 @@ layout_mode = 2
 [node name="OnlineLabel" type="FoldableContainer" parent="ScrollContainer/Margins/List" unique_id=1457248820]
 layout_mode = 2
 title = "online"
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/Margins/List/OnlineLabel" unique_id=474087244]
 script = ExtResource("2_gvvro")
-message = Array[int]([-119])
-property_name = &"title"
+translations = Dictionary[StringName, String]({
+&"title": "USERS_ONLINE"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="Online" type="VBoxContainer" parent="ScrollContainer/Margins/List/OnlineLabel" unique_id=627596032]
 layout_mode = 2
@@ -53,9 +57,13 @@ layout_mode = 2
 [node name="KnownLabel" type="FoldableContainer" parent="ScrollContainer/Margins/List" unique_id=608495546]
 layout_mode = 2
 title = "known"
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/Margins/List/KnownLabel" unique_id=596829479]
 script = ExtResource("2_gvvro")
-message = Array[int]([-123])
-property_name = &"title"
+translations = Dictionary[StringName, String]({
+&"title": "USERS_NICKED"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="Known" type="VBoxContainer" parent="ScrollContainer/Margins/List/KnownLabel" unique_id=1861638605]
 layout_mode = 2

@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://ciogfbq06qv56" path="res://Scenes/DictEditMenu/dict_edit_menu.gd" id="1_wmq72"]
 [ext_resource type="Script" uid="uid://dqce42c573ptg" path="res://Scripts/SimpleTranslatable.gd" id="2_icn0b"]
+[ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="2_ql6ly"]
 [ext_resource type="Script" uid="uid://gtpqlwktlalr" path="res://Scripts/FilteredLineEdit.gd" id="3_f8ufa"]
 [ext_resource type="PackedScene" uid="uid://bw4nasduhbqkb" path="res://Scenes/Common/bool_toggle_button.tscn" id="3_si2t6"]
 [ext_resource type="PackedScene" uid="uid://2emnji0ns3x2" path="res://Scenes/Common/confirmation_button.tscn" id="5_2h3m4"]
-[ext_resource type="Script" uid="uid://dgdrelr1yg18f" path="res://Scripts/MultiTranslatable.gd" id="5_uladm"]
 
 [node name="DictEditWindow" type="PanelContainer" unique_id=1113766720]
 anchors_preset = 15
@@ -23,8 +23,13 @@ layout_mode = 2
 layout_mode = 2
 text = "signal editor UI Title"
 horizontal_alignment = 1
-script = ExtResource("2_icn0b")
-message = Array[int]([-42, -38, -77, -174])
+
+[node name="LocaleNode" type="Node" parent="DictEditMainframe/DictEditTitle" unique_id=992810955]
+script = ExtResource("2_ql6ly")
+translations = Dictionary[StringName, String]({
+&"text": "DICT_EDIT_HEADER"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="HSeparator" type="HSeparator" parent="DictEditMainframe" unique_id=2011356045]
 layout_mode = 2
@@ -46,7 +51,6 @@ context_menu_enabled = false
 emoji_menu_enabled = false
 caret_blink = true
 script = ExtResource("3_f8ufa")
-placeholder = Array[int]([-109, -237, -38])
 
 [node name="NotesEdit" type="TextEdit" parent="DictEditMainframe" unique_id=1225501255]
 custom_minimum_size = Vector2(0, 150)
@@ -84,6 +88,17 @@ popup/item_3/id = 3
 popup/item_4/text = "1 attract"
 popup/item_4/id = 4
 
+[node name="LocaleNode" type="Node" parent="DictEditMainframe/BeforeAndAfterFormat/BeforeOption" unique_id=1239902156]
+script = ExtResource("2_ql6ly")
+translations = Dictionary[StringName, String]({
+&"popup/item_0/text": "FORMAT_NONE",
+&"popup/item_1/text": "FORMAT_SPACE",
+&"popup/item_2/text": "FORMAT_NEWLINE",
+&"popup/item_3/text": "FORMAT_DOUBLE",
+&"popup/item_4/text": "FORMAT_ATTRACT"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
 [node name="FormatClarity" type="Label" parent="DictEditMainframe/BeforeAndAfterFormat" unique_id=306431489]
 layout_mode = 2
 text = "precedes |-# precedes"
@@ -103,14 +118,30 @@ popup/item_3/id = 3
 popup/item_4/text = "1 attract"
 popup/item_4/id = 4
 
+[node name="LocaleNode" type="Node" parent="DictEditMainframe/BeforeAndAfterFormat/AfterOption" unique_id=876550322]
+script = ExtResource("2_ql6ly")
+translations = Dictionary[StringName, String]({
+&"popup/item_0/text": "FORMAT_NONE",
+&"popup/item_1/text": "FORMAT_SPACE",
+&"popup/item_2/text": "FORMAT_NEWLINE",
+&"popup/item_3/text": "FORMAT_DOUBLE",
+&"popup/item_4/text": "FORMAT_ATTRACT"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
 [node name="BreakSentence" type="HBoxContainer" parent="DictEditMainframe" unique_id=722368581]
 layout_mode = 2
 
 [node name="BreakClarity" type="Label" parent="DictEditMainframe/BreakSentence" unique_id=999523653]
 layout_mode = 2
 text = "break on double"
-script = ExtResource("2_icn0b")
-message = Array[int]([-26, -14, 2, -229, -42, -122, 1, -108, -190, -15, -4])
+
+[node name="LocaleNode" type="Node" parent="DictEditMainframe/BreakSentence/BreakClarity" unique_id=1314067051]
+script = ExtResource("2_ql6ly")
+translations = Dictionary[StringName, String]({
+&"text": "DICT_EDIT_BREAK"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="BreakOnDouble" parent="DictEditMainframe/BreakSentence" unique_id=1728394877 instance=ExtResource("3_si2t6")]
 layout_mode = 2
@@ -122,8 +153,13 @@ layout_mode = 2
 [node name="IndentLabel" type="Label" parent="DictEditMainframe/Indentation" unique_id=1965001691]
 layout_mode = 2
 text = "how to indent?"
-script = ExtResource("2_icn0b")
-message = Array[int]([-42, -86, -190])
+
+[node name="LocaleNode" type="Node" parent="DictEditMainframe/Indentation/IndentLabel" unique_id=1160745488]
+script = ExtResource("2_ql6ly")
+translations = Dictionary[StringName, String]({
+&"text": "DICT_EDIT_INDENTATION"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="IndentOption" type="OptionButton" parent="DictEditMainframe/Indentation" unique_id=84928034]
 layout_mode = 2
@@ -135,12 +171,15 @@ popup/item_1/text = "start indent"
 popup/item_1/id = 1
 popup/item_2/text = "end indent"
 popup/item_2/id = 2
-script = ExtResource("5_uladm")
-messages = Dictionary[StringName, Array]({
-&"popup/item_0/text": [-38, -29, -85],
-&"popup/item_1/text": [-38, -85],
-&"popup/item_2/text": [-88, -85]
+
+[node name="LocaleNode" type="Node" parent="DictEditMainframe/Indentation/IndentOption" unique_id=369957998]
+script = ExtResource("2_ql6ly")
+translations = Dictionary[StringName, String]({
+&"popup/item_0/text": "DICT_EDIT_NO_INDENT",
+&"popup/item_1/text": "DICT_EDIT_INDENT",
+&"popup/item_2/text": "DICT_EDIT_DEDENT"
 })
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="BBCodeOptions" type="VBoxContainer" parent="DictEditMainframe" unique_id=1953522590]
 layout_mode = 2
@@ -159,14 +198,19 @@ size_flags_horizontal = 3
 [node name="Label" type="Label" parent="DictEditMainframe/BBCodeOptions/GridContainer/Bold" unique_id=584600921]
 layout_mode = 2
 text = "bold"
-script = ExtResource("2_icn0b")
-message = Array[int]([-42, -22, -100])
+
+[node name="LocaleNode" type="Node" parent="DictEditMainframe/BBCodeOptions/GridContainer/Bold/Label" unique_id=84830077]
+script = ExtResource("2_ql6ly")
+translations = Dictionary[StringName, String]({
+&"text": "DICT_EDIT_BOLD"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="Button" parent="DictEditMainframe/BBCodeOptions/GridContainer/Bold" unique_id=391121514 instance=ExtResource("3_si2t6")]
 layout_mode = 2
 size_flags_horizontal = 1
-off_text = Array[int]([-114])
-on_text = Array[int]([-108])
+off_text = "DICT_EDIT_NO_BOLD"
+on_text = "DICT_EDIT_YES_BOLD"
 
 [node name="Italic" type="HBoxContainer" parent="DictEditMainframe/BBCodeOptions/GridContainer" unique_id=482233777]
 layout_mode = 2
@@ -175,14 +219,19 @@ size_flags_horizontal = 3
 [node name="Label" type="Label" parent="DictEditMainframe/BBCodeOptions/GridContainer/Italic" unique_id=1911758676]
 layout_mode = 2
 text = "italic"
-script = ExtResource("2_icn0b")
-message = Array[int]([-42, -49, -86, -51])
+
+[node name="LocaleNode" type="Node" parent="DictEditMainframe/BBCodeOptions/GridContainer/Italic/Label" unique_id=1622245753]
+script = ExtResource("2_ql6ly")
+translations = Dictionary[StringName, String]({
+&"text": "DICT_EDIT_ITALICS"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="Button" parent="DictEditMainframe/BBCodeOptions/GridContainer/Italic" unique_id=1312886222 instance=ExtResource("3_si2t6")]
 layout_mode = 2
 size_flags_horizontal = 1
-off_text = Array[int]([-174, -29, -85])
-on_text = Array[int]([-174, -85])
+off_text = "DICT_EDIT_NO_ITALICS"
+on_text = "DICT_EDIT_YES_ITALICS"
 
 [node name="Underline" type="HBoxContainer" parent="DictEditMainframe/BBCodeOptions/GridContainer" unique_id=1975299222]
 layout_mode = 2
@@ -191,14 +240,19 @@ size_flags_horizontal = 3
 [node name="Label" type="Label" parent="DictEditMainframe/BBCodeOptions/GridContainer/Underline" unique_id=1832529931]
 layout_mode = 2
 text = "underline"
-script = ExtResource("2_icn0b")
-message = Array[int]([-109, -51, -17])
+
+[node name="LocaleNode" type="Node" parent="DictEditMainframe/BBCodeOptions/GridContainer/Underline/Label" unique_id=1709854226]
+script = ExtResource("2_ql6ly")
+translations = Dictionary[StringName, String]({
+&"text": "DICT_EDIT_UNDERLINE"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="Button" parent="DictEditMainframe/BBCodeOptions/GridContainer/Underline" unique_id=1625235116 instance=ExtResource("3_si2t6")]
 layout_mode = 2
 size_flags_horizontal = 1
-off_text = Array[int]([-100, -29])
-on_text = Array[int]([-100])
+off_text = "DICT_EDIT_NO_UNDERLINE"
+on_text = "DICT_EDIT_YES_UNDERLINE"
 
 [node name="Strikethrough" type="HBoxContainer" parent="DictEditMainframe/BBCodeOptions/GridContainer" unique_id=69063760]
 layout_mode = 2
@@ -207,14 +261,19 @@ size_flags_horizontal = 3
 [node name="Label" type="Label" parent="DictEditMainframe/BBCodeOptions/GridContainer/Strikethrough" unique_id=462434326]
 layout_mode = 2
 text = "strikethrough"
-script = ExtResource("2_icn0b")
-message = Array[int]([-114, -51, -17])
+
+[node name="LocaleNode" type="Node" parent="DictEditMainframe/BBCodeOptions/GridContainer/Strikethrough/Label" unique_id=472676158]
+script = ExtResource("2_ql6ly")
+translations = Dictionary[StringName, String]({
+&"text": "DICT_EDIT_STRIKETHROUGH"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="Button" parent="DictEditMainframe/BBCodeOptions/GridContainer/Strikethrough" unique_id=1065103595 instance=ExtResource("3_si2t6")]
 layout_mode = 2
 size_flags_horizontal = 1
-off_text = Array[int]([-100, -29])
-on_text = Array[int]([-100])
+off_text = "DICT_EDIT_NO_STRIKE"
+on_text = "DICT_EDIT_YES_STRIKE"
 
 [node name="ColorPicker" type="HBoxContainer" parent="DictEditMainframe/BBCodeOptions" unique_id=422787390]
 layout_mode = 2
@@ -258,15 +317,20 @@ layout_mode = 2
 [node name="IsLabel" type="Label" parent="DictEditMainframe/BBCodeOptions/ColorPicker" unique_id=665122511]
 layout_mode = 2
 text = "is"
-script = ExtResource("2_icn0b")
-message = Array[int]([-100])
+
+[node name="LocaleNode" type="Node" parent="DictEditMainframe/BBCodeOptions/ColorPicker/IsLabel" unique_id=1612296523]
+script = ExtResource("2_ql6ly")
+translations = Dictionary[StringName, String]({
+&"text": "DICT_EDIT_COLOR_IS"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="BG" parent="DictEditMainframe/BBCodeOptions/ColorPicker" unique_id=1780354143 instance=ExtResource("3_si2t6")]
 layout_mode = 2
 size_flags_horizontal = 1
 size_flags_vertical = 4
-off_text = Array[int]([-42, -54])
-on_text = Array[int]([-22, -54])
+off_text = "DICT_EDIT_COLOR_SIGNAL"
+on_text = "DICT_EDIT_COLOR_BG"
 
 [node name="SubmitElseCancel" type="GridContainer" parent="DictEditMainframe" unique_id=1177023276]
 layout_mode = 2
@@ -276,15 +340,25 @@ columns = 2
 layout_mode = 2
 size_flags_horizontal = 3
 text = "change"
-script = ExtResource("2_icn0b")
-message = Array[int]([-174, -85])
+
+[node name="LocaleNode" type="Node" parent="DictEditMainframe/SubmitElseCancel/SubmitButton" unique_id=1746737243]
+script = ExtResource("2_ql6ly")
+translations = Dictionary[StringName, String]({
+&"text": "SUBMIT_LONG"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="CancelButton" type="Button" parent="DictEditMainframe/SubmitElseCancel" unique_id=739614641]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "not"
-script = ExtResource("2_icn0b")
-message = Array[int]([-174, -29, -85])
+
+[node name="LocaleNode" type="Node" parent="DictEditMainframe/SubmitElseCancel/CancelButton" unique_id=1794393205]
+script = ExtResource("2_ql6ly")
+translations = Dictionary[StringName, String]({
+&"text": "CANCEL_LONG"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="DeleteButton" parent="DictEditMainframe/SubmitElseCancel" unique_id=1499947826 instance=ExtResource("5_2h3m4")]
 layout_mode = 2
@@ -293,8 +367,13 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 text = "close"
-script = ExtResource("2_icn0b")
-message = Array[int]([-163, -29, -85])
+
+[node name="LocaleNode" type="Node" parent="DictEditMainframe/SubmitElseCancel/CloseButton" unique_id=1873154031]
+script = ExtResource("2_ql6ly")
+translations = Dictionary[StringName, String]({
+&"text": "CLOSE_MENU_LONG"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [connection signal="text_submitted" from="DictEditMainframe/SignalNameEdit/NameLineEdit" to="." method="_on_name_line_edit_text_submitted"]
 [connection signal="gui_input" from="DictEditMainframe/NotesEdit" to="." method="_on_notes_edit_gui_input"]

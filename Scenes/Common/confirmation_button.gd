@@ -1,8 +1,8 @@
 extends Button
 class_name ConfirmationButton
 
-@export var normal_text: Array[int] = [-88, -127, -85]
-@export var confirm_text: Array[int] = [-42, -88, -85]
+@export var normal_text: String = "DELETE_ASK"
+@export var confirm_text: String = "DELETE_CONFIRM"
 @export_color_no_alpha var confirm_color: Color = Color(1, .4, .475)
 @export var double_click_window_he_sec: float = 0.5
 @export var timeout_window_he_sec: float = 6
@@ -20,11 +20,11 @@ func set_confirm_state(confirmation = null) -> void:
 	if confirmation is bool:
 		confirm = confirmation
 	if confirm:
-		text = DictionaryHandler.signals_to_words(confirm_text)
+		text = Localizer.translate(confirm_text)
 		self_modulate = confirm_color
 		time_window.start(timeout_window_he_sec * Main.HE6_HALF_LIFE)
 	else:
-		text = DictionaryHandler.signals_to_words(normal_text)
+		text = Localizer.translate(normal_text)
 		self_modulate = Color(1., 1., 1.)
 		time_window.stop()
 

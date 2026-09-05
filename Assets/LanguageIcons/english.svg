@@ -1,0 +1,26 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+	<style>
+		.s0 { fill: #163c83 } 
+		.s1 { fill: #ffffff } 
+		.s2 { fill: #c6322c } 
+	</style>
+	<g id="Layer 1">
+		<path id="Shape 1" fill-rule="evenodd" class="s0" d="m120 10h120v220h-120"/>
+		<path id="Shape 3" fill-rule="evenodd" class="s1" d="m160 70l60-60h20v40l-40 40h40v60h-60l60 60v20h-40l-40-40v40h-160v-220h160"/>
+		<path id="Shape 4" fill-rule="evenodd" class="s0" d="m129.09 10l1.3 100h-130.39v-100z"/>
+		<path id="Shape 5 copy 2" fill-rule="evenodd" class="s2" d="m140 110h20l80-80v-20"/>
+		<path id="Shape 5 copy 3" fill-rule="evenodd" class="s2" d="m140 130v20l80 80h20"/>
+		<path id="Shape 2" fill-rule="evenodd" class="s2" d="m240 110v20h-100v100h-20v-220h20v100z"/>
+		<path id="Shape 2 copy" fill-rule="evenodd" class="s2" d="m120 210v20h-120v-20z"/>
+		<path id="Shape 2 copy 2" fill-rule="evenodd" class="s2" d="m120 130v20h-120v-20z"/>
+		<path id="Shape 2 copy 3" fill-rule="evenodd" class="s2" d="m120 170v20h-120v-20z"/>
+		<path id="Shape 5" fill-rule="evenodd" class="s1" d="m20 50h-20v-20h20z"/>
+		<path id="Shape 5 copy" fill-rule="evenodd" class="s1" d="m20 90h-20v-20h20z"/>
+		<path id="Shape 5 copy 4" fill-rule="evenodd" class="s1" d="m40 70h-20v-20h20z"/>
+		<path id="Shape 5 copy 5" fill-rule="evenodd" class="s1" d="m60 50h-20v-20h20z"/>
+		<path id="Shape 5 copy 6" fill-rule="evenodd" class="s1" d="m60 90h-20v-20h20z"/>
+		<path id="Shape 5 copy 7" fill-rule="evenodd" class="s1" d="m80 70h-20v-20h20z"/>
+		<path id="Shape 5 copy 8" fill-rule="evenodd" class="s1" d="m100 50h-20v-20h20z"/>
+		<path id="Shape 5 copy 9" fill-rule="evenodd" class="s1" d="m100 90h-20v-20h20z"/>
+	</g>
+</svg>

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c1h04iufkd28w"]
 
-[ext_resource type="Script" uid="uid://dqce42c573ptg" path="res://Scripts/SimpleTranslatable.gd" id="1_l64t4"]
 [ext_resource type="Script" uid="uid://com1i3l3kqyrr" path="res://Scenes/CallsignPicker/callsign_node.gd" id="1_pf6dc"]
+[ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="2_lxpi2"]
 [ext_resource type="PackedScene" uid="uid://dc1vhk1wyejon" path="res://Scenes/Common/identicon.tscn" id="3_61est"]
 
 [node name="CallsignNode" type="HBoxContainer" unique_id=1004165478]
@@ -21,8 +21,13 @@ size_flags_vertical = 3
 text = "+"
 horizontal_alignment = 1
 vertical_alignment = 1
-script = ExtResource("1_l64t4")
-message = Array[int]([-5])
+
+[node name="LocaleNode" type="Node" parent="RollerGrid/AddLabel" unique_id=1290342544]
+script = ExtResource("2_lxpi2")
+translations = Dictionary[StringName, String]({
+&"text": "CALLSIGN_ADD"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="Digit512Inc" type="Button" parent="RollerGrid" unique_id=1437929607]
 custom_minimum_size = Vector2(22, 22)
@@ -91,8 +96,13 @@ size_flags_vertical = 3
 text = "-"
 horizontal_alignment = 1
 vertical_alignment = 1
-script = ExtResource("1_l64t4")
-message = Array[int]([-7])
+
+[node name="LocaleNode" type="Node" parent="RollerGrid/SubLabel" unique_id=2130217935]
+script = ExtResource("2_lxpi2")
+translations = Dictionary[StringName, String]({
+&"text": "CALLSIGN_SUB"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="Digit512Dec" type="Button" parent="RollerGrid" unique_id=117634177]
 custom_minimum_size = Vector2(22, 22)
@@ -134,16 +144,26 @@ layout_mode = 2
 size_flags_vertical = 3
 mouse_default_cursor_shape = 2
 text = "set"
-script = ExtResource("1_l64t4")
-message = Array[int]([-174])
+
+[node name="LocaleNode" type="Node" parent="ActionButtons/SubmitButton" unique_id=1486614961]
+script = ExtResource("2_lxpi2")
+translations = Dictionary[StringName, String]({
+&"text": "SUBMIT"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="UndoButton" type="Button" parent="ActionButtons" unique_id=113470087]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_default_cursor_shape = 2
 text = "reset"
-script = ExtResource("1_l64t4")
-message = Array[int]([-29])
+
+[node name="LocaleNode" type="Node" parent="ActionButtons/UndoButton" unique_id=1209300354]
+script = ExtResource("2_lxpi2")
+translations = Dictionary[StringName, String]({
+&"text": "CANCEL"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [connection signal="pressed" from="RollerGrid/Digit512Inc" to="." method="_on_digit_512_inc_pressed"]
 [connection signal="pressed" from="RollerGrid/Digit64Inc" to="." method="_on_digit_64_inc_pressed"]

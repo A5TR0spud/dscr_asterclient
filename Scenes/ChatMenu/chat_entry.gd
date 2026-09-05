@@ -5,6 +5,7 @@ var timestamp: int = 0
 var message: Array = []
 var _time_ago: int = 0
 var _time_ago_string: String = ""
+var _etc_string: String = ""
 var collapsed: bool = true:
 	set(value):
 		var old_value: bool = collapsed
@@ -31,24 +32,34 @@ func _ready():
 	collapsed = true
 	calc_time()
 	Main.instance.reload_dict.connect(_refresh)
+	Main.instance.localization_reload.connect(_on_locale_reload)
 	Main.instance.reload_settings.connect(_evaluate_corpus)
 	self.mouse_entered.connect(hover_change.emit.bind(true))
 	self.mouse_exited.connect(hover_change.emit.bind(false))
 
 func _refresh():
+	_on_locale_reload()
 	refresh()
-	_time_ago_string = DictionaryHandler.signals_to_words(["{0}", -69, -118, -121])
 	_evaluate_corpus()
+
+func _on_locale_reload():
+	_time_ago_string = Localizer.translate("TIME_AGO_HSEC")
+	_etc_string = Localizer.translate("TRUNCATION")
 
 func request_rewrite(clickable: bool):
 	_evaluate_corpus(clickable)
 
 func _evaluate_corpus(clickable: bool = false):
-	var to_show: Array = message
+	var to_show: Array
+	if message.is_typed():
+		for val in message:
+			to_show.append(val)
+	else:
+		to_show = message
 	set_etc_visibility.emit(is_message_truncatable())
 	if collapsed and is_message_truncatable():
 		to_show = to_show.slice(0, SettingsHandler.truncate_message_size)
-		to_show.append(-25)
+		to_show.append(_etc_string)
 	set_message_text(
 		DictionaryHandler.signals_to_words(
 			to_show,

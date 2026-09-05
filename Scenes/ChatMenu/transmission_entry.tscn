@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dc1vhk1wyejon" path="res://Scenes/Common/identicon.tscn" id="2_wapdh"]
 [ext_resource type="FontFile" uid="uid://cwbj6dro36xa3" path="res://fonts/CascadiaMono-Bold.ttf" id="3_42owa"]
 [ext_resource type="StyleBox" uid="uid://4hbvf66ek6pl" path="res://Styling/transmission_indent.tres" id="4_wapdh"]
-[ext_resource type="Script" uid="uid://dqce42c573ptg" path="res://Scripts/SimpleTranslatable.gd" id="5_wapdh"]
+[ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="5_wapdh"]
 [ext_resource type="PackedScene" uid="uid://bcqkh2yjqiert" path="res://Scenes/Images/visualizer_node.tscn" id="6_wapdh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g4v7s"]
@@ -72,6 +72,13 @@ item_count = 1
 popup/item_0/text = "pluck"
 popup/item_0/id = 0
 
+[node name="LocaleNode" type="Node" parent="Header/Trans" unique_id=1156605522]
+script = ExtResource("5_wapdh")
+translations = Dictionary[StringName, String]({
+&"popup/item_0/text": "COPY_SIGNAL_NUMBERS"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
 [node name="Body" type="HBoxContainer" parent="." unique_id=1048473022]
 layout_mode = 2
 
@@ -110,8 +117,13 @@ mouse_default_cursor_shape = 2
 toggle_mode = true
 text = "Visualize"
 alignment = 0
+
+[node name="LocaleNode" type="Node" parent="Body/Corpus/ContextButtons/ImageButton" unique_id=1106034659]
 script = ExtResource("5_wapdh")
-message = Array[int]([-53])
+translations = Dictionary[StringName, String]({
+&"text": "IMAGE_TOGGLE"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="EtcButton" type="Button" parent="Body/Corpus/ContextButtons" unique_id=109864259]
 layout_mode = 2
@@ -121,8 +133,13 @@ mouse_default_cursor_shape = 2
 toggle_mode = true
 text = "More"
 alignment = 0
+
+[node name="LocaleNode" type="Node" parent="Body/Corpus/ContextButtons/EtcButton" unique_id=2124181401]
 script = ExtResource("5_wapdh")
-message = Array[int]([-25])
+translations = Dictionary[StringName, String]({
+&"text": "TRUNCATE_TOGGLE"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="VisualizeNode" parent="Body/Corpus" unique_id=1907311917 instance=ExtResource("6_wapdh")]
 visible = false

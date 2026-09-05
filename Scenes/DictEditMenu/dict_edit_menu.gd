@@ -104,7 +104,7 @@ func reload() -> void:
 	before_label.set_item_disabled(4, current_signal >= 0)
 	after_label.set_item_disabled(4, current_signal >= 0)
 	if current_signal == UNKNOWN_SIGNAL:
-		before_after_clear_label.text = DictionaryHandler.signals_to_words([-122, -42, -122])
+		before_after_clear_label.text = Localizer.translate("DICT_EDIT_BA_LABEL_GENERIC")
 		before_label.select(DictionaryHandler.default_before_mode)
 		after_label.select(DictionaryHandler.default_after_mode)
 		_push_color_to_spinners(Color.from_string(DictionaryHandler.default_color, Color.WHITE))
@@ -115,8 +115,8 @@ func reload() -> void:
 		background_edit.button_pressed = DictionaryHandler.default_background
 		return
 	var desc: Dictionary = DictionaryHandler.get_or_default_signal_desc(current_signal)
-	name_label.text = DictionaryHandler.signals_to_words([-42, -14, -1, absi(current_signal), -15, -4])
-	before_after_clear_label.text = DictionaryHandler.signals_to_words([-122, current_signal, -122])
+	name_label.text = Localizer.translate("DICT_EDIT_NAME_LABEL", absi(current_signal))
+	before_after_clear_label.text = Localizer.translate("DICT_EDIT_BA_LABEL", absi(current_signal))
 	name_edit.text = DictionaryHandler.get_or_default_signal_name(current_signal)
 	if not DictionaryHandler.word_keys.has(current_signal):
 		name_edit.grab_focus()
@@ -193,16 +193,6 @@ func _push_color_to_spinners(col: Color):
 
 func refresh():
 	reload()
-	before_label.set_item_text(0, DictionaryHandler.signals_to_words([-111]))
-	before_label.set_item_text(1, DictionaryHandler.signals_to_words([1, -190]))
-	before_label.set_item_text(2, DictionaryHandler.signals_to_words([1, -108, -190]))
-	before_label.set_item_text(3, DictionaryHandler.signals_to_words([2, -108, -190]))
-	before_label.set_item_text(4, DictionaryHandler.signals_to_words([1, -189]))
-	after_label.set_item_text(0, DictionaryHandler.signals_to_words([-111]))
-	after_label.set_item_text(1, DictionaryHandler.signals_to_words([1, -190]))
-	after_label.set_item_text(2, DictionaryHandler.signals_to_words([1, -108, -190]))
-	after_label.set_item_text(3, DictionaryHandler.signals_to_words([2, -108, -190]))
-	after_label.set_item_text(4, DictionaryHandler.signals_to_words([1, -189]))
 
 func _on_notes_edit_gui_input(event):
 	if event.is_action_pressed("ui_text_submit") and not event.is_action_pressed("ui_text_newline"):

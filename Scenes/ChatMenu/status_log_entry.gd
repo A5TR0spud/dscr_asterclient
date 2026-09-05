@@ -6,8 +6,13 @@ class_name StatusLogEntry
 @onready var tab_node: VSeparator = $Body/MessageIndent
 @onready var etc_button_node: Button = $Body/Corpus/ContextButtons/EtcButton
 
+var translation_key: String = ""
+var arguments: Variant = []
+
 func ready():
 	Main.instance.reload_dict.connect(refresh)
+	Main.instance.localization_reload.connect(refresh.bind(true))
+	refresh()
 
 func _physics_process(_delta):
 	calc_time()
@@ -16,11 +21,14 @@ func _physics_process(_delta):
 func get_color() -> Color:
 	return Color.WHITE
 
-func refresh():
-	pass
+func refresh(from_locale: bool = false):
+	if not translation_key.is_empty():
+		message = Localizer.raw_translate(translation_key)
+		if from_locale:
+			request_rewrite(false)
 
-func set_message_text(new_text: String):
-	message_node.text = new_text
+func set_message_text(_new_text: String):
+	message_node.text = _new_text.format(arguments)
 
 func supports_bbcode() -> bool:
 	return false

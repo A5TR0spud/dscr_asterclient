@@ -1,10 +1,9 @@
 [gd_scene format=3 uid="uid://tpn8p2apuh1t"]
 
-[ext_resource type="Script" uid="uid://dqce42c573ptg" path="res://Scripts/SimpleTranslatable.gd" id="1_tpcp0"]
+[ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="1_1mk6h"]
 [ext_resource type="Script" uid="uid://du2luaidhxiem" path="res://Scenes/DictDisplayMenu/dictionary_save_open.gd" id="2_b08ua"]
 [ext_resource type="Script" uid="uid://cwf16ujxnodbv" path="res://Scenes/DictDisplayMenu/default_format_option.gd" id="2_wphnd"]
 [ext_resource type="Script" uid="uid://b6d5ucfwdeqjh" path="res://Scenes/DictDisplayMenu/dictionary_display.gd" id="3_b08ua"]
-[ext_resource type="Script" uid="uid://cyqng7nb5maao" path="res://Scenes/DictDisplayMenu/new_signal_button.gd" id="4_1mk6h"]
 [ext_resource type="Script" uid="uid://gtpqlwktlalr" path="res://Scripts/FilteredLineEdit.gd" id="6_b08ua"]
 
 [node name="DictionaryTab" type="VBoxContainer" unique_id=1745367524]
@@ -24,8 +23,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "meaning change"
 horizontal_alignment = 1
-script = ExtResource("1_tpcp0")
-message = Array[int]([-237, -174])
+
+[node name="LocaleNode" type="Node" parent="DictionaryHeader/DictionaryLabel" unique_id=345407862]
+script = ExtResource("1_1mk6h")
+translations = Dictionary[StringName, String]({
+&"text": "DICT_HEADER"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="DictionarySaveOpen" type="Button" parent="DictionaryHeader" unique_id=1945237576]
 self_modulate = Color(0.8784314, 0.8784314, 0.8784314, 1)
@@ -34,6 +38,13 @@ offset_transform_enabled = true
 mouse_default_cursor_shape = 2
 text = "file source"
 script = ExtResource("2_b08ua")
+
+[node name="LocaleNode" type="Node" parent="DictionaryHeader/DictionarySaveOpen" unique_id=1735927858]
+script = ExtResource("1_1mk6h")
+translations = Dictionary[StringName, String]({
+&"text": "DICT_OPEN_FILE"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="HSeparator2" type="HSeparator" parent="." unique_id=1377386859]
 layout_mode = 2
@@ -66,31 +77,15 @@ mouse_filter = 1
 mouse_default_cursor_shape = 2
 text = "unknown precedes known"
 horizontal_alignment = 2
-script = ExtResource("1_tpcp0")
-message = Array[int]([-124, -122, -123])
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/MarginContainer/VBoxContainer/DefaultFormatOption/Signal" unique_id=1209890268]
+script = ExtResource("1_1mk6h")
+translations = Dictionary[StringName, String]({
+&"text": "DICT_DEFAULT"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="HSeparator" type="HSeparator" parent="ScrollContainer/MarginContainer/VBoxContainer/DefaultFormatOption" unique_id=384322409]
-layout_mode = 2
-
-[node name="UnknownFormatOption" type="VBoxContainer" parent="ScrollContainer/MarginContainer/VBoxContainer" unique_id=1425646915]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 0
-mouse_default_cursor_shape = 2
-script = ExtResource("2_wphnd")
-to_open = 1
-
-[node name="Signal" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer/UnknownFormatOption" unique_id=661817630]
-layout_mode = 2
-mouse_filter = 1
-mouse_default_cursor_shape = 2
-text = "unknown"
-horizontal_alignment = 2
-script = ExtResource("1_tpcp0")
-message = Array[int]([-110, -124])
-
-[node name="HSeparator" type="HSeparator" parent="ScrollContainer/MarginContainer/VBoxContainer/UnknownFormatOption" unique_id=2080187884]
 layout_mode = 2
 
 [node name="Dictionary" type="VBoxContainer" parent="ScrollContainer/MarginContainer/VBoxContainer" unique_id=2102306008]
@@ -102,8 +97,13 @@ script = ExtResource("3_b08ua")
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "new signal"
-script = ExtResource("4_1mk6h")
-message = Array[int]([-38, -77, -163])
+
+[node name="LocaleNode" type="Node" parent="NewSignalButton" unique_id=31791558]
+script = ExtResource("1_1mk6h")
+translations = Dictionary[StringName, String]({
+&"text": "DICT_SEARCH_MAKE"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="NewSignalDesig" type="HBoxContainer" parent="." unique_id=1003123393]
 layout_mode = 2
@@ -122,7 +122,13 @@ caret_blink = true
 script = ExtResource("6_b08ua")
 deny_list = "-0123456789"
 allow_list = true
-placeholder = Array[int]([-42])
+
+[node name="LocaleNode" type="Node" parent="NewSignalDesig/NumEdit" unique_id=1949390529]
+script = ExtResource("1_1mk6h")
+translations = Dictionary[StringName, String]({
+&"placeholder_text": "SIGNAL_NUMBER"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="SigEdit" type="LineEdit" parent="NewSignalDesig" unique_id=804966430]
 layout_mode = 2
@@ -135,7 +141,13 @@ context_menu_enabled = false
 emoji_menu_enabled = false
 caret_blink = true
 script = ExtResource("6_b08ua")
-placeholder = Array[int]([-237])
+
+[node name="LocaleNode" type="Node" parent="NewSignalDesig/SigEdit" unique_id=438235825]
+script = ExtResource("1_1mk6h")
+translations = Dictionary[StringName, String]({
+&"placeholder_text": "SIGNAL_NAME"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [connection signal="pressed" from="DictionaryHeader/DictionarySaveOpen" to="ScrollContainer/MarginContainer/VBoxContainer/Dictionary" method="_on_dictionary_save_open_pressed"]
 [connection signal="pressed" from="NewSignalButton" to="NewSignalButton" method="_on_pressed"]

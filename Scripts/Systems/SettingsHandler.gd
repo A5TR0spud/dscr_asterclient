@@ -15,6 +15,16 @@ static var img_invert_pitch: bool = false
 static var img_invert_zoom: bool = false
 static var do_bbcode: bool = false
 static var use_at_undef: bool = true
+static var language: String = ""
+
+static func validate_and_set_language(code: String = language):
+	if code not in ["m0", "en"]:
+		LocaleMenu.open()
+		return
+	language = code
+	TranslationServer.set_locale(language)
+	Main.on_localization_reload()
+	save()
 
 static func initialize() -> void:
 	# Setting names kept in PascalCase to keep backwards compatibility
@@ -34,6 +44,8 @@ static func initialize() -> void:
 	img_invert_zoom = SaveSystem.settings.get_or_add("img_invert_zoom", img_invert_zoom)
 	do_bbcode = SaveSystem.settings.get_or_add("do_bbcode", do_bbcode)
 	use_at_undef = SaveSystem.settings.get_or_add("use_at_undef", use_at_undef)
+	language = SaveSystem.settings.get_or_add("language", "")
+	validate_and_set_language()
 
 static func evaluate_volume() -> void:
 	AudioServer.set_bus_volume_linear(
@@ -63,3 +75,4 @@ static func export() -> void:
 	SaveSystem.settings.set("img_invert_yaw", img_invert_yaw)
 	SaveSystem.settings.set("do_bbcode", do_bbcode)
 	SaveSystem.settings.set("use_at_undef", use_at_undef)
+	SaveSystem.settings.set("language", language)

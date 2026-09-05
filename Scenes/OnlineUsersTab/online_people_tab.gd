@@ -2,6 +2,7 @@ extends Container
 
 func _ready():
 	Main.instance.reload_dict.connect(refresh)
+	Main.instance.localization_reload.connect(refresh)
 	Main.instance.connected_user_change.connect(reload)
 	Main.instance.reload_nicknames.connect(reload_known)
 
@@ -46,4 +47,4 @@ func reload() -> void:
 	_reload_helper(online_list, Main.instance.connected_users)
 
 func refresh() -> void:
-	header_node.text = DictionaryHandler.signals_to_words([-130, -23, -4, Main.instance.connected_users.size()])
+	header_node.text = Localizer.translate("USERS_HEADER", Main.instance.connected_users.size())

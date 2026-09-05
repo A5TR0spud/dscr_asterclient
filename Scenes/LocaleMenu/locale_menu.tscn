@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://cnhrmaid1urmm"]
+
+[ext_resource type="Script" uid="uid://cymbpsqg5nw5d" path="res://Scenes/LocaleMenu/locale_menu.gd" id="1_d2tkp"]
+[ext_resource type="Texture2D" uid="uid://cw8a263plge6n" path="res://Assets/LanguageIcons/meteor0ese.svg" id="1_g7jid"]
+[ext_resource type="Texture2D" uid="uid://dnr676eu355jw" path="res://Assets/LanguageIcons/english.svg" id="2_d2tkp"]
+
+[node name="LocaleMenu" type="PanelContainer" unique_id=1619317538]
+top_level = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_d2tkp")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1699782983]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="CenterContainer" unique_id=763846540]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+columns = 2
+
+[node name="m0" type="Button" parent="CenterContainer/GridContainer" unique_id=654038840]
+texture_filter = 2
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_constants/icon_max_width = 24
+theme_override_font_sizes/font_size = 24
+text = "1420405752"
+icon = ExtResource("1_g7jid")
+
+[node name="en" type="Button" parent="CenterContainer/GridContainer" unique_id=1824061060]
+texture_filter = 2
+layout_mode = 2
+theme_override_constants/icon_max_width = 24
+theme_override_font_sizes/font_size = 24
+text = "English"
+icon = ExtResource("2_d2tkp")
+
+[connection signal="pressed" from="CenterContainer/GridContainer/m0" to="." method="_on_m_0_pressed"]
+[connection signal="pressed" from="CenterContainer/GridContainer/en" to="." method="_on_en_pressed"]

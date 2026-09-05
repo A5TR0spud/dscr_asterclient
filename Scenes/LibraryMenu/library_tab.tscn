@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://c6kmkupmer6fn" path="res://Scenes/Common/transmission_edit.tscn" id="1_i5m64"]
 [ext_resource type="Script" uid="uid://drc541g03f64b" path="res://Scenes/LibraryMenu/library_tab.gd" id="1_ntelf"]
-[ext_resource type="Script" uid="uid://dqce42c573ptg" path="res://Scripts/SimpleTranslatable.gd" id="1_yegc8"]
 [ext_resource type="PackedScene" uid="uid://d4neakrhevfia" path="res://Scenes/ChatMenu/transmission_entry.tscn" id="3_mpoun"]
+[ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="4_s4yvl"]
 [ext_resource type="PackedScene" uid="uid://2emnji0ns3x2" path="res://Scenes/Common/confirmation_button.tscn" id="5_mpoun"]
 
 [node name="Library" type="PanelContainer" unique_id=1052642948]
@@ -34,15 +34,13 @@ theme_override_constants/separation = 12
 layout_mode = 2
 size_flags_horizontal = 3
 max_length = 30
-script = ExtResource("1_yegc8")
-message = Array[int]([-43, -237])
-property_name = &"placeholder_text"
 
-[node name="Title" type="Label" parent="Body/Editor/Header" unique_id=57657579]
-layout_mode = 2
-text = "title go here!"
-script = ExtResource("1_yegc8")
-message = Array[int]([-38, -77, -163])
+[node name="LocaleNode" type="Node" parent="Body/Editor/Header/LineEdit" unique_id=1494968717]
+script = ExtResource("4_s4yvl")
+translations = Dictionary[StringName, String]({
+&"placeholder_text": "LIBRARY_NAME_PLACEHOLDER"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="GridContainer" type="VSplitContainer" parent="Body/Editor" unique_id=2060103814]
 layout_mode = 2
@@ -75,15 +73,25 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 text = "copy sigs"
-script = ExtResource("1_yegc8")
-message = Array[int]([-42, -40])
+
+[node name="LocaleNode" type="Node" parent="Body/Editor/GridContainer/VBoxContainer/HBoxContainer/CopySignals" unique_id=1125590415]
+script = ExtResource("4_s4yvl")
+translations = Dictionary[StringName, String]({
+&"text": "COPY_SIGNAL_NUMBERS"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="CopyWords" type="Button" parent="Body/Editor/GridContainer/VBoxContainer/HBoxContainer" unique_id=1682179097]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "copy words"
-script = ExtResource("1_yegc8")
-message = Array[int]([-237, -40])
+
+[node name="LocaleNode" type="Node" parent="Body/Editor/GridContainer/VBoxContainer/HBoxContainer/CopyWords" unique_id=517452269]
+script = ExtResource("4_s4yvl")
+translations = Dictionary[StringName, String]({
+&"text": "COPY_SIGNAL_NAMES"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Body/Editor/GridContainer/VBoxContainer" unique_id=1018313947]
 custom_minimum_size = Vector2(0, 32)
@@ -104,19 +112,28 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 text = "submit"
-script = ExtResource("1_yegc8")
-message = Array[int]([-174, -85])
+
+[node name="LocaleNode" type="Node" parent="Body/Editor/Buttons/Submit" unique_id=207078532]
+script = ExtResource("4_s4yvl")
+translations = Dictionary[StringName, String]({
+&"text": "SUBMIT_LONG"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="Cancel" type="Button" parent="Body/Editor/Buttons" unique_id=1029250237]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "cancel"
-script = ExtResource("1_yegc8")
-message = Array[int]([-174, -29, -85])
+
+[node name="LocaleNode" type="Node" parent="Body/Editor/Buttons/Cancel" unique_id=487550297]
+script = ExtResource("4_s4yvl")
+translations = Dictionary[StringName, String]({
+&"text": "CANCEL_LONG"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="Delete" parent="Body/Editor/Buttons" unique_id=1499947826 instance=ExtResource("5_mpoun")]
 layout_mode = 2
-confirm_text = Array[int]([-43, -88, -85])
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Body" unique_id=1708179464]
 layout_mode = 2

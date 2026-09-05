@@ -6,19 +6,13 @@ class_name TransmissionEdit
 #CodeEdit hates trying to autocomplete things without spaces, so use a nested one which contains only the word to try
 @onready var autocomplete_finder: CodeEdit = $AutocompleteFinder
 
-@export var placeholder: Array[int] = [-43, -38]
-
 const DELIMITER_CHARACTER = "\u001f"
 
 func _ready():
-	Main.instance.reload_dict.connect(refresh)
 	Main.instance.reload_settings.connect(_set_popup_size.call_deferred)
 	auto_list_panel.hide()
 	autocomplete_finder.hide()
 	syntax_highlighter = TransmissionHighlighter.new()
-
-func refresh():
-	placeholder_text = DictionaryHandler.signals_to_words(placeholder)
 
 signal submit_text(message: String)
 

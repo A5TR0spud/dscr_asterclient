@@ -13,11 +13,12 @@ func _ready():
 	name_node.self_modulate = Main.get_callsign_color(callsign)
 	Main.instance.reload_nicknames.connect(refresh_name)
 	Main.instance.reload_dict.connect(refresh_label)
+	Main.instance.localization_reload.connect(refresh_label)
 	refresh_label()
 	refresh_name()
 
 func refresh_label():
-	num_node.text = Main.base_10_to_callsign(callsign) + " " + DictionaryHandler.get_or_default_signal_name(-100)
+	num_node.text = Localizer.translate("USERS_NICK_IS", Main.base_10_to_callsign(callsign))
 
 func refresh_name():
 	name_node.text = NicknamesHandler.get_nick(callsign)

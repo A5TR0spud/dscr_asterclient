@@ -46,7 +46,7 @@ func _set_sig_text():
 	t_preview.message = current_transmission
 	t_preview.request_rewrite(false)
 	t_preview.try_parses()
-	t_preview.override_transmission_label(DictionaryHandler.signals_to_words([-42, -23, -4, current_transmission.size()]))
+	t_preview.override_transmission_label(Localizer.translate("LIBRARY_SIGNAL_COUNT", current_transmission.size()))
 
 func _ready():
 	Main.instance.reload_dict.connect(_reload)

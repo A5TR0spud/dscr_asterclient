@@ -47,10 +47,14 @@ static func on_image_inversion_reload() -> void:
 signal reload_library
 static func on_library_reload() -> void:
 	instance.reload_library.emit()
+signal localization_reload
+static func on_localization_reload() -> void:
+	instance.localization_reload.emit()
 
 signal connected_user_change
 
 func _enter_tree() -> void:
+	#TranslationServer.set_locale("m0")
 	instance = self
 
 var trying_to_quit: bool = false
@@ -364,3 +368,7 @@ func _on_files_dropped(files: PackedStringArray):
 		SoundManager.play_sound(SoundManager.Sounds.SUCCESS)
 	else:
 		SoundManager.play_sound(SoundManager.Sounds.FAIL)
+
+
+func _on_locale_button_pressed():
+	LocaleMenu.open()

@@ -1,0 +1,11 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+	<style>
+		.s0 { fill: none;stroke: #ffffff;stroke-linecap: round;stroke-linejoin: round;stroke-width: 20 } 
+	</style>
+	<g id="Layer 1">
+		<path id="Shape 1" fill-rule="evenodd" class="s0" d="m120 230c-60.83 0-110-49.17-110-110 0-60.83 49.17-110 110-110 60.83 0 110 49.17 110 110 0 60.83-49.17 110-110 110z"/>
+		<path id="Shape 1 copy" fill-rule="evenodd" class="s0" d="m120 230c-23.17 0-41.89-49.17-41.89-110 0-60.83 18.72-110 41.89-110 23.17 0 41.89 49.17 41.89 110 0 60.83-18.72 110-41.89 110z"/>
+		<path id="Shape 3" fill-rule="evenodd" class="s0" d="m22.68 79.83l194.88 0.17z"/>
+		<path id="Shape 3 copy" fill-rule="evenodd" class="s0" d="m21.74 160h196.19z"/>
+	</g>
+</svg>

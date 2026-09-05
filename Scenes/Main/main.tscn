@@ -2,12 +2,13 @@
 
 [ext_resource type="Script" uid="uid://1aqi7v8d5nf0" path="res://Scenes/Main/main.gd" id="1_6t3k2"]
 [ext_resource type="AudioStream" uid="uid://bvuts6f2essww" path="res://Assets/Sounds/boot_up.ogg" id="2_hfg1r"]
-[ext_resource type="Script" uid="uid://dqce42c573ptg" path="res://Scripts/SimpleTranslatable.gd" id="2_vk4q2"]
 [ext_resource type="AudioStream" uid="uid://bspyt735rxcbt" path="res://Assets/Sounds/shut_down.ogg" id="3_4e4y2"]
 [ext_resource type="PackedScene" uid="uid://bmqd6twlnn8dk" path="res://Scenes/ChatMenu/chat.tscn" id="3_imbg2"]
 [ext_resource type="PackedScene" uid="uid://bs6sllfdwwwmx" path="res://Scenes/Main/sound_scene.tscn" id="4_6t3k2"]
 [ext_resource type="Script" uid="uid://4obb1ushbfji" path="res://Scenes/Main/corpus.gd" id="5_wliom"]
+[ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="6_2ok46"]
 [ext_resource type="Script" uid="uid://bft2883q6jmm7" path="res://Scenes/Main/sidebar_tabber.gd" id="6_es6iu"]
+[ext_resource type="Texture2D" uid="uid://dd181plkpjof5" path="res://Assets/LanguageIcons/language.svg" id="7_2ok46"]
 [ext_resource type="PackedScene" uid="uid://tpn8p2apuh1t" path="res://Scenes/DictDisplayMenu/dictionary_tab.tscn" id="7_hfg1r"]
 [ext_resource type="PackedScene" uid="uid://bunet4g0aqi5h" path="res://Scenes/OnlineUsersTab/online_people_tab.tscn" id="8_hfg1r"]
 [ext_resource type="PackedScene" uid="uid://bvo2gxc2kcenm" path="res://Scenes/SettingsMenu/settings_tab.tscn" id="9_4e4y2"]
@@ -15,6 +16,9 @@
 [ext_resource type="PackedScene" uid="uid://c1h04iufkd28w" path="res://Scenes/CallsignPicker/callsign_node.tscn" id="11_4a3kt"]
 [ext_resource type="Script" uid="uid://cmdmiuvan8h1p" path="res://Scenes/Main/dict_edit_prison.gd" id="12_ifk88"]
 [ext_resource type="PackedScene" uid="uid://crn4b5wrwilbc" path="res://Scenes/DictEditMenu/dict_edit_window.tscn" id="13_8sujb"]
+[ext_resource type="PackedScene" uid="uid://cnhrmaid1urmm" path="res://Scenes/LocaleMenu/locale_menu.tscn" id="17_koken"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g4v7s"]
 
 [node name="Main" type="PanelContainer" unique_id=201184023]
 anchors_preset = 15
@@ -68,14 +72,53 @@ tab_count = 2
 tab_0/title = "chat"
 tab_1/title = "library"
 
+[node name="LocaleNode" type="Node" parent="Body/Corpus/Header/Tabber" unique_id=927415609]
+script = ExtResource("6_2ok46")
+translations = Dictionary[StringName, String]({
+&"tab_0/title": "TAB_CHAT",
+&"tab_1/title": "TAB_LIBRARY"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
 [node name="VSeparator" type="VSeparator" parent="Body/Corpus/Header" unique_id=1447746975]
 layout_mode = 2
 
 [node name="DSVE_Button" type="Button" parent="Body/Corpus/Header" unique_id=1672549758]
 layout_mode = 2
 text = "dsve"
-script = ExtResource("2_vk4q2")
-message = Array[int]([-53, -38])
+
+[node name="LocaleNode" type="Node" parent="Body/Corpus/Header/DSVE_Button" unique_id=273337952]
+script = ExtResource("6_2ok46")
+translations = Dictionary[StringName, String]({
+&"text": "BUTTON_DSVE"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="LanguageButton" type="PanelContainer" parent="Body/Corpus/Header" unique_id=1136216525]
+layout_mode = 2
+size_flags_horizontal = 10
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxEmpty_g4v7s")
+
+[node name="MarginContainer" type="MarginContainer" parent="Body/Corpus/Header/LanguageButton" unique_id=1889300634]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="TextureRect" type="TextureRect" parent="Body/Corpus/Header/LanguageButton/MarginContainer" unique_id=285607661]
+texture_filter = 2
+propagate_maximum_size = true
+layout_mode = 2
+texture = ExtResource("7_2ok46")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="LocaleButton" type="Button" parent="Body/Corpus/Header/LanguageButton" unique_id=1935810922]
+texture_filter = 2
+layout_mode = 2
+mouse_filter = 1
 
 [node name="TabContainer" type="Container" parent="Body/Corpus" unique_id=1155907715]
 layout_mode = 2
@@ -113,6 +156,15 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
+[node name="LocaleNode" type="Node" parent="Body/Sidebar/SidebarTabber" unique_id=1503982285]
+script = ExtResource("6_2ok46")
+translations = Dictionary[StringName, String]({
+&"tab_0/title": "TAB_DICT",
+&"tab_1/title": "TAB_USERS",
+&"tab_2/title": "TAB_SETTINGS"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
 [node name="HSeparator" type="HSeparator" parent="Body/Sidebar" unique_id=1590731449]
 layout_mode = 2
 
@@ -124,8 +176,13 @@ size_flags_horizontal = 8
 layout_mode = 2
 text = "callsign"
 horizontal_alignment = 1
-script = ExtResource("2_vk4q2")
-message = Array[int]([-128, -42])
+
+[node name="LocaleNode" type="Node" parent="Body/Sidebar/CallsignContainer/CallsignLabel" unique_id=521216219]
+script = ExtResource("6_2ok46")
+translations = Dictionary[StringName, String]({
+&"text": "CALLSIGN"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="CallsignEdit" parent="Body/Sidebar/CallsignContainer" unique_id=965442127 instance=ExtResource("11_4a3kt")]
 layout_mode = 2
@@ -140,11 +197,16 @@ script = ExtResource("12_ifk88")
 [node name="DictEditWindow" parent="DictEditPrison" unique_id=1113766720 instance=ExtResource("13_8sujb")]
 layout_mode = 2
 
+[node name="LocaleMenu" parent="." unique_id=1619317538 instance=ExtResource("17_koken")]
+visible = false
+layout_mode = 2
+
 [connection signal="timeout" from="TimeoutTime" to="." method="_on_timeout_time_timeout"]
 [connection signal="timeout" from="ReconnectTime" to="." method="_on_reconnect_time_timeout"]
 [connection signal="mouse_entered" from="Body/Corpus" to="Body/Corpus" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Body/Corpus" to="Body/Corpus" method="_on_mouse_exited"]
 [connection signal="tab_changed" from="Body/Corpus/Header/Tabber" to="Body/Corpus" method="_on_tabber_tab_changed"]
 [connection signal="pressed" from="Body/Corpus/Header/DSVE_Button" to="." method="_on_dsve_button_pressed"]
+[connection signal="pressed" from="Body/Corpus/Header/LanguageButton/LocaleButton" to="." method="_on_locale_button_pressed"]
 [connection signal="callsign_submitted" from="Body/Sidebar/CallsignContainer/CallsignEdit" to="." method="_on_callsign_edit_callsign_submitted"]
 [connection signal="visibility_changed" from="DictEditPrison/DictEditWindow" to="DictEditPrison" method="_on_dict_edit_window_visibility_changed"]

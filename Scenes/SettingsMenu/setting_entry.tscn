@@ -18,18 +18,10 @@ size_flags_horizontal = 3
 text = "bool [setting]"
 autowrap_mode = 2
 
-[node name="BoolOption" type="HBoxContainer" parent="." unique_id=161004079]
-layout_mode = 2
-
-[node name="Equals" type="Label" parent="BoolOption" unique_id=1098791462]
-layout_mode = 2
-size_flags_horizontal = 8
-text = "is"
-
-[node name="BoolButton" parent="BoolOption" unique_id=1728394877 instance=ExtResource("2_48t1y")]
+[node name="BoolButton" parent="." unique_id=1728394877 instance=ExtResource("2_48t1y")]
 layout_mode = 2
 
 [node name="HSeparator" type="HSeparator" parent="." unique_id=264909740]
 layout_mode = 2
 
-[connection signal="toggled" from="BoolOption/BoolButton" to="." method="_on_bool_button_toggled"]
+[connection signal="toggled" from="BoolButton" to="." method="_on_bool_button_toggled"]

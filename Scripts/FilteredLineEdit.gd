@@ -5,14 +5,6 @@ class_name FilteredLineEdit
 @export var allow_list: bool = false
 @export var replace_list: Dictionary = {" ": "_"}
 @export var capitalize: bool = true
-@export var placeholder: Array[int]
-
-func _ready():
-	Main.instance.reload_dict.connect(refresh)
-	refresh()
-
-func refresh():
-	placeholder_text = DictionaryHandler.signals_to_words(placeholder)
 
 func _filter_paste() -> void:
 	var new_text: String = text

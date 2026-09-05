@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c8ye8ghrhpfng" path="res://Scenes/OnlineUsersTab/callsign_entry.gd" id="1_urwyp"]
 [ext_resource type="PackedScene" uid="uid://dc1vhk1wyejon" path="res://Scenes/Common/identicon.tscn" id="2_jurdb"]
-[ext_resource type="Script" uid="uid://dqce42c573ptg" path="res://Scripts/SimpleTranslatable.gd" id="3_urwyp"]
+[ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="3_urwyp"]
 
 [node name="CallsignEntry" type="VBoxContainer" unique_id=1464278328]
 anchors_preset = 15
@@ -36,9 +36,13 @@ size_flags_horizontal = 3
 text = "Bobert"
 alignment = 2
 max_length = 16
+
+[node name="LocaleNode" type="Node" parent="HBoxContainer/Nickname" unique_id=1452558720]
 script = ExtResource("3_urwyp")
-message = Array[int]([-111])
-property_name = &"placeholder_text"
+translations = Dictionary[StringName, String]({
+&"placeholder_text": "USERS_UNNICKED"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="HSeparator" type="HSeparator" parent="." unique_id=625636416]
 layout_mode = 2

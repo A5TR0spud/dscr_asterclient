@@ -60,7 +60,6 @@ func override_transmission_label(text: String):
 
 func refresh():
 	timeago_node.text = get_timeago_string()
-	transmission_node.set("popup/item_0/text", DictionaryHandler.get_or_default_signal_name(-40))
 	transmission_node.text = str(trans % 512).pad_zeros(3)
 
 func set_message_text(new_text: String):
