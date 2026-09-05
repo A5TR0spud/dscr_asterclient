@@ -8,7 +8,6 @@ func _ready() -> void:
 @onready var do_bbcode: SettingEntry = $ScrollContainer/MarginContainer/Options/DoBBCode
 @onready var truncate: SpinBox = $ScrollContainer/MarginContainer/Options/TruncHbox/TruncationSpinner
 @onready var font_size: SpinBox = $ScrollContainer/MarginContainer/Options/FontHbox/FontSpinner
-@onready var address_edit: LineEdit = $ScrollContainer/MarginContainer/Options/Address/AdressEdit
 @onready var color_edit: SpinBox = $ScrollContainer/MarginContainer/Options/ThemeColor/ColorPicker
 @onready var color_sample: ColorRect = $ScrollContainer/MarginContainer/Options/ColorRect
 @onready var sound_slider: HScrollBar = $ScrollContainer/MarginContainer/Options/GlobalVolume/VolumeSlider
@@ -91,15 +90,6 @@ func _on_truncation_spinner_value_changed(value):
 func _on_font_spinner_value_changed(value):
 	SettingsHandler.font_size = value
 	save(true, true)
-
-func _try_address():
-	Main.reconnect_or_change_url(address_edit.text)
-
-func _on_adress_edit_text_submitted(_new_text):
-	_try_address()
-
-func _on_address_connect_pressed():
-	_try_address()
 
 func _sample_color(val: int = -1):
 	if val < 0 or val > 64:

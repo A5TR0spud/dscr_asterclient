@@ -134,6 +134,7 @@ metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="Delete" parent="Body/Editor/Buttons" unique_id=1499947826 instance=ExtResource("5_mpoun")]
 layout_mode = 2
+confirm_text = "DELETE_CONFIRM_TRX"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Body" unique_id=1708179464]
 layout_mode = 2

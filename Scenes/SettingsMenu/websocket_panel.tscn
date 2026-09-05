@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://emlk4t1nxdyo"]
+
+[ext_resource type="Script" uid="uid://ctoooylmva4sy" path="res://Scenes/SettingsMenu/websocket_panel.gd" id="1_4ymsq"]
+[ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="1_8mnwb"]
+
+[node name="WSSPanel" type="FoldableContainer" unique_id=1243890935]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+title = "websockets"
+script = ExtResource("1_4ymsq")
+
+[node name="LocaleNode" type="Node" parent="." unique_id=737026107]
+script = ExtResource("1_8mnwb")
+translations = Dictionary[StringName, String]({
+&"title": "WSS_HEADER"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1419115681]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer" unique_id=1736125114]
+custom_minimum_size = Vector2(0, 250)
+custom_maximum_size = Vector2(-1, 256)
+propagate_maximum_size = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/scrollbar_h_separation = 4
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer" unique_id=2137388999]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AddWSS" type="Button" parent="VBoxContainer" unique_id=864125239]
+layout_mode = 2
+size_flags_vertical = 8
+text = "add"
+
+[node name="LocaleNode" type="Node" parent="VBoxContainer/AddWSS" unique_id=2005701106]
+script = ExtResource("1_8mnwb")
+translations = Dictionary[StringName, String]({
+&"text": "WSS_ADD"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[connection signal="pressed" from="VBoxContainer/AddWSS" to="." method="_on_add_wss_pressed"]

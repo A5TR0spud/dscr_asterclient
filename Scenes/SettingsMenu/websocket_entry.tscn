@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://dxpkkxynfohl7"]
+
+[ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="1_dsy7v"]
+[ext_resource type="PackedScene" uid="uid://2emnji0ns3x2" path="res://Scenes/Common/confirmation_button.tscn" id="1_fkew7"]
+[ext_resource type="Script" uid="uid://c3qmqbpvgdp8f" path="res://Scenes/SettingsMenu/websocket_entry.gd" id="1_uvn6s"]
+
+[node name="WebsocketEntry" type="VBoxContainer" unique_id=1674375786]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uvn6s")
+
+[node name="LineEdit" type="LineEdit" parent="." unique_id=364122011]
+layout_mode = 2
+placeholder_text = "wss://dscr-relay.dixonary.co.uk"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=407696619]
+layout_mode = 2
+
+[node name="ConnectButton" type="Button" parent="HBoxContainer" unique_id=1495342065]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "connect"
+
+[node name="LocaleNode" type="Node" parent="HBoxContainer/ConnectButton" unique_id=151749341]
+script = ExtResource("1_dsy7v")
+translations = Dictionary[StringName, String]({
+&"text": "WSS_CONNECT"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="ConfirmationButton" parent="HBoxContainer" unique_id=1499947826 instance=ExtResource("1_fkew7")]
+layout_mode = 2
+normal_text = "DELETE_ASK_SHORT"
+
+[node name="HSeparator" type="HSeparator" parent="." unique_id=570079708]
+layout_mode = 2
+
+[connection signal="focus_exited" from="LineEdit" to="." method="_on_line_edit_focus_exited"]
+[connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="HBoxContainer/ConnectButton" to="." method="_on_connect_button_pressed"]
+[connection signal="confirmed" from="HBoxContainer/ConfirmationButton" to="." method="_on_confirmation_button_confirmed"]

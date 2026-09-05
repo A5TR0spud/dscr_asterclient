@@ -164,6 +164,7 @@ static func new_log(state: State, args: Array = []) -> void:
 			new_message.translation_key = "SYSTEM_DISCONNECTED"
 		State.WILL_AUTO_RECONNECT_SOON:
 			new_message.translation_key = "SYSTEM_WILL_RECONNECT"
+			new_message.arguments = [int(args[0])]
 		State.UNKNOWN_WORD:
 			# UNKNOWN SIGNAL IS [ %s, %s, %s, etc ]
 			var inner: String = ""

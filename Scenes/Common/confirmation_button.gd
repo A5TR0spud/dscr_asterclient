@@ -14,6 +14,7 @@ var confirm: bool = false
 
 func _ready():
 	Main.instance.reload_dict.connect(set_confirm_state)
+	Main.instance.localization_reload.connect(set_confirm_state)
 	set_confirm_state()
 
 func set_confirm_state(confirmation = null) -> void:

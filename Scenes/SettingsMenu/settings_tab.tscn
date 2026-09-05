@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bx77kcm12yq8h" path="res://Scenes/SettingsMenu/settings_tab.gd" id="1_0yg8b"]
 [ext_resource type="PackedScene" uid="uid://dnd1u3xl3gie1" path="res://Scenes/SettingsMenu/setting_entry.tscn" id="3_0yg8b"]
 [ext_resource type="AudioStream" uid="uid://q27rk7sfk50e" path="res://Assets/Sounds/dial.ogg" id="3_nlym6"]
+[ext_resource type="PackedScene" uid="uid://emlk4t1nxdyo" path="res://Scenes/SettingsMenu/websocket_panel.tscn" id="4_gal0n"]
 [ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="5_gal0n"]
 
 [node name="SettingsTab" type="VBoxContainer" unique_id=1649791393]
@@ -65,23 +66,8 @@ metadata/_custom_type_script = "uid://7gga31jeosxl"
 [node name="HSeparator8" type="HSeparator" parent="ScrollContainer/MarginContainer/Options" unique_id=1000904488]
 layout_mode = 2
 
-[node name="Address" type="VBoxContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=1602527487]
+[node name="WSSPanel" parent="ScrollContainer/MarginContainer/Options" unique_id=1243890935 instance=ExtResource("4_gal0n")]
 layout_mode = 2
-
-[node name="AdressEdit" type="LineEdit" parent="ScrollContainer/MarginContainer/Options/Address" unique_id=29234447]
-layout_mode = 2
-placeholder_text = "wss://dscr-relay.dixonary.co.uk"
-
-[node name="AddressConnect" type="Button" parent="ScrollContainer/MarginContainer/Options/Address" unique_id=1760540175]
-layout_mode = 2
-text = "connect"
-
-[node name="LocaleNode" type="Node" parent="ScrollContainer/MarginContainer/Options/Address/AddressConnect" unique_id=1233887144]
-script = ExtResource("5_gal0n")
-translations = Dictionary[StringName, String]({
-&"text": "SETTINGS_RECONNECT"
-})
-metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="HSeparator3" type="HSeparator" parent="ScrollContainer/MarginContainer/Options" unique_id=1456062547]
 layout_mode = 2
@@ -310,8 +296,6 @@ layout_mode = 2
 description = "SETTINGS_INVERT_ZOOM"
 
 [connection signal="pressed" from="ScrollContainer/MarginContainer/Options/DirectoryButton" to="." method="_on_directory_button_pressed"]
-[connection signal="text_submitted" from="ScrollContainer/MarginContainer/Options/Address/AdressEdit" to="." method="_on_adress_edit_text_submitted"]
-[connection signal="pressed" from="ScrollContainer/MarginContainer/Options/Address/AddressConnect" to="." method="_on_address_connect_pressed"]
 [connection signal="set" from="ScrollContainer/MarginContainer/Options/Formatting" to="." method="_on_formatting_set"]
 [connection signal="set" from="ScrollContainer/MarginContainer/Options/ImageVis" to="." method="_on_image_vis_set"]
 [connection signal="set" from="ScrollContainer/MarginContainer/Options/DoBBCode" to="." method="_on_signal_color_set"]

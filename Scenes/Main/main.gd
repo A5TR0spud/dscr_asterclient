@@ -50,6 +50,7 @@ static func on_library_reload() -> void:
 signal localization_reload
 static func on_localization_reload() -> void:
 	instance.localization_reload.emit()
+signal post_load
 
 signal connected_user_change
 
@@ -90,6 +91,7 @@ func _ready():
 	boot_sound.play()
 	boot_sound.finished.connect(boot_sound.queue_free)
 	get_window().files_dropped.connect(_on_files_dropped)
+	post_load.emit()
 
 static func get_callsign_color(value: int) -> Color:
 	var hue: float = fmod(137.5 * value, 360) / 360.0;

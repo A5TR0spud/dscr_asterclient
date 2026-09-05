@@ -10,6 +10,7 @@
 * Dictionary files can be loaded by dragging them onto the client. (Eearslya)
 * Added localization. On opening for the first time, a prompt will block spoilers and ask for desired language.
   * This can be changed at any time by the button near the top right
+* Websockets can now be saved and loaded from a list
 
 ### Changes
 

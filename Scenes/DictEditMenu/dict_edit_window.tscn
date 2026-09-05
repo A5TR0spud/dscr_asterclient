@@ -371,6 +371,7 @@ metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="DeleteButton" parent="DictEditMainframe/SubmitElseCancel" unique_id=1499947826 instance=ExtResource("5_2h3m4")]
 layout_mode = 2
+confirm_text = "DELETE_CONFIRM_SIG"
 
 [node name="CloseButton" type="Button" parent="DictEditMainframe/SubmitElseCancel" unique_id=1956457673]
 layout_mode = 2
