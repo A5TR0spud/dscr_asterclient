@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cb8hjgvp01r33" path="res://Assets/ImageGrid.png" id="1_42cc5"]
 [ext_resource type="Script" uid="uid://clw6gb5wupvng" path="res://Scenes/Images/visualizer_node.gd" id="1_psu8h"]
-[ext_resource type="Script" uid="uid://dqce42c573ptg" path="res://Scripts/SimpleTranslatable.gd" id="3_o36ya"]
+[ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="2_psu8h"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_kq2tu"]
 viewport_path = NodePath("Intermediate/RenderAndYaw/VisualizerRect/SubViewport")
@@ -37,9 +37,13 @@ layout_mode = 2
 layout_mode = 2
 min_value = -60.0
 page = 40.0
-script = ExtResource("3_o36ya")
-message = Array[int]([-50, -39])
-property_name = &"tooltip_text"
+
+[node name="LocaleNode" type="Node" parent="Intermediate/ZoomSlider" unique_id=196089722]
+script = ExtResource("2_psu8h")
+translations = Dictionary[StringName, String]({
+&"tooltip_text": "IMAGE_ZOOM"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="RenderAndYaw" type="VBoxContainer" parent="Intermediate" unique_id=2113766076]
 layout_mode = 2
@@ -86,17 +90,25 @@ mesh = SubResource("QuadMesh_g4v7s")
 layout_mode = 2
 min_value = -60.0
 page = 40.0
-script = ExtResource("3_o36ya")
-message = Array[int]([-51, -92])
-property_name = &"tooltip_text"
+
+[node name="LocaleNode" type="Node" parent="Intermediate/RenderAndYaw/YawSlider" unique_id=947944797]
+script = ExtResource("2_psu8h")
+translations = Dictionary[StringName, String]({
+&"tooltip_text": "IMAGE_YAW"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="PitchSlider" type="VScrollBar" parent="Intermediate" unique_id=2089934509]
 layout_mode = 2
 min_value = -60.0
 page = 40.0
-script = ExtResource("3_o36ya")
-message = Array[int]([-49, -92])
-property_name = &"tooltip_text"
+
+[node name="LocaleNode" type="Node" parent="Intermediate/PitchSlider" unique_id=14300425]
+script = ExtResource("2_psu8h")
+translations = Dictionary[StringName, String]({
+&"tooltip_text": "IMAGE_PITCH"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [connection signal="value_changed" from="Intermediate/ZoomSlider" to="." method="_on_zoom_slider_value_changed"]
 [connection signal="gui_input" from="Intermediate/RenderAndYaw/VisualizerRect" to="." method="_on_visualizer_rect_gui_input"]

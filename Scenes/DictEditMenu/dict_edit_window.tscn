@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://crn4b5wrwilbc"]
 
 [ext_resource type="Script" uid="uid://ciogfbq06qv56" path="res://Scenes/DictEditMenu/dict_edit_menu.gd" id="1_wmq72"]
-[ext_resource type="Script" uid="uid://dqce42c573ptg" path="res://Scripts/SimpleTranslatable.gd" id="2_icn0b"]
 [ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="2_ql6ly"]
 [ext_resource type="Script" uid="uid://gtpqlwktlalr" path="res://Scripts/FilteredLineEdit.gd" id="3_f8ufa"]
 [ext_resource type="PackedScene" uid="uid://bw4nasduhbqkb" path="res://Scenes/Common/bool_toggle_button.tscn" id="3_si2t6"]
@@ -52,6 +51,13 @@ emoji_menu_enabled = false
 caret_blink = true
 script = ExtResource("3_f8ufa")
 
+[node name="LocaleNode" type="Node" parent="DictEditMainframe/SignalNameEdit/NameLineEdit" unique_id=955907769]
+script = ExtResource("2_ql6ly")
+translations = Dictionary[StringName, String]({
+&"placeholder_text": "DICT_EDIT_NAME_PLACEHOLDER"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
 [node name="NotesEdit" type="TextEdit" parent="DictEditMainframe" unique_id=1225501255]
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
@@ -64,10 +70,13 @@ tab_input_mode = false
 scroll_fit_content_height = true
 caret_blink = true
 caret_multiple = false
-script = ExtResource("2_icn0b")
-message = Array[int]([-119, -130, -86, -108, -237, -38, -85])
-format = true
-property_name = &"placeholder_text"
+
+[node name="LocaleNode" type="Node" parent="DictEditMainframe/NotesEdit" unique_id=995775087]
+script = ExtResource("2_ql6ly")
+translations = Dictionary[StringName, String]({
+&"placeholder_text": "DICT_EDIT_DESC_PLACEHOLDER"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="BeforeAndAfterFormat" type="HBoxContainer" parent="DictEditMainframe" unique_id=96548629]
 layout_mode = 2
