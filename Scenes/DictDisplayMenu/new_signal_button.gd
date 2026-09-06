@@ -1,4 +1,4 @@
-extends TranslatableSimple
+extends Button
 
 @onready var num_chooser: LineEdit = $"../NewSignalDesig/NumEdit"
 @onready var name_chooser: LineEdit = $"../NewSignalDesig/SigEdit"

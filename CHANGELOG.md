@@ -1,5 +1,11 @@
 # Versions
 
+## 0.7.1: Oh crap, that's like, the most important feature
+
+### Fixes
+
+* Button to create new signals works again
+
 ## 0.7.0: QoL Ad Infinitum
 
 ### Additions
@@ -15,7 +21,7 @@
   * Saving/loading/editing a list of websockets and connecting to one
   * Saving/loading/duplicating/editing dictionary files and setting one as active
   * Replaced "open directory button" in Settings with "change directory button" in Sources that should handle nigh everything on its own
-    * Valid files that already exist at the new location will not be overwritten
+	* Valid files that already exist at the new location will not be overwritten
 
 ### Changes
 
