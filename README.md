@@ -34,6 +34,8 @@ The dictionary must be named "DICTIONARY-1.save", it will not recognize the file
 
 #### Changing Save Directory
 
+##### Pre 0.7.0
+
 In settings (|-241, top right), at the top of the list, press the (|-40) button.
 This will open the "base" save directory.
 There should be a file called "directory.txt";
@@ -42,6 +44,10 @@ Select the DICTIONARY-1.save file as well as all .json files (nicknames.json, li
 Do NOT select "directory.txt".
 Move the selected files into the directory specified in "directory.txt".
 Close the program and re-open it.
+
+##### 0.7.0 And Later
+
+In the Sources tab (third tab), at the bottom of its panel is a button to change save directory. It should almost completely handle moving all files from the old save directory to the new one. It will not overwrite files it finds in the new location and may not always delete files from the old location properly.
 
 #### Channels
 
