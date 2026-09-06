@@ -1,18 +1,21 @@
 # Versions
 
-## --WIP--
+## 0.7.0: QoL Ad Infinitum
 
 ### Additions
 
 * Added formatting option to remove spaces (Eearslya)
-* Signals now color in the transmission editor(s). Unknown signals are red. (Eearslya)
+* Signals now color in the transmission editor(s). Undefined signals are red. (Eearslya)
 * Callsigns tab now has a section at the bottom for named users even if they're offline
 * Dictionary files can be loaded by dragging them onto the client. (Eearslya)
 * Added localization. On opening for the first time, a prompt will block spoilers and ask for desired language.
   * This can be changed at any time by the button near the top right
+  * Currently, the [localization spreadsheet](/Localization/translation%20spreadsheet.ods) only has Mete0rese and English translations
 * New sources tab allows:
-  * Saving/loading/editing a list of websockets
-  * Saving/loading/duplicating/editing dictionary files
+  * Saving/loading/editing a list of websockets and connecting to one
+  * Saving/loading/duplicating/editing dictionary files and setting one as active
+  * Replaced "open directory button" in Settings with "change directory button" in Sources that should handle nigh everything on its own
+    * Valid files that already exist at the new location will not be overwritten
 
 ### Changes
 
@@ -23,8 +26,6 @@
 * If someone leaves while you are editing their nickname, it will now wait before disappearing
 * Moved todo out of in-program
 * Callsign tab entries are more compact
-* Replaced "open directory button" in settings with "change directory button" that should handle nigh everything on its own
-  * Valid files that already exist at the new location will not be overwritten
 
 ### Fixes
 
@@ -67,7 +68,7 @@
 
 * Fixed pressing CTRL deselecting received transmissions when hovering over them
 
-## 0.5.0
+## 0.5.0: QoL Again
 
 ### Additions
 
