@@ -22,14 +22,10 @@ horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 script = ExtResource("1_fsvsf")
 
-[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer" unique_id=1235315218]
+[node name="ChatDisplay" type="VBoxContainer" parent="ScrollContainer" unique_id=185948828]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_right = 15
-
-[node name="ChatDisplay" type="VBoxContainer" parent="ScrollContainer/MarginContainer" unique_id=185948828]
-layout_mode = 2
 alignment = 2
 
 [node name="ScrollToNew" type="Button" parent="." unique_id=1306046159]
@@ -58,5 +54,5 @@ grow_vertical = 2
 mouse_filter = 1
 theme_override_styles/panel = ExtResource("3_xv58l")
 
-[connection signal="child_entered_tree" from="ScrollContainer/MarginContainer/ChatDisplay" to="." method="_on_chat_display_child_entered_tree"]
+[connection signal="child_entered_tree" from="ScrollContainer/ChatDisplay" to="." method="_on_chat_display_child_entered_tree"]
 [connection signal="pressed" from="ScrollToNew" to="." method="_on_scroll_to_new_pressed"]

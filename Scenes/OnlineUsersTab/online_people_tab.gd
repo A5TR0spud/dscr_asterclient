@@ -8,10 +8,10 @@ func _ready():
 
 var entry = preload("res://Scenes/OnlineUsersTab/callsign_entry.tscn")
 
-@onready var online_list: VBoxContainer = $ScrollContainer/Margins/List/OnlineLabel/Online
-@onready var known_list: VBoxContainer = $ScrollContainer/Margins/List/KnownLabel/Known
+@onready var online_list: VBoxContainer = $ScrollContainer/List/OnlineLabel/Online
+@onready var known_list: VBoxContainer = $ScrollContainer/List/KnownLabel/Known
 @onready var header_node: Label = $Label
-@onready var known_label: Control = $ScrollContainer/Margins/List/KnownLabel
+@onready var known_label: Control = $ScrollContainer/List/KnownLabel
 
 func _reload_helper(container: VBoxContainer, new_list: Array[int]):
 	var already_present: Array[int] = []

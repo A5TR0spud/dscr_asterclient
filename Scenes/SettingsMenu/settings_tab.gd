@@ -3,19 +3,19 @@ extends VBoxContainer
 func _ready() -> void:
 	Main.instance.reload_settings.connect(refresh)
 
-@onready var formatting: SettingEntry = $ScrollContainer/MarginContainer/Options/Formatting
-@onready var image_visibility: SettingEntry = $ScrollContainer/MarginContainer/Options/ImageVis
-@onready var do_bbcode: SettingEntry = $ScrollContainer/MarginContainer/Options/DoBBCode
-@onready var truncate: SpinBox = $ScrollContainer/MarginContainer/Options/TruncHbox/TruncationSpinner
-@onready var font_size: SpinBox = $ScrollContainer/MarginContainer/Options/FontHbox/FontSpinner
-@onready var color_edit: SpinBox = $ScrollContainer/MarginContainer/Options/ThemeColor/ColorPicker
-@onready var color_sample: ColorRect = $ScrollContainer/MarginContainer/Options/ColorRect
-@onready var sound_slider: HScrollBar = $ScrollContainer/MarginContainer/Options/GlobalVolume/VolumeSlider
+@onready var formatting: SettingEntry = $ScrollContainer/Options/Formatting
+@onready var image_visibility: SettingEntry = $ScrollContainer/Options/ImageVis
+@onready var do_bbcode: SettingEntry = $ScrollContainer/Options/DoBBCode
+@onready var truncate: SpinBox = $ScrollContainer/Options/TruncHbox/TruncationSpinner
+@onready var font_size: SpinBox = $ScrollContainer/Options/FontHbox/FontSpinner
+@onready var color_edit: SpinBox = $ScrollContainer/Options/ThemeColor/ColorPicker
+@onready var color_sample: ColorRect = $ScrollContainer/Options/ColorRect
+@onready var sound_slider: HScrollBar = $ScrollContainer/Options/GlobalVolume/VolumeSlider
 @onready var sound_sample: AudioStreamPlayer = $AudioPreview
-@onready var invert_pitch: SettingEntry = $ScrollContainer/MarginContainer/Options/ImageMovement/VBoxContainer/InvertPitch
-@onready var invert_yaw: SettingEntry = $ScrollContainer/MarginContainer/Options/ImageMovement/VBoxContainer/InvertYaw
-@onready var invert_zoom: SettingEntry = $ScrollContainer/MarginContainer/Options/ImageMovement/VBoxContainer/InvertZoom
-@onready var undef_setting: SettingEntry = $ScrollContainer/MarginContainer/Options/UndefSetting
+@onready var invert_pitch: SettingEntry = $ScrollContainer/Options/ImageMovement/VBoxContainer/InvertPitch
+@onready var invert_yaw: SettingEntry = $ScrollContainer/Options/ImageMovement/VBoxContainer/InvertYaw
+@onready var invert_zoom: SettingEntry = $ScrollContainer/Options/ImageMovement/VBoxContainer/InvertZoom
+@onready var undef_setting: SettingEntry = $ScrollContainer/Options/UndefSetting
 
 func refresh() -> void:
 	formatting.set_state_no_signal(SettingsHandler.do_formatting)

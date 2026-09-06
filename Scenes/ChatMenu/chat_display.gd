@@ -1,6 +1,6 @@
 extends MarginContainer
 class_name ChatChannel
-@onready var chat_display = $ScrollContainer/MarginContainer/ChatDisplay
+@onready var chat_display = $ScrollContainer/ChatDisplay
 @onready var scroll_container: AutoScrollContainer = $ScrollContainer
 @onready var scroll_bar: VScrollBar = $ScrollContainer.get_v_scroll_bar()
 @onready var scroll_down_button: Button = $ScrollToNew

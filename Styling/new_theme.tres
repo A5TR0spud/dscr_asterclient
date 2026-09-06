@@ -132,6 +132,7 @@ RichTextLabel/fonts/bold_font = ExtResource("12_d5xg6")
 RichTextLabel/fonts/bold_italics_font = ExtResource("13_00ekq")
 RichTextLabel/fonts/italics_font = ExtResource("14_3a2p8")
 RichTextLabel/styles/focus = SubResource("StyleBoxFlat_nkfox")
+ScrollContainer/constants/scrollbar_h_separation = 8
 SpinBox/icons/down = SubResource("GradientTexture1D_ttirq")
 SpinBox/icons/down_disabled = SubResource("GradientTexture1D_ttirq")
 SpinBox/icons/down_hover = SubResource("GradientTexture1D_ttirq")

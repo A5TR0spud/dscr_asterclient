@@ -141,13 +141,7 @@ layout_mode = 2
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Body/ScrollContainer" unique_id=2023256750]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_right = 10
-
-[node name="Catalogue" type="HFlowContainer" parent="Body/ScrollContainer/MarginContainer" unique_id=1869558709]
+[node name="Catalogue" type="HFlowContainer" parent="Body/ScrollContainer" unique_id=1869558709]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3

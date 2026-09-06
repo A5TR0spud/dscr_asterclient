@@ -7,7 +7,7 @@ class_name Library
 @onready var t_preview: TransEntry = $Body/Editor/GridContainer/TransHolder/TransmissionEntry
 @onready var debounce: Timer = $RefreshDebounce
 
-@onready var catalog: Control = $Body/ScrollContainer/MarginContainer/Catalogue
+@onready var catalog: Control = $Body/ScrollContainer/Catalogue
 
 var lib_entry = preload("res://Scenes/LibraryMenu/library_entry.tscn")
 

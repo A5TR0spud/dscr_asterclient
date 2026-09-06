@@ -40,34 +40,28 @@ size_flags_vertical = 3
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer" unique_id=1280514268]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_right = 10
-
-[node name="Options" type="VBoxContainer" parent="ScrollContainer/MarginContainer" unique_id=1647770350]
+[node name="Options" type="VBoxContainer" parent="ScrollContainer" unique_id=1647770350]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Formatting" parent="ScrollContainer/MarginContainer/Options" unique_id=1141489488 instance=ExtResource("3_0yg8b")]
+[node name="Formatting" parent="ScrollContainer/Options" unique_id=1141489488 instance=ExtResource("3_0yg8b")]
 layout_mode = 2
 description = "SETTINGS_DO_WHITESPACE"
 
-[node name="ImageVis" parent="ScrollContainer/MarginContainer/Options" unique_id=1916992470 instance=ExtResource("3_0yg8b")]
+[node name="ImageVis" parent="ScrollContainer/Options" unique_id=1916992470 instance=ExtResource("3_0yg8b")]
 layout_mode = 2
 description = "SETTINGS_DEFAULT_IMAGE"
 
-[node name="DoBBCode" parent="ScrollContainer/MarginContainer/Options" unique_id=1844422194 instance=ExtResource("3_0yg8b")]
+[node name="DoBBCode" parent="ScrollContainer/Options" unique_id=1844422194 instance=ExtResource("3_0yg8b")]
 layout_mode = 2
 description = "SETTINGS_DO_BBCODE"
 
-[node name="TruncHbox" type="HBoxContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=720322280]
+[node name="TruncHbox" type="HBoxContainer" parent="ScrollContainer/Options" unique_id=720322280]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="TruncationSpinner" type="SpinBox" parent="ScrollContainer/MarginContainer/Options/TruncHbox" unique_id=1798054392]
+[node name="TruncationSpinner" type="SpinBox" parent="ScrollContainer/Options/TruncHbox" unique_id=1798054392]
 layout_mode = 2
 size_flags_horizontal = 0
 min_value = 31.0
@@ -75,38 +69,38 @@ max_value = 511.0
 value = 63.0
 rounded = true
 
-[node name="TruncLabel" type="Label" parent="ScrollContainer/MarginContainer/Options/TruncHbox" unique_id=1597931858]
+[node name="TruncLabel" type="Label" parent="ScrollContainer/Options/TruncHbox" unique_id=1597931858]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "transmission truncation setting"
 autowrap_mode = 3
 
-[node name="LocaleNode" type="Node" parent="ScrollContainer/MarginContainer/Options/TruncHbox/TruncLabel" unique_id=1318862708]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/Options/TruncHbox/TruncLabel" unique_id=1318862708]
 script = ExtResource("5_gal0n")
 translations = Dictionary[StringName, String]({
 &"text": "SETTINGS_TRUNCATE"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="HSeparator2" type="HSeparator" parent="ScrollContainer/MarginContainer/Options" unique_id=2092124219]
+[node name="HSeparator2" type="HSeparator" parent="ScrollContainer/Options" unique_id=2092124219]
 layout_mode = 2
 
-[node name="FontHbox" type="HBoxContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=90540622]
+[node name="FontHbox" type="HBoxContainer" parent="ScrollContainer/Options" unique_id=90540622]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="FontSizeLabel" type="Label" parent="ScrollContainer/MarginContainer/Options/FontHbox" unique_id=110664921]
+[node name="FontSizeLabel" type="Label" parent="ScrollContainer/Options/FontHbox" unique_id=110664921]
 layout_mode = 2
 text = "font size setting"
 
-[node name="LocaleNode" type="Node" parent="ScrollContainer/MarginContainer/Options/FontHbox/FontSizeLabel" unique_id=651643112]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/Options/FontHbox/FontSizeLabel" unique_id=651643112]
 script = ExtResource("5_gal0n")
 translations = Dictionary[StringName, String]({
 &"text": "SETTINGS_FONT_SIZE"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="FontSpinner" type="SpinBox" parent="ScrollContainer/MarginContainer/Options/FontHbox" unique_id=897245892]
+[node name="FontSpinner" type="SpinBox" parent="ScrollContainer/Options/FontHbox" unique_id=897245892]
 layout_mode = 2
 size_flags_horizontal = 0
 min_value = 15.0
@@ -114,88 +108,88 @@ max_value = 24.0
 value = 18.0
 rounded = true
 
-[node name="HSeparator" type="HSeparator" parent="ScrollContainer/MarginContainer/Options" unique_id=1571308958]
+[node name="HSeparator" type="HSeparator" parent="ScrollContainer/Options" unique_id=1571308958]
 layout_mode = 2
 
-[node name="UndefSetting" parent="ScrollContainer/MarginContainer/Options" unique_id=1683413919 instance=ExtResource("3_0yg8b")]
+[node name="UndefSetting" parent="ScrollContainer/Options" unique_id=1683413919 instance=ExtResource("3_0yg8b")]
 layout_mode = 2
 description = "SETTINGS_USE_AT_UNDEF"
 state = true
 
-[node name="HSeparator7" type="HSeparator" parent="ScrollContainer/MarginContainer/Options" unique_id=1499822315]
+[node name="HSeparator7" type="HSeparator" parent="ScrollContainer/Options" unique_id=1499822315]
 layout_mode = 2
 
-[node name="ThemeColor" type="HBoxContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=243570277]
+[node name="ThemeColor" type="HBoxContainer" parent="ScrollContainer/Options" unique_id=243570277]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="ColorLabel" type="Label" parent="ScrollContainer/MarginContainer/Options/ThemeColor" unique_id=1858344240]
+[node name="ColorLabel" type="Label" parent="ScrollContainer/Options/ThemeColor" unique_id=1858344240]
 layout_mode = 2
 text = "color theme setting"
 
-[node name="LocaleNode" type="Node" parent="ScrollContainer/MarginContainer/Options/ThemeColor/ColorLabel" unique_id=1304098920]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/Options/ThemeColor/ColorLabel" unique_id=1304098920]
 script = ExtResource("5_gal0n")
 translations = Dictionary[StringName, String]({
 &"text": "SETTINGS_THEME_COLOR"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="ColorPicker" type="SpinBox" parent="ScrollContainer/MarginContainer/Options/ThemeColor" unique_id=423506351]
+[node name="ColorPicker" type="SpinBox" parent="ScrollContainer/Options/ThemeColor" unique_id=423506351]
 layout_mode = 2
 size_flags_horizontal = 0
 max_value = 64.0
 value = 50.0
 
-[node name="ColorRect" type="ColorRect" parent="ScrollContainer/MarginContainer/Options" unique_id=376741741]
+[node name="ColorRect" type="ColorRect" parent="ScrollContainer/Options" unique_id=376741741]
 custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 
-[node name="ThemeColorSubmitElse" type="HBoxContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=1782643435]
+[node name="ThemeColorSubmitElse" type="HBoxContainer" parent="ScrollContainer/Options" unique_id=1782643435]
 layout_mode = 2
 
-[node name="ColorSubmitButton" type="Button" parent="ScrollContainer/MarginContainer/Options/ThemeColorSubmitElse" unique_id=1914408651]
+[node name="ColorSubmitButton" type="Button" parent="ScrollContainer/Options/ThemeColorSubmitElse" unique_id=1914408651]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "submit color"
 
-[node name="LocaleNode" type="Node" parent="ScrollContainer/MarginContainer/Options/ThemeColorSubmitElse/ColorSubmitButton" unique_id=374685336]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/Options/ThemeColorSubmitElse/ColorSubmitButton" unique_id=374685336]
 script = ExtResource("5_gal0n")
 translations = Dictionary[StringName, String]({
 &"text": "SUBMIT"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="ColorCancelButton" type="Button" parent="ScrollContainer/MarginContainer/Options/ThemeColorSubmitElse" unique_id=307673388]
+[node name="ColorCancelButton" type="Button" parent="ScrollContainer/Options/ThemeColorSubmitElse" unique_id=307673388]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "cancel"
 
-[node name="LocaleNode" type="Node" parent="ScrollContainer/MarginContainer/Options/ThemeColorSubmitElse/ColorCancelButton" unique_id=1458168255]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/Options/ThemeColorSubmitElse/ColorCancelButton" unique_id=1458168255]
 script = ExtResource("5_gal0n")
 translations = Dictionary[StringName, String]({
 &"text": "CANCEL"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="HSeparator4" type="HSeparator" parent="ScrollContainer/MarginContainer/Options" unique_id=113793633]
+[node name="HSeparator4" type="HSeparator" parent="ScrollContainer/Options" unique_id=113793633]
 layout_mode = 2
 
-[node name="GlobalVolume" type="VBoxContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=970437208]
+[node name="GlobalVolume" type="VBoxContainer" parent="ScrollContainer/Options" unique_id=970437208]
 layout_mode = 2
 
-[node name="VolumeLabel" type="Label" parent="ScrollContainer/MarginContainer/Options/GlobalVolume" unique_id=187059848]
+[node name="VolumeLabel" type="Label" parent="ScrollContainer/Options/GlobalVolume" unique_id=187059848]
 layout_mode = 2
 text = "sound volume"
 autowrap_mode = 2
 
-[node name="LocaleNode" type="Node" parent="ScrollContainer/MarginContainer/Options/GlobalVolume/VolumeLabel" unique_id=1039090998]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/Options/GlobalVolume/VolumeLabel" unique_id=1039090998]
 script = ExtResource("5_gal0n")
 translations = Dictionary[StringName, String]({
 &"text": "SETTINGS_VOLUME"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="VolumeSlider" type="HScrollBar" parent="ScrollContainer/MarginContainer/Options/GlobalVolume" unique_id=336024893]
+[node name="VolumeSlider" type="HScrollBar" parent="ScrollContainer/Options/GlobalVolume" unique_id=336024893]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 144.0
@@ -204,87 +198,87 @@ page = 16.0
 value = 64.0
 rounded = true
 
-[node name="SliderLabelGrid" type="HBoxContainer" parent="ScrollContainer/MarginContainer/Options/GlobalVolume" unique_id=1443703006]
+[node name="SliderLabelGrid" type="HBoxContainer" parent="ScrollContainer/Options/GlobalVolume" unique_id=1443703006]
 layout_mode = 2
 
-[node name="Silent" type="Label" parent="ScrollContainer/MarginContainer/Options/GlobalVolume/SliderLabelGrid" unique_id=1261588972]
+[node name="Silent" type="Label" parent="ScrollContainer/Options/GlobalVolume/SliderLabelGrid" unique_id=1261588972]
 layout_mode = 2
 size_flags_horizontal = 2
 text = "silent"
 horizontal_alignment = 3
 
-[node name="LocaleNode" type="Node" parent="ScrollContainer/MarginContainer/Options/GlobalVolume/SliderLabelGrid/Silent" unique_id=47497133]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/Options/GlobalVolume/SliderLabelGrid/Silent" unique_id=47497133]
 script = ExtResource("5_gal0n")
 translations = Dictionary[StringName, String]({
 &"text": "SETTINGS_VOLUME_ZERO"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="Normal" type="Label" parent="ScrollContainer/MarginContainer/Options/GlobalVolume/SliderLabelGrid" unique_id=1887747570]
+[node name="Normal" type="Label" parent="ScrollContainer/Options/GlobalVolume/SliderLabelGrid" unique_id=1887747570]
 layout_mode = 2
 size_flags_horizontal = 6
 text = "normal"
 horizontal_alignment = 3
 
-[node name="LocaleNode" type="Node" parent="ScrollContainer/MarginContainer/Options/GlobalVolume/SliderLabelGrid/Normal" unique_id=913745177]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/Options/GlobalVolume/SliderLabelGrid/Normal" unique_id=913745177]
 script = ExtResource("5_gal0n")
 translations = Dictionary[StringName, String]({
 &"text": "SETTINGS_VOLUME_DEFAULT"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="Deafening" type="Label" parent="ScrollContainer/MarginContainer/Options/GlobalVolume/SliderLabelGrid" unique_id=1679507505]
+[node name="Deafening" type="Label" parent="ScrollContainer/Options/GlobalVolume/SliderLabelGrid" unique_id=1679507505]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "deafening"
 horizontal_alignment = 3
 
-[node name="LocaleNode" type="Node" parent="ScrollContainer/MarginContainer/Options/GlobalVolume/SliderLabelGrid/Deafening" unique_id=1699773932]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/Options/GlobalVolume/SliderLabelGrid/Deafening" unique_id=1699773932]
 script = ExtResource("5_gal0n")
 translations = Dictionary[StringName, String]({
 &"text": "SETTINGS_VOLUME_LOUD"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="HSeparator5" type="HSeparator" parent="ScrollContainer/MarginContainer/Options" unique_id=1134833940]
+[node name="HSeparator5" type="HSeparator" parent="ScrollContainer/Options" unique_id=1134833940]
 layout_mode = 2
 
-[node name="ImageMovement" type="FoldableContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=1922610066]
+[node name="ImageMovement" type="FoldableContainer" parent="ScrollContainer/Options" unique_id=1922610066]
 layout_mode = 2
 title = "image camera inversion"
 
-[node name="LocaleNode" type="Node" parent="ScrollContainer/MarginContainer/Options/ImageMovement" unique_id=566775524]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/Options/ImageMovement" unique_id=566775524]
 script = ExtResource("5_gal0n")
 translations = Dictionary[StringName, String]({
 &"title": "SETTINGS_CAMERA_HEADER"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer/Options/ImageMovement" unique_id=93656462]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/Options/ImageMovement" unique_id=93656462]
 layout_mode = 2
 
-[node name="InvertPitch" parent="ScrollContainer/MarginContainer/Options/ImageMovement/VBoxContainer" unique_id=540540814 instance=ExtResource("3_0yg8b")]
+[node name="InvertPitch" parent="ScrollContainer/Options/ImageMovement/VBoxContainer" unique_id=540540814 instance=ExtResource("3_0yg8b")]
 layout_mode = 2
 description = "SETTINGS_INVERT_PITCH"
 
-[node name="InvertYaw" parent="ScrollContainer/MarginContainer/Options/ImageMovement/VBoxContainer" unique_id=2014048263 instance=ExtResource("3_0yg8b")]
+[node name="InvertYaw" parent="ScrollContainer/Options/ImageMovement/VBoxContainer" unique_id=2014048263 instance=ExtResource("3_0yg8b")]
 layout_mode = 2
 description = "SETTINGS_INVERT_YAW"
 
-[node name="InvertZoom" parent="ScrollContainer/MarginContainer/Options/ImageMovement/VBoxContainer" unique_id=663214121 instance=ExtResource("3_0yg8b")]
+[node name="InvertZoom" parent="ScrollContainer/Options/ImageMovement/VBoxContainer" unique_id=663214121 instance=ExtResource("3_0yg8b")]
 layout_mode = 2
 description = "SETTINGS_INVERT_ZOOM"
 
-[connection signal="set" from="ScrollContainer/MarginContainer/Options/Formatting" to="." method="_on_formatting_set"]
-[connection signal="set" from="ScrollContainer/MarginContainer/Options/ImageVis" to="." method="_on_image_vis_set"]
-[connection signal="set" from="ScrollContainer/MarginContainer/Options/DoBBCode" to="." method="_on_signal_color_set"]
-[connection signal="value_changed" from="ScrollContainer/MarginContainer/Options/TruncHbox/TruncationSpinner" to="." method="_on_truncation_spinner_value_changed"]
-[connection signal="value_changed" from="ScrollContainer/MarginContainer/Options/FontHbox/FontSpinner" to="." method="_on_font_spinner_value_changed"]
-[connection signal="set" from="ScrollContainer/MarginContainer/Options/UndefSetting" to="." method="_on_undef_setting_set"]
-[connection signal="value_changed" from="ScrollContainer/MarginContainer/Options/ThemeColor/ColorPicker" to="." method="_on_color_picker_value_changed"]
-[connection signal="pressed" from="ScrollContainer/MarginContainer/Options/ThemeColorSubmitElse/ColorSubmitButton" to="." method="_on_color_submit_button_pressed"]
-[connection signal="pressed" from="ScrollContainer/MarginContainer/Options/ThemeColorSubmitElse/ColorCancelButton" to="." method="_on_color_cancel_button_pressed"]
-[connection signal="value_changed" from="ScrollContainer/MarginContainer/Options/GlobalVolume/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
-[connection signal="set" from="ScrollContainer/MarginContainer/Options/ImageMovement/VBoxContainer/InvertPitch" to="." method="_on_invert_pitch_set"]
-[connection signal="set" from="ScrollContainer/MarginContainer/Options/ImageMovement/VBoxContainer/InvertYaw" to="." method="_on_invert_yaw_set"]
-[connection signal="set" from="ScrollContainer/MarginContainer/Options/ImageMovement/VBoxContainer/InvertZoom" to="." method="_on_invert_zoom_set"]
+[connection signal="set" from="ScrollContainer/Options/Formatting" to="." method="_on_formatting_set"]
+[connection signal="set" from="ScrollContainer/Options/ImageVis" to="." method="_on_image_vis_set"]
+[connection signal="set" from="ScrollContainer/Options/DoBBCode" to="." method="_on_signal_color_set"]
+[connection signal="value_changed" from="ScrollContainer/Options/TruncHbox/TruncationSpinner" to="." method="_on_truncation_spinner_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/Options/FontHbox/FontSpinner" to="." method="_on_font_spinner_value_changed"]
+[connection signal="set" from="ScrollContainer/Options/UndefSetting" to="." method="_on_undef_setting_set"]
+[connection signal="value_changed" from="ScrollContainer/Options/ThemeColor/ColorPicker" to="." method="_on_color_picker_value_changed"]
+[connection signal="pressed" from="ScrollContainer/Options/ThemeColorSubmitElse/ColorSubmitButton" to="." method="_on_color_submit_button_pressed"]
+[connection signal="pressed" from="ScrollContainer/Options/ThemeColorSubmitElse/ColorCancelButton" to="." method="_on_color_cancel_button_pressed"]
+[connection signal="value_changed" from="ScrollContainer/Options/GlobalVolume/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="set" from="ScrollContainer/Options/ImageMovement/VBoxContainer/InvertPitch" to="." method="_on_invert_pitch_set"]
+[connection signal="set" from="ScrollContainer/Options/ImageMovement/VBoxContainer/InvertYaw" to="." method="_on_invert_yaw_set"]
+[connection signal="set" from="ScrollContainer/Options/ImageMovement/VBoxContainer/InvertZoom" to="." method="_on_invert_zoom_set"]

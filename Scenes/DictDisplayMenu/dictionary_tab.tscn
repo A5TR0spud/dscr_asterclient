@@ -55,40 +55,36 @@ size_flags_vertical = 3
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer" unique_id=1835053845]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer" unique_id=1306308516]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_right = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer" unique_id=1306308516]
-layout_mode = 2
-
-[node name="DefaultFormatOption" type="VBoxContainer" parent="ScrollContainer/MarginContainer/VBoxContainer" unique_id=114364998]
+[node name="DefaultFormatOption" type="VBoxContainer" parent="ScrollContainer/VBoxContainer" unique_id=114364998]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 0
 mouse_default_cursor_shape = 2
 script = ExtResource("2_wphnd")
 
-[node name="Signal" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer/DefaultFormatOption" unique_id=805318430]
+[node name="Signal" type="Label" parent="ScrollContainer/VBoxContainer/DefaultFormatOption" unique_id=805318430]
 layout_mode = 2
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 text = "unknown precedes known"
 horizontal_alignment = 2
 
-[node name="LocaleNode" type="Node" parent="ScrollContainer/MarginContainer/VBoxContainer/DefaultFormatOption/Signal" unique_id=1209890268]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/DefaultFormatOption/Signal" unique_id=1209890268]
 script = ExtResource("1_1mk6h")
 translations = Dictionary[StringName, String]({
 &"text": "DICT_DEFAULT"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="HSeparator" type="HSeparator" parent="ScrollContainer/MarginContainer/VBoxContainer/DefaultFormatOption" unique_id=384322409]
+[node name="HSeparator" type="HSeparator" parent="ScrollContainer/VBoxContainer/DefaultFormatOption" unique_id=384322409]
 layout_mode = 2
 
-[node name="Dictionary" type="VBoxContainer" parent="ScrollContainer/MarginContainer/VBoxContainer" unique_id=2102306008]
+[node name="Dictionary" type="VBoxContainer" parent="ScrollContainer/VBoxContainer" unique_id=2102306008]
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("3_b08ua")
@@ -149,8 +145,8 @@ translations = Dictionary[StringName, String]({
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[connection signal="pressed" from="DictionaryHeader/DictionarySaveOpen" to="ScrollContainer/MarginContainer/VBoxContainer/Dictionary" method="_on_dictionary_save_open_pressed"]
+[connection signal="pressed" from="DictionaryHeader/DictionarySaveOpen" to="ScrollContainer/VBoxContainer/Dictionary" method="_on_dictionary_save_open_pressed"]
 [connection signal="pressed" from="NewSignalButton" to="NewSignalButton" method="_on_pressed"]
-[connection signal="text_changed" from="NewSignalDesig/NumEdit" to="ScrollContainer/MarginContainer/VBoxContainer/Dictionary" method="_on_num_edit_text_changed"]
-[connection signal="text_changed" from="NewSignalDesig/SigEdit" to="ScrollContainer/MarginContainer/VBoxContainer/Dictionary" method="_on_sig_edit_text_changed"]
+[connection signal="text_changed" from="NewSignalDesig/NumEdit" to="ScrollContainer/VBoxContainer/Dictionary" method="_on_num_edit_text_changed"]
+[connection signal="text_changed" from="NewSignalDesig/SigEdit" to="ScrollContainer/VBoxContainer/Dictionary" method="_on_sig_edit_text_changed"]
 [connection signal="text_submitted" from="NewSignalDesig/SigEdit" to="NewSignalButton" method="_on_sig_edit_text_submitted"]

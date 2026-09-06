@@ -29,41 +29,35 @@ size_flags_vertical = 3
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
-[node name="Margins" type="MarginContainer" parent="ScrollContainer" unique_id=171983257]
+[node name="List" type="VBoxContainer" parent="ScrollContainer" unique_id=978021282]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 7
 
-[node name="List" type="VBoxContainer" parent="ScrollContainer/Margins" unique_id=978021282]
-layout_mode = 2
-
-[node name="OnlineLabel" type="FoldableContainer" parent="ScrollContainer/Margins/List" unique_id=1457248820]
+[node name="OnlineLabel" type="FoldableContainer" parent="ScrollContainer/List" unique_id=1457248820]
 layout_mode = 2
 title = "online"
 
-[node name="LocaleNode" type="Node" parent="ScrollContainer/Margins/List/OnlineLabel" unique_id=474087244]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/List/OnlineLabel" unique_id=474087244]
 script = ExtResource("2_gvvro")
 translations = Dictionary[StringName, String]({
 &"title": "USERS_ONLINE"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="Online" type="VBoxContainer" parent="ScrollContainer/Margins/List/OnlineLabel" unique_id=627596032]
+[node name="Online" type="VBoxContainer" parent="ScrollContainer/List/OnlineLabel" unique_id=627596032]
 layout_mode = 2
 
-[node name="KnownLabel" type="FoldableContainer" parent="ScrollContainer/Margins/List" unique_id=608495546]
+[node name="KnownLabel" type="FoldableContainer" parent="ScrollContainer/List" unique_id=608495546]
 layout_mode = 2
 title = "known"
 
-[node name="LocaleNode" type="Node" parent="ScrollContainer/Margins/List/KnownLabel" unique_id=596829479]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/List/KnownLabel" unique_id=596829479]
 script = ExtResource("2_gvvro")
 translations = Dictionary[StringName, String]({
 &"title": "USERS_NICKED"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="Known" type="VBoxContainer" parent="ScrollContainer/Margins/List/KnownLabel" unique_id=1861638605]
+[node name="Known" type="VBoxContainer" parent="ScrollContainer/List/KnownLabel" unique_id=1861638605]
 layout_mode = 2
