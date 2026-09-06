@@ -17,6 +17,7 @@ static var use_at_undef: bool = true
 static var language: String = ""
 static var websocket_address: String = Main.DSCR_URL
 static var websocket_addresses: Array = [Main.DSCR_URL]
+static var current_dictionary: String = "DICTIONARY-1.save"
 
 static func validate_and_set_language(code: String = language):
 	if code not in ["m0", "en"]:
@@ -67,6 +68,7 @@ static func initialize() -> void:
 		websocket_addresses.append(websocket_address)
 	if Main.DSCR_URL not in websocket_addresses:
 		websocket_addresses.append(Main.DSCR_URL)
+	current_dictionary = SaveSystem.settings.get_or_add("current_dictionary", current_dictionary)
 
 static func evaluate_volume() -> void:
 	AudioServer.set_bus_volume_linear(
@@ -98,3 +100,4 @@ static func export() -> void:
 	SaveSystem.settings.set("language", language)
 	SaveSystem.settings.set("wss_addresses", websocket_addresses)
 	SaveSystem.settings.set("WebsocketAddress", websocket_address)
+	SaveSystem.settings.set("current_dictionary", current_dictionary)

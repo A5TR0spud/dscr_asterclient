@@ -1,0 +1,119 @@
+[gd_scene format=3 uid="uid://bjsm5yvgoxcva"]
+
+[ext_resource type="Script" uid="uid://ctoooylmva4sy" path="res://Scenes/SettingsMenu/SourcesMenu/source_menu.gd" id="1_rum6k"]
+[ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="2_joqq6"]
+
+[node name="SourceMenu" type="PanelContainer" unique_id=37936975]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rum6k")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1931796963]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=4324949]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="WSSPanel" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=1419115681]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/WSSPanel" unique_id=1889015002]
+layout_mode = 2
+text = "addresses"
+horizontal_alignment = 1
+
+[node name="LocaleNode" type="Node" parent="VBoxContainer/HBoxContainer/WSSPanel/Label" unique_id=737026107]
+script = ExtResource("2_joqq6")
+translations = Dictionary[StringName, String]({
+&"text": "WSS_HEADER"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/WSSPanel" unique_id=1736125114]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/scrollbar_h_separation = 4
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/WSSPanel/ScrollContainer" unique_id=2137388999]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="AddWSS" type="Button" parent="VBoxContainer/HBoxContainer/WSSPanel" unique_id=864125239]
+layout_mode = 2
+size_flags_vertical = 8
+text = "add"
+
+[node name="LocaleNode" type="Node" parent="VBoxContainer/HBoxContainer/WSSPanel/AddWSS" unique_id=2005701106]
+script = ExtResource("2_joqq6")
+translations = Dictionary[StringName, String]({
+&"text": "WSS_ADD"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="DictPanel" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=988769441]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/DictPanel" unique_id=1937779884]
+layout_mode = 2
+text = "Dictionaries"
+horizontal_alignment = 1
+
+[node name="LocaleNode" type="Node" parent="VBoxContainer/HBoxContainer/DictPanel/Label" unique_id=815193340]
+script = ExtResource("2_joqq6")
+translations = Dictionary[StringName, String]({
+&"text": "SOURCE_DICT_HEADER"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/DictPanel" unique_id=153054137]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/DictPanel/ScrollContainer" unique_id=729226788]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="AddDict" type="Button" parent="VBoxContainer/HBoxContainer/DictPanel" unique_id=1026163928]
+layout_mode = 2
+text = "add"
+
+[node name="LocaleNode" type="Node" parent="VBoxContainer/HBoxContainer/DictPanel/AddDict" unique_id=719692951]
+script = ExtResource("2_joqq6")
+translations = Dictionary[StringName, String]({
+&"text": "DICT_NEW"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=5802823]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer" unique_id=1512106125]
+layout_mode = 2
+
+[node name="DirectoryButton" type="Button" parent="VBoxContainer/GridContainer" unique_id=1695911829]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "change save directory"
+
+[node name="LocaleNode" type="Node" parent="VBoxContainer/GridContainer/DirectoryButton" unique_id=76478900]
+script = ExtResource("2_joqq6")
+translations = Dictionary[StringName, String]({
+&"text": "SETTINGS_DIRECTORY"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/WSSPanel/AddWSS" to="." method="_on_add_wss_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/DictPanel/AddDict" to="." method="_on_add_dict_pressed"]
+[connection signal="pressed" from="VBoxContainer/GridContainer/DirectoryButton" to="." method="_on_directory_button_pressed"]

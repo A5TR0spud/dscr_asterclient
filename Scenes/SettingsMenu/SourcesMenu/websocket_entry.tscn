@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dxpkkxynfohl7"]
 
-[ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="1_dsy7v"]
-[ext_resource type="PackedScene" uid="uid://2emnji0ns3x2" path="res://Scenes/Common/confirmation_button.tscn" id="1_fkew7"]
-[ext_resource type="Script" uid="uid://c3qmqbpvgdp8f" path="res://Scenes/SettingsMenu/websocket_entry.gd" id="1_uvn6s"]
+[ext_resource type="Script" uid="uid://c3qmqbpvgdp8f" path="res://Scenes/SettingsMenu/SourcesMenu/websocket_entry.gd" id="1_cp446"]
+[ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="2_75ije"]
+[ext_resource type="PackedScene" uid="uid://2emnji0ns3x2" path="res://Scenes/Common/confirmation_button.tscn" id="3_nxcla"]
 
 [node name="WebsocketEntry" type="VBoxContainer" unique_id=1674375786]
 anchors_preset = 15
@@ -10,7 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_uvn6s")
+script = ExtResource("1_cp446")
 
 [node name="LineEdit" type="LineEdit" parent="." unique_id=364122011]
 layout_mode = 2
@@ -25,13 +25,13 @@ size_flags_horizontal = 3
 text = "connect"
 
 [node name="LocaleNode" type="Node" parent="HBoxContainer/ConnectButton" unique_id=151749341]
-script = ExtResource("1_dsy7v")
+script = ExtResource("2_75ije")
 translations = Dictionary[StringName, String]({
 &"text": "WSS_CONNECT"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="ConfirmationButton" parent="HBoxContainer" unique_id=1499947826 instance=ExtResource("1_fkew7")]
+[node name="ConfirmationButton" parent="HBoxContainer" unique_id=1499947826 instance=ExtResource("3_nxcla")]
 layout_mode = 2
 normal_text = "DELETE_ASK_SHORT"
 

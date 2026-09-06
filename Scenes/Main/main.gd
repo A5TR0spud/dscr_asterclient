@@ -371,6 +371,5 @@ func _on_files_dropped(files: PackedStringArray):
 	else:
 		SoundManager.play_sound(SoundManager.Sounds.FAIL)
 
-
 func _on_locale_button_pressed():
 	LocaleMenu.open()

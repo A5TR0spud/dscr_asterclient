@@ -16,6 +16,7 @@
 * "load dictionary from file" button
 * saved websocket address list
 * Image editor tab (w/ compat vs compact exports)
+* Use custom bbcode for underline/strikethroughs so they're 2px wide and thus actually visible
 
 ### nikzapp
 

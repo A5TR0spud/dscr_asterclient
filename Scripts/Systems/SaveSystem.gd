@@ -1,6 +1,6 @@
 class_name SaveSystem
 
-static var dict: Dictionary = {
+const SKELETON_DICT: Dictionary = {
 	"wordDict": {
 		"keys": [
 		],
@@ -16,6 +16,8 @@ static var dict: Dictionary = {
 	"beforeUserDefaultMode": 1,
 	"afterUserDefaultMode": 1
 }
+
+static var dict: Dictionary = SKELETON_DICT.duplicate_deep()
 
 static var settings: Dictionary = {}
 static var nicknames: Dictionary = {}
@@ -34,8 +36,9 @@ static func load_all() -> void:
 	var dicts: String = opened_save_folder.path_join(_DICT_FOLDER)
 	if not DirAccess.dir_exists_absolute(dicts):
 		DirAccess.make_dir_recursive_absolute(dicts)
-	load_dict()
 	load_settings()
+	_current_dictionary_filename = SettingsHandler.current_dictionary
+	load_dict()
 	load_nicknames()
 	load_library()
 
@@ -228,6 +231,71 @@ static func load_settings() -> void:
 # 1: space
 # 2: new line
 # 3: double new line
+
+## assumes the given name has already been validated
+static func create_skeleton_dict_file(name: String):
+	var file := FileAccess.open(opened_save_folder.path_join(_DICT_FOLDER).path_join(name), FileAccess.WRITE)
+	file.store_string(JSON.stringify(SKELETON_DICT, "\t"))
+	file.close()
+
+static func get_all_dict_names() -> PackedStringArray:
+	var dir := DirAccess.open(opened_save_folder.path_join(_DICT_FOLDER))
+	if not dir:
+		return PackedStringArray([])
+	return dir.get_files()
+
+static func get_valid_dict_name(to_try: String):
+	var new_name: String = to_try
+	var lastdot: int = to_try.rfind(".")
+	var suffix: String = ""
+	if lastdot >= 0:
+		suffix = to_try.right(-lastdot)
+		new_name = to_try.left(lastdot)
+	var num: int = 0
+	if new_name.length() > 0 and new_name.right(1).is_valid_int():
+		var num_str: String = ""
+		while new_name.length() > 0 and new_name.right(1).is_valid_int():
+			num_str = new_name.right(1) + num_str
+			new_name = new_name.left(-1)
+		num = num_str.to_int()
+	if num == 0 and FileAccess.file_exists(opened_save_folder.path_join(_DICT_FOLDER).path_join(new_name + suffix)):
+		num += 1
+	while FileAccess.file_exists(opened_save_folder.path_join(_DICT_FOLDER).path_join(new_name + str(num) + suffix)):
+		num += 1
+	return new_name + (str(num) if num != 0 else "") + suffix
+
+static func delete_dict_name(to_delete: String) -> bool:
+	var dir := DirAccess.open(opened_save_folder.path_join(_DICT_FOLDER))
+	if not dir or DirAccess.get_open_error() != Error.OK:
+		return false
+	var err := dir.remove(to_delete)
+	return err == Error.OK
+
+static func change_dict_name(from: String, to: String) -> String:
+	to = get_valid_dict_name(to)
+	var err := DirAccess.rename_absolute(opened_save_folder.path_join(_DICT_FOLDER).path_join(from), opened_save_folder.path_join(_DICT_FOLDER).path_join(to))
+	return to if err == Error.OK else from
+
+static func dupe_dict(to_dupe: String):
+	var old := FileAccess.open(opened_save_folder.path_join(_DICT_FOLDER).path_join(to_dupe), FileAccess.READ)
+	if not old:
+		return
+	var data_to_dupe: String = FileAccess.get_file_as_string(opened_save_folder.path_join(_DICT_FOLDER).path_join(to_dupe))
+	old.close()
+	
+	var new_name: String = get_valid_dict_name(to_dupe)
+	
+	var new := FileAccess.open(opened_save_folder.path_join(_DICT_FOLDER).path_join(new_name), FileAccess.WRITE)
+	new.store_string(data_to_dupe)
+	new.close()
+
+static func load_folder_dict(name: String = "DICTIONARY-1.save"):
+	_current_dictionary_filename = name
+	SettingsHandler.current_dictionary = name
+	save_settings()
+	dict = SKELETON_DICT.duplicate_deep()
+	load_dict(opened_save_folder.path_join(_DICT_FOLDER).path_join(name))
+	Main.on_dict_reload()
 
 static func load_dict(path: String = "") -> bool:
 	if path.is_empty():

@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://cmdmiuvan8h1p" path="res://Scenes/Main/dict_edit_prison.gd" id="12_ifk88"]
 [ext_resource type="PackedScene" uid="uid://crn4b5wrwilbc" path="res://Scenes/DictEditMenu/dict_edit_window.tscn" id="13_8sujb"]
 [ext_resource type="PackedScene" uid="uid://cnhrmaid1urmm" path="res://Scenes/LocaleMenu/locale_menu.tscn" id="17_koken"]
+[ext_resource type="PackedScene" uid="uid://bjsm5yvgoxcva" path="res://Scenes/SettingsMenu/SourcesMenu/source_menu.tscn" id="19_c4b4r"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g4v7s"]
 
@@ -68,15 +69,17 @@ layout_mode = 2
 current_tab = 0
 clip_tabs = false
 close_with_middle_mouse = false
-tab_count = 2
+tab_count = 3
 tab_0/title = "chat"
 tab_1/title = "library"
+tab_2/title = "sources"
 
 [node name="LocaleNode" type="Node" parent="Body/Corpus/Header/Tabber" unique_id=927415609]
 script = ExtResource("6_2ok46")
 translations = Dictionary[StringName, String]({
 &"tab_0/title": "TAB_CHAT",
-&"tab_1/title": "TAB_LIBRARY"
+&"tab_1/title": "TAB_LIBRARY",
+&"tab_2/title": "TAB_SOURCES"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
@@ -85,6 +88,7 @@ layout_mode = 2
 
 [node name="DSVE_Button" type="Button" parent="Body/Corpus/Header" unique_id=1672549758]
 layout_mode = 2
+size_flags_horizontal = 2
 text = "dsve"
 
 [node name="LocaleNode" type="Node" parent="Body/Corpus/Header/DSVE_Button" unique_id=273337952]
@@ -94,20 +98,20 @@ translations = Dictionary[StringName, String]({
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="LanguageButton" type="PanelContainer" parent="Body/Corpus/Header" unique_id=1136216525]
+[node name="LanguageButton" type="PanelContainer" parent="Body/Corpus/Header" unique_id=111455099]
 layout_mode = 2
 size_flags_horizontal = 10
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxEmpty_g4v7s")
 
-[node name="MarginContainer" type="MarginContainer" parent="Body/Corpus/Header/LanguageButton" unique_id=1889300634]
+[node name="MarginContainer" type="MarginContainer" parent="Body/Corpus/Header/LanguageButton" unique_id=1453173118]
 layout_mode = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="TextureRect" type="TextureRect" parent="Body/Corpus/Header/LanguageButton/MarginContainer" unique_id=285607661]
+[node name="TextureRect" type="TextureRect" parent="Body/Corpus/Header/LanguageButton/MarginContainer" unique_id=50992410]
 texture_filter = 2
 propagate_maximum_size = true
 layout_mode = 2
@@ -115,7 +119,7 @@ texture = ExtResource("7_2ok46")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="LocaleButton" type="Button" parent="Body/Corpus/Header/LanguageButton" unique_id=1935810922]
+[node name="LocaleButton" type="Button" parent="Body/Corpus/Header/LanguageButton" unique_id=1147780416]
 texture_filter = 2
 layout_mode = 2
 mouse_filter = 1
@@ -131,6 +135,10 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 mouse_filter = 1
+
+[node name="SourceMenu" parent="Body/Corpus/TabContainer" unique_id=37936975 instance=ExtResource("19_c4b4r")]
+visible = false
+layout_mode = 2
 
 [node name="Sidebar" type="VBoxContainer" parent="Body" unique_id=2052290855]
 layout_mode = 2

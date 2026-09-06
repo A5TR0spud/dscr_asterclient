@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://bx77kcm12yq8h" path="res://Scenes/SettingsMenu/settings_tab.gd" id="1_0yg8b"]
 [ext_resource type="PackedScene" uid="uid://dnd1u3xl3gie1" path="res://Scenes/SettingsMenu/setting_entry.tscn" id="3_0yg8b"]
 [ext_resource type="AudioStream" uid="uid://q27rk7sfk50e" path="res://Assets/Sounds/dial.ogg" id="3_nlym6"]
-[ext_resource type="PackedScene" uid="uid://emlk4t1nxdyo" path="res://Scenes/SettingsMenu/websocket_panel.tscn" id="4_gal0n"]
 [ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="5_gal0n"]
 
 [node name="SettingsTab" type="VBoxContainer" unique_id=1649791393]
@@ -51,26 +50,6 @@ theme_override_constants/margin_right = 10
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[node name="DirectoryButton" type="Button" parent="ScrollContainer/MarginContainer/Options" unique_id=901871438]
-layout_mode = 2
-text = "change save directory"
-
-[node name="LocaleNode" type="Node" parent="ScrollContainer/MarginContainer/Options/DirectoryButton" unique_id=1535597078]
-script = ExtResource("5_gal0n")
-translations = Dictionary[StringName, String]({
-&"text": "SETTINGS_DIRECTORY"
-})
-metadata/_custom_type_script = "uid://7gga31jeosxl"
-
-[node name="HSeparator8" type="HSeparator" parent="ScrollContainer/MarginContainer/Options" unique_id=1000904488]
-layout_mode = 2
-
-[node name="WSSPanel" parent="ScrollContainer/MarginContainer/Options" unique_id=1243890935 instance=ExtResource("4_gal0n")]
-layout_mode = 2
-
-[node name="HSeparator3" type="HSeparator" parent="ScrollContainer/MarginContainer/Options" unique_id=1456062547]
-layout_mode = 2
 
 [node name="Formatting" parent="ScrollContainer/MarginContainer/Options" unique_id=1141489488 instance=ExtResource("3_0yg8b")]
 layout_mode = 2
@@ -272,6 +251,7 @@ layout_mode = 2
 
 [node name="ImageMovement" type="FoldableContainer" parent="ScrollContainer/MarginContainer/Options" unique_id=1922610066]
 layout_mode = 2
+title = "image camera inversion"
 
 [node name="LocaleNode" type="Node" parent="ScrollContainer/MarginContainer/Options/ImageMovement" unique_id=566775524]
 script = ExtResource("5_gal0n")
@@ -295,7 +275,6 @@ description = "SETTINGS_INVERT_YAW"
 layout_mode = 2
 description = "SETTINGS_INVERT_ZOOM"
 
-[connection signal="pressed" from="ScrollContainer/MarginContainer/Options/DirectoryButton" to="." method="_on_directory_button_pressed"]
 [connection signal="set" from="ScrollContainer/MarginContainer/Options/Formatting" to="." method="_on_formatting_set"]
 [connection signal="set" from="ScrollContainer/MarginContainer/Options/ImageVis" to="." method="_on_image_vis_set"]
 [connection signal="set" from="ScrollContainer/MarginContainer/Options/DoBBCode" to="." method="_on_signal_color_set"]

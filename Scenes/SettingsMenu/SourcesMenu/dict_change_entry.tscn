@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://cc1nrgsfxfdj1"]
+
+[ext_resource type="Script" uid="uid://c3blhxqprhf46" path="res://Scenes/SettingsMenu/SourcesMenu/dict_change_entry.gd" id="1_jqllh"]
+[ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="1_qlgcq"]
+[ext_resource type="PackedScene" uid="uid://2emnji0ns3x2" path="res://Scenes/Common/confirmation_button.tscn" id="2_jqllh"]
+
+[node name="DictChangeEntry" type="VBoxContainer" unique_id=1738595650]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jqllh")
+
+[node name="LineEdit" type="LineEdit" parent="." unique_id=1706589274]
+layout_mode = 2
+placeholder_text = "dict 1"
+
+[node name="LocaleNode" type="Node" parent="LineEdit" unique_id=950930081]
+script = ExtResource("1_qlgcq")
+translations = Dictionary[StringName, String]({
+&"placeholder_text": "SOURCE_DICT_PLACEHOLD"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=647211187]
+layout_mode = 2
+
+[node name="LoadButton" type="Button" parent="HBoxContainer" unique_id=1643790547]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "load"
+
+[node name="LocaleNode" type="Node" parent="HBoxContainer/LoadButton" unique_id=323729016]
+script = ExtResource("1_qlgcq")
+translations = Dictionary[StringName, String]({
+&"text": "DICT_USE"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="DupeButton" type="Button" parent="HBoxContainer" unique_id=1949248613]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "duplicate"
+
+[node name="LocaleNode" type="Node" parent="HBoxContainer/DupeButton" unique_id=1939138733]
+script = ExtResource("1_qlgcq")
+translations = Dictionary[StringName, String]({
+&"text": "DICT_DUPE"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="DeleteButton" parent="HBoxContainer" unique_id=1499947826 instance=ExtResource("2_jqllh")]
+layout_mode = 2
+normal_text = "DELETE_ASK_SHORT"
+
+[node name="HSeparator" type="HSeparator" parent="." unique_id=408798796]
+layout_mode = 2
+
+[connection signal="focus_exited" from="LineEdit" to="." method="_on_line_edit_focus_exited"]
+[connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="HBoxContainer/LoadButton" to="." method="_on_load_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/DupeButton" to="." method="_on_dupe_button_pressed"]
+[connection signal="confirmed" from="HBoxContainer/DeleteButton" to="." method="_on_delete_button_confirmed"]
