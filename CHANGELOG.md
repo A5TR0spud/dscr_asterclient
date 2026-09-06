@@ -16,7 +16,7 @@
 * Dictionary files can be loaded by dragging them onto the client. (Eearslya)
 * Added localization. On opening for the first time, a prompt will block spoilers and ask for desired language.
   * This can be changed at any time by the button near the top right
-  * Currently, the [localization spreadsheet](/Localization/translation%20spreadsheet.ods) only has Mete0rese and English translations
+  * Currently, the [localization csv](/Localization/lang.csv) only has Mete0rese and English translations
 * New sources tab allows:
   * Saving/loading/editing a list of websockets and connecting to one
   * Saving/loading/duplicating/editing dictionary files and setting one as active
