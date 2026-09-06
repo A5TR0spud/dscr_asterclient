@@ -12,9 +12,7 @@
 * hover over translated words to get the signal
 * hover over negative numbers to get the translation
 * implement message history so you can use arrow keys to access your previous transmissions
-* "change current dictionary" button (overhaul the dictionary save structure)
 * "load dictionary from file" button
-* saved websocket address list
 * Image editor tab (w/ compat vs compact exports)
 * Use custom bbcode for underline/strikethroughs so they're 2px wide and thus actually visible
 * Add per-dict settings for Meteor0ese support and DSCRism (music, etc) support
