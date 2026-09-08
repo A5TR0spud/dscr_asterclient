@@ -41,9 +41,14 @@ func _get_line_syntax_highlighting(line: int) -> Dictionary:
 			if signal_idx >= 0:
 				# Skip coloring if disabled in settings.
 				if SettingsHandler.do_bbcode:
-					var desc = DictionaryHandler.desc_values[signal_idx]
-					var word_color := DictionaryHandler.calc_desc_color(desc.get(DictionaryHandler.color_key))
-					color = _push_color(result, pos, color, word_color)
+					# Don't assume word and description arrays are in sync
+					# Attempt to find the description by actual signal number
+					var sig = DictionaryHandler.word_keys[signal_idx]
+					var desc_index = DictionaryHandler.desc_keys.find(sig)
+					if desc_index >= 0:
+						var desc = DictionaryHandler.desc_values[desc_index]
+						var word_color := DictionaryHandler.calc_desc_color(desc.get(DictionaryHandler.color_key))
+						color = _push_color(result, pos, color, word_color)
 
 				pos += sub_len
 				found = true
