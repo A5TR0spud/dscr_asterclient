@@ -49,6 +49,8 @@ func _get_line_syntax_highlighting(line: int) -> Dictionary:
 						var desc = DictionaryHandler.desc_values[desc_index]
 						var word_color := DictionaryHandler.calc_desc_color(desc.get(DictionaryHandler.color_key))
 						color = _push_color(result, pos, color, word_color)
+					else:
+						color = _push_color(result, pos, color, Color.WHITE)
 
 				pos += sub_len
 				found = true
