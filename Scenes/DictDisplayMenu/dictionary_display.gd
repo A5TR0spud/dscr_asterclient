@@ -12,9 +12,9 @@ func _ready():
 func refresh():
 	for child in self.get_children():
 		child.queue_free()
-	for idx in range(DictionaryHandler.desc_keys.size()):
+	for idx in range(DictionaryHandler.word_keys.size()):
 		var instance: DictEntry = dict_entry_scene.instantiate()
-		instance.sig = DictionaryHandler.desc_keys[idx]
+		instance.sig = DictionaryHandler.word_keys[idx]
 		add_child(instance)
 	search_children()
 
