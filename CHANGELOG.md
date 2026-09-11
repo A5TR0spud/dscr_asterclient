@@ -2,6 +2,10 @@
 
 ## --WIP--
 
+### Changes
+
+* Added signal counter to dictionary
+
 ### Fixes
 
 * Fixed misaligned dictionaries having potentially incorrect colors when typed into the transmission editor (Eearslya)

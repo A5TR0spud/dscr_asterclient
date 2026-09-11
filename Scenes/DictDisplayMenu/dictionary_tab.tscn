@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="1_1mk6h"]
 [ext_resource type="Script" uid="uid://du2luaidhxiem" path="res://Scenes/DictDisplayMenu/dictionary_save_open.gd" id="2_b08ua"]
 [ext_resource type="Script" uid="uid://cwf16ujxnodbv" path="res://Scenes/DictDisplayMenu/default_format_option.gd" id="2_wphnd"]
+[ext_resource type="Script" uid="uid://bqmlmpukp04k2" path="res://Scenes/DictDisplayMenu/dict_count_label.gd" id="3_1mk6h"]
 [ext_resource type="Script" uid="uid://b6d5ucfwdeqjh" path="res://Scenes/DictDisplayMenu/dictionary_display.gd" id="3_b08ua"]
 [ext_resource type="Script" uid="uid://cyqng7nb5maao" path="res://Scenes/DictDisplayMenu/new_signal_button.gd" id="5_b08ua"]
 [ext_resource type="Script" uid="uid://gtpqlwktlalr" path="res://Scripts/FilteredLineEdit.gd" id="6_b08ua"]
@@ -60,6 +61,14 @@ vertical_scroll_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="DictCountLabel" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=1021371712]
+layout_mode = 2
+text = "signal count"
+script = ExtResource("3_1mk6h")
+
+[node name="HSeparator" type="HSeparator" parent="ScrollContainer/VBoxContainer" unique_id=969609551]
+layout_mode = 2
 
 [node name="DefaultFormatOption" type="VBoxContainer" parent="ScrollContainer/VBoxContainer" unique_id=114364998]
 layout_mode = 2

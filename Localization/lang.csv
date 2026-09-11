@@ -117,3 +117,4 @@ DICT_USE,-40,Load
 SOURCE_DICT_HEADER,-42,Dictionaries
 SOURCE_DICT_PLACEHOLD,-237,Name dictionary…
 TAB_SOURCES,-40,Sources
+DICT_COUNT,-42 -23 -4 {0},{0} Defined Signals
