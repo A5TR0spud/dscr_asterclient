@@ -33,7 +33,11 @@ func _on_transmission_edit_text_changed():
 	debounce.start()
 
 func _on_refresh_debounce_timeout():
+	_evaluate_transmission()
+
+func _evaluate_transmission():
 	if current_input == words_edit.text: return
+	if !debounce.is_stopped(): debounce.stop()
 
 	var parsed: ParseResult = DictionaryHandler.parse_text(words_edit.text, false)
 	if current_transmission != parsed.output:
@@ -88,6 +92,7 @@ func _get_name() -> String:
 	return o
 
 func _on_submit_pressed():
+	_evaluate_transmission()
 	LibraryHandler.set_transmission(_get_name(), current_transmission)
 	_reload()
 	unsaved_changes = false

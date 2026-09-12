@@ -10,6 +10,7 @@
 
 * Fixed misaligned dictionaries having potentially incorrect colors when typed into the transmission editor (Eearslya)
 * Fixed un-description-ed signals not appearing in the dictionary tab
+* Clicking submit on a library entry before it registers now forces it to register before saving
 
 ## 0.7.1: Oh crap, that's like, the most important feature
 
