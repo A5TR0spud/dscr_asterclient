@@ -15,12 +15,13 @@ size_flags_vertical = 3
 theme_override_constants/margin_bottom = 12
 script = ExtResource("2_b6sdv")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1344835550]
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1951603416]
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 script = ExtResource("1_fsvsf")
+metadata/_custom_type_script = "uid://b17wh5igsahay"
 
 [node name="ChatDisplay" type="VBoxContainer" parent="ScrollContainer" unique_id=185948828]
 layout_mode = 2

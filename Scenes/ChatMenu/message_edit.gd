@@ -133,8 +133,9 @@ func _confirm_selection(index: int) -> void:
 
 ## find delimiter index near the caret, -1 if not found
 func find_delimiter_near(line: String, col: int) -> int:
-	if col > 0 and line[col - 1] == DELIMITER_CHARACTER:
-		return col - 1 # thing@|thing@
+	if col - 1 < line.length():
+		if col > 0 and line[col - 1] == DELIMITER_CHARACTER:
+			return col - 1 # thing@|thing@
 	if col < line.length() and line[col] == DELIMITER_CHARACTER:
 		return col     # thing|@thing@
 	return -1
