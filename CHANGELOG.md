@@ -10,6 +10,7 @@
 
 * Added collapse button to library sidebar
 * Dictionary search bar now uses fuzzy search (can accomodate some typos)
+* Patched image renderer. It's faster now.
 
 ### Fixes
 

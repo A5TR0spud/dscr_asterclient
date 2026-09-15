@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cb8hjgvp01r33" path="res://Assets/ImageGrid.png" id="1_42cc5"]
 [ext_resource type="Script" uid="uid://clw6gb5wupvng" path="res://Scenes/Images/visualizer_node.gd" id="1_psu8h"]
 [ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="2_psu8h"]
+[ext_resource type="Shader" uid="uid://cufhqyh03k8p1" path="res://Scenes/Images/reverse_fresnel.gdshader" id="4_uo7r5"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_kq2tu"]
 viewport_path = NodePath("Intermediate/RenderAndYaw/VisualizerRect/SubViewport")
@@ -25,6 +26,19 @@ texture_filter = 0
 material = SubResource("StandardMaterial3D_0mdww")
 size = Vector2(32, 32)
 orientation = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3bk5g"]
+render_priority = 0
+shader = ExtResource("4_uo7r5")
+
+[sub_resource type="SphereMesh" id="SphereMesh_57qmd"]
+material = SubResource("ShaderMaterial_3bk5g")
+
+[sub_resource type="MultiMesh" id="MultiMesh_g4v7s"]
+resource_local_to_scene = true
+transform_format = 1
+use_colors = true
+mesh = SubResource("SphereMesh_57qmd")
 
 [node name="VisualizerNode" type="PanelContainer" unique_id=1907311917]
 custom_maximum_size = Vector2(576, -1)
@@ -62,6 +76,7 @@ stretch_mode = 5
 [node name="SubViewport" type="SubViewport" parent="Intermediate/RenderAndYaw/VisualizerRect" unique_id=626713555]
 own_world_3d = true
 scaling_3d_mode = 5
+anisotropic_filtering_level = 0
 oversampling = false
 size = Vector2i(200, 128)
 
@@ -84,7 +99,11 @@ mesh = SubResource("QuadMesh_g4v7s")
 transform = Transform3D(1, 0, 0, 0, -1, -1.509958e-07, 0, 1.509958e-07, -1, 0, 8, 0)
 mesh = SubResource("QuadMesh_g4v7s")
 
-[node name="Plots" type="Node3D" parent="Intermediate/RenderAndYaw/VisualizerRect/SubViewport" unique_id=359063276]
+[node name="Plots" type="MultiMeshInstance3D" parent="Intermediate/RenderAndYaw/VisualizerRect/SubViewport" unique_id=1090367063]
+cast_shadow = 0
+custom_aabb = AABB(-16, -8, -16, 32, 16, 32)
+gi_mode = 0
+multimesh = SubResource("MultiMesh_g4v7s")
 
 [node name="YawSlider" type="HScrollBar" parent="Intermediate/RenderAndYaw" unique_id=2145835859]
 layout_mode = 2

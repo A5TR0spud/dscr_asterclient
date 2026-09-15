@@ -25,15 +25,14 @@ static func calculate_color (value: int) -> Color:
 	var hi = ceil(n)
 	return lerp(Color(COLORS[lo]), Color(COLORS[hi]), fmod(n, 1))
 
-static var plot_scene := preload("res://Scenes/Images/plot_node.tscn")
-
 @onready var cam_pivot: Node3D = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport/CameraOrigin
 @onready var cam: Camera3D = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport/CameraOrigin/Cam
-@onready var plots: Node3D = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport/Plots
+@onready var plots: MultiMeshInstance3D = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport/Plots
 @onready var zoom_slider: Range = $Intermediate/ZoomSlider
 @onready var yaw_slider: Range = $Intermediate/RenderAndYaw/YawSlider
 @onready var pitch_slider: Range = $Intermediate/PitchSlider
 @onready var visualizer: TextureRect = $Intermediate/RenderAndYaw/VisualizerRect
+@onready var multimesh: MultiMesh = plots.multimesh
 
 var _sphere_data: Array = []
 
@@ -109,8 +108,7 @@ func _parse_sphere(parser: TransmissionParser) -> Dictionary:
 	return {"x": x, "y": y, "z": z, "r": r, "c": c}
 
 func check_image(message0: Array) -> bool:
-	for c in plots.get_children():
-		c.queue_free()
+	multimesh.instance_count = 0
 	_sphere_data.clear()
 	var message: Array[int] = []
 	for u in message0:
@@ -137,17 +135,21 @@ func check_image(message0: Array) -> bool:
 	if _sphere_data.is_empty():
 		#print("empty image")
 		return false
-	for p: Dictionary in _sphere_data:
-		if p["r"] <= 0:
-			continue
-		#print("dat: ", p)
-		var plot: PlotNode = plot_scene.instantiate()
-		plot.col = calculate_color(p["c"])
-		plot.radius = p["r"] * 0.5
-		plot.position.x = p["x"]
-		plot.position.y = p["z"]
-		plot.position.z = -p["y"]
-		plots.add_child(plot)
+	_sphere_data = _sphere_data.filter(func(a: Dictionary): return a["r"] > 0)
+	multimesh.instance_count = _sphere_data.size()
+	for idx: int in range(_sphere_data.size()):
+		var p: Dictionary = _sphere_data[idx]
+		multimesh.set_instance_color(idx, calculate_color(p["c"]).srgb_to_linear())
+		multimesh.set_instance_transform(idx, Transform3D(
+			# X Scale/Shear
+			Vector3(p["r"], 0, 0),
+			# Y Scale/Shear
+			Vector3(0, p["r"], 0),
+			# Z Scale/Shear
+			Vector3(0, 0, p["r"]),
+			# Origin Position
+			Vector3(p["x"], p["z"], -p["y"])
+		))
 	return true
 
 var mouse_teleported: bool = false
