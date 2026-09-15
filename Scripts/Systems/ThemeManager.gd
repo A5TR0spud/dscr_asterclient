@@ -25,6 +25,7 @@ static var tab_but_unselected = preload("uid://10juafvr3ky1")
 static var h_sep = preload("uid://dgjcahl47q10n")
 static var v_sep = preload("uid://db3k5eiovgegq")
 static var h_split = preload("uid://b1t3fn13p4807")
+static var v_split = preload("uid://circtrvcvn66m")
 
 static var old_color: int = -1
 
@@ -115,9 +116,11 @@ static func set_theme_color(col: int = -1) -> void:
 	h_sep.color = new_color
 	v_sep.color = new_color
 	h_split.bg_color = new_color
+	v_split.bg_color = new_color
 	h_sep.color.a = 0.5
 	v_sep.color.a = 0.5
 	h_split.bg_color.a = 0.5
+	v_split.bg_color.a = 0.5
 	grabber_pressed_style.bg_color = new_color
 	# light outline
 	new_color.r += 0.1 * ratio.r

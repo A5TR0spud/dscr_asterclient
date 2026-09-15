@@ -2,6 +2,6 @@
 
 [resource]
 bg_color = Color(0.1254902, 0.1254902, 0.1254902, 1)
-border_width_left = 5
-border_width_right = 5
+border_width_left = 4
+border_width_right = 4
 border_color = Color(0.8, 0.8, 0.8, 0)

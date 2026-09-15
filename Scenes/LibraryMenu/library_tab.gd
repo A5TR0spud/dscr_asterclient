@@ -1,13 +1,15 @@
 extends Control
 class_name Library
 
-@onready var name_edit: LineEdit = $Body/Editor/Header/LineEdit
-@onready var words_edit: TransmissionEdit = $Body/Editor/GridContainer/VBoxContainer/ScrollContainer/TransmissionEdit
-@onready var delete_button: ConfirmationButton = $Body/Editor/Buttons/Delete
-@onready var t_preview: TransEntry = $Body/Editor/GridContainer/TransHolder/TransmissionEntry
+@onready var name_edit: LineEdit = $Body/HBoxContainer/Editor/Header/LineEdit
+@onready var words_edit: TransmissionEdit = $Body/HBoxContainer/Editor/VSplitContainer/VBoxContainer/ScrollContainer/TransmissionEdit
+@onready var delete_button: ConfirmationButton = $Body/HBoxContainer/Editor/Buttons/Delete
+@onready var t_preview: TransEntry = $Body/HBoxContainer/Editor/VSplitContainer/TransHolder/TransmissionEntry
 @onready var debounce: Timer = $RefreshDebounce
 
-@onready var catalog: Control = $Body/ScrollContainer/Catalogue
+@onready var catalog: Container = $Body/Sidebar/ScrollContainer/Catalogue
+@onready var search: LineEdit = $Body/Sidebar/SearchBar
+@onready var sidebar: Container = $Body/Sidebar
 
 var lib_entry = preload("res://Scenes/LibraryMenu/library_entry.tscn")
 
@@ -84,6 +86,9 @@ func _reload():
 			var c: LibraryEntry = lib_entry.instantiate()
 			c.trans_name = s
 			catalog.add_child(c)
+	if search.text.is_empty():
+		_do_sort()
+	queue_search()
 
 func _get_name() -> String:
 	var o: String = name_edit.text
@@ -125,3 +130,39 @@ func _on_copy_words_pressed():
 func _on_visibility_changed():
 	if visible:
 		_refresh_preview()
+
+var _search_is_queued: bool = false
+func queue_search(new_text: String = search.text):
+	_search_is_queued = true
+	_do_search.call_deferred(new_text)
+
+func _do_sort():
+	var to_sort: Array = LibraryHandler.get_all_transmissions().duplicate()
+	to_sort.sort()
+	for c: LibraryEntry in catalog.get_children():
+		catalog.move_child(c, to_sort.find(c.trans_name))
+
+func _do_search(new_text: String):
+	if not _search_is_queued:
+		return
+	_search_is_queued = false
+	if new_text.is_empty():
+		for c in catalog.get_children():
+			c.show()
+		_do_sort()
+		return
+	var best_candidates: Array[String] = AutocompleteManager.get_dl_candidates(
+		new_text, catalog.get_children().map(func (a: LibraryEntry): return a.trans_name), 10
+	)
+	for c: LibraryEntry in catalog.get_children():
+		if c.trans_name in best_candidates:
+			c.show()
+			catalog.move_child(c, best_candidates.find(c.trans_name))
+		else:
+			c.hide()
+
+func _on_search_bar_text_changed(new_text: String):
+	queue_search(new_text)
+
+func _on_collapse_sidebar_toggled(toggled_on: bool):
+	sidebar.visible = toggled_on

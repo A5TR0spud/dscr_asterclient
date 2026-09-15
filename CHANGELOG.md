@@ -1,5 +1,20 @@
 # Versions
 
+## --WIP--
+
+### Additions
+
+* Added search bar to library
+
+### Changes
+
+* Added collapse button to library sidebar
+* Dictionary search bar now uses fuzzy search (can accomodate some typos)
+
+### Fixes
+
+* Saving a new transmission to the library now sorts the same as on startup
+
 ## 0.7.2
 
 ### Changes

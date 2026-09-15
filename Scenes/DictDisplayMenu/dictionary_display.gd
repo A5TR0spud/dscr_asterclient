@@ -36,11 +36,12 @@ func _physics_process(_delta: float) -> void:
 	ticker += 1
 
 func search_children() -> void:
+	var options: Array = AutocompleteManager.get_autocomplete_options(nam_search, DictionaryHandler.word_names)
 	for child: DictEntry in self.get_children():
 		child.visible = (
 			(not num_search or str(child.sig).contains(num_search))
 			and
-			(not nam_search or DictionaryHandler.get_or_default_signal_name(child.sig).contains(nam_search))
+			(not nam_search or DictionaryHandler.get_or_default_signal_name(child.sig) in options)
 		)
 	re_search = false
 

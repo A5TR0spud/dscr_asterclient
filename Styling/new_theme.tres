@@ -25,12 +25,15 @@
 [ext_resource type="StyleBox" uid="uid://10juafvr3ky1" path="res://Styling/Tabber/ButtonLookalike/tab_unselected.tres" id="15_d5xg6"]
 [ext_resource type="StyleBox" uid="uid://db3k5eiovgegq" path="res://Styling/Seps/v_sep.tres" id="15_k7nka"]
 [ext_resource type="FontFile" uid="uid://kx3rrq8lr2ar" path="res://fonts/CascadiaMono-Regular.ttf" id="18_pkgym"]
+[ext_resource type="StyleBox" uid="uid://circtrvcvn66m" path="res://Styling/Seps/v_split.tres" id="25_00ekq"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gt42v"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pfqjd"]
 bg_color = Color(0.8758882, 0.8758883, 0.87588835, 1)
 corner_detail = 1
+
+[sub_resource type="ImageTexture" id="ImageTexture_d5xg6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bsxcp"]
 content_margin_left = 10.0
@@ -72,6 +75,10 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
+[sub_resource type="ImageTexture" id="ImageTexture_3a2p8"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_i4fbu"]
+
 [resource]
 default_font = ExtResource("18_pkgym")
 default_font_size = 18
@@ -95,6 +102,10 @@ HScrollBar/styles/grabber_pressed = ExtResource("5_em145")
 HScrollBar/styles/scroll = ExtResource("6_i4omk")
 HSeparator/styles/separator = ExtResource("7_fqkxe")
 HSplitContainer/constants/autohide = 0
+HSplitContainer/constants/minimum_grab_thickness = 12
+HSplitContainer/constants/separation = 14
+HSplitContainer/icons/grabber = SubResource("ImageTexture_d5xg6")
+HSplitContainer/icons/touch_dragger = SubResource("ImageTexture_d5xg6")
 HSplitContainer/styles/split_bar_background = ExtResource("8_k7nka")
 ItemList/styles/cursor = SubResource("StyleBoxFlat_bsxcp")
 ItemList/styles/cursor_unfocused = SubResource("StyleBoxFlat_bsxcp")
@@ -168,3 +179,9 @@ VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_pfqjd")
 VScrollBar/styles/grabber_pressed = ExtResource("5_em145")
 VScrollBar/styles/scroll = ExtResource("9_2dlxw")
 VSeparator/styles/separator = ExtResource("15_k7nka")
+VSplitContainer/constants/autohide = 0
+VSplitContainer/constants/minimum_grab_thickness = 12
+VSplitContainer/constants/separation = 14
+VSplitContainer/icons/grabber = SubResource("ImageTexture_3a2p8")
+VSplitContainer/icons/touch_dragger = SubResource("ImageTexture_i4fbu")
+VSplitContainer/styles/split_bar_background = ExtResource("25_00ekq")
