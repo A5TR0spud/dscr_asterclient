@@ -16,6 +16,7 @@ var logged_history: Array[Dictionary] = []
 
 func _ready() -> void:
 	Main.instance.reload_dict.connect(update_name)
+	Main.instance.localization_reload.connect(update_name)
 	scroll_bar.value_changed.connect(_on_scroll)
 	scroll_bar.changed.connect(set_scroll_down_vis)
 	scroll_down_button.hide()
@@ -129,18 +130,13 @@ func clear_notification():
 	update_name()
 
 func update_name():
-	var sig = []
-	if enable_notification:
-		sig.append(-124)
-	
-	if default_channel:
-		sig.append_array([-111, Chat.CHANNEL_SELECTOR])
-	else:
-		sig.append(id)
-		
 	Chat.instance.channel_container.set_tab_title(
 		get_index(),
-		DictionaryHandler.signals_to_words(sig)
+		Localizer.translate("CHAT_CHANNEL_UNREAD" if enable_notification else "CHAT_CHANNEL",
+			Localizer.translate("CHAT_CHANNEL_NONE")
+			if default_channel else
+			DictionaryHandler.get_or_default_signal_name(id) if id < 0 else str(id)
+		)
 	)
 
 func get_prefix() -> Array[int]:
