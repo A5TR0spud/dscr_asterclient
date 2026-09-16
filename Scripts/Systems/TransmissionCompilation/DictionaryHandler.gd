@@ -246,6 +246,103 @@ static func find_incomplete_signal(line: String, caret_column: int, expected: St
 		broken_column += sub.length() + 1
 	return ["", -1]
 
+class PositionedSignal:
+	extends Object
+	var sig = 0
+	var start: int = 0
+	var end: int = 0
+	
+	func _init(sig0, start0: int, end0: int):
+		self.sig = sig0
+		self.start = start0
+		self.end = end0
+	
+	func _to_string() -> String:
+		return "|"+str(sig)+"["+str(start)+","+str(end)+"]"
+
+static func relay3544_text_parse(value: String, start: int) -> Array[PositionedSignal]:
+	var signals_at_char: Dictionary[int, Array] = {
+		start: []
+	}
+	var best_signals: Array = []
+	value = value + " "
+	for i: int in range(start, value.length()):
+		var signals = signals_at_char.get(i)
+		if signals == null: continue
+		assert(signals is Array)
+		signals = signals as Array
+		best_signals = signals
+		
+		# parse numbers
+		if value[i] == "0":
+			# deal with leading zeroes
+			var s = signals.duplicate()
+			s.append(PositionedSignal.new(
+				0, i, i + 1
+			))
+			signals_at_char.get_or_add(i + 1,
+				s
+			)
+		else:
+			# match a pipe-escaped number
+			var mat := RegEx.create_from_string("^\\|?(-?[0-9]+)").search(
+				value.substr(i)
+			)
+			print(mat)
+			if mat != null:
+				var sig: int = mat.get_string(1).to_int()
+				var s = signals.duplicate()
+				s.append(PositionedSignal.new(
+					sig, i, i + mat.get_string(1).length()
+				))
+				signals_at_char.get_or_add(i + mat.get_string(1).length() + 1,
+					s
+				)
+		# match whitespace
+		if value[i].strip_edges() == "":
+			signals_at_char.get_or_add(i + 1, signals)
+		
+		# match signals
+		for idx: int in range(word_keys.size()):
+			if idx >= word_names.size():
+				continue
+			var sig: int = word_keys[idx]
+			var token: String = word_names[idx]
+			if sig == -157400:
+				print(value.substr(i, token.length()).to_upper(), " : ", token)
+			if value.substr(i, token.length()).to_upper() == token.to_upper():
+				print(sig, " great success! ", i)
+				var s = signals.duplicate()
+				s.append(PositionedSignal.new(
+					sig, i, i + token.length()
+				))
+				signals_at_char.get_or_add(i + token.length(),
+					s
+				)
+	print("out: ", best_signals)
+	return best_signals
+
+static func relay3544_parse_wrap(value: String) -> Array[PositionedSignal]:
+	var signals: Array[PositionedSignal] = []
+	var index: int = 0
+	while true:
+		if index >= value.length(): return signals
+		if value[index].strip_edges().length() == 0:
+			index += 1
+			continue
+		signals.append_array(relay3544_text_parse(value, index))
+		var next_idx: int = signals.back().end if signals.size() > 0 else 0
+		if next_idx <= index:
+			var prev_error = signals.back() if signals.size() > 0 else null
+			if prev_error and prev_error.sig == null and prev_error.end == index:
+				prev_error.end += 1
+			else:
+				signals.append(PositionedSignal.new(null, index, index + 1))
+			index += 1
+		else:
+			index = next_idx
+	return signals
+
 ## Takes a string input and outputs a ParseResult object
 ## The returned object contains information about failure and parsed numerical signals
 static func parse_text(input: String, earlyReturn: bool = false) -> ParseResult:
@@ -330,6 +427,11 @@ static func parse_text(input: String, earlyReturn: bool = false) -> ParseResult:
 static func parse_text_to_signals(input: String, do_logging: bool = true) -> Array[int]:
 	var parsed: ParseResult = parse_text(input, not do_logging)
 	
+	#print(relay3544_parse_wrap(input))
+	#print(TransmissionCompilation.compile_text(input))
+	
+	#return []
+	
 	if parsed.state == ParseResult.FailureState.ALL_GOOD:
 		return parsed.output
 	
@@ -339,7 +441,7 @@ static func parse_text_to_signals(input: String, do_logging: bool = true) -> Arr
 				Chat.new_log(Chat.State.INPUT_TOO_LONG, [parsed.output.size()])
 			ParseResult.FailureState.UNKNOWN_STRING:
 				Chat.new_log(Chat.State.UNKNOWN_WORD, parsed.failures)
-		
+	
 	return []
 
 static func contains_signal(sig: int) -> bool:
