@@ -102,7 +102,6 @@ mouse_default_cursor_shape = 1
 bbcode_enabled = true
 text = "test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test "
 fit_content = true
-autowrap_mode = 2
 meta_underlined = false
 selection_enabled = true
 

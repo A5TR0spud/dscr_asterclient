@@ -16,6 +16,7 @@
 ### Fixes
 
 * Saving a new transmission to the library now sorts the same as on startup
+* Overly long translations with no spaces no longer clip out of bounds
 
 ## 0.7.2
 
