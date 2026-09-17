@@ -1,103 +1,187 @@
-extends Resource
+extends RefCounted
 class_name TransmissionCompilation
-var _objects: Array[PositionedSignal]
-var _size: int
-var _seed: String
-var _error: CompileError
-const MAXIMUM_COMPILE_LENGTH: int = 4096
 
-enum CompileError {
+static var _unknowns: Array = []
+static var _error: ErrorCode = ErrorCode.UNCOMPILED
+static var _prev_length: int = 0
+static var _dict_result: Dictionary = {}
+
+enum ErrorCode {
 	UNCOMPILED,
-	OK,
-	WAY_TOO_LONG,
-	UNKNOWN
+	ALL_GOOD,
+	UNKNOWN,
+	TOO_LONG
 }
 
-func _init(to_compile: String):
-	_seed = to_compile
-	_error = CompileError.UNCOMPILED
-	_objects = []
-	_objects.resize(MAXIMUM_COMPILE_LENGTH)
-	_size = 0
+## In the form:[br]
+## "starts": starts of signal groups ([PackedInt64Array]) [br]
+## "ends": ends of signal groups ([PackedInt64Array]) [br]
+## "signal_groups": signal numbers ([Array][lb][PackedInt64Array][rb]) [br]
+## The same index refers to the same signal group across all arrays
+static func get_as_data_dict() -> Dictionary:
+	return _dict_result
 
-func set_new_input(to_compile: String):
-	_seed = to_compile
-	_error = CompileError.UNCOMPILED
-	_size = 0
+## Did the most recent [code]compile_text[/code] call result in an error?
+static func has_error() -> bool:
+	return _error != ErrorCode.ALL_GOOD
 
-## Gets the array of compiled signals.[br]
-## This data may be junk if it has an error. See [code]get_error()[/code]
-func get_compiled() -> Array[PositionedSignal]:
-	return _objects.slice(0, _size)
+## Logs the error of the most recent [code]compile_text[/code] function call to the in-game chat.
+static func log_error() -> void:
+	match _error:
+		ErrorCode.UNCOMPILED or ErrorCode.ALL_GOOD:
+			return
+		ErrorCode.TOO_LONG:
+			Chat.new_log(Chat.State.INPUT_TOO_LONG, [_prev_length])
+		ErrorCode.UNKNOWN:
+			Chat.new_log(Chat.State.UNKNOWN_WORD, _unknowns)
 
-func get_error() -> CompileError:
-	return _error
-
-func compile() -> void:
-	_size = 0
-	var source: Dictionary[int, PositionedSignal] = {}
-	for idx: int in range(_seed.length()):
-		# check dictionary
-		for dict_idx in range(DictionaryHandler.word_keys.size()):
-			if dict_idx >= DictionaryHandler.word_names.size():
+static func compile_text(input: String) -> PackedInt64Array:
+	_unknowns.clear()
+	_error = ErrorCode.UNCOMPILED
+	var starts: PackedInt64Array = []
+	var ends: PackedInt64Array = []
+	var sigs: Array[PackedInt64Array] = []
+	var number_cutoff: int = 0
+	for start: int in range(input.length()):
+		if input[start] == "|":
+			var _sub: String = input.substr(start)
+			var m := RegEx.create_from_string("^\\|(-?[0-9]{1,18})").search(_sub)
+			if m:
+				var end: int = start + 1 + m.get_string().length()
+				if end not in ends:
+					if start in ends:
+						var found_idx: int = ends.find(start)
+						ends[found_idx] = end
+						sigs[found_idx].append(m.get_string().to_int())
+					else:
+						starts.append(start)
+						ends.append(end)
+						sigs.append([m.get_string().to_int()])
+					number_cutoff = end
+			continue
+		if input[start] == "0":
+			var end: int = start + 1
+			if end not in ends:
+				if start in ends:
+					var found_idx: int = ends.find(start)
+					ends[found_idx] = end
+					sigs[found_idx].append(0)
+				else:
+					starts.append(start)
+					ends.append(end)
+					sigs.append([0])
+			continue
+		if input[start].is_valid_int():
+			if start < number_cutoff:
 				continue
-			var sig: int = DictionaryHandler.word_keys[dict_idx]
-			var name: String = DictionaryHandler.word_names[dict_idx]
-			if _seed.substr(idx, name.length()).to_upper() == name.to_upper():
-				if !source.has(idx + name.length()):
-					source.set(idx + name.length(), PositionedSignal.new(
-						sig, idx, idx + name.length()
-					))
+			var _sub: String = input.substr(start)
+			var m := RegEx.create_from_string("^([0-9]{1,18})").search(_sub)
+			if m:
+				var end: int = start + m.get_string().length()
+				if end not in ends:
+					if start in ends:
+						var found_idx: int = ends.find(start)
+						ends[found_idx] = end
+						sigs[found_idx].append(m.get_string().to_int())
+					else:
+						starts.append(start)
+						ends.append(end)
+						sigs.append([m.get_string().to_int()])
+					number_cutoff = end
+			continue
+		
+		var extension_idx: PackedInt64Array = []
+		var extend_with: PackedInt64Array = []
+		var extend_to: PackedInt64Array = []
+		for idx in range(DictionaryHandler.word_keys.size()):
+			var d: String = DictionaryHandler.word_names[idx]
+			var dx: int = DictionaryHandler.word_keys[idx]
+			var end: int = start + d.length()
+			if input.substr(start, d.length()) == d:
+				if start in ends and end not in ends:
+					var found_idx: int = ends.find(start)
+					extension_idx.append(found_idx)
+					extend_with.append(dx)
+					extend_to.append(end)
+				elif !ends.has(end):
+					starts.append(start)
+					ends.append(end)
+					sigs.append([dx])
+		for ext: int in range(extension_idx.size()-1, -1, -1):
+			var k: int = extension_idx[ext]
+			if ext == 0:
+				ends[k] = extend_to[ext]
+				sigs[k].append(extend_with[ext])
+			else:
+				var v: PackedInt64Array = sigs[k].duplicate()
+				v.append(extend_with[ext])
+				starts.append(starts[k])
+				ends.append(extend_to[ext])
+				sigs.append(v)
 	
-	var seed_cursor: int = 0
-	var source_cursor: int = 0
-	var dest_cursor: int = 0
-	for sindex: int in source.keys():
-		_objects[dest_cursor] = source[sindex]
-	if _error == CompileError.UNCOMPILED:
-		_error = CompileError.OK
+	var to: int = 0
+	var from: int = 1
+	var unflipped: bool = true
+	while to < starts.size() and from < starts.size():
+		var _fro: int = from if unflipped else to
+		var _to: int = to if unflipped else from
+		var start: int = starts[_fro]
+		var end: int = ends[_fro]
+		var sig: PackedInt64Array = sigs[_fro]
+		var c_start: int = starts[_to]
+		var c_end: int = ends[_to]
+		var c_sig: PackedInt64Array = sigs[_to]
+		if (
+			(start < c_start and c_end == end)
+			or (start == c_start and c_end < end)
+			or (
+				start == c_start and
+				end == c_end and
+				sig.size() < c_sig.size()
+			)
+			or (start < c_start and c_end < end)
+		):
+			starts[_to] = start
+			ends[_to] = end
+			sigs[_to] = sig
+			starts.remove_at(_fro)
+			ends.remove_at(_fro)
+			sigs.remove_at(_fro)
+			continue
+		unflipped = not unflipped
+		if unflipped:
+			from += 1
+			to += 1
+	
+	var prevend: int = 0
+	var out: PackedInt64Array = []
+	#var mix: Array = []
+	for idx: int in range(starts.size() + 1):
+		var start: int = starts[idx] if idx < starts.size() else input.length()
+		var end: int = ends[idx] if idx < starts.size() else 0
+		if start > prevend:
+			var _s: String = input.substr(prevend, start - prevend)
+			if !is_whitespace(_s):
+				_unknowns.append_array(_s.replace_chars("\n\r\t", ord(" ")).split(" ", false))
+				_error = ErrorCode.UNKNOWN
+			#if !_s.is_empty():
+				#mix.append(_s)
+		if idx < starts.size():
+			out.append_array(sigs[idx])
+			#mix.append_array(sigs[idx])
+		prevend = end
+	
+	_prev_length = starts.size()
+	if _prev_length >= Main.MAX_MESSAGE_LENGTH:
+		_error = ErrorCode.TOO_LONG
+	elif _error == ErrorCode.UNCOMPILED:
+		_error = ErrorCode.ALL_GOOD
+	_dict_result = {
+		"starts": starts,
+		"ends": ends,
+		"signal_groups": sigs
+	}
+	return out
 
-func log_errors() -> void:
-	var errors: Array = _objects.filter(
-		func(a: PositionedSignal):
-			return a != null and a.result is not int
-	).map(
-		func(a: PositionedSignal):
-			return _seed.substr(a.start, a.end)
-	)
-	Chat.new_log(Chat.State.UNKNOWN_WORD, errors)
-
-## Negative numbers refer to a signal.[br]
-## 0 refers to a number.[br]
-## 1 refers to an error, string, or whitespace.[br]
-## 2 means the provided index is invalid.
-func get_signal_at(index: int) -> int:
-	if index < 0 or index >= _seed.length():
-		return 2
-	for p: PositionedSignal in get_compiled():
-		if p.start <= index and index < p.end:
-			if p.result is int:
-				if p.result >= 0:
-					return 0
-				return p.result
-			return 1
-	return 1
-
-class PositionedSignal:
-	extends Resource
-	var result: Variant
-	var start: int
-	var end: int
-	func _init(sig: Variant, start0: int, end0: int):
-		result = sig
-		start = start0
-		end = end0
-
-static func compile_text(input: String, do_logging: bool = true) -> Array:
-	var _i := TransmissionCompilation.new(input)
-	_i.compile()
-	if do_logging:
-		_i.log_errors()
-	#if _i.get_error() == CompileError.OK:
-	#	return _i.get_successes()
-	return []
+static func is_whitespace(val: String) -> bool:
+	return val.strip_edges(true, false).is_empty()

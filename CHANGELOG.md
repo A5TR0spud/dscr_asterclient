@@ -16,6 +16,7 @@
 ### Fixes
 
 * Saving a new transmission to the library now sorts the same as on startup
+* Certain edge-case failures to compile transmissions have been fixed
 
 ## 0.7.2
 

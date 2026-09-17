@@ -187,7 +187,7 @@ enum MessageCompilationResult {
 # 1: More detailed MessageCompilationResult
 func send_message(written: String) -> Array:
 	# Return true to clear the input box
-	var sig: Array[int] = DictionaryHandler.parse_text_to_signals(written)
+	var sig: PackedInt64Array = DictionaryHandler.parse_text_to_signals(written)
 	if sig.size() == 0:
 		return [false, MessageCompilationResult.MESSAGE_FAILED]
 	# handle commands
@@ -219,10 +219,13 @@ func send_message(written: String) -> Array:
 		Chat.focus_channel(sig[1])
 	else:
 		#only apply prefix if not manually setting a prefix
-		var prefix: Array[int] = Chat.get_current_channel_node().get_prefix()
+		var prefix: PackedInt64Array = Chat.get_current_channel_node().get_prefix()
 		sig = prefix + sig
 	
-	var strig: Array = sig.map(func (a): return str(a)) as Array[String]
+	var strig: PackedStringArray = []
+	strig.resize(sig.size())
+	for idx: int in range(sig.size()):
+		strig[idx] = str(sig[idx])
 	# extra check here to account for auto-channel-prefix
 	if strig.size() > MAX_MESSAGE_LENGTH:
 		Chat.new_log(Chat.State.INPUT_TOO_LONG, [strig.size()])

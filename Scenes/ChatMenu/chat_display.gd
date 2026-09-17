@@ -139,7 +139,7 @@ func update_name():
 		)
 	)
 
-func get_prefix() -> Array[int]:
+func get_prefix() -> PackedInt64Array:
 	if default_channel:
 		return []
 	else:
