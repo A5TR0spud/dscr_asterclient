@@ -30,6 +30,10 @@ func ready():
 	if stasis:
 		hover_node.visible = false
 	Main.instance.reload_dictionary_support.connect(try_parses)
+	Main.instance.reload_dictionary_support.connect(func():
+		if -54 in message:
+			request_rewrite(false)
+	)
 
 func get_color() -> Color:
 	return Main.get_callsign_color(sender)
