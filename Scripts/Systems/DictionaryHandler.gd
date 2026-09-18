@@ -104,6 +104,16 @@ static var default_background: bool:
 		return SaveSystem.dict.get_or_add("defaultInvert", false)
 	set(value):
 		SaveSystem.dict.set("defaultInvert", value)
+static var support_m0: bool:
+	get:
+		return SaveSystem.dict.get_or_add("supportMeteorite0", true)
+	set(value):
+		SaveSystem.dict.set("supportMeteorite0", value)
+static var support_dscr: bool:
+	get:
+		return SaveSystem.dict.get_or_add("supportDSCR", false)
+	set(value):
+		SaveSystem.dict.set("supportDSCR", value)
 
 const desc_key: String = "desc"
 const before_key: String = "formatMode"
@@ -425,7 +435,7 @@ static func signals_to_words(input: Array, do_whitespace_format: bool = false, c
 				color = calc_desc_color(desc.get(color_key))
 		elif is_number:
 			word = str(sig)
-			if prev is int and prev == -54 and sig >= 0 and sig <= 64:
+			if support_m0 and prev is int and prev == -54 and sig >= 0 and sig <= 64:
 				color = VisualizeNode.calculate_color(sig)
 				invert = true
 		

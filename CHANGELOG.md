@@ -12,11 +12,14 @@
 * Dictionary search bar now uses fuzzy search (can accomodate some typos)
 * Patched image renderer. It's faster now.
 * The default channel and the unread marker are now localized
+* Feature support levels can now be set per-dictionary in the Sources tab.
+* If the dictionary supports DSCR, images can now use cubes
 
 ### Fixes
 
 * Saving a new transmission to the library now sorts the same as on startup
 * Overly long translations with no spaces no longer clip out of bounds
+* Renaming the currently active dictionary should update where saved changes go
 
 ## 0.7.2
 

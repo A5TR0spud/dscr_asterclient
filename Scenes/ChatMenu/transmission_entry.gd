@@ -29,18 +29,22 @@ func ready():
 	Main.instance.reload_nicknames.connect(refresh_callsign)
 	if stasis:
 		hover_node.visible = false
+	Main.instance.reload_dictionary_support.connect(try_parses)
 
 func get_color() -> Color:
 	return Main.get_callsign_color(sender)
 
 func try_parses():
-	var has_image: bool = image_node.check_image(message)
-	image_node.visible = has_image and is_image_open
-	image_button_node.set_pressed_no_signal(image_node.visible)
-	image_button_node.visible = has_image
-	if not has_image and delete_empty_parses:
-		image_node.queue_free()
-		image_button_node.queue_free()
+	var has_image: bool = VisualizeNode.IMAGE in message
+	var image_enabled: bool = DictionaryHandler.support_m0
+	var has_valid_image: bool = image_node.check_image(message) if has_image else false
+	if is_instance_valid(image_node):
+		image_node.visible = has_valid_image and is_image_open and image_enabled
+		image_button_node.set_pressed_no_signal(image_node.visible)
+		image_button_node.visible = has_valid_image and image_enabled
+		if !has_image and delete_empty_parses:
+			image_node.queue_free()
+			image_button_node.queue_free()
 
 func refresh_callsign():
 	callsign_node.text = Main.base_10_to_callsign(sender)

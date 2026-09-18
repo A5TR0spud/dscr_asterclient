@@ -27,12 +27,15 @@ static func calculate_color (value: int) -> Color:
 
 @onready var cam_pivot: Node3D = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport/CameraOrigin
 @onready var cam: Camera3D = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport/CameraOrigin/Cam
-@onready var plots: MultiMeshInstance3D = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport/Plots
 @onready var zoom_slider: Range = $Intermediate/ZoomSlider
 @onready var yaw_slider: Range = $Intermediate/RenderAndYaw/YawSlider
 @onready var pitch_slider: Range = $Intermediate/PitchSlider
 @onready var visualizer: TextureRect = $Intermediate/RenderAndYaw/VisualizerRect
-@onready var multimesh: MultiMesh = plots.multimesh
+
+@onready var plot_spheres: MultiMeshInstance3D = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport/Spheres
+@onready var multimesh_spheres: MultiMesh = plot_spheres.multimesh
+@onready var plot_cubes: MultiMeshInstance3D = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport/Cubes
+@onready var multimesh_cubes: MultiMesh = plot_cubes.multimesh
 
 var _sphere_data: Array = []
 
@@ -86,12 +89,18 @@ func _on_pitch_slider_value_changed(value: float):
 
 const IMAGE: int = -53
 const PLOT : int = -52
+const CUBE : int = -524000
 const SEP  : int = -3
 
 var first_sphere: bool = true
 
+var _ball_count: int = 0
+var _cube_count: int = 0
 func _parse_sphere(parser: TransmissionParser) -> Dictionary:
-	if (first_sphere and parser.peek() == PLOT) or not first_sphere:
+	var type: int = 0
+	if DictionaryHandler.support_dscr and parser.try_consume(CUBE):
+		type = 1
+	elif (first_sphere and parser.peek() == PLOT) or not first_sphere:
 		parser.expect(PLOT)
 	var x = parser.read_number()
 	parser.expect(SEP)
@@ -104,11 +113,16 @@ func _parse_sphere(parser: TransmissionParser) -> Dictionary:
 	var c = parser.read_number()
 	parser.try_consume(SEP)
 	first_sphere = false
-
-	return {"x": x, "y": y, "z": z, "r": r, "c": c}
+	if r > 0:
+		match type:
+			0:
+				_ball_count += 1
+			1:
+				_cube_count += 1
+	return {"t": type, "x": x, "y": y, "z": z, "r": r, "c": c}
 
 func check_image(message0: Array) -> bool:
-	multimesh.instance_count = 0
+	multimesh_spheres.instance_count = 0
 	_sphere_data.clear()
 	var message: Array[int] = []
 	for u in message0:
@@ -121,6 +135,8 @@ func check_image(message0: Array) -> bool:
 		if not parser.skip_to(IMAGE): return false
 		parser.expect(IMAGE)
 		first_sphere = true
+		_ball_count = 0
+		_cube_count = 0
 		var pos := parser.save_state()
 		var spheres = parser.read_group_items(_parse_sphere)
 
@@ -136,11 +152,25 @@ func check_image(message0: Array) -> bool:
 		#print("empty image")
 		return false
 	_sphere_data = _sphere_data.filter(func(a: Dictionary): return a["r"] > 0)
-	multimesh.instance_count = _sphere_data.size()
-	for idx: int in range(_sphere_data.size()):
-		var p: Dictionary = _sphere_data[idx]
-		multimesh.set_instance_color(idx, calculate_color(p["c"]).srgb_to_linear())
-		multimesh.set_instance_transform(idx, Transform3D(
+	multimesh_spheres.instance_count = _ball_count
+	multimesh_cubes.instance_count = _cube_count
+	var _balldx: int = 0
+	var _cubedx: int = 0
+	for p: Dictionary in _sphere_data:
+		var mm: MultiMesh
+		var t: int = p["t"]
+		var idx: int = 0
+		match t:
+			0:
+				mm = multimesh_spheres
+				idx = _balldx
+				_balldx += 1
+			1:
+				mm = multimesh_cubes
+				idx = _cubedx
+				_cubedx += 1
+		mm.set_instance_color(idx, calculate_color(p["c"]).srgb_to_linear())
+		mm.set_instance_transform(idx, Transform3D(
 			# X Scale/Shear
 			Vector3(p["r"], 0, 0),
 			# Y Scale/Shear

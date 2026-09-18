@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dxpkkxynfohl7"]
 
-[ext_resource type="Script" uid="uid://c3qmqbpvgdp8f" path="res://Scenes/SettingsMenu/SourcesMenu/websocket_entry.gd" id="1_cp446"]
+[ext_resource type="Script" uid="uid://c3qmqbpvgdp8f" path="res://Scenes/SourcesMenu/websocket_entry.gd" id="1_cp446"]
 [ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="2_75ije"]
 [ext_resource type="PackedScene" uid="uid://2emnji0ns3x2" path="res://Scenes/Common/confirmation_button.tscn" id="3_nxcla"]
 

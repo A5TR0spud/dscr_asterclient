@@ -15,7 +15,7 @@
 * "load dictionary from file" button
 * Image editor tab (w/ compat vs compact exports)
 * Use custom bbcode for underline/strikethroughs so they're 2px wide and thus actually visible
-* Add per-dict settings for Meteor0ese support and DSCRism (music, etc) support
+* Music
 * clean up transmission un/re-loading and/to figure out duplicate and missing history
 
 ### nikzapp

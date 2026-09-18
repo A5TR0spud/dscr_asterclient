@@ -17,7 +17,7 @@
 [ext_resource type="Script" uid="uid://cmdmiuvan8h1p" path="res://Scenes/Main/dict_edit_prison.gd" id="12_ifk88"]
 [ext_resource type="PackedScene" uid="uid://crn4b5wrwilbc" path="res://Scenes/DictEditMenu/dict_edit_window.tscn" id="13_8sujb"]
 [ext_resource type="PackedScene" uid="uid://cnhrmaid1urmm" path="res://Scenes/LocaleMenu/locale_menu.tscn" id="17_koken"]
-[ext_resource type="PackedScene" uid="uid://bjsm5yvgoxcva" path="res://Scenes/SettingsMenu/SourcesMenu/source_menu.tscn" id="19_c4b4r"]
+[ext_resource type="PackedScene" uid="uid://bjsm5yvgoxcva" path="res://Scenes/SourcesMenu/source_menu.tscn" id="19_c4b4r"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g4v7s"]
 

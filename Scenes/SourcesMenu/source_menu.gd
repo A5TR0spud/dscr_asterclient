@@ -6,8 +6,8 @@ static var instance: SourcesMenu
 @onready var wss_list: VBoxContainer = $VBoxContainer/HBoxContainer/WSSPanel/ScrollContainer/VBoxContainer
 @onready var dc_list: VBoxContainer = $VBoxContainer/HBoxContainer/DictPanel/ScrollContainer/VBoxContainer
 
-var wss_entry = preload("res://Scenes/SettingsMenu/SourcesMenu/websocket_entry.tscn")
-var dc_entry = preload("res://Scenes/SettingsMenu/SourcesMenu/dict_change_entry.tscn")
+var wss_entry = preload("res://Scenes/SourcesMenu/websocket_entry.tscn")
+var dc_entry = preload("res://Scenes/SourcesMenu/dict_change_entry.tscn")
 
 func _enter_tree():
 	instance = self

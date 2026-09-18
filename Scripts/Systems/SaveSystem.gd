@@ -274,7 +274,10 @@ static func delete_dict_name(to_delete: String) -> bool:
 static func change_dict_name(from: String, to: String) -> String:
 	to = get_valid_dict_name(to)
 	var err := DirAccess.rename_absolute(opened_save_folder.path_join(_DICT_FOLDER).path_join(from), opened_save_folder.path_join(_DICT_FOLDER).path_join(to))
-	return to if err == Error.OK else from
+	var o: String = to if err == Error.OK else from
+	if from == _current_dictionary_filename:
+		_current_dictionary_filename = o
+	return o
 
 static func dupe_dict(to_dupe: String):
 	var old := FileAccess.open(opened_save_folder.path_join(_DICT_FOLDER).path_join(to_dupe), FileAccess.READ)
@@ -348,6 +351,7 @@ static func load_dict(path: String = "") -> bool:
 		return false
 
 	Main.on_dict_reload()
+	Main.on_dictionary_support_updated()
 	return true
 
 static func eval_bad_dict() -> void:

@@ -51,6 +51,9 @@ signal localization_reload
 static func on_localization_reload() -> void:
 	instance.localization_reload.emit()
 signal post_load
+signal reload_dictionary_support
+static func on_dictionary_support_updated() -> void:
+	instance.reload_dictionary_support.emit()
 
 signal connected_user_change
 

@@ -40,6 +40,15 @@ transform_format = 1
 use_colors = true
 mesh = SubResource("SphereMesh_57qmd")
 
+[sub_resource type="BoxMesh" id="BoxMesh_psu8h"]
+material = SubResource("ShaderMaterial_3bk5g")
+
+[sub_resource type="MultiMesh" id="MultiMesh_psu8h"]
+resource_local_to_scene = true
+transform_format = 1
+use_colors = true
+mesh = SubResource("BoxMesh_psu8h")
+
 [node name="VisualizerNode" type="PanelContainer" unique_id=1907311917]
 custom_maximum_size = Vector2(576, -1)
 script = ExtResource("1_psu8h")
@@ -99,11 +108,17 @@ mesh = SubResource("QuadMesh_g4v7s")
 transform = Transform3D(1, 0, 0, 0, -1, -1.509958e-07, 0, 1.509958e-07, -1, 0, 8, 0)
 mesh = SubResource("QuadMesh_g4v7s")
 
-[node name="Plots" type="MultiMeshInstance3D" parent="Intermediate/RenderAndYaw/VisualizerRect/SubViewport" unique_id=1090367063]
+[node name="Spheres" type="MultiMeshInstance3D" parent="Intermediate/RenderAndYaw/VisualizerRect/SubViewport" unique_id=1090367063]
 cast_shadow = 0
 custom_aabb = AABB(-16, -8, -16, 32, 16, 32)
 gi_mode = 0
 multimesh = SubResource("MultiMesh_g4v7s")
+
+[node name="Cubes" type="MultiMeshInstance3D" parent="Intermediate/RenderAndYaw/VisualizerRect/SubViewport" unique_id=1261465019]
+cast_shadow = 0
+custom_aabb = AABB(-16, -8, -16, 32, 16, 32)
+gi_mode = 0
+multimesh = SubResource("MultiMesh_psu8h")
 
 [node name="YawSlider" type="HScrollBar" parent="Intermediate/RenderAndYaw" unique_id=2145835859]
 layout_mode = 2

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bjsm5yvgoxcva"]
 
-[ext_resource type="Script" uid="uid://ctoooylmva4sy" path="res://Scenes/SettingsMenu/SourcesMenu/source_menu.gd" id="1_rum6k"]
+[ext_resource type="Script" uid="uid://ctoooylmva4sy" path="res://Scenes/SourcesMenu/source_menu.gd" id="1_rum6k"]
 [ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="2_joqq6"]
 
 [node name="SourceMenu" type="PanelContainer" unique_id=37936975]
