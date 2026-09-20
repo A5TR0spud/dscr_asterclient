@@ -182,7 +182,9 @@ func check_image(message0: Array) -> bool:
 		))
 	return true
 
-var mouse_teleported: bool = false
+
+var _held_mouse_pos: Vector2
+var _is_holding: bool = false
 func _on_visualizer_rect_gui_input(event: InputEvent):
 	if event.is_action_pressed("zoom in"):
 		zoom_slider.value += event.get_action_strength("zoom in") * zoom_slider.page * 0.5
@@ -192,42 +194,35 @@ func _on_visualizer_rect_gui_input(event: InputEvent):
 		zoom_slider.value -= event.get_action_strength("zoom out") * zoom_slider.page * 0.5
 		accept_event()
 		return
-	if not Input.is_action_pressed("rotate_image"):
+	if event.is_action_released("rotate_image"):
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		visualizer.warp_mouse.call_deferred(_held_mouse_pos)
+		_is_holding = false
+		accept_event()
 		return
+	if event.is_action_pressed("rotate_image"):
+		_held_mouse_pos = visualizer.get_local_mouse_position()
+		Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
+		_is_holding = true
+		accept_event()
+		return
+	if !_is_holding:
+		return
+	if visualizer.get_local_mouse_position() == _held_mouse_pos:
+		return
+	visualizer.warp_mouse.call_deferred(_held_mouse_pos)
 	if event is InputEventMouseMotion:
 		event = event as InputEventMouseMotion
-		var motion: Vector2 = event.relative
-		motion.x /= yaw_slider.size.x
-		motion.y /= pitch_slider.size.y
+		var motion: Vector2 = event.position - _held_mouse_pos
 		motion.x *= yaw_slider.max_value - yaw_slider.min_value - yaw_slider.page
 		motion.y *= pitch_slider.max_value - pitch_slider.min_value - pitch_slider.page
-		if mouse_teleported:
-			mouse_teleported = false
-			return
-		var mouse_pos: Vector2 = visualizer.get_local_mouse_position()
-		if mouse_pos.x < 0:
-			mouse_pos.x = visualizer.size.x - 1
-			visualizer.warp_mouse(mouse_pos)
-			mouse_teleported = true
-		if mouse_pos.x > visualizer.size.x:
-			mouse_pos.x = 1
-			visualizer.warp_mouse(mouse_pos)
-			mouse_teleported = true
-		if mouse_pos.y < 0:
-			mouse_pos.y = visualizer.size.y - 1
-			visualizer.warp_mouse(mouse_pos)
-			mouse_teleported = true
-		if mouse_pos.y > visualizer.size.y:
-			mouse_pos.y = 1
-			visualizer.warp_mouse(mouse_pos)
-			mouse_teleported = true
+		motion.x /= yaw_slider.size.x
+		motion.y /= pitch_slider.size.y
 		var yaw: float = yaw_slider.value + motion.x
 		if yaw > yaw_slider.max_value - yaw_slider.page:
 			yaw -= yaw_slider.max_value - yaw_slider.min_value - yaw_slider.page
-			mouse_teleported = true
 		if yaw < yaw_slider.min_value:
 			yaw += yaw_slider.max_value - yaw_slider.min_value - yaw_slider.page
-			mouse_teleported = true
 		yaw_slider.value = yaw
 		pitch_slider.value += motion.y
 		accept_event()

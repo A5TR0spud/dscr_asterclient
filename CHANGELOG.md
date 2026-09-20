@@ -20,6 +20,7 @@
 * Saving a new transmission to the library now sorts the same as on startup
 * Overly long translations with no spaces no longer clip out of bounds
 * Renaming the currently active dictionary should update where saved changes go
+* Fixed cursor-wrapping in image rotation sometimes flipping pitch
 
 ## 0.7.2
 
