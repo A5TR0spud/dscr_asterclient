@@ -41,7 +41,8 @@ turbulence_enabled = true
 turbulence_influence_min = 0.010000001
 turbulence_influence_max = 0.010000001
 
-[node name="Confetti" type="Control" unique_id=1252774838]
+[node name="Confetti" type="Control" unique_id=442682486]
+top_level = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -59,6 +60,7 @@ autostart = true
 [node name="LeftBasic" type="GPUParticles2D" parent="." unique_id=1343541128]
 position = Vector2(0, 648)
 rotation = -0.2617994
+scale = Vector2(0.99999994, 0.99999994)
 emitting = false
 amount = 24
 amount_ratio = 0.5
@@ -72,6 +74,7 @@ process_material = SubResource("ParticleProcessMaterial_yf5fn")
 [node name="LeftTrails" type="GPUParticles2D" parent="." unique_id=60095057]
 position = Vector2(0, 648)
 rotation = -0.2617994
+scale = Vector2(0.99999994, 0.99999994)
 emitting = false
 amount = 24
 amount_ratio = 0.5
@@ -116,4 +119,5 @@ trail_sections = 10
 trail_section_subdivisions = 10
 process_material = SubResource("ParticleProcessMaterial_yf5fn")
 
+[connection signal="item_rect_changed" from="." to="." method="_on_item_rect_changed"]
 [connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]

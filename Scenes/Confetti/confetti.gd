@@ -18,10 +18,6 @@ func _burst():
 			return
 		cd.start(12)
 	show()
-	lb.position = Vector2(0, get_rect().size.y)
-	lt.position = Vector2(0, get_rect().size.y)
-	rb.position = get_rect().size
-	rt.position = get_rect().size
 	for c in get_children():
 		if c is GPUParticles2D:
 			c.restart()
@@ -33,3 +29,11 @@ static func burst():
 
 func _on_cooldown_timeout():
 	hide()
+
+func _on_item_rect_changed():
+	if not is_node_ready():
+		await ready
+	lb.position = Vector2(0, get_viewport_rect().size.y)
+	lt.position = Vector2(0, get_viewport_rect().size.y)
+	rb.position = get_viewport_rect().size
+	rt.position = get_viewport_rect().size
