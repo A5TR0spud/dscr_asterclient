@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://d372frnw84240" path="res://Assets/Sounds/acknowledge.ogg" id="4_5lc5d"]
 [ext_resource type="AudioStream" uid="uid://bf1uu02ektp1y" path="res://Assets/Sounds/openure.ogg" id="4_etekg"]
 [ext_resource type="AudioStream" uid="uid://dokxqms87xtdo" path="res://Assets/Sounds/triple_dial.ogg" id="6_jfsv2"]
+[ext_resource type="AudioStream" uid="uid://eqcsl67khrwl" path="res://Assets/Sounds/party_horn.mp3" id="8_etekg"]
 
 [node name="SoundManager" type="Node" unique_id=467419252]
 script = ExtResource("1_pkawr")
@@ -41,3 +42,8 @@ pitch_scale = 1.25
 [node name="command_send" type="AudioStreamPlayer" parent="." unique_id=2025775238]
 stream = ExtResource("6_jfsv2")
 pitch_scale = 1.25
+
+[node name="party_horn" type="AudioStreamPlayer" parent="." unique_id=1205760244]
+stream = ExtResource("8_etekg")
+volume_db = -5.0
+pitch_scale = 1.49

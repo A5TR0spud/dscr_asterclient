@@ -21,6 +21,7 @@ func _burst():
 	for c in get_children():
 		if c is GPUParticles2D:
 			c.restart()
+	SoundManager.play_sound(SoundManager.Sounds.PARTY_HORN)
 
 static func burst():
 	if not instance or not instance.is_node_ready():

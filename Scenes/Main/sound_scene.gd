@@ -11,6 +11,7 @@ static var instance: SoundManager
 @onready var message_send: AudioStreamPlayer = $message_send
 @onready var command_send: AudioStreamPlayer = $command_send
 @onready var click: AudioStreamPlayer = $click
+@onready var party_horn: AudioStreamPlayer = $party_horn
 
 enum Sounds {
 	NOTIFICATION,
@@ -24,7 +25,11 @@ enum Sounds {
 	CONFIRMED,
 	SUCCESS,
 	MESSAGE_SENT,
-	COMMAND_ACCEPTED
+	COMMAND_ACCEPTED,
+	# sourced from https://pixabay.com/sound-effects/film-special-effects-birthday-party-horn-250238/
+	# for free
+	# uploaded by Universfield
+	PARTY_HORN
 }
 
 func _enter_tree():
@@ -34,6 +39,8 @@ static func play_sound(sound_id: Sounds) -> void:
 	instance._play_sound(sound_id)
 
 func _play_sound(sound_id: Sounds) -> void:
+	if AudioServer.is_bus_mute(AudioServer.get_bus_index("Master")):
+		return
 	match sound_id:
 		Sounds.NOTIFICATION:
 			notification_sound.play()
@@ -61,3 +68,6 @@ func _play_sound(sound_id: Sounds) -> void:
 			message_send.play()
 		Sounds.COMMAND_ACCEPTED:
 			message_send.play()
+		Sounds.PARTY_HORN:
+			party_horn.pitch_scale = randf_range(1.45, 1.55)
+			party_horn.play()

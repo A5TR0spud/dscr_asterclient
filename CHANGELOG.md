@@ -7,6 +7,7 @@
 * Images can now be resized
   * Added a toggle per-image to scale resolution vs keep it chunky
   * Added button to images to reset camera position
+* Added a happy fun sound for a particularly happy fun thing
 
 ### Changes
 
