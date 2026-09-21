@@ -2,7 +2,7 @@ extends VBoxContainer
 
 func _ready() -> void:
 	Main.instance.reload_settings.connect(refresh)
-	Main.instance.reload_dictionary_support.connect(_refresh_confetti)
+	Main.instance.reload_dictionary_support.connect(_refresh_dict_supports)
 	Main.instance.reload_dict.connect(_refresh_confetti)
 
 @onready var formatting: SettingEntry = $ScrollContainer/Options/Formatting
@@ -19,6 +19,7 @@ func _ready() -> void:
 @onready var invert_zoom: SettingEntry = $ScrollContainer/Options/ImageMovement/VBoxContainer/InvertZoom
 @onready var undef_setting: SettingEntry = $ScrollContainer/Options/UndefSetting
 @onready var confetti_setting: SettingEntry = $ScrollContainer/Options/Confetti
+@onready var image_setting_group: FoldableContainer = $ScrollContainer/Options/ImageMovement
 
 func refresh() -> void:
 	formatting.set_state_no_signal(SettingsHandler.do_formatting)
@@ -34,7 +35,12 @@ func refresh() -> void:
 	_sample_color()
 	undef_setting.set_state_no_signal(SettingsHandler.use_at_undef)
 	confetti_setting.set_state_no_signal(SettingsHandler.confetti)
+	_refresh_dict_supports()
+
+func _refresh_dict_supports():
 	_refresh_confetti()
+	image_visibility.visible = DictionaryHandler.support_m0
+	image_setting_group.visible = DictionaryHandler.support_m0
 
 func _refresh_confetti():
 	confetti_setting.visible = DictionaryHandler.support_dscr and -702 in DictionaryHandler.word_keys
