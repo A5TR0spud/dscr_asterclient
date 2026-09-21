@@ -2,30 +2,36 @@
 
 [ext_resource type="Script" uid="uid://n6r7kl2cvtxb" path="res://Scenes/Common/icon_button.gd" id="1_hrr7x"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8vf8x"]
-
-[node name="IconButton" type="PanelContainer" unique_id=1745782209]
+[node name="IconButton" type="MarginContainer" unique_id=171257682]
 texture_filter = 6
 offset_right = 20.0
 offset_bottom = 8.0
 tooltip_auto_translate_mode = 2
-mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxEmpty_8vf8x")
-script = ExtResource("1_hrr7x")
-
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=215722103]
-layout_mode = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
+script = ExtResource("1_hrr7x")
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer" unique_id=281965406]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=281965406]
 layout_mode = 2
-expand_mode = 5
+expand_mode = 3
 stretch_mode = 5
 
-[node name="Button" type="Button" parent="." unique_id=804467243]
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect" unique_id=215722103]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = -4
+theme_override_constants/margin_top = -4
+theme_override_constants/margin_right = -4
+theme_override_constants/margin_bottom = -4
+
+[node name="Button" type="Button" parent="TextureRect/MarginContainer" unique_id=804467243]
 layout_mode = 2
 mouse_filter = 1
 mouse_default_cursor_shape = 2
+theme_override_constants/align_to_largest_stylebox = 1

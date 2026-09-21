@@ -45,5 +45,5 @@ pitch_scale = 1.25
 
 [node name="party_horn" type="AudioStreamPlayer" parent="." unique_id=1205760244]
 stream = ExtResource("8_etekg")
-volume_db = -5.0
+volume_db = -7.0
 pitch_scale = 1.49

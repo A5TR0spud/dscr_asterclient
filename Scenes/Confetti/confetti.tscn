@@ -86,8 +86,6 @@ explosiveness = 0.95
 randomness = 0.14
 trail_enabled = true
 trail_lifetime = 0.1
-trail_sections = 10
-trail_section_subdivisions = 10
 process_material = SubResource("ParticleProcessMaterial_yf5fn")
 
 [node name="RightBasic" type="GPUParticles2D" parent="." unique_id=2033066561]
@@ -116,8 +114,6 @@ explosiveness = 0.95
 randomness = 0.14
 trail_enabled = true
 trail_lifetime = 0.1
-trail_sections = 10
-trail_section_subdivisions = 10
 process_material = SubResource("ParticleProcessMaterial_yf5fn")
 
 [connection signal="item_rect_changed" from="." to="." method="_on_item_rect_changed"]

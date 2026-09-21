@@ -91,13 +91,11 @@ size_flags_horizontal = 3
 [node name="DSVE_Button" parent="Body/Corpus/Header" unique_id=1745782209 instance=ExtResource("7_c4b4r")]
 layout_mode = 2
 icon = ExtResource("7_1t20g")
-expand_mode = 3
 tooltip_key = "BUTTON_DSVE"
 
 [node name="LocaleButton" parent="Body/Corpus/Header" unique_id=390179226 instance=ExtResource("7_c4b4r")]
 layout_mode = 2
 icon = ExtResource("7_2ok46")
-expand_mode = 3
 tooltip_key = "BUTTON_LANG"
 
 [node name="TabContainer" type="Container" parent="Body/Corpus" unique_id=1155907715]
