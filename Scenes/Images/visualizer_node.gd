@@ -32,7 +32,7 @@ static func calculate_color (value: int) -> Color:
 @onready var pitch_slider: Range = $Intermediate/PitchSlider
 @onready var visualizer: TextureRect = $Intermediate/RenderAndYaw/VisualizerRect
 @onready var viewport: SubViewport = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport
-@onready var res_button: Button = $Intermediate/VBoxContainer/LanguageButton/ResolutionButton
+@onready var res_button: IconButton = $Intermediate/VBoxContainer/ResolutionButton
 
 @onready var plot_spheres: MultiMeshInstance3D = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport/Spheres
 @onready var multimesh_spheres: MultiMesh = plot_spheres.multimesh
@@ -246,3 +246,8 @@ func _on_resolution_button_toggled(toggled_on):
 
 func _viewport_res():
 	viewport.size = Vector2(visualizer.size.x, visualizer.size.x * 128.0/200.0)
+
+func _on_center_button_pressed():
+	yaw_slider.value = 0
+	zoom_slider.value = 0
+	pitch_slider.value = 0
