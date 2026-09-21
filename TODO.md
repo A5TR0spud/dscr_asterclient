@@ -1,6 +1,5 @@
 ## TODO
 
-* ability to resize image-render window
 * ability to send received transmission direct to library
 * add signal-matching options? (eg recolor matching pairs of -14 and -15, autocompleting -14 also types -15)
 * add "macro-dictionary" tab

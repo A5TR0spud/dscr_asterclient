@@ -5,6 +5,11 @@
 ### Additions
 
 * Images can now be resized
+  * Added a toggle per-image to scale resolution vs keep it chunky
+
+### Fixes
+
+* Adjusted the m0 localization for default image visibility setting to remove implication it enables/disables images entirely
 
 ## 0.7.3
 

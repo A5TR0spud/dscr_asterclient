@@ -23,7 +23,7 @@ SETTINGS_HEADER,-241 -174,Settings
 SETTINGS_DIRECTORY,-40 -174,Change Save Directory
 SETTINGS_RECONNECT,-241 0 -41,Reconnect
 SETTINGS_DO_WHITESPACE,-26 -14 -42 -190 -85 -100 -223 -15 -4,Follow dictionary whitespace?
-SETTINGS_DEFAULT_IMAGE,-26 -14 -53 -163 -85 -15 -4,Show images by default?
+SETTINGS_DEFAULT_IMAGE,-26 -14 -124 -53 -163 -85 -15 -4,Show images by default?
 SETTINGS_DO_BBCODE,-26 -14 -42 -54 -163 -85 -15 -4,Enable word formatting?
 SETTINGS_BOOL_TRUE,-27,Yes
 SETTINGS_BOOL_FALSE,-28,No
