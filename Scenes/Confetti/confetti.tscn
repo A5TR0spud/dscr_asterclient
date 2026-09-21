@@ -22,24 +22,25 @@ gradient = SubResource("Gradient_vvhja")
 particle_flag_disable_z = true
 angle_min = -720.0
 angle_max = 720.0
-direction = Vector3(1, -1, 0)
 spread = 25.0
-initial_velocity_min = 518.13
-initial_velocity_max = 777.2
+initial_velocity_min = 544.04
+initial_velocity_max = 919.69
 angular_velocity_min = -70.000015
 angular_velocity_max = 69.999985
 gravity = Vector3(0, 98, 0)
+linear_accel_min = 8.289998
+linear_accel_max = 8.289998
 tangential_accel_min = -27.980001
 tangential_accel_max = 26.419996
-damping_min = 22.798
-damping_max = 22.798
+damping_min = 13.990001
+damping_max = 13.990001
 attractor_interaction_enabled = false
 scale_min = 0.75
 color_initial_ramp = SubResource("GradientTexture1D_57qmd")
 alpha_curve = SubResource("CurveTexture_d0u6y")
 turbulence_enabled = true
-turbulence_influence_min = 0.010000001
-turbulence_influence_max = 0.010000001
+turbulence_influence_min = 0.020000001
+turbulence_influence_max = 0.020000001
 
 [node name="Confetti" type="Control" unique_id=442682486]
 top_level = true
@@ -59,7 +60,7 @@ autostart = true
 
 [node name="LeftBasic" type="GPUParticles2D" parent="." unique_id=1343541128]
 position = Vector2(0, 648)
-rotation = -0.2617994
+rotation = -1.0471976
 scale = Vector2(0.99999994, 0.99999994)
 emitting = false
 amount = 24
@@ -73,7 +74,7 @@ process_material = SubResource("ParticleProcessMaterial_yf5fn")
 
 [node name="LeftTrails" type="GPUParticles2D" parent="." unique_id=60095057]
 position = Vector2(0, 648)
-rotation = -0.2617994
+rotation = -1.0471976
 scale = Vector2(0.99999994, 0.99999994)
 emitting = false
 amount = 24
@@ -91,7 +92,7 @@ process_material = SubResource("ParticleProcessMaterial_yf5fn")
 
 [node name="RightBasic" type="GPUParticles2D" parent="." unique_id=2033066561]
 position = Vector2(1152, 648)
-rotation = -1.3089969
+rotation = -2.0943952
 emitting = false
 amount = 24
 amount_ratio = 0.5
@@ -104,7 +105,7 @@ process_material = SubResource("ParticleProcessMaterial_yf5fn")
 
 [node name="RightTrails" type="GPUParticles2D" parent="." unique_id=1902743016]
 position = Vector2(1152, 648)
-rotation = -1.3089969
+rotation = -2.0943952
 emitting = false
 amount = 24
 amount_ratio = 0.5
