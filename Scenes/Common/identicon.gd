@@ -33,35 +33,47 @@ func _uv_to_coord(uv: Vector2i) -> Vector2i:
 	return Vector2i(roundi(icon_size * 0.2 * uv.x), roundi(icon_size * 0.2 * uv.y))
 
 func _draw():
-	for i: int in range(15):
-		var x: int = i % 3
-		var y: int = floori(i / 3.0)
-		var r: int = num
-		if r % 2 == 0:
-			y = 4 - y
-		if (r % 3) == 0:
-			x = 2 - x
-		y = (r % 5 + y) % 5
-		
-		var idx: int = x + y * 3
-		if y == 2:
-			idx += 6
-		if y > 2:
-			idx -= 3
-		var big_skip: bool = false
-		for j: int in range(12):
-			if r % 2 == 0 and idx == j:
-				big_skip = true
-				break
-			r = floori(r * 0.5)
-		if big_skip:
-			continue
-		if (idx == 12) and (num % 7) == 1:
-			continue
-		if (idx == 13) and (num % 11) == 1:
-			continue
-		if (idx == 14) and (num % 13) == 1:
-			continue
-		draw_rect(_xy_to_rect(2 - i % 3, floori(i / 3.0)), _col)
-		if i % 3 != 0:
-			draw_rect(_xy_to_rect(2 + i % 3, floori(i / 3.0)), _col)
+	if num % 2 == 1:
+		for i: int in range(25):
+			var x: int = i % 5
+			var y: int = floor(i / 5.0)
+			if y == 0 and num % (abs(x-2) + 1) == 0:
+				continue
+			var f: int = 14-(abs(x-2)+y*3)
+			if f >= 0:
+				if num % 2**(f+1) >= 2**f:
+					continue
+			draw_rect(_xy_to_rect(x, y), _col)
+	else:
+		for i: int in range(15):
+			var x: int = i % 3
+			var y: int = floori(i / 3.0)
+			var r: int = num
+			if r % 2 == 0:
+				y = 4 - y
+			if (r % 3) == 0:
+				x = 2 - x
+			y = (r % 5 + y) % 5
+			
+			var idx: int = x + y * 3
+			if y == 2:
+				idx += 6
+			if y > 2:
+				idx -= 3
+			var big_skip: bool = false
+			for j: int in range(12):
+				if r % 2 == 0 and idx == j:
+					big_skip = true
+					break
+				r = floori(r * 0.5)
+			if big_skip:
+				continue
+			if (idx == 12) and (num % 7) == 1:
+				continue
+			if (idx == 13) and (num % 11) == 1:
+				continue
+			if (idx == 14) and (num % 13) == 1:
+				continue
+			draw_rect(_xy_to_rect(2 - i % 3, floori(i / 3.0)), _col)
+			if i % 3 != 0:
+				draw_rect(_xy_to_rect(2 + i % 3, floori(i / 3.0)), _col)

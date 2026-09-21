@@ -14,6 +14,7 @@
 * The default channel and the unread marker are now localized
 * Feature support levels can now be set per-dictionary in the Sources tab.
 * If the dictionary supports DSCR, images can now use cubes
+* Odd numbered callsigns now use a different, simpler, more unique identicon generation method to reduce duplicates
 
 ### Fixes
 
