@@ -1,11 +1,11 @@
 # Versions
 
-## --WIP--
+## 0.7.3
 
 ### Additions
 
 * Added search bar to library
-* Added a special surprise!
+* Added a special surprise! See changes for a hint at how to enable it
 
 ### Changes
 
@@ -14,14 +14,17 @@
 * Patched image renderer. It's faster now.
 * The default channel and the unread marker are now localized
 * Feature support levels can now be set per-dictionary in the Sources tab.
-* If the dictionary supports DSCR, images can now use cubes
-* Odd numbered callsigns now use a different, simpler, more unique identicon generation method to reduce duplicates
+  * Default dictionary support level is meteorite 0
+  * If the dictionary supports DSCR, images can now use cubes
+  * If using a non-meteor dictionary, irrelevant settings (image settings) are hidden
+* Odd numbered callsigns now use a different, simpler, less duplicable identicon generation method (to reduce the chances of duplicates duplicates)
 * Added custom underline/strikethrough implementation so they're not so hard to see
+* Hovering over transmissions unhides the button styling on the transmission number, so that it being a button isn't so concealed
 
 ### Fixes
 
 * Saving a new transmission to the library now sorts the same as on startup
-* Overly long translations with no spaces no longer clip out of bounds
+* Overly long transmissions with no spaces no longer clip out of bounds
 * Renaming the currently active dictionary should update where saved changes go
 * Fixed cursor-wrapping in image rotation sometimes flipping pitch
 

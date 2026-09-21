@@ -100,6 +100,7 @@ func _on_hover_change(hovering: bool) -> void:
 	timeago_node.text = get_timeago_string()
 	hover_node.visible = hovering
 	is_hovering = hovering
+	transmission_node.flat = not hovering
 	_handle_clickables()
 
 func _on_set_etc_visibility(visiblity: bool) -> void:
