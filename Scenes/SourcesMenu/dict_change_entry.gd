@@ -10,7 +10,6 @@ func _ready():
 	Main.instance.reload_dict.connect(refresh)
 
 func refresh():
-	print("r")
 	edit.text = dict_name
 	supports.visible = dict_name == SaveSystem._current_dictionary_filename
 	if DictionaryHandler.support_dscr:

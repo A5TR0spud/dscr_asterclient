@@ -15,6 +15,7 @@
 * Feature support levels can now be set per-dictionary in the Sources tab.
 * If the dictionary supports DSCR, images can now use cubes
 * Odd numbered callsigns now use a different, simpler, more unique identicon generation method to reduce duplicates
+* Added custom underline/strikethrough implementation so they're not so hard to see
 
 ### Fixes
 

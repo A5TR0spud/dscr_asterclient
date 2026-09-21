@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dwkx03fumio6d"]
 
 [ext_resource type="Script" uid="uid://b5gm3ho0sr5aa" path="res://Scenes/DictDisplayMenu/dict_entry.gd" id="1_b8k2r"]
+[ext_resource type="Script" uid="uid://c81wheph0v6l6" path="res://Scenes/ChatMenu/custom_underline_bold.gd" id="2_ufpmx"]
 
 [node name="DictEntry" type="VBoxContainer" unique_id=674482300]
 anchors_preset = 15
@@ -38,6 +39,10 @@ scroll_active = false
 autowrap_mode = 0
 horizontal_alignment = 2
 meta_underlined = false
+
+[node name="CustomEffectsInstallerNode" type="Node" parent="Entry/Meaning" unique_id=2030882311]
+script = ExtResource("2_ufpmx")
+metadata/_custom_type_script = "uid://c81wheph0v6l6"
 
 [node name="HSeparator" type="HSeparator" parent="." unique_id=1714625919]
 layout_mode = 2

@@ -5,6 +5,7 @@
 [ext_resource type="FontFile" uid="uid://cwbj6dro36xa3" path="res://fonts/CascadiaMono-Bold.ttf" id="3_42owa"]
 [ext_resource type="StyleBox" uid="uid://4hbvf66ek6pl" path="res://Styling/transmission_indent.tres" id="4_wapdh"]
 [ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="5_wapdh"]
+[ext_resource type="Script" uid="uid://c81wheph0v6l6" path="res://Scenes/ChatMenu/custom_underline_bold.gd" id="6_kq2tu"]
 [ext_resource type="PackedScene" uid="uid://bcqkh2yjqiert" path="res://Scenes/Images/visualizer_node.tscn" id="6_wapdh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g4v7s"]
@@ -104,6 +105,10 @@ text = "test test test test test test test test test test test test test test te
 fit_content = true
 meta_underlined = false
 selection_enabled = true
+
+[node name="CustomEffectsInstallerNode" type="Node" parent="Body/Corpus/Message" unique_id=438355690]
+script = ExtResource("6_kq2tu")
+metadata/_custom_type_script = "uid://c81wheph0v6l6"
 
 [node name="ContextButtons" type="HFlowContainer" parent="Body/Corpus" unique_id=1127365251]
 layout_mode = 2

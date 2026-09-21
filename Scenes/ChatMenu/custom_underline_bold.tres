@@ -1,0 +1,6 @@
+[gd_resource type="RichTextEffect" script_class="CustomEffectsInstallerNode" format=3 uid="uid://hwgds8m37mdk"]
+
+[ext_resource type="Script" uid="uid://c81wheph0v6l6" path="res://Scenes/ChatMenu/custom_underline_bold.gd" id="1_4idt1"]
+
+[resource]
+script = ExtResource("1_4idt1")

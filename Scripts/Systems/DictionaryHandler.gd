@@ -466,10 +466,8 @@ static func signals_to_words(input: Array, do_whitespace_format: bool = false, c
 					o += "[b]"
 				if italic:
 					o += "[i]"
-				if underline:
-					o += "[u]"
-				if strike:
-					o += "[s]"
+				if strike or underline:
+					o += str("[su2 u=", underline, " s=", strike, "]")
 				if invert:
 					o += "[bgcolor=#" + color.to_html(false) + "][color="+("black" if calc_luminosity(color) > 0.5 else "white") + "]"
 				elif color != Color.WHITE:
@@ -481,10 +479,8 @@ static func signals_to_words(input: Array, do_whitespace_format: bool = false, c
 					o += "[/color][/bgcolor]" 
 				elif color != Color.WHITE:
 					o += "[/color]"
-				if strike:
-					o += "[/s]"
-				if underline:
-					o += "[/u]"
+				if strike or underline:
+					o += "[/su2]"
 				if italic:
 					o += "[/i]"
 				if bold:
