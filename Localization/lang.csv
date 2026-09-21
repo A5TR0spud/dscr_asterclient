@@ -5,6 +5,7 @@ TAB_DICT,-42,Dictionary
 TAB_USERS,-130,Users
 TAB_SETTINGS,-241,Settings
 BUTTON_DSVE,-53 -38,DSVE
+BUTTON_LANG,-195 -174,Change language
 BUTTON_SCROLL,-119 -43,Return to bottom
 PLACEHOLDER_ENTRY,-43 -38,Enter message here…
 SIGNAL_NAME,-42,Signal

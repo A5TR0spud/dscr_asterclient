@@ -23,7 +23,7 @@ size_flags_vertical = 4
 columns = 2
 
 [node name="m0" type="Button" parent="CenterContainer/GridContainer" unique_id=654038840]
-texture_filter = 2
+texture_filter = 4
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_constants/icon_max_width = 24

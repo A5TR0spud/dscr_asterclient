@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://clw6gb5wupvng" path="res://Scenes/Images/visualizer_node.gd" id="1_psu8h"]
 [ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="2_psu8h"]
 [ext_resource type="Shader" uid="uid://cufhqyh03k8p1" path="res://Scenes/Images/reverse_fresnel.gdshader" id="4_uo7r5"]
-[ext_resource type="Texture2D" uid="uid://cti0yirl0u427" path="res://Assets/image_icon.svg" id="5_uo7r5"]
+[ext_resource type="Texture2D" uid="uid://djnpe41edcgnt" path="res://Assets/resolution_icon.png" id="5_uo7r5"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_kq2tu"]
 viewport_path = NodePath("Intermediate/RenderAndYaw/VisualizerRect/SubViewport")
@@ -176,7 +176,7 @@ theme_override_constants/margin_bottom = 4
 
 [node name="TextureRect" type="TextureRect" parent="Intermediate/VBoxContainer/LanguageButton/MarginContainer" unique_id=745290583]
 texture_filter = 2
-custom_minimum_size = Vector2(24, 24)
+custom_minimum_size = Vector2(22, 22)
 propagate_maximum_size = true
 layout_mode = 2
 texture = ExtResource("5_uo7r5")

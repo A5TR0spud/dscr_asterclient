@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://4obb1ushbfji" path="res://Scenes/Main/corpus.gd" id="5_wliom"]
 [ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="6_2ok46"]
 [ext_resource type="Script" uid="uid://bft2883q6jmm7" path="res://Scenes/Main/sidebar_tabber.gd" id="6_es6iu"]
+[ext_resource type="Texture2D" uid="uid://cti0yirl0u427" path="res://Assets/image_icon.svg" id="7_1t20g"]
 [ext_resource type="Texture2D" uid="uid://dd181plkpjof5" path="res://Assets/LanguageIcons/language.svg" id="7_2ok46"]
 [ext_resource type="PackedScene" uid="uid://tpn8p2apuh1t" path="res://Scenes/DictDisplayMenu/dictionary_tab.tscn" id="7_hfg1r"]
 [ext_resource type="PackedScene" uid="uid://bunet4g0aqi5h" path="res://Scenes/OnlineUsersTab/online_people_tab.tscn" id="8_hfg1r"]
@@ -84,24 +85,46 @@ translations = Dictionary[StringName, String]({
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="VSeparator" type="VSeparator" parent="Body/Corpus/Header" unique_id=1447746975]
+[node name="Spacer" type="Control" parent="Body/Corpus/Header" unique_id=601842669]
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="DSVE_Button" type="Button" parent="Body/Corpus/Header" unique_id=1672549758]
+[node name="DSVEButton" type="PanelContainer" parent="Body/Corpus/Header" unique_id=635321987]
 layout_mode = 2
-size_flags_horizontal = 2
-text = "dsve"
+size_flags_horizontal = 8
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxEmpty_g4v7s")
 
-[node name="LocaleNode" type="Node" parent="Body/Corpus/Header/DSVE_Button" unique_id=273337952]
+[node name="MarginContainer" type="MarginContainer" parent="Body/Corpus/Header/DSVEButton" unique_id=60327567]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="TextureRect" type="TextureRect" parent="Body/Corpus/Header/DSVEButton/MarginContainer" unique_id=794737580]
+texture_filter = 4
+propagate_maximum_size = true
+layout_mode = 2
+texture = ExtResource("7_1t20g")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="DSVEButton" type="Button" parent="Body/Corpus/Header/DSVEButton" unique_id=1776798251]
+layout_mode = 2
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+
+[node name="LocaleNode" type="Node" parent="Body/Corpus/Header/DSVEButton/DSVEButton" unique_id=477246927]
 script = ExtResource("6_2ok46")
 translations = Dictionary[StringName, String]({
-&"text": "BUTTON_DSVE"
+&"tooltip_text": "BUTTON_DSVE"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="LanguageButton" type="PanelContainer" parent="Body/Corpus/Header" unique_id=111455099]
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 8
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxEmpty_g4v7s")
 
@@ -113,7 +136,7 @@ theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
 [node name="TextureRect" type="TextureRect" parent="Body/Corpus/Header/LanguageButton/MarginContainer" unique_id=50992410]
-texture_filter = 2
+texture_filter = 6
 propagate_maximum_size = true
 layout_mode = 2
 texture = ExtResource("7_2ok46")
@@ -121,10 +144,16 @@ expand_mode = 3
 stretch_mode = 5
 
 [node name="LocaleButton" type="Button" parent="Body/Corpus/Header/LanguageButton" unique_id=1147780416]
-texture_filter = 2
 layout_mode = 2
 mouse_filter = 1
 mouse_default_cursor_shape = 2
+
+[node name="LocaleNode" type="Node" parent="Body/Corpus/Header/LanguageButton/LocaleButton" unique_id=1607365093]
+script = ExtResource("6_2ok46")
+translations = Dictionary[StringName, String]({
+&"tooltip_text": "BUTTON_LANG"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="TabContainer" type="Container" parent="Body/Corpus" unique_id=1155907715]
 layout_mode = 2
@@ -220,7 +249,7 @@ layout_mode = 2
 [connection signal="mouse_entered" from="Body/Corpus" to="Body/Corpus" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Body/Corpus" to="Body/Corpus" method="_on_mouse_exited"]
 [connection signal="tab_changed" from="Body/Corpus/Header/Tabber" to="Body/Corpus" method="_on_tabber_tab_changed"]
-[connection signal="pressed" from="Body/Corpus/Header/DSVE_Button" to="." method="_on_dsve_button_pressed"]
+[connection signal="pressed" from="Body/Corpus/Header/DSVEButton/DSVEButton" to="." method="_on_dsve_button_pressed"]
 [connection signal="pressed" from="Body/Corpus/Header/LanguageButton/LocaleButton" to="." method="_on_locale_button_pressed"]
 [connection signal="callsign_submitted" from="Body/Sidebar/CallsignContainer/CallsignEdit" to="." method="_on_callsign_edit_callsign_submitted"]
 [connection signal="visibility_changed" from="DictEditPrison/DictEditWindow" to="DictEditPrison" method="_on_dict_edit_window_visibility_changed"]

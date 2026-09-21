@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dd181plkpjof5"
-path="res://.godot/imported/language.svg-6e2531d270f644dca32151a5ddc039ef.ctex"
+uid="uid://djnpe41edcgnt"
+path="res://.godot/imported/resolution_icon.png-0117d24be7471fdfe31c6c9cbc0b8e90.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/LanguageIcons/language.svg"
-dest_files=["res://.godot/imported/language.svg-6e2531d270f644dca32151a5ddc039ef.ctex"]
+source_file="res://Assets/resolution_icon.png"
+dest_files=["res://.godot/imported/resolution_icon.png-0117d24be7471fdfe31c6c9cbc0b8e90.ctex"]
 
 [params]
 
@@ -23,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -38,6 +38,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

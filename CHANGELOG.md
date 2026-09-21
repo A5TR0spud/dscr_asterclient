@@ -7,6 +7,11 @@
 * Images can now be resized
   * Added a toggle per-image to scale resolution vs keep it chunky
 
+### Changes
+
+* DSVE button switched to icon button and moved rightward
+* Button icons properly filter now (removes pixel artefacts on non-pixel icons)
+
 ### Fixes
 
 * Adjusted the m0 localization for default image visibility setting to remove implication it enables/disables images entirely
