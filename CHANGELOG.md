@@ -5,6 +5,7 @@
 ### Additions
 
 * Added search bar to library
+* Added a special surprise!
 
 ### Changes
 

@@ -2,6 +2,8 @@ extends VBoxContainer
 
 func _ready() -> void:
 	Main.instance.reload_settings.connect(refresh)
+	Main.instance.reload_dictionary_support.connect(_refresh_confetti)
+	Main.instance.reload_dict.connect(_refresh_confetti)
 
 @onready var formatting: SettingEntry = $ScrollContainer/Options/Formatting
 @onready var image_visibility: SettingEntry = $ScrollContainer/Options/ImageVis
@@ -16,6 +18,7 @@ func _ready() -> void:
 @onready var invert_yaw: SettingEntry = $ScrollContainer/Options/ImageMovement/VBoxContainer/InvertYaw
 @onready var invert_zoom: SettingEntry = $ScrollContainer/Options/ImageMovement/VBoxContainer/InvertZoom
 @onready var undef_setting: SettingEntry = $ScrollContainer/Options/UndefSetting
+@onready var confetti_setting: SettingEntry = $ScrollContainer/Options/Confetti
 
 func refresh() -> void:
 	formatting.set_state_no_signal(SettingsHandler.do_formatting)
@@ -30,6 +33,11 @@ func refresh() -> void:
 	sound_slider.set_value_no_signal(_volume_linear_to_slider())
 	_sample_color()
 	undef_setting.set_state_no_signal(SettingsHandler.use_at_undef)
+	confetti_setting.set_state_no_signal(SettingsHandler.confetti)
+	_refresh_confetti()
+
+func _refresh_confetti():
+	confetti_setting.visible = DictionaryHandler.support_dscr and -702 in DictionaryHandler.word_keys
 
 func _volume_linear_to_slider(value: float = -1) -> float:
 	if value < 0:
@@ -131,4 +139,8 @@ func _on_invert_zoom_set(new_value):
 func _on_undef_setting_set(new_value):
 	SettingsHandler.use_at_undef = new_value
 	Main.on_dict_reload()
+	save(false)
+
+func _on_confetti_set(new_value):
+	SettingsHandler.confetti = new_value
 	save(false)

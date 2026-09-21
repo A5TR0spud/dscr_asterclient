@@ -57,6 +57,10 @@ description = "SETTINGS_DEFAULT_IMAGE"
 layout_mode = 2
 description = "SETTINGS_DO_BBCODE"
 
+[node name="Confetti" parent="ScrollContainer/Options" unique_id=1525244345 instance=ExtResource("3_0yg8b")]
+layout_mode = 2
+description = "SETTINGS_CONFETTI"
+
 [node name="TruncHbox" type="HBoxContainer" parent="ScrollContainer/Options" unique_id=720322280]
 layout_mode = 2
 theme_override_constants/separation = 8
@@ -272,6 +276,7 @@ description = "SETTINGS_INVERT_ZOOM"
 [connection signal="set" from="ScrollContainer/Options/Formatting" to="." method="_on_formatting_set"]
 [connection signal="set" from="ScrollContainer/Options/ImageVis" to="." method="_on_image_vis_set"]
 [connection signal="set" from="ScrollContainer/Options/DoBBCode" to="." method="_on_signal_color_set"]
+[connection signal="set" from="ScrollContainer/Options/Confetti" to="." method="_on_confetti_set"]
 [connection signal="value_changed" from="ScrollContainer/Options/TruncHbox/TruncationSpinner" to="." method="_on_truncation_spinner_value_changed"]
 [connection signal="value_changed" from="ScrollContainer/Options/FontHbox/FontSpinner" to="." method="_on_font_spinner_value_changed"]
 [connection signal="set" from="ScrollContainer/Options/UndefSetting" to="." method="_on_undef_setting_set"]

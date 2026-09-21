@@ -115,7 +115,7 @@ metadata/_custom_type_script = "uid://7gga31jeosxl"
 [node name="NewSignalDesig" type="HBoxContainer" parent="." unique_id=1003123393]
 layout_mode = 2
 
-[node name="NumEdit" type="LineEdit" parent="NewSignalDesig" unique_id=1375073779]
+[node name="NumEdit" type="LineEdit" parent="NewSignalDesig" unique_id=705152307]
 custom_maximum_size = Vector2(230, -1)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -129,6 +129,7 @@ caret_blink = true
 script = ExtResource("6_b08ua")
 deny_list = "-0123456789"
 allow_list = true
+metadata/_custom_type_script = "uid://gtpqlwktlalr"
 
 [node name="LocaleNode" type="Node" parent="NewSignalDesig/NumEdit" unique_id=1949390529]
 script = ExtResource("1_1mk6h")
@@ -137,7 +138,7 @@ translations = Dictionary[StringName, String]({
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="SigEdit" type="LineEdit" parent="NewSignalDesig" unique_id=804966430]
+[node name="SigEdit" type="LineEdit" parent="NewSignalDesig" unique_id=734985167]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "name"
@@ -148,6 +149,7 @@ context_menu_enabled = false
 emoji_menu_enabled = false
 caret_blink = true
 script = ExtResource("6_b08ua")
+metadata/_custom_type_script = "uid://gtpqlwktlalr"
 
 [node name="LocaleNode" type="Node" parent="NewSignalDesig/SigEdit" unique_id=438235825]
 script = ExtResource("1_1mk6h")

@@ -1,0 +1,119 @@
+[gd_scene format=3 uid="uid://dtbd3sge4ym14"]
+
+[ext_resource type="Texture2D" uid="uid://u8pwuueu72oi" path="res://Assets/Square.png" id="1_vfd34"]
+[ext_resource type="Script" uid="uid://55j6p7ukjcjp" path="res://Scenes/Confetti/confetti.gd" id="1_vvhja"]
+
+[sub_resource type="Curve" id="Curve_3gngh"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 1, Vector2(0.75184363, 1), 0.0, 0.0, 1, 0, Vector2(1, 0), -12.759198, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_d0u6y"]
+curve = SubResource("Curve_3gngh")
+
+[sub_resource type="Gradient" id="Gradient_vvhja"]
+interpolation_color_space = 1
+offsets = PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1)
+colors = PackedColorArray(1, 0.34509805, 0, 1, 0.73333335, 1, 0, 1, 0, 0.8039216, 1, 1, 0, 0.5176471, 1, 1, 0.3019608, 0, 1, 1, 0.9843137, 0.22352941, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_57qmd"]
+gradient = SubResource("Gradient_vvhja")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yf5fn"]
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(1, -1, 0)
+spread = 25.0
+initial_velocity_min = 518.13
+initial_velocity_max = 777.2
+angular_velocity_min = -70.000015
+angular_velocity_max = 69.999985
+gravity = Vector3(0, 98, 0)
+tangential_accel_min = -27.980001
+tangential_accel_max = 26.419996
+damping_min = 22.798
+damping_max = 22.798
+attractor_interaction_enabled = false
+scale_min = 0.75
+color_initial_ramp = SubResource("GradientTexture1D_57qmd")
+alpha_curve = SubResource("CurveTexture_d0u6y")
+turbulence_enabled = true
+turbulence_influence_min = 0.010000001
+turbulence_influence_max = 0.010000001
+
+[node name="Confetti" type="Control" unique_id=1252774838]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_vvhja")
+
+[node name="Cooldown" type="Timer" parent="." unique_id=1086468412]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="LeftBasic" type="GPUParticles2D" parent="." unique_id=1343541128]
+position = Vector2(0, 648)
+rotation = -0.2617994
+emitting = false
+amount = 24
+amount_ratio = 0.5
+texture = ExtResource("1_vfd34")
+lifetime = 10.0
+one_shot = true
+explosiveness = 0.95
+randomness = 0.14
+process_material = SubResource("ParticleProcessMaterial_yf5fn")
+
+[node name="LeftTrails" type="GPUParticles2D" parent="." unique_id=60095057]
+position = Vector2(0, 648)
+rotation = -0.2617994
+emitting = false
+amount = 24
+amount_ratio = 0.5
+texture = ExtResource("1_vfd34")
+lifetime = 10.0
+one_shot = true
+explosiveness = 0.95
+randomness = 0.14
+trail_enabled = true
+trail_lifetime = 0.1
+trail_sections = 10
+trail_section_subdivisions = 10
+process_material = SubResource("ParticleProcessMaterial_yf5fn")
+
+[node name="RightBasic" type="GPUParticles2D" parent="." unique_id=2033066561]
+position = Vector2(1152, 648)
+rotation = -1.3089969
+emitting = false
+amount = 24
+amount_ratio = 0.5
+texture = ExtResource("1_vfd34")
+lifetime = 10.0
+one_shot = true
+explosiveness = 0.95
+randomness = 0.14
+process_material = SubResource("ParticleProcessMaterial_yf5fn")
+
+[node name="RightTrails" type="GPUParticles2D" parent="." unique_id=1902743016]
+position = Vector2(1152, 648)
+rotation = -1.3089969
+emitting = false
+amount = 24
+amount_ratio = 0.5
+texture = ExtResource("1_vfd34")
+lifetime = 10.0
+one_shot = true
+explosiveness = 0.95
+randomness = 0.14
+trail_enabled = true
+trail_lifetime = 0.1
+trail_sections = 10
+trail_section_subdivisions = 10
+process_material = SubResource("ParticleProcessMaterial_yf5fn")
+
+[connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]

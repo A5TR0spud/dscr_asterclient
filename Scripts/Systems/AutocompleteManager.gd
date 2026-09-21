@@ -14,7 +14,7 @@ static func get_autocomplete_options(to_check: String, against: Array) -> Array:
 		_autocomplete_finder = CodeEdit.new()
 		_autocomplete_finder.code_completion_enabled = true
 		_autocomplete_finder.delimiter_strings.clear()
-	_autocomplete_finder.text = to_check
+	_autocomplete_finder.text = encode_special_chars(to_check)
 	_autocomplete_finder.set_caret_column(to_check.length() + 1)
 	for word: String in against:
 		word = encode_special_chars(word)
@@ -25,13 +25,13 @@ static func get_autocomplete_options(to_check: String, against: Array) -> Array:
 	_autocomplete_finder.cancel_code_completion()
 	if options.is_empty() and to_check in against:
 		return [to_check]
-	return options.map(func(a): return a["display_text"])
+	return options.map(func(a): return decode_special_chars(a["display_text"]))
 
 static func is_special_character(chr: String) -> bool:
 	return chr in "!\"#$%&'()*+,-./:;<=>?@[\\]^`{|}~"
 
 static func encode_special_chars(text: String) -> String:
-	for i in len(text):
+	for i: int in range(text.length()):
 		if is_special_character(text[i]):
 			text[i] = char(ord(text[i]) + PUA_OFFSET)
 	return text

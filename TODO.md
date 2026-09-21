@@ -9,13 +9,14 @@
 * figure out what to do if a transmission is not received (ie a number is skipped)
 * entering signals into notes so that they auto-update
 * make pressing MAKES ELSE SENSE create the dictionary entry instead of only bringing up the menu, or else make that a setting
-* hover over translated words to get the signal
 * hover over negative numbers to get the translation
 * implement message history so you can use arrow keys to access your previous transmissions
 * "load dictionary from file" button
 * Image editor tab (w/ compat vs compact exports)
 * Use custom bbcode for underline/strikethroughs so they're 2px wide and thus actually visible
 * Music
+* tagging words and searching by tag
+* word aliases (unless the macro system is sufficient)
 * clean up transmission un/re-loading and/to figure out duplicate and missing history
 
 ### nikzapp

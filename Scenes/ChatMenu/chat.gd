@@ -56,6 +56,15 @@ static func new_transmission(packet: PackedStringArray) -> void:
 		#print(integer_message)
 	
 	new_message.message = integer_message
+	if (
+		SettingsHandler.confetti
+		and DictionaryHandler.support_dscr
+		and integer_message.size() <= 3
+		and integer_message.size() > 0
+		and -702 in integer_message
+		and -702 in DictionaryHandler.word_keys
+	):
+		Confetti.burst()
 	
 	var channel: ChatChannel = get_channel_node(channel_id)
 	

@@ -39,6 +39,7 @@ folder_colors={
 "res://Scenes/CallsignPicker/": "gray",
 "res://Scenes/ChatMenu/": "blue",
 "res://Scenes/Common/": "gray",
+"res://Scenes/Confetti/": "pink",
 "res://Scenes/DictDisplayMenu/": "orange",
 "res://Scenes/DictEditMenu/": "yellow",
 "res://Scenes/Images/": "red",
