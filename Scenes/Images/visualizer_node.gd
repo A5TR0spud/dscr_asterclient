@@ -227,3 +227,9 @@ func _on_visualizer_rect_gui_input(event: InputEvent):
 		pitch_slider.value += motion.y
 		accept_event()
 		return
+
+func _on_resize_button_gui_input(event: InputEvent):
+	if !Input.is_action_pressed("rotate_image"):
+		return
+	if event is InputEventMouseMotion:
+		custom_maximum_size.x = max(custom_minimum_size.x, custom_maximum_size.x + event.relative.x)

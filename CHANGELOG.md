@@ -1,5 +1,11 @@
 # Versions
 
+## --WIP--
+
+### Additions
+
+* Images can now be resized
+
 ## 0.7.3
 
 ### Additions
@@ -15,7 +21,7 @@
 * The default channel and the unread marker are now localized
 * Feature support levels can now be set per-dictionary in the Sources tab.
   * Default dictionary support level is meteorite 0
-  * If the dictionary supports DSCR, images can now use cubes
+  * If the dictionary supports DSCR, images can use cubes
   * If using a non-meteor dictionary, irrelevant settings (image settings) are hidden
 * Odd numbered callsigns now use a different, simpler, less duplicable identicon generation method (to reduce the chances of duplicates duplicates)
 * Added custom underline/strikethrough implementation so they're not so hard to see

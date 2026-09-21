@@ -50,6 +50,7 @@ use_colors = true
 mesh = SubResource("BoxMesh_psu8h")
 
 [node name="VisualizerNode" type="PanelContainer" unique_id=1907311917]
+custom_minimum_size = Vector2(300, 0)
 custom_maximum_size = Vector2(576, -1)
 script = ExtResource("1_psu8h")
 
@@ -144,7 +145,17 @@ translations = Dictionary[StringName, String]({
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
+[node name="VSeparator" type="VSeparator" parent="Intermediate" unique_id=1764003837]
+layout_mode = 2
+
+[node name="ResizeButton" type="Button" parent="Intermediate" unique_id=1985047988]
+custom_minimum_size = Vector2(18, 0)
+layout_mode = 2
+mouse_filter = 1
+mouse_default_cursor_shape = 10
+
 [connection signal="value_changed" from="Intermediate/ZoomSlider" to="." method="_on_zoom_slider_value_changed"]
 [connection signal="gui_input" from="Intermediate/RenderAndYaw/VisualizerRect" to="." method="_on_visualizer_rect_gui_input"]
 [connection signal="value_changed" from="Intermediate/RenderAndYaw/YawSlider" to="." method="_on_yaw_slider_value_changed"]
 [connection signal="value_changed" from="Intermediate/PitchSlider" to="." method="_on_pitch_slider_value_changed"]
+[connection signal="gui_input" from="Intermediate/ResizeButton" to="." method="_on_resize_button_gui_input"]
