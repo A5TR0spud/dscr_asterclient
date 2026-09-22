@@ -55,18 +55,23 @@ static func new_transmission(packet: PackedStringArray) -> void:
 		integer_message = integer_message.slice(2)
 		#print(integer_message)
 	
+	var channel: ChatChannel = get_channel_node(channel_id)
+	
 	new_message.message = integer_message
 	if (
 		SettingsHandler.confetti
 		and DictionaryHandler.support_dscr
-		and integer_message.size() <= 3
-		and integer_message.size() > 0
+		and (
+			(integer_message.size() <= 3 and integer_message.size() > 0)
+			or
+			(integer_message.slice(0, 3) == [-702, -2, -2])
+		)
 		and -702 in integer_message
 		and -702 in DictionaryHandler.word_keys
+		and channel.is_visible_in_tree()
+		and channel.scroll_container.bottom_is_visible()
 	):
 		Confetti.burst()
-	
-	var channel: ChatChannel = get_channel_node(channel_id)
 	
 	if (
 		(new_message.sender != Main.instance.previously_accepted_callsign)

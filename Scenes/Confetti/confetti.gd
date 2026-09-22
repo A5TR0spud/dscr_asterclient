@@ -21,6 +21,8 @@ func _burst():
 	for c in get_children():
 		if c is GPUParticles2D:
 			c.restart()
+	if not get_window().has_focus():
+		return
 	SoundManager.play_sound(SoundManager.Sounds.PARTY_HORN)
 
 static func burst():

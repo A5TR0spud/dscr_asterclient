@@ -1,6 +1,6 @@
 # Versions
 
-## --WIP--
+## 0.7.5
 
 ### Additions
 
@@ -8,7 +8,14 @@
 
 ### Changes
 
-* Improved a certain visual effect
+* (Subjectively) improved a certain visual effect
+* Starting a message with "(the secret trigger word) |-2 |-2" now counts regardless of the length of the rest of the transmission
+* The happy sound no longer plays when the window is unfocused
+
+### Fixes
+
+* A certain effect will no longer trigger seemingly spontaneously via other people triggering it in unviewed channels
+* Dictionary edit popup's notes section now has a scrollbar for the purpose of handling long entries
 
 ## 0.7.4
 

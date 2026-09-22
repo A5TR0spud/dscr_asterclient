@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="DSCR Asterclient"
-config/version="0.7.4"
+config/version="0.7.5"
 config/tags=PackedStringArray("2d", "effort", "ui")
 run/main_scene="uid://bft3wuvruhqvw"
 config/auto_accept_quit=false
@@ -122,7 +122,6 @@ common/max_physics_steps_per_frame=5
 
 textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
-textures/vram_compression/compress_with_gpu=false
 textures/lossless_compression/force_png=true
 anti_aliasing/quality/msaa_2d=1
 textures/decals/filter=0

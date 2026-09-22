@@ -58,9 +58,18 @@ translations = Dictionary[StringName, String]({
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="NotesEdit" type="TextEdit" parent="DictEditMainframe" unique_id=1225501255]
+[node name="NotesScrollContainer" type="ScrollContainer" parent="DictEditMainframe" unique_id=2008521790]
+custom_minimum_size = Vector2(0, 150)
+custom_maximum_size = Vector2(-1, 350)
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="NotesEdit" type="TextEdit" parent="DictEditMainframe/NotesScrollContainer" unique_id=1225501255]
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 placeholder_text = "CURRENT HUMAN DOES BIG MEANING MAKES DOST"
 context_menu_enabled = false
@@ -71,7 +80,7 @@ scroll_fit_content_height = true
 caret_blink = true
 caret_multiple = false
 
-[node name="LocaleNode" type="Node" parent="DictEditMainframe/NotesEdit" unique_id=995775087]
+[node name="LocaleNode" type="Node" parent="DictEditMainframe/NotesScrollContainer/NotesEdit" unique_id=995775087]
 script = ExtResource("2_ql6ly")
 translations = Dictionary[StringName, String]({
 &"placeholder_text": "DICT_EDIT_DESC_PLACEHOLDER"
@@ -386,7 +395,7 @@ translations = Dictionary[StringName, String]({
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [connection signal="text_submitted" from="DictEditMainframe/SignalNameEdit/NameLineEdit" to="." method="_on_name_line_edit_text_submitted"]
-[connection signal="gui_input" from="DictEditMainframe/NotesEdit" to="." method="_on_notes_edit_gui_input"]
+[connection signal="gui_input" from="DictEditMainframe/NotesScrollContainer/NotesEdit" to="." method="_on_notes_edit_gui_input"]
 [connection signal="value_changed" from="DictEditMainframe/BBCodeOptions/ColorPicker/GridContainer/HueSpinner" to="." method="_on_hue_spinner_value_changed"]
 [connection signal="value_changed" from="DictEditMainframe/BBCodeOptions/ColorPicker/GridContainer/ValueSpinner" to="." method="_on_value_spinner_value_changed"]
 [connection signal="value_changed" from="DictEditMainframe/BBCodeOptions/ColorPicker/GridContainer/SatSpinner" to="." method="_on_sat_spinner_value_changed"]
