@@ -20,8 +20,20 @@ var unsaved_changes: bool = false
 
 static var instance: Library
 
+signal force_select
+
 func _enter_tree():
 	instance = self
+
+static func make_transmission(title: String, message: Array):
+	instance.pre_name = title
+	instance.name_edit.text = title
+	instance.current_transmission = message
+	instance._reload()
+	instance.current_input = instance.words_edit.text
+	instance.force_select.emit()
+	instance.name_edit.grab_focus()
+	instance.name_edit.select_all()
 
 static func open_transmission(trx: String):
 	instance.pre_name = trx

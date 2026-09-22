@@ -127,3 +127,5 @@ LIBRARY_SEARCH,-163,Search…
 CHAT_CHANNEL,{0},{0}
 CHAT_CHANNEL_NONE,-111 -65535,Main Chat
 CHAT_CHANNEL_UNREAD,-124 {0},(?) {0}
+SEND_TO_LIBRARY,-16 -14 -43 -15 -41 -39,Send to library
+NEW_LIBRARY_NAME,{name} -2 {trx} -14 {contents} -25 -15,{name}_tr_{trx}: “{contents}…”

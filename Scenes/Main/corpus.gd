@@ -29,3 +29,7 @@ func _on_mouse_entered():
 
 func _on_mouse_exited():
 	_is_hovering = false
+
+func _on_library_force_select():
+	tabber.current_tab = 1
+	_show_tab(1)

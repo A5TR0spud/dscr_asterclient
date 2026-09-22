@@ -194,5 +194,6 @@ layout_mode = 2
 [connection signal="tab_changed" from="Body/Corpus/Header/Tabber" to="Body/Corpus" method="_on_tabber_tab_changed"]
 [connection signal="pressed" from="Body/Corpus/Header/DSVE_Button" to="." method="_on_dsve_button_pressed"]
 [connection signal="pressed" from="Body/Corpus/Header/LocaleButton" to="." method="_on_locale_button_pressed"]
+[connection signal="force_select" from="Body/Corpus/TabContainer/Library" to="Body/Corpus" method="_on_library_force_select"]
 [connection signal="callsign_submitted" from="Body/Sidebar/CallsignContainer/CallsignEdit" to="." method="_on_callsign_edit_callsign_submitted"]
 [connection signal="visibility_changed" from="DictEditPrison/DictEditWindow" to="DictEditPrison" method="_on_dict_edit_window_visibility_changed"]

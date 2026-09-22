@@ -1,11 +1,10 @@
 ## TODO
 
-* ability to send received transmission direct to library
 * add signal-matching options? (eg recolor matching pairs of -14 and -15, autocompleting -14 also types -15)
 * add "macro-dictionary" tab
 * figure out what to do if a transmission is not received (ie a number is skipped)
 * entering signals into notes so that they auto-update
-* hover over negative numbers to get the translation
+* hover over numbers to get the translation
 * implement message history so you can use arrow keys to access your previous transmissions
 * Image editor tab (w/ compat vs compact exports)
 * Music

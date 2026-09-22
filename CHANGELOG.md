@@ -1,5 +1,15 @@
 # Versions
 
+## --WIP--
+
+### Additions
+
+* Added button to send received transmission directly to library
+
+### Changes
+
+* Improved a certain visual effect
+
 ## 0.7.4
 
 ### Additions

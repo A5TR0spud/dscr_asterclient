@@ -78,8 +78,21 @@ func _on_etc_button_toggled(_toggled_on):
 	collapsed = not _toggled_on
 
 func transmit_pressed(id: int) -> void:
-	if id == 0:
-		copy_as_signals()
+	match id:
+		0:
+			copy_as_signals()
+		1:
+			Library.make_transmission(
+				Localizer.translate(
+					"NEW_LIBRARY_NAME",
+					{
+						"name": Main.base_10_to_callsign(sender),
+						"trx": trans,
+						"contents": DictionaryHandler.get_or_default_signal_name(message[0]) if message.size() > 0 else ""
+					}
+				),
+				message
+			)
 
 func copy_as_signals():
 	var o: Array[String] = []
