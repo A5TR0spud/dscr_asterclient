@@ -33,6 +33,7 @@ static func calculate_color (value: int) -> Color:
 @onready var visualizer: TextureRect = $Intermediate/RenderAndYaw/VisualizerRect
 @onready var viewport: SubViewport = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport
 @onready var res_button: IconButton = $Intermediate/VBoxContainer/ResolutionButton
+@onready var center_button: IconButton = $Intermediate/VBoxContainer/CenterButton
 
 @onready var plot_spheres: MultiMeshInstance3D = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport/Spheres
 @onready var multimesh_spheres: MultiMesh = plot_spheres.multimesh
@@ -49,16 +50,19 @@ func _set_zoom(value: float) -> void:
 		value *= -1
 	value += 1
 	cam.position.z = 2.5 * value * value + 10.5 * value + 3
+	_calc_center_button_enabled()
 
 func _set_yaw(value: float) -> void:
 	if SettingsHandler.img_invert_yaw:
 		value *= -1
 	cam_pivot.rotation_degrees.y = value * 360.0
+	_calc_center_button_enabled()
 
 func _set_pitch(value: float) -> void:
 	if SettingsHandler.img_invert_pitch:
 		value *= -1
 	cam_pivot.rotation_degrees.x = -value * 70
+	_calc_center_button_enabled()
 
 # untested but probably
 # Returns the value of a scrollbar mapped to the interval [-1, 1]
@@ -235,7 +239,7 @@ func _on_resize_button_gui_input(event: InputEvent):
 		return
 	if event is InputEventMouseMotion:
 		custom_maximum_size.x = max(custom_minimum_size.x, custom_maximum_size.x + event.relative.x)
-		if res_button.button_pressed:
+		if res_button.is_pressed():
 			_viewport_res.call_deferred()
 
 func _on_resolution_button_toggled(toggled_on):
@@ -251,3 +255,11 @@ func _on_center_button_pressed():
 	yaw_slider.value = 0
 	zoom_slider.value = 0
 	pitch_slider.value = 0
+	center_button.set_disabled(true)
+
+func _calc_center_button_enabled():
+	center_button.set_disabled(
+		yaw_slider.value == 0 and
+		zoom_slider.value == 0 and
+		pitch_slider.value == 0
+	)

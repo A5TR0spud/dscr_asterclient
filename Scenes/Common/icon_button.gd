@@ -19,12 +19,22 @@ class_name IconButton
 	set(value):
 		button_pressed = value
 		_on_change()
+@export var start_disabled: bool = false
 
 @onready var tex_rect: TextureRect = $TextureRect
 @onready var button: Button = $TextureRect/MarginContainer/Button
 
+func set_disabled(is_disabled: bool):
+	button.disabled = is_disabled
+	tex_rect.self_modulate = Color(1.0, 1.0, 1.0, 0.33) if is_disabled else Color.WHITE
+	button.mouse_default_cursor_shape = Control.CURSOR_ARROW if is_disabled else Control.CURSOR_POINTING_HAND
+
+func is_pressed() -> bool:
+	return button.button_pressed
+
 func _ready():
 	_on_change.call_deferred()
+	set_disabled(start_disabled)
 	if Engine.is_editor_hint():
 		return
 	button.pressed.connect(pressed.emit)

@@ -1,5 +1,15 @@
 # Versions
 
+## --WIP--
+
+### Changes
+
+* Image recenter button now greys out when it wouldn't do anything
+
+### Fixes
+
+* Fixed image resolution not changing with size when toggling the resolution button and then changing image size
+
 ## 0.7.5
 
 ### Additions

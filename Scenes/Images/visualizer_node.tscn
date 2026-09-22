@@ -159,6 +159,7 @@ custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 icon = ExtResource("5_8vf8x")
 expand_mode = 5
+start_disabled = true
 
 [node name="ResizeButton" type="Button" parent="Intermediate/VBoxContainer" unique_id=1985047988]
 custom_minimum_size = Vector2(20, 0)
