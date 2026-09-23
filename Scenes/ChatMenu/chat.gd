@@ -58,15 +58,19 @@ static func new_transmission(packet: PackedStringArray) -> void:
 	var channel: ChatChannel = get_channel_node(channel_id)
 	
 	new_message.message = integer_message
+	var confet: int = integer_message.find(-702)
+	var followed_by_not: int = integer_message.find(-29, confet) if confet >= 0 else -1
 	if (
 		SettingsHandler.confetti
 		and DictionaryHandler.support_dscr
 		and (
-			(integer_message.size() <= 3 and integer_message.size() > 0)
+			(integer_message.size() <= 3 and integer_message.size() > 0 and followed_by_not != confet + 1)
 			or
-			(integer_message.slice(0, 3) == [-702, -2, -2])
+			(integer_message.size() >= 3 and integer_message.slice(0, 3) == [-702, -2, -2])
+			or 
+			(integer_message.size() >= 3 and integer_message.slice(-3, -1) == [-2, -2] and integer_message.back() == -702)
 		)
-		and -702 in integer_message
+		and confet >= 0
 		and -702 in DictionaryHandler.word_keys
 		and channel.is_visible_in_tree()
 		and channel.scroll_container.bottom_is_visible()
