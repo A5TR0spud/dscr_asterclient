@@ -12,7 +12,9 @@
   * If the transmission ends with "|-2 |-2 ????" then it will appear
   * If the transmission signal count is 3 or less and it contains a "????" not followed by "|-29" then it will appear
   * The dictionary must be set to DSCR in the sources tab
-  * It must be enabled in settings (defaults to on and only visible when dictionary is in DSCR mode)
+  * ???? must be defined in the dictionary
+  * It must be enabled in settings (defaults to on and only visible when relevant)
+* Dictionary sources now reload when the window gains focus
 
 ### Fixes
 

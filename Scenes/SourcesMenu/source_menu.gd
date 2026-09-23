@@ -15,6 +15,7 @@ func _enter_tree():
 func _ready():
 	Main.instance.post_load.connect(refresh)
 	_refresh_dicts()
+	get_window().focus_entered.connect(refresh_files)
 
 static func refresh_files():
 	instance._refresh_dicts()
@@ -41,12 +42,11 @@ var ticker: int = 0
 func _physics_process(_delta):
 	if not is_visible_in_tree():
 		return
-	if ticker > 256:
+	if ticker > 2048:
 		for c: DictChangeEntry in dc_list.get_children():
 			if c.edit.has_focus():
 				return
 		_refresh_dicts()
-		ticker = -1
 	ticker += 1
 
 func _refresh_wss():
@@ -58,6 +58,7 @@ func _refresh_wss():
 		wss_list.add_child(obj)
 
 func _refresh_dicts():
+	ticker = -1
 	var dicts: PackedStringArray = SaveSystem.get_all_dict_names()
 	for c in dc_list.get_children():
 		c.queue_free()
