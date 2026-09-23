@@ -130,6 +130,15 @@ func find_delimiter_near(line: String, col: int) -> int:
 		return col     # thing|@thing@
 	return -1
 
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if Rect2(Vector2.ZERO, size).has_point(get_local_mouse_position()):
+				return
+			if Rect2(Vector2.ZERO, auto_list_panel.size).has_point(auto_list_panel.get_local_mouse_position()):
+				return
+			auto_list_panel.hide()
+
 func _gui_input(event: InputEvent) -> void:
 	# TODO: implement brace matching (handling), so that it can parse |-14 and |-15 if they are group symbols
 	if event.is_action_pressed("ui_text_newline"):

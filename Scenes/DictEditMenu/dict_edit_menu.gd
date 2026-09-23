@@ -98,7 +98,7 @@ func save() -> void:
 func reload() -> void:
 	break_sentence.visible = current_signal < 0
 	name_sentence.visible = current_signal < 0
-	desc_edit.visible = current_signal < 0
+	notes_scroll.visible = current_signal < 0
 	delete_button.visible = current_signal < 0
 	bbcode_options.visible = SettingsHandler.do_bbcode
 	indentation.visible = current_signal < 0
@@ -207,6 +207,10 @@ func _input(event):
 	if event.is_action_pressed("ui_close_dialog"):
 		close()
 		accept_event()
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			if not Rect2(Vector2.ZERO, size).has_point(get_local_mouse_position()):
+				close()
 
 static func is_open() -> bool:
 	return instance.visible

@@ -17,6 +17,8 @@
 ### Fixes
 
 * Fixed image resolution not changing with size when toggling the resolution button and then changing image size
+* Clicking away from autocomplete options once again hides them
+* Fixed the scrollbar in the dictionary menu causing a big empty space to appear when editing default formatting
 
 ## 0.7.5
 
