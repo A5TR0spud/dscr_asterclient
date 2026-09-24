@@ -67,8 +67,7 @@ func _refresh_dicts():
 		if idx < dc_list.get_child_count():
 			dc_list.get_child(idx).dict_name = dicts[idx]
 			dc_list.get_child(idx).refresh()
-			continue
-		if idx >= dc_list.get_child_count():
+		else:
 			var obj: DictChangeEntry = dc_entry.instantiate()
 			obj.dict_name = dicts[idx]
 			dc_list.add_child(obj)
