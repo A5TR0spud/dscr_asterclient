@@ -54,7 +54,7 @@ func try_parses():
 			image_node.queue_free()
 			image_button_node.queue_free()
 	has_song = music_player.check_song(message)
-	song_button_node.visible = has_song
+	song_button_node.visible = has_song and DictionaryHandler.support_dscr
 
 func refresh_callsign():
 	callsign_node.text = Main.base_10_to_callsign(sender)

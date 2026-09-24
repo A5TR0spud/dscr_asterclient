@@ -252,6 +252,9 @@ metadata/_custom_type_script = "uid://7gga31jeosxl"
 [node name="MusicVolume" type="VBoxContainer" parent="ScrollContainer/Options" unique_id=2129312572]
 layout_mode = 2
 
+[node name="HSeparator6" type="HSeparator" parent="ScrollContainer/Options/MusicVolume" unique_id=2104188487]
+layout_mode = 2
+
 [node name="VolumeLabel" type="Label" parent="ScrollContainer/Options/MusicVolume" unique_id=1491597206]
 layout_mode = 2
 text = "sound volume"

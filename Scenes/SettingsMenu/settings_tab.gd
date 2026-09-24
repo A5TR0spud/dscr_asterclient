@@ -22,6 +22,7 @@ func _ready() -> void:
 @onready var confetti_setting: SettingEntry = $ScrollContainer/Options/Confetti
 @onready var image_setting_group: FoldableContainer = $ScrollContainer/Options/ImageMovement
 @onready var music_sample: AudioStreamPlayer = $MusicAudioPreview
+@onready var music_parent: Control = $ScrollContainer/Options/MusicVolume
 
 func refresh() -> void:
 	formatting.set_state_no_signal(SettingsHandler.do_formatting)
@@ -44,6 +45,7 @@ func _refresh_dict_supports():
 	_refresh_confetti()
 	image_visibility.visible = DictionaryHandler.support_m0
 	image_setting_group.visible = DictionaryHandler.support_m0
+	music_parent.visible = DictionaryHandler.support_dscr
 
 func _refresh_confetti():
 	confetti_setting.visible = DictionaryHandler.support_dscr and -702 in DictionaryHandler.word_keys

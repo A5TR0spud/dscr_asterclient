@@ -15,7 +15,7 @@ func _enter_tree():
 func _ready():
 	Main.instance.post_load.connect(refresh)
 	_refresh_dicts()
-	get_window().focus_entered.connect(refresh_files)
+	get_window().focus_entered.connect(_refresh_dicts)
 
 static func refresh_files():
 	instance._refresh_dicts()
@@ -60,12 +60,18 @@ func _refresh_wss():
 func _refresh_dicts():
 	ticker = -1
 	var dicts: PackedStringArray = SaveSystem.get_all_dict_names()
-	for c in dc_list.get_children():
-		c.queue_free()
-	for d in dicts:
-		var obj: DictChangeEntry = dc_entry.instantiate()
-		obj.dict_name = d
-		dc_list.add_child(obj)
+	for idx: int in range(max(dc_list.get_child_count(), dicts.size())):
+		if idx >= dicts.size():
+			dc_list.get_child(idx).queue_free()
+			continue
+		if idx < dc_list.get_child_count():
+			dc_list.get_child(idx).dict_name = dicts[idx]
+			dc_list.get_child(idx).refresh()
+			continue
+		if idx >= dc_list.get_child_count():
+			var obj: DictChangeEntry = dc_entry.instantiate()
+			obj.dict_name = dicts[idx]
+			dc_list.add_child(obj)
 
 func _on_add_dict_pressed():
 	var obj: DictChangeEntry = dc_entry.instantiate()

@@ -38,11 +38,7 @@ func _on_line_edit_focus_exited():
 	refresh()
 
 func _on_support_options_item_selected(index: int):
-	var oldm0 := DictionaryHandler.support_m0
-	var olddscr := DictionaryHandler.support_dscr
 	DictionaryHandler.support_m0 = index < 2
 	DictionaryHandler.support_dscr = index == 1
-	if oldm0 == DictionaryHandler.support_m0 and olddscr == DictionaryHandler.support_dscr:
-		return
 	SaveSystem.save_dict()
 	Main.on_dictionary_support_updated()
