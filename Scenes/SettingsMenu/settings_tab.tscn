@@ -249,17 +249,22 @@ translations = Dictionary[StringName, String]({
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="MusicVolume" type="VBoxContainer" parent="ScrollContainer/Options" unique_id=324051399]
+[node name="MusicVolume" type="VBoxContainer" parent="ScrollContainer/Options" unique_id=2129312572]
 layout_mode = 2
 
-[node name="VolumeLabel" type="Label" parent="ScrollContainer/Options/MusicVolume" unique_id=1561581926]
+[node name="VolumeLabel" type="Label" parent="ScrollContainer/Options/MusicVolume" unique_id=1491597206]
 layout_mode = 2
 text = "sound volume"
 autowrap_mode = 2
-script = ExtResource("1_1gwgo")
-message = Array[int]([-577, -172, -39, -22, -100])
 
-[node name="VolumeSlider" type="HScrollBar" parent="ScrollContainer/Options/MusicVolume" unique_id=1026432478]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/Options/MusicVolume/VolumeLabel" unique_id=417559232]
+script = ExtResource("5_gal0n")
+translations = Dictionary[StringName, String]({
+&"text": "SETTINGS_VOLUME_MUSIC"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="VolumeSlider" type="HScrollBar" parent="ScrollContainer/Options/MusicVolume" unique_id=489092292]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 144.0
@@ -268,32 +273,47 @@ page = 16.0
 value = 64.0
 rounded = true
 
-[node name="SliderLabelGrid" type="HBoxContainer" parent="ScrollContainer/Options/MusicVolume" unique_id=907088586]
+[node name="SliderLabelGrid" type="HBoxContainer" parent="ScrollContainer/Options/MusicVolume" unique_id=1836988671]
 layout_mode = 2
 
-[node name="Silent" type="Label" parent="ScrollContainer/Options/MusicVolume/SliderLabelGrid" unique_id=184313052]
+[node name="Silent" type="Label" parent="ScrollContainer/Options/MusicVolume/SliderLabelGrid" unique_id=89725400]
 layout_mode = 2
 size_flags_horizontal = 2
 text = "silent"
 horizontal_alignment = 3
-script = ExtResource("1_1gwgo")
-message = Array[int]([-111])
 
-[node name="Normal" type="Label" parent="ScrollContainer/Options/MusicVolume/SliderLabelGrid" unique_id=1879375728]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/Options/MusicVolume/SliderLabelGrid/Silent" unique_id=585240623]
+script = ExtResource("5_gal0n")
+translations = Dictionary[StringName, String]({
+&"text": "SETTINGS_VOLUME_ZERO"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="Normal" type="Label" parent="ScrollContainer/Options/MusicVolume/SliderLabelGrid" unique_id=311440986]
 layout_mode = 2
 size_flags_horizontal = 6
 text = "normal"
 horizontal_alignment = 3
-script = ExtResource("1_1gwgo")
-message = Array[int]([-114])
 
-[node name="Deafening" type="Label" parent="ScrollContainer/Options/MusicVolume/SliderLabelGrid" unique_id=569715250]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/Options/MusicVolume/SliderLabelGrid/Normal" unique_id=1525437166]
+script = ExtResource("5_gal0n")
+translations = Dictionary[StringName, String]({
+&"text": "SETTINGS_VOLUME_DEFAULT"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="Deafening" type="Label" parent="ScrollContainer/Options/MusicVolume/SliderLabelGrid" unique_id=1166531189]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "deafening"
 horizontal_alignment = 3
-script = ExtResource("1_1gwgo")
-message = Array[int]([-108])
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/Options/MusicVolume/SliderLabelGrid/Deafening" unique_id=47513575]
+script = ExtResource("5_gal0n")
+translations = Dictionary[StringName, String]({
+&"text": "SETTINGS_VOLUME_LOUD"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="HSeparator5" type="HSeparator" parent="ScrollContainer/Options" unique_id=1134833940]
 layout_mode = 2
@@ -335,7 +355,7 @@ description = "SETTINGS_INVERT_ZOOM"
 [connection signal="pressed" from="ScrollContainer/Options/ThemeColorSubmitElse/ColorSubmitButton" to="." method="_on_color_submit_button_pressed"]
 [connection signal="pressed" from="ScrollContainer/Options/ThemeColorSubmitElse/ColorCancelButton" to="." method="_on_color_cancel_button_pressed"]
 [connection signal="value_changed" from="ScrollContainer/Options/GlobalVolume/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/Options/MusicVolume/VolumeSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="set" from="ScrollContainer/Options/ImageMovement/VBoxContainer/InvertPitch" to="." method="_on_invert_pitch_set"]
 [connection signal="set" from="ScrollContainer/Options/ImageMovement/VBoxContainer/InvertYaw" to="." method="_on_invert_yaw_set"]
 [connection signal="set" from="ScrollContainer/Options/ImageMovement/VBoxContainer/InvertZoom" to="." method="_on_invert_zoom_set"]
-[connection signal="value_changed" from="ScrollContainer/Options/MusicVolume/VolumeSlider" to="." method="_on_music_slider_value_changed"]

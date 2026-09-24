@@ -15,8 +15,6 @@ const sample_hz: float = 22050.0
 
 static var now_playing: Music = null
 
-@export var song_button: Node
-
 var active_notes: Array = []
 var current_note: int = 0
 var chained_songs: Array[Music] = []
@@ -34,8 +32,6 @@ func play_music() -> void:
 
 	if now_playing:
 		now_playing.chain_music(self)
-		(song_button as TranslatableSimple).message = [-577, -25]
-		song_button.refresh()
 		return
 
 	if current_song.size() > 0:
@@ -46,15 +42,11 @@ func play_music() -> void:
 		now_playing = self
 		play()
 		playback = get_stream_playback()
-		(song_button as TranslatableSimple).message = [-577, -29]
-		song_button.refresh()
 
 func chain_music(next: Music) -> void:
 	chained_songs.append(next)
 
 func cancel_chain() -> void:
-	(song_button as TranslatableSimple).message = [-577]
-	song_button.refresh()
 	for i in chained_songs:
 		i.cancel_chain()
 
@@ -63,7 +55,6 @@ func stop_music() -> void:
 	if now_playing == self: now_playing = null
 	cancel_chain()
 	chained_songs.clear()
-	song_button.refresh()
 
 func check_song(message: Array) -> bool:
 	if playback: stop_music()

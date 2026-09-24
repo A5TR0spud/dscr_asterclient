@@ -13,7 +13,7 @@ func _ready() -> void:
 @onready var color_edit: SpinBox = $ScrollContainer/Options/ThemeColor/ColorPicker
 @onready var color_sample: ColorRect = $ScrollContainer/Options/ColorRect
 @onready var sound_slider: HScrollBar = $ScrollContainer/Options/GlobalVolume/VolumeSlider
-@onready var music_slider: HScrollBar = $ScrollContainer/MarginContainer/Options/MusicVolume/VolumeSlider
+@onready var music_slider: HScrollBar = $ScrollContainer/Options/MusicVolume/VolumeSlider
 @onready var sound_sample: AudioStreamPlayer = $AudioPreview
 @onready var invert_pitch: SettingEntry = $ScrollContainer/Options/ImageMovement/VBoxContainer/InvertPitch
 @onready var invert_yaw: SettingEntry = $ScrollContainer/Options/ImageMovement/VBoxContainer/InvertYaw
