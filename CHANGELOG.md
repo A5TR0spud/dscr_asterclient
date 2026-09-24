@@ -4,7 +4,8 @@
 
 ### Additions
 
-* Added support for -577 (Eearslya)
+* Added basic support for -577 (Eearslya)
+  * This doesn't include the wild syntax with -11 and such
 
 ### Changes
 
