@@ -10,7 +10,7 @@
 ### Changes
 
 * Image recenter button now greys out when it wouldn't do anything
-* Full list of changed ???? rules:
+* Full list of updated ???? rules:
   * If the transmission starts with "???? |-2 |-2" then it will appear
   * If the transmission ends with "|-2 |-2 ????" then it will appear
   * If the transmission signal count is 3 or less and it contains a "????" not followed by "|-29" then it will appear
@@ -18,6 +18,8 @@
   * ???? must be defined in the dictionary
   * It must be enabled in settings (defaults to on and only visible when relevant)
 * Dictionary sources now reload when the window gains focus
+* Pressing enter in the Library now newlines instead of doing nothing
+* "@-_UNDEF" formatting for unknown signals now defaults to off to help newcomers figure out how to type unknown signals
 
 ### Fixes
 

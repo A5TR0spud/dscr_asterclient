@@ -111,6 +111,7 @@ vertical_scroll_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+eat_enter = false
 
 [node name="Buttons" type="HBoxContainer" parent="Body/HBoxContainer/Editor" unique_id=1269378282]
 layout_mode = 2

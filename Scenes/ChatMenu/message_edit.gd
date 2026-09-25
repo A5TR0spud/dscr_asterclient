@@ -1,6 +1,8 @@
 extends TextEdit
 class_name TransmissionEdit
 
+## Will disable enter as a newline and emit [code]submit_text[/code] instead
+@export var eat_enter: bool = true
 @onready var autocomplete_list: ItemList = $PanelContainer/MarginContainer/ItemList
 @onready var auto_list_panel: PanelContainer = $PanelContainer
 #CodeEdit hates trying to autocomplete things without spaces, so use a nested one which contains only the word to try
@@ -141,7 +143,10 @@ func _input(event: InputEvent) -> void:
 
 func _gui_input(event: InputEvent) -> void:
 	# TODO: implement brace matching (handling), so that it can parse |-14 and |-15 if they are group symbols
-	if event.is_action_pressed("ui_text_newline"):
+	if (
+		event.is_action_pressed("ui_text_newline")
+		or (not eat_enter and event.is_action_pressed("ui_text_submit"))
+	):
 		insert_text_at_caret("\n")
 		accept_event()
 		return
