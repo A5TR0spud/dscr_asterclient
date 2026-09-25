@@ -45,10 +45,9 @@ static func compile_text(input: String) -> PackedInt64Array:
 	time = Time.get_ticks_usec()
 	_unknowns.clear()
 	_error = ErrorCode.UNCOMPILED
-	var starts: PackedInt64Array = []
-	var ends: PackedInt64Array = []
+	var starts: PackedInt32Array = []
+	var ends: PackedInt32Array = []
 	var sigs: Array[PackedInt64Array] = []
-	var number_cutoff: int = 0
 	for start: int in range(input.length()):
 		if input[start] == "|":
 			var _sub: String = input.substr(start)
@@ -64,7 +63,7 @@ static func compile_text(input: String) -> PackedInt64Array:
 						starts.append(start)
 						ends.append(end)
 						sigs.append([m.get_string().to_int()])
-					number_cutoff = end
+					start = end
 			continue
 		if input[start] == "0":
 			var end: int = start + 1
@@ -79,8 +78,6 @@ static func compile_text(input: String) -> PackedInt64Array:
 					sigs.append([0])
 			continue
 		if input[start].is_valid_int():
-			if start < number_cutoff:
-				continue
 			var _sub: String = input.substr(start)
 			var m := RegEx.create_from_string("^([0-9]{1,18})").search(_sub)
 			if m:
@@ -94,12 +91,13 @@ static func compile_text(input: String) -> PackedInt64Array:
 						starts.append(start)
 						ends.append(end)
 						sigs.append([m.get_string().to_int()])
-					number_cutoff = end
+					start = end
 			continue
 		
 		var extension_idx: PackedInt64Array = []
 		var extend_with: PackedInt64Array = []
 		var extend_to: PackedInt64Array = []
+		var first_end: int = INT64_MAX
 		for idx in range(DictionaryHandler.word_keys.size()):
 			var d: String = DictionaryHandler.word_names[idx]
 			var dx: int = DictionaryHandler.word_keys[idx]
@@ -110,10 +108,12 @@ static func compile_text(input: String) -> PackedInt64Array:
 					extension_idx.append(found_idx)
 					extend_with.append(dx)
 					extend_to.append(end)
+					first_end = mini(first_end, end)
 				elif end not in ends:
 					starts.append(start)
 					ends.append(end)
 					sigs.append([dx])
+					first_end = mini(first_end, end)
 		for ext: int in range(extension_idx.size()-1, -1, -1):
 			var k: int = extension_idx[ext]
 			if ext == 0:
@@ -125,6 +125,8 @@ static func compile_text(input: String) -> PackedInt64Array:
 				starts.append(starts[k])
 				ends.append(extend_to[ext])
 				sigs.append(v)
+		if first_end < sigs.size():
+			start = first_end
 	log_time("populate")
 	var to: int = 0
 	var from: int = 1

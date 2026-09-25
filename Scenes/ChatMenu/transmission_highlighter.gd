@@ -11,8 +11,8 @@ func _get_line_syntax_highlighting(line: int) -> Dictionary:
 	
 	TransmissionCompilation.compile_text(input)
 	var d := TransmissionCompilation.get_as_data_dict()
-	var starts: PackedInt64Array = d["starts"]
-	var ends: PackedInt64Array = d["ends"]
+	var starts: PackedInt32Array = d["starts"]
+	var ends: PackedInt32Array = d["ends"]
 	var sigs: Array[PackedInt64Array] = d["signal_groups"]
 	var prevend: int = 0
 	for idx: int in range(starts.size() + 1):
