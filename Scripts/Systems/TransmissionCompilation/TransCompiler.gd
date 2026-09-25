@@ -48,7 +48,15 @@ static func compile_text(input: String) -> PackedInt64Array:
 	var starts: PackedInt32Array = []
 	var ends: PackedInt32Array = []
 	var sigs: Array[PackedInt64Array] = []
-	for start: int in range(input.length()):
+	var start: int = -1
+	var last_end_idx: int = 0
+	input = input.to_upper()
+	#print(input)
+	while start + 1 < input.length():
+		start += 1
+		if is_whitespace(input[start]):
+			continue
+		#print(start)
 		if input[start] == "|":
 			var _sub: String = input.substr(start)
 			var m := RegEx.create_from_string("^\\|(-?[0-9]{1,18})").search(_sub)
@@ -63,7 +71,7 @@ static func compile_text(input: String) -> PackedInt64Array:
 						starts.append(start)
 						ends.append(end)
 						sigs.append([m.get_string().to_int()])
-					start = end
+					start = end - 1
 			continue
 		if input[start] == "0":
 			var end: int = start + 1
@@ -91,7 +99,7 @@ static func compile_text(input: String) -> PackedInt64Array:
 						starts.append(start)
 						ends.append(end)
 						sigs.append([m.get_string().to_int()])
-					start = end
+					start = end - 1
 			continue
 		
 		var extension_idx: PackedInt64Array = []
@@ -102,7 +110,7 @@ static func compile_text(input: String) -> PackedInt64Array:
 			var d: String = DictionaryHandler.word_names[idx]
 			var dx: int = DictionaryHandler.word_keys[idx]
 			var end: int = start + d.length()
-			if input.substr(start, d.length()) == d:
+			if input.substr(start, d.length()) == d.to_upper():
 				var found_idx: int = ends.find(start)
 				if found_idx >= 0 and end not in ends:
 					extension_idx.append(found_idx)
@@ -125,8 +133,19 @@ static func compile_text(input: String) -> PackedInt64Array:
 				starts.append(starts[k])
 				ends.append(extend_to[ext])
 				sigs.append(v)
-		if first_end < sigs.size():
-			start = first_end
+		if first_end < INT64_MAX:
+			start = first_end - 1
+		else:
+			var low_endx: int = -1
+			for i: int in range(last_end_idx, ends.size()):
+				var terminus: int = ends[i]
+				if terminus <= start:
+					continue
+				if low_endx < 0 or ends[i] < ends[low_endx]:
+					low_endx = i
+			if low_endx >= 0:
+				last_end_idx = low_endx
+				start = ends[last_end_idx]
 	log_time("populate")
 	var to: int = 0
 	var from: int = 1
@@ -134,23 +153,23 @@ static func compile_text(input: String) -> PackedInt64Array:
 	while to < starts.size() and from < starts.size():
 		var _fro: int = from if unflipped else to
 		var _to: int = to if unflipped else from
-		var start: int = starts[_fro]
+		var started: int = starts[_fro]
 		var end: int = ends[_fro]
 		var sig: PackedInt64Array = sigs[_fro]
 		var c_start: int = starts[_to]
 		var c_end: int = ends[_to]
 		var c_sig: PackedInt64Array = sigs[_to]
 		if (
-			(start < c_start and c_end == end)
-			or (start == c_start and c_end < end)
+			(started < c_start and c_end == end)
+			or (started == c_start and c_end < end)
 			or (
-				start == c_start and
+				started == c_start and
 				end == c_end and
 				sig.size() < c_sig.size()
 			)
-			or (start < c_start and c_end < end)
+			or (started < c_start and c_end < end)
 		):
-			starts[_to] = start
+			starts[_to] = started
 			ends[_to] = end
 			sigs[_to] = sig
 			starts.remove_at(_fro)
@@ -167,10 +186,10 @@ static func compile_text(input: String) -> PackedInt64Array:
 	var out: PackedInt64Array = []
 	#var mix: Array = []
 	for idx: int in range(starts.size() + 1):
-		var start: int = starts[idx] if idx < starts.size() else input.length()
+		var started: int = starts[idx] if idx < starts.size() else input.length()
 		var end: int = ends[idx] if idx < starts.size() else 0
-		if start > prevend:
-			var _s: String = input.substr(prevend, start - prevend)
+		if started > prevend:
+			var _s: String = input.substr(prevend, started - prevend)
 			if !is_whitespace(_s):
 				_unknowns.append_array(_s.replace_chars("\n\r\t", ord(" ")).split(" ", false))
 				_error = ErrorCode.UNKNOWN
