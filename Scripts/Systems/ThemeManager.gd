@@ -39,7 +39,8 @@ static func set_font_size(size: int = -1) -> void:
 		SettingsHandler.font_size = size
 		SettingsHandler.save()
 
-static var theme_thread: Thread = null
+static var theme_thread: int = -1
+static var thread_running: bool = false
 
 static func _setty(n, nam: String, val):
 	n.set.call_deferred(nam, val)
@@ -121,8 +122,9 @@ static func _set_color_inner(col: int):
 	await _setty(grabber_style, "bg_color", new_color)
 	_setty(hover_press_style, "border_color", new_color)
 	(func():
-		if theme_thread.is_started():
-			theme_thread.wait_to_finish()
+		if thread_running:
+			WorkerThreadPool.wait_for_task_completion(theme_thread)
+			thread_running = false
 	).call_deferred()
 
 static func set_theme_color(col: int = -1) -> void:
@@ -136,12 +138,13 @@ static func set_theme_color(col: int = -1) -> void:
 	if old_color == col:
 		return
 	old_color = col
-	if theme_thread == null:
-		theme_thread = Thread.new()
-	elif theme_thread.is_started():
-		theme_thread.wait_to_finish()
-	theme_thread.start(_set_color_inner.bind(col))
+	if thread_running:
+		WorkerThreadPool.wait_for_task_completion(theme_thread)
+	theme_thread = WorkerThreadPool.add_task(
+		_set_color_inner.bind(col)
+	)
+	thread_running = true
 
 func free():
-	if theme_thread != null and theme_thread.is_started():
-		theme_thread.wait_to_finish()
+	if thread_running:
+		WorkerThreadPool.wait_for_task_completion(theme_thread)
