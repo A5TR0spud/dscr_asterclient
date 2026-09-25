@@ -20,6 +20,8 @@
 * Dictionary sources now reload when the window gains focus
 * Pressing enter in the Library now newlines instead of doing nothing
 * "@-_UNDEF" formatting for unknown signals now defaults to off to help newcomers figure out how to type unknown signals
+* Sped up sidebar dictionary system. Deleting, renaming, adding signals is much faster.
+* Changing theme color now goes thing-by-thing instead of freezing all at once
 
 ### Fixes
 

@@ -10,12 +10,17 @@ func _ready():
 	Main.instance.reload_dict.connect(refresh)
 
 func refresh():
-	for child in self.get_children():
-		child.queue_free()
-	for idx in range(DictionaryHandler.word_keys.size()):
-		var instance: DictEntry = dict_entry_scene.instantiate()
-		instance.sig = DictionaryHandler.word_keys[idx]
-		add_child(instance)
+	for idx: int in range(max(self.get_child_count(), DictionaryHandler.word_keys.size())):
+		if idx >= DictionaryHandler.word_keys.size():
+			self.get_child(idx).queue_free()
+			continue
+		if idx < self.get_child_count():
+			self.get_child(idx).sig = DictionaryHandler.word_keys[idx]
+			self.get_child(idx).refresh()
+		else:
+			var obj: DictEntry = dict_entry_scene.instantiate()
+			obj.sig = DictionaryHandler.word_keys[idx]
+			self.add_child(obj)
 	search_children()
 
 var re_search: bool = false

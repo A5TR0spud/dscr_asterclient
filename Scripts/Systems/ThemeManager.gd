@@ -1,4 +1,4 @@
-extends Node
+extends RefCounted
 class_name ThemeManager
 
 static var new_theme = preload("uid://c0reghmcwiqpy")
@@ -39,18 +39,13 @@ static func set_font_size(size: int = -1) -> void:
 		SettingsHandler.font_size = size
 		SettingsHandler.save()
 
-static func set_theme_color(col: int = -1) -> void:
-	if col < 0 or col > 64:
-		col = SettingsHandler.theme_color
-	if col < 0 or col > 64:
-		col = 57
-	if SettingsHandler.theme_color != col:
-		SettingsHandler.theme_color = col
-		SettingsHandler.save()
-	if old_color == col:
-		return
-	old_color = col
-	
+static var theme_thread: Thread = null
+
+static func _setty(n, nam: String, val):
+	n.set.call_deferred(nam, val)
+	await Main.instance.get_tree().process_frame
+
+static func _set_color_inner(col: int):
 	var new_color: Color = VisualizeNode.calculate_color(col)
 	var red_correction: float = 0
 	if col == 0:
@@ -77,7 +72,6 @@ static func set_theme_color(col: int = -1) -> void:
 		new_color *= 1.0 - (green_correction * 0.5)
 	var ratio: Color = new_color * 0.5 + Color(0.7, 0.7, 0.7)
 	
-	
 	# backgrounds
 	new_color.r8 -= 62
 	new_color.g8 -= 62
@@ -87,44 +81,67 @@ static func set_theme_color(col: int = -1) -> void:
 	if col < 50:
 		new_color.s *= 1.2
 		new_color.v *= 0.4
-	panel_style.bg_color = new_color
-	code_autocomplete_style.bg_color = new_color
+	await _setty(panel_style, "bg_color", new_color)
+	await _setty(code_autocomplete_style, "bg_color", new_color)
 	# edit boxes
 	new_color.r += 0.1 * ratio.r
 	new_color.g += 0.1 * ratio.g
 	new_color.b += 0.1 * ratio.b
-	text_edit_style.bg_color = new_color
-	code_edit_style.bg_color = new_color
-	grabber_back_style.bg_color = new_color
-	v_grabber_back_style.bg_color = new_color
+	await _setty(text_edit_style, "bg_color", new_color)
+	await _setty(code_edit_style, "bg_color", new_color)
+	await _setty(grabber_back_style, "bg_color", new_color)
+	await _setty(v_grabber_back_style, "bg_color", new_color)
 	# dark outline
 	new_color.r += 0.2 * ratio.r
 	new_color.g += 0.2 * ratio.g
 	new_color.b += 0.2 * ratio.b
-	press_style.border_color = new_color
-	tab_unselected.border_color = new_color
-	tab_but_unselected.border_color = new_color
+	await _setty(press_style, "border_color", new_color)
+	await _setty(tab_unselected, "border_color", new_color)
+	await _setty(tab_but_unselected, "border_color", new_color)
 	# normal outline
 	new_color.r += 0.2 * ratio.r
 	new_color.g += 0.2 * ratio.g
 	new_color.b += 0.2 * ratio.b
-	outline_style.border_color = new_color
-	tab_selected.border_color = new_color
-	tab_but_selected.border_color = new_color
-	panel_style.border_color = new_color
-	code_autocomplete_style.border_color = new_color
-	h_sep.color = new_color
-	v_sep.color = new_color
-	h_split.bg_color = new_color
-	v_split.bg_color = new_color
-	h_sep.color.a = 0.5
-	v_sep.color.a = 0.5
-	h_split.bg_color.a = 0.5
-	v_split.bg_color.a = 0.5
-	grabber_pressed_style.bg_color = new_color
+	await _setty(outline_style, "border_color", new_color)
+	await _setty(tab_selected, "border_color", new_color)
+	await _setty(tab_but_selected, "border_color", new_color)
+	await _setty(panel_style, "border_color", new_color)
+	await _setty(code_autocomplete_style, "border_color", new_color)
+	await _setty(grabber_pressed_style, "bg_color", new_color)
+	var _new_color: Color = new_color
+	_new_color.a = 0.5
+	await _setty(h_sep, "color", _new_color)
+	await _setty(v_sep, "color", _new_color)
+	await _setty(h_split, "bg_color", _new_color)
+	await _setty(v_split, "bg_color", _new_color)
 	# light outline
 	new_color.r += 0.1 * ratio.r
 	new_color.g += 0.1 * ratio.g
 	new_color.b += 0.1 * ratio.b
-	grabber_style.bg_color = new_color
-	hover_press_style.border_color = new_color
+	await _setty(grabber_style, "bg_color", new_color)
+	_setty(hover_press_style, "border_color", new_color)
+	(func():
+		if theme_thread.is_started():
+			theme_thread.wait_to_finish()
+	).call_deferred()
+
+static func set_theme_color(col: int = -1) -> void:
+	if col < 0 or col > 64:
+		col = SettingsHandler.theme_color
+	if col < 0 or col > 64:
+		col = 57
+	if SettingsHandler.theme_color != col:
+		SettingsHandler.theme_color = col
+		SettingsHandler.save()
+	if old_color == col:
+		return
+	old_color = col
+	if theme_thread == null:
+		theme_thread = Thread.new()
+	elif theme_thread.is_started():
+		theme_thread.wait_to_finish()
+	theme_thread.start(_set_color_inner.bind(col))
+
+func free():
+	if theme_thread != null and theme_thread.is_started():
+		theme_thread.wait_to_finish()
