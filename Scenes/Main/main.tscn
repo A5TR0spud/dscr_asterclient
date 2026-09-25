@@ -47,9 +47,11 @@ ignore_time_scale = true
 
 [node name="BootUp" type="AudioStreamPlayer" parent="." unique_id=927185845]
 stream = ExtResource("2_hfg1r")
+bus = &"System"
 
 [node name="ShutDown" type="AudioStreamPlayer" parent="." unique_id=737853012]
 stream = ExtResource("3_4e4y2")
+bus = &"System"
 
 [node name="SoundManager" parent="." unique_id=467419252 instance=ExtResource("4_6t3k2")]
 

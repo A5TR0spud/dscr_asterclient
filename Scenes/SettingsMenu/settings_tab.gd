@@ -13,6 +13,7 @@ func _ready() -> void:
 @onready var color_edit: SpinBox = $ScrollContainer/Options/ThemeColor/ColorPicker
 @onready var color_sample: ColorRect = $ScrollContainer/Options/ColorRect
 @onready var sound_slider: HScrollBar = $ScrollContainer/Options/GlobalVolume/VolumeSlider
+@onready var music_slider: HScrollBar = $ScrollContainer/Options/MusicVolume/VolumeSlider
 @onready var sound_sample: AudioStreamPlayer = $AudioPreview
 @onready var invert_pitch: SettingEntry = $ScrollContainer/Options/ImageMovement/VBoxContainer/InvertPitch
 @onready var invert_yaw: SettingEntry = $ScrollContainer/Options/ImageMovement/VBoxContainer/InvertYaw
@@ -20,6 +21,8 @@ func _ready() -> void:
 @onready var undef_setting: SettingEntry = $ScrollContainer/Options/UndefSetting
 @onready var confetti_setting: SettingEntry = $ScrollContainer/Options/Confetti
 @onready var image_setting_group: FoldableContainer = $ScrollContainer/Options/ImageMovement
+@onready var music_sample: AudioStreamPlayer = $MusicAudioPreview
+@onready var music_parent: Control = $ScrollContainer/Options/MusicVolume
 
 func refresh() -> void:
 	formatting.set_state_no_signal(SettingsHandler.do_formatting)
@@ -31,7 +34,8 @@ func refresh() -> void:
 	truncate.set_value_no_signal(SettingsHandler.truncate_message_size)
 	font_size.set_value_no_signal(SettingsHandler.font_size)
 	color_edit.set_value_no_signal(SettingsHandler.theme_color)
-	sound_slider.set_value_no_signal(_volume_linear_to_slider())
+	sound_slider.set_value_no_signal(_volume_linear_to_slider(sound_slider, SettingsHandler.master_volume))
+	music_slider.set_value_no_signal(_volume_linear_to_slider(music_slider, SettingsHandler.music_volume))
 	_sample_color()
 	undef_setting.set_state_no_signal(SettingsHandler.use_at_undef)
 	confetti_setting.set_state_no_signal(SettingsHandler.confetti)
@@ -41,22 +45,23 @@ func _refresh_dict_supports():
 	_refresh_confetti()
 	image_visibility.visible = DictionaryHandler.support_m0
 	image_setting_group.visible = DictionaryHandler.support_m0
+	music_parent.visible = DictionaryHandler.support_dscr
 
 func _refresh_confetti():
 	confetti_setting.visible = DictionaryHandler.support_dscr and -702 in DictionaryHandler.word_keys
 
-func _volume_linear_to_slider(value: float = -1) -> float:
+func _volume_linear_to_slider(slider: HScrollBar, default: float, value: float = -1) -> float:
 	if value < 0:
-		value = SettingsHandler.master_volume
+		value = default
 	if value > 1:
 		value = (value - 1) * 2 + 1
-	value *= 0.5 * (sound_slider.max_value - sound_slider.page)
+	value *= 0.5 * (slider.max_value - slider.page)
 	return value
 
-func _volume_slider_to_linear(value: float = -1) -> float:
+func _volume_slider_to_linear(slider: HScrollBar, value: float = -1) -> float:
 	if value < 0:
-		value = sound_slider.value
-	value /= sound_slider.max_value - sound_slider.page
+		value = slider.value
+	value /= slider.max_value - slider.page
 	value *= 2
 	if value > 1:
 		value = 1 + (value - 1) * 0.5
@@ -121,11 +126,19 @@ func _on_color_picker_value_changed(value):
 	_sample_color(value)
 
 func _on_volume_slider_value_changed(value):
-	SettingsHandler.master_volume = _volume_slider_to_linear(value)
+	SettingsHandler.master_volume = _volume_slider_to_linear(sound_slider, value)
 	SettingsHandler.evaluate_volume()
 	if not sound_sample.playing:
 		sound_sample.play()
 	save(false, true)
+
+func _on_music_slider_value_changed(value):
+	SettingsHandler.music_volume = _volume_slider_to_linear(music_slider, value)
+	SettingsHandler.evaluate_volume()
+	if not music_sample.playing:
+		music_sample.play()
+	save(false, true)
+	pass
 
 func _on_invert_pitch_set(new_value):
 	SettingsHandler.img_invert_pitch = new_value

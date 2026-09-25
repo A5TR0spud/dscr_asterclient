@@ -31,8 +31,8 @@ static var instance : Main
 
 signal reload_dict
 static func on_dict_reload() -> void:
-	instance.reload_dict.emit()
 	SaveSystem.eval_bad_dict()
+	instance.reload_dict.emit()
 signal reload_settings
 static func on_settings_reload() -> void:
 	ThemeManager.set_font_size()

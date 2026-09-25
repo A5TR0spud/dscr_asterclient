@@ -108,6 +108,7 @@ click_signal_modifier={
 
 [internationalization]
 
+rendering/root_node_auto_translate=false
 locale/translations=PackedStringArray("res://Localization/lang.en.translation", "res://Localization/lang.m0.translation")
 
 [physics]

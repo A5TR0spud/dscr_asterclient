@@ -2,12 +2,15 @@
 
 ## --WIP--
 
+### Additions
+
+* Added basic support for -577 (Eearslya)
+  * This doesn't include the wild syntax with -11 and such
+
 ### Changes
 
 * Image recenter button now greys out when it wouldn't do anything
-* ???? no longer shows up if it's immediately followed by |-29
-* ???? can now show up when ending a transmission with "|-2 |-2 ????"
-* Full list of ???? rules:
+* Full list of changed ???? rules:
   * If the transmission starts with "???? |-2 |-2" then it will appear
   * If the transmission ends with "|-2 |-2 ????" then it will appear
   * If the transmission signal count is 3 or less and it contains a "????" not followed by "|-29" then it will appear
@@ -21,6 +24,8 @@
 * Fixed image resolution not changing with size when toggling the resolution button and then changing image size
 * Clicking away from autocomplete options once again hides them
 * Fixed the scrollbar in the dictionary menu causing a big empty space to appear when editing default formatting
+* Disabled auto-translate so that setting a dictionary entry to a localization key by coincedence no longer hijacks what it says
+* (?) Fixed dubious dictionary support selection
 
 ## 0.7.5
 

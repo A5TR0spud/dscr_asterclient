@@ -19,6 +19,10 @@ var is_image_open: bool = false
 @onready var image_node: VisualizeNode = $Body/Corpus/VisualizeNode
 @onready var image_button_node: Button = $Body/Corpus/ContextButtons/ImageButton
 
+@onready var music_player: AudioStreamPlayer = $Music
+@onready var song_button_node: Button = $Body/Corpus/ContextButtons/SongButton
+var has_song: bool = false
+
 @onready var context_buttons: HFlowContainer = $Body/Corpus/ContextButtons
 
 func ready():
@@ -49,6 +53,8 @@ func try_parses():
 		if !has_image and delete_empty_parses:
 			image_node.queue_free()
 			image_button_node.queue_free()
+	has_song = music_player.check_song(message)
+	song_button_node.visible = has_song and DictionaryHandler.support_dscr
 
 func refresh_callsign():
 	callsign_node.text = Main.base_10_to_callsign(sender)
