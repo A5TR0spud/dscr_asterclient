@@ -49,7 +49,7 @@ static func compile_text(input: String) -> PackedInt64Array:
 	var ends: PackedInt32Array = []
 	var sigs: Array[PackedInt64Array] = []
 	var start: int = -1
-	var last_end_idx: int = 0
+	var finished_to_idx: int = 0
 	input = input.to_upper()
 	#print(input)
 	while start + 1 < input.length():
@@ -106,22 +106,21 @@ static func compile_text(input: String) -> PackedInt64Array:
 		var extend_with: PackedInt64Array = []
 		var extend_to: PackedInt64Array = []
 		var first_end: int = INT64_MAX
-		for idx in range(DictionaryHandler.word_keys.size()):
-			var d: String = DictionaryHandler.word_names[idx]
-			var dx: int = DictionaryHandler.word_keys[idx]
-			var end: int = start + d.length()
-			if input.substr(start, d.length()) == d.to_upper():
-				var found_idx: int = ends.find(start)
-				if found_idx >= 0 and end not in ends:
-					extension_idx.append(found_idx)
-					extend_with.append(dx)
-					extend_to.append(end)
-					first_end = mini(first_end, end)
-				elif end not in ends:
-					starts.append(start)
-					ends.append(end)
-					sigs.append([dx])
-					first_end = mini(first_end, end)
+		var found_indices: Array[PackedInt64Array] = DictionaryHandler.prefix_tree.find_all_matches(input.substr(start))
+		for idx in range(found_indices[0].size()):
+			var end: int = start + found_indices[1][idx]
+			var dx: int = found_indices[0][idx]
+			var found_idx: int = ends.find(start)
+			if found_idx >= 0 and end not in ends:
+				extension_idx.append(found_idx)
+				extend_with.append(dx)
+				extend_to.append(end)
+				first_end = mini(first_end, end)
+			elif end not in ends:
+				starts.append(start)
+				ends.append(end)
+				sigs.append([dx])
+				first_end = mini(first_end, end)
 		for ext: int in range(extension_idx.size()-1, -1, -1):
 			var k: int = extension_idx[ext]
 			if ext == 0:
@@ -137,15 +136,15 @@ static func compile_text(input: String) -> PackedInt64Array:
 			start = first_end - 1
 		else:
 			var low_endx: int = -1
-			for i: int in range(last_end_idx, ends.size()):
+			for i: int in range(finished_to_idx, ends.size()):
 				var terminus: int = ends[i]
 				if terminus <= start:
 					continue
 				if low_endx < 0 or ends[i] < ends[low_endx]:
 					low_endx = i
 			if low_endx >= 0:
-				last_end_idx = low_endx
-				start = ends[last_end_idx]
+				finished_to_idx = low_endx
+				start = ends[finished_to_idx]
 	log_time("populate")
 	var to: int = 0
 	var from: int = 1

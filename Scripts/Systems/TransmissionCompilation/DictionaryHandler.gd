@@ -129,9 +129,13 @@ const strikethrough_key: String = "strikethrough"
 const background_key: String = "invert"
 const indent_key: String = "indentation"
 
+static var prefix_tree: Trie = Trie.new()
+
 static func initialize() -> void:
 	word_keys = word_dict.get_or_add("keys", []).map(func(v): return int(v)) as Array[int]
 	desc_keys = desc_dict.get_or_add("keys", []).map(func(v): return int(v)) as Array[int]
+	prefix_tree.clear()
+	prefix_tree.populate_from_arrays(word_names, word_keys)
 
 static func export() -> void:
 	word_dict.set("keys", word_keys)
@@ -170,11 +174,14 @@ static func apply_signal_name(sig: int, name: String = "", do_logging: bool = fa
 			Chat.new_log(Chat.State.DUPLICATE_NAME, [word_keys[dupe_idx], sig, name])
 		return false
 	if idx >= 0:
+		prefix_tree.remove(word_names[idx])
+		prefix_tree.insert(name, sig)
 		word_names[idx] = name
 		return true
 	idx = word_keys.bsearch_custom(sig, func(a, b): return a > b)
 	word_keys.insert(idx, sig)
 	word_names.insert(idx, name)
+	prefix_tree.insert(name, sig)
 	return true
 
 static func apply_signal_desc(sig: int, desc: Dictionary) -> void:
@@ -490,6 +497,7 @@ static func forget_signal(sig: int) -> void:
 	if idx >= 0:
 		word_keys.remove_at(idx)
 		if idx < word_names.size():
+			prefix_tree.remove(word_names[idx])
 			word_names.remove_at(idx)
 	
 	idx = desc_keys.find(sig)
