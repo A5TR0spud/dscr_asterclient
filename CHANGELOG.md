@@ -30,6 +30,9 @@
 * Fixed the scrollbar in the dictionary menu causing a big empty space to appear when editing default formatting
 * Disabled auto-translate so that setting a dictionary entry to a localization key by coincedence no longer hijacks what it says
 * (?) Fixed dubious dictionary support selection
+* Several text-to-signal conversion edge cases have been fixed
+  * The new system should be case-insensitive and allow special characters on every letter past the first
+  * Naming signals still forces caps and prevents special characters
 
 ## 0.7.5
 

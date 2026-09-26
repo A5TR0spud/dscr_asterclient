@@ -35,14 +35,14 @@ static func log_error() -> void:
 		ErrorCode.UNKNOWN:
 			Chat.new_log(Chat.State.UNKNOWN_WORD, _unknowns)
 
-static var time: int
-static func log_time(strig: String):
-	var _time: int = Time.get_ticks_usec() - time
-	print(strig, " secs: ", _time * 0.000001)
-	time = Time.get_ticks_usec()
+#static var time: int
+#static func log_time(strig: String):
+	#var _time: int = Time.get_ticks_usec() - time
+	#print(strig, " secs: ", _time * 0.000001)
+	#time = Time.get_ticks_usec()
 
 static func compile_text(input: String) -> PackedInt64Array:
-	time = Time.get_ticks_usec()
+	#time = Time.get_ticks_usec()
 	_unknowns.clear()
 	_error = ErrorCode.UNCOMPILED
 	var starts: PackedInt32Array = []
@@ -145,13 +145,13 @@ static func compile_text(input: String) -> PackedInt64Array:
 			if low_endx >= 0:
 				finished_to_idx = low_endx
 				start = ends[finished_to_idx]
-	log_time("populate")
+	#log_time("populate")
 	var to: int = 0
 	var from: int = 1
 	var unflipped: bool = true
-	print(starts)
-	print(ends)
-	print(sigs)
+	#print(starts)
+	#print(ends)
+	#print(sigs)
 	while to < starts.size() and from < starts.size():
 		var _fro: int = from if unflipped else to
 		var _to: int = to if unflipped else from
@@ -184,10 +184,10 @@ static func compile_text(input: String) -> PackedInt64Array:
 			from += 1
 			to += 1
 	
-	log_time("filter")
-	print(starts)
-	print(ends)
-	print(sigs)
+	#log_time("filter")
+	#print(starts)
+	#print(ends)
+	#print(sigs)
 	var prevend: int = 0
 	var out: PackedInt64Array = []
 	#var mix: Array = []
@@ -206,7 +206,7 @@ static func compile_text(input: String) -> PackedInt64Array:
 			#mix.append_array(sigs[idx])
 		prevend = end
 	
-	log_time("generate")
+	#log_time("generate")
 	_prev_length = starts.size()
 	if _prev_length >= Main.MAX_MESSAGE_LENGTH:
 		_error = ErrorCode.TOO_LONG
