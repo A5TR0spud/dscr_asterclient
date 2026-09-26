@@ -235,7 +235,7 @@ static func find_incomplete_signal(line: String, caret_column: int, expected: St
 		if caret_column <= sub.length():
 			if sub.is_empty():
 				break
-			var result: ParseResult = parse_text(sub)
+			var result: ParseResult = parse_text_greedy(sub)
 			if (result.state == ParseResult.FailureState.TOO_LONG
 				or result.state == ParseResult.FailureState.UNPARSED
 			):
@@ -265,7 +265,7 @@ static func find_incomplete_signal(line: String, caret_column: int, expected: St
 
 ## Takes a string input and outputs a ParseResult object
 ## The returned object contains information about failure and parsed numerical signals
-static func parse_text(input: String, earlyReturn: bool = false) -> ParseResult:
+static func parse_text_greedy(input: String, earlyReturn: bool = false) -> ParseResult:
 	input = input.strip_edges().strip_escapes().to_upper()
 	var result: ParseResult = ParseResult.new()
 	result.state = ParseResult.FailureState.ALL_GOOD
@@ -345,12 +345,13 @@ static func parse_text(input: String, earlyReturn: bool = false) -> ParseResult:
 	return result
 
 
-static func parse_text_to_signals(input: String, do_logging: bool = true) -> PackedInt64Array:
+static func parse_text_to_signals(input: String, do_logging: bool = true, ignore_errors: bool = false) -> PackedInt64Array:
 	var sigs: PackedInt64Array = TransmissionCompilation.compile_text(input)
 	if TransmissionCompilation.has_error():
 		if do_logging:
 			TransmissionCompilation.log_error()
-		return []
+		if not ignore_errors:
+			return []
 	return sigs
 
 static func contains_signal(sig: int) -> bool:

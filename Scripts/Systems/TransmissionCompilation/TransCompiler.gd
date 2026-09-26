@@ -149,6 +149,9 @@ static func compile_text(input: String) -> PackedInt64Array:
 	var to: int = 0
 	var from: int = 1
 	var unflipped: bool = true
+	print(starts)
+	print(ends)
+	print(sigs)
 	while to < starts.size() and from < starts.size():
 		var _fro: int = from if unflipped else to
 		var _to: int = to if unflipped else from
@@ -174,6 +177,7 @@ static func compile_text(input: String) -> PackedInt64Array:
 			starts.remove_at(_fro)
 			ends.remove_at(_fro)
 			sigs.remove_at(_fro)
+			unflipped = true
 			continue
 		unflipped = not unflipped
 		if unflipped:
@@ -181,6 +185,9 @@ static func compile_text(input: String) -> PackedInt64Array:
 			to += 1
 	
 	log_time("filter")
+	print(starts)
+	print(ends)
+	print(sigs)
 	var prevend: int = 0
 	var out: PackedInt64Array = []
 	#var mix: Array = []

@@ -15,7 +15,7 @@ var lib_entry = preload("res://Scenes/LibraryMenu/library_entry.tscn")
 
 var pre_name: String = ""
 var current_input: String = ""
-var current_transmission: Array = []
+var current_transmission: PackedInt64Array = []
 var unsaved_changes: bool = false
 
 static var instance: Library
@@ -53,10 +53,10 @@ func _evaluate_transmission():
 	if current_input == words_edit.text: return
 	if !debounce.is_stopped(): debounce.stop()
 
-	var parsed: ParseResult = DictionaryHandler.parse_text(words_edit.text, false)
-	if current_transmission != parsed.output:
+	var parsed: PackedInt64Array = DictionaryHandler.parse_text_to_signals(words_edit.text, false, true)
+	if current_transmission != parsed:
 		current_input = words_edit.text
-		current_transmission = parsed.output
+		current_transmission = parsed
 		_set_sig_text()
 	unsaved_changes = true
 
