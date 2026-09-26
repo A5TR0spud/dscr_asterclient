@@ -67,6 +67,10 @@ func find_all_matches(input: String) -> Array[PackedInt64Array]:
 			out_signals.append(cur._signal)
 			out_lengths.append(idx + 1)
 	
+	#if out_lengths or out_signals:
+	#	print("find all matches")
+	#	print(out_signals)
+	#	print(out_lengths)
 	return [out_signals, out_lengths]
 
 func remove(word: String) -> void:

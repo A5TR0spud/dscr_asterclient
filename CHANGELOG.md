@@ -1,6 +1,12 @@
 # Versions
 
-## --WIP--
+## 0.8.1
+
+### Fixes
+
+* Text-to-signal conversion no longer skips a beat if a word contains a smaller word
+
+## 0.8.0
 
 ### Additions
 

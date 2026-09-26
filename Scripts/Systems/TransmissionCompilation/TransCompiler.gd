@@ -15,7 +15,7 @@ enum ErrorCode {
 
 ## In the form:[br]
 ## "starts": indices for starts of signals ([PackedInt32Array]) [br]
-## "lengths": indices for lengths of signals ([PackedInt32Array]) [br]
+## "lengths": lengths of signals ([PackedInt32Array]) [br]
 ## "signals": signal numbers ([PackedInt64Array]) [br]
 ## The same index refers to the same signal group across all arrays
 static func get_as_data_dict() -> Dictionary:
@@ -43,6 +43,7 @@ static func log_error() -> void:
 
 static func compile_text(input: String) -> PackedInt64Array:
 	#time = Time.get_ticks_usec()
+	#print("--------")
 	_unknowns.clear()
 	_error = ErrorCode.UNCOMPILED
 	var group_starts: PackedInt32Array = []
@@ -58,7 +59,7 @@ static func compile_text(input: String) -> PackedInt64Array:
 		start += 1
 		if is_whitespace(input[start]):
 			continue
-		#print(start)
+		#print(start, " : ", input[start])
 		if input[start] == "|":
 			var _sub: String = input.substr(start)
 			var m := RegEx.create_from_string("^\\|(-?[0-9]{1,18})").search(_sub)
@@ -120,25 +121,23 @@ static func compile_text(input: String) -> PackedInt64Array:
 		var extend_with: PackedInt64Array = []
 		var extend_to: PackedInt64Array = []
 		var extend_length: PackedInt64Array = []
-		var first_end: int = INT64_MAX
 		var found_indices: Array[PackedInt64Array] = DictionaryHandler.prefix_tree.find_all_matches(input.substr(start))
 		for idx in range(found_indices[0].size()):
-			var end: int = start + found_indices[1][idx]
-			var dx: int = found_indices[0][idx]
+			var _length: int = found_indices[1][idx]
+			var end: int = start + _length
+			var _sig: int = found_indices[0][idx]
 			var found_idx: int = group_ends.find(start)
 			if found_idx >= 0 and end not in group_ends:
 				extension_idx.append(found_idx)
-				extend_with.append(dx)
+				extend_with.append(_sig)
 				extend_to.append(end)
-				extend_length.append(found_indices[1][idx])
-				first_end = mini(first_end, end)
+				extend_length.append(_length)
 			elif end not in group_ends:
 				group_starts.append(start)
 				group_ends.append(end)
-				group_sigs.append([dx])
-				per_lengths.append([found_indices[1][idx]])
+				group_sigs.append([_sig])
+				per_lengths.append([_length])
 				per_starts.append([start])
-				first_end = mini(first_end, end)
 		for ext: int in range(extension_idx.size()-1, -1, -1):
 			var k: int = extension_idx[ext]
 			if ext == 0:
@@ -153,13 +152,13 @@ static func compile_text(input: String) -> PackedInt64Array:
 				group_ends.append(extend_to[ext])
 				group_sigs.append(v)
 				v = per_lengths[k].duplicate()
-				v.append(extend_length[k])
+				v.append(extend_length[ext])
 				per_lengths.append(v)
 				v = per_starts[k].duplicate()
 				v.append(start)
 				per_starts.append(v)
-		if first_end < INT64_MAX:
-			start = first_end - 1
+		if found_indices[1]:
+			start += found_indices[1][0] - 1
 		else:
 			var low_endx: int = -1
 			for i: int in range(finished_to_idx, group_ends.size()):
@@ -170,14 +169,17 @@ static func compile_text(input: String) -> PackedInt64Array:
 					low_endx = i
 			if low_endx >= 0:
 				finished_to_idx = low_endx
-				start = group_ends[finished_to_idx]
+				start = group_ends[finished_to_idx] - 1
 	#log_time("populate")
 	var to: int = 0
 	var from: int = 1
 	var unflipped: bool = true
+	#print("--")
 	#print(group_starts)
 	#print(group_ends)
 	#print(group_sigs)
+	#print(per_starts)
+	#print(per_lengths)
 	while to < group_starts.size() and from < group_starts.size():
 		var _fro: int = from if unflipped else to
 		var _to: int = to if unflipped else from
@@ -215,18 +217,17 @@ static func compile_text(input: String) -> PackedInt64Array:
 			to += 1
 	
 	#log_time("filter")
-	#print(group_starts)
-	#print(group_ends)
-	#print(group_sigs)
-	var prevend: int = 0
-	var out: PackedInt64Array = []
-	var out_starts: PackedInt32Array = []
-	var out_lens: PackedInt32Array = []
+	#print("--")
 	#print(group_starts)
 	#print(group_ends)
 	#print(group_sigs)
 	#print(per_starts)
 	#print(per_lengths)
+	#print("--")
+	var prevend: int = 0
+	var out: PackedInt64Array = []
+	var out_starts: PackedInt32Array = []
+	var out_lens: PackedInt32Array = []
 	#var mix: Array = []
 	for idx: int in range(group_starts.size() + 1):
 		var started: int = group_starts[idx] if idx < group_starts.size() else input.length()
@@ -245,6 +246,9 @@ static func compile_text(input: String) -> PackedInt64Array:
 			#mix.append_array(group_sigs[idx])
 		prevend = end
 	
+	#print(out)
+	#print(out_starts)
+	#print(out_lens)
 	#log_time("generate")
 	_prev_length = group_starts.size()
 	if _prev_length >= Main.MAX_MESSAGE_LENGTH:
