@@ -10,7 +10,7 @@ const GROUP_BEGIN = -14
 const GROUP_END = -15
 const SONG = -577
 const NOTE = -605003
-const conversion_factor: float = 0.8066
+const conversion_factor: float = 0.8067
 const sample_hz: float = 22050.0
 
 static var now_playing: Music = null
@@ -127,7 +127,7 @@ func _fill_buffer() -> void:
 			elif note.type == NoteType.SAWTOOTH:
 				sample = 2.0 * note.phase - 1.0
 			elif note.type == NoteType.SQUARE:
-				sample = 1.0 if note.phase < 0.5 else -1.0
+				sample = (1.0 if note.phase < 0.5 else -1.0) * 0.5
 			elif note.type == NoteType.TRIANGLE:
 				sample = 4.0 * abs(fmod(note.phase + 0.75, 1.0) - 0.5) - 1.0
 			

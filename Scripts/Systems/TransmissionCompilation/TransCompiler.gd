@@ -14,9 +14,9 @@ enum ErrorCode {
 }
 
 ## In the form:[br]
-## "starts": starts of signal groups ([PackedInt64Array]) [br]
-## "ends": ends of signal groups ([PackedInt64Array]) [br]
-## "signal_groups": signal numbers ([Array][lb][PackedInt64Array][rb]) [br]
+## "starts": indices for starts of signals ([PackedInt32Array]) [br]
+## "lengths": indices for lengths of signals ([PackedInt32Array]) [br]
+## "signals": signal numbers ([PackedInt64Array]) [br]
 ## The same index refers to the same signal group across all arrays
 static func get_as_data_dict() -> Dictionary:
 	return _dict_result
@@ -45,9 +45,11 @@ static func compile_text(input: String) -> PackedInt64Array:
 	#time = Time.get_ticks_usec()
 	_unknowns.clear()
 	_error = ErrorCode.UNCOMPILED
-	var starts: PackedInt32Array = []
-	var ends: PackedInt32Array = []
-	var sigs: Array[PackedInt64Array] = []
+	var group_starts: PackedInt32Array = []
+	var group_ends: PackedInt32Array = []
+	var group_sigs: Array[PackedInt64Array] = []
+	var per_starts: Array[PackedInt32Array] = []
+	var per_lengths: Array[PackedInt32Array] = []
 	var start: int = -1
 	var finished_to_idx: int = 0
 	input = input.to_upper()
@@ -61,106 +63,130 @@ static func compile_text(input: String) -> PackedInt64Array:
 			var _sub: String = input.substr(start)
 			var m := RegEx.create_from_string("^\\|(-?[0-9]{1,18})").search(_sub)
 			if m:
-				var end: int = start + 1 + m.get_string().length()
-				if end not in ends:
-					if start in ends:
-						var found_idx: int = ends.find(start)
-						ends[found_idx] = end
-						sigs[found_idx].append(m.get_string().to_int())
+				var end: int = start + m.get_string().length()
+				if end not in group_ends:
+					if start in group_ends:
+						var found_idx: int = group_ends.find(start)
+						group_ends[found_idx] = end
+						group_sigs[found_idx].append(m.get_string().to_int())
+						per_lengths[found_idx].append(m.get_string().length())
+						per_starts[found_idx].append(start)
 					else:
-						starts.append(start)
-						ends.append(end)
-						sigs.append([m.get_string().to_int()])
+						group_starts.append(start)
+						group_ends.append(end)
+						group_sigs.append([m.get_string().to_int()])
+						per_lengths.append([m.get_string().length()])
+						per_starts.append([start])
 					start = end - 1
 			continue
 		if input[start] == "0":
 			var end: int = start + 1
-			if end not in ends:
-				if start in ends:
-					var found_idx: int = ends.find(start)
-					ends[found_idx] = end
-					sigs[found_idx].append(0)
+			if end not in group_ends:
+				if start in group_ends:
+					var found_idx: int = group_ends.find(start)
+					group_ends[found_idx] = end
+					group_sigs[found_idx].append(0)
+					per_lengths[found_idx].append(1)
+					per_starts[found_idx].append(start)
 				else:
-					starts.append(start)
-					ends.append(end)
-					sigs.append([0])
+					group_starts.append(start)
+					group_ends.append(end)
+					group_sigs.append([0])
+					per_lengths.append([1])
+					per_starts.append([start])
 			continue
 		if input[start].is_valid_int():
 			var _sub: String = input.substr(start)
 			var m := RegEx.create_from_string("^([0-9]{1,18})").search(_sub)
 			if m:
 				var end: int = start + m.get_string().length()
-				if end not in ends:
-					if start in ends:
-						var found_idx: int = ends.find(start)
-						ends[found_idx] = end
-						sigs[found_idx].append(m.get_string().to_int())
+				if end not in group_ends:
+					if start in group_ends:
+						var found_idx: int = group_ends.find(start)
+						group_ends[found_idx] = end
+						group_sigs[found_idx].append(m.get_string().to_int())
+						per_lengths[found_idx].append(m.get_string().length())
+						per_starts[found_idx].append(start)
 					else:
-						starts.append(start)
-						ends.append(end)
-						sigs.append([m.get_string().to_int()])
+						group_starts.append(start)
+						group_ends.append(end)
+						group_sigs.append([m.get_string().to_int()])
+						per_lengths.append([m.get_string().length()])
+						per_starts.append([start])
 					start = end - 1
 			continue
 		
 		var extension_idx: PackedInt64Array = []
 		var extend_with: PackedInt64Array = []
 		var extend_to: PackedInt64Array = []
+		var extend_length: PackedInt64Array = []
 		var first_end: int = INT64_MAX
 		var found_indices: Array[PackedInt64Array] = DictionaryHandler.prefix_tree.find_all_matches(input.substr(start))
 		for idx in range(found_indices[0].size()):
 			var end: int = start + found_indices[1][idx]
 			var dx: int = found_indices[0][idx]
-			var found_idx: int = ends.find(start)
-			if found_idx >= 0 and end not in ends:
+			var found_idx: int = group_ends.find(start)
+			if found_idx >= 0 and end not in group_ends:
 				extension_idx.append(found_idx)
 				extend_with.append(dx)
 				extend_to.append(end)
+				extend_length.append(found_indices[1][idx])
 				first_end = mini(first_end, end)
-			elif end not in ends:
-				starts.append(start)
-				ends.append(end)
-				sigs.append([dx])
+			elif end not in group_ends:
+				group_starts.append(start)
+				group_ends.append(end)
+				group_sigs.append([dx])
+				per_lengths.append([found_indices[1][idx]])
+				per_starts.append([start])
 				first_end = mini(first_end, end)
 		for ext: int in range(extension_idx.size()-1, -1, -1):
 			var k: int = extension_idx[ext]
 			if ext == 0:
-				ends[k] = extend_to[ext]
-				sigs[k].append(extend_with[ext])
+				group_ends[k] = extend_to[ext]
+				group_sigs[k].append(extend_with[ext])
+				per_lengths[k].append(extend_length[ext])
+				per_starts[k].append(start)
 			else:
-				var v: PackedInt64Array = sigs[k].duplicate()
+				var v = group_sigs[k].duplicate()
 				v.append(extend_with[ext])
-				starts.append(starts[k])
-				ends.append(extend_to[ext])
-				sigs.append(v)
+				group_starts.append(group_starts[k])
+				group_ends.append(extend_to[ext])
+				group_sigs.append(v)
+				v = per_lengths[k].duplicate()
+				v.append(extend_length[k])
+				per_lengths.append(v)
+				v = per_starts[k].duplicate()
+				v.append(start)
+				per_starts.append(v)
 		if first_end < INT64_MAX:
 			start = first_end - 1
 		else:
 			var low_endx: int = -1
-			for i: int in range(finished_to_idx, ends.size()):
-				var terminus: int = ends[i]
+			for i: int in range(finished_to_idx, group_ends.size()):
+				var terminus: int = group_ends[i]
 				if terminus <= start:
 					continue
-				if low_endx < 0 or ends[i] < ends[low_endx]:
+				if low_endx < 0 or group_ends[i] < group_ends[low_endx]:
 					low_endx = i
 			if low_endx >= 0:
 				finished_to_idx = low_endx
-				start = ends[finished_to_idx]
+				start = group_ends[finished_to_idx]
 	#log_time("populate")
 	var to: int = 0
 	var from: int = 1
 	var unflipped: bool = true
-	#print(starts)
-	#print(ends)
-	#print(sigs)
-	while to < starts.size() and from < starts.size():
+	#print(group_starts)
+	#print(group_ends)
+	#print(group_sigs)
+	while to < group_starts.size() and from < group_starts.size():
 		var _fro: int = from if unflipped else to
 		var _to: int = to if unflipped else from
-		var started: int = starts[_fro]
-		var end: int = ends[_fro]
-		var sig: PackedInt64Array = sigs[_fro]
-		var c_start: int = starts[_to]
-		var c_end: int = ends[_to]
-		var c_sig: PackedInt64Array = sigs[_to]
+		var started: int = group_starts[_fro]
+		var end: int = group_ends[_fro]
+		var sig: PackedInt64Array = group_sigs[_fro]
+		var c_start: int = group_starts[_to]
+		var c_end: int = group_ends[_to]
+		var c_sig: PackedInt64Array = group_sigs[_to]
 		if (
 			(started < c_start and c_end == end)
 			or (started == c_start and c_end < end)
@@ -171,12 +197,16 @@ static func compile_text(input: String) -> PackedInt64Array:
 			)
 			or (started < c_start and c_end < end)
 		):
-			starts[_to] = started
-			ends[_to] = end
-			sigs[_to] = sig
-			starts.remove_at(_fro)
-			ends.remove_at(_fro)
-			sigs.remove_at(_fro)
+			group_starts[_to] = started
+			group_ends[_to] = end
+			group_sigs[_to] = sig
+			per_lengths[_to] = per_lengths[_fro]
+			per_starts[_to] = per_starts[_fro]
+			group_starts.remove_at(_fro)
+			group_ends.remove_at(_fro)
+			group_sigs.remove_at(_fro)
+			per_lengths.remove_at(_fro)
+			per_starts.remove_at(_fro)
 			unflipped = true
 			continue
 		unflipped = not unflipped
@@ -185,15 +215,22 @@ static func compile_text(input: String) -> PackedInt64Array:
 			to += 1
 	
 	#log_time("filter")
-	#print(starts)
-	#print(ends)
-	#print(sigs)
+	#print(group_starts)
+	#print(group_ends)
+	#print(group_sigs)
 	var prevend: int = 0
 	var out: PackedInt64Array = []
+	var out_starts: PackedInt32Array = []
+	var out_lens: PackedInt32Array = []
+	#print(group_starts)
+	#print(group_ends)
+	#print(group_sigs)
+	#print(per_starts)
+	#print(per_lengths)
 	#var mix: Array = []
-	for idx: int in range(starts.size() + 1):
-		var started: int = starts[idx] if idx < starts.size() else input.length()
-		var end: int = ends[idx] if idx < starts.size() else 0
+	for idx: int in range(group_starts.size() + 1):
+		var started: int = group_starts[idx] if idx < group_starts.size() else input.length()
+		var end: int = group_ends[idx] if idx < group_starts.size() else 0
 		if started > prevend:
 			var _s: String = input.substr(prevend, started - prevend)
 			if !is_whitespace(_s):
@@ -201,21 +238,23 @@ static func compile_text(input: String) -> PackedInt64Array:
 				_error = ErrorCode.UNKNOWN
 			#if !_s.is_empty():
 				#mix.append(_s)
-		if idx < starts.size():
-			out.append_array(sigs[idx])
-			#mix.append_array(sigs[idx])
+		if idx < group_starts.size():
+			out.append_array(group_sigs[idx])
+			out_starts.append_array(per_starts[idx])
+			out_lens.append_array(per_lengths[idx])
+			#mix.append_array(group_sigs[idx])
 		prevend = end
 	
 	#log_time("generate")
-	_prev_length = starts.size()
+	_prev_length = group_starts.size()
 	if _prev_length >= Main.MAX_MESSAGE_LENGTH:
 		_error = ErrorCode.TOO_LONG
 	elif _error == ErrorCode.UNCOMPILED:
 		_error = ErrorCode.ALL_GOOD
 	_dict_result = {
-		"starts": starts,
-		"ends": ends,
-		"signal_groups": sigs
+		"starts": out_starts,
+		"lengths": out_lens,
+		"signals": out
 	}
 	return out
 

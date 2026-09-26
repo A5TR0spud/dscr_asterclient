@@ -28,7 +28,7 @@
 * Fixed image resolution not changing with size when toggling the resolution button and then changing image size
 * Clicking away from autocomplete options once again hides them
 * Fixed the scrollbar in the dictionary menu causing a big empty space to appear when editing default formatting
-* Disabled auto-translate so that setting a dictionary entry to a localization key by coincedence no longer hijacks what it says
+* Disabled auto-translate so that setting a dictionary entry to a localization key by coincidence no longer hijacks what it says
 * (?) Fixed dubious dictionary support selection
 * Several text-to-signal conversion edge cases have been fixed
   * The new system should be case-insensitive and allow special characters on every letter past the first
