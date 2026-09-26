@@ -4,63 +4,38 @@ class_name TransmissionHighlighter
 func _get_line_syntax_highlighting(line: int) -> Dictionary:
 	var input := get_text_edit().get_line(line)
 	if input.strip_edges().strip_escapes().is_empty(): return {}
+	if !SettingsHandler.do_bbcode: return {}
 
 	var color := Color.WHITE
-	var pos: int = 0
 	var result: Dictionary = {}
-
-	while pos < input.length():
-		# Skip over whitespace and numbers
-		if _is_whitespace(input[pos]) or input[pos].is_valid_int():
-			color = _push_color(result, pos, color, Color.WHITE)
-			pos += 1
-			continue
-
-		var sub_limit := mini(input.length() - pos, DictionaryHandler.MAX_NAME_LENGTH)
-		# Since signal names can't have spaces, we can limit our substring to the next space
-		# so we don't have to search as much.
-		var next_space := input.find(" ", pos)
-		if next_space > 0: sub_limit = mini(sub_limit, next_space - pos)
-
-		var found: bool = false
-		for sub_len in range(sub_limit, 0, -1):
-			var sub := input.substr(pos, sub_len)
-
-			# Handle unknown signal entries
-			if sub[0] == "|":
-				var subsub := sub.right(-1)
-				if subsub.is_valid_int() and subsub.to_int() < 0:
-					if SettingsHandler.do_bbcode:
-						color = _push_color(result, pos, color, DictionaryHandler.default_color)
-					pos += sub_len
-					found = true
-					break
-
-			# Attempt to find a signal by name.
-			var signal_idx := DictionaryHandler.word_names.find(sub)
-			if signal_idx >= 0:
-				# Skip coloring if disabled in settings.
-				if SettingsHandler.do_bbcode:
-					# Don't assume word and description arrays are in sync
-					# Attempt to find the description by actual signal number
-					var sig = DictionaryHandler.word_keys[signal_idx]
-					var desc_index = DictionaryHandler.desc_keys.find(sig)
-					if desc_index >= 0:
-						var desc = DictionaryHandler.desc_values[desc_index]
-						var word_color := DictionaryHandler.calc_desc_color(desc.get(DictionaryHandler.color_key))
-						color = _push_color(result, pos, color, word_color)
-					else:
-						color = _push_color(result, pos, color, Color.WHITE)
-
-				pos += sub_len
-				found = true
-				break
-
-		# If nothing was found, it is not a valid signal.
-		if not found:
-			color = _push_color(result, pos, color, Color.RED)
-			pos += 1
-
+	
+	TransmissionCompilation.compile_text(input)
+	var d := TransmissionCompilation.get_as_data_dict()
+	var starts: PackedInt32Array = d["starts"]
+	var ends: PackedInt32Array = d["ends"]
+	var sigs: Array[PackedInt64Array] = d["signal_groups"]
+	var prevend: int = 0
+	for idx: int in range(starts.size() + 1):
+		var start: int = starts[idx] if idx < starts.size() else input.length()
+		var end: int = ends[idx] if idx < starts.size() else 0
+		if start > prevend:
+			color = _push_color(result, prevend, color, Color.RED)
+		var offset: int = 0
+		if idx < starts.size():
+			for sig: int in sigs[idx]:
+				if sig < 0:
+					var desc = DictionaryHandler.get_or_default_signal_desc(sig)
+					color = _push_color(
+						result, start + offset, color, DictionaryHandler.calc_desc_color(desc.get(DictionaryHandler.color_key))
+					)
+					offset += DictionaryHandler.get_or_default_signal_name(sig).length()
+				else:
+					color = _push_color(
+						result, start + offset, color, Color.WHITE
+					)
+					offset += str(sig).length()
+		prevend = end
+	
 	return result
 
 static func _is_whitespace(s: String) -> bool:

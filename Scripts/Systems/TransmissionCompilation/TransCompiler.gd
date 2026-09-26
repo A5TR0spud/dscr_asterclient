@@ -1,0 +1,223 @@
+extends RefCounted
+class_name TransmissionCompilation
+
+static var _unknowns: Array = []
+static var _error: ErrorCode = ErrorCode.UNCOMPILED
+static var _prev_length: int = 0
+static var _dict_result: Dictionary = {}
+
+enum ErrorCode {
+	UNCOMPILED,
+	ALL_GOOD,
+	UNKNOWN,
+	TOO_LONG
+}
+
+## In the form:[br]
+## "starts": starts of signal groups ([PackedInt64Array]) [br]
+## "ends": ends of signal groups ([PackedInt64Array]) [br]
+## "signal_groups": signal numbers ([Array][lb][PackedInt64Array][rb]) [br]
+## The same index refers to the same signal group across all arrays
+static func get_as_data_dict() -> Dictionary:
+	return _dict_result
+
+## Did the most recent [code]compile_text[/code] call result in an error?
+static func has_error() -> bool:
+	return _error != ErrorCode.ALL_GOOD
+
+## Logs the error of the most recent [code]compile_text[/code] function call to the in-game chat.
+static func log_error() -> void:
+	match _error:
+		ErrorCode.UNCOMPILED or ErrorCode.ALL_GOOD:
+			return
+		ErrorCode.TOO_LONG:
+			Chat.new_log(Chat.State.INPUT_TOO_LONG, [_prev_length])
+		ErrorCode.UNKNOWN:
+			Chat.new_log(Chat.State.UNKNOWN_WORD, _unknowns)
+
+static var time: int
+static func log_time(strig: String):
+	var _time: int = Time.get_ticks_usec() - time
+	print(strig, " secs: ", _time * 0.000001)
+	time = Time.get_ticks_usec()
+
+static func compile_text(input: String) -> PackedInt64Array:
+	time = Time.get_ticks_usec()
+	_unknowns.clear()
+	_error = ErrorCode.UNCOMPILED
+	var starts: PackedInt32Array = []
+	var ends: PackedInt32Array = []
+	var sigs: Array[PackedInt64Array] = []
+	var start: int = -1
+	var finished_to_idx: int = 0
+	input = input.to_upper()
+	#print(input)
+	while start + 1 < input.length():
+		start += 1
+		if is_whitespace(input[start]):
+			continue
+		#print(start)
+		if input[start] == "|":
+			var _sub: String = input.substr(start)
+			var m := RegEx.create_from_string("^\\|(-?[0-9]{1,18})").search(_sub)
+			if m:
+				var end: int = start + 1 + m.get_string().length()
+				if end not in ends:
+					if start in ends:
+						var found_idx: int = ends.find(start)
+						ends[found_idx] = end
+						sigs[found_idx].append(m.get_string().to_int())
+					else:
+						starts.append(start)
+						ends.append(end)
+						sigs.append([m.get_string().to_int()])
+					start = end - 1
+			continue
+		if input[start] == "0":
+			var end: int = start + 1
+			if end not in ends:
+				if start in ends:
+					var found_idx: int = ends.find(start)
+					ends[found_idx] = end
+					sigs[found_idx].append(0)
+				else:
+					starts.append(start)
+					ends.append(end)
+					sigs.append([0])
+			continue
+		if input[start].is_valid_int():
+			var _sub: String = input.substr(start)
+			var m := RegEx.create_from_string("^([0-9]{1,18})").search(_sub)
+			if m:
+				var end: int = start + m.get_string().length()
+				if end not in ends:
+					if start in ends:
+						var found_idx: int = ends.find(start)
+						ends[found_idx] = end
+						sigs[found_idx].append(m.get_string().to_int())
+					else:
+						starts.append(start)
+						ends.append(end)
+						sigs.append([m.get_string().to_int()])
+					start = end - 1
+			continue
+		
+		var extension_idx: PackedInt64Array = []
+		var extend_with: PackedInt64Array = []
+		var extend_to: PackedInt64Array = []
+		var first_end: int = INT64_MAX
+		var found_indices: Array[PackedInt64Array] = DictionaryHandler.prefix_tree.find_all_matches(input.substr(start))
+		for idx in range(found_indices[0].size()):
+			var end: int = start + found_indices[1][idx]
+			var dx: int = found_indices[0][idx]
+			var found_idx: int = ends.find(start)
+			if found_idx >= 0 and end not in ends:
+				extension_idx.append(found_idx)
+				extend_with.append(dx)
+				extend_to.append(end)
+				first_end = mini(first_end, end)
+			elif end not in ends:
+				starts.append(start)
+				ends.append(end)
+				sigs.append([dx])
+				first_end = mini(first_end, end)
+		for ext: int in range(extension_idx.size()-1, -1, -1):
+			var k: int = extension_idx[ext]
+			if ext == 0:
+				ends[k] = extend_to[ext]
+				sigs[k].append(extend_with[ext])
+			else:
+				var v: PackedInt64Array = sigs[k].duplicate()
+				v.append(extend_with[ext])
+				starts.append(starts[k])
+				ends.append(extend_to[ext])
+				sigs.append(v)
+		if first_end < INT64_MAX:
+			start = first_end - 1
+		else:
+			var low_endx: int = -1
+			for i: int in range(finished_to_idx, ends.size()):
+				var terminus: int = ends[i]
+				if terminus <= start:
+					continue
+				if low_endx < 0 or ends[i] < ends[low_endx]:
+					low_endx = i
+			if low_endx >= 0:
+				finished_to_idx = low_endx
+				start = ends[finished_to_idx]
+	log_time("populate")
+	var to: int = 0
+	var from: int = 1
+	var unflipped: bool = true
+	print(starts)
+	print(ends)
+	print(sigs)
+	while to < starts.size() and from < starts.size():
+		var _fro: int = from if unflipped else to
+		var _to: int = to if unflipped else from
+		var started: int = starts[_fro]
+		var end: int = ends[_fro]
+		var sig: PackedInt64Array = sigs[_fro]
+		var c_start: int = starts[_to]
+		var c_end: int = ends[_to]
+		var c_sig: PackedInt64Array = sigs[_to]
+		if (
+			(started < c_start and c_end == end)
+			or (started == c_start and c_end < end)
+			or (
+				started == c_start and
+				end == c_end and
+				sig.size() < c_sig.size()
+			)
+			or (started < c_start and c_end < end)
+		):
+			starts[_to] = started
+			ends[_to] = end
+			sigs[_to] = sig
+			starts.remove_at(_fro)
+			ends.remove_at(_fro)
+			sigs.remove_at(_fro)
+			unflipped = true
+			continue
+		unflipped = not unflipped
+		if unflipped:
+			from += 1
+			to += 1
+	
+	log_time("filter")
+	print(starts)
+	print(ends)
+	print(sigs)
+	var prevend: int = 0
+	var out: PackedInt64Array = []
+	#var mix: Array = []
+	for idx: int in range(starts.size() + 1):
+		var started: int = starts[idx] if idx < starts.size() else input.length()
+		var end: int = ends[idx] if idx < starts.size() else 0
+		if started > prevend:
+			var _s: String = input.substr(prevend, started - prevend)
+			if !is_whitespace(_s):
+				_unknowns.append_array(_s.replace_chars("\n\r\t", ord(" ")).split(" ", false))
+				_error = ErrorCode.UNKNOWN
+			#if !_s.is_empty():
+				#mix.append(_s)
+		if idx < starts.size():
+			out.append_array(sigs[idx])
+			#mix.append_array(sigs[idx])
+		prevend = end
+	
+	log_time("generate")
+	_prev_length = starts.size()
+	if _prev_length >= Main.MAX_MESSAGE_LENGTH:
+		_error = ErrorCode.TOO_LONG
+	elif _error == ErrorCode.UNCOMPILED:
+		_error = ErrorCode.ALL_GOOD
+	_dict_result = {
+		"starts": starts,
+		"ends": ends,
+		"signal_groups": sigs
+	}
+	return out
+
+static func is_whitespace(val: String) -> bool:
+	return val.strip_edges(true, false).is_empty()

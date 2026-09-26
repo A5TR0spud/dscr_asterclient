@@ -129,9 +129,13 @@ const strikethrough_key: String = "strikethrough"
 const background_key: String = "invert"
 const indent_key: String = "indentation"
 
+static var prefix_tree: Trie = Trie.new()
+
 static func initialize() -> void:
 	word_keys = word_dict.get_or_add("keys", []).map(func(v): return int(v)) as Array[int]
 	desc_keys = desc_dict.get_or_add("keys", []).map(func(v): return int(v)) as Array[int]
+	prefix_tree.clear()
+	prefix_tree.populate_from_arrays(word_names, word_keys)
 
 static func export() -> void:
 	word_dict.set("keys", word_keys)
@@ -170,11 +174,14 @@ static func apply_signal_name(sig: int, name: String = "", do_logging: bool = fa
 			Chat.new_log(Chat.State.DUPLICATE_NAME, [word_keys[dupe_idx], sig, name])
 		return false
 	if idx >= 0:
+		prefix_tree.remove(word_names[idx])
+		prefix_tree.insert(name, sig)
 		word_names[idx] = name
 		return true
 	idx = word_keys.bsearch_custom(sig, func(a, b): return a > b)
 	word_keys.insert(idx, sig)
 	word_names.insert(idx, name)
+	prefix_tree.insert(name, sig)
 	return true
 
 static func apply_signal_desc(sig: int, desc: Dictionary) -> void:
@@ -228,7 +235,7 @@ static func find_incomplete_signal(line: String, caret_column: int, expected: St
 		if caret_column <= sub.length():
 			if sub.is_empty():
 				break
-			var result: ParseResult = parse_text(sub)
+			var result: ParseResult = parse_text_greedy(sub)
 			if (result.state == ParseResult.FailureState.TOO_LONG
 				or result.state == ParseResult.FailureState.UNPARSED
 			):
@@ -258,7 +265,7 @@ static func find_incomplete_signal(line: String, caret_column: int, expected: St
 
 ## Takes a string input and outputs a ParseResult object
 ## The returned object contains information about failure and parsed numerical signals
-static func parse_text(input: String, earlyReturn: bool = false) -> ParseResult:
+static func parse_text_greedy(input: String, earlyReturn: bool = false) -> ParseResult:
 	input = input.strip_edges().strip_escapes().to_upper()
 	var result: ParseResult = ParseResult.new()
 	result.state = ParseResult.FailureState.ALL_GOOD
@@ -337,20 +344,15 @@ static func parse_text(input: String, earlyReturn: bool = false) -> ParseResult:
 		result.state = ParseResult.FailureState.UNKNOWN_STRING
 	return result
 
-static func parse_text_to_signals(input: String, do_logging: bool = true) -> Array[int]:
-	var parsed: ParseResult = parse_text(input, not do_logging)
-	
-	if parsed.state == ParseResult.FailureState.ALL_GOOD:
-		return parsed.output
-	
-	if do_logging:
-		match parsed.state:
-			ParseResult.FailureState.TOO_LONG:
-				Chat.new_log(Chat.State.INPUT_TOO_LONG, [parsed.output.size()])
-			ParseResult.FailureState.UNKNOWN_STRING:
-				Chat.new_log(Chat.State.UNKNOWN_WORD, parsed.failures)
-		
-	return []
+
+static func parse_text_to_signals(input: String, do_logging: bool = true, ignore_errors: bool = false) -> PackedInt64Array:
+	var sigs: PackedInt64Array = TransmissionCompilation.compile_text(input)
+	if TransmissionCompilation.has_error():
+		if do_logging:
+			TransmissionCompilation.log_error()
+		if not ignore_errors:
+			return []
+	return sigs
 
 static func contains_signal(sig: int) -> bool:
 	var idx: int = word_keys.find(sig)
@@ -496,6 +498,7 @@ static func forget_signal(sig: int) -> void:
 	if idx >= 0:
 		word_keys.remove_at(idx)
 		if idx < word_names.size():
+			prefix_tree.remove(word_names[idx])
 			word_names.remove_at(idx)
 	
 	idx = desc_keys.find(sig)
