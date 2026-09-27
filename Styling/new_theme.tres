@@ -13,7 +13,10 @@
 [ext_resource type="StyleBox" uid="uid://b1t3fn13p4807" path="res://Styling/Seps/h_split.tres" id="8_k7nka"]
 [ext_resource type="StyleBox" uid="uid://8g63ltkd03h1" path="res://Styling/HScrollBar/v_scroll_back.tres" id="9_2dlxw"]
 [ext_resource type="StyleBox" uid="uid://bcjd652kvj2ue" path="res://Styling/Tabber/tab_focus.tres" id="9_i4omk"]
+[ext_resource type="Texture2D" uid="uid://u8pwuueu72oi" path="res://Assets/Square.png" id="10_3a2p8"]
 [ext_resource type="StyleBox" uid="uid://c72inj02naxqg" path="res://Styling/Tabber/tab_hovered.tres" id="10_gwgd7"]
+[ext_resource type="Texture2D" uid="uid://lilbca6bxcqx" path="res://Assets/BlankSquare.png" id="10_i4fbu"]
+[ext_resource type="Texture2D" uid="uid://0macp80jjt01" path="res://Assets/HSliderUngrabbed.png" id="10_sxxod"]
 [ext_resource type="StyleBox" uid="uid://8mg0wvheihvx" path="res://Styling/Tabber/tab_selected.tres" id="11_fqkxe"]
 [ext_resource type="FontFile" uid="uid://cwbj6dro36xa3" path="res://fonts/CascadiaMono-Bold.ttf" id="12_d5xg6"]
 [ext_resource type="StyleBox" uid="uid://bcpf14e281kyl" path="res://Styling/Tabber/tab_unselected.tres" id="12_k7nka"]
@@ -75,7 +78,7 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="ImageTexture" id="ImageTexture_3a2p8"]
+[sub_resource type="ImageTexture" id="ImageTexture_sxxod"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_i4fbu"]
 
@@ -101,6 +104,12 @@ HScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_pfqjd")
 HScrollBar/styles/grabber_pressed = ExtResource("5_em145")
 HScrollBar/styles/scroll = ExtResource("6_i4omk")
 HSeparator/styles/separator = ExtResource("7_fqkxe")
+HSlider/icons/grabber = ExtResource("10_sxxod")
+HSlider/icons/grabber_disabled = ExtResource("10_i4fbu")
+HSlider/icons/grabber_highlight = ExtResource("10_3a2p8")
+HSlider/styles/grabber_area = ExtResource("5_em145")
+HSlider/styles/grabber_area_highlight = ExtResource("4_u5f6s")
+HSlider/styles/slider = ExtResource("6_i4omk")
 HSplitContainer/constants/autohide = 0
 HSplitContainer/constants/minimum_grab_thickness = 12
 HSplitContainer/constants/separation = 14
@@ -182,6 +191,6 @@ VSeparator/styles/separator = ExtResource("15_k7nka")
 VSplitContainer/constants/autohide = 0
 VSplitContainer/constants/minimum_grab_thickness = 12
 VSplitContainer/constants/separation = 14
-VSplitContainer/icons/grabber = SubResource("ImageTexture_3a2p8")
+VSplitContainer/icons/grabber = SubResource("ImageTexture_sxxod")
 VSplitContainer/icons/touch_dragger = SubResource("ImageTexture_i4fbu")
 VSplitContainer/styles/split_bar_background = ExtResource("25_00ekq")

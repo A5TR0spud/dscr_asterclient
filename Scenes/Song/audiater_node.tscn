@@ -1,0 +1,92 @@
+[gd_scene format=3 uid="uid://dh3a6lfi6lj5o"]
+
+[ext_resource type="Script" uid="uid://dc63rsad6hivi" path="res://Scenes/Song/audiater_node.gd" id="1_d143w"]
+[ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="2_d143w"]
+[ext_resource type="Texture2D" uid="uid://dqe307s668lqa" path="res://Assets/volume_icon.svg" id="3_d143w"]
+
+[node name="AudiaterNote" type="PanelContainer" unique_id=1249369280]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_d143w")
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=394096801]
+bus = &"Music"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=769026308]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" unique_id=1530399985]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer2" unique_id=1939880449]
+texture_filter = 4
+layout_mode = 2
+texture = ExtResource("3_d143w")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer2" unique_id=427473532]
+layout_mode = 2
+
+[node name="CurrentTime" type="Label" parent="VBoxContainer/HBoxContainer2" unique_id=1847472273]
+layout_mode = 2
+text = "00"
+
+[node name="ProgressSlider" type="HSlider" parent="VBoxContainer/HBoxContainer2" unique_id=89875715]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/center_grabber = 1
+step = 0.01
+editable = false
+scrollable = false
+
+[node name="Duration" type="Label" parent="VBoxContainer/HBoxContainer2" unique_id=584332323]
+layout_mode = 2
+text = "duration"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=590651361]
+layout_mode = 2
+
+[node name="PlayButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1723803530]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+text = "play/pause"
+
+[node name="LocaleNode" type="Node" parent="VBoxContainer/HBoxContainer/PlayButton" unique_id=1478346910]
+script = ExtResource("2_d143w")
+translations = Dictionary[StringName, String]({
+&"text": "MUSIC_PLAY"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="QueueButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1047982591]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "queue"
+
+[node name="LocaleNode" type="Node" parent="VBoxContainer/HBoxContainer/QueueButton" unique_id=282166099]
+script = ExtResource("2_d143w")
+translations = Dictionary[StringName, String]({
+&"text": "MUSIC_QUEUE"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="VolumeSlider" type="HSlider" parent="VBoxContainer/HBoxContainer" unique_id=1515353029]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 2.0
+step = 0.05
+value = 1.0
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/QueueButton" to="." method="_on_queue_button_pressed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/VolumeSlider" to="." method="_on_volume_slider_value_changed"]

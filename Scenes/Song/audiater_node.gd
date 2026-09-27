@@ -1,5 +1,12 @@
-extends AudioStreamPlayer
-class_name Music
+extends Control
+class_name AudiaterNode
+
+@onready var music_player_node: AudioStreamPlayer = $Music
+@onready var current_time_label: Label = $VBoxContainer/HBoxContainer2/CurrentTime
+@onready var progress: HSlider = $VBoxContainer/HBoxContainer2/ProgressSlider
+@onready var duration_label: Label = $VBoxContainer/HBoxContainer2/Duration
+@onready var volume: HSlider = $VBoxContainer/HBoxContainer/VolumeSlider
+@onready var playpause_tr: LocaleNode = $VBoxContainer/HBoxContainer/PlayButton/LocaleNode
 
 enum NoteType { SINE, SQUARE, SAWTOOTH, TRIANGLE }
 
@@ -10,14 +17,14 @@ const GROUP_BEGIN = -14
 const GROUP_END = -15
 const SONG = -577
 const NOTE = -605003
-const conversion_factor: float = 0.8067
+const conversion_factor: float = Main.HE6_HALF_LIFE
 const sample_hz: float = 22050.0
 
-static var now_playing: Music = null
+static var now_playing: AudiaterNode = null
 
 var active_notes: Array = []
 var current_note: int = 0
-var chained_songs: Array[Music] = []
+static var queued_songs: Array[AudiaterNode] = []
 var current_song: Array = []
 var playback: AudioStreamGeneratorPlayback
 var playback_time: float = 0.0
@@ -26,35 +33,22 @@ var song_length: float = 0.0
 signal song_end
 
 func play_music() -> void:
-	if is_playing():
+	queued_songs.clear()
+	if music_player_node.is_playing():
 		stop_music()
 		return
-
-	if now_playing:
-		now_playing.chain_music(self)
-		return
-
+	if now_playing and now_playing.music_player_node.is_playing():
+		now_playing.stop_music()
 	if current_song.size() > 0:
-		print(current_song)
+		playpause_tr.translations["text"] = "MUSIC_STOP"
+		playpause_tr.refresh()
+		#print(current_song)
 		active_notes = []
 		current_note = 0
 		playback_time = 0.0
 		now_playing = self
-		play()
-		playback = get_stream_playback()
-
-func chain_music(next: Music) -> void:
-	chained_songs.append(next)
-
-func cancel_chain() -> void:
-	for i in chained_songs:
-		i.cancel_chain()
-
-func stop_music() -> void:
-	stop()
-	if now_playing == self: now_playing = null
-	cancel_chain()
-	chained_songs.clear()
+		music_player_node.play()
+		playback = music_player_node.get_stream_playback()
 
 func check_song(message: Array) -> bool:
 	if playback: stop_music()
@@ -76,7 +70,9 @@ func check_song(message: Array) -> bool:
 		for note in notes:
 			song_length = maxf(note.start_time + note.duration, song_length)
 		current_song = notes
-
+		progress.max_value = song_length
+		duration_label.text = String.num(song_length / Main.HE6_HALF_LIFE, 0)
+		progress.value = 0
 		return true
 
 	return false
@@ -147,26 +143,43 @@ func _fill_buffer() -> void:
 		playback_time += time_step
 
 	if playback.get_playback_position() >= song_length:
-		stop()
+		music_player_node.stop()
 		_on_finished()
 
-func _ready() -> void:
-	stream = AudioStreamGenerator.new()
-	stream.mix_rate = sample_hz
-	stream.buffer_length = 0.5
-
 func _process(_delta: float) -> void:
-	if playback: _fill_buffer()
+	if playback:
+		_fill_buffer()
+		if music_player_node.playing:
+			progress.value = music_player_node.get_playback_position() + AudioServer.get_time_since_last_mix()
+			current_time_label.text = String.num(progress.value / Main.HE6_HALF_LIFE, 0).pad_zeros(2)
 
-func _on_finished() -> void:
+func stop_music() -> void:
+	playpause_tr.translations["text"] = "MUSIC_PLAY"
+	playpause_tr.refresh()
+	music_player_node.stop()
+	progress.value = 0
+	current_time_label.text = "00"
+	if now_playing == self: now_playing = null
+
+func _ready() -> void:
+	music_player_node.stream = AudioStreamGenerator.new()
+	music_player_node.stream.mix_rate = sample_hz
+	music_player_node.stream.buffer_length = 0.5
+
+func _on_play_button_pressed():
+	play_music()
+
+func _on_queue_button_pressed():
+	queued_songs.append(self)
+
+func _on_finished():
 	playback = null
 	now_playing = null
 	song_end.emit()
-	if not chained_songs.is_empty():
-		var next = chained_songs[0]
-		var remain = chained_songs.slice(1)
-		for chain in remain:
-			next.chain_music(chain)
-		next.play_music()
-		chained_songs.clear()
 	stop_music()
+	if not queued_songs.is_empty():
+		queued_songs.front().play_music()
+		queued_songs = queued_songs.slice(1)
+
+func _on_volume_slider_value_changed(value):
+	music_player_node.volume_linear = value

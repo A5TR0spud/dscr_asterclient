@@ -46,8 +46,10 @@ folder_colors={
 "res://Scenes/LibraryMenu/": "blue",
 "res://Scenes/OnlineUsersTab/": "pink",
 "res://Scenes/SettingsMenu/": "orange",
+"res://Scenes/Song/": "red",
 "res://Scenes/SourcesMenu/": "orange",
 "res://Scripts/": "gray",
+"res://Scripts/Systems/TransmissionCompilation/": "gray",
 "res://Styling/": "purple",
 "res://fonts/": "red"
 }

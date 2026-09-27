@@ -1,5 +1,15 @@
 # Versions
 
+## --WIP--
+
+### Additions
+
+* Added control panel for -577
+
+### Changes
+
+* Slightly thinned image visualization grid lines
+
 ## 0.8.1
 
 ### Fixes

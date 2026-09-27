@@ -8,7 +8,8 @@
 * hover over numbers to get the translation
 * implement message history so you can use arrow keys to access your previous transmissions
 * Image editor tab (w/ compat vs compact exports)
-* Music
+* Advanced music parsing
+* Image camera control strafe/walk/fly that doesn't require a keyboard
 * tagging words and searching by tag
 * word aliases (unless the macro system is sufficient)
 * clean up transmission un/re-loading and/to figure out duplicate and missing history

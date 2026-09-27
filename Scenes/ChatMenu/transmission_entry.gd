@@ -19,9 +19,7 @@ var is_image_open: bool = false
 @onready var image_node: VisualizeNode = $Body/Corpus/VisualizeNode
 @onready var image_button_node: Button = $Body/Corpus/ContextButtons/ImageButton
 
-@onready var music_player: AudioStreamPlayer = $Music
-@onready var song_button_node: Button = $Body/Corpus/ContextButtons/SongButton
-var has_song: bool = false
+@onready var song_node: AudiaterNode = $Body/Corpus/AudiateNode
 
 @onready var context_buttons: HFlowContainer = $Body/Corpus/ContextButtons
 
@@ -43,18 +41,23 @@ func get_color() -> Color:
 	return Main.get_callsign_color(sender)
 
 func try_parses():
-	var has_image: bool = VisualizeNode.IMAGE in message
-	var image_enabled: bool = DictionaryHandler.support_m0
-	var has_valid_image: bool = image_node.check_image(message) if has_image else false
 	if is_instance_valid(image_node):
+		var has_image: bool = VisualizeNode.IMAGE in message
+		var image_enabled: bool = DictionaryHandler.support_m0
+		var has_valid_image: bool = image_node.check_image(message) if has_image else false
 		image_node.visible = has_valid_image and is_image_open and image_enabled
 		image_button_node.set_pressed_no_signal(image_node.visible)
 		image_button_node.visible = has_valid_image and image_enabled
 		if !has_image and delete_empty_parses:
 			image_node.queue_free()
 			image_button_node.queue_free()
-	has_song = music_player.check_song(message)
-	song_button_node.visible = has_song and DictionaryHandler.support_dscr
+	if is_instance_valid(song_node):
+		var has_song: bool = AudiaterNode.SONG in message
+		var song_enabled: bool = DictionaryHandler.support_dscr
+		var has_valid_song: bool = song_node.check_song(message) if has_song else false
+		song_node.visible = has_valid_song and song_enabled
+		if !has_song and delete_empty_parses:
+			song_node.queue_free()
 
 func refresh_callsign():
 	callsign_node.text = Main.base_10_to_callsign(sender)
