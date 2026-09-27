@@ -30,10 +30,7 @@ var playback: AudioStreamGeneratorPlayback
 var playback_time: float = 0.0
 var song_length: float = 0.0
 
-signal song_end
-
 func play_music() -> void:
-	queued_songs.clear()
 	if music_player_node.is_playing():
 		stop_music()
 		return
@@ -167,15 +164,18 @@ func _ready() -> void:
 	music_player_node.stream.buffer_length = 0.5
 
 func _on_play_button_pressed():
+	queued_songs.clear()
 	play_music()
 
 func _on_queue_button_pressed():
-	queued_songs.append(self)
+	if queued_songs.is_empty() and not now_playing:
+		play_music()
+	else:
+		queued_songs.append(self)
 
 func _on_finished():
 	playback = null
 	now_playing = null
-	song_end.emit()
 	stop_music()
 	if not queued_songs.is_empty():
 		queued_songs.front().play_music()

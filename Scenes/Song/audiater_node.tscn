@@ -33,6 +33,7 @@ stretch_mode = 5
 layout_mode = 2
 
 [node name="CurrentTime" type="Label" parent="VBoxContainer/HBoxContainer2" unique_id=1847472273]
+self_modulate = Color(1, 1, 1, 0.49803922)
 layout_mode = 2
 text = "00"
 
@@ -46,6 +47,7 @@ editable = false
 scrollable = false
 
 [node name="Duration" type="Label" parent="VBoxContainer/HBoxContainer2" unique_id=584332323]
+self_modulate = Color(1, 1, 1, 0.49803922)
 layout_mode = 2
 text = "duration"
 
