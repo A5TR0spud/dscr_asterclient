@@ -70,6 +70,7 @@ func check_song(message: Array) -> bool:
 		progress.max_value = song_length
 		duration_label.text = String.num(song_length / Main.HE6_HALF_LIFE, 0)
 		progress.value = 0
+		current_time_label.text = "0".pad_zeros(duration_label.text.length())
 		return true
 
 	return false
@@ -148,14 +149,14 @@ func _process(_delta: float) -> void:
 		_fill_buffer()
 		if music_player_node.playing:
 			progress.value = music_player_node.get_playback_position() + AudioServer.get_time_since_last_mix()
-			current_time_label.text = String.num(progress.value / Main.HE6_HALF_LIFE, 0).pad_zeros(2)
+			current_time_label.text = String.num(progress.value / Main.HE6_HALF_LIFE, 0).pad_zeros(duration_label.text.length())
 
 func stop_music() -> void:
 	playpause_tr.translations["text"] = "MUSIC_PLAY"
 	playpause_tr.refresh()
 	music_player_node.stop()
 	progress.value = 0
-	current_time_label.text = "00"
+	current_time_label.text = "0".pad_zeros(duration_label.text.length())
 	if now_playing == self: now_playing = null
 
 func _ready() -> void:

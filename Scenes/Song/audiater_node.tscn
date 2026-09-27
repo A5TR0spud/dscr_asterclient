@@ -35,7 +35,7 @@ layout_mode = 2
 [node name="CurrentTime" type="Label" parent="VBoxContainer/HBoxContainer2" unique_id=1847472273]
 self_modulate = Color(1, 1, 1, 0.49803922)
 layout_mode = 2
-text = "00"
+text = "current time"
 
 [node name="ProgressSlider" type="HSlider" parent="VBoxContainer/HBoxContainer2" unique_id=89875715]
 custom_minimum_size = Vector2(64, 0)
