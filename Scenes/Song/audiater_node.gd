@@ -99,7 +99,6 @@ func parse_song_item(parser: TransmissionParser) -> Array[Dictionary]:
 	var duration = parser.read_number() * conversion_factor
 	parser.expect(SEP)
 	var frequency = parser.read_number() / conversion_factor
-	parser.try_consume(SEP)
 	var out: Array[Dictionary] = [{
 		"start_time": start_time,
 		"duration": duration,
@@ -107,6 +106,7 @@ func parse_song_item(parser: TransmissionParser) -> Array[Dictionary]:
 	}]
 	_sequence_accum = start_time + duration
 	out.append_array(parser.read_sequence(parse_sequenced_notes, SEQUENCER, true))
+	parser.try_consume(SEP)
 	return out
 
 func _fill_buffer() -> void:

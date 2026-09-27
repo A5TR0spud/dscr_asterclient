@@ -6,6 +6,7 @@
 
 * Added control panel for -577
 * Added -122 support for -577
+  * -11 is still not supported
 
 ### Changes
 
