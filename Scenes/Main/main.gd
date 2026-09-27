@@ -27,6 +27,9 @@ var connected_users: Array[int] = []
 @onready var boot_sound: AudioStreamPlayer = $BootUp
 @onready var shut_down_sound: AudioStreamPlayer = $ShutDown
 
+@onready var dsve_button: IconButton = $Body/Corpus/Header/DSVE_Button
+@onready var dsmidi_button: IconButton = $Body/Corpus/Header/DSMIDI_Button
+
 static var instance : Main
 
 signal reload_dict
@@ -54,6 +57,8 @@ signal post_load
 signal reload_dictionary_support
 static func on_dictionary_support_updated() -> void:
 	instance.reload_dictionary_support.emit()
+	instance.dsve_button.visible = DictionaryHandler.support_m0
+	instance.dsmidi_button.visible = DictionaryHandler.support_dscr and DictionaryHandler.contains_signal(-577)
 
 signal connected_user_change
 
@@ -349,8 +354,6 @@ func _on_dictionary_save_open_pressed():
 	SaveSystem.load_dict()
 	SaveSystem.open_save_location()
 
-func _on_dsve_button_pressed():
-	OS.shell_open("https://dsve.akqqa.dev/")
 
 func _on_callsign_edit_callsign_submitted(new_value: int) -> void:
 	callsign = new_value
@@ -379,3 +382,9 @@ func _on_files_dropped(files: PackedStringArray):
 
 func _on_locale_button_pressed():
 	LocaleMenu.open()
+
+func _on_dsve_button_pressed():
+	OS.shell_open("https://dsve.akqqa.dev/")
+
+func _on_dsmidi_button_pressed():
+	OS.shell_open("https://dsmidi.akqqa.dev/")

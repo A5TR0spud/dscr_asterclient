@@ -9,6 +9,8 @@
 ### Changes
 
 * Slightly thinned image visualization grid lines
+* DSVE button now disappears when irrelevant
+* Added another link button not unlike DSVE
 
 ## 0.8.1
 

@@ -150,6 +150,7 @@ translations = Dictionary[StringName, String]({
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="AudiateNode" parent="Body/Corpus" unique_id=1249369280 instance=ExtResource("8_a82gk")]
+visible = false
 layout_mode = 2
 
 [node name="VisualizeNode" parent="Body/Corpus" unique_id=1907311917 instance=ExtResource("6_wapdh")]
