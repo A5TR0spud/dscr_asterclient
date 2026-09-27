@@ -15,6 +15,8 @@ const SEP = -3
 const DECIMAL = -10
 const GROUP_BEGIN = -14
 const GROUP_END = -15
+const SEQUENCER = -122
+#/key 1574 song [ music_note 0, 1, 420 precedes music_note 1, 440 ]
 const SONG = -577
 const NOTE = -605003
 const conversion_factor: float = Main.HE6_HALF_LIFE
@@ -55,7 +57,7 @@ func check_song(message: Array) -> bool:
 		if not parser.skip_to(SONG): return false
 		parser.expect(SONG)
 		var pos := parser.save_state()
-		var notes := parser.read_group_items(parse_note)
+		var notes := parser.read_group_items(parse_song_item, true)
 
 		if parser.has_error():
 			print(parser.get_error_message())
@@ -75,20 +77,37 @@ func check_song(message: Array) -> bool:
 
 	return false
 
-func parse_note(parser: TransmissionParser) -> Dictionary:
-	parser.expect(NOTE)
-	var start_time = parser.read_number()
-	parser.expect(SEP)
-	var duration = parser.read_number()
-	parser.expect(SEP)
-	var frequency = parser.read_number()
-	parser.try_consume(SEP)
+var _sequence_accum: float = 0
 
+func parse_sequenced_notes(parser: TransmissionParser) -> Dictionary:
+	parser.expect(NOTE)
+	var duration = parser.read_number() * conversion_factor
+	parser.expect(SEP)
+	var frequency = parser.read_number() / conversion_factor
+	var start_time = _sequence_accum
+	_sequence_accum += duration
 	return {
-		"start_time": start_time * conversion_factor,
-		"duration": duration * conversion_factor,
-		"frequency": frequency / conversion_factor
+		"start_time": start_time,
+		"duration": duration,
+		"frequency": frequency
 	}
+
+func parse_song_item(parser: TransmissionParser) -> Array[Dictionary]:
+	parser.expect(NOTE)
+	var start_time = parser.read_number() * conversion_factor
+	parser.expect(SEP)
+	var duration = parser.read_number() * conversion_factor
+	parser.expect(SEP)
+	var frequency = parser.read_number() / conversion_factor
+	parser.try_consume(SEP)
+	var out: Array[Dictionary] = [{
+		"start_time": start_time,
+		"duration": duration,
+		"frequency": frequency
+	}]
+	_sequence_accum = start_time + duration
+	out.append_array(parser.read_sequence(parse_sequenced_notes, SEQUENCER, true))
+	return out
 
 func _fill_buffer() -> void:
 	var frames_available := playback.get_frames_available()

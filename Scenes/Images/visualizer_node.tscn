@@ -3,8 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://cb8hjgvp01r33" path="res://Assets/ImageGrid.png" id="1_42cc5"]
 [ext_resource type="Script" uid="uid://clw6gb5wupvng" path="res://Scenes/Images/visualizer_node.gd" id="1_psu8h"]
 [ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="2_psu8h"]
-[ext_resource type="Shader" uid="uid://cufhqyh03k8p1" path="res://Scenes/Images/reverse_fresnel.gdshader" id="4_uo7r5"]
+[ext_resource type="MultiMesh" uid="uid://x57ntwryxlhs" path="res://Scenes/Images/sphere_multi_mesh.tres" id="4_indmu"]
 [ext_resource type="PackedScene" uid="uid://iqh1s0683kvy" path="res://Scenes/Common/icon_button.tscn" id="5_1c76j"]
+[ext_resource type="MultiMesh" uid="uid://b25iqmc8gnt6q" path="res://Scenes/Images/cube_multi_mesh.tres" id="5_1eel7"]
 [ext_resource type="Texture2D" uid="uid://ba8m358qq4yt3" path="res://Assets/center_icon.svg" id="5_8vf8x"]
 [ext_resource type="Texture2D" uid="uid://djnpe41edcgnt" path="res://Assets/resolution_icon.png" id="5_uo7r5"]
 
@@ -29,28 +30,6 @@ texture_filter = 0
 material = SubResource("StandardMaterial3D_0mdww")
 size = Vector2(32, 32)
 orientation = 1
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3bk5g"]
-render_priority = 0
-shader = ExtResource("4_uo7r5")
-
-[sub_resource type="SphereMesh" id="SphereMesh_57qmd"]
-material = SubResource("ShaderMaterial_3bk5g")
-
-[sub_resource type="MultiMesh" id="MultiMesh_g4v7s"]
-resource_local_to_scene = true
-transform_format = 1
-use_colors = true
-mesh = SubResource("SphereMesh_57qmd")
-
-[sub_resource type="BoxMesh" id="BoxMesh_psu8h"]
-material = SubResource("ShaderMaterial_3bk5g")
-
-[sub_resource type="MultiMesh" id="MultiMesh_psu8h"]
-resource_local_to_scene = true
-transform_format = 1
-use_colors = true
-mesh = SubResource("BoxMesh_psu8h")
 
 [node name="VisualizerNode" type="PanelContainer" unique_id=1907311917]
 custom_minimum_size = Vector2(300, 0)
@@ -116,13 +95,13 @@ mesh = SubResource("QuadMesh_g4v7s")
 cast_shadow = 0
 custom_aabb = AABB(-16, -8, -16, 32, 16, 32)
 gi_mode = 0
-multimesh = SubResource("MultiMesh_g4v7s")
+multimesh = ExtResource("4_indmu")
 
 [node name="Cubes" type="MultiMeshInstance3D" parent="Intermediate/RenderAndYaw/VisualizerRect/SubViewport" unique_id=1261465019]
 cast_shadow = 0
 custom_aabb = AABB(-16, -8, -16, 32, 16, 32)
 gi_mode = 0
-multimesh = SubResource("MultiMesh_psu8h")
+multimesh = ExtResource("5_1eel7")
 
 [node name="YawSlider" type="HScrollBar" parent="Intermediate/RenderAndYaw" unique_id=2145835859]
 layout_mode = 2

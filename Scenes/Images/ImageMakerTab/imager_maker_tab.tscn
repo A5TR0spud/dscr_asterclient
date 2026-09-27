@@ -1,0 +1,243 @@
+[gd_scene format=3 uid="uid://dyce25nctnsuk"]
+
+[ext_resource type="Shader" uid="uid://xodpbd1nby8m" path="res://Scenes/Images/unshaded_culled.gdshader" id="1_hlnya"]
+[ext_resource type="MultiMesh" uid="uid://x57ntwryxlhs" path="res://Scenes/Images/sphere_multi_mesh.tres" id="1_sjkkq"]
+[ext_resource type="MultiMesh" uid="uid://b25iqmc8gnt6q" path="res://Scenes/Images/cube_multi_mesh.tres" id="2_hlnya"]
+[ext_resource type="Shader" uid="uid://8f7ya8w5qfpk" path="res://Scenes/Images/unshaded_unculled.gdshader" id="2_l400v"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_g4v7s"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_g4v7s"]
+radius = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iwqr7"]
+render_priority = 0
+shader = ExtResource("1_hlnya")
+shader_parameter/albedo = Color(0.5058824, 0.8039216, 0.02745098, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_sjkkq"]
+top_radius = 0.0
+bottom_radius = 0.08
+height = 0.3
+radial_segments = 16
+rings = 0
+cap_top = false
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_yf5fn"]
+top_radius = 0.02
+bottom_radius = 0.02
+height = 1.0
+radial_segments = 16
+rings = 0
+cap_top = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hsxt3"]
+render_priority = 0
+shader = ExtResource("1_hlnya")
+shader_parameter/albedo = Color(0.91764706, 0.19607843, 0.30588236, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yxab6"]
+render_priority = 0
+shader = ExtResource("1_hlnya")
+shader_parameter/albedo = Color(0.16470589, 0.5254902, 0.91764706, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mk0i3"]
+render_priority = 0
+shader = ExtResource("1_hlnya")
+shader_parameter/albedo = Color(0.16470589, 0.5254902, 0.91764706, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yf5fn"]
+size = Vector3(0.1, 0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l400v"]
+render_priority = 0
+shader = ExtResource("2_l400v")
+shader_parameter/albedo = Color(0.91764706, 0.19607843, 0.30588236, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_g4v7s"]
+size = Vector2(0.3, 0.3)
+orientation = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sjkkq"]
+size = Vector3(0.5, 0.1, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bxch0"]
+render_priority = 0
+shader = ExtResource("2_l400v")
+shader_parameter/albedo = Color(0.5058824, 0.8039216, 0.02745098, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_sjkkq"]
+size = Vector2(0.3, 0.3)
+orientation = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hlnya"]
+size = Vector3(0.5, 0.5, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g6pu7"]
+render_priority = 1
+shader = ExtResource("2_l400v")
+shader_parameter/albedo = Color(0.16470589, 0.5254902, 0.91764706, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_hlnya"]
+size = Vector2(0.3, 0.3)
+
+[node name="ImageMakerTab" type="Node3D" unique_id=1114655983]
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1157824835]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=115806915]
+shape = SubResource("SphereShape3D_g4v7s")
+
+[node name="Gizmo" type="Node3D" parent="." unique_id=885114171]
+
+[node name="AxisX" type="Area3D" parent="Gizmo" unique_id=1240433872]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gizmo/AxisX" unique_id=493212305]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_g4v7s")
+debug_fill = false
+
+[node name="UpArrow" type="MeshInstance3D" parent="Gizmo/AxisX" unique_id=1150988770]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+sorting_offset = 32.0
+material_override = SubResource("ShaderMaterial_iwqr7")
+cast_shadow = 0
+ignore_occlusion_culling = true
+mesh = SubResource("CylinderMesh_sjkkq")
+
+[node name="DownArrow" type="MeshInstance3D" parent="Gizmo/AxisX" unique_id=1940539162]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -1, 0)
+sorting_offset = 32.0
+material_override = SubResource("ShaderMaterial_iwqr7")
+cast_shadow = 0
+ignore_occlusion_culling = true
+mesh = SubResource("CylinderMesh_sjkkq")
+
+[node name="Rod" type="MeshInstance3D" parent="Gizmo/AxisX" unique_id=1748061576]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+sorting_offset = 32.0
+material_override = SubResource("ShaderMaterial_iwqr7")
+cast_shadow = 0
+ignore_occlusion_culling = true
+mesh = SubResource("CylinderMesh_yf5fn")
+
+[node name="AxisY" type="Area3D" parent="Gizmo" unique_id=950922103]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gizmo/AxisY" unique_id=716701127]
+shape = SubResource("CylinderShape3D_g4v7s")
+debug_fill = false
+
+[node name="UpArrow" type="MeshInstance3D" parent="Gizmo/AxisY" unique_id=479735555]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 1, -4.371139e-08, 0)
+sorting_offset = 32.0
+material_override = SubResource("ShaderMaterial_hsxt3")
+cast_shadow = 0
+ignore_occlusion_culling = true
+mesh = SubResource("CylinderMesh_sjkkq")
+
+[node name="DownArrow" type="MeshInstance3D" parent="Gizmo/AxisY" unique_id=1876602110]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -1, 4.371139e-08, 0)
+sorting_offset = 32.0
+material_override = SubResource("ShaderMaterial_hsxt3")
+cast_shadow = 0
+ignore_occlusion_culling = true
+mesh = SubResource("CylinderMesh_sjkkq")
+
+[node name="Rod" type="MeshInstance3D" parent="Gizmo/AxisY" unique_id=1610472062]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0.5, 0, 0)
+sorting_offset = 32.0
+material_override = SubResource("ShaderMaterial_hsxt3")
+cast_shadow = 0
+ignore_occlusion_culling = true
+mesh = SubResource("CylinderMesh_yf5fn")
+
+[node name="AxizZ" type="Area3D" parent="Gizmo" unique_id=2007148638]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gizmo/AxizZ" unique_id=1241386706]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_g4v7s")
+debug_fill = false
+
+[node name="UpArrow" type="MeshInstance3D" parent="Gizmo/AxizZ" unique_id=1890438809]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, -4.371139e-08, -4.371139e-08, 1)
+sorting_offset = 32.0
+material_override = SubResource("ShaderMaterial_yxab6")
+cast_shadow = 0
+ignore_occlusion_culling = true
+mesh = SubResource("CylinderMesh_sjkkq")
+
+[node name="DownArrow" type="MeshInstance3D" parent="Gizmo/AxizZ" unique_id=1787114726]
+transform = Transform3D(1.9106855e-15, 4.371139e-08, -1, 1, -4.371139e-08, 0, -4.371139e-08, -1, -4.371139e-08, 4.371139e-08, 4.371139e-08, -1)
+sorting_offset = 32.0
+material_override = SubResource("ShaderMaterial_mk0i3")
+cast_shadow = 0
+ignore_occlusion_culling = true
+mesh = SubResource("CylinderMesh_sjkkq")
+
+[node name="Rod" type="MeshInstance3D" parent="Gizmo/AxizZ" unique_id=1104750340]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0.5)
+sorting_offset = 32.0
+material_override = SubResource("ShaderMaterial_mk0i3")
+cast_shadow = 0
+ignore_occlusion_culling = true
+mesh = SubResource("CylinderMesh_yf5fn")
+
+[node name="PlaneYZ" type="Area3D" parent="Gizmo" unique_id=547736337]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gizmo/PlaneYZ" unique_id=1239857270]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.5)
+shape = SubResource("BoxShape3D_yf5fn")
+debug_fill = false
+
+[node name="Square" type="MeshInstance3D" parent="Gizmo/PlaneYZ" unique_id=1202308406]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0.4)
+sorting_offset = 32.0
+material_override = SubResource("ShaderMaterial_l400v")
+cast_shadow = 0
+ignore_occlusion_culling = true
+mesh = SubResource("QuadMesh_g4v7s")
+
+[node name="PlaneXZ" type="Area3D" parent="Gizmo" unique_id=1753893090]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gizmo/PlaneXZ" unique_id=705177628]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.5)
+shape = SubResource("BoxShape3D_sjkkq")
+debug_fill = false
+
+[node name="Square" type="MeshInstance3D" parent="Gizmo/PlaneXZ" unique_id=2138741880]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 0.4)
+sorting_offset = 32.0
+material_override = SubResource("ShaderMaterial_bxch0")
+cast_shadow = 0
+ignore_occlusion_culling = true
+mesh = SubResource("QuadMesh_sjkkq")
+
+[node name="PlaneXY" type="Area3D" parent="Gizmo" unique_id=302636079]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gizmo/PlaneXY" unique_id=2117626262]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, 0)
+shape = SubResource("BoxShape3D_hlnya")
+debug_fill = false
+
+[node name="Square" type="MeshInstance3D" parent="Gizmo/PlaneXY" unique_id=1452210027]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.4, 0)
+sorting_offset = 32.0
+material_override = SubResource("ShaderMaterial_g6pu7")
+cast_shadow = 0
+ignore_occlusion_culling = true
+mesh = SubResource("QuadMesh_hlnya")
+
+[node name="CameraOrigin" type="Node3D" parent="." unique_id=395045337]
+transform = Transform3D(0.95371693, 0.15307169, -0.2588301, 0, 0.86074203, 0.50904137, 0.3007058, -0.48548138, 0.82090425, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraOrigin" unique_id=1342789362]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.2907133)
+
+[node name="spheres" type="MultiMeshInstance3D" parent="." unique_id=1828769265]
+cast_shadow = 0
+ignore_occlusion_culling = true
+multimesh = ExtResource("1_sjkkq")
+
+[node name="cubes" type="MultiMeshInstance3D" parent="." unique_id=935779080]
+multimesh = ExtResource("2_hlnya")

@@ -43,6 +43,7 @@ folder_colors={
 "res://Scenes/DictDisplayMenu/": "orange",
 "res://Scenes/DictEditMenu/": "yellow",
 "res://Scenes/Images/": "red",
+"res://Scenes/Images/ImageMakerTab/": "red",
 "res://Scenes/LibraryMenu/": "blue",
 "res://Scenes/OnlineUsersTab/": "pink",
 "res://Scenes/SettingsMenu/": "orange",
@@ -126,6 +127,5 @@ common/max_physics_steps_per_frame=5
 textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
 textures/lossless_compression/force_png=true
-anti_aliasing/quality/msaa_2d=1
 textures/decals/filter=0
 textures/light_projectors/filter=0

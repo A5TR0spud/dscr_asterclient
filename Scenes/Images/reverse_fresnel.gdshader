@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode unshaded;
+render_mode unshaded, cull_back;
 
 float fresnel(float amount, vec3 normal, vec3 view)
 {

@@ -1,10 +1,18 @@
 extends RefCounted
 class_name TransmissionParser
 
+##"."
 const DECIMAL = -10
+##"["
 const GROUP_START = -14
+##"]"
 const GROUP_END = -15
+##"-"
 const NEGATIVE = -1
+##","
+const GROUP_SEQUENCE = -3
+##"is followed by"
+const ORDER_SEQUENCE = -122
 
 var _data: Array
 var _error: bool = false
@@ -64,12 +72,29 @@ func peek(offset: int = 0):
 
 ## Loops through a list of items, calling the given function to parse each item.
 ## Should be called when cursor is at a group start marker.
-func read_group_items(item_parser: Callable) -> Array:
+## Provided Callable will be provided the parser as its only argument.
+func read_group_items(item_parser: Callable, collapse_arrays: bool = false) -> Array:
 	var items: Array = []
 	expect(GROUP_START)
 	while not _error and not is_at_end() and not check(GROUP_END):
-		items.append(item_parser.call(self))
+		var tmp = item_parser.call(self)
+		if tmp is Array and collapse_arrays:
+			items.append_array(tmp)
+		else:
+			items.append(tmp)
 	expect(GROUP_END)
+	
+	return items
+
+## Loops through a sequence of items, calling the given function to parse each item.
+## Provided Callable will be provided the parser as its only argument.
+func read_sequence(item_parser: Callable, delimiter: int = ORDER_SEQUENCE, require_prefixed_delimiter: bool = false) -> Array:
+	var items: Array = []
+	
+	var do: bool = try_consume(delimiter) if require_prefixed_delimiter else not _error and not is_at_end()
+	while do:
+		items.append(item_parser.call(self))
+		do = try_consume(delimiter)
 	
 	return items
 

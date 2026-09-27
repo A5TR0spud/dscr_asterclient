@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cjd3hjlgtsjip"]
+
+[ext_resource type="Shader" uid="uid://cufhqyh03k8p1" path="res://Scenes/Images/reverse_fresnel.gdshader" id="1_pied6"]
+
+[resource]
+render_priority = -1
+shader = ExtResource("1_pied6")
