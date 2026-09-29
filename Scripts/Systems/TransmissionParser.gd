@@ -60,6 +60,11 @@ func get_error_message() -> String:
 func has_error() -> bool:
 	return _error
 
+#iff is not a typo
+## Returns true iff the parser has no error and is not at its end
+func can_continue() -> bool:
+	return not _error and _pos < _data.size()
+
 func is_at_end() -> bool:
 	return _pos >= _data.size()
 
@@ -76,9 +81,9 @@ func peek(offset: int = 0):
 func read_group_items(item_parser: Callable, collapse_arrays: bool = false) -> Array:
 	var items: Array = []
 	expect(GROUP_START)
-	while not _error and not is_at_end() and not check(GROUP_END):
+	while can_continue() and not check(GROUP_END):
 		var tmp = item_parser.call(self)
-		if tmp is Array and collapse_arrays:
+		if collapse_arrays and tmp is Array:
 			items.append_array(tmp)
 		else:
 			items.append(tmp)
@@ -86,26 +91,15 @@ func read_group_items(item_parser: Callable, collapse_arrays: bool = false) -> A
 	
 	return items
 
-## Loops through a sequence of items, calling the given function to parse each item.
-## Provided Callable will be provided the parser as its only argument.
-func read_sequence(item_parser: Callable, delimiter: int = ORDER_SEQUENCE, require_prefixed_delimiter: bool = false) -> Array:
-	var items: Array = []
-	
-	var do: bool = try_consume(delimiter) if require_prefixed_delimiter else not _error and not is_at_end()
-	while do:
-		items.append(item_parser.call(self))
-		do = try_consume(delimiter)
-	
-	return items
-
 ## Reads a floating-point number at the current position.
 ## Ignores leading zeroes in the integer portion, but preserves them in the fractional portion.
-func read_number() -> Variant:
+## Failed parses result in an output of 0.
+func read_number() -> float:
 	var negative := try_consume(NEGATIVE)
 	while peek() == 0: skip()
 
 	var val_str: String = ""
-	while not _error and not is_at_end():
+	while can_continue():
 		var i = peek()
 		if i == DECIMAL:
 			val_str += "."
@@ -117,7 +111,7 @@ func read_number() -> Variant:
 		else:
 			break
 
-	var value = val_str.to_float()
+	var value: float = val_str.to_float()
 
 	return -value if negative else value
 

@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bcqkh2yjqiert"]
 
-[ext_resource type="Texture2D" uid="uid://cb8hjgvp01r33" path="res://Assets/ImageGrid.png" id="1_42cc5"]
 [ext_resource type="Script" uid="uid://clw6gb5wupvng" path="res://Scenes/Images/visualizer_node.gd" id="1_psu8h"]
 [ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="2_psu8h"]
+[ext_resource type="PackedScene" uid="uid://000b36jo5qbu" path="res://Scenes/Images/backdrop.tscn" id="3_indmu"]
 [ext_resource type="MultiMesh" uid="uid://x57ntwryxlhs" path="res://Scenes/Images/sphere_multi_mesh.tres" id="4_indmu"]
 [ext_resource type="PackedScene" uid="uid://iqh1s0683kvy" path="res://Scenes/Common/icon_button.tscn" id="5_1c76j"]
 [ext_resource type="MultiMesh" uid="uid://b25iqmc8gnt6q" path="res://Scenes/Images/cube_multi_mesh.tres" id="5_1eel7"]
@@ -11,25 +11,6 @@
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_kq2tu"]
 viewport_path = NodePath("Intermediate/RenderAndYaw/VisualizerRect/SubViewport")
-
-[sub_resource type="Environment" id="Environment_g4v7s"]
-background_mode = 1
-ambient_light_source = 1
-reflected_light_source = 1
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0mdww"]
-transparency = 2
-alpha_scissor_threshold = 0.5
-alpha_antialiasing_mode = 0
-shading_mode = 0
-albedo_color = Color(0.11372549, 0.37254903, 0.050980393, 1)
-albedo_texture = ExtResource("1_42cc5")
-texture_filter = 0
-
-[sub_resource type="QuadMesh" id="QuadMesh_g4v7s"]
-material = SubResource("StandardMaterial3D_0mdww")
-size = Vector2(32, 32)
-orientation = 1
 
 [node name="VisualizerNode" type="PanelContainer" unique_id=1907311917]
 custom_minimum_size = Vector2(300, 0)
@@ -80,16 +61,7 @@ current = true
 fov = 60.0
 far = 64.0
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Intermediate/RenderAndYaw/VisualizerRect/SubViewport" unique_id=1113409715]
-environment = SubResource("Environment_g4v7s")
-
-[node name="Floor" type="MeshInstance3D" parent="Intermediate/RenderAndYaw/VisualizerRect/SubViewport" unique_id=415239029]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
-mesh = SubResource("QuadMesh_g4v7s")
-
-[node name="Ceiling" type="MeshInstance3D" parent="Intermediate/RenderAndYaw/VisualizerRect/SubViewport" unique_id=1973831854]
-transform = Transform3D(1, 0, 0, 0, -1, -1.509958e-07, 0, 1.509958e-07, -1, 0, 8, 0)
-mesh = SubResource("QuadMesh_g4v7s")
+[node name="Backdrop" parent="Intermediate/RenderAndYaw/VisualizerRect/SubViewport" unique_id=1970434345 instance=ExtResource("3_indmu")]
 
 [node name="Spheres" type="MultiMeshInstance3D" parent="Intermediate/RenderAndYaw/VisualizerRect/SubViewport" unique_id=1090367063]
 cast_shadow = 0

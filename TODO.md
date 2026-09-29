@@ -14,6 +14,7 @@
 * word aliases (unless the macro system is sufficient)
 * clean up transmission un/re-loading and/to figure out duplicate and missing history
 * ability to block channels when using the skeleton key
+* add backup callsign setting
 
 ### nikzapp
 

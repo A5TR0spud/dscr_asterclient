@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://000b36jo5qbu"]
+
+[ext_resource type="Texture2D" uid="uid://cb8hjgvp01r33" path="res://Assets/ImageGrid.png" id="1_h0b6d"]
+
+[sub_resource type="Environment" id="Environment_g4v7s"]
+background_mode = 1
+ambient_light_source = 1
+reflected_light_source = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0mdww"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+shading_mode = 0
+albedo_color = Color(0.11372549, 0.37254903, 0.050980393, 1)
+albedo_texture = ExtResource("1_h0b6d")
+texture_filter = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_g4v7s"]
+material = SubResource("StandardMaterial3D_0mdww")
+size = Vector2(32, 32)
+orientation = 1
+
+[node name="Backdrop" type="WorldEnvironment" unique_id=5605136]
+environment = SubResource("Environment_g4v7s")
+
+[node name="Ceiling" type="MeshInstance3D" parent="." unique_id=890853009]
+transform = Transform3D(1, 0, 0, 0, -1, -1.509958e-07, 0, 1.509958e-07, -1, 0, 8, 0)
+mesh = SubResource("QuadMesh_g4v7s")
+
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=638217505]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
+mesh = SubResource("QuadMesh_g4v7s")

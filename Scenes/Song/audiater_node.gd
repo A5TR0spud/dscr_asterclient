@@ -57,7 +57,7 @@ func check_song(message: Array) -> bool:
 		if not parser.skip_to(SONG): return false
 		parser.expect(SONG)
 		var pos := parser.save_state()
-		var notes := parser.read_group_items(parse_song_item, true)
+		var notes := parser.read_group_items(parse_song_sequence, true)
 
 		if parser.has_error():
 			print(parser.get_error_message())
@@ -77,35 +77,37 @@ func check_song(message: Array) -> bool:
 
 	return false
 
-var _sequence_accum: float = 0
+class Note:
+	extends RefCounted
+	var start_time: float
+	var duration: float
+	var frequency: float
+	
+	func _init(start: float, length: float, freq: float):
+		start_time = start
+		duration = length
+		frequency = freq
 
-func parse_sequenced_notes(parser: TransmissionParser) -> Dictionary:
-	parser.expect(NOTE)
-	var duration = parser.read_number() * conversion_factor
-	parser.expect(SEP)
-	var frequency = parser.read_number() / conversion_factor
-	var start_time = _sequence_accum
-	_sequence_accum += duration
-	return {
-		"start_time": start_time,
-		"duration": duration,
-		"frequency": frequency
-	}
-
-func parse_song_item(parser: TransmissionParser) -> Array[Dictionary]:
+func parse_song_note(parser: TransmissionParser) -> Note:
 	parser.expect(NOTE)
 	var start_time = parser.read_number() * conversion_factor
 	parser.expect(SEP)
 	var duration = parser.read_number() * conversion_factor
 	parser.expect(SEP)
 	var frequency = parser.read_number() / conversion_factor
-	var out: Array[Dictionary] = [{
-		"start_time": start_time,
-		"duration": duration,
-		"frequency": frequency
-	}]
-	_sequence_accum = start_time + duration
-	out.append_array(parser.read_sequence(parse_sequenced_notes, SEQUENCER, true))
+	return Note.new(start_time, duration, frequency)
+
+func parse_song_sequence(parser: TransmissionParser) -> Array[Note]:
+	var out: Array[Note] = []
+	var _note: Note = parse_song_note(parser)
+	out.append(_note)
+	var sequence_accum: float = _note.start_time + _note.duration
+	while parser.try_consume(SEQUENCER):
+		_note = parse_song_note(parser)
+		var delay: float = _note.start_time
+		_note.start_time += sequence_accum
+		sequence_accum += delay + _note.duration
+		out.append(_note)
 	parser.try_consume(SEP)
 	return out
 
