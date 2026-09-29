@@ -91,6 +91,26 @@ func read_group_items(item_parser: Callable, collapse_arrays: bool = false) -> A
 	
 	return items
 
+## Peeks a number at the current position + offset and returns its length in signals.
+## Uses the same logic as [code]read_number()[/code].
+func number_length(offset: int = 0) -> int:
+	var idx: int = offset
+	if peek(idx) == NEGATIVE:
+		idx += 1
+	while peek(idx) == 0:
+		idx += 1
+	while not _error and idx < _data.size():
+		var i = peek(idx)
+		if i == DECIMAL:
+			idx += 1
+			continue
+		elif i >= 0:
+			idx += 1
+		else:
+			break
+
+	return idx - offset
+
 ## Reads a floating-point number at the current position.
 ## Ignores leading zeroes in the integer portion, but preserves them in the fractional portion.
 ## Failed parses result in an output of 0.

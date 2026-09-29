@@ -13,10 +13,10 @@ enum NoteType { SINE, SQUARE, SAWTOOTH, TRIANGLE }
 const NEG = -1
 const SEP = -3
 const DECIMAL = -10
+const VARIABLE = -11
 const GROUP_BEGIN = -14
 const GROUP_END = -15
 const SEQUENCER = -122
-#/key 1574 song [ music_note 0, 1, 420 precedes music_note 1, 440 ]
 const SONG = -577
 const NOTE = -605003
 const conversion_factor: float = Main.HE6_HALF_LIFE
@@ -31,6 +31,8 @@ var current_song: Array = []
 var playback: AudioStreamGeneratorPlayback
 var playback_time: float = 0.0
 var song_length: float = 0.0
+
+var song_variables: Dictionary = {}
 
 func play_music() -> void:
 	if music_player_node.is_playing():
@@ -57,7 +59,8 @@ func check_song(message: Array) -> bool:
 		if not parser.skip_to(SONG): return false
 		parser.expect(SONG)
 		var pos := parser.save_state()
-		var notes := parser.read_group_items(parse_song_sequence, true)
+		song_variables = {}
+		var notes := parse_song_group(parser)
 
 		if parser.has_error():
 			print(parser.get_error_message())
@@ -89,6 +92,7 @@ class Note:
 		frequency = freq
 
 func parse_song_note(parser: TransmissionParser) -> Note:
+	#print("note ", parser.save_state())
 	parser.expect(NOTE)
 	var start_time = parser.read_number() * conversion_factor
 	parser.expect(SEP)
@@ -97,19 +101,78 @@ func parse_song_note(parser: TransmissionParser) -> Note:
 	var frequency = parser.read_number() / conversion_factor
 	return Note.new(start_time, duration, frequency)
 
+func parse_song_item(parser: TransmissionParser) -> Array[Note]:
+	#print("item ", parser.save_state())
+	if not parser.can_continue():
+		return []
+	if parser.check(NOTE):
+		return [parse_song_note(parser)]
+	if parser.try_consume(VARIABLE):
+		var idx = parser.advance()
+		#print(song_variables.get(idx))
+		if parser.check(GROUP_BEGIN):
+			var p := parse_song_group(parser)
+			song_variables[idx] = p
+			var o: Array[Note] = []
+			for n in p:
+				o.append(Note.new(n.start_time, n.duration, n.frequency))
+			return o
+		else:
+			if idx in song_variables:
+				var o: Array[Note] = []
+				for n in song_variables[idx]:
+					o.append(Note.new(n.start_time, n.duration, n.frequency))
+				return o
+			return []
+	return parse_song_group(parser)
+
+func parse_song_chord(parser: TransmissionParser) -> Array[Note]:
+	#print("chord ", parser.save_state())
+	var items: Array[Note] = []
+	var sav: int = parser.save_state()
+	while not parser.check(GROUP_END) and parser.can_continue():
+		var _i: Array[Note] = parse_song_item(parser)
+		if not _i:
+			parser.restore_state(sav, true)
+			break
+		sav = parser.save_state()
+		items.append_array(_i)
+		parser.try_consume(SEP)
+	return items
+
 func parse_song_sequence(parser: TransmissionParser) -> Array[Note]:
-	var out: Array[Note] = []
-	var _note: Note = parse_song_note(parser)
-	out.append(_note)
-	var sequence_accum: float = _note.start_time + _note.duration
-	while parser.try_consume(SEQUENCER):
-		_note = parse_song_note(parser)
-		var delay: float = _note.start_time
-		_note.start_time += sequence_accum
-		sequence_accum += delay + _note.duration
-		out.append(_note)
-	parser.try_consume(SEP)
-	return out
+	#print("sequence ", parser.save_state())
+	var items: Array[Note] = []
+	var _sequence_accum: float = 0
+	var do: bool = true
+	var sav: int = parser.save_state()
+	while not parser.check(GROUP_END) and parser.can_continue() and do:
+		var _i: Array[Note] = parse_song_chord(parser)
+		do = parser.try_consume(SEQUENCER)
+		if not _i:
+			parser.restore_state(sav, true)
+			break
+		sav = parser.save_state()
+		var end: float = 0
+		for n in items:
+			#print(n.start_time, " ", n.duration, " ", n.frequency)
+			end = max(n.start_time + n.duration, end)
+		_sequence_accum = end
+		for n in _i:
+			n.start_time += _sequence_accum
+		#print(_sequence_accum)
+		#_sequence_accum += _i.reduce(func(acc, b): return max(b.duration, acc), 0)
+		#for existing_note in items:
+		#	_sequence_accum = max(existing_note.start_time + existing_note.duration, _sequence_accum)
+		items.append_array(_i)
+	return items
+
+func parse_song_group(parser: TransmissionParser) -> Array[Note]:
+	#print("group ", parser.save_state())
+	parser.expect(GROUP_BEGIN)
+	var items := parse_song_sequence(parser)
+	parser.expect(GROUP_END)
+	return items
 
 func _fill_buffer() -> void:
 	var frames_available := playback.get_frames_available()

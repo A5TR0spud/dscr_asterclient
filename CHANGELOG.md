@@ -5,8 +5,7 @@
 ### Additions
 
 * Added control panel for -577
-* Added -122 support for -577
-  * -11 is still not supported
+* Added -122 and -11 support for -577, using the same logic/syntax as Relay3544
 
 ### Changes
 
