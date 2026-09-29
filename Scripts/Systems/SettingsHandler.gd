@@ -20,6 +20,7 @@ static var websocket_address: String = Main.DSCR_URL
 static var websocket_addresses: Array = [Main.DSCR_URL]
 static var current_dictionary: String = "DICTIONARY-1.save"
 static var confetti: bool = true
+static var number_auto_sep: bool = true
 
 static func validate_and_set_language(code: String = language):
 	if code not in ["m0", "en"]:
@@ -73,6 +74,7 @@ static func initialize() -> void:
 		websocket_addresses.append(Main.DSCR_URL)
 	current_dictionary = SaveSystem.settings.get_or_add("current_dictionary", current_dictionary)
 	confetti = SaveSystem.settings.get_or_add("confetti", confetti)
+	number_auto_sep = SaveSystem.settings.get_or_add("number_auto_sep", number_auto_sep)
 
 static func evaluate_volume() -> void:
 	AudioServer.set_bus_volume_linear(
@@ -116,3 +118,4 @@ static func export() -> void:
 	SaveSystem.settings.set("current_dictionary", current_dictionary)
 	SaveSystem.settings.set("confetti", confetti)
 	SaveSystem.settings.set("music_volume", music_volume)
+	SaveSystem.settings.set("number_auto_sep", number_auto_sep)

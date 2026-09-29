@@ -232,14 +232,24 @@ static func compile_text(input: String) -> PackedInt64Array:
 	for idx: int in range(group_starts.size() + 1):
 		var started: int = group_starts[idx] if idx < group_starts.size() else input.length()
 		var end: int = group_ends[idx] if idx < group_starts.size() else 0
-		if started > prevend:
-			var _s: String = input.substr(prevend, started - prevend)
-			if !is_whitespace(_s):
-				_unknowns.append_array(_s.replace_chars("\n\r\t", ord(" ")).split(" ", false))
-				_error = ErrorCode.UNKNOWN
-			#if !_s.is_empty():
-				#mix.append(_s)
+		var _caught_bestring: String = input.substr(prevend, started - prevend)
+		if started > prevend and !is_whitespace(_caught_bestring):
+			_unknowns.append_array(_caught_bestring.replace_chars("\n\r\t", ord(" ")).split(" ", false))
+			_error = ErrorCode.UNKNOWN
+
 		if idx < group_starts.size():
+			if (
+				SettingsHandler.number_auto_sep and
+				DictionaryHandler.support_m0 and
+				out.size() > 0 and
+				out.get(out.size() - 1) >= 0 and
+				group_sigs.size() > idx and
+				group_sigs[idx].size() > 0 and
+				group_sigs[idx].get(0) >= 0
+			):
+				out.append(-2)
+				out_starts.append(per_starts[idx][0])
+				out_lens.append(0)
 			out.append_array(group_sigs[idx])
 			out_starts.append_array(per_starts[idx])
 			out_lens.append_array(per_lengths[idx])

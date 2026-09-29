@@ -1,11 +1,12 @@
 # Versions
 
-## --WIP--
+## 0.8.2
 
 ### Additions
 
 * Added control panel for -577
 * Added -122 and -11 support for -577, using the same logic/syntax as Relay3544
+* Added setting to automatically insert -2 between numbers that have gaps between them before sending
 
 ### Changes
 

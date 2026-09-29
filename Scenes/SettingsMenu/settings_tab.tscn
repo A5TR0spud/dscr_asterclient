@@ -62,9 +62,15 @@ description = "SETTINGS_DEFAULT_IMAGE"
 layout_mode = 2
 description = "SETTINGS_DO_BBCODE"
 
+[node name="NumberSeparation" parent="ScrollContainer/Options" unique_id=1913893789 instance=ExtResource("3_0yg8b")]
+layout_mode = 2
+description = "SETTINGS_NUMBER_SEP"
+state = true
+
 [node name="Confetti" parent="ScrollContainer/Options" unique_id=1525244345 instance=ExtResource("3_0yg8b")]
 layout_mode = 2
 description = "SETTINGS_CONFETTI"
+state = true
 
 [node name="TruncHbox" type="HBoxContainer" parent="ScrollContainer/Options" unique_id=720322280]
 layout_mode = 2
@@ -350,6 +356,7 @@ description = "SETTINGS_INVERT_ZOOM"
 [connection signal="set" from="ScrollContainer/Options/Formatting" to="." method="_on_formatting_set"]
 [connection signal="set" from="ScrollContainer/Options/ImageVis" to="." method="_on_image_vis_set"]
 [connection signal="set" from="ScrollContainer/Options/DoBBCode" to="." method="_on_signal_color_set"]
+[connection signal="set" from="ScrollContainer/Options/NumberSeparation" to="." method="_on_number_separation_set"]
 [connection signal="set" from="ScrollContainer/Options/Confetti" to="." method="_on_confetti_set"]
 [connection signal="value_changed" from="ScrollContainer/Options/TruncHbox/TruncationSpinner" to="." method="_on_truncation_spinner_value_changed"]
 [connection signal="value_changed" from="ScrollContainer/Options/FontHbox/FontSpinner" to="." method="_on_font_spinner_value_changed"]

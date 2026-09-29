@@ -113,16 +113,10 @@ func parse_song_item(parser: TransmissionParser) -> Array[Note]:
 		if parser.check(GROUP_BEGIN):
 			var p := parse_song_group(parser)
 			song_variables[idx] = p
-			var o: Array[Note] = []
-			for n in p:
-				o.append(Note.new(n.start_time, n.duration, n.frequency))
-			return o
+			return p
 		else:
 			if idx in song_variables:
-				var o: Array[Note] = []
-				for n in song_variables[idx]:
-					o.append(Note.new(n.start_time, n.duration, n.frequency))
-				return o
+				return song_variables[idx]
 			return []
 	return parse_song_group(parser)
 
@@ -158,8 +152,10 @@ func parse_song_sequence(parser: TransmissionParser) -> Array[Note]:
 			#print(n.start_time, " ", n.duration, " ", n.frequency)
 			end = max(n.start_time + n.duration, end)
 		_sequence_accum = end
-		for n in _i:
-			n.start_time += _sequence_accum
+		
+		for idx: int in range(_i.size()):
+			var o: Note = _i[idx]
+			_i[idx] = Note.new(o.start_time + _sequence_accum, o.duration, o.frequency)
 		#print(_sequence_accum)
 		#_sequence_accum += _i.reduce(func(acc, b): return max(b.duration, acc), 0)
 		#for existing_note in items:

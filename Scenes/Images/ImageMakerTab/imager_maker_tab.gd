@@ -50,17 +50,17 @@ func _process(delta):
 	if _queued_zoom:
 		camera_node.position.z = 8 * (1.5 ** (_zoom_level - 4))
 		_queued_zoom = false
-	var x := sin(_yaw)*cos(_pitch)
-	var y := sin(_pitch)
-	var z := cos(_yaw)*cos(_pitch)
+	#var x := sin(_yaw)*cos(_pitch)
+	#var y := sin(_pitch)
+	#var z := cos(_yaw)*cos(_pitch)
 	
-	axis_x.visible = abs(x) < 0.985
-	axis_y.visible = abs(y) < 0.985
-	axis_z.visible = abs(z) < 0.985
-	
-	plane_yz.visible = abs(x) > 0.5
-	plane_xz.visible = abs(y) > 0.5
-	plane_xy.visible = abs(z) > 0.5
+	#axis_x.visible = abs(x) < 0.985
+	#axis_y.visible = abs(y) < 0.985
+	#axis_z.visible = abs(z) < 0.985
+	#
+	#plane_yz.visible = abs(x) > 0.5
+	#plane_xz.visible = abs(y) > 0.5
+	#plane_xy.visible = abs(z) > 0.5
 	
 	#gizmo.scale.x = gizmo.position.distance_to(camera_node.global_position) / BASE_ZOOM_AMOUNT
 	#gizmo.scale.y = gizmo.scale.x
@@ -103,8 +103,8 @@ func _unhandled_input(event: InputEvent):
 		return
 	# panning
 	if event is InputEventMouseMotion and Input.is_action_pressed("pan_image"):
-		var dx: float = -event.relative.x * 0.01
-		var dy: float = event.relative.y * 0.01
+		var dx: float = -event.relative.x * 0.001 * camera_node.position.z
+		var dy: float = event.relative.y * 0.001 * camera_node.position.z
 		#camera_node.position.x -= event.relative.x * 0.01
 		#camera_node.position.y += event.relative.y * 0.01
 		#x sin(yaw)+cos(pitch)
@@ -120,6 +120,6 @@ func _unhandled_input(event: InputEvent):
 		return
 	# rotating
 	if event is InputEventMouseMotion and Input.is_action_pressed("rotate_image"):
-		_yaw -= event.relative.x * 0.01
-		_pitch -= event.relative.y * 0.01
+		_yaw -= event.relative.x * 0.005
+		_pitch -= event.relative.y * 0.005
 		return
