@@ -1,5 +1,12 @@
 # Versions
 
+## --WIP--
+
+### Fixes
+
+* Fixed the auto-number-separation setting not being translated
+* Adjusted how button-copying works so that the auto-number-separation setting doesn't screw with pasting
+
 ## 0.8.2
 
 ### Additions

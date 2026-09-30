@@ -51,6 +51,7 @@ SETTINGS_INVERT_PITCH,-26 -14 -49 -92 -100 -87 -15 -4,Invert pitch?
 SETTINGS_INVERT_YAW,-26 -14 -51 -92 -100 -87 -15 -4,Invert yaw?
 SETTINGS_INVERT_ZOOM,-26 -14 -50 -39 -100 -87 -15 -4,Invert zoom?
 SETTINGS_CONFETTI,-702,Confetti!
+SETTINGS_NUMBER_SEP,-11 -190 -11 -100 -11 -2 -11,Insert |-2 between spaced numbers
 CALLSIGN,-128 -42,Callsign
 COPY_SIGNAL_NUMBERS,-42 -40,Copy signals
 COPY_SIGNAL_NAMES,-237 -40,Copy words

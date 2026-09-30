@@ -104,13 +104,21 @@ func transmit_pressed(id: int) -> void:
 			)
 
 func copy_as_signals():
-	var o: Array[String] = []
+	var s: String = ""
+	var w: bool = false
 	for i in message:
+		if i < 0:
+			w = true
+		if w and s:
+			s += " "
 		if i >= 0:
-			o.append(str(i))
+			if SettingsHandler.number_auto_sep and DictionaryHandler.support_m0:
+				w = false
+			s += str(i)
 		else:
-			o.append("|" + str(i))
-	DisplayServer.clipboard_set(" ".join(o))
+			s += str("|", i)
+			w = true
+	DisplayServer.clipboard_set(s)
 
 func supports_bbcode() -> bool:
 	return true

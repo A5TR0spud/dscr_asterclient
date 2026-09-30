@@ -437,6 +437,14 @@ static func signals_to_words(input: Array, do_whitespace_format: bool = false, c
 				color = calc_desc_color(desc.get(color_key))
 		elif is_number:
 			word = str(sig)
+			
+			if (
+				prev is int and
+				prev >= 0 and
+				SettingsHandler.number_auto_sep and
+				DictionaryHandler.support_m0
+			):
+				format_mode = 0
 			if support_m0 and prev is int and prev == -54 and sig >= 0 and sig <= 64:
 				color = VisualizeNode.calculate_color(sig)
 				invert = true

@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://000b36jo5qbu" path="res://Scenes/Images/backdrop.tscn" id="2_bxch0"]
 [ext_resource type="Shader" uid="uid://8f7ya8w5qfpk" path="res://Scenes/Images/unshaded_unculled.gdshader" id="2_l400v"]
 [ext_resource type="Material" uid="uid://cjd3hjlgtsjip" path="res://Scenes/Images/reverse_fresnel_material.tres" id="4_l400v"]
+[ext_resource type="Script" uid="uid://c2bcsoy0w6lhe" path="res://Scenes/Common/bool_toggle_button.gd" id="6_hsxt3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hsxt3"]
 render_priority = 0
@@ -314,6 +315,121 @@ mouse_filter = 2
 layout_mode = 2
 mouse_filter = 0
 
-[node name="Label" type="Label" parent="Control/HSplitContainer/VBoxContainer" unique_id=1372425881]
+[node name="objectcontrols" type="VBoxContainer" parent="Control/HSplitContainer/VBoxContainer" unique_id=961849555]
 layout_mode = 2
-text = "label"
+
+[node name="Label" type="Label" parent="Control/HSplitContainer/VBoxContainer/objectcontrols" unique_id=1372425881]
+layout_mode = 2
+text = "object 0"
+horizontal_alignment = 1
+
+[node name="coords" type="HBoxContainer" parent="Control/HSplitContainer/VBoxContainer/objectcontrols" unique_id=747850744]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="Control/HSplitContainer/VBoxContainer/objectcontrols/coords" unique_id=427158524]
+layout_mode = 2
+text = "x"
+
+[node name="SpinBox" type="SpinBox" parent="Control/HSplitContainer/VBoxContainer/objectcontrols/coords" unique_id=745009578]
+layout_mode = 2
+size_flags_vertical = 4
+min_value = -32.0
+max_value = 32.0
+
+[node name="Label2" type="Label" parent="Control/HSplitContainer/VBoxContainer/objectcontrols/coords" unique_id=1090098013]
+layout_mode = 2
+size_flags_stretch_ratio = 0.45
+text = "y"
+
+[node name="SpinBox2" type="SpinBox" parent="Control/HSplitContainer/VBoxContainer/objectcontrols/coords" unique_id=331983652]
+layout_mode = 2
+size_flags_vertical = 4
+min_value = -32.0
+max_value = 32.0
+
+[node name="Label3" type="Label" parent="Control/HSplitContainer/VBoxContainer/objectcontrols/coords" unique_id=2072370314]
+layout_mode = 2
+text = "z"
+
+[node name="SpinBox3" type="SpinBox" parent="Control/HSplitContainer/VBoxContainer/objectcontrols/coords" unique_id=84370932]
+layout_mode = 2
+size_flags_vertical = 4
+min_value = -32.0
+max_value = 32.0
+
+[node name="properties" type="GridContainer" parent="Control/HSplitContainer/VBoxContainer/objectcontrols" unique_id=1560239149]
+layout_mode = 2
+columns = 3
+
+[node name="Label" type="Label" parent="Control/HSplitContainer/VBoxContainer/objectcontrols/properties" unique_id=1198899941]
+layout_mode = 2
+text = "radius"
+
+[node name="HSlider" type="HSlider" parent="Control/HSplitContainer/VBoxContainer/objectcontrols/properties" unique_id=385624752]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="SpinBox" type="SpinBox" parent="Control/HSplitContainer/VBoxContainer/objectcontrols/properties" unique_id=1397866629]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+max_value = 16.0
+
+[node name="Label2" type="Label" parent="Control/HSplitContainer/VBoxContainer/objectcontrols/properties" unique_id=1014723026]
+layout_mode = 2
+text = "color"
+
+[node name="HSlider2" type="HSlider" parent="Control/HSplitContainer/VBoxContainer/objectcontrols/properties" unique_id=1592007572]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="SpinBox2" type="SpinBox" parent="Control/HSplitContainer/VBoxContainer/objectcontrols/properties" unique_id=1600594181]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+min_value = 1.0
+max_value = 64.0
+value = 57.0
+
+[node name="Button" type="Button" parent="Control/HSplitContainer/VBoxContainer/objectcontrols" unique_id=1482530513]
+layout_mode = 2
+text = "dupe"
+
+[node name="Button2" type="Button" parent="Control/HSplitContainer/VBoxContainer/objectcontrols" unique_id=546077727]
+layout_mode = 2
+text = "delete"
+
+[node name="BoolButton" type="Button" parent="Control/HSplitContainer/VBoxContainer/objectcontrols" unique_id=60427225]
+layout_mode = 2
+text = "is a cube vs sphere"
+script = ExtResource("6_hsxt3")
+metadata/_custom_type_script = "uid://c2bcsoy0w6lhe"
+
+[node name="HSeparator" type="HSeparator" parent="Control/HSplitContainer/VBoxContainer/objectcontrols" unique_id=1546298115]
+layout_mode = 2
+
+[node name="Button3" type="Button" parent="Control/HSplitContainer/VBoxContainer" unique_id=395874084]
+layout_mode = 2
+text = "new object"
+
+[node name="Button4" type="Button" parent="Control/HSplitContainer/VBoxContainer" unique_id=2049124691]
+layout_mode = 2
+text = "restart image"
+
+[node name="HSeparator" type="HSeparator" parent="Control/HSplitContainer/VBoxContainer" unique_id=2037505175]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/HSplitContainer/VBoxContainer" unique_id=1778428494]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="objects" type="HFlowContainer" parent="Control/HSplitContainer/VBoxContainer/ScrollContainer" unique_id=2101860420]
+layout_mode = 2
+size_flags_vertical = 3

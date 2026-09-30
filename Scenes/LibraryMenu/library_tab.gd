@@ -129,12 +129,8 @@ func _on_delete_confirmed():
 	_reload()
 
 func _on_copy_signals_pressed():
-	var o: Array[String] = []
-	for sig in current_transmission:
-		var s: String = "|" if sig < 0 else ""
-		s += str(sig)
-		o.append(s)
-	DisplayServer.clipboard_set(" ".join(o))
+	_evaluate_transmission()
+	t_preview.copy_as_signals()
 
 func _on_copy_words_pressed():
 	DisplayServer.clipboard_set(DictionaryHandler.signals_to_words(current_transmission, true))
