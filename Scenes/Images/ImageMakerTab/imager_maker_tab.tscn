@@ -396,12 +396,17 @@ min_value = 1.0
 max_value = 64.0
 value = 57.0
 
-[node name="Button" type="Button" parent="Control/HSplitContainer/VBoxContainer/objectcontrols" unique_id=1482530513]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/HSplitContainer/VBoxContainer/objectcontrols" unique_id=1464087706]
 layout_mode = 2
+
+[node name="Button" type="Button" parent="Control/HSplitContainer/VBoxContainer/objectcontrols/HBoxContainer" unique_id=1482530513]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "dupe"
 
-[node name="Button2" type="Button" parent="Control/HSplitContainer/VBoxContainer/objectcontrols" unique_id=546077727]
+[node name="Button2" type="Button" parent="Control/HSplitContainer/VBoxContainer/objectcontrols/HBoxContainer" unique_id=546077727]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "delete"
 
 [node name="BoolButton" type="Button" parent="Control/HSplitContainer/VBoxContainer/objectcontrols" unique_id=60427225]
@@ -432,4 +437,5 @@ vertical_scroll_mode = 2
 
 [node name="objects" type="HFlowContainer" parent="Control/HSplitContainer/VBoxContainer/ScrollContainer" unique_id=2101860420]
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3

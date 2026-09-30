@@ -2,6 +2,10 @@
 
 ## --WIP--
 
+### Changes
+
+* Adjusted -577 shape and envelope and added a boost to lows
+
 ### Fixes
 
 * Fixed the auto-number-separation setting not being translated

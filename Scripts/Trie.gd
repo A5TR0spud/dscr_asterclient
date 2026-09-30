@@ -50,6 +50,7 @@ func check_prefix(prefix: String) -> bool:
 		cur = cur._children[cdx]
 	return true
 
+## Finds all words that are contained at the start of the given string.
 ## Returns an array of 2 arrays.[br]
 ## Array 0 is a list of signals.[br]
 ## Array 1 is a list of corresponding lengths.

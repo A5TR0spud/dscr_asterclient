@@ -8,7 +8,13 @@ class_name AudiaterNode
 @onready var volume: HSlider = $VBoxContainer/HBoxContainer/VolumeSlider
 @onready var playpause_tr: LocaleNode = $VBoxContainer/HBoxContainer/PlayButton/LocaleNode
 
-enum NoteType { SINE, SQUARE, SAWTOOTH, TRIANGLE }
+enum NoteType {
+	SINE,
+	SQUARE,
+	SAWTOOTH,
+	TRIANGLE,
+	ARBITRARY,
+}
 
 const NEG = -1
 const SEP = -3
@@ -182,7 +188,7 @@ func _fill_buffer() -> void:
 				"phase": 0.0,
 				"time_left": note_data.duration,
 				"total_duration": note_data.duration,
-				"type": NoteType.SINE
+				"type": NoteType.ARBITRARY
 			}
 			active_notes.append(note)
 			current_note += 1
@@ -196,17 +202,38 @@ func _fill_buffer() -> void:
 			var increment = note.frequency / sample_hz
 			
 			var sample = 0.0
-			if note.type == NoteType.SINE:
-				sample = sin(note.phase * TAU)
-			elif note.type == NoteType.SAWTOOTH:
-				sample = 2.0 * note.phase - 1.0
-			elif note.type == NoteType.SQUARE:
-				sample = (1.0 if note.phase < 0.5 else -1.0) * 0.5
-			elif note.type == NoteType.TRIANGLE:
-				sample = 4.0 * abs(fmod(note.phase + 0.75, 1.0) - 0.5) - 1.0
+			match note.type:
+				NoteType.ARBITRARY:
+					# smoothed out square wave
+					var mag: float = 0
+					var p: float = fmod(note.phase, 0.5)
+					if p < 0.125:
+						mag = sin(p * 2 * TAU)
+					elif p < 0.375:
+						mag = 1
+					elif p < 0.5:
+						mag = sin((p - 0.25) * 2 * TAU)
+					if note.phase >= 0.5:
+						mag *= -1
+					sample = mag * 0.8
+				NoteType.SINE:
+					sample = sin(note.phase * TAU)
+				NoteType.SAWTOOTH:
+					sample = (2.0 * note.phase - 1.0) * 0.3
+				NoteType.SQUARE:
+					sample = (1.0 if note.phase < 0.5 else -1.0) * 0.3
+				NoteType.TRIANGLE:
+					sample = 4.0 * abs(fmod(note.phase + 0.75, 1.0) - 0.5) - 1.0
 			
-			var volume_envelope = clamp(note.time_left / 0.05, 0.0, 1.0)
-			mixed_sample += sample * 0.2 * volume_envelope
+			var volume_envelope = 1
+			var start_ago: float = note.total_duration - note.time_left
+			if start_ago < 0.0025:
+				volume_envelope *= start_ago / 0.0025
+			if note.time_left < 0.01:
+				volume_envelope *= note.time_left / 0.01
+			volume_envelope *= remap(note.time_left / note.total_duration, 1, 0, 1, 0.5)
+			volume_envelope /= note.frequency / 200.0 + 1
+			mixed_sample += sample * 0.3 * volume_envelope
 			
 			note.phase = fmod(note.phase + increment, 1.0)
 			note.time_left -= time_step
@@ -216,7 +243,7 @@ func _fill_buffer() -> void:
 			
 			j -= 1
 
-		mixed_sample = clamp(mixed_sample, -1.0, 1.0)
+		mixed_sample = clamp(mixed_sample, -2.0, 2.0)
 		playback.push_frame(Vector2.ONE * mixed_sample)
 		playback_time += time_step
 
