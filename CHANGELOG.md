@@ -6,12 +6,13 @@
 
 * Everything is louder now, as the overall volume seemed to be too low at default
 * Adjusted -577 shape and envelope and added a boost to lows
-* Fleshed out the -702 into an entire parser and added an except to -100 -124
+* Fleshed out the -702 into an entire parser and added an exception to -100 -124
 
 ### Fixes
 
 * Fixed the auto-number-separation setting not being translated
-* Adjusted how button-copying works so that the auto-number-separation setting doesn't screw with pasting
+* Adjusted how button-copying works so that the auto-number-separation setting doesn't screw with pasting when copying from Library
+* Fixed the order of saved transmissions in the Library breaking
 
 ## 0.8.2
 

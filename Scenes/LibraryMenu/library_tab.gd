@@ -144,11 +144,22 @@ func queue_search(new_text: String = search.text):
 	_search_is_queued = true
 	_do_search.call_deferred(new_text)
 
-func _do_sort():
-	var to_sort: Array = LibraryHandler.get_all_transmissions().duplicate()
-	to_sort.sort()
-	for c: LibraryEntry in catalog.get_children():
-		catalog.move_child(c, to_sort.find(c.trans_name))
+func _do_sort(order: Array = []):
+	if order.is_empty():
+		var to_sort: Array = LibraryHandler.get_all_transmissions().duplicate()
+		to_sort.sort()
+		order = to_sort
+	
+	for i: int in range(order.size()):
+		var s: String = order[i]
+		for j: int in range(i, catalog.get_child_count()):
+			var c: LibraryEntry = catalog.get_child(j)
+			if c.trans_name == s:
+				catalog.move_child(c, i)
+				c.show()
+				break
+			else:
+				c.hide()
 
 func _do_search(new_text: String):
 	if not _search_is_queued:
@@ -162,12 +173,7 @@ func _do_search(new_text: String):
 	var best_candidates: Array[String] = AutocompleteManager.get_dl_candidates(
 		new_text, catalog.get_children().map(func (a: LibraryEntry): return a.trans_name), 10
 	)
-	for c: LibraryEntry in catalog.get_children():
-		if c.trans_name in best_candidates:
-			c.show()
-			catalog.move_child(c, best_candidates.find(c.trans_name))
-		else:
-			c.hide()
+	_do_sort(best_candidates)
 
 func _on_search_bar_text_changed(new_text: String):
 	queue_search(new_text)
