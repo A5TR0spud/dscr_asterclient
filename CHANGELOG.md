@@ -4,7 +4,9 @@
 
 ### Changes
 
+* Everything is louder now, as the overall volume seemed to be too low at default
 * Adjusted -577 shape and envelope and added a boost to lows
+* Fleshed out the -702 into an entire parser and added an except to -100 -124
 
 ### Fixes
 

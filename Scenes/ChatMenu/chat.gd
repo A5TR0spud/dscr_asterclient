@@ -58,24 +58,45 @@ static func new_transmission(packet: PackedStringArray) -> void:
 	var channel: ChatChannel = get_channel_node(channel_id)
 	
 	new_message.message = integer_message
-	var confet: int = integer_message.find(-702)
-	var followed_by_not: int = integer_message.find(-29, confet) if confet >= 0 else -1
+	
 	if (
-		SettingsHandler.confetti
-		and DictionaryHandler.support_dscr
-		and (
-			(integer_message.size() <= 3 and integer_message.size() > 0 and followed_by_not != confet + 1)
-			or
-			(integer_message.size() >= 3 and integer_message.slice(0, 3) == [-702, -2, -2])
-			or 
-			(integer_message.size() >= 3 and integer_message.slice(-3, -1) == [-2, -2] and integer_message.back() == -702)
-		)
-		and confet >= 0
-		and -702 in DictionaryHandler.word_keys
-		and channel.is_visible_in_tree()
-		and channel.scroll_container.bottom_is_visible()
+		SettingsHandler.confetti and
+		DictionaryHandler.support_dscr and
+		-702 in DictionaryHandler.word_keys and
+		channel.is_visible_in_tree() and
+		channel.scroll_container.bottom_is_visible()
 	):
-		Confetti.burst()
+		var confetti_parser := TransmissionParser.new(integer_message)
+		var yippee: bool = false
+		while confetti_parser.can_continue():
+			if not confetti_parser.skip_to(-702):
+				break
+			if confetti_parser.peek(1) == -29:
+				confetti_parser.skip()
+				continue
+			if confetti_parser.peek(1) == -100 and confetti_parser.peek(2) == -124:
+				confetti_parser.skip(3)
+				continue
+			var j: int = confetti_parser.save_state()
+			var delimited_left: int = j
+			var delimited_right: int = integer_message.size() - 1 - j
+			for i in range(1,4):
+				if confetti_parser.peek(-i) == -2 and confetti_parser.peek(-i - 1) == -2:
+					delimited_left = i - 1
+					break
+			for i in range(1,4):
+				if confetti_parser.peek(i) == -2 and confetti_parser.peek(i + 1) == -2:
+					delimited_right = i - 1
+					break
+			#print("l ", delimited_left, " r ", delimited_right)
+			if delimited_right + delimited_left < 3:
+				yippee = true
+				break
+			confetti_parser.skip()
+		if yippee:
+			print("confetti!")
+			Confetti.burst()
+	
 	
 	if (
 		(new_message.sender != Main.instance.previously_accepted_callsign)
