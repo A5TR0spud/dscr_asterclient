@@ -176,6 +176,18 @@ func parse_song_group(parser: TransmissionParser) -> Array[Note]:
 	parser.expect(GROUP_END)
 	return items
 
+func smoothed_square_wave(phase: float, smoothness: float = 0) -> float:
+	var neg = phase >= 0.5
+	if neg: phase -= 0.5
+	var mag: float = 0
+	if phase < 0.25 * smoothness:
+		mag = sin(TAU * phase / smoothness)
+	elif phase < 0.5 - 0.25 * smoothness:
+		mag = 1
+	else:
+		mag = sin(TAU * (0.5 - phase) / smoothness)
+	return -mag if neg else mag
+
 func _fill_buffer() -> void:
 	var frames_available := playback.get_frames_available()
 	var time_step: float = 1.0 / sample_hz
@@ -202,20 +214,12 @@ func _fill_buffer() -> void:
 			var increment = note.frequency / sample_hz
 			
 			var sample = 0.0
+			var start_ago: float = note.total_duration - note.time_left
 			match note.type:
 				NoteType.ARBITRARY:
-					# smoothed out square wave
-					var mag: float = 0
-					var p: float = fmod(note.phase, 0.5)
-					if p < 0.125:
-						mag = sin(p * 2 * TAU)
-					elif p < 0.375:
-						mag = 1
-					elif p < 0.5:
-						mag = sin((p - 0.25) * 2 * TAU)
-					if note.phase >= 0.5:
-						mag *= -1
-					sample = mag * 0.8
+					var s: float = clamp(1.0 - (600.0 / note.frequency), 0, 1) * 0.3 + 0.25
+					s += max(-0.01, remap(note.time_left / note.total_duration, 1, 0, -0.2, 0.05))
+					sample = smoothed_square_wave(note.phase, clamp(s, 0.2, 0.9)) * 0.8
 				NoteType.SINE:
 					sample = sin(note.phase * TAU)
 				NoteType.SAWTOOTH:
@@ -226,7 +230,6 @@ func _fill_buffer() -> void:
 					sample = 4.0 * abs(fmod(note.phase + 0.75, 1.0) - 0.5) - 1.0
 			
 			var volume_envelope = 1
-			var start_ago: float = note.total_duration - note.time_left
 			if start_ago < 0.0025:
 				volume_envelope *= start_ago / 0.0025
 			if note.time_left < 0.01:
