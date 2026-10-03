@@ -134,15 +134,6 @@ static func _hue_to_rgb(p: float, q: float, t: float) -> float:
 		return (q - p) * (2./3. - t) * 6 + p
 	return p
 
-var _queued_callsign: Array = [0, false]
-
-func set_callsign(cs: int, is_reconnect: bool = false) -> void:
-	for i in connected_users:
-		if i == cs and i != previously_accepted_callsign:
-			cs += 1
-			cs %= 4096
-	_queued_callsign = [cs, is_reconnect]
-
 static func reconnect_or_change_url(wss: String) -> void:
 	instance._reconnect_or_change_url(wss)
 
@@ -164,11 +155,9 @@ func start_connect(is_reconnect_attempt: bool = false) -> void:
 	if trying_to_quit: return
 	if is_reconnect_attempt:
 		print("Attempting Reconnect")
+		set_callsign(previously_accepted_callsign, true)
 	else:
-		if SettingsHandler.preferred_callsign <= 4095 and SettingsHandler.preferred_callsign >= 0:
-			set_callsign(SettingsHandler.preferred_callsign)
-		else:
-			set_callsign(randi_range(0, 4095))
+		_try_claim_callsign()
 	# Initiate connection to the given URL.
 	var err = socket.connect_to_url(websocket_url)
 	if err == OK:
@@ -245,6 +234,58 @@ func send_message(written: String) -> Array:
 	return [false, MessageCompilationResult.MESSAGE_FAILED]
 
 signal on_callsign_changed(cs: int)
+
+var _queued_callsign: Array = [0, false]
+
+func set_callsign(cs: int, is_reconnect: bool = false) -> void:
+	if cs == previously_accepted_callsign and not is_reconnect and cs >= 0:
+		return
+	if cs != previously_accepted_callsign:
+		is_reconnect = false
+	cs = _verify_callsign(cs)
+	_queued_callsign = [cs, is_reconnect]
+
+func _verify_callsign(cs: int, force_one_fail: bool = false) -> int:
+	if cs < 0 or cs >= 4096:
+		cs = randi_range(0, 4095)
+	if cs == previously_accepted_callsign:
+		return cs
+	while cs in connected_users or force_one_fail:
+		if SettingsHandler.failsafe_callsign_increment:
+			cs += 1
+			cs %= 4096
+		else:
+			cs = randi_range(0, 4095)
+		force_one_fail = false
+	return cs
+
+func _try_claim_callsign():
+	var valid_pref: bool = SettingsHandler.preferred_callsign <= 4095 and SettingsHandler.preferred_callsign >= 0
+	var valid_fail: bool = SettingsHandler.backup_callsign <= 4095 and SettingsHandler.backup_callsign >= 0 
+	
+	if valid_pref and previously_accepted_callsign == SettingsHandler.preferred_callsign:
+		return
+	
+	if (
+		valid_pref and
+		SettingsHandler.preferred_callsign not in connected_users
+	):
+		set_callsign(SettingsHandler.preferred_callsign)
+		return
+	if (
+		valid_fail and
+		previously_accepted_callsign != SettingsHandler.backup_callsign and
+		SettingsHandler.backup_callsign not in connected_users
+	):
+		set_callsign(SettingsHandler.backup_callsign)
+		return
+	if valid_pref and SettingsHandler.preferred_callsign in connected_users:
+		return
+	if valid_fail and SettingsHandler.backup_callsign in connected_users:
+		return
+	set_callsign(-1)
+
+var _handling_loss: bool = false
 func handle_packet(incoming: String) -> void:
 	print("< Got string data from server: %s" % incoming)
 	var status: PackedStringArray = incoming.split(",")
@@ -252,10 +293,14 @@ func handle_packet(incoming: String) -> void:
 		previously_accepted_callsign = status[1].to_int()
 		callsign = previously_accepted_callsign
 		on_callsign_changed.emit(previously_accepted_callsign)
+		_handling_loss = false
 		return
 	if status[0] == "U":
-		callsign += 1
-		set_callsign(callsign, false)
+		if callsign != SettingsHandler.backup_callsign and not _handling_loss:
+			set_callsign(SettingsHandler.backup_callsign)
+		else:
+			set_callsign(_verify_callsign(callsign, true))
+		_handling_loss = true
 		return
 	if status[0] == "R":
 		Chat.new_transmission(status.slice(1))
@@ -265,12 +310,7 @@ func handle_packet(incoming: String) -> void:
 		for i in status.slice(1):
 			connected_users.append(i.to_int())
 		connected_user_change.emit()
-		if SettingsHandler.preferred_callsign <= 4095 and SettingsHandler.preferred_callsign >= 0:
-			if (
-				previously_accepted_callsign != SettingsHandler.preferred_callsign
-				and SettingsHandler.preferred_callsign not in connected_users
-			):
-				set_callsign(SettingsHandler.preferred_callsign)
+		_try_claim_callsign()
 		return
 	print("UNKNOWN STRING PACKET: %s" % incoming)
 

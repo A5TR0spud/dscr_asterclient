@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://dnd1u3xl3gie1" path="res://Scenes/SettingsMenu/setting_entry.tscn" id="3_0yg8b"]
 [ext_resource type="AudioStream" uid="uid://q27rk7sfk50e" path="res://Assets/Sounds/dial.ogg" id="3_nlym6"]
 [ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="5_gal0n"]
+[ext_resource type="PackedScene" uid="uid://c1h04iufkd28w" path="res://Scenes/CallsignPicker/callsign_node.tscn" id="5_qann0"]
+[ext_resource type="PackedScene" uid="uid://bw4nasduhbqkb" path="res://Scenes/Common/bool_toggle_button.tscn" id="6_qann0"]
 
 [node name="SettingsTab" type="VBoxContainer" unique_id=1649791393]
 anchors_preset = 15
@@ -42,6 +44,7 @@ layout_mode = 2
 [node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1648418170]
 layout_mode = 2
 size_flags_vertical = 3
+scroll_vertical = 490
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
@@ -204,14 +207,14 @@ translations = Dictionary[StringName, String]({
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="VolumeSlider" type="HScrollBar" parent="ScrollContainer/Options/GlobalVolume" unique_id=336024893]
+[node name="VolumeSlider" type="HSlider" parent="ScrollContainer/Options/GlobalVolume" unique_id=759428393]
 layout_mode = 2
 size_flags_horizontal = 3
-max_value = 144.0
+max_value = 128.0
 step = 4.0
-page = 16.0
 value = 64.0
 rounded = true
+scrollable = false
 
 [node name="SliderLabelGrid" type="HBoxContainer" parent="ScrollContainer/Options/GlobalVolume" unique_id=1443703006]
 layout_mode = 2
@@ -229,11 +232,10 @@ translations = Dictionary[StringName, String]({
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="Normal" type="Label" parent="ScrollContainer/Options/GlobalVolume/SliderLabelGrid" unique_id=1887747570]
+[node name="Normal" type="Button" parent="ScrollContainer/Options/GlobalVolume/SliderLabelGrid" unique_id=1980908345]
 layout_mode = 2
 size_flags_horizontal = 6
 text = "normal"
-horizontal_alignment = 3
 
 [node name="LocaleNode" type="Node" parent="ScrollContainer/Options/GlobalVolume/SliderLabelGrid/Normal" unique_id=913745177]
 script = ExtResource("5_gal0n")
@@ -273,14 +275,14 @@ translations = Dictionary[StringName, String]({
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="VolumeSlider" type="HScrollBar" parent="ScrollContainer/Options/MusicVolume" unique_id=489092292]
+[node name="VolumeSlider" type="HSlider" parent="ScrollContainer/Options/MusicVolume" unique_id=1886645294]
 layout_mode = 2
 size_flags_horizontal = 3
-max_value = 144.0
+max_value = 128.0
 step = 4.0
-page = 16.0
 value = 64.0
 rounded = true
+scrollable = false
 
 [node name="SliderLabelGrid" type="HBoxContainer" parent="ScrollContainer/Options/MusicVolume" unique_id=1836988671]
 layout_mode = 2
@@ -298,11 +300,10 @@ translations = Dictionary[StringName, String]({
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="Normal" type="Label" parent="ScrollContainer/Options/MusicVolume/SliderLabelGrid" unique_id=311440986]
+[node name="Normal" type="Button" parent="ScrollContainer/Options/MusicVolume/SliderLabelGrid" unique_id=854033611]
 layout_mode = 2
 size_flags_horizontal = 6
 text = "normal"
-horizontal_alignment = 3
 
 [node name="LocaleNode" type="Node" parent="ScrollContainer/Options/MusicVolume/SliderLabelGrid/Normal" unique_id=1525437166]
 script = ExtResource("5_gal0n")
@@ -353,6 +354,34 @@ description = "SETTINGS_INVERT_YAW"
 layout_mode = 2
 description = "SETTINGS_INVERT_ZOOM"
 
+[node name="HSeparator6" type="HSeparator" parent="ScrollContainer/Options" unique_id=1835686938]
+layout_mode = 2
+
+[node name="BackupCallsign" type="VBoxContainer" parent="ScrollContainer/Options" unique_id=462930047]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/Options/BackupCallsign" unique_id=2027427798]
+layout_mode = 2
+text = "backup callsign"
+horizontal_alignment = 1
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/Options/BackupCallsign/Label" unique_id=403527225]
+script = ExtResource("5_gal0n")
+translations = Dictionary[StringName, String]({
+&"text": "SETTINGS_BACKUP_CALLSIGN"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="CallsignNode" parent="ScrollContainer/Options/BackupCallsign" unique_id=1004165478 instance=ExtResource("5_qann0")]
+layout_mode = 2
+
+[node name="BackupBackupMode" parent="ScrollContainer/Options/BackupCallsign" unique_id=1728394877 instance=ExtResource("6_qann0")]
+layout_mode = 2
+button_pressed = true
+text = "backup backup mode"
+off_text = "SETTINGS_BACKUP_RANDOM"
+on_text = "SETTINGS_BACKUP_INCREMENT"
+
 [connection signal="set" from="ScrollContainer/Options/Formatting" to="." method="_on_formatting_set"]
 [connection signal="set" from="ScrollContainer/Options/ImageVis" to="." method="_on_image_vis_set"]
 [connection signal="set" from="ScrollContainer/Options/DoBBCode" to="." method="_on_signal_color_set"]
@@ -365,7 +394,11 @@ description = "SETTINGS_INVERT_ZOOM"
 [connection signal="pressed" from="ScrollContainer/Options/ThemeColorSubmitElse/ColorSubmitButton" to="." method="_on_color_submit_button_pressed"]
 [connection signal="pressed" from="ScrollContainer/Options/ThemeColorSubmitElse/ColorCancelButton" to="." method="_on_color_cancel_button_pressed"]
 [connection signal="value_changed" from="ScrollContainer/Options/GlobalVolume/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="pressed" from="ScrollContainer/Options/GlobalVolume/SliderLabelGrid/Normal" to="." method="_on_volume_normal_pressed"]
 [connection signal="value_changed" from="ScrollContainer/Options/MusicVolume/VolumeSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="pressed" from="ScrollContainer/Options/MusicVolume/SliderLabelGrid/Normal" to="." method="_on_music_volume_normal_pressed"]
 [connection signal="set" from="ScrollContainer/Options/ImageMovement/VBoxContainer/InvertPitch" to="." method="_on_invert_pitch_set"]
 [connection signal="set" from="ScrollContainer/Options/ImageMovement/VBoxContainer/InvertYaw" to="." method="_on_invert_yaw_set"]
 [connection signal="set" from="ScrollContainer/Options/ImageMovement/VBoxContainer/InvertZoom" to="." method="_on_invert_zoom_set"]
+[connection signal="callsign_submitted" from="ScrollContainer/Options/BackupCallsign/CallsignNode" to="." method="_on_callsign_node_callsign_submitted"]
+[connection signal="toggled" from="ScrollContainer/Options/BackupCallsign/BackupBackupMode" to="." method="_on_backup_backup_mode_toggled"]

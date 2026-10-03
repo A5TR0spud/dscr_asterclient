@@ -1,6 +1,7 @@
 extends VBoxContainer
 
 func _ready() -> void:
+	$ScrollContainer.scroll_vertical = 0
 	Main.instance.reload_settings.connect(refresh)
 	Main.instance.reload_dictionary_support.connect(_refresh_dict_supports)
 	Main.instance.reload_dict.connect(_refresh_confetti)
@@ -12,8 +13,8 @@ func _ready() -> void:
 @onready var font_size: SpinBox = $ScrollContainer/Options/FontHbox/FontSpinner
 @onready var color_edit: SpinBox = $ScrollContainer/Options/ThemeColor/ColorPicker
 @onready var color_sample: ColorRect = $ScrollContainer/Options/ColorRect
-@onready var sound_slider: HScrollBar = $ScrollContainer/Options/GlobalVolume/VolumeSlider
-@onready var music_slider: HScrollBar = $ScrollContainer/Options/MusicVolume/VolumeSlider
+@onready var sound_slider: Range = $ScrollContainer/Options/GlobalVolume/VolumeSlider
+@onready var music_slider: Range = $ScrollContainer/Options/MusicVolume/VolumeSlider
 @onready var sound_sample: AudioStreamPlayer = $AudioPreview
 @onready var invert_pitch: SettingEntry = $ScrollContainer/Options/ImageMovement/VBoxContainer/InvertPitch
 @onready var invert_yaw: SettingEntry = $ScrollContainer/Options/ImageMovement/VBoxContainer/InvertYaw
@@ -24,6 +25,8 @@ func _ready() -> void:
 @onready var image_setting_group: FoldableContainer = $ScrollContainer/Options/ImageMovement
 @onready var music_sample: AudioStreamPlayer = $MusicAudioPreview
 @onready var music_parent: Control = $ScrollContainer/Options/MusicVolume
+@onready var callsign_backup: CallsignSelector = $ScrollContainer/Options/BackupCallsign/CallsignNode
+@onready var callsign_failsafe: BoolButton = $ScrollContainer/Options/BackupCallsign/BackupBackupMode
 
 func refresh() -> void:
 	formatting.set_state_no_signal(SettingsHandler.do_formatting)
@@ -41,6 +44,8 @@ func refresh() -> void:
 	undef_setting.set_state_no_signal(SettingsHandler.use_at_undef)
 	confetti_setting.set_state_no_signal(SettingsHandler.confetti)
 	number_sep_setting.set_state_no_signal(SettingsHandler.number_auto_sep)
+	callsign_backup.callsign = SettingsHandler.backup_callsign
+	callsign_failsafe.set_pressed_no_signal(SettingsHandler.failsafe_callsign_increment)
 	_refresh_dict_supports()
 
 func _refresh_dict_supports():
@@ -53,27 +58,23 @@ func _refresh_dict_supports():
 func _refresh_confetti():
 	confetti_setting.visible = DictionaryHandler.support_dscr and -702 in DictionaryHandler.word_keys
 
-func _volume_linear_to_slider(slider: HScrollBar, default: float, value: float = -1) -> float:
+func _volume_linear_to_slider(slider: Range, value: float) -> float:
 	if value < 0:
-		value = default
-	if value > 1:
-		value = (value - 1) * 2 + 1
+		value = 0
 	value *= 0.5 * (slider.max_value - slider.page)
 	return value
 
-func _volume_slider_to_linear(slider: HScrollBar, value: float = -1) -> float:
+func _volume_slider_to_linear(slider: Range, value: float = -1) -> float:
 	if value < 0:
 		value = slider.value
 	value /= slider.max_value - slider.page
 	value *= 2
-	if value > 1:
-		value = 1 + (value - 1) * 0.5
 	return value
 
 var queued_save: bool = false
 var queued_reload: bool = false
 
-func save(requires_reload: bool = true, spammy: bool = false) -> void:
+func save(requires_reload: bool, spammy: bool = false) -> void:
 	if spammy:
 		queued_save = true
 		queued_reload = requires_reload or queued_reload
@@ -94,7 +95,7 @@ func _physics_process(_delta):
 
 func _on_formatting_set(new_value):
 	SettingsHandler.do_formatting = new_value
-	save()
+	save(true)
 
 func _on_image_vis_set(new_value):
 	SettingsHandler.image_default = new_value
@@ -169,4 +170,18 @@ func _on_confetti_set(new_value):
 
 func _on_number_separation_set(new_value):
 	SettingsHandler.number_auto_sep = new_value
+	save(false)
+
+func _on_volume_normal_pressed():
+	sound_slider.value = _volume_linear_to_slider(sound_slider, 1)
+
+func _on_music_volume_normal_pressed():
+	music_slider.value = _volume_linear_to_slider(music_slider, 1)
+
+func _on_callsign_node_callsign_submitted(new_value):
+	SettingsHandler.backup_callsign = new_value
+	save(false)
+
+func _on_backup_backup_mode_toggled(toggled_on):
+	SettingsHandler.failsafe_callsign_increment = toggled_on
 	save(false)

@@ -21,6 +21,8 @@ static var websocket_addresses: Array = [Main.DSCR_URL]
 static var current_dictionary: String = "DICTIONARY-1.save"
 static var confetti: bool = true
 static var number_auto_sep: bool = true
+static var backup_callsign: int = -1
+static var failsafe_callsign_increment: bool = true
 
 static func validate_and_set_language(code: String = language):
 	if code not in ["m0", "en"]:
@@ -75,6 +77,8 @@ static func initialize() -> void:
 	current_dictionary = SaveSystem.settings.get_or_add("current_dictionary", current_dictionary)
 	confetti = SaveSystem.settings.get_or_add("confetti", confetti)
 	number_auto_sep = SaveSystem.settings.get_or_add("number_auto_sep", number_auto_sep)
+	backup_callsign = SaveSystem.settings.get_or_add("backup_callsign", backup_callsign)
+	failsafe_callsign_increment = SaveSystem.settings.get_or_add("failsafe_callsign_increment", failsafe_callsign_increment)
 
 static func evaluate_volume() -> void:
 	AudioServer.set_bus_volume_linear(
@@ -119,3 +123,5 @@ static func export() -> void:
 	SaveSystem.settings.set("confetti", confetti)
 	SaveSystem.settings.set("music_volume", music_volume)
 	SaveSystem.settings.set("number_auto_sep", number_auto_sep)
+	SaveSystem.settings.set("backup_callsign", backup_callsign)
+	SaveSystem.settings.set("failsafe_callsign_increment", failsafe_callsign_increment)

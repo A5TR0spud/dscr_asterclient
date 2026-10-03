@@ -2,11 +2,16 @@
 
 ## --WIP--
 
+### Additions
+
+* Added backup callsign and backup backup mode settings (can choose random vs increment)
+
 ### Changes
 
-* Everything is louder now, as the overall volume seemed to be too low at default
+* Everything is louder now, as the overall volume seemed to be too low
+  * Volume slider now goes up to 2x rather than 1.5x
 * Adjusted -577 shape and envelope and added a boost to lows
-* Fleshed out the -702 into an entire parser and added an exception to -100 -124
+* Fleshed out the -702 into an entire parser and added an exception to -100 (sometimes), and -99
 
 ### Fixes
 

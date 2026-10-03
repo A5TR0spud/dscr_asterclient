@@ -74,9 +74,14 @@ static func new_transmission(packet: PackedStringArray) -> void:
 			if confetti_parser.peek(1) == -29:
 				confetti_parser.skip()
 				continue
-			if confetti_parser.peek(1) == -100 and confetti_parser.peek(2) == -124:
-				confetti_parser.skip(3)
+			if confetti_parser.peek(1) == -99:
+				confetti_parser.skip()
 				continue
+			if confetti_parser.peek(1) == -100:
+				var p2 = confetti_parser.peek(2)
+				if p2 is int and p2 != -2:
+					confetti_parser.skip(3)
+					continue
 			var j: int = confetti_parser.save_state()
 			var delimited_left: int = j
 			var delimited_right: int = integer_message.size() - 1 - j
