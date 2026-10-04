@@ -10,6 +10,7 @@
 
 * Everything is louder now, as the overall volume seemed to be too low
   * Volume slider now goes up to 2x rather than 1.5x
+* Default volume label is now a button
 * Adjusted -577 shape and envelope and added a boost to lows
 * Fleshed out the -702 into an entire parser and added an exception to -100 (sometimes), and -99
 
