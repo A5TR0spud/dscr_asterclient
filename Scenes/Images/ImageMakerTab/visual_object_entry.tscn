@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://bq1dtypt35t8e"]
+
+[ext_resource type="Script" uid="uid://bhjdnx5bxngm5" path="res://Scenes/Images/ImageMakerTab/visual_object_entry.gd" id="1_epsl0"]
+[ext_resource type="Texture2D" uid="uid://b0oly5566bjub" path="res://Assets/down_icon.svg" id="2_8fouc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g4v7s"]
+
+[node name="VisualObjectEntry" type="VBoxContainer" unique_id=981827870]
+script = ExtResource("1_epsl0")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=370203669]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer" unique_id=2066164092]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+
+[node name="SelectLabel" type="Label" parent="HBoxContainer" unique_id=1653799089]
+layout_mode = 2
+text = "obj 0,0,0,1,64"
+
+[node name="SelectButton" type="Button" parent="HBoxContainer/SelectLabel" unique_id=731747946]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_g4v7s")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_g4v7s")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_g4v7s")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_g4v7s")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_g4v7s")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_g4v7s")
+flat = true
+
+[node name="Control" type="Control" parent="HBoxContainer" unique_id=177632700]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Down" type="TextureRect" parent="HBoxContainer" unique_id=775633894]
+texture_filter = 4
+layout_mode = 2
+texture = ExtResource("2_8fouc")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="DownButton" type="Button" parent="HBoxContainer/Down" unique_id=169335293]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_g4v7s")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_g4v7s")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_g4v7s")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_g4v7s")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_g4v7s")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_g4v7s")
+flat = true
+
+[node name="Up" type="TextureRect" parent="HBoxContainer" unique_id=97919329]
+texture_filter = 4
+layout_mode = 2
+texture = ExtResource("2_8fouc")
+expand_mode = 3
+stretch_mode = 5
+flip_v = true
+
+[node name="UpButton" type="Button" parent="HBoxContainer/Up" unique_id=1109416380]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_g4v7s")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_g4v7s")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_g4v7s")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_g4v7s")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_g4v7s")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_g4v7s")
+flat = true
+
+[node name="HSeparator" type="HSeparator" parent="." unique_id=1820277811]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[connection signal="pressed" from="HBoxContainer/SelectLabel/SelectButton" to="." method="_on_select_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/Down/DownButton" to="." method="_on_down_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/Up/UpButton" to="." method="_on_up_button_pressed"]

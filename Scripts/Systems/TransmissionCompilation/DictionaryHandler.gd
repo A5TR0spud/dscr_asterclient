@@ -501,6 +501,28 @@ static func signals_to_words(input: Array, do_whitespace_format: bool = false, c
 		prev = sig
 	return o.strip_edges()
 
+static func number_to_signals(num) -> PackedInt64Array:
+	var o: PackedInt64Array = []
+	if num < 0:
+		o.append(-2)
+		num = abs(num)
+	var i: int = int(num)
+	var r: float = num - i
+	if i > 0:
+		o.append(i)
+	if r > 0:
+		o.append(-10)
+		var s: String = str(r)
+		if s.begins_with("0."):
+			s = s.right(-2)
+		elif s.begins_with("."):
+			s = s.right(-1)
+		while s.left(1) == "0":
+			o.append(0)
+			s = s.right(-1)
+		o.append(s.to_int())
+	return o
+
 static func forget_signal(sig: int) -> void:
 	var idx: int = word_keys.find(sig)
 	if idx >= 0:

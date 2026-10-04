@@ -1,0 +1,560 @@
+[gd_scene format=3 uid="uid://dyce25nctnsuk"]
+
+[ext_resource type="Script" uid="uid://c1hw38kob0boa" path="res://Scenes/Images/ImageMakerTab/image_maker_tab.gd" id="1_6x71k"]
+[ext_resource type="PackedScene" uid="uid://000b36jo5qbu" path="res://Scenes/Images/backdrop.tscn" id="2_6rwxm"]
+[ext_resource type="Shader" uid="uid://xodpbd1nby8m" path="res://Scenes/Images/unshaded_culled.gdshader" id="3_fj04k"]
+[ext_resource type="PackedScene" uid="uid://2emnji0ns3x2" path="res://Scenes/Common/confirmation_button.tscn" id="4_6rwxm"]
+[ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="4_fj04k"]
+[ext_resource type="Shader" uid="uid://8f7ya8w5qfpk" path="res://Scenes/Images/unshaded_unculled.gdshader" id="4_ytjqr"]
+[ext_resource type="Material" uid="uid://cjd3hjlgtsjip" path="res://Scenes/Images/reverse_fresnel_material.tres" id="5_70w7y"]
+[ext_resource type="Texture2D" uid="uid://cxex8x57k6h16" path="res://Assets/sphere_icon.svg" id="6_csc57"]
+[ext_resource type="Texture2D" uid="uid://ba7p5nhjblchd" path="res://Assets/cube_icon.svg" id="7_oo2aj"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_6x71k"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_akl3u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yxab6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hsxt3"]
+render_priority = 0
+shader = ExtResource("3_fj04k")
+shader_parameter/albedo = Color(0.91764706, 0.19607843, 0.30588236, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_sjkkq"]
+top_radius = 0.0
+bottom_radius = 0.08
+height = 0.3
+radial_segments = 16
+rings = 0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_yf5fn"]
+top_radius = 0.02
+bottom_radius = 0.02
+height = 1.0
+radial_segments = 16
+rings = 0
+cap_top = false
+cap_bottom = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iwqr7"]
+render_priority = 0
+shader = ExtResource("3_fj04k")
+shader_parameter/albedo = Color(0.5058824, 0.8039216, 0.02745098, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yxab6"]
+render_priority = 0
+shader = ExtResource("3_fj04k")
+shader_parameter/albedo = Color(0.16470589, 0.5254902, 0.91764706, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mk0i3"]
+render_priority = 0
+shader = ExtResource("3_fj04k")
+shader_parameter/albedo = Color(0.16470589, 0.5254902, 0.91764706, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l400v"]
+render_priority = 0
+shader = ExtResource("4_ytjqr")
+shader_parameter/albedo = Color(0.91764706, 0.19607843, 0.30588236, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_g4v7s"]
+size = Vector2(0.3, 0.3)
+orientation = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bxch0"]
+render_priority = 0
+shader = ExtResource("4_ytjqr")
+shader_parameter/albedo = Color(0.5058824, 0.8039216, 0.02745098, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_sjkkq"]
+size = Vector2(0.3, 0.3)
+orientation = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g6pu7"]
+render_priority = 1
+shader = ExtResource("4_ytjqr")
+shader_parameter/albedo = Color(0.16470589, 0.5254902, 0.91764706, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_hlnya"]
+size = Vector2(0.3, 0.3)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hfeh0"]
+render_priority = 1
+shader = ExtResource("4_ytjqr")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_bxch0"]
+radius = 0.1
+height = 0.2
+radial_segments = 4
+rings = 1
+
+[sub_resource type="BoxMesh" id="BoxMesh_g4v7s"]
+size = Vector3(0.16, 0.3, 0.16)
+
+[sub_resource type="Shader" id="Shader_l400v"]
+code = "shader_type spatial;
+render_mode cull_disabled, unshaded;
+
+uniform vec3 albedo : source_color = vec3(1.0, 1.0, 1.0);
+
+void fragment() {
+	ALBEDO = albedo;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pc5xs"]
+render_priority = 1
+shader = SubResource("Shader_l400v")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_g4v7s"]
+material = SubResource("ShaderMaterial_pc5xs")
+radius = 0.03
+height = 0.06
+radial_segments = 4
+rings = 1
+
+[sub_resource type="SphereMesh" id="SphereMesh_57qmd"]
+material = ExtResource("5_70w7y")
+
+[sub_resource type="MultiMesh" id="MultiMesh_bxch0"]
+resource_local_to_scene = true
+transform_format = 1
+use_colors = true
+mesh = SubResource("SphereMesh_57qmd")
+
+[sub_resource type="BoxMesh" id="BoxMesh_psu8h"]
+material = ExtResource("5_70w7y")
+
+[sub_resource type="MultiMesh" id="MultiMesh_hsxt3"]
+resource_local_to_scene = true
+transform_format = 1
+use_colors = true
+mesh = SubResource("BoxMesh_psu8h")
+
+[node name="ImageMakerTab" type="Control" unique_id=994492879]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_6x71k")
+
+[node name="HSplitContainer" type="HSplitContainer" parent="." unique_id=1959222164]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offsets = PackedInt32Array(-290)
+dragging_enabled = false
+dragger_visibility = 1
+split_offset = -290
+
+[node name="View" type="TextureRect" parent="HSplitContainer" unique_id=974766568]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = SubResource("ViewportTexture_6x71k")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="HSplitContainer" unique_id=1554338268]
+layout_mode = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="Sidebar" type="VBoxContainer" parent="HSplitContainer/MarginContainer" unique_id=1117644829]
+layout_mode = 2
+mouse_filter = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HSplitContainer/MarginContainer/Sidebar" unique_id=1484158805]
+layout_mode = 2
+
+[node name="NewObject" type="Button" parent="HSplitContainer/MarginContainer/Sidebar/HBoxContainer" unique_id=395874084]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "new object"
+
+[node name="LocaleNode" type="Node" parent="HSplitContainer/MarginContainer/Sidebar/HBoxContainer/NewObject" unique_id=1419032086]
+script = ExtResource("4_fj04k")
+translations = Dictionary[StringName, String]({
+&"text": "COMPOSITOR_NEW_OBJ"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="DeleteImage" parent="HSplitContainer/MarginContainer/Sidebar/HBoxContainer" unique_id=1499947826 instance=ExtResource("4_6rwxm")]
+layout_mode = 2
+normal_text = "COMPOSITOR_RESTART"
+
+[node name="ObjectControls" type="VBoxContainer" parent="HSplitContainer/MarginContainer/Sidebar" unique_id=961849555]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/MarginContainer/Sidebar/ObjectControls" unique_id=1546298115]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HSplitContainer/MarginContainer/Sidebar/ObjectControls" unique_id=1265045756]
+layout_mode = 2
+
+[node name="ItemList" type="TabBar" parent="HSplitContainer/MarginContainer/Sidebar/ObjectControls/HBoxContainer" unique_id=548270911]
+texture_filter = 4
+layout_mode = 2
+theme_override_constants/icon_max_width = 24
+current_tab = 0
+clip_tabs = false
+close_with_middle_mouse = false
+scrolling_enabled = false
+switch_on_drag_hover = false
+tab_count = 2
+tab_0/icon = ExtResource("6_csc57")
+tab_1/icon = ExtResource("7_oo2aj")
+
+[node name="ObjectLabel" type="Label" parent="HSplitContainer/MarginContainer/Sidebar/ObjectControls/HBoxContainer" unique_id=1372425881]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 2
+
+[node name="Coordinates" type="HBoxContainer" parent="HSplitContainer/MarginContainer/Sidebar/ObjectControls" unique_id=747850744]
+layout_mode = 2
+
+[node name="LabelX" type="Label" parent="HSplitContainer/MarginContainer/Sidebar/ObjectControls/Coordinates" unique_id=427158524]
+layout_mode = 2
+text = "x"
+
+[node name="LocaleNode" type="Node" parent="HSplitContainer/MarginContainer/Sidebar/ObjectControls/Coordinates/LabelX" unique_id=96131066]
+script = ExtResource("4_fj04k")
+translations = Dictionary[StringName, String]({
+&"text": "COMPOSITOR_X"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="SpinX" type="SpinBox" parent="HSplitContainer/MarginContainer/Sidebar/ObjectControls/Coordinates" unique_id=745009578]
+layout_mode = 2
+size_flags_vertical = 4
+min_value = -32.0
+max_value = 32.0
+step = 0.1
+
+[node name="Spacer" type="Control" parent="HSplitContainer/MarginContainer/Sidebar/ObjectControls/Coordinates" unique_id=938997349]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LabelY" type="Label" parent="HSplitContainer/MarginContainer/Sidebar/ObjectControls/Coordinates" unique_id=1090098013]
+layout_mode = 2
+size_flags_stretch_ratio = 0.45
+text = "y"
+
+[node name="LocaleNode" type="Node" parent="HSplitContainer/MarginContainer/Sidebar/ObjectControls/Coordinates/LabelY" unique_id=1834032678]
+script = ExtResource("4_fj04k")
+translations = Dictionary[StringName, String]({
+&"text": "COMPOSITOR_Y"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="SpinY" type="SpinBox" parent="HSplitContainer/MarginContainer/Sidebar/ObjectControls/Coordinates" unique_id=331983652]
+layout_mode = 2
+size_flags_vertical = 4
+min_value = -32.0
+max_value = 32.0
+step = 0.1
+
+[node name="Spacer2" type="Control" parent="HSplitContainer/MarginContainer/Sidebar/ObjectControls/Coordinates" unique_id=377374906]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LabelZ" type="Label" parent="HSplitContainer/MarginContainer/Sidebar/ObjectControls/Coordinates" unique_id=2072370314]
+layout_mode = 2
+text = "z"
+
+[node name="LocaleNode" type="Node" parent="HSplitContainer/MarginContainer/Sidebar/ObjectControls/Coordinates/LabelZ" unique_id=1150097709]
+script = ExtResource("4_fj04k")
+translations = Dictionary[StringName, String]({
+&"text": "COMPOSITOR_Z"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="SpinZ" type="SpinBox" parent="HSplitContainer/MarginContainer/Sidebar/ObjectControls/Coordinates" unique_id=84370932]
+layout_mode = 2
+size_flags_vertical = 4
+min_value = -32.0
+max_value = 32.0
+step = 0.1
+
+[node name="Properties" type="GridContainer" parent="HSplitContainer/MarginContainer/Sidebar/ObjectControls" unique_id=1560239149]
+layout_mode = 2
+columns = 3
+
+[node name="LabelR" type="Label" parent="HSplitContainer/MarginContainer/Sidebar/ObjectControls/Properties" unique_id=1198899941]
+layout_mode = 2
+text = "radius"
+
+[node name="LocaleNode" type="Node" parent="HSplitContainer/MarginContainer/Sidebar/ObjectControls/Properties/LabelR" unique_id=1006888533]
+script = ExtResource("4_fj04k")
+translations = Dictionary[StringName, String]({
+&"text": "COMPOSITOR_RADIUS"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="SliderR" type="HSlider" parent="HSplitContainer/MarginContainer/Sidebar/ObjectControls/Properties" unique_id=385624752]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 16.0
+value = 1.0
+
+[node name="SpinR" type="SpinBox" parent="HSplitContainer/MarginContainer/Sidebar/ObjectControls/Properties" unique_id=1397866629]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+min_value = 0.1
+max_value = 16.0
+step = 0.1
+value = 1.0
+
+[node name="LabelC" type="Label" parent="HSplitContainer/MarginContainer/Sidebar/ObjectControls/Properties" unique_id=1014723026]
+layout_mode = 2
+text = "color"
+
+[node name="LocaleNode" type="Node" parent="HSplitContainer/MarginContainer/Sidebar/ObjectControls/Properties/LabelC" unique_id=68921275]
+script = ExtResource("4_fj04k")
+translations = Dictionary[StringName, String]({
+&"text": "COMPOSITOR_COLOR"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="SliderC" type="HSlider" parent="HSplitContainer/MarginContainer/Sidebar/ObjectControls/Properties" unique_id=1412832766]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_akl3u")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_yxab6")
+max_value = 64.0
+value = 57.0
+rounded = true
+
+[node name="SpinC" type="SpinBox" parent="HSplitContainer/MarginContainer/Sidebar/ObjectControls/Properties" unique_id=1600594181]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+max_value = 64.0
+value = 57.0
+rounded = true
+
+[node name="Buttons" type="HBoxContainer" parent="HSplitContainer/MarginContainer/Sidebar/ObjectControls" unique_id=1464087706]
+layout_mode = 2
+
+[node name="Duplicate" type="Button" parent="HSplitContainer/MarginContainer/Sidebar/ObjectControls/Buttons" unique_id=1482530513]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "dupe"
+
+[node name="LocaleNode" type="Node" parent="HSplitContainer/MarginContainer/Sidebar/ObjectControls/Buttons/Duplicate" unique_id=1224242809]
+script = ExtResource("4_fj04k")
+translations = Dictionary[StringName, String]({
+&"text": "COMPOSITOR_DUPE"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="Delete" parent="HSplitContainer/MarginContainer/Sidebar/ObjectControls/Buttons" unique_id=1999351806 instance=ExtResource("4_6rwxm")]
+layout_mode = 2
+normal_text = "DELETE_ASK_SHORT"
+
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/MarginContainer/Sidebar" unique_id=2037505175]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HSplitContainer/MarginContainer/Sidebar" unique_id=1778428494]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="ObjectsList" type="VBoxContainer" parent="HSplitContainer/MarginContainer/Sidebar/ScrollContainer" unique_id=1486656164]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=303691760]
+scaling_3d_mode = 5
+anisotropic_filtering_level = 0
+
+[node name="Backdrop" parent="SubViewport" unique_id=1970434345 instance=ExtResource("2_6rwxm")]
+
+[node name="Gizmo" type="Node3D" parent="SubViewport" unique_id=885114171]
+visible = false
+
+[node name="AxisX" type="Node3D" parent="SubViewport/Gizmo" unique_id=251465637]
+
+[node name="UpArrow" type="MeshInstance3D" parent="SubViewport/Gizmo/AxisX" unique_id=479735555]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 1, -4.371139e-08, 0)
+sorting_offset = 32.0
+material_override = SubResource("ShaderMaterial_hsxt3")
+cast_shadow = 0
+ignore_occlusion_culling = true
+mesh = SubResource("CylinderMesh_sjkkq")
+
+[node name="DownArrow" type="MeshInstance3D" parent="SubViewport/Gizmo/AxisX" unique_id=1876602110]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -1, 4.371139e-08, 0)
+sorting_offset = 32.0
+material_override = SubResource("ShaderMaterial_hsxt3")
+cast_shadow = 0
+ignore_occlusion_culling = true
+mesh = SubResource("CylinderMesh_sjkkq")
+
+[node name="Rod" type="MeshInstance3D" parent="SubViewport/Gizmo/AxisX" unique_id=1610472062]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0.5, 0, 0)
+sorting_offset = 32.0
+material_override = SubResource("ShaderMaterial_hsxt3")
+cast_shadow = 0
+ignore_occlusion_culling = true
+mesh = SubResource("CylinderMesh_yf5fn")
+
+[node name="AxisY" type="Node3D" parent="SubViewport/Gizmo" unique_id=1081821774]
+
+[node name="UpArrow" type="MeshInstance3D" parent="SubViewport/Gizmo/AxisY" unique_id=1150988770]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+sorting_offset = 32.0
+material_override = SubResource("ShaderMaterial_iwqr7")
+cast_shadow = 0
+ignore_occlusion_culling = true
+mesh = SubResource("CylinderMesh_sjkkq")
+
+[node name="DownArrow" type="MeshInstance3D" parent="SubViewport/Gizmo/AxisY" unique_id=1940539162]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -1, 0)
+sorting_offset = 32.0
+material_override = SubResource("ShaderMaterial_iwqr7")
+cast_shadow = 0
+ignore_occlusion_culling = true
+mesh = SubResource("CylinderMesh_sjkkq")
+
+[node name="Rod" type="MeshInstance3D" parent="SubViewport/Gizmo/AxisY" unique_id=1748061576]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+sorting_offset = 32.0
+material_override = SubResource("ShaderMaterial_iwqr7")
+cast_shadow = 0
+ignore_occlusion_culling = true
+mesh = SubResource("CylinderMesh_yf5fn")
+
+[node name="AxisZ" type="Node3D" parent="SubViewport/Gizmo" unique_id=97053045]
+
+[node name="UpArrow" type="MeshInstance3D" parent="SubViewport/Gizmo/AxisZ" unique_id=1890438809]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, -4.371139e-08, -4.371139e-08, 1)
+sorting_offset = 32.0
+material_override = SubResource("ShaderMaterial_yxab6")
+cast_shadow = 0
+ignore_occlusion_culling = true
+mesh = SubResource("CylinderMesh_sjkkq")
+
+[node name="DownArrow" type="MeshInstance3D" parent="SubViewport/Gizmo/AxisZ" unique_id=1787114726]
+transform = Transform3D(1.9106855e-15, 4.371139e-08, -1, 1, -4.371139e-08, 0, -4.371139e-08, -1, -4.371139e-08, 4.371139e-08, 4.371139e-08, -1)
+sorting_offset = 32.0
+material_override = SubResource("ShaderMaterial_mk0i3")
+cast_shadow = 0
+ignore_occlusion_culling = true
+mesh = SubResource("CylinderMesh_sjkkq")
+
+[node name="Rod" type="MeshInstance3D" parent="SubViewport/Gizmo/AxisZ" unique_id=1104750340]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0.5)
+sorting_offset = 32.0
+material_override = SubResource("ShaderMaterial_mk0i3")
+cast_shadow = 0
+ignore_occlusion_culling = true
+mesh = SubResource("CylinderMesh_yf5fn")
+
+[node name="PlaneYZ" type="Node3D" parent="SubViewport/Gizmo" unique_id=637820719]
+
+[node name="Square" type="MeshInstance3D" parent="SubViewport/Gizmo/PlaneYZ" unique_id=1202308406]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0.4)
+sorting_offset = 32.0
+material_override = SubResource("ShaderMaterial_l400v")
+cast_shadow = 0
+ignore_occlusion_culling = true
+mesh = SubResource("QuadMesh_g4v7s")
+
+[node name="PlaneXZ" type="Node3D" parent="SubViewport/Gizmo" unique_id=801145334]
+
+[node name="Square" type="MeshInstance3D" parent="SubViewport/Gizmo/PlaneXZ" unique_id=2138741880]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 0.4)
+sorting_offset = 32.0
+material_override = SubResource("ShaderMaterial_bxch0")
+cast_shadow = 0
+ignore_occlusion_culling = true
+mesh = SubResource("QuadMesh_sjkkq")
+
+[node name="PlaneXY" type="Node3D" parent="SubViewport/Gizmo" unique_id=384298946]
+
+[node name="Square" type="MeshInstance3D" parent="SubViewport/Gizmo/PlaneXY" unique_id=1452210027]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.4, 0)
+sorting_offset = 32.0
+material_override = SubResource("ShaderMaterial_g6pu7")
+cast_shadow = 0
+ignore_occlusion_culling = true
+mesh = SubResource("QuadMesh_hlnya")
+
+[node name="Scalar" type="Node3D" parent="SubViewport/Gizmo" unique_id=2032537876]
+
+[node name="Octahedron" type="MeshInstance3D" parent="SubViewport/Gizmo/Scalar" unique_id=1233194655]
+sorting_offset = 32.0
+material_override = SubResource("ShaderMaterial_hfeh0")
+cast_shadow = 0
+ignore_occlusion_culling = true
+mesh = SubResource("SphereMesh_bxch0")
+
+[node name="Handle" type="Node3D" parent="SubViewport/Gizmo/Scalar" unique_id=766168358]
+transform = Transform3D(0.7071067, -0.50000006, -0.5, -6.181724e-08, -0.7071068, 0.70710677, -0.7071068, -0.4999999, -0.5, 0, 0, 0)
+
+[node name="UpArrow" type="MeshInstance3D" parent="SubViewport/Gizmo/Scalar/Handle" unique_id=1956210482]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+sorting_offset = 32.0
+material_override = SubResource("ShaderMaterial_hfeh0")
+cast_shadow = 0
+ignore_occlusion_culling = true
+mesh = SubResource("BoxMesh_g4v7s")
+
+[node name="Rod" type="MeshInstance3D" parent="SubViewport/Gizmo/Scalar/Handle" unique_id=143570366]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0.5, 0)
+sorting_offset = 32.0
+material_override = SubResource("ShaderMaterial_hfeh0")
+cast_shadow = 0
+ignore_occlusion_culling = true
+mesh = SubResource("CylinderMesh_yf5fn")
+
+[node name="CameraPivot" type="Node3D" parent="SubViewport" unique_id=395045337]
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport/CameraPivot" unique_id=1342789362]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+current = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/CameraPivot" unique_id=695947565]
+mesh = SubResource("SphereMesh_g4v7s")
+
+[node name="spheres" type="MultiMeshInstance3D" parent="SubViewport" unique_id=1909174741]
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_bxch0")
+
+[node name="cubes" type="MultiMeshInstance3D" parent="SubViewport" unique_id=1323829330]
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_hsxt3")
+
+[connection signal="gui_input" from="HSplitContainer/View" to="." method="_on_view_gui_input"]
+[connection signal="resized" from="HSplitContainer/View" to="." method="_on_view_resized"]
+[connection signal="pressed" from="HSplitContainer/MarginContainer/Sidebar/HBoxContainer/NewObject" to="." method="_on_new_object_pressed"]
+[connection signal="confirmed" from="HSplitContainer/MarginContainer/Sidebar/HBoxContainer/DeleteImage" to="." method="_on_delete_image_confirmed"]
+[connection signal="tab_selected" from="HSplitContainer/MarginContainer/Sidebar/ObjectControls/HBoxContainer/ItemList" to="." method="_on_item_list_tab_selected"]
+[connection signal="value_changed" from="HSplitContainer/MarginContainer/Sidebar/ObjectControls/Coordinates/SpinX" to="." method="_on_spin_x_value_changed"]
+[connection signal="value_changed" from="HSplitContainer/MarginContainer/Sidebar/ObjectControls/Coordinates/SpinY" to="." method="_on_spin_y_value_changed"]
+[connection signal="value_changed" from="HSplitContainer/MarginContainer/Sidebar/ObjectControls/Coordinates/SpinZ" to="." method="_on_spin_z_value_changed"]
+[connection signal="value_changed" from="HSplitContainer/MarginContainer/Sidebar/ObjectControls/Properties/SliderR" to="." method="_on_slider_r_value_changed"]
+[connection signal="value_changed" from="HSplitContainer/MarginContainer/Sidebar/ObjectControls/Properties/SpinR" to="." method="_on_spin_r_value_changed"]
+[connection signal="value_changed" from="HSplitContainer/MarginContainer/Sidebar/ObjectControls/Properties/SliderC" to="." method="_on_slider_c_value_changed"]
+[connection signal="value_changed" from="HSplitContainer/MarginContainer/Sidebar/ObjectControls/Properties/SpinC" to="." method="_on_spin_c_value_changed"]
+[connection signal="pressed" from="HSplitContainer/MarginContainer/Sidebar/ObjectControls/Buttons/Duplicate" to="." method="_on_duplicate_pressed"]
+[connection signal="confirmed" from="HSplitContainer/MarginContainer/Sidebar/ObjectControls/Buttons/Delete" to="." method="_on_delete_confirmed"]
+[connection signal="child_order_changed" from="HSplitContainer/MarginContainer/Sidebar/ScrollContainer/ObjectsList" to="." method="_on_objects_list_child_order_changed"]

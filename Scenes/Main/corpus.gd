@@ -7,6 +7,14 @@ extends VBoxContainer
 func _ready():
 	tabber.current_tab = 0
 	_show_tab(0)
+	Main.instance.reload_dictionary_support.connect(_reload_support)
+
+func _reload_support():
+	while tabber.tab_count > 3:
+		tabber.remove_tab(3)
+	if DictionaryHandler.support_m0:
+		tabber.add_tab("images")
+	tabber.get_child(0).refresh()
 
 func _on_tabber_tab_changed(tab: int):
 	_show_tab(tab)
