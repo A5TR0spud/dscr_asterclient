@@ -71,6 +71,9 @@ static func new_transmission(packet: PackedStringArray) -> void:
 		while confetti_parser.can_continue():
 			if not confetti_parser.skip_to(-702):
 				break
+			if confetti_parser.peek(-1) == -111:
+				confetti_parser.skip()
+				continue
 			if confetti_parser.peek(1) == -29:
 				confetti_parser.skip()
 				continue
