@@ -384,6 +384,9 @@ size_flags_vertical = 3
 [node name="SubViewport" type="SubViewport" parent="." unique_id=303691760]
 scaling_3d_mode = 5
 anisotropic_filtering_level = 0
+physics_object_picking = true
+physics_object_picking_sort = true
+physics_object_picking_first_only = true
 
 [node name="Backdrop" parent="SubViewport" unique_id=1970434345 instance=ExtResource("2_6rwxm")]
 
@@ -543,6 +546,7 @@ multimesh = SubResource("MultiMesh_bxch0")
 cast_shadow = 0
 multimesh = SubResource("MultiMesh_hsxt3")
 
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="gui_input" from="HSplitContainer/View" to="." method="_on_view_gui_input"]
 [connection signal="resized" from="HSplitContainer/View" to="." method="_on_view_resized"]
 [connection signal="pressed" from="HSplitContainer/MarginContainer/Sidebar/HBoxContainer/NewObject" to="." method="_on_new_object_pressed"]

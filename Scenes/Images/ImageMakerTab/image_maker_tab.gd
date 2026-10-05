@@ -309,7 +309,6 @@ func _on_delete_image_confirmed():
 	for c: Node in obj_list:
 		c.queue_free()
 
-
 func _on_item_list_tab_selected(tab):
 	if is_instance_valid(selected_obj):
 		if tab == 1:
@@ -317,3 +316,7 @@ func _on_item_list_tab_selected(tab):
 		else:
 			selected_obj.type = VisualObjectEntry.ObjType.SPHERE
 		_on_objects_list_child_order_changed()
+
+func _on_visibility_changed():
+	set_physics_process(is_visible_in_tree())
+	process_mode = Node.PROCESS_MODE_DISABLED if not is_visible_in_tree() else Node.PROCESS_MODE_INHERIT
