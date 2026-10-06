@@ -162,7 +162,7 @@ image_reset={
 [internationalization]
 
 rendering/root_node_auto_translate=false
-locale/translations=PackedStringArray("res://Localization/lang.en.translation", "res://Localization/lang.m0.translation")
+locale/translations=PackedStringArray("res://Localization/lang.en.translation", "res://Localization/lang.m0.translation", "res://Localization/lang.pl.translation")
 
 [physics]
 
