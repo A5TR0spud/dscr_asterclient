@@ -13,6 +13,15 @@ static func translate(key: String, arguments: Variant = []) -> String:
 		translation = DictionaryHandler.signals_to_words(arr)
 	return translation.format(arguments)
 
+static func translate_plural(key: String, n: int, arguments: Variant = []) -> String:
+		if TranslationServer.get_locale() == "m0":
+			return translate(key, arguments)
+			
+		var translation: String = TranslationServer.translate_plural(key, "", n);
+		if arguments is not Array and arguments is not Dictionary:
+			arguments = [arguments]
+		return translation.format(arguments)
+
 ## Returns an array with 1 string if not in meteorese.
 ## Returns an array of signals (with parsing strings) if in meteorese
 static func raw_translate(key: String) -> Array:

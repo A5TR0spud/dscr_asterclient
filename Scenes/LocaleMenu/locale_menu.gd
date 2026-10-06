@@ -18,3 +18,6 @@ func _on_m_0_pressed():
 
 func _on_en_pressed():
 	_select("en")
+	
+func _on_pl_pressed():
+	_select("pl")

@@ -5,4 +5,5 @@ func _ready():
 	Main.instance.localization_reload.connect(refresh)
 
 func refresh():
-	text = Localizer.translate("DICT_COUNT", DictionaryHandler.word_keys.size())
+	var keys_size = DictionaryHandler.word_keys.size()
+	text = Localizer.translate_plural("DICT_COUNT", keys_size, keys_size)

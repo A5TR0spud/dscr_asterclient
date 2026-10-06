@@ -1,140 +1,149 @@
-key,m0,en
-TAB_CHAT,-214,Relay
-TAB_LIBRARY,-43,Library
-TAB_DICT,-42,Dictionary
-TAB_USERS,-130,Users
-TAB_SETTINGS,-241,Settings
-BUTTON_DSVE,-53 -38,DSVE
-BUTTON_DSMIDI,-577 -38,DSMIDI
-BUTTON_LANG,-195 -174,Change language
-BUTTON_SCROLL,-119 -43,Return to bottom
-PLACEHOLDER_ENTRY,-43 -38,Enter message here…
-SIGNAL_NAME,-42,Signal
-SIGNAL_NUMBER,-237,Number
-TIME_AGO_HSEC,{0} -69 -118 -121,{0} He-6 seconds ago
-DICT_HEADER,-237 -174,Dictionary
-DICT_DEFAULT,-124 -122 -123,Default Formatting
-DICT_SEARCH_MAKE,-38 -77 -163,Search or create
-DICT_OPEN_FILE,-40,Open file
-USERS_HEADER,-130 -23 -4 {0},Online Users: {0}
-USERS_ONLINE,-119,Online
-USERS_NICKED,-123,Nicknamed
-USERS_NICK_IS,{0} -100,{0} is
-USERS_UNNICKED,-111,unnamed
-SETTINGS_HEADER,-241 -174,Settings
-SETTINGS_DIRECTORY,-40 -174,Change Save Directory
-SETTINGS_RECONNECT,-241 0 -41,Reconnect
-SETTINGS_DO_WHITESPACE,-26 -14 -42 -190 -85 -100 -223 -15 -4,Follow dictionary whitespace?
-SETTINGS_DEFAULT_IMAGE,-26 -14 -124 -53 -163 -85 -15 -4,Show images by default?
-SETTINGS_DO_BBCODE,-26 -14 -42 -54 -163 -85 -15 -4,Enable word formatting?
-SETTINGS_BOOL_TRUE,-27,Yes
-SETTINGS_BOOL_FALSE,-28,No
-SETTINGS_TRUNCATE,-42 -122 -25,Words before truncation
-TRUNCATION,-25,…
-TRUNCATE_TOGGLE,-25,Truncate
-IMAGE_TOGGLE,-53,Visualize
-MUSIC_PLAY,-577,Play
-MUSIC_STOP,-29,Stop
-MUSIC_QUEUE,-5,Queue
-SETTINGS_FONT_SIZE,-42 -22 -4,Font size
-SETTINGS_USE_AT_UNDEF,-26 -14 -124 -42 -100 @-_UNDEF -15 -4,Should unknown words be displayed with “@UNDEF”?
-SETTINGS_THEME_COLOR,-110 -54 -100,Theme color
-SUBMIT,-174,Submit
-CANCEL,-29,Cancel
-SETTINGS_VOLUME,-110 -172 -39 -22 -100,Volume
-SETTINGS_VOLUME_MUSIC,-577 -172 -39 -22 -100,Music Volume
-SETTINGS_VOLUME_ZERO,-111,Muted
-SETTINGS_VOLUME_DEFAULT,-114,Default
-SETTINGS_VOLUME_LOUD,-108,Loud
-SETTINGS_CAMERA_HEADER,-53 -39,Camera Controls
-SETTINGS_INVERT_PITCH,-26 -14 -49 -92 -100 -87 -15 -4,Invert pitch?
-SETTINGS_INVERT_YAW,-26 -14 -51 -92 -100 -87 -15 -4,Invert yaw?
-SETTINGS_INVERT_ZOOM,-26 -14 -50 -39 -100 -87 -15 -4,Invert zoom?
-SETTINGS_CONFETTI,-702,Confetti!
-SETTINGS_NUMBER_SEP,-11 -190 -11 -100 -11 -2 -11,Insert |-2 between spaced numbers
-SETTINGS_BACKUP_CALLSIGN,-37 -128 -11 -100 -155 -36,Backup callsign
-SETTINGS_BACKUP_RANDOM,-11,Random
-SETTINGS_BACKUP_INCREMENT,1 -5,Increment
-CALLSIGN,-128 -42,Callsign
-COPY_SIGNAL_NUMBERS,-42 -40,Copy signals
-COPY_SIGNAL_NAMES,-237 -40,Copy words
-SUBMIT_LONG,-174 -85,Submit
-CANCEL_LONG,-174 -29 -85,Cancel
-DELETE_ASK,-88 -127 -85,Delete?
-DELETE_CONFIRM_TRX,-43 -88 -85,Are you sure?
-DELETE_CONFIRM_SIG,-42 -88 -85,Are you sure?
-DELETE_ASK_SHORT,-88,Delete?
-DELETE_CONFIRM,-85,Delete.
-SYSTEM,-241,System
-SYSTEM_CONNECTING,-119 -241 -86 -14 -241 0 -196 -15 -127 -85,Attempting to connect…
-SYSTEM_CONNECTED,-154 -2 -119 -241 -86 -241 0 -196 -145 -85,Connected!
-SYSTEM_CONNECTION_FAILED,-155 -2 -119 -241 -86 -241 0 -196 -145 -29 -85,Cannot connect.
-SYSTEM_DISCONNECTING,-119 -241 -30 -241 0 -86 -14 -196 -15 -127 -29 -186 -85 -109 -120 -65 -121,Attempting to disconnect…
-SYSTEM_DISCONNECTED,-241 0 -86 -119 -241 -196 -29 -85,Disconnected.
-SYSTEM_WILL_RECONNECT,-119 -241 -86 -14 -241 0 -196 -15 -127 -85 {0} -69 -120 -121,Will reconnect in {0} He-6 seconds…
-SYSTEM_UNKNOWN_SIGNAL,-124 -42 -100 -14 {0} -15,Unknown words: {0}
-SYSTEM_TOO_LONG,-241 -86 -43 -14 -42 -23 -32 {maxLength} -15 -196 -145 -29 -85 -2 -42 -23 -4 {trxSize},"Maximum signals per transmission: {maxLength}
-Signals in this transmission: {trxSize}"
-SYSTEM_CHANNEL_INPUT_TOO_SHORT,-241 -86 -43 -14 {0} -30 -42 -23 -33 3 -15 -196 -145 -29 -85,Cannot use {0} with less than 3 signals
-SYSTEM_INPUT_LENGTH_INVALID_TWO,-241 -86 -43 -14 {0} -30 -42 -23 -4 -29 2 -15 -196 -145 -29 -85,Cannot use {0} with 2 signals
-SYSTEM_INPUT_LENGTH_INVALID_VAR,-241 -86 -43 -14 -42 -23 -4 -29 {0} -15 -196 -145 -29 -85,Cannot send {0} signals
-SYSTEM_DUPLICATE_NAME,-42 -14 -1 {sig0} -15 -30 -42 -14 -1 {sig1} -15 -100 -229 -2 {name},Signals -{sig0} and -{sig1} cannot both be named “ {name} ”
-DELETE_TRANSMISSION,-88,Dismiss
-DICT_EDIT_HEADER,-42 -38 -77 -174,Edit Dictionary
-DICT_EDIT_NAME_LABEL,-42 -14 -1 {0} -15 -4,Signal -{0} is
-DICT_EDIT_BA_LABEL,-122 {0} -122,then {0} then
-DICT_EDIT_BA_LABEL_GENERIC,-122 -42 -122,then word then
-DICT_EDIT_NAME_PLACEHOLDER,-109 -237 -38,Enter name…
-DICT_EDIT_DESC_PLACEHOLDER,-119 -130 -86 -108 -237 -38 -85,Enter notes…
-FORMAT_NONE,-111,Nothing
-FORMAT_SPACE,1 -190,Space
-FORMAT_NEWLINE,1 -108 -190,Newline
-FORMAT_DOUBLE,2 -108 -190,Double newline
-FORMAT_ATTRACT,1 -189,Remove space
-DICT_EDIT_BREAK,-26 -14 2 -229 -42 -122 1 -108 -190 -15 -4,Break on double?
-DICT_EDIT_INDENTATION,-42 -86 -190,Indentation:
-DICT_EDIT_NO_INDENT,-38 -29 -85,None
-DICT_EDIT_INDENT,-38 -85,Indent
-DICT_EDIT_DEDENT,-88 -85,Dedent
-DICT_EDIT_BOLD,-42 -22 -100,Bold?
-DICT_EDIT_NO_BOLD,-114,No
-DICT_EDIT_YES_BOLD,-108,Yes
-DICT_EDIT_ITALICS,-42 -49 -86 -51,Italicize?
-DICT_EDIT_NO_ITALICS,-174 -29 -85,No
-DICT_EDIT_YES_ITALICS,-174 -85,Yes
-DICT_EDIT_UNDERLINE,-109 -51 -17,Underline?
-DICT_EDIT_NO_UNDERLINE,-100 -29,No
-DICT_EDIT_YES_UNDERLINE,-100,Yes
-DICT_EDIT_STRIKETHROUGH,-114 -51 -17,Strikethrough?
-DICT_EDIT_NO_STRIKE,-100 -29,No
-DICT_EDIT_YES_STRIKE,-100,Yes
-DICT_EDIT_COLOR_IS,-100,is
-DICT_EDIT_COLOR_SIGNAL,-42 -54,word color
-DICT_EDIT_COLOR_BG,-22 -54,background color
-CLOSE_MENU_LONG,-163 -29 -85,Close
-LIBRARY_SIGNAL_COUNT,-42 -23 -4 {0},Signal count: {0}
-CALLSIGN_ADD,-5,+
-CALLSIGN_SUB,-7,-
-LIBRARY_NAME_PLACEHOLDER,-43 -237,Name transmission…
-IMAGE_ZOOM,-50 -39,Zoom
-IMAGE_YAW,-51 -92,Yaw
-IMAGE_PITCH,-49 -92,Pitch
-WSS_CONNECT,-40,Connect
-WSS_HEADER,-241 0,Websocket Addresses
-WSS_ADD,-38,Add new address
-DICT_NEW,-38,Add new dictionary
-DICT_DUPE,-144,Duplicate
-DICT_USE,-40,Load
-DICT_METEOR,-44 0,Meteorese
-DICT_DSCR,-247,DSCR
-DICT_OTHER,-223,Other
-SOURCE_DICT_HEADER,-42,Dictionaries
-SOURCE_DICT_PLACEHOLD,-237,Name dictionary…
-TAB_SOURCES,-40,Sources
-DICT_COUNT,-42 -23 -4 {0},{0} Defined Signals
-LIBRARY_SEARCH,-163,Search…
-CHAT_CHANNEL,{0},{0}
-CHAT_CHANNEL_NONE,-111 -65535,Main Chat
-CHAT_CHANNEL_UNREAD,-124 {0},(?) {0}
-SEND_TO_LIBRARY,-16 -14 -43 -15 -41 -39,Send to library
-NEW_LIBRARY_NAME,{name} -2 {trx} -14 {contents} -25 -15,{name}_tr_{trx}: “{contents}…”
+key,m0,?plural,en,pl
+TAB_CHAT,-214,,Relay,Radiostacja
+TAB_LIBRARY,-43,,Library,Biblioteka
+TAB_DICT,-42,,Dictionary,Słownik
+TAB_USERS,-130,,Users,Stacje
+TAB_SETTINGS,-241,,Settings,Ustawienia
+BUTTON_DSVE,-53 -38,,DSVE,DSVE
+BUTTON_DSMIDI,-577 -38,,DSMIDI,DSMIDI
+BUTTON_LANG,-195 -174,,Change language,Zmiana języka
+BUTTON_SCROLL,-119 -43,,Return to bottom,Przewiń w dół
+PLACEHOLDER_ENTRY,-43 -38,,Enter message here…,Wpisz wiadomość…
+SIGNAL_NAME,-42,,Signal,Hasło
+SIGNAL_NUMBER,-237,,Number,Sygnał
+TIME_AGO_HSEC,{0} -69 -118 -121,yes,{0} He-6 second ago,{0} He-6 sekundę temu
+,,,{0} He-6 seconds ago,{0} He-6 sekundy temu
+,,,,{0} He-6 sekund temu
+DICT_HEADER,-237 -174,,Dictionary,Słownik
+DICT_DEFAULT,-124 -122 -123,,Default Formatting,Domyślne formatowanie
+DICT_SEARCH_MAKE,-38 -77 -163,,Search or create,Wyszukaj lub stwórz
+DICT_OPEN_FILE,-40,,Open file,Otwórz plik
+USERS_HEADER,-130 -23 -4 {0},,Online Users: {0},Nadające stacje: {0}
+USERS_ONLINE,-119,,Online,Nadają teraz
+USERS_NICKED,-123,,Nicknamed,Ksywki
+USERS_NICK_IS,{0} -100,,{0} is,{0} to
+USERS_UNNICKED,-111,,unnamed,bez nazwy
+SETTINGS_HEADER,-241 -174,,Settings,Ustawienia
+SETTINGS_DIRECTORY,-40 -174,,Change Save Directory,Zmień Miejsce Zapisu
+SETTINGS_RECONNECT,-241 0 -41,,Reconnect,Połącz ponownie
+SETTINGS_DO_WHITESPACE,-26 -14 -42 -190 -85 -100 -223 -15 -4,,Follow dictionary whitespace?,Formatuj białe znaki
+SETTINGS_DEFAULT_IMAGE,-26 -14 -124 -53 -163 -85 -15 -4,,Show images by default?,Wyświetl obrazy domyślnie
+SETTINGS_DO_BBCODE,-26 -14 -42 -54 -163 -85 -15 -4,,Enable word formatting?,Formatuj słowa
+SETTINGS_BOOL_TRUE,-27,,Yes,Tak
+SETTINGS_BOOL_FALSE,-28,,No,Nie
+SETTINGS_TRUNCATE,-42 -122 -25,,Words before truncation,sygnały przed skróceniem
+TRUNCATION,-25,,…,…
+TRUNCATE_TOGGLE,-25,,Truncate,Skróć
+IMAGE_TOGGLE,-53,,Visualize,Wizualizacja
+MUSIC_PLAY,-577,,Play,Odtwórz
+MUSIC_STOP,-29,,Stop,Zatrzymaj
+MUSIC_QUEUE,-5,,Queue,Kolejkuj
+SETTINGS_FONT_SIZE,-42 -22 -4,,Font size,Rozmiar czcionki
+SETTINGS_USE_AT_UNDEF,-26 -14 -124 -42 -100 @-_UNDEF -15 -4,,Should unknown words be displayed with “@UNDEF”?,Pokaż nieznane hasła jako „@UNDEF”
+SETTINGS_THEME_COLOR,-110 -54 -100,,Theme color,Schemat kolorów
+SUBMIT,-174,,Submit,Zapisz
+CANCEL,-29,,Cancel,Cofnij zmiany
+SETTINGS_VOLUME,-110 -172 -39 -22 -100,,Volume,Głośność
+SETTINGS_VOLUME_MUSIC,-577 -172 -39 -22 -100,,Music Volume,Głośność Muzyki
+SETTINGS_VOLUME_ZERO,-111,,Muted,Wycisz
+SETTINGS_VOLUME_DEFAULT,-114,,Default,Domyślny
+SETTINGS_VOLUME_LOUD,-108,,Loud,Głośny
+SETTINGS_CAMERA_HEADER,-53 -39,,Camera Controls,Kontrola Kamery
+SETTINGS_INVERT_PITCH,-26 -14 -49 -92 -100 -87 -15 -4,,Invert pitch?,Odwróć nachylenie
+SETTINGS_INVERT_YAW,-26 -14 -51 -92 -100 -87 -15 -4,,Invert yaw?,Odwróć pochylenie
+SETTINGS_INVERT_ZOOM,-26 -14 -50 -39 -100 -87 -15 -4,,Invert zoom?,Odwróć zbliżenie
+SETTINGS_CONFETTI,-702,,Confetti!,Konfetti!
+SETTINGS_NUMBER_SEP,-11 -190 -11 -100 -11 -2 -11,,Insert |-2 between spaced numbers,Wstaw |-2 między liczbami
+SETTINGS_BACKUP_CALLSIGN,-37 -128 -11 -100 -155 -36,,Backup callsign,Zapasowy znak wywoławczy
+SETTINGS_BACKUP_RANDOM,-11,,Random,Losowy
+SETTINGS_BACKUP_INCREMENT,1 -5,,Increment,Użyj następny
+CALLSIGN,-128 -42,,Callsign,Znak wywoławczy
+COPY_SIGNAL_NUMBERS,-42 -40,,Copy signals,Kopiuj sygnały
+COPY_SIGNAL_NAMES,-237 -40,,Copy words,Kopiuj słowa
+SUBMIT_LONG,-174 -85,,Submit,Zapisz
+CANCEL_LONG,-174 -29 -85,,Cancel,Anuluj
+DELETE_ASK,-88 -127 -85,,Delete?,Usuń
+DELETE_CONFIRM_TRX,-43 -88 -85,,Are you sure?,Napewno?
+DELETE_CONFIRM_SIG,-42 -88 -85,,Are you sure?,Napewno?
+DELETE_ASK_SHORT,-88,,Delete?,Usuń?
+DELETE_CONFIRM,-85,,Delete.,Usuń.
+SYSTEM,-241,,System,System
+SYSTEM_CONNECTING,-119 -241 -86 -14 -241 0 -196 -15 -127 -85,,Attempting to connect…,Łączenie…
+SYSTEM_CONNECTED,-154 -2 -119 -241 -86 -241 0 -196 -145 -85,,Connected!,Połączono!
+SYSTEM_CONNECTION_FAILED,-155 -2 -119 -241 -86 -241 0 -196 -145 -29 -85,,Cannot connect.,Nie udało się nawiązać połączenia.
+SYSTEM_DISCONNECTING,-119 -241 -30 -241 0 -86 -14 -196 -15 -127 -29 -186 -85 -109 -120 -65 -121,,Attempting to disconnect…,Rozłączanie…
+SYSTEM_DISCONNECTED,-241 0 -86 -119 -241 -196 -29 -85,,Disconnected.,Rozłączono.
+SYSTEM_WILL_RECONNECT,-119 -241 -86 -14 -241 0 -196 -15 -127 -85 {0} -69 -120 -121,yes,Will reconnect in {0} He-6 seconds…,Połączy ponownie za {0} He-6 sekundę…
+,,,Will reconnect in {0} He-6 seconds…,Połączy ponownie za {0} He-6 sekundy…
+,,,,Połączy ponownie za {0} He-6 sekund…
+SYSTEM_UNKNOWN_SIGNAL,-124 -42 -100 -14 {0} -15,,Unknown words: {0},Nieznane sygnały: {0}
+SYSTEM_TOO_LONG,-241 -86 -43 -14 -42 -23 -32 {maxLength} -15 -196 -145 -29 -85 -2 -42 -23 -4 {trxSize},,"Maximum signals per transmission: {maxLength}
+Signals in this transmission: {trxSize}","Maksymalna liczba sygnałów na transmisję: {maxLength}
+Sygnały wewnątrz transmisji: {trxSize}"
+SYSTEM_CHANNEL_INPUT_TOO_SHORT,-241 -86 -43 -14 {0} -30 -42 -23 -33 3 -15 -196 -145 -29 -85,,Cannot use {0} with less than 3 signals,Nie można użyć {0} mając z mniej niż trzema argumentami
+SYSTEM_INPUT_LENGTH_INVALID_TWO,-241 -86 -43 -14 {0} -30 -42 -23 -4 -29 2 -15 -196 -145 -29 -85,,Cannot use {0} with 2 signals,Nie można użyć {0} z dwoma argumentami
+SYSTEM_INPUT_LENGTH_INVALID_VAR,-241 -86 -43 -14 -42 -23 -4 -29 {0} -15 -196 -145 -29 -85,yes,Cannot send {0} signals,Nie można wysłać {0} sygnałów
+,,,Cannot send {0} signals,Nie można wysłać {0} sygnałów
+,,,,Nie można wysłać {0} sygnałów
+SYSTEM_DUPLICATE_NAME,-42 -14 -1 {sig0} -15 -30 -42 -14 -1 {sig1} -15 -100 -229 -2 {name},,Signals -{sig0} and -{sig1} cannot both be named “ {name} ”,Nie można nadać tej samej nazwy „{name}” hasłom -{sig0} oraz -{sig1}
+DELETE_TRANSMISSION,-88,,Dismiss,Pomiń
+DICT_EDIT_HEADER,-42 -38 -77 -174,,Edit Dictionary,Edytuj słownik
+DICT_EDIT_NAME_LABEL,-42 -14 -1 {0} -15 -4,,Signal -{0} is,Sygnał -{0} to
+DICT_EDIT_BA_LABEL,-122 {0} -122,,then {0} then,potem {0} a potem
+DICT_EDIT_BA_LABEL_GENERIC,-122 -42 -122,,then word then,potem hasło a potem
+DICT_EDIT_NAME_PLACEHOLDER,-109 -237 -38,,Enter name…,Wpisz hasło…
+DICT_EDIT_DESC_PLACEHOLDER,-119 -130 -86 -108 -237 -38 -85,,Enter notes…,Wprowadź notatki…
+FORMAT_NONE,-111,,Nothing,Nic
+FORMAT_SPACE,1 -190,,Space,Spacja
+FORMAT_NEWLINE,1 -108 -190,,Newline,Złam linię
+FORMAT_DOUBLE,2 -108 -190,,Double newline,Podwójna linia
+FORMAT_ATTRACT,1 -189,,Remove space,Usuń spację
+DICT_EDIT_BREAK,-26 -14 2 -229 -42 -122 1 -108 -190 -15 -4,,Break on double?,Złam po podwojeniu?
+DICT_EDIT_INDENTATION,-42 -86 -190,,Indentation:,Wcięcie:
+DICT_EDIT_NO_INDENT,-38 -29 -85,,None,Brak
+DICT_EDIT_INDENT,-38 -85,,Indent,Wcięcie
+DICT_EDIT_DEDENT,-88 -85,,Dedent,Wycięcie
+DICT_EDIT_BOLD,-42 -22 -100,,Bold?,Wytłuść?
+DICT_EDIT_NO_BOLD,-114,,No,Nie
+DICT_EDIT_YES_BOLD,-108,,Yes,Tak
+DICT_EDIT_ITALICS,-42 -49 -86 -51,,Italicize?,Pochyl?
+DICT_EDIT_NO_ITALICS,-174 -29 -85,,No,Nie
+DICT_EDIT_YES_ITALICS,-174 -85,,Yes,Tak
+DICT_EDIT_UNDERLINE,-109 -51 -17,,Underline?,Podkreśl?
+DICT_EDIT_NO_UNDERLINE,-100 -29,,No,Nie
+DICT_EDIT_YES_UNDERLINE,-100,,Yes,Tak
+DICT_EDIT_STRIKETHROUGH,-114 -51 -17,,Strikethrough?,Przekreśl?
+DICT_EDIT_NO_STRIKE,-100 -29,,No,Nie
+DICT_EDIT_YES_STRIKE,-100,,Yes,Tak
+DICT_EDIT_COLOR_IS,-100,,is,jako
+DICT_EDIT_COLOR_SIGNAL,-42 -54,,word color,kolor hasła
+DICT_EDIT_COLOR_BG,-22 -54,,background color,kolor tła
+CLOSE_MENU_LONG,-163 -29 -85,,Close,Zamknij
+LIBRARY_SIGNAL_COUNT,-42 -23 -4 {0},,Signal count: {0},Liczba haseł: {0}
+CALLSIGN_ADD,-5,,+,+
+CALLSIGN_SUB,-7,,-,-
+LIBRARY_NAME_PLACEHOLDER,-43 -237,,Name transmission…,Nazwij transmisję…
+IMAGE_ZOOM,-50 -39,,Zoom,Zbliż
+IMAGE_YAW,-51 -92,,Yaw,Nachylenie
+IMAGE_PITCH,-49 -92,,Pitch,Pochylenie
+WSS_CONNECT,-40,,Connect,Połącz
+WSS_HEADER,-241 0,,Websocket Addresses,Adresy Websocketów
+WSS_ADD,-38,,Add new address,Dodaj adres
+DICT_NEW,-38,,Add new dictionary,Dodaj słownik
+DICT_DUPE,-144,,Duplicate,Zduplikuj
+DICT_USE,-40,,Load,Ładuj
+DICT_METEOR,-44 0,,Meteorese,Meteorowy
+DICT_DSCR,-247,,DSCR,DSCR
+DICT_OTHER,-223,,Other,Inny
+SOURCE_DICT_HEADER,-42,,Dictionaries,Słowniki
+SOURCE_DICT_PLACEHOLD,-237,,Name dictionary…,Nazwij słownik…
+TAB_SOURCES,-40,,Sources,Źródła
+DICT_COUNT,-42 -23 -4 {0},yes,{0} Defined Signal,Zdefiniowano {0} hasło
+,,,{0} Defined Signals,Zdefiniowano {0} hasła
+,,,,Zdefiniowano {0} haseł
+LIBRARY_SEARCH,-163,,Search…,Wyszukaj…
+CHAT_CHANNEL,{0},,{0},{0}
+CHAT_CHANNEL_NONE,-111 -65535,,Main Chat,Główne pasmo
+CHAT_CHANNEL_UNREAD,-124 {0},,(?) {0},(?) {0}
+SEND_TO_LIBRARY,-16 -14 -43 -15 -41 -39,,Send to library,Dodaj do biblioteki
+NEW_LIBRARY_NAME,{name} -2 {trx} -14 {contents} -25 -15,,{name}_tr_{trx}: “{contents}…”,{name}_tr_{trx}: “{contents}…”

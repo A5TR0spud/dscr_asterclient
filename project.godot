@@ -26,6 +26,7 @@ config/icon="res://icon.svg"
 window/size/mode=2
 window/size/initial_position_type=5
 window/size/sharp_corners=true
+window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
 [file_customization]
@@ -162,7 +163,7 @@ image_reset={
 [internationalization]
 
 rendering/root_node_auto_translate=false
-locale/translations=PackedStringArray("res://Localization/lang.en.translation", "res://Localization/lang.m0.translation")
+locale/translations=PackedStringArray("res://Localization/lang.en.translation", "res://Localization/lang.m0.translation", "res://Localization/lang.pl.translation")
 
 [physics]
 

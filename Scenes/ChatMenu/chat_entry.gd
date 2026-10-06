@@ -4,7 +4,6 @@ extends VBoxContainer
 var timestamp: int = 0
 var message: Array = []
 var _time_ago: int = 0
-var _time_ago_string: String = ""
 var _etc_string: Array = []
 var collapsed: bool = true:
 	set(value):
@@ -23,7 +22,7 @@ func calc_time():
 	_time_ago = floori(timeago / Main.HE6_HALF_LIFE)
 
 func get_timeago_string():
-	return _time_ago_string.format([_time_ago])
+	return Localizer.translate_plural("TIME_AGO_HSEC", _time_ago).format([_time_ago])
 
 func _ready():
 	ready()
@@ -43,7 +42,6 @@ func _refresh():
 	_evaluate_corpus()
 
 func _on_locale_reload(re_eval: bool = true):
-	_time_ago_string = Localizer.translate("TIME_AGO_HSEC")
 	_etc_string = Localizer.raw_translate("TRUNCATION")
 	if re_eval:
 		_evaluate_corpus()
