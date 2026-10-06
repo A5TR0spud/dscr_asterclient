@@ -5,7 +5,7 @@
 ### Additions
 
 * Added backup callsign and backup backup mode settings (can choose random vs increment)
-* Added Polski / Polish translation ([Sugar/@trzyipol]())
+* Added Polski / Polish translation ([Sugar @trzyipol](https://github.com/A5TR0spud/dscr_asterclient/commits?author=Trzyipolkostkicukru))
 
 ### Changes
 
