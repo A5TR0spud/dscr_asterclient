@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dd181plkpjof5"
-path="res://.godot/imported/language.svg-6e2531d270f644dca32151a5ddc039ef.ctex"
+uid="uid://c150swnx6ugxb"
+path="res://.godot/imported/macro.svg-4e80661e496040580ebdb5e82a6ed06c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/LanguageIcons/language.svg"
-dest_files=["res://.godot/imported/language.svg-6e2531d270f644dca32151a5ddc039ef.ctex"]
+source_file="res://Assets/Icons/macro.svg"
+dest_files=["res://.godot/imported/macro.svg-4e80661e496040580ebdb5e82a6ed06c.ctex"]
 
 [params]
 
@@ -23,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

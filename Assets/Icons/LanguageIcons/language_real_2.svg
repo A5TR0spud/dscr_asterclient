@@ -1,0 +1,20 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+	<style>
+		.s0 { fill: none;stroke: #ffffff;paint-order:stroke fill markers;stroke-width: 30 } 
+		.s1 { fill: none;stroke: #ffffff;paint-order:stroke fill markers;stroke-linejoin: bevel;stroke-width: 30 } 
+	</style>
+	<g id="Layer 1">
+		<g id="english">
+			<path id="Shape 12" fill-rule="evenodd" class="s0" d="m15 245l30-125h30l30 125"/>
+			<path id="Shape 17" fill-rule="evenodd" class="s1" d="m40 185h40z"/>
+		</g>
+		<g id="chinese">
+			<path id="Shape 14" fill-rule="evenodd" class="s0" d="m120 40h120z"/>
+			<path id="Shape 15" fill-rule="evenodd" class="s0" d="m180 0v40z"/>
+			<path id="Shape 16" fill-rule="evenodd" class="s0" d="m120 120h20l45-25 30-35v-20"/>
+			<path id="Shape 16 copy" fill-rule="evenodd" class="s0" d="m145 40v20l30 35 45 25h20"/>
+		</g>
+		<path id="Shape 18" fill-rule="evenodd" class="s0" d="m25 95c0-44.24 35.76-80 80-80"/>
+		<path id="Shape 19" fill-rule="evenodd" class="s0" d="m215 145c0 44.24-35.76 80-80 80"/>
+	</g>
+</svg>

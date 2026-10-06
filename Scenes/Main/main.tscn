@@ -8,14 +8,14 @@
 [ext_resource type="Script" uid="uid://4obb1ushbfji" path="res://Scenes/Main/corpus.gd" id="5_wliom"]
 [ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="6_2ok46"]
 [ext_resource type="Script" uid="uid://bft2883q6jmm7" path="res://Scenes/Main/sidebar_tabber.gd" id="6_es6iu"]
-[ext_resource type="Texture2D" uid="uid://cti0yirl0u427" path="res://Assets/image_icon.svg" id="7_1t20g"]
-[ext_resource type="Texture2D" uid="uid://dd181plkpjof5" path="res://Assets/LanguageIcons/language.svg" id="7_2ok46"]
 [ext_resource type="PackedScene" uid="uid://iqh1s0683kvy" path="res://Scenes/Common/icon_button.tscn" id="7_c4b4r"]
 [ext_resource type="PackedScene" uid="uid://tpn8p2apuh1t" path="res://Scenes/DictDisplayMenu/dictionary_tab.tscn" id="7_hfg1r"]
-[ext_resource type="Texture2D" uid="uid://dqe307s668lqa" path="res://Assets/volume_icon.svg" id="8_4o5wv"]
+[ext_resource type="Texture2D" uid="uid://62xp5hqfq0ds" path="res://Assets/Icons/sound_glyph.svg" id="8_4o5wv"]
 [ext_resource type="PackedScene" uid="uid://bunet4g0aqi5h" path="res://Scenes/OnlineUsersTab/online_people_tab.tscn" id="8_hfg1r"]
 [ext_resource type="PackedScene" uid="uid://bvo2gxc2kcenm" path="res://Scenes/SettingsMenu/settings_tab.tscn" id="9_4e4y2"]
+[ext_resource type="Texture2D" uid="uid://c6trg70j153jp" path="res://Assets/Icons/image_glyph.svg" id="9_4o5wv"]
 [ext_resource type="PackedScene" uid="uid://iblx4x1lwahd" path="res://Scenes/LibraryMenu/library_tab.tscn" id="9_koken"]
+[ext_resource type="Texture2D" uid="uid://big1qknqwrn5l" path="res://Assets/Icons/LanguageIcons/language_real_2.svg" id="10_4o5wv"]
 [ext_resource type="PackedScene" uid="uid://c1h04iufkd28w" path="res://Scenes/CallsignPicker/callsign_node.tscn" id="11_4a3kt"]
 [ext_resource type="Script" uid="uid://cmdmiuvan8h1p" path="res://Scenes/Main/dict_edit_prison.gd" id="12_ifk88"]
 [ext_resource type="PackedScene" uid="uid://crn4b5wrwilbc" path="res://Scenes/DictEditMenu/dict_edit_window.tscn" id="13_8sujb"]
@@ -98,12 +98,12 @@ tooltip_key = "BUTTON_DSMIDI"
 
 [node name="DSVE_Button" parent="Body/Corpus/Header" unique_id=1745782209 instance=ExtResource("7_c4b4r")]
 layout_mode = 2
-icon = ExtResource("7_1t20g")
+icon = ExtResource("9_4o5wv")
 tooltip_key = "BUTTON_DSVE"
 
 [node name="LocaleButton" parent="Body/Corpus/Header" unique_id=390179226 instance=ExtResource("7_c4b4r")]
 layout_mode = 2
-icon = ExtResource("7_2ok46")
+icon = ExtResource("10_4o5wv")
 tooltip_key = "BUTTON_LANG"
 
 [node name="TabContainer" type="Container" parent="Body/Corpus" unique_id=1155907715]

@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cnhrmaid1urmm"]
 
 [ext_resource type="Script" uid="uid://cymbpsqg5nw5d" path="res://Scenes/LocaleMenu/locale_menu.gd" id="1_d2tkp"]
-[ext_resource type="Texture2D" uid="uid://cw8a263plge6n" path="res://Assets/LanguageIcons/meteor0ese.svg" id="1_g7jid"]
-[ext_resource type="Texture2D" uid="uid://dnr676eu355jw" path="res://Assets/LanguageIcons/english.svg" id="2_d2tkp"]
+[ext_resource type="Texture2D" uid="uid://cw8a263plge6n" path="res://Assets/Icons/LanguageIcons/meteor0ese.svg" id="1_g7jid"]
+[ext_resource type="Texture2D" uid="uid://dnr676eu355jw" path="res://Assets/Icons/LanguageIcons/english.svg" id="2_d2tkp"]
 
 [node name="LocaleMenu" type="PanelContainer" unique_id=1619317538]
 top_level = true

@@ -6,8 +6,8 @@
 [ext_resource type="MultiMesh" uid="uid://x57ntwryxlhs" path="res://Scenes/Images/sphere_multi_mesh.tres" id="4_indmu"]
 [ext_resource type="PackedScene" uid="uid://iqh1s0683kvy" path="res://Scenes/Common/icon_button.tscn" id="5_1c76j"]
 [ext_resource type="MultiMesh" uid="uid://b25iqmc8gnt6q" path="res://Scenes/Images/cube_multi_mesh.tres" id="5_1eel7"]
-[ext_resource type="Texture2D" uid="uid://ba8m358qq4yt3" path="res://Assets/center_icon.svg" id="5_8vf8x"]
-[ext_resource type="Texture2D" uid="uid://djnpe41edcgnt" path="res://Assets/resolution_icon.png" id="5_uo7r5"]
+[ext_resource type="Texture2D" uid="uid://ba8m358qq4yt3" path="res://Assets/Icons/recenter.svg" id="5_8vf8x"]
+[ext_resource type="Texture2D" uid="uid://djnpe41edcgnt" path="res://Assets/Icons/resolution.png" id="5_uo7r5"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_kq2tu"]
 viewport_path = NodePath("Intermediate/RenderAndYaw/VisualizerRect/SubViewport")

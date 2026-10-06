@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cw8a263plge6n"
-path="res://.godot/imported/meteor0ese.svg-4912852cac13f1bb974470dabd5d86ee.ctex"
+uid="uid://c6trg70j153jp"
+path="res://.godot/imported/image_glyph.svg-28488613f1888ba1c3d758b537926720.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/LanguageIcons/meteor0ese.svg"
-dest_files=["res://.godot/imported/meteor0ese.svg-4912852cac13f1bb974470dabd5d86ee.ctex"]
+source_file="res://Assets/Icons/image_glyph.svg"
+dest_files=["res://.godot/imported/image_glyph.svg-28488613f1888ba1c3d758b537926720.ctex"]
 
 [params]
 

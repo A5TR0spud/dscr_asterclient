@@ -1,11 +1,10 @@
 [gd_scene format=3 uid="uid://dh3a6lfi6lj5o"]
 
 [ext_resource type="Script" uid="uid://dc63rsad6hivi" path="res://Scenes/Song/audiater_node.gd" id="1_d143w"]
+[ext_resource type="Texture2D" uid="uid://62xp5hqfq0ds" path="res://Assets/Icons/sound_glyph.svg" id="2_80jau"]
 [ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="2_d143w"]
-[ext_resource type="Texture2D" uid="uid://dqe307s668lqa" path="res://Assets/volume_icon.svg" id="3_d143w"]
 
 [node name="AudiaterNote" type="PanelContainer" unique_id=1249369280]
-anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -25,7 +24,7 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer2" unique_id=1939880449]
 texture_filter = 4
 layout_mode = 2
-texture = ExtResource("3_d143w")
+texture = ExtResource("2_80jau")
 expand_mode = 3
 stretch_mode = 5
 

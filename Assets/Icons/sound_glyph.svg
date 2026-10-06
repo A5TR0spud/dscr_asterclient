@@ -1,0 +1,12 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+	<style>
+		.s0 { fill: none;stroke: #ffffff;paint-order:stroke fill markers;stroke-linecap: round;stroke-miterlimit:10;stroke-width: 40 } 
+	</style>
+	<g id="Layer 1">
+		<path id="Shape 2" fill-rule="evenodd" class="s0" d="m20 100v40"/>
+		<path id="Shape 2 copy 2" fill-rule="evenodd" class="s0" d="m70 60v120"/>
+		<path id="Shape 2 copy 3" fill-rule="evenodd" class="s0" d="m170 60v120"/>
+		<path id="Shape 2 copy" fill-rule="evenodd" class="s0" d="m220 140v-40"/>
+		<path id="Shape 2 copy 4" fill-rule="evenodd" class="s0" d="m120 140v-40"/>
+	</g>
+</svg>

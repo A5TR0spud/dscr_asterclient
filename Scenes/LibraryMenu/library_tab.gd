@@ -113,6 +113,7 @@ func _on_submit_pressed():
 	LibraryHandler.set_transmission(_get_name(), current_transmission)
 	_reload()
 	unsaved_changes = false
+	instance.pre_name = _get_name()
 
 func _on_cancel_pressed():
 	name_edit.text = pre_name

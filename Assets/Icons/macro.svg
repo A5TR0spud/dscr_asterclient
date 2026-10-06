@@ -1,0 +1,10 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+	<style>
+		.s0 { fill: #ffffff } 
+	</style>
+	<g id="Layer 1">
+		<path class="s0" d="m220 60v60h-200v-60z"/>
+		<path class="s0" d="m140 140v40h-120v-40z"/>
+		<path class="s0" d="m220 140v40h-60v-40z"/>
+	</g>
+</svg>
