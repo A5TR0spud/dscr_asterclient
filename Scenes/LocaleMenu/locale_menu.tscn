@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cymbpsqg5nw5d" path="res://Scenes/LocaleMenu/locale_menu.gd" id="1_d2tkp"]
 [ext_resource type="Texture2D" uid="uid://cw8a263plge6n" path="res://Assets/Icons/LanguageIcons/meteor0ese.svg" id="1_g7jid"]
-[ext_resource type="Texture2D" uid="uid://dnr676eu355jw" path="res://Assets/Icons/LanguageIcons/english.svg" id="2_d2tkp"]
+[ext_resource type="Texture2D" uid="uid://ba5336swev2p1" path="res://Assets/Icons/LanguageIcons/english.svg" id="3_vklgi"]
 [ext_resource type="Texture2D" uid="uid://0q4nkiso04lb" path="res://Assets/Icons/LanguageIcons/polish.svg" id="4_vklgi"]
 
 [node name="LocaleMenu" type="PanelContainer" unique_id=1619317538]
@@ -37,10 +37,10 @@ layout_mode = 2
 theme_override_constants/icon_max_width = 24
 theme_override_font_sizes/font_size = 24
 text = "English"
-icon = ExtResource("2_d2tkp")
+icon = ExtResource("3_vklgi")
 
 [node name="pl" type="Button" parent="CenterContainer/GridContainer" unique_id=474255170]
-texture_filter = 2
+texture_filter = 1
 layout_mode = 2
 theme_override_constants/icon_max_width = 24
 theme_override_font_sizes/font_size = 24

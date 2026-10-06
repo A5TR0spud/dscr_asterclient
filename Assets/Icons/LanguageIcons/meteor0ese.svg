@@ -1,11 +1,17 @@
 <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
 	<style>
-		.s0 { fill: #ffffff;stroke: #ffffff;stroke-linecap: round;stroke-linejoin: round;stroke-width: 20 } 
-		.s1 { fill: none;stroke: #ffffff;stroke-linecap: round;stroke-linejoin: round;stroke-width: 40 } 
+		.s0 { fill: none;stroke: #ffffff;paint-order:stroke fill markers;stroke-linejoin: round;stroke-width: 40 } 
+		.s1 { fill: none;stroke: #ffffff;paint-order:stroke fill markers;stroke-linejoin: bevel;stroke-width: 40 } 
 	</style>
 	<g id="Layer 1">
-		<path id="Shape 1" fill-rule="evenodd" class="s0" d="m120 210c-16.59 0-30-13.41-30-30 0-16.59 13.41-30 30-30 16.59 0 30 13.41 30 30 0 16.59-13.41 30-30 30z"/>
-		<path id="Shape 1 copy" fill-rule="evenodd" class="s1" d="m60 124.9c33.24-33.24 86.97-33.24 120.21 0"/>
-		<path id="Shape 1 copy 2" fill-rule="evenodd" class="s1" d="m21 81.01c54.74-54.75 143.25-54.75 197.99 0"/>
+		<path id="Shape 1" fill-rule="evenodd" class="s0" d="m0 70h60q30-90 60 0 30 90 60 0h60"/>
+		<path id="Shape 2" fill-rule="evenodd" class="s1" d="m21 190v-40z"/>
+		<path id="Shape 2 copy" fill-rule="evenodd" class="s1" d="m219 190v-40z"/>
+		<path id="Shape 2 copy 2" fill-rule="evenodd" class="s1" d="m87 190v-40z"/>
+		<path id="Shape 2 copy 3" fill-rule="evenodd" class="s1" d="m153 190v-40z"/>
+		<path id="Shape 2 copy 4" fill-rule="evenodd" class="s1" d="m21 240v-40z"/>
+		<path id="Shape 2 copy 5" fill-rule="evenodd" class="s1" d="m219 240v-40z"/>
+		<path id="Shape 2 copy 6" fill-rule="evenodd" class="s1" d="m87 240v-40z"/>
+		<path id="Shape 2 copy 7" fill-rule="evenodd" class="s1" d="m153 240v-40z"/>
 	</g>
 </svg>

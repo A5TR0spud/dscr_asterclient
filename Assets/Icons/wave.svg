@@ -3,6 +3,6 @@
 		.s0 { fill: none;stroke: #ffffff;paint-order:stroke fill markers;stroke-miterlimit:10;stroke-width: 30 } 
 	</style>
 	<g id="Layer 1">
-		<path id="Shape 1" fill-rule="evenodd" class="s0" d="m0 120h30l15 60 15 30h30l15-30 30-120 15-30h30l15 30 15 60h30"/>
+		<path id="Shape 1" fill-rule="evenodd" class="s0" d="m0 120h29.96c20.04 120 70.04 120 90.04 0 20-120 70-120 90 0h30"/>
 	</g>
 </svg>

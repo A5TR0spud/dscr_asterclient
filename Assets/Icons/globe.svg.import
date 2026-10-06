@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dd181plkpjof5"
-path="res://.godot/imported/language_nonsense.svg-6c8c2e41958e43bd0e9da1eb52031ead.ctex"
+uid="uid://dvk6mv21d4dib"
+path="res://.godot/imported/globe.svg-2e20bad5dc0399b0e6d7dae13a9b962d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Icons/LanguageIcons/language_nonsense.svg"
-dest_files=["res://.godot/imported/language_nonsense.svg-6c8c2e41958e43bd0e9da1eb52031ead.ctex"]
+source_file="res://Assets/Icons/globe.svg"
+dest_files=["res://.godot/imported/globe.svg-2e20bad5dc0399b0e6d7dae13a9b962d.ctex"]
 
 [params]
 

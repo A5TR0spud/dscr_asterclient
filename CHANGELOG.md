@@ -15,7 +15,7 @@
 * Adjusted -577 shape and envelope and added a boost to lows
 * Fleshed out the -702 into an entire parser and added an exception to -100 (sometimes), -111, and -99
 * Saving a transmission via Library and then pressing cancel now reverts to the save state instead of last loaded transmission
-* Updated some icons
+* Updated icons
 
 ### Fixes
 
