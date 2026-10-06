@@ -2,6 +2,7 @@ extends PanelContainer
 class_name LocaleMenu
 
 static var instance: LocaleMenu
+const VALID_LANGUAGES: PackedStringArray = ["m0", "en", "pl"]
 
 func _enter_tree():
 	instance = self

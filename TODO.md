@@ -21,6 +21,7 @@
 * option to suppress notifications from skeleton key channel(s)
 * add backup callsign setting
 * music parsing for sine vs square vs saw vs triangle vs smooth square
+* add setting for canvas stretch mode (window/stretch/mode="canvas_items")
 
 ### nikzapp
 

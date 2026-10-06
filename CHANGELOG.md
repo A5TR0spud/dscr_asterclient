@@ -5,6 +5,7 @@
 ### Additions
 
 * Added backup callsign and backup backup mode settings (can choose random vs increment)
+* Added Polski / Polish translation ([Sugar/@trzyipol]())
 
 ### Changes
 

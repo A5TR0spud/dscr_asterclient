@@ -25,7 +25,7 @@ static var backup_callsign: int = -1
 static var failsafe_callsign_increment: bool = true
 
 static func validate_and_set_language(code: String = language):
-	if code not in ["m0", "en", "pl"]:
+	if code not in LocaleMenu.VALID_LANGUAGES:
 		LocaleMenu.open()
 		return
 	language = code
