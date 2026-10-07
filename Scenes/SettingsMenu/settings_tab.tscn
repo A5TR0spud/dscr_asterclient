@@ -44,7 +44,7 @@ layout_mode = 2
 [node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1648418170]
 layout_mode = 2
 size_flags_vertical = 3
-scroll_vertical = 320
+scroll_vertical = 100
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 

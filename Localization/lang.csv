@@ -32,7 +32,7 @@ SETTINGS_DO_BBCODE,-26 -14 -42 -54 -163 -85 -15 -4,,Enable word formatting?,Form
 SETTINGS_BOOL_TRUE,-27,,Yes,Tak
 SETTINGS_BOOL_FALSE,-28,,No,Nie
 SETTINGS_TRUNCATE,-42 -122 -25,,Words before truncation,sygnały przed skróceniem
-SETTINGS_CANVAS_STRETCH,-26 -14 -110 -22 -174 -85 -15 -4,,Stretch UI,
+SETTINGS_CANVAS_STRETCH,-26 -14 -110 -22 -174 -85 -15 -4,,Stretch UI,Rozciągnij UI
 TRUNCATION,-25,,…,…
 TRUNCATE_TOGGLE,-25,,Truncate,Skróć
 IMAGE_TOGGLE,-53,,Visualize,Wizualizacja
