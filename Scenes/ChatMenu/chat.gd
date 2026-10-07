@@ -60,51 +60,12 @@ static func new_transmission(packet: PackedStringArray) -> void:
 	new_message.message = integer_message
 	
 	if (
-		SettingsHandler.confetti and
-		DictionaryHandler.support_dscr and
-		-702 in DictionaryHandler.word_keys and
+		Confetti.evaluate_confetti(integer_message) and
 		channel.is_visible_in_tree() and
 		channel.scroll_container.bottom_is_visible()
 	):
-		var confetti_parser := TransmissionParser.new(integer_message)
-		var yippee: bool = false
-		while confetti_parser.can_continue():
-			if not confetti_parser.skip_to(-702):
-				break
-			if confetti_parser.peek(-1) == -111:
-				confetti_parser.skip()
-				continue
-			if confetti_parser.peek(1) == -29:
-				confetti_parser.skip()
-				continue
-			if confetti_parser.peek(1) == -99:
-				confetti_parser.skip()
-				continue
-			if confetti_parser.peek(1) == -100:
-				var p2 = confetti_parser.peek(2)
-				if p2 is int and p2 != -2:
-					confetti_parser.skip(3)
-					continue
-			var j: int = confetti_parser.save_state()
-			var delimited_left: int = j
-			var delimited_right: int = integer_message.size() - 1 - j
-			for i in range(1,4):
-				if confetti_parser.peek(-i) == -2 and confetti_parser.peek(-i - 1) == -2:
-					delimited_left = i - 1
-					break
-			for i in range(1,4):
-				if confetti_parser.peek(i) == -2 and confetti_parser.peek(i + 1) == -2:
-					delimited_right = i - 1
-					break
-			#print("l ", delimited_left, " r ", delimited_right)
-			if delimited_right + delimited_left < 3:
-				yippee = true
-				break
-			confetti_parser.skip()
-		if yippee:
-			print("confetti!")
-			Confetti.burst()
-	
+		print("confetti!")
+		Confetti.burst()
 	
 	if (
 		(new_message.sender != Main.instance.previously_accepted_callsign)

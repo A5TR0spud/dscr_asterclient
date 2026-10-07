@@ -142,6 +142,7 @@ func _reconnect_or_change_url(wss: String) -> void:
 	if wss.is_empty(): wss = DSCR_URL
 	SettingsHandler.websocket_address = wss
 	SettingsHandler.save()
+	var is_reconnecting: bool = wss == websocket_url
 	websocket_url = wss
 	if socket.get_ready_state() == WebSocketPeer.STATE_CONNECTING or socket.get_ready_state() == WebSocketPeer.STATE_OPEN:
 		set_physics_process(true)
@@ -149,13 +150,14 @@ func _reconnect_or_change_url(wss: String) -> void:
 		reconnect_time.stop()
 		socket.close(1001)
 		return
-	start_connect()
+	start_connect(is_reconnecting)
 
 func start_connect(is_reconnect_attempt: bool = false) -> void:
+	print("start connect. reconnect? ", is_reconnect_attempt)
 	if trying_to_quit: return
 	if is_reconnect_attempt:
 		print("Attempting Reconnect")
-		set_callsign(previously_accepted_callsign, true)
+		set_callsign(callsign, true)
 	else:
 		_try_claim_callsign()
 	# Initiate connection to the given URL.
@@ -240,8 +242,6 @@ var _queued_callsign: Array = [0, false]
 func set_callsign(cs: int, is_reconnect: bool = false) -> void:
 	if cs == previously_accepted_callsign and not is_reconnect and cs >= 0:
 		return
-	if cs != previously_accepted_callsign:
-		is_reconnect = false
 	cs = _verify_callsign(cs)
 	_queued_callsign = [cs, is_reconnect]
 
@@ -295,6 +295,11 @@ func handle_packet(incoming: String) -> void:
 		on_callsign_changed.emit(previously_accepted_callsign)
 		_handling_loss = false
 		return
+	if status[0] == "E":
+		previously_accepted_callsign = callsign
+		on_callsign_changed.emit(previously_accepted_callsign)
+		print("Reconnect OK")
+		return
 	if status[0] == "U":
 		if callsign != SettingsHandler.backup_callsign and not _handling_loss:
 			set_callsign(SettingsHandler.backup_callsign)
@@ -331,9 +336,13 @@ func _physics_process(_delta):
 	if state != previous_state:
 		if state == WebSocketPeer.STATE_CLOSED:
 			print("CLOSED")
+			connected_users.clear()
+			previously_accepted_callsign = -1
 		elif state == WebSocketPeer.STATE_CLOSING:
 			Chat.new_log(Chat.State.DISCONNECTING)
 			print("CLOSING")
+			connected_users.clear()
+			previously_accepted_callsign = -1
 		elif state == WebSocketPeer.STATE_CONNECTING:
 			print("CONNECTING")
 		elif state == WebSocketPeer.STATE_OPEN:
@@ -358,6 +367,7 @@ func _physics_process(_delta):
 			if _queued_callsign[1]:
 				m += ",0"
 			socket.send_text(m)
+			print("> Sent: ", m)
 			_queued_callsign = []
 		while socket.get_available_packet_count():
 			var packet = socket.get_packet()
@@ -410,7 +420,7 @@ func _on_reconnect_time_timeout():
 	if socket.get_ready_state() == WebSocketPeer.STATE_CLOSED and reconnect_cooldown.is_stopped():
 		print("Attempting auto-reconnect...")
 		reconnect_cooldown.start()
-		start_connect()
+		start_connect(true)
 
 func _on_files_dropped(files: PackedStringArray):
 	if files.size() > 1: return

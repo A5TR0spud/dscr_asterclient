@@ -5,7 +5,7 @@
 ### Additions
 
 * Added backup callsign and backup backup mode settings (can choose random vs increment)
-* Added Polski / Polish translation ([Sugar @trzyipol](https://github.com/A5TR0spud/dscr_asterclient/commits?author=Trzyipolkostkicukru))
+* Added Polski / Polish translation! ([Sugar @trzyipol](https://github.com/A5TR0spud/dscr_asterclient/commits?author=Trzyipolkostkicukru))
 
 ### Changes
 
@@ -14,13 +14,13 @@
 * Default volume label is now a button
 * Adjusted -577 shape and envelope and added a boost to lows
 * Fleshed out the -702 into an entire parser and added an exception to -100 (sometimes), -111, and -99
-* Saving a transmission via Library and then pressing cancel now reverts to the save state instead of last loaded transmission
-* Updated icons
+* Updated UI icons
 
 ### Fixes
 
-* Fixed the auto-number-separation setting not being translated
+* Fixed the auto-number-separation setting not being translated from its key
 * Adjusted how button-copying works so that the auto-number-separation setting doesn't screw with pasting when copying from Library
+* Saving a transmission via Library and then pressing cancel now reverts to the save state instead of last loaded transmission
 * Fixed the order of saved transmissions in the Library breaking
 
 ## 0.8.2
@@ -43,7 +43,7 @@
 
 * Text-to-signal conversion no longer skips a beat if a word contains a smaller word
 
-## 0.8.0
+## 0.8.0: Unvisual Object
 
 ### Additions
 
