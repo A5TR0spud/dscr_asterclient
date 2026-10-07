@@ -18,11 +18,13 @@
 * ability to block channels when using the skeleton key
  add backup callsign setting
 * music parsing for sine vs square vs saw vs triangle vs smooth square
-* add setting for canvas stretch mode (window/stretch/mode="canvas_items")
+
+### TRANSLATIONS
+
+* SETTINGS_CANVAS_STRETCH: Polish
 
 ### nikzapp
 
-* confetti/clean up confetti?
 * arbitrary parsing/clean up parser
 * lua modules/plugins
 * android support

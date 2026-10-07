@@ -1,4 +1,4 @@
-extends Node
+extends RefCounted
 class_name SettingsHandler
 
 static var do_formatting: bool = true
@@ -23,6 +23,7 @@ static var confetti: bool = true
 static var number_auto_sep: bool = true
 static var backup_callsign: int = -1
 static var failsafe_callsign_increment: bool = true
+static var stretch_canvas: bool = false
 
 static func validate_and_set_language(code: String = language):
 	if code not in LocaleMenu.VALID_LANGUAGES:
@@ -32,6 +33,12 @@ static func validate_and_set_language(code: String = language):
 	TranslationServer.set_locale(language)
 	Main.on_localization_reload()
 	save()
+
+static func stretch_or_unstretch_canvas():
+	
+	Main.instance.get_tree().root.content_scale_mode = (
+		Window.CONTENT_SCALE_MODE_CANVAS_ITEMS if stretch_canvas else Window.CONTENT_SCALE_MODE_DISABLED
+	)
 
 static func delete_wss(address: String) -> void:
 	if websocket_addresses.has(address):
@@ -66,7 +73,7 @@ static func initialize() -> void:
 	img_invert_zoom = SaveSystem.settings.get_or_add("img_invert_zoom", img_invert_zoom)
 	do_bbcode = SaveSystem.settings.get_or_add("do_bbcode", do_bbcode)
 	use_at_undef = SaveSystem.settings.get_or_add("use_at_undef", use_at_undef)
-	language = SaveSystem.settings.get_or_add("language", "")
+	language = SaveSystem.settings.get_or_add("language", language)
 	validate_and_set_language.call_deferred()
 	websocket_address = SaveSystem.settings.get_or_add("WebsocketAddress", websocket_address)
 	websocket_addresses = SaveSystem.settings.get_or_add("wss_addresses", websocket_addresses)
@@ -79,6 +86,8 @@ static func initialize() -> void:
 	number_auto_sep = SaveSystem.settings.get_or_add("number_auto_sep", number_auto_sep)
 	backup_callsign = SaveSystem.settings.get_or_add("backup_callsign", backup_callsign)
 	failsafe_callsign_increment = SaveSystem.settings.get_or_add("failsafe_callsign_increment", failsafe_callsign_increment)
+	stretch_canvas = SaveSystem.settings.get_or_add("stretch_canvas", stretch_canvas)
+	stretch_or_unstretch_canvas.call_deferred()
 
 static func evaluate_volume() -> void:
 	AudioServer.set_bus_volume_linear(
@@ -125,3 +134,4 @@ static func export() -> void:
 	SaveSystem.settings.set("number_auto_sep", number_auto_sep)
 	SaveSystem.settings.set("backup_callsign", backup_callsign)
 	SaveSystem.settings.set("failsafe_callsign_increment", failsafe_callsign_increment)
+	SaveSystem.settings.set("stretch_canvas", stretch_canvas)

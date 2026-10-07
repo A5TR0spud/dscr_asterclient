@@ -11,6 +11,7 @@ func _ready() -> void:
 @onready var do_bbcode: SettingEntry = $ScrollContainer/Options/DoBBCode
 @onready var truncate: SpinBox = $ScrollContainer/Options/TruncHbox/TruncationSpinner
 @onready var font_size: SpinBox = $ScrollContainer/Options/FontHbox/FontSpinner
+@onready var ui_stretch: SettingEntry = $ScrollContainer/Options/UIStretch
 @onready var color_edit: SpinBox = $ScrollContainer/Options/ThemeColor/ColorPicker
 @onready var color_sample: ColorRect = $ScrollContainer/Options/ColorRect
 @onready var sound_slider: Range = $ScrollContainer/Options/GlobalVolume/VolumeSlider
@@ -37,6 +38,7 @@ func refresh() -> void:
 	invert_zoom.set_state_no_signal(SettingsHandler.img_invert_zoom)
 	truncate.set_value_no_signal(SettingsHandler.truncate_message_size)
 	font_size.set_value_no_signal(SettingsHandler.font_size)
+	ui_stretch.set_state_no_signal(SettingsHandler.stretch_canvas)
 	color_edit.set_value_no_signal(SettingsHandler.theme_color)
 	sound_slider.set_value_no_signal(_volume_linear_to_slider(sound_slider, SettingsHandler.master_volume))
 	music_slider.set_value_no_signal(_volume_linear_to_slider(music_slider, SettingsHandler.music_volume))
@@ -184,4 +186,9 @@ func _on_callsign_node_callsign_submitted(new_value):
 
 func _on_backup_backup_mode_toggled(toggled_on):
 	SettingsHandler.failsafe_callsign_increment = toggled_on
+	save(false)
+
+func _on_ui_stretch_set(new_value):
+	SettingsHandler.stretch_canvas = new_value
+	SettingsHandler.stretch_or_unstretch_canvas()
 	save(false)

@@ -44,7 +44,7 @@ layout_mode = 2
 [node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1648418170]
 layout_mode = 2
 size_flags_vertical = 3
-scroll_vertical = 490
+scroll_vertical = 320
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
@@ -126,16 +126,17 @@ max_value = 24.0
 value = 18.0
 rounded = true
 
-[node name="HSeparator" type="HSeparator" parent="ScrollContainer/Options" unique_id=1571308958]
+[node name="HSeparator3" type="HSeparator" parent="ScrollContainer/Options" unique_id=1013432024]
 layout_mode = 2
+
+[node name="UIStretch" parent="ScrollContainer/Options" unique_id=1792622087 instance=ExtResource("3_0yg8b")]
+layout_mode = 2
+description = "SETTINGS_CANVAS_STRETCH"
 
 [node name="UndefSetting" parent="ScrollContainer/Options" unique_id=1683413919 instance=ExtResource("3_0yg8b")]
 layout_mode = 2
 description = "SETTINGS_USE_AT_UNDEF"
 state = true
-
-[node name="HSeparator7" type="HSeparator" parent="ScrollContainer/Options" unique_id=1499822315]
-layout_mode = 2
 
 [node name="ThemeColor" type="HBoxContainer" parent="ScrollContainer/Options" unique_id=243570277]
 layout_mode = 2
@@ -389,6 +390,7 @@ on_text = "SETTINGS_BACKUP_INCREMENT"
 [connection signal="set" from="ScrollContainer/Options/Confetti" to="." method="_on_confetti_set"]
 [connection signal="value_changed" from="ScrollContainer/Options/TruncHbox/TruncationSpinner" to="." method="_on_truncation_spinner_value_changed"]
 [connection signal="value_changed" from="ScrollContainer/Options/FontHbox/FontSpinner" to="." method="_on_font_spinner_value_changed"]
+[connection signal="set" from="ScrollContainer/Options/UIStretch" to="." method="_on_ui_stretch_set"]
 [connection signal="set" from="ScrollContainer/Options/UndefSetting" to="." method="_on_undef_setting_set"]
 [connection signal="value_changed" from="ScrollContainer/Options/ThemeColor/ColorPicker" to="." method="_on_color_picker_value_changed"]
 [connection signal="pressed" from="ScrollContainer/Options/ThemeColorSubmitElse/ColorSubmitButton" to="." method="_on_color_submit_button_pressed"]

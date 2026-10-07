@@ -1,18 +1,19 @@
 # Versions
 
-## --WIP--
+## WIP 0.8.3
 
 ### Additions
 
-* Added backup callsign and backup backup mode settings (can choose random vs increment)
 * Added Polski / Polish translation! ([Sugar @trzyipol](https://github.com/A5TR0spud/dscr_asterclient/commits?author=Trzyipolkostkicukru))
+* Added backup callsign and backup backup mode settings (can choose random vs increment)
+* Added UI stretch setting
 
 ### Changes
 
 * Everything is louder now, as the overall volume seemed to be too low
   * Volume slider now goes up to 2x rather than 1.5x
 * Default volume label is now a button
-* Adjusted -577 shape and envelope and added a boost to lows
+* Tuned -577
 * Fleshed out the -702 into an entire parser and added an exception to -100 (sometimes), -111, and -99
 * Updated UI icons
 * The skeleton key now works as expected
@@ -20,10 +21,10 @@
 ### Fixes
 
 * Fixed the auto-number-separation setting not being translated from its key
-* Adjusted how button-copying works so that the auto-number-separation setting doesn't screw with pasting when copying from Library
+* Adjusted how button-copying works so that the auto-number-separation setting doesn't screw with pasting leading zeroes when copying from Library
 * Saving a transmission via Library and then pressing cancel now reverts to the save state instead of last loaded transmission
 * Fixed the order of saved transmissions in the Library breaking
-* (?) Fixed reconnecting never re-initiating, causing a softlock
+* (?) Fixed reconnecting never reintroducing yourself, causing a softlock
 
 ## 0.8.2
 
