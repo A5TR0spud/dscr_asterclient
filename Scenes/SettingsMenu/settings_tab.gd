@@ -197,11 +197,15 @@ func _on_ui_stretch_set(new_value):
 
 func _on_scale_confirm_cancel():
 	SettingsHandler.stretch_or_unstretch_canvas()
+	ui_scale.editable = true
+	ui_scale.set_value_no_signal(SettingsHandler.stretch_scale)
 
 func _on_scale_confirm_confirmed():
 	SettingsHandler.stretch_scale = ui_scale.value
 	SettingsHandler.stretch_or_unstretch_canvas()
 	save(false)
+	ui_scale.editable = true
 
 func _on_scale_confirm_probed():
+	ui_scale.editable = false
 	SettingsHandler.apply_ui_scale(ui_scale.value)
