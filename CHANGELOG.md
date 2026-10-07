@@ -1,10 +1,11 @@
 # Versions
 
-## --WIP--
+## 0.8.4
 
 ### Changes
 
 * Sending messages in the skeleton key channel now bypasses the auto-key system, so by default, they send to main chat
+* Adjusted base resolution so that stretch mode is maybe less bad
 
 ## 0.8.3
 

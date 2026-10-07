@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="DSCR Asterclient"
-config/version="0.8.3"
+config/version="0.8.4"
 config/tags=PackedStringArray("2d", "effort", "ui")
 run/main_scene="uid://bft3wuvruhqvw"
 config/auto_accept_quit=false
@@ -23,9 +23,13 @@ config/icon="res://icon.svg"
 
 [display]
 
+window/size/viewport_width=1920
+window/size/viewport_height=991
 window/size/mode=2
 window/size/initial_position_type=5
 window/size/sharp_corners=true
+window/size/window_width_override=1152
+window/size/window_height_override=648
 window/stretch/aspect="expand"
 
 [file_customization]
