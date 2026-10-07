@@ -16,8 +16,8 @@
 * word aliases (unless the macro system is sufficient)
 * clean up transmission un/re-loading and/to figure out duplicate and missing history
 * ability to block channels when using the skeleton key
- add backup callsign setting
 * music parsing for sine vs square vs saw vs triangle vs smooth square
+* when you've read all other channels, there's no unread message indicator in the skeleton key channel
 
 ### TRANSLATIONS
 

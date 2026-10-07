@@ -2,10 +2,9 @@
 
 [ext_resource type="Script" uid="uid://c3blhxqprhf46" path="res://Scenes/SourcesMenu/dict_change_entry.gd" id="1_jqllh"]
 [ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="1_qlgcq"]
-[ext_resource type="PackedScene" uid="uid://2emnji0ns3x2" path="res://Scenes/Common/confirmation_button.tscn" id="2_jqllh"]
+[ext_resource type="Script" uid="uid://dbvyvpj6id1sv" path="res://Scripts/ConfirmationButton.gd" id="3_8xyae"]
 
 [node name="DictChangeEntry" type="VBoxContainer" unique_id=1738595650]
-anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -50,9 +49,13 @@ translations = Dictionary[StringName, String]({
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="DeleteButton" parent="HBoxContainer" unique_id=1499947826 instance=ExtResource("2_jqllh")]
+[node name="DeleteButton" type="Button" parent="HBoxContainer" unique_id=250247456]
 layout_mode = 2
+size_flags_horizontal = 3
+text = "delete"
+script = ExtResource("3_8xyae")
 normal_text = "DELETE_ASK_SHORT"
+metadata/_custom_type_script = "uid://dbvyvpj6id1sv"
 
 [node name="SupportOptions" type="OptionButton" parent="." unique_id=940683363]
 layout_mode = 2

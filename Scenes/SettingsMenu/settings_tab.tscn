@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bx77kcm12yq8h" path="res://Scenes/SettingsMenu/settings_tab.gd" id="1_0yg8b"]
 [ext_resource type="PackedScene" uid="uid://dnd1u3xl3gie1" path="res://Scenes/SettingsMenu/setting_entry.tscn" id="3_0yg8b"]
 [ext_resource type="AudioStream" uid="uid://q27rk7sfk50e" path="res://Assets/Sounds/dial.ogg" id="3_nlym6"]
+[ext_resource type="Script" uid="uid://dbvyvpj6id1sv" path="res://Scripts/ConfirmationButton.gd" id="5_2xmuf"]
 [ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="5_gal0n"]
 [ext_resource type="PackedScene" uid="uid://c1h04iufkd28w" path="res://Scenes/CallsignPicker/callsign_node.tscn" id="5_qann0"]
 [ext_resource type="PackedScene" uid="uid://bw4nasduhbqkb" path="res://Scenes/Common/bool_toggle_button.tscn" id="6_qann0"]
@@ -132,6 +133,40 @@ layout_mode = 2
 [node name="UIStretch" parent="ScrollContainer/Options" unique_id=1792622087 instance=ExtResource("3_0yg8b")]
 layout_mode = 2
 description = "SETTINGS_CANVAS_STRETCH"
+
+[node name="UIScale" type="HBoxContainer" parent="ScrollContainer/Options" unique_id=425921686]
+layout_mode = 2
+
+[node name="ScaleLabel" type="Label" parent="ScrollContainer/Options/UIScale" unique_id=339292293]
+layout_mode = 2
+text = "ui scale"
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/Options/UIScale/ScaleLabel" unique_id=1127676552]
+script = ExtResource("5_gal0n")
+translations = Dictionary[StringName, String]({
+&"text": "SETTINGS_UI_SCALE"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="ScaleSpinner" type="SpinBox" parent="ScrollContainer/Options/UIScale" unique_id=1865330330]
+layout_mode = 2
+min_value = 0.5
+max_value = 4.0
+step = 0.05
+value = 1.0
+
+[node name="ScaleConfirm" type="Button" parent="ScrollContainer/Options" unique_id=1182839585]
+layout_mode = 2
+text = "confirm scale"
+script = ExtResource("5_2xmuf")
+normal_text = "SUBMIT"
+confirm_text = "SUBMIT"
+confirm_color = Color(0.39999998, 0.6299999, 1, 1)
+confirmed_sound = 6
+metadata/_custom_type_script = "uid://dbvyvpj6id1sv"
+
+[node name="HSeparator7" type="HSeparator" parent="ScrollContainer/Options" unique_id=913644994]
+layout_mode = 2
 
 [node name="UndefSetting" parent="ScrollContainer/Options" unique_id=1683413919 instance=ExtResource("3_0yg8b")]
 layout_mode = 2
@@ -391,6 +426,9 @@ on_text = "SETTINGS_BACKUP_INCREMENT"
 [connection signal="value_changed" from="ScrollContainer/Options/TruncHbox/TruncationSpinner" to="." method="_on_truncation_spinner_value_changed"]
 [connection signal="value_changed" from="ScrollContainer/Options/FontHbox/FontSpinner" to="." method="_on_font_spinner_value_changed"]
 [connection signal="set" from="ScrollContainer/Options/UIStretch" to="." method="_on_ui_stretch_set"]
+[connection signal="cancel" from="ScrollContainer/Options/ScaleConfirm" to="." method="_on_scale_confirm_cancel"]
+[connection signal="confirmed" from="ScrollContainer/Options/ScaleConfirm" to="." method="_on_scale_confirm_confirmed"]
+[connection signal="probed" from="ScrollContainer/Options/ScaleConfirm" to="." method="_on_scale_confirm_probed"]
 [connection signal="set" from="ScrollContainer/Options/UndefSetting" to="." method="_on_undef_setting_set"]
 [connection signal="value_changed" from="ScrollContainer/Options/ThemeColor/ColorPicker" to="." method="_on_color_picker_value_changed"]
 [connection signal="pressed" from="ScrollContainer/Options/ThemeColorSubmitElse/ColorSubmitButton" to="." method="_on_color_submit_button_pressed"]

@@ -14,6 +14,7 @@ static var instance: SoundManager
 @onready var party_horn: AudioStreamPlayer = $party_horn
 
 enum Sounds {
+	NONE,
 	NOTIFICATION,
 	CLICK,
 	CANCEL,
@@ -42,6 +43,8 @@ func _play_sound(sound_id: Sounds) -> void:
 	if AudioServer.is_bus_mute(AudioServer.get_bus_index("Master")):
 		return
 	match sound_id:
+		Sounds.NONE:
+			return
 		Sounds.NOTIFICATION:
 			notification_sound.play()
 		Sounds.CLICK:

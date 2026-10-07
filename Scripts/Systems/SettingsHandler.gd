@@ -24,6 +24,7 @@ static var number_auto_sep: bool = true
 static var backup_callsign: int = -1
 static var failsafe_callsign_increment: bool = true
 static var stretch_canvas: bool = false
+static var stretch_scale: float = 1
 
 static func validate_and_set_language(code: String = language):
 	if code not in LocaleMenu.VALID_LANGUAGES:
@@ -34,11 +35,15 @@ static func validate_and_set_language(code: String = language):
 	Main.on_localization_reload()
 	save()
 
+static func apply_ui_scale(scale: float):
+	Main.instance.get_tree().root.content_scale_factor = scale
+
 static func stretch_or_unstretch_canvas():
-	
-	Main.instance.get_tree().root.content_scale_mode = (
+	var window: Window = Main.instance.get_tree().root
+	window.content_scale_mode = (
 		Window.CONTENT_SCALE_MODE_CANVAS_ITEMS if stretch_canvas else Window.CONTENT_SCALE_MODE_DISABLED
 	)
+	window.content_scale_factor = stretch_scale
 
 static func delete_wss(address: String) -> void:
 	if websocket_addresses.has(address):
@@ -87,6 +92,7 @@ static func initialize() -> void:
 	backup_callsign = SaveSystem.settings.get_or_add("backup_callsign", backup_callsign)
 	failsafe_callsign_increment = SaveSystem.settings.get_or_add("failsafe_callsign_increment", failsafe_callsign_increment)
 	stretch_canvas = SaveSystem.settings.get_or_add("stretch_canvas", stretch_canvas)
+	stretch_scale = SaveSystem.settings.get_or_add("stretch_scale", stretch_scale)
 	stretch_or_unstretch_canvas.call_deferred()
 
 static func evaluate_volume() -> void:
@@ -135,3 +141,4 @@ static func export() -> void:
 	SaveSystem.settings.set("backup_callsign", backup_callsign)
 	SaveSystem.settings.set("failsafe_callsign_increment", failsafe_callsign_increment)
 	SaveSystem.settings.set("stretch_canvas", stretch_canvas)
+	SaveSystem.settings.set("stretch_scale", stretch_scale)

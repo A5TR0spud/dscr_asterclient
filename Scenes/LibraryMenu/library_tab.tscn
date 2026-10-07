@@ -4,10 +4,9 @@
 [ext_resource type="Script" uid="uid://drc541g03f64b" path="res://Scenes/LibraryMenu/library_tab.gd" id="1_ntelf"]
 [ext_resource type="PackedScene" uid="uid://d4neakrhevfia" path="res://Scenes/ChatMenu/transmission_entry.tscn" id="3_mpoun"]
 [ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="4_s4yvl"]
-[ext_resource type="PackedScene" uid="uid://2emnji0ns3x2" path="res://Scenes/Common/confirmation_button.tscn" id="5_mpoun"]
+[ext_resource type="Script" uid="uid://dbvyvpj6id1sv" path="res://Scripts/ConfirmationButton.gd" id="5_mpoun"]
 
 [node name="Library" type="PanelContainer" unique_id=1052642948]
-anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -140,9 +139,13 @@ translations = Dictionary[StringName, String]({
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="Delete" parent="Body/HBoxContainer/Editor/Buttons" unique_id=1499947826 instance=ExtResource("5_mpoun")]
+[node name="Delete" type="Button" parent="Body/HBoxContainer/Editor/Buttons" unique_id=1215264531]
 layout_mode = 2
+size_flags_horizontal = 3
+text = "delete"
+script = ExtResource("5_mpoun")
 confirm_text = "DELETE_CONFIRM_TRX"
+metadata/_custom_type_script = "uid://dbvyvpj6id1sv"
 
 [node name="CollapseSidebar" type="Button" parent="Body/HBoxContainer" unique_id=89407512]
 layout_mode = 2

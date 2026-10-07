@@ -12,6 +12,7 @@ func _ready() -> void:
 @onready var truncate: SpinBox = $ScrollContainer/Options/TruncHbox/TruncationSpinner
 @onready var font_size: SpinBox = $ScrollContainer/Options/FontHbox/FontSpinner
 @onready var ui_stretch: SettingEntry = $ScrollContainer/Options/UIStretch
+@onready var ui_scale: SpinBox = $ScrollContainer/Options/UIScale/ScaleSpinner
 @onready var color_edit: SpinBox = $ScrollContainer/Options/ThemeColor/ColorPicker
 @onready var color_sample: ColorRect = $ScrollContainer/Options/ColorRect
 @onready var sound_slider: Range = $ScrollContainer/Options/GlobalVolume/VolumeSlider
@@ -49,6 +50,7 @@ func refresh() -> void:
 	callsign_backup.callsign = SettingsHandler.backup_callsign
 	callsign_failsafe.set_pressed_no_signal(SettingsHandler.failsafe_callsign_increment)
 	_refresh_dict_supports()
+	ui_scale.set_value_no_signal(SettingsHandler.stretch_scale)
 
 func _refresh_dict_supports():
 	_refresh_confetti()
@@ -192,3 +194,14 @@ func _on_ui_stretch_set(new_value):
 	SettingsHandler.stretch_canvas = new_value
 	SettingsHandler.stretch_or_unstretch_canvas()
 	save(false)
+
+func _on_scale_confirm_cancel():
+	SettingsHandler.stretch_or_unstretch_canvas()
+
+func _on_scale_confirm_confirmed():
+	SettingsHandler.stretch_scale = ui_scale.value
+	SettingsHandler.stretch_or_unstretch_canvas()
+	save(false)
+
+func _on_scale_confirm_probed():
+	SettingsHandler.apply_ui_scale(ui_scale.value)

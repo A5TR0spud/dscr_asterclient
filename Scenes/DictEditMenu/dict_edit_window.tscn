@@ -4,10 +4,9 @@
 [ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="2_ql6ly"]
 [ext_resource type="Script" uid="uid://gtpqlwktlalr" path="res://Scripts/FilteredLineEdit.gd" id="3_f8ufa"]
 [ext_resource type="PackedScene" uid="uid://bw4nasduhbqkb" path="res://Scenes/Common/bool_toggle_button.tscn" id="3_si2t6"]
-[ext_resource type="PackedScene" uid="uid://2emnji0ns3x2" path="res://Scenes/Common/confirmation_button.tscn" id="5_2h3m4"]
+[ext_resource type="Script" uid="uid://dbvyvpj6id1sv" path="res://Scripts/ConfirmationButton.gd" id="5_2h3m4"]
 
 [node name="DictEditWindow" type="PanelContainer" unique_id=1113766720]
-anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -378,9 +377,13 @@ translations = Dictionary[StringName, String]({
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="DeleteButton" parent="DictEditMainframe/SubmitElseCancel" unique_id=1499947826 instance=ExtResource("5_2h3m4")]
+[node name="DeleteButton" type="Button" parent="DictEditMainframe/SubmitElseCancel" unique_id=2050367992]
 layout_mode = 2
+size_flags_horizontal = 3
+text = "delete"
+script = ExtResource("5_2h3m4")
 confirm_text = "DELETE_CONFIRM_SIG"
+metadata/_custom_type_script = "uid://dbvyvpj6id1sv"
 
 [node name="CloseButton" type="Button" parent="DictEditMainframe/SubmitElseCancel" unique_id=1956457673]
 layout_mode = 2

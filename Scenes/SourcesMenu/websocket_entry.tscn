@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c3qmqbpvgdp8f" path="res://Scenes/SourcesMenu/websocket_entry.gd" id="1_cp446"]
 [ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="2_75ije"]
-[ext_resource type="PackedScene" uid="uid://2emnji0ns3x2" path="res://Scenes/Common/confirmation_button.tscn" id="3_nxcla"]
+[ext_resource type="Script" uid="uid://dbvyvpj6id1sv" path="res://Scripts/ConfirmationButton.gd" id="3_bmpdh"]
 
 [node name="WebsocketEntry" type="VBoxContainer" unique_id=1674375786]
 anchors_preset = 15
@@ -31,9 +31,13 @@ translations = Dictionary[StringName, String]({
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="ConfirmationButton" parent="HBoxContainer" unique_id=1499947826 instance=ExtResource("3_nxcla")]
+[node name="ConfirmationButton" type="Button" parent="HBoxContainer" unique_id=2079574033]
 layout_mode = 2
+size_flags_horizontal = 3
+text = "delete"
+script = ExtResource("3_bmpdh")
 normal_text = "DELETE_ASK_SHORT"
+metadata/_custom_type_script = "uid://dbvyvpj6id1sv"
 
 [node name="HSeparator" type="HSeparator" parent="." unique_id=570079708]
 layout_mode = 2
