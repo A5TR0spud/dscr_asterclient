@@ -214,8 +214,7 @@ func send_message(written: String) -> Array:
 		if len(sig) < 3:
 			Chat.new_log(Chat.State.INPUT_ENCRYPT_TOO_SHORT, [Chat.CHANNEL_SELECTOR])
 			return [false, MessageCompilationResult.COMMAND_FAILED]
-		Chat.get_channel_node(sig[1])
-		Chat.focus_channel(sig[1])
+		Chat.open_channel_from_selector(sig[1])
 	else:
 		#only apply prefix if not manually setting a prefix
 		var prefix: PackedInt64Array = Chat.get_current_channel_node().get_prefix()

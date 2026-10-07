@@ -45,7 +45,7 @@ mouse_filter = 1
 theme_override_fonts/font = ExtResource("3_42owa")
 text = "1574"
 
-[node name="Control" type="Control" parent="Header" unique_id=1847686898]
+[node name="Spacer" type="Control" parent="Header" unique_id=1847686898]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
@@ -61,6 +61,19 @@ mouse_filter = 1
 text = "30 akersecond prior when"
 
 [node name="Sep2" type="VSeparator" parent="Header/HoverBox" unique_id=1837902486]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="KeyBox" type="HBoxContainer" parent="Header" unique_id=429854526]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Key" type="Label" parent="Header/KeyBox" unique_id=1876538771]
+modulate = Color(1, 1, 1, 0.49803922)
+layout_mode = 2
+text = "/key etc"
+
+[node name="VSeparator" type="VSeparator" parent="Header/KeyBox" unique_id=528018484]
 layout_mode = 2
 mouse_filter = 1
 

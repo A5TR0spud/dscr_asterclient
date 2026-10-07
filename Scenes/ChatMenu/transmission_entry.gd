@@ -1,6 +1,7 @@
 extends ChatEntry
 class_name TransEntry
 var trans: int = 0
+var key = null
 var is_image_open: bool = false
 @export var image_open_override: bool = false
 @export var stasis: bool = false
@@ -8,6 +9,8 @@ var is_image_open: bool = false
 
 # evil
 @onready var callsign_node: Label = $Header/Cbox/Callsign
+@onready var keybox_node: Control = $Header/KeyBox
+@onready var key_node: Label = $Header/KeyBox/Key
 @onready var transmission_node: MenuButton = $Header/Trans
 @onready var timeago_node: Label = $Header/HoverBox/Timeago
 @onready var message_node: RichTextLabel = $Body/Corpus/Message
@@ -31,6 +34,7 @@ func ready():
 	Main.instance.reload_nicknames.connect(refresh_callsign)
 	if stasis:
 		hover_node.visible = false
+	keybox_node.visible = key != null
 	Main.instance.reload_dictionary_support.connect(try_parses)
 	Main.instance.reload_dictionary_support.connect(func():
 		if -54 in message:
@@ -77,7 +81,9 @@ func override_transmission_label(text: String):
 
 func refresh():
 	timeago_node.text = get_timeago_string()
-	transmission_node.text = str(trans % 512).pad_zeros(3)
+	transmission_node.text = str(trans).pad_zeros(3)
+	if key is int:
+		key_node.text = DictionaryHandler.get_or_default_signal_name(key) if key < 0 else str(key)
 
 func set_message_text(new_text: String):
 	message_node.text = new_text

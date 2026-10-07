@@ -16,10 +16,7 @@
 * word aliases (unless the macro system is sufficient)
 * clean up transmission un/re-loading and/to figure out duplicate and missing history
 * ability to block channels when using the skeleton key
-* ghost messages from all channels to the skeleton key channel
-  * if in the skeleton key channel, key/at/send-to/encrypt won't swap selected channel
-* option to suppress notifications from skeleton key channel(s)
-* add backup callsign setting
+ add backup callsign setting
 * music parsing for sine vs square vs saw vs triangle vs smooth square
 * add setting for canvas stretch mode (window/stretch/mode="canvas_items")
 

@@ -53,7 +53,8 @@ func add_message_node(message: ChatEntry):
 			"m": PackedInt64Array(message.message),
 			"time": message.timestamp,
 			"sender": message.sender,
-			"trx": message.trans
+			"trx": message.trans,
+			"key": message.key
 		})
 		shown_transmissions += 1
 	message.tree_exiting.connect(_recalculate_sep.bind(message, false))
@@ -92,6 +93,7 @@ func try_show_history() -> bool:
 	trx.timestamp = unshown_to_add["time"]
 	trx.sender = unshown_to_add["sender"]
 	trx.trans = unshown_to_add["trx"]
+	trx.key = unshown_to_add["key"]
 	chat_display.add_child(trx)
 	chat_display.move_child(trx, 0)
 	_recalculate_sep(trx, true)

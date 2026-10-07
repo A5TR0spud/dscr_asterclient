@@ -24,7 +24,7 @@ func _ready():
 func open_loaded_channels():
 	for tab_idx in range(1, channel_container.get_child_count()):
 		var tab: ChatChannel = channel_container.get_child(tab_idx)
-		if tab.id in SettingsHandler.opened_channels or SettingsHandler.opened_channels.has(SKELETON_KEY):
+		if tab.id in SettingsHandler.opened_channels:# or SettingsHandler.opened_channels.has(SKELETON_KEY):
 			continue
 		instance.channel_container.set_tab_hidden(tab_idx, true)
 	for channel_id in SettingsHandler.opened_channels:
@@ -73,7 +73,19 @@ static func new_transmission(packet: PackedStringArray) -> void:
 		and channel_is_visible(channel_id)
 	):
 		SoundManager.play_sound(SoundManager.Sounds.NOTIFICATION)
+	if channel_id == SKELETON_KEY:
+		new_message.key = SKELETON_KEY
 	channel.add_message_node(new_message)
+	
+	if channel_id != SKELETON_KEY:
+		var ske_message: TransEntry = transmission_entry_scene.instantiate()
+		ske_message.timestamp = new_message.timestamp
+		ske_message.sender = new_message.sender
+		ske_message.trans = new_message.trans
+		ske_message.message = integer_message
+		ske_message.key = channel_id
+		var spooky_channel: ChatChannel = get_channel_node(SKELETON_KEY)
+		spooky_channel.add_message_node(ske_message)
 
 enum State {
 	CONNECTING,
@@ -99,10 +111,21 @@ static func channel_is_visible(id = null) -> bool:
 	var node = instance.channel_container.get_node(str(id))
 	return not instance.channel_container.is_tab_hidden(node.get_index())
 
+static func open_channel_from_selector(id: int) -> void:
+	var has_skeleton_key := SKELETON_KEY in SettingsHandler.opened_channels
+	var has_key := id in SettingsHandler.opened_channels
+	var in_channel := get_channel_node(id).is_visible_in_tree()
+	if in_channel:
+		return
+	if has_skeleton_key and not has_key:
+		id = SKELETON_KEY
+	Chat.get_channel_node(id)
+	Chat.focus_channel(id)
+
 ## gets channel node given an id.
 ## if an id is not provided, the default channel is used
 ## if a channel does not exist, its scene will be instantiated and set up
-static func get_channel_node(id = null) -> Node:
+static func get_channel_node(id = null) -> ChatChannel:
 	if id == null:
 		return instance.channel_container.get_child(0)
 	if instance.channel_container.has_node(str(id)):
@@ -112,23 +135,27 @@ static func get_channel_node(id = null) -> Node:
 	var tab_id = channel_node.get_index()
 	channel_node.set_channel_name(id)
 	
-	instance.channel_container.set_tab_hidden(tab_id, not SettingsHandler.opened_channels.has(SKELETON_KEY))
+	instance.channel_container.set_tab_hidden(tab_id, not SettingsHandler.opened_channels.has(tab_id))
+	#instance.channel_container.set_tab_hidden(tab_id, not SettingsHandler.opened_channels.has(SKELETON_KEY))
 	
 	return channel_node
 
 static func get_current_channel_node() -> Node:
 	return instance.channel_container.get_child(instance.channel_container.current_tab)
 
-static func enable_channel(id: int):
+static func enable_channel(id: int, save: bool = true):
 	var tabber: TabContainer = instance.channel_container
 	var tab_id = get_channel_node(id).get_index()
 	tabber.set_tab_hidden(tab_id, false)
-	if id not in SettingsHandler.opened_channels:
+	if save and id not in SettingsHandler.opened_channels:
 		SettingsHandler.opened_channels.append(id)
 		SettingsHandler.save()
 	if id == SKELETON_KEY:
 		for tab_to_bone in range(tabber.get_tab_count()):
-			tabber.set_tab_hidden(tab_to_bone, false)
+			var bone_id: Variant = (tabber.get_child(tab_to_bone) as ChatChannel).id
+			if bone_id is not int:
+				continue
+			tabber.set_tab_hidden(tab_to_bone, not bone_id in SettingsHandler.opened_channels)
 
 static func disable_channel(id: int):
 	var tabber: TabContainer = instance.channel_container
@@ -137,20 +164,21 @@ static func disable_channel(id: int):
 	if id in SettingsHandler.opened_channels:
 		SettingsHandler.opened_channels.erase(id)
 		SettingsHandler.save()
-	if id == SKELETON_KEY:
-		for tab_to_bone in range(tabber.get_tab_count()):
-			var tab_to_check: Control = tabber.get_tab_control(tab_to_bone)
-			if tab_to_check is not ChatChannel:
-				continue
-			tab_to_check = tab_to_check as ChatChannel
-			var signal_key = tab_to_check.id
-			if signal_key is not int:
-				continue
-			signal_key = signal_key as int
-			if not SettingsHandler.opened_channels.has(signal_key):
-				tabber.set_tab_hidden(tab_to_bone, true)
+	#if id == SKELETON_KEY:
+	#	for tab_to_bone in range(tabber.get_tab_count()):
+	#		var tab_to_check: Control = tabber.get_tab_control(tab_to_bone)
+	#		if tab_to_check is not ChatChannel:
+	#			continue
+	#		tab_to_check = tab_to_check as ChatChannel
+	#		var signal_key = tab_to_check.id
+	#		if signal_key is not int:
+	#			continue
+	#		signal_key = signal_key as int
+	#		if not SettingsHandler.opened_channels.has(signal_key):
+	#			tabber.set_tab_hidden(tab_to_bone, true)
 
 static func focus_channel(id: int):
+	enable_channel(id, false)
 	get_channel_node(id).visible = true
 
 func _on_tab_container_tab_changed(tab: int) -> void:

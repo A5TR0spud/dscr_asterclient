@@ -15,6 +15,7 @@
 * Adjusted -577 shape and envelope and added a boost to lows
 * Fleshed out the -702 into an entire parser and added an exception to -100 (sometimes), -111, and -99
 * Updated UI icons
+* The skeleton key now works as expected
 
 ### Fixes
 
@@ -22,6 +23,7 @@
 * Adjusted how button-copying works so that the auto-number-separation setting doesn't screw with pasting when copying from Library
 * Saving a transmission via Library and then pressing cancel now reverts to the save state instead of last loaded transmission
 * Fixed the order of saved transmissions in the Library breaking
+* (?) Fixed reconnecting never re-initiating, causing a softlock
 
 ## 0.8.2
 
