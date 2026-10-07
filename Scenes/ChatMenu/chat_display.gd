@@ -7,7 +7,7 @@ class_name ChatChannel
 static var trx_scene = preload("res://Scenes/ChatMenu/transmission_entry.tscn")
 var default_channel: bool = true
 var id = null
-var enable_notification: bool = false
+var _unread_notification: bool = false
 
 const HIDE_EXCESS_TRANSMISSIONS: int = 32
 
@@ -61,7 +61,11 @@ func add_message_node(message: ChatEntry):
 	chat_display.add_child(message)
 	_recalculate_sep(message, true)
 	
-	if Chat.instance.channel_container.current_tab != get_index():
+	if (
+		Chat.instance.channel_container.current_tab != get_index() and
+		id != Chat.SKELETON_KEY and
+		Chat.get_current_channel_node().id != Chat.SKELETON_KEY
+	):
 		set_notification()
 
 func _input(event):
@@ -124,17 +128,20 @@ func set_channel_name(_id):
 	update_name()
 
 func set_notification():
-	enable_notification = true
+	_unread_notification = true
 	update_name()
 
 func clear_notification():
-	enable_notification = false
+	_unread_notification = false
 	update_name()
+
+func has_notification() -> bool:
+	return _unread_notification
 
 func update_name():
 	Chat.instance.channel_container.set_tab_title(
 		get_index(),
-		Localizer.translate("CHAT_CHANNEL_UNREAD" if enable_notification else "CHAT_CHANNEL",
+		Localizer.translate("CHAT_CHANNEL_UNREAD" if _unread_notification else "CHAT_CHANNEL",
 			Localizer.translate("CHAT_CHANNEL_NONE")
 			if default_channel else
 			DictionaryHandler.get_or_default_signal_name(id) if id < 0 else str(id)

@@ -79,9 +79,11 @@ static func new_transmission(packet: PackedStringArray) -> void:
 	
 	if (
 		(new_message.sender != Main.instance.previously_accepted_callsign)
-		and instance.get_window().has_focus()
-		and get_active_channel().id == channel_id
-		and channel.scroll_container.bottom_is_visible()
+		and (
+			not instance.get_window().has_focus() or
+			(get_active_channel().id != channel_id and get_active_channel().id != SKELETON_KEY) or
+			not channel.scroll_container.bottom_is_visible()
+		)
 		and channel_is_available(channel_id)
 	):
 		SoundManager.play_sound(SoundManager.Sounds.NOTIFICATION)
@@ -90,6 +92,9 @@ static func new_transmission(packet: PackedStringArray) -> void:
 		new_message.key = SKELETON_KEY
 		ghost_to_skeleton = false
 	channel.add_message_node(new_message)
+	
+	if get_active_channel().id != channel_id and get_active_channel().id != SKELETON_KEY:
+		spooky_channel.set_notification()
 	
 	if ghost_to_skeleton:
 		var ske_message: TransEntry = transmission_entry_scene.instantiate()
@@ -195,8 +200,22 @@ static func focus_channel(id: int):
 	enable_channel(id, false)
 	get_channel_node(id).visible = true
 
+func _update_skeleton_key_notification() -> void:
+	for c: ChatChannel in channel_container.get_children():
+		if c.id == SKELETON_KEY:
+			continue
+		if c.has_notification():
+			return
+	get_channel_node(SKELETON_KEY).clear_notification()
+
 func _on_tab_container_tab_changed(tab: int) -> void:
-	channel_container.get_child(tab).clear_notification()
+	var cha: ChatChannel = channel_container.get_child(tab)
+	cha.clear_notification()
+	if cha.id != SKELETON_KEY:
+		_update_skeleton_key_notification()
+	else:
+		for c: ChatChannel in channel_container.get_children():
+			c.clear_notification()
 
 static func new_log(state: State, args: Array = []) -> void:
 	var new_message: StatusLogEntry = status_log_entry_scene.instantiate()

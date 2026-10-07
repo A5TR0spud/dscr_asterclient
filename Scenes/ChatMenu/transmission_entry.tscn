@@ -69,7 +69,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="Key" type="Label" parent="Header/KeyBox" unique_id=1876538771]
-modulate = Color(1, 1, 1, 0.49803922)
+modulate = Color(0.8784314, 0.7647059, 0, 1)
 layout_mode = 2
 text = "/key etc"
 

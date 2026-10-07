@@ -5,7 +5,10 @@
 ### Changes
 
 * Sending messages in the skeleton key channel now bypasses the auto-key system, so by default, they send to main chat
-* Adjusted base resolution so that stretch mode is maybe less bad
+* Adjusted base resolution so that stretch mode is less bad by default
+* Added UI Scale setting
+* Reading all channels now marks the skeleton key as read and vice versa
+* Keys in the skeleton channel are now yellow to match vanilla DSCR
 
 ## 0.8.3
 
