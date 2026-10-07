@@ -17,11 +17,7 @@
 * clean up transmission un/re-loading and/to figure out duplicate and missing history
 * ability to block channels when using the skeleton key
 * music parsing for sine vs square vs saw vs triangle vs smooth square
-* when you've read all other channels, there's no unread message indicator in the skeleton key channel
-
-### TRANSLATIONS
-
-* SETTINGS_CANVAS_STRETCH: Polish
+* ???? i forgor
 
 ### nikzapp
 
