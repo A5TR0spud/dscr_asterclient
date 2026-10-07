@@ -21,6 +21,10 @@ func _ready():
 	Main.instance.reload_settings.connect(open_loaded_channels)
 	open_loaded_channels()
 
+static func get_active_channel() -> ChatChannel:
+	var idx: int = instance.channel_container.current_tab
+	return instance.channel_container.get_child(idx)
+
 func open_loaded_channels():
 	for tab_idx in range(1, channel_container.get_child_count()):
 		var tab: ChatChannel = channel_container.get_child(tab_idx)
@@ -56,35 +60,44 @@ static func new_transmission(packet: PackedStringArray) -> void:
 		#print(integer_message)
 	
 	var channel: ChatChannel = get_channel_node(channel_id)
+	var spooky_channel: ChatChannel = get_channel_node(SKELETON_KEY)
 	
 	new_message.message = integer_message
 	
 	if (
 		Confetti.evaluate_confetti(integer_message) and
-		channel.is_visible_in_tree() and
-		channel.scroll_container.bottom_is_visible()
+		(
+			(get_active_channel().id == channel_id and
+			channel.scroll_container.bottom_is_visible())
+			or
+			(get_active_channel().id == SKELETON_KEY and
+			spooky_channel.scroll_container.bottom_is_visible())
+		)
 	):
 		print("confetti!")
 		Confetti.burst()
 	
 	if (
 		(new_message.sender != Main.instance.previously_accepted_callsign)
-		and (not instance.get_window().has_focus() or not channel.is_visible_in_tree() or not channel.scroll_container.bottom_is_visible())
-		and channel_is_visible(channel_id)
+		and instance.get_window().has_focus()
+		and get_active_channel().id == channel_id
+		and channel.scroll_container.bottom_is_visible()
+		and channel_is_available(channel_id)
 	):
 		SoundManager.play_sound(SoundManager.Sounds.NOTIFICATION)
+	var ghost_to_skeleton: bool = true
 	if channel_id == SKELETON_KEY:
 		new_message.key = SKELETON_KEY
+		ghost_to_skeleton = false
 	channel.add_message_node(new_message)
 	
-	if channel_id != SKELETON_KEY:
+	if ghost_to_skeleton:
 		var ske_message: TransEntry = transmission_entry_scene.instantiate()
 		ske_message.timestamp = new_message.timestamp
 		ske_message.sender = new_message.sender
 		ske_message.trans = new_message.trans
 		ske_message.message = integer_message
 		ske_message.key = channel_id
-		var spooky_channel: ChatChannel = get_channel_node(SKELETON_KEY)
 		spooky_channel.add_message_node(ske_message)
 
 enum State {
@@ -102,7 +115,7 @@ enum State {
 	DUPLICATE_NAME,
 }
 
-static func channel_is_visible(id = null) -> bool:
+static func channel_is_available(id = null) -> bool:
 	if id == null:
 		return true
 	var has: bool = instance.channel_container.has_node(str(id))
@@ -112,11 +125,12 @@ static func channel_is_visible(id = null) -> bool:
 	return not instance.channel_container.is_tab_hidden(node.get_index())
 
 static func open_channel_from_selector(id: int) -> void:
+	if get_active_channel().id == id:
+		return
+	if get_active_channel().id == SKELETON_KEY:
+		return
 	var has_skeleton_key := SKELETON_KEY in SettingsHandler.opened_channels
 	var has_key := id in SettingsHandler.opened_channels
-	var in_channel := get_channel_node(id).is_visible_in_tree()
-	if in_channel:
-		return
 	if has_skeleton_key and not has_key:
 		id = SKELETON_KEY
 	Chat.get_channel_node(id)

@@ -1,5 +1,11 @@
 # Versions
 
+## --WIP--
+
+### Changes
+
+* Sending messages in the skeleton key channel now bypasses the auto-key system, so by default, they send to main chat
+
 ## 0.8.3
 
 ### Additions

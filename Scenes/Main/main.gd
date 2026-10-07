@@ -206,7 +206,7 @@ func send_message(written: String) -> Array:
 			Chat.new_log(Chat.State.INPUT_COMMAND_LENGTH_INVALID, [Chat.COMMAND_LEAVE, 2])
 			return [false, MessageCompilationResult.COMMAND_FAILED]
 		var res := MessageCompilationResult.REDUNDANT
-		if Chat.channel_is_visible(sig[1]):
+		if Chat.channel_is_available(sig[1]):
 			res = MessageCompilationResult.HIDE_SENT
 		Chat.disable_channel(sig[1])
 		return [true, res]
@@ -215,7 +215,7 @@ func send_message(written: String) -> Array:
 			Chat.new_log(Chat.State.INPUT_ENCRYPT_TOO_SHORT, [Chat.CHANNEL_SELECTOR])
 			return [false, MessageCompilationResult.COMMAND_FAILED]
 		Chat.open_channel_from_selector(sig[1])
-	else:
+	elif Chat.get_active_channel().id != Chat.SKELETON_KEY:
 		#only apply prefix if not manually setting a prefix
 		var prefix: PackedInt64Array = Chat.get_current_channel_node().get_prefix()
 		sig = prefix + sig
