@@ -104,7 +104,7 @@ one_shot = true
 autostart = true
 
 [node name="LeftBasic" type="GPUParticles2D" parent="." unique_id=1343541128]
-position = Vector2(0, 648)
+position = Vector2(0, 991)
 rotation = -1.1780972
 scale = Vector2(0.99999994, 0.99999994)
 emitting = false
@@ -118,7 +118,7 @@ visibility_rect = Rect2(-100, -200, 1000, 1000)
 process_material = SubResource("ParticleProcessMaterial_yf5fn")
 
 [node name="LeftTrails" type="GPUParticles2D" parent="." unique_id=60095057]
-position = Vector2(0, 648)
+position = Vector2(0, 991)
 rotation = -1.3089969
 scale = Vector2(0.99999994, 0.99999994)
 emitting = false
@@ -137,7 +137,7 @@ trail_section_subdivisions = 1
 process_material = SubResource("ParticleProcessMaterial_r0mpv")
 
 [node name="RightBasic" type="GPUParticles2D" parent="." unique_id=2033066561]
-position = Vector2(1152, 648)
+position = Vector2(1920, 991)
 rotation = -1.9634954
 emitting = false
 amount = 24
@@ -150,7 +150,7 @@ visibility_rect = Rect2(-100, -800, 1000, 1000)
 process_material = SubResource("ParticleProcessMaterial_yf5fn")
 
 [node name="RightTrails" type="GPUParticles2D" parent="." unique_id=1761447008]
-position = Vector2(1152, 648)
+position = Vector2(1920, 991)
 rotation = -1.8325958
 emitting = false
 amount = 14

@@ -17,8 +17,6 @@
 * clean up transmission un/re-loading and/to figure out duplicate and missing history
 * ability to block channels when using the skeleton key
 * music parsing for sine vs square vs saw vs triangle vs smooth square
-* reordering channel tabs saves the new order
-* make keys in the skeleton key channel clickable to open the channel
 
 ### nikzapp
 

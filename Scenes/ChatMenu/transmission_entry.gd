@@ -65,6 +65,8 @@ func try_parses():
 		song_node.visible = has_valid_song and song_enabled
 		if !has_song and delete_empty_parses:
 			song_node.queue_free()
+		elif !has_valid_song:
+			song_node.stop_music()
 
 func refresh_callsign():
 	callsign_node.text = Main.base_10_to_callsign(sender)

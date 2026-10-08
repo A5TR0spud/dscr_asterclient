@@ -44,25 +44,35 @@ func _on_item_rect_changed():
 static func can_confetti() -> bool:
 	return SettingsHandler.confetti and DictionaryHandler.support_dscr and -702 in DictionaryHandler.word_keys
 
+
+const CONFETTI: int = -702
+const DELIMIT: int = -2
+const NIL: int = -111
+const NOT: int = -29
+const IS_OF: int = -99
+const IS: int = -100
+const AND: int = -30
+const THEN: int = -36
+
 static func evaluate_confetti(message: Array[int]) -> bool:
 	if not can_confetti():
 		return false
 	var confetti_parser := TransmissionParser.new(message)
 	while confetti_parser.can_continue():
-		if not confetti_parser.skip_to(-702):
+		if not confetti_parser.skip_to(CONFETTI):
 			break
-		if confetti_parser.peek(-1) == -111:
+		if confetti_parser.peek(-1) == NIL:
 			confetti_parser.skip(2)
 			continue
-		if confetti_parser.peek(1) == -29:
+		if confetti_parser.peek(1) == NOT:
 			confetti_parser.skip(2)
 			continue
-		if confetti_parser.peek(1) == -99:
+		if confetti_parser.peek(1) == IS_OF:
 			confetti_parser.skip(2)
 			continue
-		if confetti_parser.peek(1) == -100:
+		if confetti_parser.peek(1) == IS:
 			var p2 = confetti_parser.peek(2)
-			if p2 is int and p2 != -2:
+			if p2 is int and p2 != DELIMIT:
 				confetti_parser.skip(3)
 				continue
 		var j: int = confetti_parser.save_state()
@@ -70,15 +80,17 @@ static func evaluate_confetti(message: Array[int]) -> bool:
 		var delimited_right: int = message.size() - 1 - j
 		for i in range(1,4):
 			if (
-				(confetti_parser.peek(-i) == -2 or confetti_parser.peek(-i) == -36) and
-				(confetti_parser.peek(-i - 1) == -2 or -i - 1 + j < 0)
+				((confetti_parser.peek(-i) == DELIMIT or confetti_parser.peek(-i) == THEN) and
+				(confetti_parser.peek(-i - 1) == DELIMIT or -i - 1 + j < 0))
+				or confetti_parser.peek(-i) == AND
 			):
 				delimited_left = i - 1
 				break
 		for i in range(1,4):
 			if (
-				confetti_parser.peek(i) == -2 and
-				(confetti_parser.peek(i + 1) == -2 or i + j + 1 >= message.size())
+				(confetti_parser.peek(i) == DELIMIT and
+				(confetti_parser.peek(i + 1) == DELIMIT or i + j + 1 >= message.size()))
+				or confetti_parser.peek(i) == AND
 			):
 				delimited_right = i - 1
 				break

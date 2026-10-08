@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://dbvyvpj6id1sv" path="res://Scripts/ConfirmationButton.gd" id="5_mpoun"]
 
 [node name="Library" type="PanelContainer" unique_id=1052642948]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -183,7 +184,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="timeout" from="RefreshDebounce" to="." method="_on_refresh_debounce_timeout"]
 [connection signal="pressed" from="Body/HBoxContainer/Editor/VSplitContainer/VBoxContainer/HBoxContainer/CopySignals" to="." method="_on_copy_signals_pressed"]
 [connection signal="pressed" from="Body/HBoxContainer/Editor/VSplitContainer/VBoxContainer/HBoxContainer/CopyWords" to="." method="_on_copy_words_pressed"]

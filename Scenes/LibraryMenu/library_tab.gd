@@ -136,10 +136,6 @@ func _on_copy_signals_pressed():
 func _on_copy_words_pressed():
 	DisplayServer.clipboard_set(DictionaryHandler.signals_to_words(current_transmission, true))
 
-func _on_visibility_changed():
-	if visible:
-		_refresh_preview()
-
 var _search_is_queued: bool = false
 func queue_search(new_text: String = search.text):
 	_search_is_queued = true

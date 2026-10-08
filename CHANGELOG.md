@@ -6,10 +6,13 @@
 
 * The key indicator in the skeleton key channel can now be clicked
 * Rearranging channel tabs now saves the new order
+* -702 now delimits at -30 as well
 
 ### Fixes
 
-* (?) Potentially fixed issue that on unknown conditions would cause callsign to randomize a crap ton
+* -577 now ceases in the Library when switching to a transmission that doesn't have one
+* (?) Potentially fixed potential issue that on unknown conditions would cause callsign to randomize a crap ton
+* Switching to the Library no longer reloads the current saved transmission (-577 won't be so shy)
 
 ## 0.8.4
 
