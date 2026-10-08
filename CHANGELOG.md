@@ -1,5 +1,11 @@
 # Versions
 
+## --WIP--
+
+### Fixes
+
+* (?) Potentially fixed issue that on unknown conditions would cause callsign to randomize a crap ton
+
 ## 0.8.4
 
 ### Additions

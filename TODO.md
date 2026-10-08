@@ -18,6 +18,7 @@
 * ability to block channels when using the skeleton key
 * music parsing for sine vs square vs saw vs triangle vs smooth square
 * ???? i forgor
+* make keys in the skeleton key channel clickable to open the channel
 
 ### nikzapp
 

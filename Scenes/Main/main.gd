@@ -259,30 +259,53 @@ func _verify_callsign(cs: int, force_one_fail: bool = false) -> int:
 	return cs
 
 func _try_claim_callsign():
+	var valid_cs: bool = previously_accepted_callsign <= 4095 and previously_accepted_callsign >= 0
 	var valid_pref: bool = SettingsHandler.preferred_callsign <= 4095 and SettingsHandler.preferred_callsign >= 0
 	var valid_fail: bool = SettingsHandler.backup_callsign <= 4095 and SettingsHandler.backup_callsign >= 0 
 	
-	if valid_pref and previously_accepted_callsign == SettingsHandler.preferred_callsign:
+	# do nothing if we have the preferred callsign
+	if (
+		valid_pref and
+		valid_cs and
+		previously_accepted_callsign == SettingsHandler.preferred_callsign
+	):
 		return
-	
+	# do nothing if we have the backup callsign and
+	# and the preferred callsign is taken
+	if (
+		valid_fail and
+		valid_cs and
+		valid_pref and
+		previously_accepted_callsign == SettingsHandler.backup_callsign and
+		SettingsHandler.preferred_callsign in connected_users
+	):
+		return
+	# do nothing if we have the backup callsign and
+	# and there is no preferred callsign
+	if (
+		valid_fail and
+		valid_cs and
+		previously_accepted_callsign == SettingsHandler.backup_callsign and
+		not valid_pref
+	):
+		return
+	# queue preferred callsign if it is available
 	if (
 		valid_pref and
 		SettingsHandler.preferred_callsign not in connected_users
 	):
 		set_callsign(SettingsHandler.preferred_callsign)
 		return
+	# queue backup callsign if it is available
 	if (
 		valid_fail and
-		previously_accepted_callsign != SettingsHandler.backup_callsign and
 		SettingsHandler.backup_callsign not in connected_users
 	):
 		set_callsign(SettingsHandler.backup_callsign)
 		return
-	if valid_pref and SettingsHandler.preferred_callsign in connected_users:
-		return
-	if valid_fail and SettingsHandler.backup_callsign in connected_users:
-		return
-	set_callsign(-1)
+	# randomize callsign if it's nothing
+	if not valid_cs:
+		set_callsign(-2)
 
 var _handling_loss: bool = false
 func handle_packet(incoming: String) -> void:
@@ -314,7 +337,8 @@ func handle_packet(incoming: String) -> void:
 		for i in status.slice(1):
 			connected_users.append(i.to_int())
 		connected_user_change.emit()
-		_try_claim_callsign()
+		#avoid *some* internet race conditions, hopefully
+		get_tree().create_timer(randf_range(0.1, 1)).timeout.connect(_try_claim_callsign)
 		return
 	print("UNKNOWN STRING PACKET: %s" % incoming)
 
