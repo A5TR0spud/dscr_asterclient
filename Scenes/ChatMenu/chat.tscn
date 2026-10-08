@@ -29,5 +29,6 @@ custom_maximum_size = Vector2(-1, 400)
 layout_mode = 2
 size_flags_vertical = 8
 
+[connection signal="active_tab_rearranged" from="TabContainer" to="." method="_on_tab_container_active_tab_rearranged"]
 [connection signal="tab_changed" from="TabContainer" to="." method="_on_tab_container_tab_changed"]
 [connection signal="submit_text" from="MessageEdit" to="." method="_on_message_edit_submit_text"]

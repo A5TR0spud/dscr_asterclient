@@ -68,10 +68,18 @@ mouse_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Key" type="Label" parent="Header/KeyBox" unique_id=1876538771]
-modulate = Color(0.8784314, 0.7647059, 0, 1)
+[node name="Key" type="Button" parent="Header/KeyBox" unique_id=1050312640]
 layout_mode = 2
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.8784314, 0.7647059, 0, 1)
+theme_override_colors/font_focus_color = Color(0.8784314, 0.7647059, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.8784314, 0.7647059, 0, 1)
+theme_override_colors/font_hover_color = Color(0.8784314, 0.7647059, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.8784314, 0.7647059, 0, 1)
+theme_override_colors/font_disabled_color = Color(0.8784314, 0.7647059, 0, 1)
 text = "/key etc"
+flat = true
 
 [node name="VSeparator" type="VSeparator" parent="Header/KeyBox" unique_id=528018484]
 layout_mode = 2
@@ -172,6 +180,7 @@ layout_mode = 2
 
 [connection signal="hover_change" from="." to="." method="_on_hover_change"]
 [connection signal="set_etc_visibility" from="." to="." method="_on_set_etc_visibility"]
+[connection signal="pressed" from="Header/KeyBox/Key" to="." method="_on_key_pressed"]
 [connection signal="meta_clicked" from="Body/Corpus/Message" to="." method="_on_message_meta_clicked"]
 [connection signal="toggled" from="Body/Corpus/ContextButtons/ImageButton" to="." method="_on_image_button_toggled"]
 [connection signal="toggled" from="Body/Corpus/ContextButtons/EtcButton" to="." method="_on_etc_button_toggled"]

@@ -10,7 +10,7 @@ var is_image_open: bool = false
 # evil
 @onready var callsign_node: Label = $Header/Cbox/Callsign
 @onready var keybox_node: Control = $Header/KeyBox
-@onready var key_node: Label = $Header/KeyBox/Key
+@onready var key_node: Button = $Header/KeyBox/Key
 @onready var transmission_node: MenuButton = $Header/Trans
 @onready var timeago_node: Label = $Header/HoverBox/Timeago
 @onready var message_node: RichTextLabel = $Body/Corpus/Message
@@ -35,6 +35,9 @@ func ready():
 	if stasis:
 		hover_node.visible = false
 	keybox_node.visible = key != null
+	if key == Chat.SKELETON_KEY:
+		key_node.disabled = true
+		key_node.mouse_default_cursor_shape = Control.CURSOR_ARROW
 	Main.instance.reload_dictionary_support.connect(try_parses)
 	Main.instance.reload_dictionary_support.connect(func():
 		if -54 in message:
@@ -137,6 +140,7 @@ func _on_hover_change(hovering: bool) -> void:
 	hover_node.visible = hovering
 	is_hovering = hovering
 	transmission_node.flat = not hovering
+	key_node.flat = not hovering or key == Chat.SKELETON_KEY
 	_handle_clickables()
 
 func _on_set_etc_visibility(visiblity: bool) -> void:
@@ -170,3 +174,6 @@ func _handle_clickables():
 
 func _input(_event):
 	_handle_clickables()
+
+func _on_key_pressed():
+	Chat.focus_channel(key)

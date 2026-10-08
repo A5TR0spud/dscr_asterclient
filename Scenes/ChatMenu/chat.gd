@@ -6,6 +6,7 @@ static var transmission_entry_scene = preload("res://Scenes/ChatMenu/transmissio
 static var status_log_entry_scene = preload("res://Scenes/ChatMenu/status_log_entry.tscn")
 static var chat_channel_scene = preload("res://Scenes/ChatMenu/chat_channel.tscn")
 @onready var channel_container: TabContainer = $TabContainer
+@onready var main_channel: ChatChannel = $TabContainer/Main
 
 const CHANNEL_SELECTOR: int = -65535
 const COMMAND_JOIN: int = -65534
@@ -213,9 +214,19 @@ func _on_tab_container_tab_changed(tab: int) -> void:
 	cha.clear_notification()
 	if cha.id != SKELETON_KEY:
 		_update_skeleton_key_notification()
-	else:
-		for c: ChatChannel in channel_container.get_children():
+	var debone_zone: bool = SKELETON_KEY not in SettingsHandler.opened_channels
+	for c: ChatChannel in channel_container.get_children():
+		if cha.id == SKELETON_KEY:
 			c.clear_notification()
+		if debone_zone:
+			continue
+		if c.id is not int:
+			continue
+		if c.id in SettingsHandler.opened_channels:
+			continue
+		if c.is_visible_in_tree():
+			continue
+		disable_channel(c.id)
 
 static func new_log(state: State, args: Array = []) -> void:
 	var new_message: StatusLogEntry = status_log_entry_scene.instantiate()
@@ -288,3 +299,16 @@ func _on_message_edit_submit_text(message: String):
 			SoundManager.play_sound(SoundManager.Sounds.CLOSE_UI)
 		Main.MessageCompilationResult.REDUNDANT:
 			SoundManager.play_sound(SoundManager.Sounds.REDUNDANT)
+
+func _on_tab_container_active_tab_rearranged(_idx_to):
+	var new_order: PackedInt64Array = []
+	for c: ChatChannel in channel_container.get_children():
+		if c.id is not int:
+			continue
+		if c.id not in SettingsHandler.opened_channels:
+			continue
+		new_order.append(c.id)
+	SettingsHandler.opened_channels = new_order
+	SettingsHandler.save()
+	channel_container.move_child(main_channel, 0)
+	

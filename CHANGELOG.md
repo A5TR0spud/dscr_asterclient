@@ -2,6 +2,11 @@
 
 ## --WIP--
 
+### Changes
+
+* The key indicator in the skeleton key channel can now be clicked
+* Rearranging channel tabs now saves the new order
+
 ### Fixes
 
 * (?) Potentially fixed issue that on unknown conditions would cause callsign to randomize a crap ton
