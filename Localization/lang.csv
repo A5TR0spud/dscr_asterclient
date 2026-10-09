@@ -55,7 +55,7 @@ SETTINGS_INVERT_PITCH,-26 -14 -49 -92 -100 -87 -15 -4,,Invert pitch?,Odwróć na
 SETTINGS_INVERT_YAW,-26 -14 -51 -92 -100 -87 -15 -4,,Invert yaw?,Odwróć pochylenie
 SETTINGS_INVERT_ZOOM,-26 -14 -50 -39 -100 -87 -15 -4,,Invert zoom?,Odwróć zbliżenie
 SETTINGS_CONFETTI,-702,,Confetti!,Konfetti!
-SETTINGS_NUMBER_SEP,-11 -190 -11 -100 -11 -2 -11,,Insert |-2 between spaced numbers,Wstaw |-2 między liczbami
+SETTINGS_NUMBER_SEP,-11 -190 -11 -100 -11 -2 -11,,Insert |-2 between spaced numbers?,Wstaw |-2 między liczbami
 SETTINGS_BACKUP_CALLSIGN,-37 -128 -11 -100 -155 -36,,Backup callsign,Zapasowy znak wywoławczy
 SETTINGS_BACKUP_RANDOM,-11,,Random,Losowy
 SETTINGS_BACKUP_INCREMENT,1 -5,,Increment,Użyj następny
