@@ -34,7 +34,7 @@ The dictionary must be named "DICTIONARY-1.save", it will not recognize the file
 
 #### Basic Use and Notes
 
-* Ctrl+clicking or alt+clicking a received word/signal to open the editing panel for it
+* Ctrl+click or alt+click a received word/signal to open the editing panel for it
 * Colorized and styled signals are supported, but not by default. It's available under settings.
 * Dictionary support level can be changed in the third tab, Sources. It can support Meteor0ese, DSCR, or nothing. It defaults to M0. DSCR adds signal features.
 * The "@UNDEF" setting is visual only and for received transmissions: unknown signals are still typed with a pipe (|)
