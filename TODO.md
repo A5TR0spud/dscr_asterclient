@@ -17,6 +17,7 @@
 * clean up transmission un/re-loading and/to figure out duplicate and missing history
 * ability to block channels when using the skeleton key
 * music parsing for sine vs square vs saw vs triangle vs smooth square
+* make tab arrangement not matter for the position of main chat, and save where main chat is in the order
 
 ### nikzapp
 

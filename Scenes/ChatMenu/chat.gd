@@ -26,6 +26,7 @@ static func get_active_channel() -> ChatChannel:
 	var idx: int = instance.channel_container.current_tab
 	return instance.channel_container.get_child(idx)
 
+# TODO: allow index of main chat to change
 func open_loaded_channels():
 	for tab_idx in range(1, channel_container.get_child_count()):
 		var tab: ChatChannel = channel_container.get_child(tab_idx)
@@ -142,6 +143,7 @@ static func open_channel_from_selector(id: int) -> void:
 	Chat.get_channel_node(id)
 	Chat.focus_channel(id)
 
+# TODO: make this not check index 0 for main chat
 ## gets channel node given an id.
 ## if an id is not provided, the default channel is used
 ## if a channel does not exist, its scene will be instantiated and set up
@@ -300,6 +302,7 @@ func _on_message_edit_submit_text(message: String):
 		Main.MessageCompilationResult.REDUNDANT:
 			SoundManager.play_sound(SoundManager.Sounds.REDUNDANT)
 
+# TODO: make this count main chat
 func _on_tab_container_active_tab_rearranged(_idx_to):
 	var new_order: PackedInt64Array = []
 	for c: ChatChannel in channel_container.get_children():
