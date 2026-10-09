@@ -32,6 +32,11 @@ this button will pulse as long as nothing is defined.
 Pressing it will open the file location again, just in case.
 The dictionary must be named "DICTIONARY-1.save", it will not recognize the file otherwise.
 
+#### Basic Use and Notes
+
+* Ctrl+click or alt+click a received word/signal to open the editing panel for it
+* The "@UNDEF" setting is visual only and for received transmissions: unknown signals are still typed with a pipe (|)
+
 #### Changing Save Directory
 
 ##### Pre 0.7.0
