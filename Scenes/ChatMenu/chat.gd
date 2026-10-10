@@ -26,7 +26,6 @@ static func get_active_channel() -> ChatChannel:
 	var idx: int = instance.channel_container.current_tab
 	return instance.channel_container.get_child(idx)
 
-# TODO: allow index of main chat to change
 func open_loaded_channels():
 	for tab_idx in range(1, channel_container.get_child_count()):
 		var tab: ChatChannel = channel_container.get_child(tab_idx)
@@ -35,6 +34,7 @@ func open_loaded_channels():
 		instance.channel_container.set_tab_hidden(tab_idx, true)
 	for channel_id in SettingsHandler.opened_channels:
 		enable_channel(channel_id)
+	channel_container.move_child(main_channel, SettingsHandler.where_is_main_chat)
 
 static func new_transmission(packet: PackedStringArray) -> void:
 	var transmission_number: int = packet[1].to_int()
@@ -143,13 +143,12 @@ static func open_channel_from_selector(id: int) -> void:
 	Chat.get_channel_node(id)
 	Chat.focus_channel(id)
 
-# TODO: make this not check index 0 for main chat
 ## gets channel node given an id.
 ## if an id is not provided, the default channel is used
 ## if a channel does not exist, its scene will be instantiated and set up
 static func get_channel_node(id = null) -> ChatChannel:
 	if id == null:
-		return instance.channel_container.get_child(0)
+		return instance.main_channel
 	if instance.channel_container.has_node(str(id)):
 		return instance.channel_container.get_node(str(id))
 	var channel_node = chat_channel_scene.instantiate()
@@ -185,7 +184,7 @@ static func disable_channel(id: int):
 	tabber.set_tab_hidden(tab_id, true)
 	if id in SettingsHandler.opened_channels:
 		SettingsHandler.opened_channels.erase(id)
-		SettingsHandler.save()
+		instance._save_tab_order()
 	#if id == SKELETON_KEY:
 	#	for tab_to_bone in range(tabber.get_tab_count()):
 	#		var tab_to_check: Control = tabber.get_tab_control(tab_to_bone)
@@ -302,16 +301,21 @@ func _on_message_edit_submit_text(message: String):
 		Main.MessageCompilationResult.REDUNDANT:
 			SoundManager.play_sound(SoundManager.Sounds.REDUNDANT)
 
-# TODO: make this count main chat
-func _on_tab_container_active_tab_rearranged(_idx_to):
+func _save_tab_order():
 	var new_order: PackedInt64Array = []
+	var idx: int = 0
 	for c: ChatChannel in channel_container.get_children():
+		if c.id == null:
+			SettingsHandler.where_is_main_chat = idx
 		if c.id is not int:
 			continue
 		if c.id not in SettingsHandler.opened_channels:
 			continue
+		idx += 1
 		new_order.append(c.id)
 	SettingsHandler.opened_channels = new_order
 	SettingsHandler.save()
-	channel_container.move_child(main_channel, 0)
+
+func _on_tab_container_active_tab_rearranged(_idx_to):
+	_save_tab_order()
 	

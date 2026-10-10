@@ -7,6 +7,7 @@ static var preferred_callsign: int = -1
 static var font_size: int = 18
 static var image_default: bool = false
 static var opened_channels: Array = []
+static var where_is_main_chat: int = 0
 static var theme_color: int = 57
 static var master_volume: float = 1.0
 static var music_volume: float = 1.0
@@ -94,6 +95,7 @@ static func initialize() -> void:
 	stretch_canvas = SaveSystem.settings.get_or_add("stretch_canvas", stretch_canvas)
 	stretch_scale = SaveSystem.settings.get_or_add("stretch_scale", stretch_scale)
 	stretch_or_unstretch_canvas.call_deferred()
+	where_is_main_chat = SaveSystem.settings.get_or_add("where_is_main_chat", where_is_main_chat)
 
 static func evaluate_volume() -> void:
 	AudioServer.set_bus_volume_linear(
@@ -142,3 +144,4 @@ static func export() -> void:
 	SaveSystem.settings.set("failsafe_callsign_increment", failsafe_callsign_increment)
 	SaveSystem.settings.set("stretch_canvas", stretch_canvas)
 	SaveSystem.settings.set("stretch_scale", stretch_scale)
+	SaveSystem.settings.set("where_is_main_chat", where_is_main_chat)

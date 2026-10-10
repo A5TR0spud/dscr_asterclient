@@ -10,9 +10,10 @@
 
 ### Fixes
 
+* Rearranging main chat no longer bricks it
 * -577 now ceases in the Library when switching to a transmission that doesn't have one
 * Switching to the Library no longer reloads the current transmission (-577 won't be so shy)
-* (?) Potentially fixed potential issue that on unknown conditions would cause callsign to randomize a crap tonx
+* (?) Potentially fixed potential issue that on unknown conditions could cause callsign to randomize a crap ton
 
 ## 0.8.4
 
