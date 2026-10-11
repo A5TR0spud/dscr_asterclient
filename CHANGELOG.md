@@ -2,6 +2,10 @@
 
 ## --WIP--
 
+### Changes
+
+* Autocomplete menu no longer appears from navigating the caret/cursor
+
 ### Fixes
 
 * Ctrl/alt+click works in library now

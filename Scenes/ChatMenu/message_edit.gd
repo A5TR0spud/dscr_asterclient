@@ -5,15 +5,12 @@ class_name TransmissionEdit
 @export var eat_enter: bool = true
 @onready var autocomplete_list: ItemList = $PanelContainer/MarginContainer/ItemList
 @onready var auto_list_panel: PanelContainer = $PanelContainer
-#CodeEdit hates trying to autocomplete things without spaces, so use a nested one which contains only the word to try
-#@onready var autocomplete_finder: CodeEdit = $AutocompleteFinder
 
 const DELIMITER_CHARACTER = "\u001f"
 
 func _ready():
 	Main.instance.reload_settings.connect(_set_popup_size.call_deferred)
 	auto_list_panel.hide()
-	#autocomplete_finder.hide()
 	syntax_highlighter = TransmissionHighlighter.new()
 
 signal submit_text(message: String)
@@ -106,9 +103,6 @@ func _set_popup_size():
 func _on_text_changed():
 	_request_code_completion(false)
 
-func _on_caret_changed():
-	_request_code_completion(false)
-
 func _confirm_selection(index: int) -> void:
 	var chosen: String = autocomplete_list.get_item_text(index)
 	chosen = AutocompleteManager.decode_special_chars(chosen)
@@ -135,8 +129,8 @@ func find_delimiter_near(line: String, col: int) -> int:
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
-			if Rect2(Vector2.ZERO, size).has_point(get_local_mouse_position()):
-				return
+			#if Rect2(Vector2.ZERO, size).has_point(get_local_mouse_position()):
+			#	return
 			if Rect2(Vector2.ZERO, auto_list_panel.size).has_point(auto_list_panel.get_local_mouse_position()):
 				return
 			auto_list_panel.hide()
