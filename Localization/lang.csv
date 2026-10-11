@@ -37,10 +37,10 @@ TRUNCATE_TOGGLE,-25,,Truncate,Skróć
 IMAGE_TOGGLE,-53,,Visualize,Wizualizacja
 MUSIC_PLAY,-577,,Play,Odtwórz
 MUSIC_STOP,-29,,Stop,Zatrzymaj
-MUSIC_QUEUE,-5,,Queue,Kolejkuj
+MUSIC_QUEUE,-5,,Queue,Dodaj do kolejki
 SETTINGS_FONT_SIZE,-42 -22 -4,,Font size,Rozmiar czcionki
-SETTINGS_CANVAS_STRETCH,-26 -14 -110 -22 -174 -85 -15 -4,,Stretch UI,Rozciągnij UI
-SETTINGS_UI_SCALE,-110 -22 -6,,UI Scale,Skala UI
+SETTINGS_CANVAS_STRETCH,-26 -14 -110 -22 -174 -85 -15 -4,,Stretch UI,Rozciągnij interfejs
+SETTINGS_UI_SCALE,-110 -22 -6,,UI Scale,Skala interfejsu
 SETTINGS_USE_AT_UNDEF,-26 -14 -124 -42 -100 @-_UNDEF -15 -4,,Should unknown words be displayed with “@UNDEF”?,Pokaż nieznane hasła jako „@UNDEF”
 SETTINGS_THEME_COLOR,-110 -54 -100,,Theme color,Schemat kolorów
 SUBMIT,-174,,Submit,Zapisz
@@ -48,8 +48,8 @@ CANCEL,-29,,Cancel,Cofnij zmiany
 SETTINGS_VOLUME,-110 -172 -39 -22 -100,,Volume,Głośność
 SETTINGS_VOLUME_MUSIC,-577 -172 -39 -22 -100,,Music Volume,Głośność Muzyki
 SETTINGS_VOLUME_ZERO,-111,,Muted,Wycisz
-SETTINGS_VOLUME_DEFAULT,-114,,Default,Domyślny
-SETTINGS_VOLUME_LOUD,-108,,Loud,Głośny
+SETTINGS_VOLUME_DEFAULT,-114,,Default,Domyślna
+SETTINGS_VOLUME_LOUD,-108,,Loud,Głośna
 SETTINGS_CAMERA_HEADER,-53 -39,,Camera Controls,Kontrola Kamery
 SETTINGS_INVERT_PITCH,-26 -14 -49 -92 -100 -87 -15 -4,,Invert pitch?,Odwróć nachylenie
 SETTINGS_INVERT_YAW,-26 -14 -51 -92 -100 -87 -15 -4,,Invert yaw?,Odwróć pochylenie
@@ -63,7 +63,7 @@ CALLSIGN,-128 -42,,Callsign,Znak wywoławczy
 COPY_SIGNAL_NUMBERS,-42 -40,,Copy signals,Kopiuj sygnały
 COPY_SIGNAL_NAMES,-237 -40,,Copy words,Kopiuj słowa
 SUBMIT_LONG,-174 -85,,Submit,Zapisz
-CANCEL_LONG,-174 -29 -85,,Cancel,Anuluj
+CANCEL_LONG,-174 -29 -85,,Cancel,Cofnij zmiany
 DELETE_ASK,-88 -127 -85,,Delete?,Usuń
 DELETE_CONFIRM_TRX,-43 -88 -85,,Are you sure?,Napewno?
 DELETE_CONFIRM_SIG,-42 -88 -85,,Are you sure?,Napewno?
@@ -75,19 +75,17 @@ SYSTEM_CONNECTED,-154 -2 -119 -241 -86 -241 0 -196 -145 -85,,Connected!,Połącz
 SYSTEM_CONNECTION_FAILED,-155 -2 -119 -241 -86 -241 0 -196 -145 -29 -85,,Cannot connect.,Nie udało się nawiązać połączenia.
 SYSTEM_DISCONNECTING,-119 -241 -30 -241 0 -86 -14 -196 -15 -127 -29 -186 -85 -109 -120 -65 -121,,Attempting to disconnect…,Rozłączanie…
 SYSTEM_DISCONNECTED,-241 0 -86 -119 -241 -196 -29 -85,,Disconnected.,Rozłączono.
-SYSTEM_WILL_RECONNECT,-119 -241 -86 -14 -241 0 -196 -15 -127 -85 {0} -69 -120 -121,yes,Will reconnect in {0} He-6 seconds…,Połączy ponownie za {0} He-6 sekundę…
+SYSTEM_WILL_RECONNECT,-119 -241 -86 -14 -241 0 -196 -15 -127 -85 {0} -69 -120 -121,yes,Will reconnect in {0} He-6 second…,Połączy ponownie za {0} He-6 sekundę…
 ,,,Will reconnect in {0} He-6 seconds…,Połączy ponownie za {0} He-6 sekundy…
 ,,,,Połączy ponownie za {0} He-6 sekund…
-SYSTEM_UNKNOWN_SIGNAL,-124 -42 -100 -14 {0} -15,,Unknown words: {0},Nieznane sygnały: {0}
+SYSTEM_UNKNOWN_SIGNAL,-124 -42 -100 -14 {0} -15,,Unknown words: {0},Nieznane hasła: {0}
 SYSTEM_TOO_LONG,-241 -86 -43 -14 -42 -23 -32 {maxLength} -15 -196 -145 -29 -85 -2 -42 -23 -4 {trxSize},,"Maximum signals per transmission: {maxLength}
 Signals in this transmission: {trxSize}","Maksymalna liczba sygnałów na transmisję: {maxLength}
-Sygnały wewnątrz transmisji: {trxSize}"
-SYSTEM_CHANNEL_INPUT_TOO_SHORT,-241 -86 -43 -14 {0} -30 -42 -23 -33 3 -15 -196 -145 -29 -85,,Cannot use {0} with less than 3 signals,Nie można użyć {0} mając z mniej niż trzema argumentami
-SYSTEM_INPUT_LENGTH_INVALID_TWO,-241 -86 -43 -14 {0} -30 -42 -23 -4 -29 2 -15 -196 -145 -29 -85,,Cannot use {0} with 2 signals,Nie można użyć {0} z dwoma argumentami
+Liczba sygnałów wewnątrz aktualnej transmisji: {trxSize}"
+SYSTEM_CHANNEL_INPUT_TOO_SHORT,-241 -86 -43 -14 {0} -30 -42 -23 -33 3 -15 -196 -145 -29 -85,,Cannot use {0} with less than 3 signals,Nie można użyć komendy {0} z mniej niż dwoma argumentami
+SYSTEM_INPUT_LENGTH_INVALID_TWO,-241 -86 -43 -14 {0} -30 -42 -23 -4 -29 2 -15 -196 -145 -29 -85,,Cannot use {0} with 2 signals,Komenda {0} potrzebuje conajmniej jednego argumentu
 SYSTEM_INPUT_LENGTH_INVALID_VAR,-241 -86 -43 -14 -42 -23 -4 -29 {0} -15 -196 -145 -29 -85,yes,Cannot send {0} signals,Nie można wysłać {0} sygnałów
-,,,Cannot send {0} signals,Nie można wysłać {0} sygnałów
-,,,,Nie można wysłać {0} sygnałów
-SYSTEM_DUPLICATE_NAME,-42 -14 -1 {sig0} -15 -30 -42 -14 -1 {sig1} -15 -100 -229 -2 {name},,Signals -{sig0} and -{sig1} cannot both be named “ {name} ”,Nie można nadać tej samej nazwy „{name}” hasłom -{sig0} oraz -{sig1}
+SYSTEM_DUPLICATE_NAME,-42 -14 -1 {sig0} -15 -30 -42 -14 -1 {sig1} -15 -100 -229 -2 {name},,Signals -{sig0} and -{sig1} cannot both be named “ {name} ”,Nie można nadać tej samej nazwy „{name}” sygnałom -{sig0} oraz -{sig1}
 DELETE_TRANSMISSION,-88,,Dismiss,Pomiń
 DICT_EDIT_HEADER,-42 -38 -77 -174,,Edit Dictionary,Edytuj słownik
 DICT_EDIT_NAME_LABEL,-42 -14 -1 {0} -15 -4,,Signal -{0} is,Sygnał -{0} to
@@ -103,8 +101,8 @@ FORMAT_ATTRACT,1 -189,,Remove space,Usuń spację
 DICT_EDIT_BREAK,-26 -14 2 -229 -42 -122 1 -108 -190 -15 -4,,Break on double?,Złam po podwojeniu?
 DICT_EDIT_INDENTATION,-42 -86 -190,,Indentation:,Wcięcie:
 DICT_EDIT_NO_INDENT,-38 -29 -85,,None,Brak
-DICT_EDIT_INDENT,-38 -85,,Indent,Wcięcie
-DICT_EDIT_DEDENT,-88 -85,,Dedent,Wycięcie
+DICT_EDIT_INDENT,-38 -85,,Indent,Zwiększ wcięcie
+DICT_EDIT_DEDENT,-88 -85,,Dedent,Zmniejsz wcięcie
 DICT_EDIT_BOLD,-42 -22 -100,,Bold?,Wytłuść?
 DICT_EDIT_NO_BOLD,-114,,No,Nie
 DICT_EDIT_YES_BOLD,-108,,Yes,Tak
@@ -121,7 +119,7 @@ DICT_EDIT_COLOR_IS,-100,,is,jako
 DICT_EDIT_COLOR_SIGNAL,-42 -54,,word color,kolor hasła
 DICT_EDIT_COLOR_BG,-22 -54,,background color,kolor tła
 CLOSE_MENU_LONG,-163 -29 -85,,Close,Zamknij
-LIBRARY_SIGNAL_COUNT,-42 -23 -4 {0},,Signal count: {0},Liczba haseł: {0}
+LIBRARY_SIGNAL_COUNT,-42 -23 -4 {0},,Signal count: {0},Liczba sygnałów: {0}
 CALLSIGN_ADD,-5,,+,+
 CALLSIGN_SUB,-7,,-,-
 LIBRARY_NAME_PLACEHOLDER,-43 -237,,Name transmission…,Nazwij transmisję…
@@ -129,7 +127,7 @@ IMAGE_ZOOM,-50 -39,,Zoom,Zbliż
 IMAGE_YAW,-51 -92,,Yaw,Nachylenie
 IMAGE_PITCH,-49 -92,,Pitch,Pochylenie
 WSS_CONNECT,-40,,Connect,Połącz
-WSS_HEADER,-241 0,,Websocket Addresses,Adresy Websocketów
+WSS_HEADER,-241 0,,Websocket Addresses,Adresy serwerów
 WSS_ADD,-38,,Add new address,Dodaj adres
 DICT_NEW,-38,,Add new dictionary,Dodaj słownik
 DICT_DUPE,-144,,Duplicate,Zduplikuj

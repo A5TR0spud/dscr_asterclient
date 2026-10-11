@@ -7,6 +7,7 @@ class_name StatusLogEntry
 @onready var etc_button_node: Button = $Body/Corpus/ContextButtons/EtcButton
 
 var translation_key: String = ""
+var translation_plural_n_or_null: Variant = null
 var arguments: Variant = []
 
 func ready():
@@ -23,7 +24,14 @@ func get_color() -> Color:
 
 func refresh(from_locale: bool = false):
 	if not translation_key.is_empty():
-		message = Localizer.raw_translate(translation_key)
+		if translation_plural_n_or_null is int:
+			message = Localizer.raw_translate_plural(
+				translation_key, 
+				translation_plural_n_or_null
+			)
+		else:
+			message = Localizer.raw_translate(translation_key)
+			
 		if from_locale:
 			request_rewrite(false)
 

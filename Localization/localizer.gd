@@ -27,11 +27,21 @@ static func translate_plural(key: String, n: int, arguments: Variant = []) -> St
 static func raw_translate(key: String) -> Array:
 	var translation: String = TranslationServer.translate(key)
 	if TranslationServer.get_locale() == "m0":
-		var arr: Array = translation.split(" ")
-		for idx in range(arr.size()):
-			if str(arr[idx]).is_valid_int():
-				arr[idx] = str(arr[idx]).to_int()
-			else:
-				arr[idx] = str(arr[idx])
-		return arr
+		return _raw_translate_m0(translation)
 	return [translation]
+	
+static func raw_translate_plural(key: String, n: int) -> Array:
+	if TranslationServer.get_locale() == "m0":
+		var translation: String = TranslationServer.translate(key)
+		return _raw_translate_m0(translation)
+	else:
+		return [TranslationServer.translate_plural(key, "", n)]
+
+static func _raw_translate_m0(translation: String) -> Array:
+	var arr: Array = translation.split(" ")
+	for idx in range(arr.size()):
+		if str(arr[idx]).is_valid_int():
+			arr[idx] = str(arr[idx]).to_int()
+		else:
+			arr[idx] = str(arr[idx])
+	return arr
