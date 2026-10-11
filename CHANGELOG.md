@@ -1,5 +1,12 @@
 # Versions
 
+## --WIP--
+
+### Fixes
+
+* Ctrl/alt+click works in library now
+* Can no longer ctrl/alt+click numbers
+
 ## 0.8.5
 
 ### Changes

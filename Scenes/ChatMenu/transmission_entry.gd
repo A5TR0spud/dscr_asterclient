@@ -135,15 +135,15 @@ func supports_bbcode() -> bool:
 	return true
 
 func _on_hover_change(hovering: bool) -> void:
+	is_hovering = hovering
+	_handle_clickables()
 	if stasis:
 		return
 	calc_time()
 	timeago_node.text = get_timeago_string()
 	hover_node.visible = hovering
-	is_hovering = hovering
 	transmission_node.flat = not hovering
 	key_node.flat = not hovering or key == Chat.SKELETON_KEY
-	_handle_clickables()
 
 func _on_set_etc_visibility(visiblity: bool) -> void:
 	etc_button_node.visible = visiblity

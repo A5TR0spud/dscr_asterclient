@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvk6mv21d4dib"
-path="res://.godot/imported/globe.svg-2e20bad5dc0399b0e6d7dae13a9b962d.ctex"
+uid="uid://ca6rc6jcr3hxw"
+path="res://.godot/imported/big_sound.svg-eb4b34e06eb2ecc0ebd9c6785dbcf9de.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Icons/globe.svg"
-dest_files=["res://.godot/imported/globe.svg-2e20bad5dc0399b0e6d7dae13a9b962d.ctex"]
+source_file="res://Assets/Icons/big_sound.svg"
+dest_files=["res://.godot/imported/big_sound.svg-eb4b34e06eb2ecc0ebd9c6785dbcf9de.ctex"]
 
 [params]
 

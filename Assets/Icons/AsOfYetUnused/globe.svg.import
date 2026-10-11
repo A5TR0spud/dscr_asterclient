@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cti0yirl0u427"
-path="res://.godot/imported/image_eye.svg-f3def193ab29569d0bd6818f76a9a356.ctex"
+uid="uid://dvk6mv21d4dib"
+path="res://.godot/imported/globe.svg-bda927870cb6c30001793e1439748ffe.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Icons/image_eye.svg"
-dest_files=["res://.godot/imported/image_eye.svg-f3def193ab29569d0bd6818f76a9a356.ctex"]
+source_file="res://Assets/Icons/AsOfYetUnused/globe.svg"
+dest_files=["res://.godot/imported/globe.svg-bda927870cb6c30001793e1439748ffe.ctex"]
 
 [params]
 

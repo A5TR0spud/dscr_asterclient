@@ -469,7 +469,7 @@ static func signals_to_words(input: Array, do_whitespace_format: bool = false, c
 		if can_do_bbcode:
 			# Avoid formatting issues if users put [ in their signal names
 			word = word.replace("[", "[lb]")
-			if do_clickable:
+			if do_clickable and not is_number:
 				o += "[url=" + str(sig) + "]"
 			if do_appearance_format:
 				if bold:
@@ -495,7 +495,7 @@ static func signals_to_words(input: Array, do_whitespace_format: bool = false, c
 					o += "[/i]"
 				if bold:
 					o += "[/b]"
-			if do_clickable:
+			if do_clickable and not is_number:
 				o += "[/url]"
 		
 		prev = sig

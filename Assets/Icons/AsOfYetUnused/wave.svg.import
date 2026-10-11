@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c150swnx6ugxb"
-path="res://.godot/imported/macro.svg-4e80661e496040580ebdb5e82a6ed06c.ctex"
+uid="uid://b5dnfcqtfudxt"
+path="res://.godot/imported/wave.svg-b79ba1a4d9279e3909de1d9332171bd3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Icons/macro.svg"
-dest_files=["res://.godot/imported/macro.svg-4e80661e496040580ebdb5e82a6ed06c.ctex"]
+source_file="res://Assets/Icons/AsOfYetUnused/wave.svg"
+dest_files=["res://.godot/imported/wave.svg-b79ba1a4d9279e3909de1d9332171bd3.ctex"]
 
 [params]
 
@@ -23,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
