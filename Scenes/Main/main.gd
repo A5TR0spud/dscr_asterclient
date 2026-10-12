@@ -238,9 +238,10 @@ signal on_callsign_changed(cs: int)
 
 var _queued_callsign: Array = [0, false]
 
-func set_callsign(cs: int, is_reconnect: bool = false) -> void:
-	if cs == previously_accepted_callsign and not is_reconnect and cs >= 0:
-		return
+func set_callsign(cs: int, is_reconnect: bool = false, force: bool = false) -> void:
+	if not force:
+		if cs == previously_accepted_callsign and not is_reconnect and cs >= 0:
+			return
 	cs = _verify_callsign(cs)
 	_queued_callsign = [cs, is_reconnect]
 
@@ -321,6 +322,7 @@ func handle_packet(incoming: String) -> void:
 		previously_accepted_callsign = callsign
 		on_callsign_changed.emit(previously_accepted_callsign)
 		print("Reconnect OK")
+		set_callsign(previously_accepted_callsign, false, true)
 		return
 	if status[0] == "U":
 		if callsign != SettingsHandler.backup_callsign and not _handling_loss:
