@@ -10,6 +10,7 @@
 
 * Ctrl/alt+click works in library now
 * Can no longer ctrl/alt+click numbers
+* -702 no longer appears when outside a chat tab
 
 ## 0.8.5
 

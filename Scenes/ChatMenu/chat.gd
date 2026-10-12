@@ -74,7 +74,8 @@ static func new_transmission(packet: PackedStringArray) -> void:
 			or
 			(get_active_channel().id == SKELETON_KEY and
 			spooky_channel.scroll_container.bottom_is_visible())
-		)
+		) and
+		instance.is_visible_in_tree()
 	):
 		print("confetti!")
 		Confetti.burst()
