@@ -1,6 +1,24 @@
 extends VBoxContainer
 class_name Chat
 
+class History:
+	extends Resource
+	var all_channel_head: ChatEntryNode = null
+	var channel_heads: Dictionary[int, ChatEntryNode] = {}
+
+class ChatEntryNode:
+	extends Resource
+	var message: PackedInt64Array = []
+	var sender: int = -1
+	var trx: int = -1
+	var date_timestamp: float = 0
+	var channel: int = 0
+	var has_channel: bool = false
+	var earlier_in_channel: ChatEntryNode = null
+	var earlier_in_all: ChatEntryNode = null
+
+static var history: History
+
 static var instance: Chat
 static var transmission_entry_scene = preload("res://Scenes/ChatMenu/transmission_entry.tscn")
 static var status_log_entry_scene = preload("res://Scenes/ChatMenu/status_log_entry.tscn")
@@ -14,6 +32,16 @@ const COMMAND_LEAVE: int = -65533
 const SKELETON_KEY: int = -65536
 
 static var ten_most_recent_transmissions: Array[int] = [] as Array[int]
+
+static func load_history() -> void:
+	var path: String = SaveSystem._history_path()
+	if ResourceLoader.exists(path):
+		history = load(path)
+	else:
+		history = History.new()
+
+static func save_history() -> void:
+	ResourceSaver.save(history, SaveSystem._history_path())
 
 func _enter_tree():
 	instance = self
@@ -36,7 +64,22 @@ func open_loaded_channels():
 		enable_channel(channel_id)
 	channel_container.move_child(main_channel, SettingsHandler.where_is_main_chat)
 
+static func log_to_history(sender: int, channel: Variant, trx: int, message: PackedInt64Array) -> void:
+	var new_msg: ChatEntryNode = ChatEntryNode.new()
+	new_msg.sender = sender
+	new_msg.channel = channel if channel is int else 0
+	new_msg.has_channel = channel is int
+	new_msg.message = message
+	new_msg.date_timestamp = Time.get_unix_time_from_system()
+	new_msg.trx = trx
+	new_msg.earlier_in_all = history.all_channel_head
+	history.all_channel_head = new_msg
+	if channel is int:
+		new_msg.earlier_in_channel = history.channel_heads.get(channel)
+		history.channel_heads.set(channel, new_msg)
+
 static func new_transmission(packet: PackedStringArray) -> void:
+	var sender: int = packet[0].to_int()
 	var transmission_number: int = packet[1].to_int()
 	var integer_message: Array[int] = []
 	for part in packet.slice(2):
@@ -44,7 +87,7 @@ static func new_transmission(packet: PackedStringArray) -> void:
 	
 	var new_message: TransEntry = transmission_entry_scene.instantiate()
 	new_message.timestamp = Time.get_ticks_msec()
-	new_message.sender = packet[0].to_int()
+	new_message.sender = sender
 	new_message.trans = transmission_number
 	
 	# avoid adding duplicate entries if transmission number has already been received recently
@@ -60,6 +103,8 @@ static func new_transmission(packet: PackedStringArray) -> void:
 		channel_id = integer_message[1]
 		integer_message = integer_message.slice(2)
 		#print(integer_message)
+	
+	log_to_history(sender, channel_id, transmission_number, integer_message)
 	
 	var channel: ChatChannel = get_channel_node(channel_id)
 	var spooky_channel: ChatChannel = get_channel_node(SKELETON_KEY)
