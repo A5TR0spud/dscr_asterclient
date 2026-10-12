@@ -18,6 +18,7 @@
 * ability to block channels when using the skeleton key
 * music parsing for sine vs square vs saw vs triangle vs smooth square
 * autocomplete for nicknames to numbers
+* fix emoji not working
 
 ### nikzapp
 
