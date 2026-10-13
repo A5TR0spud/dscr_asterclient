@@ -2,9 +2,14 @@
 
 ## --WIP
 
+### Changes
+
+* Autocomplete order is now sorted shortest to longest and ensures currently selected is visible (Sugar)
+
 ### Fixes
 
 * Fixed Setting: Do Dictionary Whitespace both not working and causing total collapse of the Main Channel if it's not first 
+* Fixed auto-capitalization not working on accented letters (Sugar)
 
 ## 0.8.6
 
