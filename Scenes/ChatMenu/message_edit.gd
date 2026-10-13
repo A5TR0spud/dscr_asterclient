@@ -79,6 +79,7 @@ func _show_custom_popup(options: Array):
 	for option in options:
 		autocomplete_list.add_item(AutocompleteManager.decode_special_chars(option))
 	autocomplete_list.select(0)
+	autocomplete_list.ensure_current_is_visible()
 	
 	var word = get_signal_under_caret()
 	var caret_line = get_caret_line()
@@ -168,14 +169,14 @@ func _gui_input(event: InputEvent) -> void:
 		if event.is_action_pressed("ui_down"):
 			idx = min(idx + 1, autocomplete_list.item_count - 1)
 			autocomplete_list.select(idx)
+			autocomplete_list.ensure_current_is_visible()
 			accept_event()
-			autocomplete_list.get_v_scroll_bar().value += autocomplete_list.get_item_rect(idx).size.y
 			return
 		if event.is_action_pressed("ui_up"):
 			idx = max(idx - 1, 0)
 			autocomplete_list.select(idx)
+			autocomplete_list.ensure_current_is_visible()
 			accept_event()
-			autocomplete_list.get_v_scroll_bar().value -= autocomplete_list.get_item_rect(idx).size.y
 			return
 		if event.is_action_pressed("autocomplete_accept"):
 			_confirm_selection(idx)

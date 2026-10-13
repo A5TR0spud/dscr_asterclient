@@ -23,6 +23,9 @@ static func get_autocomplete_options(to_check: String, against: Array) -> Array:
 
 	var options: Array[Dictionary] = _autocomplete_finder.get_code_completion_options()
 	_autocomplete_finder.cancel_code_completion()
+	options.sort_custom(func(a,b):
+		return a["insert_text"].length() < b["insert_text"].length()
+	)
 	if options.is_empty() and to_check in against:
 		return [to_check]
 	return options.map(func(a): return decode_special_chars(a["display_text"]))
