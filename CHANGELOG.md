@@ -1,5 +1,11 @@
 # Versions
 
+## --WIP
+
+### Fixes
+
+* Setting: Do Dictionary Formatting works again
+
 ## 0.8.6
 
 ### Additions

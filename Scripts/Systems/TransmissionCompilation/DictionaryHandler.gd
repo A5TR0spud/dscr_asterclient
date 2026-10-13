@@ -398,6 +398,8 @@ static func signals_to_words(input: Array, do_whitespace_format: bool = false, c
 	var indent: int = 0
 	var ws: int = 0
 	var prev = 1
+	if not SettingsHandler.do_formatting:
+		do_whitespace_format = false
 	for sig in input:
 		var format_mode: int = 0
 		var format_mode_after: int = 0 if do_whitespace_format else 1
