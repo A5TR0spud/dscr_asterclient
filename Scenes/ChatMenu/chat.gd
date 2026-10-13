@@ -27,9 +27,9 @@ static func get_active_channel() -> ChatChannel:
 	return instance.channel_container.get_child(idx)
 
 func open_loaded_channels():
-	for tab_idx in range(1, channel_container.get_child_count()):
+	for tab_idx in range(0, channel_container.get_child_count()):
 		var tab: ChatChannel = channel_container.get_child(tab_idx)
-		if tab.id in SettingsHandler.opened_channels:# or SettingsHandler.opened_channels.has(SKELETON_KEY):
+		if tab.id in SettingsHandler.opened_channels or tab.id == null:
 			continue
 		instance.channel_container.set_tab_hidden(tab_idx, true)
 	for channel_id in SettingsHandler.opened_channels:

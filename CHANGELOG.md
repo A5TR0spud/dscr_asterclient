@@ -1,5 +1,11 @@
 # Versions
 
+## --WIP
+
+### Fixes
+
+* Fixed Setting: Do Dictionary Whitespace both not working and causing total collapse of the Main Channel if it's not first 
+
 ## 0.8.6
 
 ### Additions
