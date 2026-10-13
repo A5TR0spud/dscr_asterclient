@@ -1,6 +1,10 @@
 # Versions
 
-## --WIP--
+## 0.8.6
+
+### Additions
+
+* Images now support -157442
 
 ### Changes
 

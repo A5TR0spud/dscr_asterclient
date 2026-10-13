@@ -96,6 +96,7 @@ func _on_pitch_slider_value_changed(value: float):
 const IMAGE: int = -53
 const PLOT : int = -52
 const CUBE : int = -524000
+const BOX  : int = -157442
 const SEP  : int = -3
 
 var first_sphere: bool = true
@@ -104,28 +105,49 @@ var _ball_count: int = 0
 var _cube_count: int = 0
 func _parse_sphere(parser: TransmissionParser) -> Dictionary:
 	var type: int = 0
+	var ret: Dictionary = {}
 	if DictionaryHandler.support_dscr and parser.try_consume(CUBE):
 		type = 1
+	elif DictionaryHandler.support_dscr and parser.try_consume(BOX):
+		type = 2
 	elif (first_sphere and parser.peek() == PLOT) or not first_sphere:
 		parser.expect(PLOT)
-	var x = parser.read_number()
+	ret.t = type
+	ret.x = parser.read_number()
 	parser.expect(SEP)
-	var y = parser.read_number()
+	ret.y = parser.read_number()
 	parser.expect(SEP)
-	var z = parser.read_number()
+	ret.z = parser.read_number()
 	parser.expect(SEP)
-	var r = parser.read_number()
+	var v0: float = parser.read_number()
 	parser.expect(SEP)
-	var c = parser.read_number()
+	var v1: float = parser.read_number()
+	var biggest_dimension: float = v0
+	if type == 2:
+		ret.rx = v0
+		ret.ry = v1
+		parser.expect(SEP)
+		var v2: float = parser.read_number()
+		biggest_dimension = max(v0, v1, v2)
+		ret.rz = v2
+		parser.expect(SEP)
+		var v3: float = parser.read_number()
+		ret.c = v3
+	else:
+		ret.rx = v0
+		ret.ry = v0
+		ret.rz = v0
+		ret.c = v1
 	parser.try_consume(SEP)
 	first_sphere = false
-	if r > 0:
-		match type:
-			0:
-				_ball_count += 1
-			1:
-				_cube_count += 1
-	return {"t": type, "x": x, "y": y, "z": z, "r": r, "c": c}
+	match type:
+		0:
+			if v0 > 0: _ball_count += 1
+		1:
+			if v0 > 0: _cube_count += 1
+		2:
+			if biggest_dimension > 0: _cube_count += 1
+	return ret
 
 func check_image(message0: Array) -> bool:
 	multimesh_spheres.instance_count = 0
@@ -157,7 +179,7 @@ func check_image(message0: Array) -> bool:
 	if _sphere_data.is_empty():
 		#print("empty image")
 		return false
-	_sphere_data = _sphere_data.filter(func(a: Dictionary): return a["r"] > 0)
+	_sphere_data = _sphere_data.filter(func(a: Dictionary): return a.rx > 0 or a.ry > 0 or a.rz > 0)
 	multimesh_spheres.instance_count = _ball_count
 	multimesh_cubes.instance_count = _cube_count
 	var _balldx: int = 0
@@ -166,23 +188,22 @@ func check_image(message0: Array) -> bool:
 		var mm: MultiMesh
 		var t: int = p["t"]
 		var idx: int = 0
-		match t:
-			0:
-				mm = multimesh_spheres
-				idx = _balldx
-				_balldx += 1
-			1:
-				mm = multimesh_cubes
-				idx = _cubedx
-				_cubedx += 1
+		if t == 0:
+			mm = multimesh_spheres
+			idx = _balldx
+			_balldx += 1
+		if t == 1 or t == 2:
+			mm = multimesh_cubes
+			idx = _cubedx
+			_cubedx += 1
 		mm.set_instance_color(idx, calculate_color(p["c"]).srgb_to_linear())
 		mm.set_instance_transform(idx, Transform3D(
 			# X Scale/Shear
-			Vector3(p["r"], 0, 0),
+			Vector3(p.rx, 0, 0),
 			# Y Scale/Shear
-			Vector3(0, p["r"], 0),
+			Vector3(0, p.rz, 0),
 			# Z Scale/Shear
-			Vector3(0, 0, p["r"]),
+			Vector3(0, 0, p.ry),
 			# Origin Position
 			Vector3(p["x"], p["z"], -p["y"])
 		))

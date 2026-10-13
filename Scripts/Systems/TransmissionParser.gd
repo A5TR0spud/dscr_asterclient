@@ -111,6 +111,10 @@ func number_length(offset: int = 0) -> int:
 
 	return idx - offset
 
+func has_number() -> bool:
+	var p = peek()
+	return p >= 0 or p == NEGATIVE or p == DECIMAL
+
 ## Reads a floating-point number at the current position.
 ## Ignores leading zeroes in the integer portion, but preserves them in the fractional portion.
 ## Failed parses result in an output of 0.
