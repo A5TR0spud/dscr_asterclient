@@ -105,6 +105,12 @@ static func _on_dir_selected(new_path):
 			tmp.store_string(FileAccess.get_file_as_string(old_path.path_join(_SETTINGS_PATH)))
 			old_dir.remove(_SETTINGS_PATH)
 			tmp.close()
+	if old_dir and old_dir.file_exists(_HISTORY_PATH) and not new_dir.file_exists(_HISTORY_PATH):
+		var tmp := FileAccess.open(new_path.path_join(_HISTORY_PATH), FileAccess.WRITE)
+		if tmp:
+			tmp.store_string(FileAccess.get_file_as_string(old_path.path_join(_HISTORY_PATH)))
+			old_dir.remove(_HISTORY_PATH)
+			tmp.close()
 	var old_dict_dir := DirAccess.open(old_path.path_join(_DICT_FOLDER))
 	new_dir.make_dir(_DICT_FOLDER)
 	if old_dict_dir:
