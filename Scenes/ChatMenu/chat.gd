@@ -1,23 +1,7 @@
 extends VBoxContainer
 class_name Chat
 
-class History:
-	extends Resource
-	var all_channel_head: ChatEntryNode = null
-	var channel_heads: Dictionary[int, ChatEntryNode] = {}
-
-class ChatEntryNode:
-	extends Resource
-	var message: PackedInt64Array = []
-	var sender: int = -1
-	var trx: int = -1
-	var date_timestamp: float = 0
-	var channel: int = 0
-	var has_channel: bool = false
-	var earlier_in_channel: ChatEntryNode = null
-	var earlier_in_all: ChatEntryNode = null
-
-static var history: History
+static var history: History = null
 
 static var instance: Chat
 static var transmission_entry_scene = preload("res://Scenes/ChatMenu/transmission_entry.tscn")
@@ -31,17 +15,26 @@ const COMMAND_JOIN: int = -65534
 const COMMAND_LEAVE: int = -65533
 const SKELETON_KEY: int = -65536
 
+signal ready_for_history
+
 static var ten_most_recent_transmissions: Array[int] = [] as Array[int]
 
 static func load_history() -> void:
-	var path: String = SaveSystem._history_path()
-	if ResourceLoader.exists(path):
-		history = load(path)
-	else:
-		history = History.new()
+	history = History.new()
+	if ResourceLoader.exists(SaveSystem._history_path()):
+		history = ResourceLoader.load(SaveSystem._history_path())
+	instance.ready_for_history.emit()
+	#var _c: ChatEntryNode = history.all_channel_head
+	#while _c:
+	#	print(_c.trx)
+	#	_c = _c.earlier_in_all
 
 static func save_history() -> void:
 	ResourceSaver.save(history, SaveSystem._history_path())
+	#var _c: ChatEntryNode = history.all_channel_head
+	#while _c:
+	#	print(_c.trx)
+	#	_c = _c.earlier_in_all
 
 func _enter_tree():
 	instance = self
@@ -77,6 +70,14 @@ static func log_to_history(sender: int, channel: Variant, trx: int, message: Pac
 	if channel is int:
 		new_msg.earlier_in_channel = history.channel_heads.get(channel)
 		history.channel_heads.set(channel, new_msg)
+	else:
+		new_msg.earlier_in_channel = history.none_channel_head
+		history.none_channel_head = new_msg
+	#print("to history")
+	#print(history)
+	#print(history.channel_heads)
+	#print(new_msg)
+	#save_history()
 
 static func new_transmission(packet: PackedStringArray) -> void:
 	var sender: int = packet[0].to_int()
@@ -103,6 +104,28 @@ static func new_transmission(packet: PackedStringArray) -> void:
 		channel_id = integer_message[1]
 		integer_message = integer_message.slice(2)
 		#print(integer_message)
+	
+	# this is for powering off/on the app
+	var _c: ChatEntryNode = history.all_channel_head
+	var _i: int = 10
+	while _c and _i >= 0:
+		#print(_c.trx, " : ", transmission_number)
+		#print(_c.sender, " : ", sender)
+		#print(_c.message, " : ", integer_message)
+		#print("-------------")
+		if (
+			_c.trx == transmission_number and _c.sender == sender
+			and _c.message.size() == integer_message.size()
+		):
+			var thats_a_dupe: bool = true
+			for _j: int in range(_c.message.size()):
+				if _c.message[_j] != integer_message[_j]:
+					thats_a_dupe = false
+					break
+			if thats_a_dupe:
+				return
+		_c = _c.earlier_in_all
+		_i -= 1
 	
 	log_to_history(sender, channel_id, transmission_number, integer_message)
 	
@@ -365,4 +388,6 @@ func _save_tab_order():
 
 func _on_tab_container_active_tab_rearranged(_idx_to):
 	_save_tab_order()
-	
+
+func _on_save_cooldown_timeout():
+	save_history()

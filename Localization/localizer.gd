@@ -16,7 +16,8 @@ static func translate(key: String, arguments: Variant = []) -> String:
 static func translate_plural(key: String, n: int, arguments: Variant = []) -> String:
 		if TranslationServer.get_locale() == "m0":
 			return translate(key, arguments)
-			
+		if n < 0:
+			n = 0
 		var translation: String = TranslationServer.translate_plural(key, "", n);
 		if arguments is not Array and arguments is not Dictionary:
 			arguments = [arguments]

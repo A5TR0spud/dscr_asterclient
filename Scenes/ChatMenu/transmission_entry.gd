@@ -2,6 +2,7 @@ extends ChatEntry
 class_name TransEntry
 var trans: int = 0
 var key = null
+var is_historical: bool = false
 var is_image_open: bool = false
 @export var image_open_override: bool = false
 @export var stasis: bool = false
@@ -34,6 +35,8 @@ func ready():
 	Main.instance.reload_nicknames.connect(refresh_callsign)
 	if stasis:
 		hover_node.visible = false
+	if is_historical:
+		modulate = Color(1, 1, 1, 0.75)
 	keybox_node.visible = key != null
 	if key == Chat.SKELETON_KEY:
 		key_node.disabled = true
