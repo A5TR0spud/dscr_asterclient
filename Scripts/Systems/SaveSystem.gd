@@ -28,7 +28,7 @@ static var _current_dictionary_filename: String = "DICTIONARY-1.save"
 const _SETTINGS_PATH: String = "settings.json"
 const _NICKNAMES_PATH: String = "nicknames.json"
 const _LIBRARY_PATH: String = "library.json"
-const _HISTORY_PATH: String = "history.dat"
+const _HISTORY_PATH: String = "history.tres"
 const DIRECTORY_PATH: String = "user://directory.txt"
 static var opened_save_folder: String = ProjectSettings.globalize_path("user://save/")
 

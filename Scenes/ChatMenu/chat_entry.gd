@@ -1,7 +1,8 @@
 @abstract class_name ChatEntry
 extends VBoxContainer
 
-var timestamp: int = 0
+var timestamp: float = 0
+var timestamp_is_unix: bool = false
 var message: Array = []
 var _time_ago: int = 0
 var _etc_string: Array = []
@@ -17,8 +18,11 @@ func is_message_truncatable() -> bool:
 	return message.size() > SettingsHandler.truncate_message_size
 
 func calc_time():
-	var timeago: float = Time.get_ticks_msec() - timestamp
-	timeago *= 0.001
+	var timeago: float
+	if timestamp_is_unix:
+		timeago = Time.get_unix_time_from_system() - timestamp
+	else:
+		timeago = 0.001 * (Time.get_ticks_msec() - timestamp)
 	_time_ago = floori(timeago / Main.HE6_HALF_LIFE)
 
 func get_timeago_string():

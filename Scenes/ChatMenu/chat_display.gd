@@ -12,7 +12,8 @@ var _unread_notification: bool = false
 const HIDE_EXCESS_TRANSMISSIONS: int = 32
 
 var shown_transmissions: int = 0
-var logged_history: Array[Dictionary] = []
+
+var current_head: ChatEntryNode = null
 
 func _ready() -> void:
 	Main.instance.reload_dict.connect(update_name)
@@ -20,6 +21,9 @@ func _ready() -> void:
 	scroll_bar.value_changed.connect(_on_scroll)
 	scroll_bar.changed.connect(set_scroll_down_vis)
 	scroll_down_button.hide()
+	if Chat.history == null:
+		await Chat.instance.ready_for_history
+	try_show_history(false)
 
 func _recalculate_sep(node: ChatEntry, adding: bool):
 	var idx: int = node.get_index()
@@ -49,13 +53,6 @@ func _recalculate_sep(node: ChatEntry, adding: bool):
 
 func add_message_node(message: ChatEntry):
 	if message is TransEntry:
-		logged_history.append({
-			"m": PackedInt64Array(message.message),
-			"time": message.timestamp,
-			"sender": message.sender,
-			"trx": message.trans,
-			"key": message.key
-		})
 		shown_transmissions += 1
 	message.tree_exiting.connect(_recalculate_sep.bind(message, false))
 	chat_display.add_child(message)
@@ -67,6 +64,7 @@ func add_message_node(message: ChatEntry):
 		Chat.get_current_channel_node().id != Chat.SKELETON_KEY
 	):
 		set_notification()
+	#try_show_history()
 
 func _input(event):
 	if not is_visible_in_tree():
@@ -88,25 +86,70 @@ func _on_scroll(val):
 func set_scroll_down_vis():
 	scroll_down_button.visible = not scroll_container.bottom_is_visible()
 
-func try_show_history() -> bool:
-	if logged_history.size() <= shown_transmissions:
+func has_next() -> bool:
+	if current_head == null:
 		return false
-	var unshown_to_add: Dictionary = logged_history[logged_history.size() - shown_transmissions - 1]
-	var trx: TransEntry = trx_scene.instantiate()
-	trx.message = unshown_to_add["m"]
-	trx.timestamp = unshown_to_add["time"]
-	trx.sender = unshown_to_add["sender"]
-	trx.trans = unshown_to_add["trx"]
-	trx.key = unshown_to_add["key"]
-	chat_display.add_child(trx)
-	chat_display.move_child(trx, 0)
-	_recalculate_sep(trx, true)
-	scroll_bar.set_value_no_signal.call_deferred(0.1)
-	shown_transmissions += 1
+	var n: ChatEntryNode
+	if id == Chat.SKELETON_KEY:
+		n = current_head.earlier_in_all
+	else:
+		n = current_head.earlier_in_channel
+	return n != null
+
+func advance() -> bool:
+	if current_head == null:
+		return false
+	var n: ChatEntryNode
+	if id == Chat.SKELETON_KEY:
+		n = current_head.earlier_in_all
+	else:
+		n = current_head.earlier_in_channel
+	if n == null:
+		return false
+	current_head = n
 	return true
+
+func try_show_history(scroll_up: bool = true):
+	#print(Chat.history)
+	#if Chat.history == null:
+	#	await Chat.instance.ready_for_history
+	if current_head == null:
+		if id == Chat.SKELETON_KEY:
+			current_head = Chat.history.all_channel_head
+		elif id is int and not default_channel:
+			current_head = Chat.history.channel_heads.get(id)
+		else:
+			current_head = Chat.history.none_channel_head
+		var i: int = 0
+		while current_head and i < shown_transmissions:
+			if not advance():
+				return
+			i += 1
+	
+	var first_force: bool = true
+	while has_next() and (first_force or shown_transmissions < HIDE_EXCESS_TRANSMISSIONS):
+		var trx: TransEntry = trx_scene.instantiate()
+		trx.message = current_head.message
+		trx.timestamp = current_head.date_timestamp
+		trx.timestamp_is_unix = true
+		trx.sender = current_head.sender
+		trx.trans = current_head.trx
+		trx.is_historical = true
+		@warning_ignore("incompatible_ternary")
+		trx.key = current_head.channel if current_head.has_channel and id == Chat.SKELETON_KEY else null
+		chat_display.add_child(trx)
+		chat_display.move_child(trx, 0)
+		_recalculate_sep(trx, true)
+		if scroll_up:
+			scroll_bar.set_value_no_signal.call_deferred(0.1)
+		shown_transmissions += 1
+		first_force = false
+		if not advance():
+			return
 
 func try_hide_history():
 	if shown_transmissions > HIDE_EXCESS_TRANSMISSIONS and scroll_container.is_scrolled_to_bottom():
+		current_head = null
 		for c in chat_display.get_children():
 			if scroll_bar.page + 64 >= scroll_bar.max_value - scroll_bar.min_value:
 				return
@@ -153,7 +196,6 @@ func get_prefix() -> PackedInt64Array:
 		return []
 	else:
 		return [Chat.CHANNEL_SELECTOR, id]
-
 
 func _on_scroll_to_new_pressed():
 	scroll_container.scroll_to_bottom()
