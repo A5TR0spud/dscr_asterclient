@@ -57,28 +57,6 @@ func open_loaded_channels():
 		enable_channel(channel_id)
 	channel_container.move_child(main_channel, SettingsHandler.where_is_main_chat)
 
-static func log_to_history(sender: int, channel: Variant, trx: int, message: PackedInt64Array) -> void:
-	var new_msg: ChatEntryNode = ChatEntryNode.new()
-	new_msg.sender = sender
-	new_msg.channel = channel if channel is int else 0
-	new_msg.has_channel = channel is int
-	new_msg.message = message
-	new_msg.date_timestamp = Time.get_unix_time_from_system()
-	new_msg.trx = trx
-	new_msg.earlier_in_all = history.all_channel_head
-	history.all_channel_head = new_msg
-	if channel is int:
-		new_msg.earlier_in_channel = history.channel_heads.get(channel)
-		history.channel_heads.set(channel, new_msg)
-	else:
-		new_msg.earlier_in_channel = history.none_channel_head
-		history.none_channel_head = new_msg
-	#print("to history")
-	#print(history)
-	#print(history.channel_heads)
-	#print(new_msg)
-	#save_history()
-
 static func new_transmission(packet: PackedStringArray) -> void:
 	var sender: int = packet[0].to_int()
 	var transmission_number: int = packet[1].to_int()
@@ -106,9 +84,9 @@ static func new_transmission(packet: PackedStringArray) -> void:
 		#print(integer_message)
 	
 	# this is for powering off/on the app
-	var _c: ChatEntryNode = history.all_channel_head
-	var _i: int = 10
-	while _c and _i >= 0:
+	var _c: ChatEntryNode = history.get_at_cyclic_index(history.last_valid())
+	var _i: int = 0
+	while _c and _i <= 10:
 		#print(_c.trx, " : ", transmission_number)
 		#print(_c.sender, " : ", sender)
 		#print(_c.message, " : ", integer_message)
@@ -124,10 +102,10 @@ static func new_transmission(packet: PackedStringArray) -> void:
 					break
 			if thats_a_dupe:
 				return
-		_c = _c.earlier_in_all
-		_i -= 1
+		_i += 1
+		_c = history.get_at_cyclic_index(history.last_valid() - _i)
 	
-	log_to_history(sender, channel_id, transmission_number, integer_message)
+	history.add(sender, channel_id, transmission_number, integer_message)
 	
 	var channel: ChatChannel = get_channel_node(channel_id)
 	var spooky_channel: ChatChannel = get_channel_node(SKELETON_KEY)
