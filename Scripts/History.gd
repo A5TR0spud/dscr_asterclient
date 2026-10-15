@@ -70,9 +70,6 @@ func add(sender: int, channel: Variant, trx: int, message: PackedInt64Array) -> 
 func push(new_msg: ChatEntryNode) -> void:
 	if catalog.size() != MAX_SUPERCAPACITY:
 		catalog.resize(MAX_SUPERCAPACITY)
-		catalog.clear()
-		first = 0
-		size = 0
 	verify_room()
 	if new_msg.has_channel:
 		if get_at_cyclic_index(channel_heads.get(new_msg.channel, -1)):
