@@ -13,6 +13,6 @@ var channel: int = 0
 @export
 var has_channel: bool = false
 @export
-var earlier_in_channel: ChatEntryNode = null
+var earlier_in_channel: int = -1
 @export
-var earlier_in_all: ChatEntryNode = null
+var later_in_channel: int = -1

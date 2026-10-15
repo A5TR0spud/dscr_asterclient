@@ -18,6 +18,7 @@
 * ability to block channels when using the skeleton key
 * music parsing for sine vs square vs saw vs triangle vs smooth square
 * autocomplete for nicknames to numbers
+* add option to hide transmissions with -132010 in them (truncate to 0 signals and new button)
 
 ### nikzapp
 

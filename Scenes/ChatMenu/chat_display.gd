@@ -13,7 +13,9 @@ const HIDE_EXCESS_TRANSMISSIONS: int = 32
 
 var shown_transmissions: int = 0
 
+var current_head_idx: int = 0
 var current_head: ChatEntryNode = null
+var fin: bool = false
 
 func _ready() -> void:
 	Main.instance.reload_dict.connect(update_name)
@@ -23,7 +25,7 @@ func _ready() -> void:
 	scroll_down_button.hide()
 	if Chat.history == null:
 		await Chat.instance.ready_for_history
-	try_show_history(false)
+	try_show_history()
 
 func _recalculate_sep(node: ChatEntry, adding: bool):
 	var idx: int = node.get_index()
@@ -78,7 +80,8 @@ func _input(event):
 
 func _on_scroll(val):
 	if val < 0.01:
-		try_show_history()
+		try_show_one_history()
+		scroll_bar.set_value_no_signal.call_deferred(0.1)
 	elif scroll_container.is_scrolled_to_bottom():
 		try_hide_history()
 	set_scroll_down_vis()
@@ -89,67 +92,76 @@ func set_scroll_down_vis():
 func has_next() -> bool:
 	if current_head == null:
 		return false
-	var n: ChatEntryNode
-	if id == Chat.SKELETON_KEY:
-		n = current_head.earlier_in_all
-	else:
-		n = current_head.earlier_in_channel
-	return n != null
+	var ni: int = Chat.history.get_previous_idx(current_head_idx, id == Chat.SKELETON_KEY)
+	if ni < 0:
+		return false
+	var n: ChatEntryNode = Chat.history.catalog[ni]
+	if n == null:
+		return false
+	return true
 
 func advance() -> bool:
 	if current_head == null:
 		return false
-	var n: ChatEntryNode
-	if id == Chat.SKELETON_KEY:
-		n = current_head.earlier_in_all
-	else:
-		n = current_head.earlier_in_channel
+	var ni: int = Chat.history.get_previous_idx(current_head_idx, id == Chat.SKELETON_KEY)
+	if ni < 0:
+		return false
+	var n: ChatEntryNode = Chat.history.catalog[ni]
 	if n == null:
 		return false
 	current_head = n
+	current_head_idx = ni
 	return true
 
-func try_show_history(scroll_up: bool = true):
-	#print(Chat.history)
-	#if Chat.history == null:
-	#	await Chat.instance.ready_for_history
+func try_show_one_history() -> bool:
+	if fin:
+		return false
 	if current_head == null:
-		if id == Chat.SKELETON_KEY:
-			current_head = Chat.history.all_channel_head
-		elif id is int and not default_channel:
-			current_head = Chat.history.channel_heads.get(id)
-		else:
-			current_head = Chat.history.none_channel_head
+		current_head_idx = Chat.history.get_head_idx(id)
+		if current_head_idx < 0:
+			return false
+		current_head = Chat.history.catalog[current_head_idx]
 		var i: int = 0
 		while current_head and i < shown_transmissions:
 			if not advance():
-				return
+				return false
 			i += 1
-	
-	var first_force: bool = true
-	while has_next() and (first_force or shown_transmissions < HIDE_EXCESS_TRANSMISSIONS):
-		var trx: TransEntry = trx_scene.instantiate()
-		trx.message = current_head.message
-		trx.timestamp = current_head.date_timestamp
-		trx.timestamp_is_unix = true
-		trx.sender = current_head.sender
-		trx.trans = current_head.trx
-		trx.is_historical = true
-		@warning_ignore("incompatible_ternary")
-		trx.key = current_head.channel if current_head.has_channel and id == Chat.SKELETON_KEY else null
-		chat_display.add_child(trx)
-		chat_display.move_child(trx, 0)
-		_recalculate_sep(trx, true)
-		if scroll_up:
-			scroll_bar.set_value_no_signal.call_deferred(0.1)
-		shown_transmissions += 1
-		first_force = false
-		if not advance():
+	if current_head == null:
+		return false
+	print(current_head_idx)
+	print(current_head)
+	print("yuh")
+	var trx: TransEntry = trx_scene.instantiate()
+	trx.message = current_head.message
+	trx.timestamp = current_head.date_timestamp
+	trx.timestamp_is_unix = true
+	trx.sender = current_head.sender
+	trx.trans = current_head.trx
+	trx.is_historical = true
+	@warning_ignore("incompatible_ternary")
+	trx.key = current_head.channel if current_head.has_channel and id == Chat.SKELETON_KEY else null
+	chat_display.add_child(trx)
+	chat_display.move_child(trx, 0)
+	_recalculate_sep(trx, true)
+	shown_transmissions += 1
+	if not advance():
+		fin = true
+	return true
+
+func try_show_history():
+	#print(Chat.history)
+	#if Chat.history == null:
+	#	await Chat.instance.ready_for_history
+	while shown_transmissions < HIDE_EXCESS_TRANSMISSIONS:
+		if not try_show_one_history():
+			return
+		if fin:
 			return
 
 func try_hide_history():
 	if shown_transmissions > HIDE_EXCESS_TRANSMISSIONS and scroll_container.is_scrolled_to_bottom():
 		current_head = null
+		fin = false
 		for c in chat_display.get_children():
 			if scroll_bar.page + 64 >= scroll_bar.max_value - scroll_bar.min_value:
 				return
