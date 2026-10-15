@@ -42,6 +42,7 @@ func _enter_tree():
 func _ready():
 	Main.instance.reload_settings.connect(open_loaded_channels)
 	open_loaded_channels()
+	main_channel.try_show_history()
 
 static func get_active_channel() -> ChatChannel:
 	var idx: int = instance.channel_container.current_tab
@@ -198,10 +199,11 @@ static func get_channel_node(id = null) -> ChatChannel:
 		return instance.main_channel
 	if instance.channel_container.has_node(str(id)):
 		return instance.channel_container.get_node(str(id))
-	var channel_node = chat_channel_scene.instantiate()
+	var channel_node: ChatChannel = chat_channel_scene.instantiate()
 	instance.channel_container.add_child(channel_node)
 	var tab_id = channel_node.get_index()
 	channel_node.set_channel_name(id)
+	channel_node.try_show_history()
 	
 	instance.channel_container.set_tab_hidden(tab_id, not SettingsHandler.opened_channels.has(tab_id))
 	#instance.channel_container.set_tab_hidden(tab_id, not SettingsHandler.opened_channels.has(SKELETON_KEY))

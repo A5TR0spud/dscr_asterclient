@@ -23,9 +23,6 @@ func _ready() -> void:
 	scroll_bar.value_changed.connect(_on_scroll)
 	scroll_bar.changed.connect(set_scroll_down_vis)
 	scroll_down_button.hide()
-	if Chat.history == null:
-		await Chat.instance.ready_for_history
-	try_show_history()
 
 func _recalculate_sep(node: ChatEntry, adding: bool):
 	var idx: int = node.get_index()
@@ -128,9 +125,6 @@ func try_show_one_history() -> bool:
 			i += 1
 	if current_head == null:
 		return false
-	print(current_head_idx)
-	print(current_head)
-	print("yuh")
 	var trx: TransEntry = trx_scene.instantiate()
 	trx.message = current_head.message
 	trx.timestamp = current_head.date_timestamp
@@ -149,9 +143,8 @@ func try_show_one_history() -> bool:
 	return true
 
 func try_show_history():
-	#print(Chat.history)
-	#if Chat.history == null:
-	#	await Chat.instance.ready_for_history
+	if Chat.history == null:
+		await Chat.instance.ready_for_history
 	while shown_transmissions < HIDE_EXCESS_TRANSMISSIONS:
 		if not try_show_one_history():
 			return

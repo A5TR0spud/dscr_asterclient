@@ -24,7 +24,9 @@ func get_head_idx(channel: Variant) -> int:
 	return ni if verify_index(ni) else -1
 
 func get_previous_idx(from_idx: int, skeleton_key: bool = false) -> int:
-	var from: ChatEntryNode = get_at_cyclic_index(from_idx)
+	if not verify_index(from_idx):
+		return -1
+	var from: ChatEntryNode = catalog[from_idx]
 	if from == null:
 		return -1
 	var ni: int = -1
