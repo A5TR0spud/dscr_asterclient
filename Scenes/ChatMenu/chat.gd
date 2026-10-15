@@ -1,6 +1,8 @@
 extends VBoxContainer
 class_name Chat
 
+static var history: History = null
+
 static var instance: Chat
 static var transmission_entry_scene = preload("res://Scenes/ChatMenu/transmission_entry.tscn")
 static var status_log_entry_scene = preload("res://Scenes/ChatMenu/status_log_entry.tscn")
@@ -13,7 +15,26 @@ const COMMAND_JOIN: int = -65534
 const COMMAND_LEAVE: int = -65533
 const SKELETON_KEY: int = -65536
 
+signal ready_for_history
+
 static var ten_most_recent_transmissions: Array[int] = [] as Array[int]
+
+static func load_history() -> void:
+	history = History.new()
+	if ResourceLoader.exists(SaveSystem._history_path()):
+		history = ResourceLoader.load(SaveSystem._history_path())
+	instance.ready_for_history.emit()
+	#var _c: ChatEntryNode = history.all_channel_head
+	#while _c:
+	#	print(_c.trx)
+	#	_c = _c.earlier_in_all
+
+static func save_history() -> void:
+	ResourceSaver.save(history, SaveSystem._history_path())
+	#var _c: ChatEntryNode = history.all_channel_head
+	#while _c:
+	#	print(_c.trx)
+	#	_c = _c.earlier_in_all
 
 func _enter_tree():
 	instance = self
@@ -21,6 +42,7 @@ func _enter_tree():
 func _ready():
 	Main.instance.reload_settings.connect(open_loaded_channels)
 	open_loaded_channels()
+	main_channel.try_show_history()
 
 static func get_active_channel() -> ChatChannel:
 	var idx: int = instance.channel_container.current_tab
@@ -37,6 +59,7 @@ func open_loaded_channels():
 	channel_container.move_child(main_channel, SettingsHandler.where_is_main_chat)
 
 static func new_transmission(packet: PackedStringArray) -> void:
+	var sender: int = packet[0].to_int()
 	var transmission_number: int = packet[1].to_int()
 	var integer_message: Array[int] = []
 	for part in packet.slice(2):
@@ -44,7 +67,7 @@ static func new_transmission(packet: PackedStringArray) -> void:
 	
 	var new_message: TransEntry = transmission_entry_scene.instantiate()
 	new_message.timestamp = Time.get_ticks_msec()
-	new_message.sender = packet[0].to_int()
+	new_message.sender = sender
 	new_message.trans = transmission_number
 	
 	# avoid adding duplicate entries if transmission number has already been received recently
@@ -60,6 +83,30 @@ static func new_transmission(packet: PackedStringArray) -> void:
 		channel_id = integer_message[1]
 		integer_message = integer_message.slice(2)
 		#print(integer_message)
+	
+	# this is for powering off/on the app
+	var _c: ChatEntryNode = history.get_at_cyclic_index(history.last_valid())
+	var _i: int = 0
+	while _c and _i <= 10:
+		#print(_c.trx, " : ", transmission_number)
+		#print(_c.sender, " : ", sender)
+		#print(_c.message, " : ", integer_message)
+		#print("-------------")
+		if (
+			_c.trx == transmission_number and _c.sender == sender
+			and _c.message.size() == integer_message.size()
+		):
+			var thats_a_dupe: bool = true
+			for _j: int in range(_c.message.size()):
+				if _c.message[_j] != integer_message[_j]:
+					thats_a_dupe = false
+					break
+			if thats_a_dupe:
+				return
+		_i += 1
+		_c = history.get_at_cyclic_index(history.last_valid() - _i)
+	
+	history.add(sender, channel_id, transmission_number, integer_message)
 	
 	var channel: ChatChannel = get_channel_node(channel_id)
 	var spooky_channel: ChatChannel = get_channel_node(SKELETON_KEY)
@@ -152,10 +199,11 @@ static func get_channel_node(id = null) -> ChatChannel:
 		return instance.main_channel
 	if instance.channel_container.has_node(str(id)):
 		return instance.channel_container.get_node(str(id))
-	var channel_node = chat_channel_scene.instantiate()
+	var channel_node: ChatChannel = chat_channel_scene.instantiate()
 	instance.channel_container.add_child(channel_node)
 	var tab_id = channel_node.get_index()
 	channel_node.set_channel_name(id)
+	channel_node.try_show_history()
 	
 	instance.channel_container.set_tab_hidden(tab_id, not SettingsHandler.opened_channels.has(tab_id))
 	#instance.channel_container.set_tab_hidden(tab_id, not SettingsHandler.opened_channels.has(SKELETON_KEY))
@@ -320,4 +368,6 @@ func _save_tab_order():
 
 func _on_tab_container_active_tab_rearranged(_idx_to):
 	_save_tab_order()
-	
+
+func _on_save_cooldown_timeout():
+	save_history()

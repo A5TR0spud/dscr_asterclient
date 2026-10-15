@@ -29,6 +29,13 @@ custom_maximum_size = Vector2(-1, 400)
 layout_mode = 2
 size_flags_vertical = 8
 
+[node name="SaveCooldown" type="Timer" parent="." unique_id=1416654278]
+process_callback = 0
+wait_time = 45.0
+autostart = true
+ignore_time_scale = true
+
 [connection signal="active_tab_rearranged" from="TabContainer" to="." method="_on_tab_container_active_tab_rearranged"]
 [connection signal="tab_changed" from="TabContainer" to="." method="_on_tab_container_tab_changed"]
 [connection signal="submit_text" from="MessageEdit" to="." method="_on_message_edit_submit_text"]
+[connection signal="timeout" from="SaveCooldown" to="." method="_on_save_cooldown_timeout"]

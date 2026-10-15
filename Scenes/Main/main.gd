@@ -80,6 +80,7 @@ func _notification(what):
 			return
 		trying_to_quit = true
 		socket.close(1001)
+		Chat.save_history()
 		# if it can't close properly in 10 seconds then just shut it down anyway
 		get_tree().create_timer(10).timeout.connect(kill_process)
 
