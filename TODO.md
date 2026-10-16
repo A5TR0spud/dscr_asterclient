@@ -16,7 +16,7 @@
 * word aliases (unless the macro system is sufficient)
 * figure out transmission history `shown_transmissions` slipping
 * ability to block channels when using the skeleton key
-* music parsing for sine vs square vs saw vs triangle vs smooth square
+* music parsing for sine vs square vs saw vs triangle vs smooth square?
 * autocomplete for nicknames to numbers
 * fix emoji not working
 * add option to hide transmissions with -132010 in them (truncate to 0 signals and new button)

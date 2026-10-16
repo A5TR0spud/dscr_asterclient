@@ -87,12 +87,12 @@ func push(new_msg: ChatEntryNode) -> void:
 	size += 1
 
 func verify_room() -> void:
-	while size >= MAX_SUPERCAPACITY - 1:
+	while size >= MAX_SUPERCAPACITY - 2:
 		if not remove_eldest():
 			return
 
 func remove_eldest() -> bool:
-	if size == 0:
+	if size <= 1:
 		return false
 	var n: ChatEntryNode = catalog[first]
 	if first in channel_heads.values():
@@ -101,7 +101,7 @@ func remove_eldest() -> bool:
 		none_channel_head = -1
 	if n.later_in_channel >= 0 and catalog[n.later_in_channel]:
 		catalog[n.later_in_channel].earlier_in_channel = -1
-	catalog[first].free()
+	#catalog[first].free()
 	catalog[first] = null
 	first = (first + 1) % MAX_SUPERCAPACITY
 	size -= 1
