@@ -15,7 +15,7 @@
 
 * Fixed Setting: Do Dictionary Whitespace both not working and causing total collapse of the Main Channel if it's not first 
 * Fixed auto-capitalization not working on accented letters (Sugar)
-* Cut, copy, and paste within the transmission edit box should now work on more machines
+* Fixed select-all/undo/redo on Linux
 * In images, -15 is now optional if at the end of the transmission
 
 ## 0.8.6

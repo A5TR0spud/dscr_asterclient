@@ -145,24 +145,25 @@ func _gui_input(event: InputEvent) -> void:
 		insert_text_at_caret("\n")
 		accept_event()
 		return
-	#if event.is_action_pressed("ui_copy"):
-		#var selected_text = get_selected_text().remove_char(ord(DELIMITER_CHARACTER))
-		#DisplayServer.clipboard_set(selected_text)
-		#accept_event()
-		#return
-	#if event.is_action_pressed("ui_cut"):
-		#var selected_text = get_selected_text().remove_char(ord(DELIMITER_CHARACTER))
-		#if selected_text != "":
-			#DisplayServer.clipboard_set(selected_text)
-			#delete_selection()
-			#text_changed.emit()
-		#accept_event()
-		#return
+	if event.is_action_pressed("ui_copy"):
+		var selected_text = get_selected_text().remove_char(ord(DELIMITER_CHARACTER))
+		DisplayServer.clipboard_set(selected_text)
+		accept_event()
+		return
+	if event.is_action_pressed("ui_cut"):
+		var selected_text = get_selected_text().remove_char(ord(DELIMITER_CHARACTER))
+		if selected_text != "":
+			DisplayServer.clipboard_set(selected_text)
+			delete_selection()
+			text_changed.emit()
+		accept_event()
+		return
 	if event.is_action_pressed("ui_paste"):
-		text_changed.emit()
-		#auto_list_panel.hide()
-		#insert_text_at_caret(DisplayServer.clipboard_get().to_upper())
-		#accept_event()
+		auto_list_panel.hide()
+		insert_text_at_caret(DisplayServer.clipboard_get().to_upper())
+		accept_event()
+		return
+	if event.is_action("ui_undo") or event.is_action("ui_redo") or event.is_action("ui_text_select_all"):
 		return
 	if auto_list_panel.visible:
 		var selected = autocomplete_list.get_selected_items()

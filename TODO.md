@@ -25,6 +25,7 @@
 * online indicator for callsigns in chat?
 * song queue visualization
 * per-channel notification sounds
+* split history per websocket
 
 ### nikzapp
 
