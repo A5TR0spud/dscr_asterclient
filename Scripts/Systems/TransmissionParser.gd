@@ -87,7 +87,8 @@ func read_group_items(item_parser: Callable, collapse_arrays: bool = false) -> A
 			items.append_array(tmp)
 		else:
 			items.append(tmp)
-	expect(GROUP_END)
+	if not is_at_end():
+		expect(GROUP_END)
 	
 	return items
 

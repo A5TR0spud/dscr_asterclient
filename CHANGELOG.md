@@ -9,12 +9,14 @@
 ### Changes
 
 * Autocomplete order is now sorted shortest to longest and ensures currently selected is visible (Sugar)
+* Can now right-click drag in images to pan the camera relative to its POV
 
 ### Fixes
 
 * Fixed Setting: Do Dictionary Whitespace both not working and causing total collapse of the Main Channel if it's not first 
 * Fixed auto-capitalization not working on accented letters (Sugar)
 * Cut, copy, and paste within the transmission edit box should now work on more machines
+* In images, -15 is now optional if at the end of the transmission
 
 ## 0.8.6
 

@@ -14,12 +14,17 @@
 * something for element names
 * tagging signals and searching by tag
 * word aliases (unless the macro system is sufficient)
-* clean up transmission un/re-loading and/to figure out duplicate and missing history
+* figure out transmission history `shown_transmissions` slipping
 * ability to block channels when using the skeleton key
 * music parsing for sine vs square vs saw vs triangle vs smooth square
 * autocomplete for nicknames to numbers
 * fix emoji not working
 * add option to hide transmissions with -132010 in them (truncate to 0 signals and new button)
+* setting to get a ping sound when callsign is spoken and channel is not focused
+* ctrl+f
+* online indicator for callsigns in chat?
+* song queue visualization
+* per-channel notification sounds
 
 ### nikzapp
 

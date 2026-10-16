@@ -233,6 +233,31 @@ func _on_visualizer_rect_gui_input(event: InputEvent):
 		_is_holding = true
 		accept_event()
 		return
+	if event is InputEventMouseMotion and Input.is_action_pressed("pan_image") and not Input.is_action_pressed("rotate_image"):
+		var dx: float = -event.relative.x * 0.005 * cam.position.z
+		var dy: float = event.relative.y * 0.005 * cam.position.z
+		var _yaw: float = cam_pivot.rotation.y
+		var _pitch: float = cam_pivot.rotation.x
+		
+		var _newpos: Vector3 = cam_pivot.position
+		# horizontal panning
+		_newpos.x += dx * cos(_yaw)
+		_newpos.z += -dx * sin(_yaw)
+		# vertical panning
+		_newpos.y += dy * cos(_pitch)
+		_newpos.x += dy * sin(_yaw) * sin(_pitch)
+		_newpos.z += dy * cos(_yaw) * sin(_pitch)
+		
+		if (
+			-16 <= _newpos.x and _newpos.x <= 16 and
+			-12 <= _newpos.y and _newpos.y <= 12 and
+			-16 <= _newpos.z and _newpos.z <= 16
+		):
+			cam_pivot.position = _newpos
+		
+		accept_event()
+		_calc_center_button_enabled()
+		return
 	if !_is_holding:
 		return
 	if visualizer.get_local_mouse_position() == _held_mouse_pos:
@@ -276,11 +301,13 @@ func _on_center_button_pressed():
 	yaw_slider.value = 0
 	zoom_slider.value = 0
 	pitch_slider.value = 0
+	cam_pivot.position = Vector3.ZERO
 	center_button.set_disabled(true)
 
 func _calc_center_button_enabled():
 	center_button.set_disabled(
 		yaw_slider.value == 0 and
 		zoom_slider.value == 0 and
-		pitch_slider.value == 0
+		pitch_slider.value == 0 and
+		cam_pivot.position == Vector3.ZERO
 	)
