@@ -17,6 +17,7 @@
 * Fixed auto-capitalization not working on accented letters (Sugar)
 * Fixed select-all/undo/redo on Linux
 * In images, -15 is now optional if at the end of the transmission
+* Swapped out reconnection for the less convenient but not disastrous approach of *not* reconnecting and instead connecting anew. This fixes reconnection purgatory and will send the 10 most recent messages again.
 
 ## 0.8.6
 

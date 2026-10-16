@@ -158,7 +158,8 @@ func start_connect(is_reconnect_attempt: bool = false) -> void:
 	if trying_to_quit: return
 	if is_reconnect_attempt:
 		print("Attempting Reconnect")
-		set_callsign(callsign, true)
+		#set_callsign(callsign, true)
+		set_callsign(callsign)
 	else:
 		_try_claim_callsign()
 	# Initiate connection to the given URL.
