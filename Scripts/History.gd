@@ -14,6 +14,7 @@ var channel_heads: Dictionary[int, int] = {}
 const MAX_SUPERCAPACITY: int = 4096
 
 func get_head_idx(channel: Variant) -> int:
+	verify_size()
 	var ni: int = -1
 	if channel == Chat.SKELETON_KEY:
 		ni = Chat.history.last_valid()
@@ -37,13 +38,15 @@ func get_previous_idx(from_idx: int, skeleton_key: bool = false) -> int:
 	return ni if verify_index(ni) else -1
 
 func verify_index(idx: int) -> bool:
+	if size == 0:
+		return false
 	if idx < 0 or idx >= MAX_SUPERCAPACITY:
 		return false
-	if idx >= last_basic() and idx >= first:
+	if idx > last_valid() and idx >= first:
 		return false
-	if idx < first and idx >= last_basic():
+	if idx < first and idx > last_valid():
 		return false
-	if idx < first and last_basic() >= first:
+	if idx < first and last_valid() > first:
 		return false
 	return true
 
@@ -70,8 +73,7 @@ func add(sender: int, channel: Variant, trx: int, message: PackedInt64Array) -> 
 	push(new_msg)
 
 func push(new_msg: ChatEntryNode) -> void:
-	if catalog.size() != MAX_SUPERCAPACITY:
-		catalog.resize(MAX_SUPERCAPACITY)
+	verify_size()
 	verify_room()
 	if new_msg.has_channel:
 		if get_at_cyclic_index(channel_heads.get(new_msg.channel, -1)):
@@ -85,9 +87,24 @@ func push(new_msg: ChatEntryNode) -> void:
 		none_channel_head = last_basic()
 	catalog[last_basic()] = new_msg
 	size += 1
+	#print("first ", first)
+	#print("size ", size)
+	#print("last ", last_valid())
+	#print("mainhead ", none_channel_head)
+	#print("heads ", channel_heads)
+	#print("hist ", catalog)
+
+func verify_size() -> void:
+	if catalog.size() != MAX_SUPERCAPACITY:
+		catalog.clear()
+		first = 0
+		size = 0
+		catalog.resize(MAX_SUPERCAPACITY)
+		none_channel_head = -1
+		channel_heads.clear()
 
 func verify_room() -> void:
-	while size >= MAX_SUPERCAPACITY - 2:
+	while size >= MAX_SUPERCAPACITY - 1:
 		if not remove_eldest():
 			return
 
