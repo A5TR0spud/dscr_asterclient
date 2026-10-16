@@ -106,8 +106,6 @@ static func new_transmission(packet: PackedStringArray) -> void:
 		_i += 1
 		_c = history.get_at_cyclic_index(history.last_valid() - _i)
 	
-	history.add(sender, channel_id, transmission_number, integer_message)
-	
 	var channel: ChatChannel = get_channel_node(channel_id)
 	var spooky_channel: ChatChannel = get_channel_node(SKELETON_KEY)
 	
@@ -154,6 +152,8 @@ static func new_transmission(packet: PackedStringArray) -> void:
 		ske_message.message = integer_message
 		ske_message.key = channel_id
 		spooky_channel.add_message_node(ske_message)
+	
+	history.add(sender, channel_id, transmission_number, integer_message)
 
 enum State {
 	CONNECTING,

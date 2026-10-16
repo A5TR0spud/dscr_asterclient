@@ -121,6 +121,7 @@ func try_show_one_history() -> bool:
 		var i: int = 0
 		while current_head and i < shown_transmissions:
 			if not advance():
+				fin = true
 				return false
 			i += 1
 	if current_head == null:

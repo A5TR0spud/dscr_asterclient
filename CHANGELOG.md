@@ -2,6 +2,10 @@
 
 ## --WIP
 
+### Additions
+
+* Added history!
+
 ### Changes
 
 * Autocomplete order is now sorted shortest to longest and ensures currently selected is visible (Sugar)
