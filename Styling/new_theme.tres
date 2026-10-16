@@ -131,6 +131,7 @@ LineEdit/styles/focus = ExtResource("1_nhcih")
 LineEdit/styles/normal = ExtResource("2_5vjxe")
 LineEdit/styles/read_only = SubResource("StyleBoxFlat_g4v7s")
 OptionButton/icons/arrow = SubResource("GradientTexture1D_ttirq")
+Panel/styles/panel = ExtResource("1_tvtlr")
 PanelContainer/styles/panel = ExtResource("1_tvtlr")
 PopupMenu/constants/gutter_compact = 0
 PopupMenu/constants/item_end_padding = 0
