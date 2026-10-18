@@ -1,6 +1,6 @@
 # Versions
 
-## --WIP
+## 0.9.0: Historical Record
 
 ### Additions
 
