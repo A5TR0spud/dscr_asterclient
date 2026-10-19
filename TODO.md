@@ -9,7 +9,6 @@
 * hover over numbers to get the translation
 * implement message history so you can use arrow keys to access your previous transmissions
 * Image editor tab (w/ compat vs compact exports)
-* Image camera control strafe/walk/fly that doesn't require a keyboard
 * audio editor tab (with support for sequences and such)
 * something for element names
 * tagging signals and searching by tag
@@ -22,7 +21,6 @@
 * add option to hide transmissions with -132010 in them (truncate to 0 signals and new button)
 * setting to get a ping sound when callsign is spoken and channel is not focused
 * ctrl+f
-* online indicator for callsigns in chat?
 * song queue visualization
 * per-channel notification sounds
 * split history per websocket

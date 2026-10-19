@@ -35,6 +35,7 @@ func ready():
 	is_image_open = SettingsHandler.image_default or image_open_override
 	try_parses()
 	refresh_callsign()
+	Main.instance.connected_user_change.connect(refresh_callsign)
 	Main.instance.reload_nicknames.connect(refresh_callsign)
 	Main.instance.reload_dict.connect(refresh_callsign)
 	if stasis:
@@ -120,6 +121,7 @@ func refresh_callsign():
 			composite += DictionaryHandler.get_or_default_signal_name(num.to_int())
 		callsign_node.text += " \'" + composite + "\'"
 	callsign_node.self_modulate = Main.get_callsign_color(sender)
+	identicon_node.self_modulate.a = 1.0 if sender in Main.instance.connected_users else 0.5
 	tab_node.self_modulate = Main.get_callsign_color(sender)
 	identicon_node.num = sender
 

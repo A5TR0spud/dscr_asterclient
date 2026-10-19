@@ -11,6 +11,11 @@
 ### Changes
 
 * Adjusted English localization for the word style setting to make it more distinct
+* Identicons dim in chat when the user is offline
+
+### Fixes
+
+* Saving transmissions in the Library now properly saves the JSON as an array of integers instead of appending ".0" to every number
 
 ## 0.9.0: Historical Record
 
