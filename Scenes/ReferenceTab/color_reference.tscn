@@ -1,8 +1,15 @@
 [gd_scene format=3 uid="uid://cto24hb8qmf3w"]
 
-[ext_resource type="Texture2D" uid="uid://mbg2qa5kfljo" path="res://Scenes/Confetti/confetti_rainbow.tres" id="1_j8igx"]
 [ext_resource type="Script" uid="uid://cr364dgqsbesj" path="res://Scenes/ReferenceTab/color_reference.gd" id="1_jhifv"]
 [ext_resource type="StyleBox" uid="uid://ce0iogvih0sn0" path="res://Styling/Seps/v_sep_bright.tres" id="2_jhifv"]
+
+[sub_resource type="Gradient" id="Gradient_j8igx"]
+offsets = PackedFloat32Array(0, 0.111, 0.222, 0.333, 0.444, 0.556, 0.667, 0.778, 0.889, 1)
+colors = PackedColorArray(1, 0.34509805, 0, 1, 0.73333335, 1, 0, 1, 0, 0.8039216, 1, 1, 0, 0.5176471, 1, 1, 0.3019608, 0, 1, 1, 0.9843137, 0.22352941, 1, 1, 1, 0.05882353, 0.84313726, 1, 0.15686275, 0.15686275, 0.15686275, 1, 0.3882353, 0.3882353, 0.3882353, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jhifv"]
+gradient = SubResource("Gradient_j8igx")
+width = 65
 
 [node name="ColorReference" type="PanelContainer" unique_id=486884822]
 anchors_preset = 15
@@ -18,7 +25,7 @@ layout_mode = 2
 [node name="Rainbow" type="TextureRect" parent="VBoxContainer" unique_id=1970985037]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-texture = ExtResource("1_j8igx")
+texture = SubResource("GradientTexture1D_jhifv")
 
 [node name="Notches" type="HBoxContainer" parent="VBoxContainer" unique_id=1450759560]
 layout_mode = 2
