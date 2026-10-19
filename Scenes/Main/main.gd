@@ -465,3 +465,9 @@ func _on_dsve_button_pressed():
 
 func _on_dsmidi_button_pressed():
 	OS.shell_open("https://dsmidi.akqqa.dev/")
+
+
+@onready var sidebar_tabber: TabContainer = $Body/Sidebar/SidebarTabber
+
+static func open_callsign_window() -> void:
+	instance.sidebar_tabber.current_tab = 1

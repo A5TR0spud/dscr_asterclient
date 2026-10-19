@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://dbvyvpj6id1sv" path="res://Scripts/ConfirmationButton.gd" id="5_2h3m4"]
 
 [node name="DictEditWindow" type="PanelContainer" unique_id=1113766720]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2

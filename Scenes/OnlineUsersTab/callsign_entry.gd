@@ -23,6 +23,12 @@ func refresh_label():
 func refresh_name():
 	name_node.text = NicknamesHandler.get_nick(callsign)
 
+func _input(event: InputEvent):
+	if event is InputEventMouseButton:
+		if event.button_index != MOUSE_BUTTON_MIDDLE and event.pressed:
+			if not Rect2(Vector2.ZERO, size).has_point(get_local_mouse_position()):
+				name_node.release_focus()
+
 func _on_nickname_editing_toggled(toggled_on):
 	if not toggled_on:
 		refresh_name()

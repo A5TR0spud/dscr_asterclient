@@ -98,16 +98,18 @@ func refresh_callsign():
 				num = "-"
 				state = 2
 			elif nick[0] == "-" and state == 2:
-				composite += "|" + num
+				composite += "|-" + num
 				num = ""
 				state = 0
-			elif nick[0] == "|" and state >= 1:
+			elif nick[0] == "|" and state == 1 and not num:
 				composite += "|"
-				num = ""
 				state = 0
 			elif not nick[0].is_valid_int() and state >= 1:
 				state = 0
-				composite += DictionaryHandler.get_or_default_signal_name(num.to_int())
+				if num:
+					composite += DictionaryHandler.get_or_default_signal_name(num.to_int()) + nick[0]
+				else:
+					composite += "|" + nick[0]
 				num = ""
 			elif nick[0] == "|" and state == 0:
 				state = 1
@@ -227,3 +229,10 @@ func _on_key_pressed():
 
 func _on_color_button_toggled(toggled_on: bool):
 	color_node.visible = toggled_on
+
+func _on_callsign_gui_input(event: InputEvent):
+	if event is InputEventMouseButton:
+		event = event as InputEventMouseButton
+		if event.pressed and event.button_index == MouseButton.MOUSE_BUTTON_LEFT:
+			Main.open_callsign_window()
+			ActiveUsersTab.select_callsign(sender)

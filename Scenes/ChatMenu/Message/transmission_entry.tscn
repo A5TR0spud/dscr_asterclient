@@ -43,6 +43,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_g4v7s")
 layout_mode = 2
 size_flags_horizontal = 0
 mouse_filter = 1
+mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("3_l6w3c")
 text = "1574"
 
@@ -201,6 +202,7 @@ layout_mode = 2
 
 [connection signal="hover_change" from="." to="." method="_on_hover_change"]
 [connection signal="set_etc_visibility" from="." to="." method="_on_set_etc_visibility"]
+[connection signal="gui_input" from="Header/Cbox/Callsign" to="." method="_on_callsign_gui_input"]
 [connection signal="pressed" from="Header/KeyBox/Key" to="." method="_on_key_pressed"]
 [connection signal="meta_clicked" from="Body/Corpus/Message" to="." method="_on_message_meta_clicked"]
 [connection signal="toggled" from="Body/Corpus/ContextButtons/ImageButton" to="." method="_on_image_button_toggled"]
