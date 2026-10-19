@@ -204,6 +204,8 @@ static func apply_signal_desc(sig: int, desc: Dictionary) -> void:
 	return
 
 static func get_or_default_signal_name(sig: int) -> String:
+	if sig >= 0:
+		return str(sig)
 	var idx: int = word_keys.find(sig)
 	if idx == -1 or word_names.size() <= idx:
 		if SettingsHandler.use_at_undef:

@@ -27,7 +27,6 @@
 * per-channel notification sounds
 * split history per websocket
 * bool setting: message log txts per-day (sender, trx, wss, timestamp (unix), timestamp (system date and time), message (signals))
-* make pipes in nicknames translate when followed by numbers
 
 ### nikzapp
 

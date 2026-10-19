@@ -5,6 +5,7 @@
 ### Additions
 
 * Split |-54 colorizer into its own setting. It can be disabled, work inline (only available with styling), or create a reference spectrum at the bottom
+* Nicknames will translate piped signals (|). Pipes can be escaped by doubling them (ie. type '||-245' to get '|-245' instead of \<signal_-245\>)
 
 ### Changes
 

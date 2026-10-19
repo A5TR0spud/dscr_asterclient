@@ -36,6 +36,7 @@ func ready():
 	try_parses()
 	refresh_callsign()
 	Main.instance.reload_nicknames.connect(refresh_callsign)
+	Main.instance.reload_dict.connect(refresh_callsign)
 	if stasis:
 		hover_node.visible = false
 	if is_historical:
@@ -85,8 +86,37 @@ func try_parses():
 
 func refresh_callsign():
 	callsign_node.text = Main.base_10_to_callsign(sender)
-	if not NicknamesHandler.get_nick(sender).is_empty():
-		callsign_node.text += " \'" + NicknamesHandler.get_nick(sender) + "\'"
+	var nick: String = NicknamesHandler.get_nick(sender)
+	if nick:
+		var composite: String = ""
+		var state: int = 0
+		var num: String = ""
+		while nick:
+			if nick[0].is_valid_int() and state >= 1:
+				num += nick[0]
+			elif nick[0] == "-" and state == 1:
+				num = "-"
+				state = 2
+			elif nick[0] == "-" and state == 2:
+				composite += "|" + num
+				num = ""
+				state = 0
+			elif nick[0] == "|" and state >= 1:
+				composite += "|"
+				num = ""
+				state = 0
+			elif not nick[0].is_valid_int() and state >= 1:
+				state = 0
+				composite += DictionaryHandler.get_or_default_signal_name(num.to_int())
+				num = ""
+			elif nick[0] == "|" and state == 0:
+				state = 1
+			else:
+				composite += nick[0]
+			nick = nick.substr(1)
+		if num:
+			composite += DictionaryHandler.get_or_default_signal_name(num.to_int())
+		callsign_node.text += " \'" + composite + "\'"
 	callsign_node.self_modulate = Main.get_callsign_color(sender)
 	tab_node.self_modulate = Main.get_callsign_color(sender)
 	identicon_node.num = sender
