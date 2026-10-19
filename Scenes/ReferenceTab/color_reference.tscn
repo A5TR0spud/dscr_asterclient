@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cto24hb8qmf3w"]
 
 [ext_resource type="Texture2D" uid="uid://mbg2qa5kfljo" path="res://Scenes/Confetti/confetti_rainbow.tres" id="1_j8igx"]
+[ext_resource type="Script" uid="uid://cr364dgqsbesj" path="res://Scenes/ReferenceTab/color_reference.gd" id="1_jhifv"]
 [ext_resource type="StyleBox" uid="uid://ce0iogvih0sn0" path="res://Styling/Seps/v_sep_bright.tres" id="2_jhifv"]
 
 [node name="ColorReference" type="PanelContainer" unique_id=486884822]
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_jhifv")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=80621477]
 layout_mode = 2
@@ -27,6 +29,7 @@ custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -36,6 +39,7 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -45,6 +49,7 @@ custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -54,6 +59,7 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -63,6 +69,7 @@ custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -72,6 +79,7 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -81,6 +89,7 @@ custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -90,6 +99,7 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -98,6 +108,7 @@ custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -107,6 +118,7 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -116,6 +128,7 @@ custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -125,6 +138,7 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -134,6 +148,7 @@ custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -143,6 +158,7 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -152,6 +168,7 @@ custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -161,6 +178,7 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -169,6 +187,7 @@ custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -178,6 +197,7 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -187,6 +207,7 @@ custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -196,6 +217,7 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -205,6 +227,7 @@ custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -214,6 +237,7 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -223,6 +247,7 @@ custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -232,6 +257,7 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -240,6 +266,7 @@ custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -249,6 +276,7 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -258,6 +286,7 @@ custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -267,6 +296,7 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -276,6 +306,7 @@ custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -285,6 +316,7 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -294,6 +326,7 @@ custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -303,6 +336,7 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -311,6 +345,7 @@ custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -320,6 +355,7 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -329,6 +365,7 @@ custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -338,6 +375,7 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -347,6 +385,7 @@ custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -356,6 +395,7 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -365,6 +405,7 @@ custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -374,6 +415,7 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -382,6 +424,7 @@ custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -391,6 +434,7 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -400,6 +444,7 @@ custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -409,6 +454,7 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -418,6 +464,7 @@ custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -427,6 +474,7 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -436,6 +484,7 @@ custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -445,6 +494,7 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -453,6 +503,7 @@ custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -462,6 +513,7 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -471,6 +523,7 @@ custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -480,6 +533,7 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -489,6 +543,7 @@ custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -498,6 +553,7 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -507,6 +563,7 @@ custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -516,6 +573,7 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -524,6 +582,7 @@ custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -533,6 +592,7 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -542,6 +602,7 @@ custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -551,6 +612,7 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -560,6 +622,7 @@ custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -569,6 +632,7 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -578,6 +642,7 @@ custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -587,6 +652,7 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -595,6 +661,7 @@ custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_constants/separation = 0
 theme_override_styles/separator = ExtResource("2_jhifv")
 
@@ -607,6 +674,7 @@ theme_override_constants/separation = 0
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
+mouse_filter = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/Labels" unique_id=1100306494]
 layout_mode = 2
@@ -614,6 +682,7 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 4.0
 offset_transform_enabled = true
 offset_transform_position_ratio = Vector2(-0.5, 0)
+mouse_filter = 1
 text = "0"
 horizontal_alignment = 1
 
@@ -621,6 +690,7 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 8.0
+mouse_filter = 1
 text = "8"
 horizontal_alignment = 1
 
@@ -628,6 +698,7 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 8.0
+mouse_filter = 1
 text = "16"
 horizontal_alignment = 1
 
@@ -635,6 +706,7 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 8.0
+mouse_filter = 1
 text = "24"
 horizontal_alignment = 1
 
@@ -642,6 +714,7 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 8.0
+mouse_filter = 1
 text = "32"
 horizontal_alignment = 1
 
@@ -649,6 +722,7 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 8.0
+mouse_filter = 1
 text = "40"
 horizontal_alignment = 1
 
@@ -656,6 +730,7 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 8.0
+mouse_filter = 1
 text = "48"
 horizontal_alignment = 1
 
@@ -663,6 +738,7 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 8.0
+mouse_filter = 1
 text = "56"
 horizontal_alignment = 1
 
@@ -672,6 +748,7 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 4.0
 offset_transform_enabled = true
 offset_transform_position_ratio = Vector2(0.5, 0)
+mouse_filter = 1
 text = "64"
 horizontal_alignment = 1
 
@@ -679,3 +756,35 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
+mouse_filter = 1
+
+[node name="CursorLabel" type="HBoxContainer" parent="VBoxContainer" unique_id=621114309]
+visible = false
+layout_mode = 2
+offset_transform_enabled = true
+theme_override_constants/separation = 0
+
+[node name="Control" type="Control" parent="VBoxContainer/CursorLabel" unique_id=644510624]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+mouse_filter = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/CursorLabel" unique_id=764674167]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 65.0
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(-0.5, 0)
+mouse_filter = 1
+text = "2"
+horizontal_alignment = 1
+
+[node name="Control2" type="Control" parent="VBoxContainer/CursorLabel" unique_id=2142595429]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+mouse_filter = 1
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
