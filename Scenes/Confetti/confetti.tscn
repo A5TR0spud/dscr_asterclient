@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://u8pwuueu72oi" path="res://Assets/Square.png" id="1_vfd34"]
 [ext_resource type="Script" uid="uid://55j6p7ukjcjp" path="res://Scenes/Confetti/confetti.gd" id="1_vvhja"]
+[ext_resource type="Texture2D" uid="uid://mbg2qa5kfljo" path="res://Scenes/Confetti/confetti_rainbow.tres" id="3_r0mpv"]
 
 [sub_resource type="Curve" id="Curve_3gngh"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 1, Vector2(0.75184363, 1), 0.0, 0.0, 1, 0, Vector2(1, 0), -12.759198, 0.0, 0, 0]
@@ -9,14 +10,6 @@ point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_d0u6y"]
 curve = SubResource("Curve_3gngh")
-
-[sub_resource type="Gradient" id="Gradient_vvhja"]
-interpolation_color_space = 1
-offsets = PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1)
-colors = PackedColorArray(1, 0.34509805, 0, 1, 0.73333335, 1, 0, 1, 0, 0.8039216, 1, 1, 0, 0.5176471, 1, 1, 0.3019608, 0, 1, 1, 0.9843137, 0.22352941, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_57qmd"]
-gradient = SubResource("Gradient_vvhja")
 
 [sub_resource type="Curve" id="Curve_ojpgf"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.167427, 0.5189733), 0.0, 0.0, 0, 0, Vector2(0.5287409, 0.2689733), 0.0, 0.0, 0, 0]
@@ -43,7 +36,7 @@ damping_min = 13.990001
 damping_max = 13.990001
 attractor_interaction_enabled = false
 scale_min = 0.39999998
-color_initial_ramp = SubResource("GradientTexture1D_57qmd")
+color_initial_ramp = ExtResource("3_r0mpv")
 alpha_curve = SubResource("CurveTexture_d0u6y")
 turbulence_enabled = true
 turbulence_noise_scale = 64.0
@@ -84,7 +77,7 @@ damping_curve = SubResource("CurveTexture_jlwkn")
 attractor_interaction_enabled = false
 scale_min = 0.13
 scale_max = 0.25
-color_initial_ramp = SubResource("GradientTexture1D_57qmd")
+color_initial_ramp = ExtResource("3_r0mpv")
 alpha_curve = SubResource("CurveTexture_d0u6y")
 
 [node name="Confetti" type="Control" unique_id=442682486]

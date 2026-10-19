@@ -58,13 +58,48 @@ size_flags_vertical = 3
 layout_mode = 2
 description = "SETTINGS_DO_WHITESPACE"
 
-[node name="ImageVis" parent="ScrollContainer/Options" unique_id=1916992470 instance=ExtResource("3_0yg8b")]
-layout_mode = 2
-description = "SETTINGS_DEFAULT_IMAGE"
-
 [node name="DoBBCode" parent="ScrollContainer/Options" unique_id=1844422194 instance=ExtResource("3_0yg8b")]
 layout_mode = 2
 description = "SETTINGS_DO_BBCODE"
+
+[node name="ColorReferenceMode" type="VBoxContainer" parent="ScrollContainer/Options" unique_id=599888418]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/Options/ColorReferenceMode" unique_id=1433338289]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "color reference mode"
+autowrap_mode = 3
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/Options/ColorReferenceMode/Label" unique_id=1608257555]
+script = ExtResource("5_gal0n")
+translations = Dictionary[StringName, String]({
+&"text": "SETTINGS_COLOR_REF"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="ColorRefSwitch" type="OptionButton" parent="ScrollContainer/Options/ColorReferenceMode" unique_id=1145925921]
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "none"
+popup/item_0/id = 0
+popup/item_1/text = "inline"
+popup/item_1/id = 1
+popup/item_2/text = "bottom"
+popup/item_2/id = 2
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/Options/ColorReferenceMode/ColorRefSwitch" unique_id=2112955505]
+script = ExtResource("5_gal0n")
+translations = Dictionary[StringName, String]({
+&"popup/item_0/text": "SETTINGS_COLOR_REF_NONE",
+&"popup/item_1/text": "SETTINGS_COLOR_REF_INLINE",
+&"popup/item_2/text": "SETTINGS_COLOR_REF_BOTTOM"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="HSeparator" type="HSeparator" parent="ScrollContainer/Options/ColorReferenceMode" unique_id=2000024870]
+layout_mode = 2
 
 [node name="NumberSeparation" parent="ScrollContainer/Options" unique_id=1913893789 instance=ExtResource("3_0yg8b")]
 layout_mode = 2
@@ -364,6 +399,10 @@ metadata/_custom_type_script = "uid://7gga31jeosxl"
 [node name="HSeparator5" type="HSeparator" parent="ScrollContainer/Options" unique_id=1134833940]
 layout_mode = 2
 
+[node name="ImageVis" parent="ScrollContainer/Options" unique_id=1916992470 instance=ExtResource("3_0yg8b")]
+layout_mode = 2
+description = "SETTINGS_DEFAULT_IMAGE"
+
 [node name="ImageMovement" type="FoldableContainer" parent="ScrollContainer/Options" unique_id=1922610066]
 layout_mode = 2
 title = "image camera inversion"
@@ -419,8 +458,8 @@ off_text = "SETTINGS_BACKUP_RANDOM"
 on_text = "SETTINGS_BACKUP_INCREMENT"
 
 [connection signal="set" from="ScrollContainer/Options/Formatting" to="." method="_on_formatting_set"]
-[connection signal="set" from="ScrollContainer/Options/ImageVis" to="." method="_on_image_vis_set"]
-[connection signal="set" from="ScrollContainer/Options/DoBBCode" to="." method="_on_signal_color_set"]
+[connection signal="set" from="ScrollContainer/Options/DoBBCode" to="." method="_on_do_bb_code_set"]
+[connection signal="item_selected" from="ScrollContainer/Options/ColorReferenceMode/ColorRefSwitch" to="." method="_on_color_ref_switch_item_selected"]
 [connection signal="set" from="ScrollContainer/Options/NumberSeparation" to="." method="_on_number_separation_set"]
 [connection signal="set" from="ScrollContainer/Options/Confetti" to="." method="_on_confetti_set"]
 [connection signal="value_changed" from="ScrollContainer/Options/TruncHbox/TruncationSpinner" to="." method="_on_truncation_spinner_value_changed"]
@@ -437,6 +476,7 @@ on_text = "SETTINGS_BACKUP_INCREMENT"
 [connection signal="pressed" from="ScrollContainer/Options/GlobalVolume/SliderLabelGrid/Normal" to="." method="_on_volume_normal_pressed"]
 [connection signal="value_changed" from="ScrollContainer/Options/MusicVolume/VolumeSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="pressed" from="ScrollContainer/Options/MusicVolume/SliderLabelGrid/Normal" to="." method="_on_music_volume_normal_pressed"]
+[connection signal="set" from="ScrollContainer/Options/ImageVis" to="." method="_on_image_vis_set"]
 [connection signal="set" from="ScrollContainer/Options/ImageMovement/VBoxContainer/InvertPitch" to="." method="_on_invert_pitch_set"]
 [connection signal="set" from="ScrollContainer/Options/ImageMovement/VBoxContainer/InvertYaw" to="." method="_on_invert_yaw_set"]
 [connection signal="set" from="ScrollContainer/Options/ImageMovement/VBoxContainer/InvertZoom" to="." method="_on_invert_zoom_set"]

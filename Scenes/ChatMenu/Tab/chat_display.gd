@@ -4,7 +4,7 @@ class_name ChatChannel
 @onready var scroll_container: AutoScrollContainer = $ScrollContainer
 @onready var scroll_bar: VScrollBar = $ScrollContainer.get_v_scroll_bar()
 @onready var scroll_down_button: Button = $ScrollToNew
-static var trx_scene = preload("res://Scenes/ChatMenu/transmission_entry.tscn")
+static var trx_scene = preload("uid://d4neakrhevfia")
 var default_channel: bool = true
 var id = null
 var _unread_notification: bool = false

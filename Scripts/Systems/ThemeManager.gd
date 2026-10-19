@@ -24,6 +24,7 @@ static var tab_but_unselected = preload("uid://10juafvr3ky1")
 # Seps
 static var h_sep = preload("uid://dgjcahl47q10n")
 static var v_sep = preload("uid://db3k5eiovgegq")
+static var v_sep_bright = preload("uid://ce0iogvih0sn0")
 static var h_split = preload("uid://b1t3fn13p4807")
 static var v_split = preload("uid://circtrvcvn66m")
 
@@ -109,6 +110,7 @@ static func _set_color_inner(col: int):
 	await _setty(panel_style, "border_color", new_color)
 	await _setty(code_autocomplete_style, "border_color", new_color)
 	await _setty(grabber_pressed_style, "bg_color", new_color)
+	await _setty(v_sep_bright, "bg_color", new_color)
 	var _new_color: Color = new_color
 	_new_color.a = 0.5
 	await _setty(h_sep, "color", _new_color)

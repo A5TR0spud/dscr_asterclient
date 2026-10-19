@@ -9,6 +9,8 @@ func _ready() -> void:
 @onready var formatting: SettingEntry = $ScrollContainer/Options/Formatting
 @onready var image_visibility: SettingEntry = $ScrollContainer/Options/ImageVis
 @onready var do_bbcode: SettingEntry = $ScrollContainer/Options/DoBBCode
+@onready var color_ref_group: Control = $ScrollContainer/Options/ColorReferenceMode
+@onready var color_ref: OptionButton = $ScrollContainer/Options/ColorReferenceMode/ColorRefSwitch
 @onready var truncate: SpinBox = $ScrollContainer/Options/TruncHbox/TruncationSpinner
 @onready var font_size: SpinBox = $ScrollContainer/Options/FontHbox/FontSpinner
 @onready var ui_stretch: SettingEntry = $ScrollContainer/Options/UIStretch
@@ -34,6 +36,7 @@ func refresh() -> void:
 	formatting.set_state_no_signal(SettingsHandler.do_formatting)
 	image_visibility.set_state_no_signal(SettingsHandler.image_default)
 	do_bbcode.set_state_no_signal(SettingsHandler.do_bbcode)
+	color_ref.selected = SettingsHandler.color_signal_mode
 	invert_pitch.set_state_no_signal(SettingsHandler.img_invert_pitch)
 	invert_yaw.set_state_no_signal(SettingsHandler.img_invert_yaw)
 	invert_zoom.set_state_no_signal(SettingsHandler.img_invert_zoom)
@@ -58,6 +61,13 @@ func _refresh_dict_supports():
 	image_setting_group.visible = DictionaryHandler.support_m0
 	music_parent.visible = DictionaryHandler.support_dscr
 	number_sep_setting.visible = DictionaryHandler.support_m0
+	_refresh_color_ref()
+
+func _refresh_color_ref():
+	color_ref_group.visible = DictionaryHandler.support_m0
+	color_ref.set_item_disabled(1, not SettingsHandler.do_bbcode)
+	if color_ref.is_item_disabled(1) and color_ref.selected == 1:
+		color_ref.select(2)
 
 func _refresh_confetti():
 	confetti_setting.visible = DictionaryHandler.support_dscr and -702 in DictionaryHandler.word_keys
@@ -105,9 +115,10 @@ func _on_image_vis_set(new_value):
 	SettingsHandler.image_default = new_value
 	save(false)
 
-func _on_signal_color_set(new_value):
+func _on_do_bb_code_set(new_value):
 	SettingsHandler.do_bbcode = new_value
 	Main.on_dict_reload()
+	_refresh_color_ref()
 	save(false)
 
 func _on_truncation_spinner_value_changed(value):
@@ -209,3 +220,8 @@ func _on_scale_confirm_confirmed():
 func _on_scale_confirm_probed():
 	ui_scale.editable = false
 	SettingsHandler.apply_ui_scale(ui_scale.value)
+
+func _on_color_ref_switch_item_selected(index: int):
+	SettingsHandler.color_signal_mode = index
+	Main.on_dictionary_support_updated()
+	save(false)

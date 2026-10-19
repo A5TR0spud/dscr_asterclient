@@ -20,6 +20,9 @@ var is_image_open: bool = false
 @onready var hover_node: HBoxContainer = $Header/HoverBox
 @onready var etc_button_node: Button = $Body/Corpus/ContextButtons/EtcButton
 
+@onready var color_node: Control = $Body/Corpus/ColorReference
+@onready var color_button: Button = $Body/Corpus/ContextButtons/ColorButton
+
 @onready var image_node: VisualizeNode = $Body/Corpus/VisualizeNode
 @onready var image_button_node: Button = $Body/Corpus/ContextButtons/ImageButton
 
@@ -70,6 +73,15 @@ func try_parses():
 			song_node.queue_free()
 		elif !has_valid_song:
 			song_node.stop_music()
+	if is_instance_valid(color_node):
+		var has_color: bool = -54 in message
+		var color_enabled: bool = DictionaryHandler.support_m0 and SettingsHandler.color_signal_mode == 2
+		color_button.visible = has_color and color_enabled
+		color_button.set_pressed_no_signal(false)
+		color_node.visible = false
+		if !has_color and delete_empty_parses:
+			color_node.queue_free()
+			color_button.queue_free()
 
 func refresh_callsign():
 	callsign_node.text = Main.base_10_to_callsign(sender)
@@ -182,3 +194,6 @@ func _input(_event):
 
 func _on_key_pressed():
 	Chat.focus_channel(key)
+
+func _on_color_button_toggled(toggled_on: bool):
+	color_node.visible = toggled_on

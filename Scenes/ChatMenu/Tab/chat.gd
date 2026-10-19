@@ -4,9 +4,9 @@ class_name Chat
 static var history: History = null
 
 static var instance: Chat
-static var transmission_entry_scene = preload("res://Scenes/ChatMenu/transmission_entry.tscn")
-static var status_log_entry_scene = preload("res://Scenes/ChatMenu/status_log_entry.tscn")
-static var chat_channel_scene = preload("res://Scenes/ChatMenu/chat_channel.tscn")
+static var transmission_entry_scene = preload("uid://d4neakrhevfia")
+static var status_log_entry_scene = preload("uid://bfuqifdrv6kq3")
+static var chat_channel_scene = preload("uid://c7bn3w1ijabx4")
 @onready var channel_container: TabContainer = $TabContainer
 @onready var main_channel: ChatChannel = $TabContainer/Main
 

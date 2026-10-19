@@ -15,6 +15,7 @@ static var img_invert_yaw: bool = false
 static var img_invert_pitch: bool = false
 static var img_invert_zoom: bool = false
 static var do_bbcode: bool = false
+static var color_signal_mode: int = 0
 static var use_at_undef: bool = false
 static var language: String = ""
 static var websocket_address: String = Main.DSCR_URL
@@ -78,6 +79,8 @@ static func initialize() -> void:
 	img_invert_yaw = SaveSystem.settings.get_or_add("img_invert_yaw", img_invert_yaw)
 	img_invert_zoom = SaveSystem.settings.get_or_add("img_invert_zoom", img_invert_zoom)
 	do_bbcode = SaveSystem.settings.get_or_add("do_bbcode", do_bbcode)
+	# update compat
+	color_signal_mode = SaveSystem.settings.get_or_add("color_signal_mode", 1 if do_bbcode else 0)
 	use_at_undef = SaveSystem.settings.get_or_add("use_at_undef", use_at_undef)
 	language = SaveSystem.settings.get_or_add("language", language)
 	validate_and_set_language.call_deferred()
@@ -132,6 +135,7 @@ static func export() -> void:
 	SaveSystem.settings.set("img_invert_zoom", img_invert_zoom)
 	SaveSystem.settings.set("img_invert_yaw", img_invert_yaw)
 	SaveSystem.settings.set("do_bbcode", do_bbcode)
+	SaveSystem.settings.set("color_signal_mode", color_signal_mode)
 	SaveSystem.settings.set("use_at_undef", use_at_undef)
 	SaveSystem.settings.set("language", language)
 	SaveSystem.settings.set("wss_addresses", websocket_addresses)

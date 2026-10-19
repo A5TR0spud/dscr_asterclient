@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bmqd6twlnn8dk"]
 
-[ext_resource type="Script" uid="uid://dr2cb7q6mysjs" path="res://Scenes/ChatMenu/chat.gd" id="1_iy605"]
-[ext_resource type="PackedScene" uid="uid://c7bn3w1ijabx4" path="res://Scenes/ChatMenu/chat_channel.tscn" id="2_iy605"]
+[ext_resource type="Script" uid="uid://dr2cb7q6mysjs" path="res://Scenes/ChatMenu/Tab/chat.gd" id="1_iy605"]
+[ext_resource type="PackedScene" uid="uid://c7bn3w1ijabx4" path="res://Scenes/ChatMenu/Tab/chat_channel.tscn" id="2_iy605"]
 [ext_resource type="PackedScene" uid="uid://c6kmkupmer6fn" path="res://Scenes/Common/transmission_edit.tscn" id="3_iy605"]
 
 [node name="Chat" type="VBoxContainer" unique_id=2068892274]

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c6kmkupmer6fn" path="res://Scenes/Common/transmission_edit.tscn" id="1_i5m64"]
 [ext_resource type="Script" uid="uid://drc541g03f64b" path="res://Scenes/LibraryMenu/library_tab.gd" id="1_ntelf"]
-[ext_resource type="PackedScene" uid="uid://d4neakrhevfia" path="res://Scenes/ChatMenu/transmission_entry.tscn" id="3_mpoun"]
+[ext_resource type="PackedScene" uid="uid://d4neakrhevfia" path="res://Scenes/ChatMenu/Message/transmission_entry.tscn" id="3_mpoun"]
 [ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="4_s4yvl"]
 [ext_resource type="Script" uid="uid://dbvyvpj6id1sv" path="res://Scripts/ConfirmationButton.gd" id="5_mpoun"]
 

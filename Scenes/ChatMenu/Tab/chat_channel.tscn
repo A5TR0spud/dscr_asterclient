@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c7bn3w1ijabx4"]
 
 [ext_resource type="Script" uid="uid://b17wh5igsahay" path="res://Scripts/AutoScroll.gd" id="1_fsvsf"]
-[ext_resource type="Script" uid="uid://ceobqq1usipvh" path="res://Scenes/ChatMenu/chat_display.gd" id="2_b6sdv"]
+[ext_resource type="Script" uid="uid://ceobqq1usipvh" path="res://Scenes/ChatMenu/Tab/chat_display.gd" id="2_b6sdv"]
 [ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="3_7eiuh"]
 
 [node name="MarginContainer" type="MarginContainer" unique_id=1576279140]

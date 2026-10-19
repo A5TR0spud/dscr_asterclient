@@ -400,6 +400,7 @@ static func signals_to_words(input: Array, do_whitespace_format: bool = false, c
 	var prev = 1
 	if not SettingsHandler.do_formatting:
 		do_whitespace_format = false
+	var color_color_numbers: bool = support_m0 and SettingsHandler.color_signal_mode == 1
 	for sig in input:
 		var format_mode: int = 0
 		var format_mode_after: int = 0 if do_whitespace_format else 1
@@ -440,14 +441,7 @@ static func signals_to_words(input: Array, do_whitespace_format: bool = false, c
 		elif is_number:
 			word = str(sig)
 			
-			if (
-				prev is int and
-				prev >= 0 and
-				SettingsHandler.number_auto_sep and
-				DictionaryHandler.support_m0
-			):
-				format_mode = 0
-			if support_m0 and prev is int and prev == -54 and sig >= 0 and sig <= 64:
+			if color_color_numbers and prev is int and prev == -54 and sig >= 0 and sig <= 64:
 				color = VisualizeNode.calculate_color(sig)
 				invert = true
 		
@@ -471,7 +465,7 @@ static func signals_to_words(input: Array, do_whitespace_format: bool = false, c
 		if can_do_bbcode:
 			# Avoid formatting issues if users put [ in their signal names
 			word = word.replace("[", "[lb]")
-			if do_clickable and not is_number:
+			if do_clickable and is_signal:
 				o += "[url=" + str(sig) + "]"
 			if do_appearance_format:
 				if bold:
@@ -497,7 +491,7 @@ static func signals_to_words(input: Array, do_whitespace_format: bool = false, c
 					o += "[/i]"
 				if bold:
 					o += "[/b]"
-			if do_clickable and not is_number:
+			if do_clickable and is_signal:
 				o += "[/url]"
 		
 		prev = sig

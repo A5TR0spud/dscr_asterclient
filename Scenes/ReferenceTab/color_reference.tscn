@@ -1,0 +1,681 @@
+[gd_scene format=3 uid="uid://cto24hb8qmf3w"]
+
+[ext_resource type="Texture2D" uid="uid://mbg2qa5kfljo" path="res://Scenes/Confetti/confetti_rainbow.tres" id="1_j8igx"]
+[ext_resource type="StyleBox" uid="uid://ce0iogvih0sn0" path="res://Styling/Seps/v_sep_bright.tres" id="2_jhifv"]
+
+[node name="ColorReference" type="PanelContainer" unique_id=486884822]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=80621477]
+layout_mode = 2
+
+[node name="Rainbow" type="TextureRect" parent="VBoxContainer" unique_id=1970985037]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+texture = ExtResource("1_j8igx")
+
+[node name="Notches" type="HBoxContainer" parent="VBoxContainer" unique_id=1450759560]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="VSeparator0" type="VSeparator" parent="VBoxContainer/Notches" unique_id=326477908]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator1" type="VSeparator" parent="VBoxContainer/Notches" unique_id=949910371]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator2" type="VSeparator" parent="VBoxContainer/Notches" unique_id=468220014]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator3" type="VSeparator" parent="VBoxContainer/Notches" unique_id=993161301]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator4" type="VSeparator" parent="VBoxContainer/Notches" unique_id=47298334]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator5" type="VSeparator" parent="VBoxContainer/Notches" unique_id=1525808526]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator6" type="VSeparator" parent="VBoxContainer/Notches" unique_id=276315176]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator7" type="VSeparator" parent="VBoxContainer/Notches" unique_id=1489988124]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator8" type="VSeparator" parent="VBoxContainer/Notches" unique_id=123265992]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator9" type="VSeparator" parent="VBoxContainer/Notches" unique_id=1476344995]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator10" type="VSeparator" parent="VBoxContainer/Notches" unique_id=1155866128]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator11" type="VSeparator" parent="VBoxContainer/Notches" unique_id=1201020187]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator12" type="VSeparator" parent="VBoxContainer/Notches" unique_id=1081336756]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator13" type="VSeparator" parent="VBoxContainer/Notches" unique_id=1105702214]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator14" type="VSeparator" parent="VBoxContainer/Notches" unique_id=3480285]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator15" type="VSeparator" parent="VBoxContainer/Notches" unique_id=208767374]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator16" type="VSeparator" parent="VBoxContainer/Notches" unique_id=2008114190]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator17" type="VSeparator" parent="VBoxContainer/Notches" unique_id=1875818254]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator18" type="VSeparator" parent="VBoxContainer/Notches" unique_id=1943937585]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator19" type="VSeparator" parent="VBoxContainer/Notches" unique_id=1991935922]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator20" type="VSeparator" parent="VBoxContainer/Notches" unique_id=1852912131]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator21" type="VSeparator" parent="VBoxContainer/Notches" unique_id=757930492]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator22" type="VSeparator" parent="VBoxContainer/Notches" unique_id=320719520]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator23" type="VSeparator" parent="VBoxContainer/Notches" unique_id=1658913118]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator24" type="VSeparator" parent="VBoxContainer/Notches" unique_id=1493087152]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator25" type="VSeparator" parent="VBoxContainer/Notches" unique_id=1538256420]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator26" type="VSeparator" parent="VBoxContainer/Notches" unique_id=1712271986]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator27" type="VSeparator" parent="VBoxContainer/Notches" unique_id=1849111918]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator28" type="VSeparator" parent="VBoxContainer/Notches" unique_id=2052201080]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator29" type="VSeparator" parent="VBoxContainer/Notches" unique_id=2059645127]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator30" type="VSeparator" parent="VBoxContainer/Notches" unique_id=1831411702]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator31" type="VSeparator" parent="VBoxContainer/Notches" unique_id=273288314]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator32" type="VSeparator" parent="VBoxContainer/Notches" unique_id=1766785492]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator33" type="VSeparator" parent="VBoxContainer/Notches" unique_id=2029489442]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator34" type="VSeparator" parent="VBoxContainer/Notches" unique_id=859426298]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator35" type="VSeparator" parent="VBoxContainer/Notches" unique_id=1482179487]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator36" type="VSeparator" parent="VBoxContainer/Notches" unique_id=52600894]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator37" type="VSeparator" parent="VBoxContainer/Notches" unique_id=2070168471]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator38" type="VSeparator" parent="VBoxContainer/Notches" unique_id=835176877]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator39" type="VSeparator" parent="VBoxContainer/Notches" unique_id=732617340]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator40" type="VSeparator" parent="VBoxContainer/Notches" unique_id=1852731845]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator41" type="VSeparator" parent="VBoxContainer/Notches" unique_id=296764140]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator42" type="VSeparator" parent="VBoxContainer/Notches" unique_id=1233490115]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator43" type="VSeparator" parent="VBoxContainer/Notches" unique_id=1314637610]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator44" type="VSeparator" parent="VBoxContainer/Notches" unique_id=1183339263]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator45" type="VSeparator" parent="VBoxContainer/Notches" unique_id=1394827154]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator46" type="VSeparator" parent="VBoxContainer/Notches" unique_id=1313006325]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator47" type="VSeparator" parent="VBoxContainer/Notches" unique_id=1655732115]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator48" type="VSeparator" parent="VBoxContainer/Notches" unique_id=851703080]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator49" type="VSeparator" parent="VBoxContainer/Notches" unique_id=827683191]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator50" type="VSeparator" parent="VBoxContainer/Notches" unique_id=814752174]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator51" type="VSeparator" parent="VBoxContainer/Notches" unique_id=358480209]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator52" type="VSeparator" parent="VBoxContainer/Notches" unique_id=846643677]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator53" type="VSeparator" parent="VBoxContainer/Notches" unique_id=738346937]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator54" type="VSeparator" parent="VBoxContainer/Notches" unique_id=92335658]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator55" type="VSeparator" parent="VBoxContainer/Notches" unique_id=1658775991]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator56" type="VSeparator" parent="VBoxContainer/Notches" unique_id=537880367]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator57" type="VSeparator" parent="VBoxContainer/Notches" unique_id=450873464]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator58" type="VSeparator" parent="VBoxContainer/Notches" unique_id=1722653968]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator59" type="VSeparator" parent="VBoxContainer/Notches" unique_id=470882481]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator60" type="VSeparator" parent="VBoxContainer/Notches" unique_id=26255963]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator61" type="VSeparator" parent="VBoxContainer/Notches" unique_id=453162765]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator62" type="VSeparator" parent="VBoxContainer/Notches" unique_id=783713818]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator63" type="VSeparator" parent="VBoxContainer/Notches" unique_id=867337905]
+modulate = Color(1, 1, 1, 0.6627451)
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="VSeparator64" type="VSeparator" parent="VBoxContainer/Notches" unique_id=1926990760]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("2_jhifv")
+
+[node name="Labels" type="HBoxContainer" parent="VBoxContainer" unique_id=1625556276]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Control" type="Control" parent="VBoxContainer/Labels" unique_id=1173614846]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="Label" type="Label" parent="VBoxContainer/Labels" unique_id=1100306494]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(-0.5, 0)
+text = "0"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer/Labels" unique_id=1034132451]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 8.0
+text = "8"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="VBoxContainer/Labels" unique_id=1624517329]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 8.0
+text = "16"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="VBoxContainer/Labels" unique_id=1283232827]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 8.0
+text = "24"
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="VBoxContainer/Labels" unique_id=1496487967]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 8.0
+text = "32"
+horizontal_alignment = 1
+
+[node name="Label6" type="Label" parent="VBoxContainer/Labels" unique_id=415232309]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 8.0
+text = "40"
+horizontal_alignment = 1
+
+[node name="Label7" type="Label" parent="VBoxContainer/Labels" unique_id=536727457]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 8.0
+text = "48"
+horizontal_alignment = 1
+
+[node name="Label8" type="Label" parent="VBoxContainer/Labels" unique_id=1774825939]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 8.0
+text = "56"
+horizontal_alignment = 1
+
+[node name="Label9" type="Label" parent="VBoxContainer/Labels" unique_id=671735695]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0.5, 0)
+text = "64"
+horizontal_alignment = 1
+
+[node name="Control2" type="Control" parent="VBoxContainer/Labels" unique_id=249876467]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5

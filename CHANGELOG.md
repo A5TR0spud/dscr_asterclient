@@ -1,5 +1,15 @@
 # Versions
 
+## --WIP--
+
+### Additions
+
+* Split |-54 colorizer into its own setting. It can be disabled, work inline (only available with styling), or create a reference spectrum at the bottom
+
+### Changes
+
+* Adjusted English localization for the word style setting to make it more distinct
+
 ## 0.9.0: Historical Record
 
 ### Additions
