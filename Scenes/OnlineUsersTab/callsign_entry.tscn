@@ -36,6 +36,8 @@ size_flags_horizontal = 3
 text = "Bobert"
 alignment = 2
 max_length = 16
+context_menu_enabled = false
+emoji_menu_enabled = false
 
 [node name="LocaleNode" type="Node" parent="HBoxContainer/Nickname" unique_id=1452558720]
 script = ExtResource("3_urwyp")

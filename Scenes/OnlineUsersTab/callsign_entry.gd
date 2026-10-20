@@ -25,7 +25,7 @@ func refresh_name():
 
 func _input(event: InputEvent):
 	if event is InputEventMouseButton:
-		if event.button_index != MOUSE_BUTTON_MIDDLE and event.pressed:
+		if event.pressed:
 			if not Rect2(Vector2.ZERO, size).has_point(get_local_mouse_position()):
 				name_node.release_focus()
 

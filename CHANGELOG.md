@@ -16,6 +16,8 @@
 ### Fixes
 
 * Saving transmissions in the Library now properly saves the JSON as an array of integers instead of appending ".0" to every number
+* Disabled context menu in nickname edit
+* Dictionary edit menu no longer closes on scrolling chat
 
 ## 0.9.0: Historical Record
 

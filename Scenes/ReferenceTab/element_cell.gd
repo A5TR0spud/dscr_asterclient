@@ -9,7 +9,6 @@ class_name ElementCell
 			proton_label.text = str(value)
 
 @onready var proton_label: Label = $VBoxContainer/Head/ProtonCt
-@onready var charge_label: Label = $VBoxContainer/Head/Charge
 @onready var symbol_label: Label = $VBoxContainer/Symbol
 @onready var name_label: Label = $VBoxContainer/ScrollContainer/Name
 @onready var name_scroll: HScrollBar = $VBoxContainer/ScrollContainer.get_h_scroll_bar()
