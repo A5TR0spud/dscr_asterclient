@@ -210,7 +210,7 @@ static func get_channel_node(id = null) -> ChatChannel:
 	
 	return channel_node
 
-static func get_current_channel_node() -> Node:
+static func get_current_channel_node() -> ChatChannel:
 	return instance.channel_container.get_child(instance.channel_container.current_tab)
 
 static func enable_channel(id: int, save: bool = true):
@@ -334,6 +334,7 @@ static func new_log(state: State, args: Array = []) -> void:
 
 @onready var medit: TransmissionEdit = $MessageEdit
 func _on_message_edit_submit_text(message: String):
+	get_current_channel_node().scroll_container.scroll_to_bottom()
 	var send_result: Array = Main.instance.send_message(message.remove_char(ord(TransmissionEdit.DELIMITER_CHARACTER)))
 	if send_result[0]:
 		medit.text = ""

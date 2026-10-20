@@ -56,743 +56,760 @@ translations = Dictionary[StringName, String]({
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="PeriodicTable" type="GridContainer" parent="ScrollContainer/VBoxContainer" unique_id=1010296718]
+[node name="CenterContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer" unique_id=179111949]
 layout_mode = 2
+
+[node name="Control" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer" unique_id=433863956]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="PeriodicTable" type="GridContainer" parent="ScrollContainer/VBoxContainer/CenterContainer" unique_id=1010296718]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 10.0
+theme_override_constants/h_separation = -2
+theme_override_constants/v_separation = -2
 columns = 18
 
-[node name="Hydrogen" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1338587854 instance=ExtResource("2_xlx6m")]
+[node name="Hydrogen" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1338587854 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1420685046]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control2" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=810970772]
+[node name="Control" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1420685046]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control3" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1188452325]
+[node name="Control2" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=810970772]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control4" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1778387904]
+[node name="Control3" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1188452325]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control5" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1503550105]
+[node name="Control4" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1778387904]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control6" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=994448086]
+[node name="Control5" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1503550105]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control7" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1579339289]
+[node name="Control6" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=994448086]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control8" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1484769798]
+[node name="Control7" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1579339289]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control9" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1568677025]
+[node name="Control8" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1484769798]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control10" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1296884883]
+[node name="Control9" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1568677025]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control11" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=907565712]
+[node name="Control10" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1296884883]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control12" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1433393952]
+[node name="Control11" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=907565712]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control13" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1102179380]
+[node name="Control12" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1433393952]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control14" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1658379349]
+[node name="Control13" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1102179380]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control15" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=670349163]
+[node name="Control14" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1658379349]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control16" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1229785229]
+[node name="Control15" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=670349163]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Helium" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=59062163 instance=ExtResource("2_xlx6m")]
+[node name="Control16" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1229785229]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Helium" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=59062163 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 2
 
-[node name="Lithium" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1581735507 instance=ExtResource("2_xlx6m")]
+[node name="Lithium" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1581735507 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 3
 
-[node name="Beryllium" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=2090961625 instance=ExtResource("2_xlx6m")]
+[node name="Beryllium" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=2090961625 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 4
 
-[node name="Control17" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=904020915]
+[node name="Control17" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=904020915]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control18" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1406820544]
+[node name="Control18" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1406820544]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control19" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1518569998]
+[node name="Control19" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1518569998]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control20" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1816129824]
+[node name="Control20" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1816129824]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control21" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1285864000]
+[node name="Control21" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1285864000]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control22" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1833747689]
+[node name="Control22" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1833747689]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control23" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1419286897]
+[node name="Control23" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1419286897]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control26" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=622605117]
+[node name="Control26" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=622605117]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control24" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1012611355]
+[node name="Control24" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1012611355]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control25" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=2124099302]
+[node name="Control25" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=2124099302]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Boron" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=376361665 instance=ExtResource("2_xlx6m")]
+[node name="Boron" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=376361665 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 5
 
-[node name="Carbon" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=2001075400 instance=ExtResource("2_xlx6m")]
+[node name="Carbon" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=2001075400 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 6
 
-[node name="Nitrogen" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=564077422 instance=ExtResource("2_xlx6m")]
+[node name="Nitrogen" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=564077422 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 7
 
-[node name="Oxygen" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1134046279 instance=ExtResource("2_xlx6m")]
+[node name="Oxygen" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1134046279 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 8
 
-[node name="Fluorine" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=729794555 instance=ExtResource("2_xlx6m")]
+[node name="Fluorine" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=729794555 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 9
 
-[node name="Neon" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1678987002 instance=ExtResource("2_xlx6m")]
+[node name="Neon" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1678987002 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 10
 
-[node name="Sodium" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=130751215 instance=ExtResource("2_xlx6m")]
+[node name="Sodium" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=130751215 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 11
 
-[node name="Magnesium" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=444537673 instance=ExtResource("2_xlx6m")]
+[node name="Magnesium" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=444537673 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 12
 
-[node name="Control27" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1468406505]
+[node name="Control27" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1468406505]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control28" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=689582763]
+[node name="Control28" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=689582763]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control29" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1067211715]
+[node name="Control29" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1067211715]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control30" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1342451794]
+[node name="Control30" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1342451794]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control31" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=2072352776]
+[node name="Control31" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=2072352776]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control32" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=196858441]
+[node name="Control32" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=196858441]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control33" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=447717623]
+[node name="Control33" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=447717623]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control34" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=283043817]
+[node name="Control34" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=283043817]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control35" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1032891733]
+[node name="Control35" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1032891733]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control36" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=128259936]
+[node name="Control36" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=128259936]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Aluminum" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=143120543 instance=ExtResource("2_xlx6m")]
+[node name="Aluminum" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=143120543 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 13
 
-[node name="Silicon" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=2035427391 instance=ExtResource("2_xlx6m")]
+[node name="Silicon" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=2035427391 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 14
 
-[node name="Nitrogen2" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=280806267 instance=ExtResource("2_xlx6m")]
+[node name="Nitrogen2" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=280806267 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 15
 
-[node name="Oxygen2" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=2004225098 instance=ExtResource("2_xlx6m")]
+[node name="Oxygen2" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=2004225098 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 16
 
-[node name="Fluorine2" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1185419356 instance=ExtResource("2_xlx6m")]
+[node name="Fluorine2" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1185419356 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 17
 
-[node name="Neon2" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=677265878 instance=ExtResource("2_xlx6m")]
+[node name="Neon2" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=677265878 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 18
 
-[node name="Aluminum2" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1850285221 instance=ExtResource("2_xlx6m")]
+[node name="Aluminum2" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1850285221 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 19
 
-[node name="Silicon2" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=734124714 instance=ExtResource("2_xlx6m")]
+[node name="Silicon2" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=734124714 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 20
 
-[node name="Nitrogen3" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=979956241 instance=ExtResource("2_xlx6m")]
+[node name="Nitrogen3" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=979956241 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 21
 
-[node name="Oxygen3" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=484682409 instance=ExtResource("2_xlx6m")]
+[node name="Oxygen3" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=484682409 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 22
 
-[node name="Fluorine3" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=856021760 instance=ExtResource("2_xlx6m")]
+[node name="Fluorine3" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=856021760 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 23
 
-[node name="Neon3" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1325793833 instance=ExtResource("2_xlx6m")]
+[node name="Neon3" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1325793833 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 24
 
-[node name="Aluminum3" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=2001988719 instance=ExtResource("2_xlx6m")]
+[node name="Aluminum3" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=2001988719 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 25
 
-[node name="Silicon3" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1598010915 instance=ExtResource("2_xlx6m")]
+[node name="Silicon3" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1598010915 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 26
 
-[node name="Nitrogen4" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1506568662 instance=ExtResource("2_xlx6m")]
+[node name="Nitrogen4" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1506568662 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 27
 
-[node name="Oxygen4" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1035957448 instance=ExtResource("2_xlx6m")]
+[node name="Oxygen4" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1035957448 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 28
 
-[node name="Fluorine4" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=948941390 instance=ExtResource("2_xlx6m")]
+[node name="Fluorine4" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=948941390 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 29
 
-[node name="Neon4" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=2059740743 instance=ExtResource("2_xlx6m")]
+[node name="Neon4" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=2059740743 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 30
 
-[node name="Aluminum4" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1474157672 instance=ExtResource("2_xlx6m")]
+[node name="Aluminum4" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1474157672 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 31
 
-[node name="Silicon4" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=237105763 instance=ExtResource("2_xlx6m")]
+[node name="Silicon4" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=237105763 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 32
 
-[node name="Nitrogen5" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=476509774 instance=ExtResource("2_xlx6m")]
+[node name="Nitrogen5" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=476509774 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 33
 
-[node name="Oxygen5" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1093884080 instance=ExtResource("2_xlx6m")]
+[node name="Oxygen5" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1093884080 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 34
 
-[node name="Fluorine5" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=405715861 instance=ExtResource("2_xlx6m")]
+[node name="Fluorine5" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=405715861 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 35
 
-[node name="Neon5" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1799105159 instance=ExtResource("2_xlx6m")]
+[node name="Neon5" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1799105159 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 36
 
-[node name="Aluminum5" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=340578894 instance=ExtResource("2_xlx6m")]
+[node name="Aluminum5" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=340578894 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 37
 
-[node name="Silicon5" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=416841261 instance=ExtResource("2_xlx6m")]
+[node name="Silicon5" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=416841261 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 38
 
-[node name="Nitrogen6" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=751616235 instance=ExtResource("2_xlx6m")]
+[node name="Nitrogen6" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=751616235 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 39
 
-[node name="Oxygen6" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=973895449 instance=ExtResource("2_xlx6m")]
+[node name="Oxygen6" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=973895449 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 40
 
-[node name="Fluorine6" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=434357686 instance=ExtResource("2_xlx6m")]
+[node name="Fluorine6" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=434357686 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 41
 
-[node name="Neon6" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=287950052 instance=ExtResource("2_xlx6m")]
+[node name="Neon6" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=287950052 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 42
 
-[node name="Aluminum6" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=482311023 instance=ExtResource("2_xlx6m")]
+[node name="Aluminum6" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=482311023 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 43
 
-[node name="Silicon6" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1672391148 instance=ExtResource("2_xlx6m")]
+[node name="Silicon6" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1672391148 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 44
 
-[node name="Nitrogen7" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=2142574440 instance=ExtResource("2_xlx6m")]
+[node name="Nitrogen7" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=2142574440 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 45
 
-[node name="Oxygen7" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=945085314 instance=ExtResource("2_xlx6m")]
+[node name="Oxygen7" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=945085314 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 46
 
-[node name="Fluorine7" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1891902162 instance=ExtResource("2_xlx6m")]
+[node name="Fluorine7" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1891902162 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 47
 
-[node name="Neon7" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1025339918 instance=ExtResource("2_xlx6m")]
+[node name="Neon7" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1025339918 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 48
 
-[node name="Aluminum7" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1747178125 instance=ExtResource("2_xlx6m")]
+[node name="Aluminum7" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1747178125 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 49
 
-[node name="Silicon7" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=205986118 instance=ExtResource("2_xlx6m")]
+[node name="Silicon7" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=205986118 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 50
 
-[node name="Nitrogen8" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=649279210 instance=ExtResource("2_xlx6m")]
+[node name="Nitrogen8" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=649279210 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 51
 
-[node name="Oxygen8" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1250482631 instance=ExtResource("2_xlx6m")]
+[node name="Oxygen8" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1250482631 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 52
 
-[node name="Fluorine8" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=618394312 instance=ExtResource("2_xlx6m")]
+[node name="Fluorine8" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=618394312 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 53
 
-[node name="Neon8" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1156233303 instance=ExtResource("2_xlx6m")]
+[node name="Neon8" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1156233303 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 54
 
-[node name="Aluminum8" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1342792170 instance=ExtResource("2_xlx6m")]
+[node name="Aluminum8" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1342792170 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 55
 
-[node name="Silicon8" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=63303260 instance=ExtResource("2_xlx6m")]
+[node name="Silicon8" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=63303260 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 56
 
-[node name="Control37" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1383249139]
+[node name="Control37" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1383249139]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Nitrogen9" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=277619193 instance=ExtResource("2_xlx6m")]
+[node name="Nitrogen9" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=277619193 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 72
 
-[node name="Oxygen9" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=622509746 instance=ExtResource("2_xlx6m")]
+[node name="Oxygen9" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=622509746 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 73
 
-[node name="Fluorine9" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=518070287 instance=ExtResource("2_xlx6m")]
+[node name="Fluorine9" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=518070287 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 74
 
-[node name="Neon9" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=522385545 instance=ExtResource("2_xlx6m")]
+[node name="Neon9" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=522385545 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 75
 
-[node name="Aluminum9" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1079284003 instance=ExtResource("2_xlx6m")]
+[node name="Aluminum9" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1079284003 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 76
 
-[node name="Silicon9" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=211239304 instance=ExtResource("2_xlx6m")]
+[node name="Silicon9" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=211239304 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 77
 
-[node name="Nitrogen10" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1081298219 instance=ExtResource("2_xlx6m")]
+[node name="Nitrogen10" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1081298219 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 78
 
-[node name="Oxygen10" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1342134340 instance=ExtResource("2_xlx6m")]
+[node name="Oxygen10" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1342134340 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 79
 
-[node name="Fluorine10" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=293512794 instance=ExtResource("2_xlx6m")]
+[node name="Fluorine10" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=293512794 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 80
 
-[node name="Neon10" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=127714788 instance=ExtResource("2_xlx6m")]
+[node name="Neon10" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=127714788 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 81
 
-[node name="Aluminum10" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1928582025 instance=ExtResource("2_xlx6m")]
+[node name="Aluminum10" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1928582025 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 82
 
-[node name="Silicon10" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=8665506 instance=ExtResource("2_xlx6m")]
+[node name="Silicon10" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=8665506 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 83
 
-[node name="Nitrogen11" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1539356316 instance=ExtResource("2_xlx6m")]
+[node name="Nitrogen11" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1539356316 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 84
 
-[node name="Oxygen11" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1622553434 instance=ExtResource("2_xlx6m")]
+[node name="Oxygen11" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1622553434 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 85
 
-[node name="Fluorine11" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=937205409 instance=ExtResource("2_xlx6m")]
+[node name="Fluorine11" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=937205409 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 86
 
-[node name="Neon11" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=134034019 instance=ExtResource("2_xlx6m")]
+[node name="Neon11" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=134034019 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 87
 
-[node name="Aluminum11" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1257005367 instance=ExtResource("2_xlx6m")]
+[node name="Aluminum11" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1257005367 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 88
 
-[node name="Control38" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=2014656609]
+[node name="Control38" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=2014656609]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Silicon11" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=383280887 instance=ExtResource("2_xlx6m")]
+[node name="Silicon11" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=383280887 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 104
 
-[node name="Nitrogen12" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=325238159 instance=ExtResource("2_xlx6m")]
+[node name="Nitrogen12" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=325238159 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 105
 
-[node name="Oxygen12" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1284648000 instance=ExtResource("2_xlx6m")]
+[node name="Oxygen12" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1284648000 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 106
 
-[node name="Fluorine12" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1855009243 instance=ExtResource("2_xlx6m")]
+[node name="Fluorine12" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1855009243 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 107
 
-[node name="Neon12" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=2114220007 instance=ExtResource("2_xlx6m")]
+[node name="Neon12" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=2114220007 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 108
 
-[node name="Aluminum12" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1659919533 instance=ExtResource("2_xlx6m")]
+[node name="Aluminum12" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1659919533 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 109
 
-[node name="Silicon12" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=65949741 instance=ExtResource("2_xlx6m")]
+[node name="Silicon12" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=65949741 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 110
 
-[node name="Oxygen14" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=2022452779 instance=ExtResource("2_xlx6m")]
+[node name="Oxygen14" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=2022452779 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 111
 
-[node name="Nitrogen13" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=672651591 instance=ExtResource("2_xlx6m")]
+[node name="Nitrogen13" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=672651591 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 112
 
-[node name="Oxygen13" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=488027904 instance=ExtResource("2_xlx6m")]
+[node name="Oxygen13" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=488027904 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 113
 
-[node name="Fluorine13" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1210046750 instance=ExtResource("2_xlx6m")]
+[node name="Fluorine13" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1210046750 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 114
 
-[node name="Neon13" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1933368388 instance=ExtResource("2_xlx6m")]
+[node name="Neon13" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1933368388 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 115
 
-[node name="Aluminum13" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=707732361 instance=ExtResource("2_xlx6m")]
+[node name="Aluminum13" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=707732361 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 116
 
-[node name="Silicon13" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=32602762 instance=ExtResource("2_xlx6m")]
+[node name="Silicon13" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=32602762 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 117
 
-[node name="Nitrogen14" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=423959863 instance=ExtResource("2_xlx6m")]
+[node name="Nitrogen14" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=423959863 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 118
 
-[node name="Control39" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1440114996]
+[node name="Control39" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1440114996]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control40" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=362761815]
+[node name="Control40" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=362761815]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control41" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=521468139]
+[node name="Control41" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=521468139]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control45" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=555723390]
+[node name="Control45" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=555723390]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control46" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1782325278]
+[node name="Control46" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1782325278]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control47" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1134113520]
+[node name="Control47" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1134113520]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control48" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1038098718]
+[node name="Control48" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1038098718]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control49" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1121255022]
+[node name="Control49" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1121255022]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control50" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1352259782]
+[node name="Control50" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1352259782]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control51" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=2119625092]
+[node name="Control51" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=2119625092]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control52" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=971758030]
+[node name="Control52" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=971758030]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control53" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1995464636]
+[node name="Control53" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1995464636]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control54" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1014792103]
+[node name="Control54" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1014792103]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control55" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1293407175]
+[node name="Control55" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1293407175]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control56" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=352227181]
+[node name="Control56" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=352227181]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control57" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=520695383]
+[node name="Control57" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=520695383]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control58" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1442419129]
+[node name="Control58" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1442419129]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control59" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=338349946]
+[node name="Control59" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=338349946]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control60" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=474107823]
+[node name="Control60" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=474107823]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control61" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1784114986]
+[node name="Control61" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1784114986]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control62" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=188311563]
+[node name="Control62" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=188311563]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Fluorine14" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1867048825 instance=ExtResource("2_xlx6m")]
+[node name="Fluorine14" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1867048825 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 57
 
-[node name="Neon14" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=228182865 instance=ExtResource("2_xlx6m")]
+[node name="Neon14" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=228182865 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 58
 
-[node name="Fluorine15" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=242592534 instance=ExtResource("2_xlx6m")]
+[node name="Fluorine15" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=242592534 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 59
 
-[node name="Neon15" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=2134741775 instance=ExtResource("2_xlx6m")]
+[node name="Neon15" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=2134741775 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 60
 
-[node name="Fluorine16" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1769523044 instance=ExtResource("2_xlx6m")]
+[node name="Fluorine16" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1769523044 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 61
 
-[node name="Neon16" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=247035128 instance=ExtResource("2_xlx6m")]
+[node name="Neon16" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=247035128 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 62
 
-[node name="Fluorine17" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=193636435 instance=ExtResource("2_xlx6m")]
+[node name="Fluorine17" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=193636435 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 63
 
-[node name="Neon17" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1892630334 instance=ExtResource("2_xlx6m")]
+[node name="Neon17" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1892630334 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 64
 
-[node name="Fluorine18" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1106338502 instance=ExtResource("2_xlx6m")]
+[node name="Fluorine18" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1106338502 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 65
 
-[node name="Neon18" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1447326477 instance=ExtResource("2_xlx6m")]
+[node name="Neon18" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1447326477 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 66
 
-[node name="Fluorine19" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=135275551 instance=ExtResource("2_xlx6m")]
+[node name="Fluorine19" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=135275551 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 67
 
-[node name="Neon19" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1544559520 instance=ExtResource("2_xlx6m")]
+[node name="Neon19" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1544559520 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 68
 
-[node name="Fluorine20" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1064253731 instance=ExtResource("2_xlx6m")]
+[node name="Fluorine20" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1064253731 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 69
 
-[node name="Neon20" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=545874401 instance=ExtResource("2_xlx6m")]
+[node name="Neon20" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=545874401 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 70
 
-[node name="Neon21" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1779750304 instance=ExtResource("2_xlx6m")]
+[node name="Neon21" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1779750304 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 71
 
-[node name="Control42" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=924940165]
+[node name="Control42" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=924940165]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control43" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=528373424]
+[node name="Control43" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=528373424]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control44" type="Control" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1678866079]
+[node name="Control44" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1678866079]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Fluorine21" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=796677253 instance=ExtResource("2_xlx6m")]
+[node name="Fluorine21" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=796677253 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 89
 
-[node name="Neon22" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1148234538 instance=ExtResource("2_xlx6m")]
+[node name="Neon22" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1148234538 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 90
 
-[node name="Fluorine22" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=969958198 instance=ExtResource("2_xlx6m")]
+[node name="Fluorine22" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=969958198 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 91
 
-[node name="Neon23" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1932021606 instance=ExtResource("2_xlx6m")]
+[node name="Neon23" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1932021606 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 92
 
-[node name="Fluorine23" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1413018867 instance=ExtResource("2_xlx6m")]
+[node name="Fluorine23" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1413018867 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 93
 
-[node name="Neon24" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1247531881 instance=ExtResource("2_xlx6m")]
+[node name="Neon24" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1247531881 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 94
 
-[node name="Fluorine24" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=631474904 instance=ExtResource("2_xlx6m")]
+[node name="Fluorine24" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=631474904 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 95
 
-[node name="Neon25" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1778960186 instance=ExtResource("2_xlx6m")]
+[node name="Neon25" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1778960186 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 96
 
-[node name="Fluorine25" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=2070657725 instance=ExtResource("2_xlx6m")]
+[node name="Fluorine25" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=2070657725 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 97
 
-[node name="Neon26" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1131641417 instance=ExtResource("2_xlx6m")]
+[node name="Neon26" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1131641417 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 98
 
-[node name="Fluorine26" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1826707600 instance=ExtResource("2_xlx6m")]
+[node name="Fluorine26" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1826707600 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 99
 
-[node name="Neon27" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1943309715 instance=ExtResource("2_xlx6m")]
+[node name="Neon27" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1943309715 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 100
 
-[node name="Fluorine27" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=983958623 instance=ExtResource("2_xlx6m")]
+[node name="Fluorine27" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=983958623 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 101
 
-[node name="Neon28" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=1794232899 instance=ExtResource("2_xlx6m")]
+[node name="Neon28" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=1794232899 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 102
 
-[node name="Neon29" parent="ScrollContainer/VBoxContainer/PeriodicTable" unique_id=155103705 instance=ExtResource("2_xlx6m")]
+[node name="Neon29" parent="ScrollContainer/VBoxContainer/CenterContainer/PeriodicTable" unique_id=155103705 instance=ExtResource("2_xlx6m")]
 layout_mode = 2
 element = 103
+
+[node name="Control2" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer" unique_id=177358249]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1

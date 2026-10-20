@@ -12,6 +12,8 @@
 
 * Adjusted English localization for the word style setting to make it more distinct
 * Identicons dim in chat when the user is offline
+* Sending a message scrolls to bottom
+* Pressing Ctrl+E now sends
 
 ### Fixes
 

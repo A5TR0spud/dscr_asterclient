@@ -140,7 +140,7 @@ func _gui_input(event: InputEvent) -> void:
 	# TODO: implement brace matching (handling), so that it can parse |-14 and |-15 if they are group symbols
 	if (
 		event.is_action_pressed("ui_text_newline")
-		or (not eat_enter and event.is_action_pressed("ui_text_submit"))
+		and (eat_enter or not event.is_action_pressed("ui_text_submit"))
 	):
 		insert_text_at_caret("\n")
 		accept_event()
