@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://b1t0ne2nxs6pi"]
+
+[ext_resource type="Script" uid="uid://baymf4kshn718" path="res://Scenes/ReferenceTab/element_cell.gd" id="1_ilioc"]
+
+[node name="ElementCell" type="PanelContainer" unique_id=1338587854]
+offset_right = 107.0
+offset_bottom = 115.0
+size_flags_horizontal = 3
+script = ExtResource("1_ilioc")
+
+[node name="EdgeTimer" type="Timer" parent="." unique_id=1310362307]
+one_shot = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=370388808]
+clip_contents = true
+layout_mode = 2
+
+[node name="Head" type="HBoxContainer" parent="VBoxContainer" unique_id=785332237]
+layout_mode = 2
+
+[node name="ProtonCt" type="Label" parent="VBoxContainer/Head" unique_id=1582748722]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+text = "1"
+
+[node name="Symbol" type="Label" parent="VBoxContainer" unique_id=1649322929]
+layout_mode = 2
+size_flags_vertical = 6
+text = "H"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer" unique_id=72012594]
+custom_minimum_size = Vector2(0, 14)
+layout_mode = 2
+mouse_filter = 2
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 0
+scroll_horizontal_by_default = true
+
+[node name="Name" type="Label" parent="VBoxContainer/ScrollContainer" unique_id=1875315365]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+text = "Helium"
+horizontal_alignment = 1

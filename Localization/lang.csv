@@ -152,3 +152,10 @@ CHAT_CHANNEL_NONE,-111 -65535,,Main Chat,Główne pasmo
 CHAT_CHANNEL_UNREAD,-124 {0},,(?) {0},(?) {0}
 SEND_TO_LIBRARY,-16 -14 -43 -15 -41 -39,,Send to library,Dodaj do biblioteki
 NEW_LIBRARY_NAME,{name} -2 {trx} -14 {contents} -25 -15,,{name}_tr_{trx}: “{contents}…”,{name}_tr_{trx}: “{contents}…”
+TAB_REFERENCES,-208,,Reference,
+REFERENCE_COLOR,-44 0 -54,,Rainbow,
+REFERENCE_PD,,,Periodic Table of Elements,
+REFERENCE_PD_POS,,,-{0},
+REFERENCE_PD_NEG,,,+{0},
+REFERENCE_PD_BOTH,,,{0},
+REFERENCE_PD_NIL,,,0,

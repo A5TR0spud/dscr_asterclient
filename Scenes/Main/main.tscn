@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://c1h04iufkd28w" path="res://Scenes/CallsignPicker/callsign_node.tscn" id="11_4a3kt"]
 [ext_resource type="Script" uid="uid://cmdmiuvan8h1p" path="res://Scenes/Main/dict_edit_prison.gd" id="12_ifk88"]
 [ext_resource type="PackedScene" uid="uid://crn4b5wrwilbc" path="res://Scenes/DictEditMenu/dict_edit_window.tscn" id="13_8sujb"]
+[ext_resource type="PackedScene" uid="uid://c2p7eyfdxisf6" path="res://Scenes/ReferenceTab/reference_tab.tscn" id="14_4a3kt"]
 [ext_resource type="PackedScene" uid="uid://cnhrmaid1urmm" path="res://Scenes/LocaleMenu/locale_menu.tscn" id="17_koken"]
 [ext_resource type="PackedScene" uid="uid://dtbd3sge4ym14" path="res://Scenes/Confetti/confetti.tscn" id="19_1t20g"]
 [ext_resource type="PackedScene" uid="uid://bjsm5yvgoxcva" path="res://Scenes/SourcesMenu/source_menu.tscn" id="19_c4b4r"]
@@ -63,6 +64,7 @@ dragger_visibility = 1
 [node name="Corpus" type="VBoxContainer" parent="Body" unique_id=1313970636]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 0
 script = ExtResource("5_wliom")
 
 [node name="Header" type="HBoxContainer" parent="Body/Corpus" unique_id=73104091]
@@ -73,17 +75,19 @@ layout_mode = 2
 current_tab = 0
 clip_tabs = false
 close_with_middle_mouse = false
-tab_count = 3
+tab_count = 4
 tab_0/title = "chat"
 tab_1/title = "library"
 tab_2/title = "sources"
+tab_3/title = "references"
 
 [node name="LocaleNode" type="Node" parent="Body/Corpus/Header/Tabber" unique_id=927415609]
 script = ExtResource("6_2ok46")
 translations = Dictionary[StringName, String]({
 &"tab_0/title": "TAB_CHAT",
 &"tab_1/title": "TAB_LIBRARY",
-&"tab_2/title": "TAB_SOURCES"
+&"tab_2/title": "TAB_SOURCES",
+&"tab_3/title": "TAB_REFERENCES"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
@@ -106,9 +110,10 @@ layout_mode = 2
 icon = ExtResource("10_4o5wv")
 tooltip_key = "BUTTON_LANG"
 
-[node name="TabContainer" type="Container" parent="Body/Corpus" unique_id=1155907715]
+[node name="TabContainer" type="MarginContainer" parent="Body/Corpus" unique_id=1647854791]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/margin_top = 4
 
 [node name="Chat" parent="Body/Corpus/TabContainer" unique_id=2068892274 instance=ExtResource("3_imbg2")]
 layout_mode = 2
@@ -119,6 +124,10 @@ layout_mode = 2
 mouse_filter = 1
 
 [node name="SourceMenu" parent="Body/Corpus/TabContainer" unique_id=37936975 instance=ExtResource("19_c4b4r")]
+visible = false
+layout_mode = 2
+
+[node name="ReferenceTab" parent="Body/Corpus/TabContainer" unique_id=834008978 instance=ExtResource("14_4a3kt")]
 visible = false
 layout_mode = 2
 
