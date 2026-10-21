@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cpdqgtv6o5dp" path="res://Scenes/ReferenceTab/reference_tab.gd" id="1_k3cvq"]
 [ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="2_jk0c3"]
 [ext_resource type="PackedScene" uid="uid://ebnh5oxmelbl" path="res://Scenes/ReferenceTab/periodic_table.tscn" id="4_cydeu"]
+[ext_resource type="Script" uid="uid://cwy0rhlrtctmt" path="res://Scenes/ReferenceTab/unit_conversion.gd" id="4_vb677"]
 
 [node name="ReferenceTab" type="PanelContainer" unique_id=834008978]
 anchors_preset = 15
@@ -45,6 +46,141 @@ layout_mode = 2
 [node name="HSeparator" type="HSeparator" parent="ScrollContainer/VBoxContainer/M0Refs/ColorRef" unique_id=130387752]
 layout_mode = 2
 
+[node name="UnitConversion" type="VBoxContainer" parent="ScrollContainer/VBoxContainer" unique_id=1895155616]
+layout_mode = 2
+script = ExtResource("4_vb677")
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/UnitConversion" unique_id=1706354773]
+layout_mode = 2
+text = "lengths"
+horizontal_alignment = 1
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitConversion/Label" unique_id=1394875892]
+script = ExtResource("2_jk0c3")
+translations = Dictionary[StringName, String]({
+&"text": "REF_UNIT_LENGTHS"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="Length" type="GridContainer" parent="ScrollContainer/VBoxContainer/UnitConversion" unique_id=831092742]
+layout_mode = 2
+columns = 2
+
+[node name="Akermeter" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitConversion/Length" unique_id=343518800]
+layout_mode = 2
+size_flags_horizontal = 3
+step = 0.0
+allow_greater = true
+allow_lesser = true
+update_on_text_changed = true
+custom_arrow_step = 1.0
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitConversion/Length/Akermeter" unique_id=85093383]
+script = ExtResource("2_jk0c3")
+translations = Dictionary[StringName, String]({
+&"suffix": "REF_UNIT_AKERMETER"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="Metrimeter" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitConversion/Length" unique_id=230068561]
+layout_mode = 2
+size_flags_horizontal = 3
+step = 0.0
+allow_greater = true
+allow_lesser = true
+update_on_text_changed = true
+custom_arrow_step = 1.0
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitConversion/Length/Metrimeter" unique_id=319568712]
+script = ExtResource("2_jk0c3")
+translations = Dictionary[StringName, String]({
+&"suffix": "REF_UNIT_METER"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="Lightakersecond" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitConversion/Length" unique_id=1672685512]
+layout_mode = 2
+size_flags_horizontal = 3
+step = 0.0
+allow_greater = true
+allow_lesser = true
+update_on_text_changed = true
+custom_arrow_step = 1.0
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitConversion/Length/Lightakersecond" unique_id=619987922]
+script = ExtResource("2_jk0c3")
+translations = Dictionary[StringName, String]({
+&"suffix": "REF_UNIT_LIGHT_ASEC"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="Lightsecond" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitConversion/Length" unique_id=1750874291]
+layout_mode = 2
+size_flags_horizontal = 3
+step = 0.0
+allow_greater = true
+allow_lesser = true
+update_on_text_changed = true
+custom_arrow_step = 1.0
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitConversion/Length/Lightsecond" unique_id=933461512]
+script = ExtResource("2_jk0c3")
+translations = Dictionary[StringName, String]({
+&"suffix": "REF_UNIT_LIGHTSEC"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="AU" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitConversion/Length" unique_id=1992349066]
+layout_mode = 2
+size_flags_horizontal = 3
+step = 0.0
+allow_greater = true
+allow_lesser = true
+update_on_text_changed = true
+custom_arrow_step = 1.0
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitConversion/Length/AU" unique_id=2117206059]
+script = ExtResource("2_jk0c3")
+translations = Dictionary[StringName, String]({
+&"suffix": "REF_UNIT_AU"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="Lightyear" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitConversion/Length" unique_id=1681037522]
+layout_mode = 2
+size_flags_horizontal = 3
+step = 0.0
+allow_greater = true
+allow_lesser = true
+update_on_text_changed = true
+custom_arrow_step = 1.0
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitConversion/Length/Lightyear" unique_id=1204375615]
+script = ExtResource("2_jk0c3")
+translations = Dictionary[StringName, String]({
+&"suffix": "REF_UNIT_LIGHTYEAR"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="Feet" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitConversion/Length" unique_id=588635762]
+layout_mode = 2
+size_flags_horizontal = 3
+step = 0.0
+allow_greater = true
+allow_lesser = true
+update_on_text_changed = true
+custom_arrow_step = 1.0
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitConversion/Length/Feet" unique_id=1597588837]
+script = ExtResource("2_jk0c3")
+translations = Dictionary[StringName, String]({
+&"suffix": "REF_UNIT_FOOT"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="HSeparator" type="HSeparator" parent="ScrollContainer/VBoxContainer/UnitConversion" unique_id=966229878]
+layout_mode = 2
+
 [node name="Label" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=273401841]
 layout_mode = 2
 text = "periodic table"
@@ -66,8 +202,17 @@ size_flags_stretch_ratio = 0.3
 
 [node name="PeriodicTable" parent="ScrollContainer/VBoxContainer/CenterContainer" unique_id=1498053878 instance=ExtResource("4_cydeu")]
 layout_mode = 2
+size_flags_stretch_ratio = 10.0
 
 [node name="Control2" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer" unique_id=177358249]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.3
+
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitConversion/Length/Akermeter" to="ScrollContainer/VBoxContainer/UnitConversion" method="_on_akermeter_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitConversion/Length/Metrimeter" to="ScrollContainer/VBoxContainer/UnitConversion" method="_on_metrimeter_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitConversion/Length/Lightakersecond" to="ScrollContainer/VBoxContainer/UnitConversion" method="_on_lightakersecond_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitConversion/Length/Lightsecond" to="ScrollContainer/VBoxContainer/UnitConversion" method="_on_lightsecond_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitConversion/Length/AU" to="ScrollContainer/VBoxContainer/UnitConversion" method="_on_au_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitConversion/Length/Lightyear" to="ScrollContainer/VBoxContainer/UnitConversion" method="_on_lightyear_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitConversion/Length/Feet" to="ScrollContainer/VBoxContainer/UnitConversion" method="_on_feet_value_changed"]

@@ -3,10 +3,10 @@
 [ext_resource type="Script" uid="uid://baymf4kshn718" path="res://Scenes/ReferenceTab/element_cell.gd" id="1_ilioc"]
 
 [node name="ElementCell" type="PanelContainer" unique_id=1338587854]
-modulate = Color(1, 1, 1, 0.5)
 offset_right = 107.0
 offset_bottom = 115.0
 size_flags_horizontal = 3
+mouse_filter = 1
 script = ExtResource("1_ilioc")
 
 [node name="EdgeTimer" type="Timer" parent="." unique_id=1310362307]

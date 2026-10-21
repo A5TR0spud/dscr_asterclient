@@ -2,32 +2,771 @@
 
 [ext_resource type="Script" uid="uid://bbsao5ly4n2ye" path="res://Scenes/ReferenceTab/periodic_table.gd" id="1_afasx"]
 [ext_resource type="PackedScene" uid="uid://b1t0ne2nxs6pi" path="res://Scenes/ReferenceTab/element_cell.tscn" id="1_b7m85"]
-[ext_resource type="StyleBox" uid="uid://dcmofilgg82h2" path="res://Styling/panel_style.tres" id="2_xh0xs"]
 
-[node name="PeriodicTable" type="GridContainer" unique_id=1498053878]
+[node name="MarginContainer" type="MarginContainer" unique_id=1390222257]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 10.0
+size_flags_vertical = 3
+
+[node name="PeriodicTable" type="GridContainer" parent="." unique_id=1498053878]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/h_separation = -2
 theme_override_constants/v_separation = -2
 columns = 18
 script = ExtResource("1_afasx")
 
-[node name="PopupPanel" type="PopupPanel" parent="." unique_id=1506291778]
-handle_input_locally = false
-oversampling_override = 1.0
-size = Vector2i(126, 100)
-theme_override_styles/panel = ExtResource("2_xh0xs")
+[node name="Hydrogen" parent="PeriodicTable" unique_id=1338587854 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="PeriodicTable" unique_id=1491364005]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control2" type="Control" parent="PeriodicTable" unique_id=2122943510]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control3" type="Control" parent="PeriodicTable" unique_id=1765210696]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control4" type="Control" parent="PeriodicTable" unique_id=220449320]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control5" type="Control" parent="PeriodicTable" unique_id=1425568590]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control6" type="Control" parent="PeriodicTable" unique_id=1718707766]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control7" type="Control" parent="PeriodicTable" unique_id=1569836133]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control8" type="Control" parent="PeriodicTable" unique_id=278305502]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control9" type="Control" parent="PeriodicTable" unique_id=1124498628]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control10" type="Control" parent="PeriodicTable" unique_id=51519967]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control11" type="Control" parent="PeriodicTable" unique_id=1841625855]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control12" type="Control" parent="PeriodicTable" unique_id=1726594898]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control13" type="Control" parent="PeriodicTable" unique_id=1196154662]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control14" type="Control" parent="PeriodicTable" unique_id=637072766]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control15" type="Control" parent="PeriodicTable" unique_id=913601498]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control16" type="Control" parent="PeriodicTable" unique_id=1729952705]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Helium" parent="PeriodicTable" unique_id=880984125 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 2
+
+[node name="Lithium" parent="PeriodicTable" unique_id=1279047810 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 3
+
+[node name="Beryllium" parent="PeriodicTable" unique_id=2039295385 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 4
+
+[node name="Control17" type="Control" parent="PeriodicTable" unique_id=2130933430]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control18" type="Control" parent="PeriodicTable" unique_id=1740469068]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control19" type="Control" parent="PeriodicTable" unique_id=1588079833]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control20" type="Control" parent="PeriodicTable" unique_id=1281237021]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control21" type="Control" parent="PeriodicTable" unique_id=1211474459]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control22" type="Control" parent="PeriodicTable" unique_id=1491502437]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control23" type="Control" parent="PeriodicTable" unique_id=2137120611]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control26" type="Control" parent="PeriodicTable" unique_id=1976811812]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control24" type="Control" parent="PeriodicTable" unique_id=2008650109]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control25" type="Control" parent="PeriodicTable" unique_id=58704993]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Boron" parent="PeriodicTable" unique_id=1616431119 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 5
+
+[node name="Carbon" parent="PeriodicTable" unique_id=112414468 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 6
+
+[node name="Nitrogen" parent="PeriodicTable" unique_id=850141033 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 7
+
+[node name="Oxygen" parent="PeriodicTable" unique_id=1997236573 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 8
+
+[node name="Fluorine" parent="PeriodicTable" unique_id=2006768861 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 9
+
+[node name="Neon" parent="PeriodicTable" unique_id=137440839 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 10
+
+[node name="Sodium" parent="PeriodicTable" unique_id=1079057313 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 11
+
+[node name="Magnesium" parent="PeriodicTable" unique_id=1251897122 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 12
+
+[node name="Control27" type="Control" parent="PeriodicTable" unique_id=1074360151]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control28" type="Control" parent="PeriodicTable" unique_id=652708390]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control29" type="Control" parent="PeriodicTable" unique_id=1322989148]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control30" type="Control" parent="PeriodicTable" unique_id=139431973]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control31" type="Control" parent="PeriodicTable" unique_id=1572291562]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control32" type="Control" parent="PeriodicTable" unique_id=1427710094]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control33" type="Control" parent="PeriodicTable" unique_id=1215649289]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control34" type="Control" parent="PeriodicTable" unique_id=1504261171]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control35" type="Control" parent="PeriodicTable" unique_id=293248536]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control36" type="Control" parent="PeriodicTable" unique_id=363470610]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Aluminum" parent="PeriodicTable" unique_id=972847806 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 13
+
+[node name="Silicon" parent="PeriodicTable" unique_id=840686857 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 14
+
+[node name="Nitrogen2" parent="PeriodicTable" unique_id=274953945 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 15
+
+[node name="Oxygen2" parent="PeriodicTable" unique_id=448904390 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 16
+
+[node name="Fluorine2" parent="PeriodicTable" unique_id=330829292 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 17
+
+[node name="Neon2" parent="PeriodicTable" unique_id=1746442932 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 18
+
+[node name="Aluminum2" parent="PeriodicTable" unique_id=837243909 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 19
+
+[node name="Silicon2" parent="PeriodicTable" unique_id=1454850048 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 20
+
+[node name="Nitrogen3" parent="PeriodicTable" unique_id=718234935 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 21
+
+[node name="Oxygen3" parent="PeriodicTable" unique_id=1129994834 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 22
+
+[node name="Fluorine3" parent="PeriodicTable" unique_id=1724061282 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 23
+
+[node name="Neon3" parent="PeriodicTable" unique_id=1290634456 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 24
+
+[node name="Aluminum3" parent="PeriodicTable" unique_id=437771241 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 25
+
+[node name="Silicon3" parent="PeriodicTable" unique_id=1181374554 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 26
+
+[node name="Nitrogen4" parent="PeriodicTable" unique_id=1925274160 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 27
+
+[node name="Oxygen4" parent="PeriodicTable" unique_id=1615205227 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 28
+
+[node name="Fluorine4" parent="PeriodicTable" unique_id=506284625 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 29
+
+[node name="Neon4" parent="PeriodicTable" unique_id=2059712718 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 30
+
+[node name="Aluminum4" parent="PeriodicTable" unique_id=584038078 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 31
+
+[node name="Silicon4" parent="PeriodicTable" unique_id=1923557090 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 32
+
+[node name="Nitrogen5" parent="PeriodicTable" unique_id=1069629412 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 33
+
+[node name="Oxygen5" parent="PeriodicTable" unique_id=933707283 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 34
+
+[node name="Fluorine5" parent="PeriodicTable" unique_id=1911558785 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 35
+
+[node name="Neon5" parent="PeriodicTable" unique_id=614816076 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 36
+
+[node name="Aluminum5" parent="PeriodicTable" unique_id=627616395 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 37
+
+[node name="Silicon5" parent="PeriodicTable" unique_id=1277003966 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 38
+
+[node name="Nitrogen6" parent="PeriodicTable" unique_id=308550950 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 39
+
+[node name="Oxygen6" parent="PeriodicTable" unique_id=1719176129 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 40
+
+[node name="Fluorine6" parent="PeriodicTable" unique_id=688975274 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 41
+
+[node name="Neon6" parent="PeriodicTable" unique_id=494312048 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 42
+
+[node name="Aluminum6" parent="PeriodicTable" unique_id=483981016 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 43
+
+[node name="Silicon6" parent="PeriodicTable" unique_id=1052358863 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 44
+
+[node name="Nitrogen7" parent="PeriodicTable" unique_id=1053066198 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 45
+
+[node name="Oxygen7" parent="PeriodicTable" unique_id=1534154572 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 46
+
+[node name="Fluorine7" parent="PeriodicTable" unique_id=588627635 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 47
+
+[node name="Neon7" parent="PeriodicTable" unique_id=57984108 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 48
+
+[node name="Aluminum7" parent="PeriodicTable" unique_id=368819123 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 49
+
+[node name="Silicon7" parent="PeriodicTable" unique_id=552256067 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 50
+
+[node name="Nitrogen8" parent="PeriodicTable" unique_id=981896238 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 51
+
+[node name="Oxygen8" parent="PeriodicTable" unique_id=1493819266 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 52
+
+[node name="Fluorine8" parent="PeriodicTable" unique_id=1348606085 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 53
+
+[node name="Neon8" parent="PeriodicTable" unique_id=1472510561 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 54
+
+[node name="Aluminum8" parent="PeriodicTable" unique_id=316435931 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 55
+
+[node name="Silicon8" parent="PeriodicTable" unique_id=382369849 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 56
+
+[node name="Control37" type="Control" parent="PeriodicTable" unique_id=859709870]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Nitrogen9" parent="PeriodicTable" unique_id=1690361822 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 72
+
+[node name="Oxygen9" parent="PeriodicTable" unique_id=1564408495 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 73
+
+[node name="Fluorine9" parent="PeriodicTable" unique_id=1460422278 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 74
+
+[node name="Neon9" parent="PeriodicTable" unique_id=216691845 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 75
+
+[node name="Aluminum9" parent="PeriodicTable" unique_id=821439360 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 76
+
+[node name="Silicon9" parent="PeriodicTable" unique_id=1503788326 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 77
+
+[node name="Nitrogen10" parent="PeriodicTable" unique_id=1369960479 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 78
+
+[node name="Oxygen10" parent="PeriodicTable" unique_id=1244958524 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 79
+
+[node name="Fluorine10" parent="PeriodicTable" unique_id=1302069224 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 80
+
+[node name="Neon10" parent="PeriodicTable" unique_id=2044915030 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 81
+
+[node name="Aluminum10" parent="PeriodicTable" unique_id=401784475 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 82
+
+[node name="Silicon10" parent="PeriodicTable" unique_id=1981107321 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 83
+
+[node name="Nitrogen11" parent="PeriodicTable" unique_id=2049388896 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 84
+
+[node name="Oxygen11" parent="PeriodicTable" unique_id=90301743 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 85
+
+[node name="Fluorine11" parent="PeriodicTable" unique_id=1531339328 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 86
+
+[node name="Neon11" parent="PeriodicTable" unique_id=1395378795 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 87
+
+[node name="Aluminum11" parent="PeriodicTable" unique_id=1697344229 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 88
+
+[node name="Control38" type="Control" parent="PeriodicTable" unique_id=51496363]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Silicon11" parent="PeriodicTable" unique_id=705359848 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 104
+
+[node name="Nitrogen12" parent="PeriodicTable" unique_id=2088709531 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 105
+
+[node name="Oxygen12" parent="PeriodicTable" unique_id=989342636 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 106
+
+[node name="Fluorine12" parent="PeriodicTable" unique_id=936184293 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 107
+
+[node name="Neon12" parent="PeriodicTable" unique_id=1674044057 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 108
+
+[node name="Aluminum12" parent="PeriodicTable" unique_id=1413984713 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 109
+
+[node name="Silicon12" parent="PeriodicTable" unique_id=1448623863 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 110
+
+[node name="Oxygen14" parent="PeriodicTable" unique_id=1011649426 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 111
+
+[node name="Nitrogen13" parent="PeriodicTable" unique_id=1280961343 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 112
+
+[node name="Oxygen13" parent="PeriodicTable" unique_id=727500602 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 113
+
+[node name="Fluorine13" parent="PeriodicTable" unique_id=272074076 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 114
+
+[node name="Neon13" parent="PeriodicTable" unique_id=1239074506 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 115
+
+[node name="Aluminum13" parent="PeriodicTable" unique_id=1030145067 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 116
+
+[node name="Silicon13" parent="PeriodicTable" unique_id=1110082110 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 117
+
+[node name="Nitrogen14" parent="PeriodicTable" unique_id=1918914976 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 118
+
+[node name="Control39" type="Control" parent="PeriodicTable" unique_id=1356501767]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control40" type="Control" parent="PeriodicTable" unique_id=1780896471]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control41" type="Control" parent="PeriodicTable" unique_id=1571410176]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control45" type="Control" parent="PeriodicTable" unique_id=1148522442]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control46" type="Control" parent="PeriodicTable" unique_id=1855950690]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control47" type="Control" parent="PeriodicTable" unique_id=1682357731]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control48" type="Control" parent="PeriodicTable" unique_id=1521497229]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control49" type="Control" parent="PeriodicTable" unique_id=1920264672]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control50" type="Control" parent="PeriodicTable" unique_id=828577906]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control51" type="Control" parent="PeriodicTable" unique_id=2094847922]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control52" type="Control" parent="PeriodicTable" unique_id=2141664002]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control53" type="Control" parent="PeriodicTable" unique_id=171230375]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control54" type="Control" parent="PeriodicTable" unique_id=1075941297]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control55" type="Control" parent="PeriodicTable" unique_id=256873599]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control56" type="Control" parent="PeriodicTable" unique_id=1111308884]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control57" type="Control" parent="PeriodicTable" unique_id=828865687]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control58" type="Control" parent="PeriodicTable" unique_id=445748678]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control59" type="Control" parent="PeriodicTable" unique_id=1216469034]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control60" type="Control" parent="PeriodicTable" unique_id=28338612]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control61" type="Control" parent="PeriodicTable" unique_id=249401414]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control62" type="Control" parent="PeriodicTable" unique_id=1554254373]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Fluorine14" parent="PeriodicTable" unique_id=487517881 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 57
+
+[node name="Neon14" parent="PeriodicTable" unique_id=713368529 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 58
+
+[node name="Fluorine15" parent="PeriodicTable" unique_id=1639011902 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 59
+
+[node name="Neon15" parent="PeriodicTable" unique_id=1860305524 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 60
+
+[node name="Fluorine16" parent="PeriodicTable" unique_id=588504048 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 61
+
+[node name="Neon16" parent="PeriodicTable" unique_id=1898988525 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 62
+
+[node name="Fluorine17" parent="PeriodicTable" unique_id=1276558284 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 63
+
+[node name="Neon17" parent="PeriodicTable" unique_id=1543328323 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 64
+
+[node name="Fluorine18" parent="PeriodicTable" unique_id=1281979558 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 65
+
+[node name="Neon18" parent="PeriodicTable" unique_id=219454641 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 66
+
+[node name="Fluorine19" parent="PeriodicTable" unique_id=157178725 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 67
+
+[node name="Neon19" parent="PeriodicTable" unique_id=732347554 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 68
+
+[node name="Fluorine20" parent="PeriodicTable" unique_id=1380424552 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 69
+
+[node name="Neon20" parent="PeriodicTable" unique_id=2122225526 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 70
+
+[node name="Neon21" parent="PeriodicTable" unique_id=1577363950 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 71
+
+[node name="Control42" type="Control" parent="PeriodicTable" unique_id=1131393567]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control43" type="Control" parent="PeriodicTable" unique_id=2083386225]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control44" type="Control" parent="PeriodicTable" unique_id=650685743]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Fluorine21" parent="PeriodicTable" unique_id=1187029774 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 89
+
+[node name="Neon22" parent="PeriodicTable" unique_id=64741827 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 90
+
+[node name="Fluorine22" parent="PeriodicTable" unique_id=1199401437 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 91
+
+[node name="Neon23" parent="PeriodicTable" unique_id=697605666 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 92
+
+[node name="Fluorine23" parent="PeriodicTable" unique_id=315767227 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 93
+
+[node name="Neon24" parent="PeriodicTable" unique_id=2888668 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 94
+
+[node name="Fluorine24" parent="PeriodicTable" unique_id=687484835 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 95
+
+[node name="Neon25" parent="PeriodicTable" unique_id=478305551 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 96
+
+[node name="Fluorine25" parent="PeriodicTable" unique_id=1266307049 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 97
+
+[node name="Neon26" parent="PeriodicTable" unique_id=877297339 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 98
+
+[node name="Fluorine26" parent="PeriodicTable" unique_id=1064601809 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 99
+
+[node name="Neon27" parent="PeriodicTable" unique_id=1159061397 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 100
+
+[node name="Fluorine27" parent="PeriodicTable" unique_id=679341407 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 101
+
+[node name="Neon28" parent="PeriodicTable" unique_id=1504997855 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 102
+
+[node name="Neon29" parent="PeriodicTable" unique_id=1940252795 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 103
+
+[node name="PopupPanel" type="PanelContainer" parent="." unique_id=440044296]
+visible = false
+top_level = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PopupPanel" unique_id=687106483]
-offset_left = 10.0
-offset_top = 8.0
-offset_right = 116.0
-offset_bottom = 92.0
+layout_mode = 2
 
 [node name="Name" type="Label" parent="PopupPanel/VBoxContainer" unique_id=1824822766]
 layout_mode = 2
@@ -40,858 +779,3 @@ text = "15 protons"
 [node name="Metallicity" type="Label" parent="PopupPanel/VBoxContainer" unique_id=581826550]
 layout_mode = 2
 text = "metal"
-
-[node name="Hydrogen" parent="." unique_id=1338587854 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-
-[node name="Control" type="Control" parent="." unique_id=1491364005]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control2" type="Control" parent="." unique_id=2122943510]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control3" type="Control" parent="." unique_id=1765210696]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control4" type="Control" parent="." unique_id=220449320]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control5" type="Control" parent="." unique_id=1425568590]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control6" type="Control" parent="." unique_id=1718707766]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control7" type="Control" parent="." unique_id=1569836133]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control8" type="Control" parent="." unique_id=278305502]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control9" type="Control" parent="." unique_id=1124498628]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control10" type="Control" parent="." unique_id=51519967]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control11" type="Control" parent="." unique_id=1841625855]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control12" type="Control" parent="." unique_id=1726594898]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control13" type="Control" parent="." unique_id=1196154662]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control14" type="Control" parent="." unique_id=637072766]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control15" type="Control" parent="." unique_id=913601498]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control16" type="Control" parent="." unique_id=1729952705]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Helium" parent="." unique_id=880984125 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 2
-
-[node name="Lithium" parent="." unique_id=1279047810 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 3
-
-[node name="Beryllium" parent="." unique_id=2039295385 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 4
-
-[node name="Control17" type="Control" parent="." unique_id=2130933430]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control18" type="Control" parent="." unique_id=1740469068]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control19" type="Control" parent="." unique_id=1588079833]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control20" type="Control" parent="." unique_id=1281237021]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control21" type="Control" parent="." unique_id=1211474459]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control22" type="Control" parent="." unique_id=1491502437]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control23" type="Control" parent="." unique_id=2137120611]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control26" type="Control" parent="." unique_id=1976811812]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control24" type="Control" parent="." unique_id=2008650109]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control25" type="Control" parent="." unique_id=58704993]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Boron" parent="." unique_id=1616431119 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 5
-
-[node name="Carbon" parent="." unique_id=112414468 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 6
-
-[node name="Nitrogen" parent="." unique_id=850141033 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 7
-
-[node name="Oxygen" parent="." unique_id=1997236573 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 8
-
-[node name="Fluorine" parent="." unique_id=2006768861 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 9
-
-[node name="Neon" parent="." unique_id=137440839 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 10
-
-[node name="Sodium" parent="." unique_id=1079057313 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 11
-
-[node name="Magnesium" parent="." unique_id=1251897122 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 12
-
-[node name="Control27" type="Control" parent="." unique_id=1074360151]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control28" type="Control" parent="." unique_id=652708390]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control29" type="Control" parent="." unique_id=1322989148]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control30" type="Control" parent="." unique_id=139431973]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control31" type="Control" parent="." unique_id=1572291562]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control32" type="Control" parent="." unique_id=1427710094]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control33" type="Control" parent="." unique_id=1215649289]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control34" type="Control" parent="." unique_id=1504261171]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control35" type="Control" parent="." unique_id=293248536]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control36" type="Control" parent="." unique_id=363470610]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Aluminum" parent="." unique_id=972847806 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 13
-
-[node name="Silicon" parent="." unique_id=840686857 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 14
-
-[node name="Nitrogen2" parent="." unique_id=274953945 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 15
-
-[node name="Oxygen2" parent="." unique_id=448904390 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 16
-
-[node name="Fluorine2" parent="." unique_id=330829292 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 17
-
-[node name="Neon2" parent="." unique_id=1746442932 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 18
-
-[node name="Aluminum2" parent="." unique_id=837243909 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 19
-
-[node name="Silicon2" parent="." unique_id=1454850048 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 20
-
-[node name="Nitrogen3" parent="." unique_id=718234935 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 21
-
-[node name="Oxygen3" parent="." unique_id=1129994834 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 22
-
-[node name="Fluorine3" parent="." unique_id=1724061282 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 23
-
-[node name="Neon3" parent="." unique_id=1290634456 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 24
-
-[node name="Aluminum3" parent="." unique_id=437771241 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 25
-
-[node name="Silicon3" parent="." unique_id=1181374554 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 26
-
-[node name="Nitrogen4" parent="." unique_id=1925274160 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 27
-
-[node name="Oxygen4" parent="." unique_id=1615205227 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 28
-
-[node name="Fluorine4" parent="." unique_id=506284625 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 29
-
-[node name="Neon4" parent="." unique_id=2059712718 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 30
-
-[node name="Aluminum4" parent="." unique_id=584038078 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 31
-
-[node name="Silicon4" parent="." unique_id=1923557090 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 32
-
-[node name="Nitrogen5" parent="." unique_id=1069629412 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 33
-
-[node name="Oxygen5" parent="." unique_id=933707283 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 34
-
-[node name="Fluorine5" parent="." unique_id=1911558785 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 35
-
-[node name="Neon5" parent="." unique_id=614816076 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 36
-
-[node name="Aluminum5" parent="." unique_id=627616395 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 37
-
-[node name="Silicon5" parent="." unique_id=1277003966 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 38
-
-[node name="Nitrogen6" parent="." unique_id=308550950 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 39
-
-[node name="Oxygen6" parent="." unique_id=1719176129 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 40
-
-[node name="Fluorine6" parent="." unique_id=688975274 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 41
-
-[node name="Neon6" parent="." unique_id=494312048 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 42
-
-[node name="Aluminum6" parent="." unique_id=483981016 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 43
-
-[node name="Silicon6" parent="." unique_id=1052358863 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 44
-
-[node name="Nitrogen7" parent="." unique_id=1053066198 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 45
-
-[node name="Oxygen7" parent="." unique_id=1534154572 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 46
-
-[node name="Fluorine7" parent="." unique_id=588627635 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 47
-
-[node name="Neon7" parent="." unique_id=57984108 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 48
-
-[node name="Aluminum7" parent="." unique_id=368819123 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 49
-
-[node name="Silicon7" parent="." unique_id=552256067 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 50
-
-[node name="Nitrogen8" parent="." unique_id=981896238 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 51
-
-[node name="Oxygen8" parent="." unique_id=1493819266 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 52
-
-[node name="Fluorine8" parent="." unique_id=1348606085 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 53
-
-[node name="Neon8" parent="." unique_id=1472510561 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 54
-
-[node name="Aluminum8" parent="." unique_id=316435931 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 55
-
-[node name="Silicon8" parent="." unique_id=382369849 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 56
-
-[node name="Control37" type="Control" parent="." unique_id=859709870]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Nitrogen9" parent="." unique_id=1690361822 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 72
-
-[node name="Oxygen9" parent="." unique_id=1564408495 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 73
-
-[node name="Fluorine9" parent="." unique_id=1460422278 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 74
-
-[node name="Neon9" parent="." unique_id=216691845 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 75
-
-[node name="Aluminum9" parent="." unique_id=821439360 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 76
-
-[node name="Silicon9" parent="." unique_id=1503788326 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 77
-
-[node name="Nitrogen10" parent="." unique_id=1369960479 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 78
-
-[node name="Oxygen10" parent="." unique_id=1244958524 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 79
-
-[node name="Fluorine10" parent="." unique_id=1302069224 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 80
-
-[node name="Neon10" parent="." unique_id=2044915030 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 81
-
-[node name="Aluminum10" parent="." unique_id=401784475 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 82
-
-[node name="Silicon10" parent="." unique_id=1981107321 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 83
-
-[node name="Nitrogen11" parent="." unique_id=2049388896 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 84
-
-[node name="Oxygen11" parent="." unique_id=90301743 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 85
-
-[node name="Fluorine11" parent="." unique_id=1531339328 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 86
-
-[node name="Neon11" parent="." unique_id=1395378795 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 87
-
-[node name="Aluminum11" parent="." unique_id=1697344229 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 88
-
-[node name="Control38" type="Control" parent="." unique_id=51496363]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Silicon11" parent="." unique_id=705359848 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 104
-
-[node name="Nitrogen12" parent="." unique_id=2088709531 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 105
-
-[node name="Oxygen12" parent="." unique_id=989342636 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 106
-
-[node name="Fluorine12" parent="." unique_id=936184293 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 107
-
-[node name="Neon12" parent="." unique_id=1674044057 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 108
-
-[node name="Aluminum12" parent="." unique_id=1413984713 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 109
-
-[node name="Silicon12" parent="." unique_id=1448623863 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 110
-
-[node name="Oxygen14" parent="." unique_id=1011649426 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 111
-
-[node name="Nitrogen13" parent="." unique_id=1280961343 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 112
-
-[node name="Oxygen13" parent="." unique_id=727500602 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 113
-
-[node name="Fluorine13" parent="." unique_id=272074076 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 114
-
-[node name="Neon13" parent="." unique_id=1239074506 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 115
-
-[node name="Aluminum13" parent="." unique_id=1030145067 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 116
-
-[node name="Silicon13" parent="." unique_id=1110082110 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 117
-
-[node name="Nitrogen14" parent="." unique_id=1918914976 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 118
-
-[node name="Control39" type="Control" parent="." unique_id=1356501767]
-custom_minimum_size = Vector2(0, 24)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control40" type="Control" parent="." unique_id=1780896471]
-custom_minimum_size = Vector2(0, 24)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control41" type="Control" parent="." unique_id=1571410176]
-custom_minimum_size = Vector2(0, 24)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control45" type="Control" parent="." unique_id=1148522442]
-custom_minimum_size = Vector2(0, 24)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control46" type="Control" parent="." unique_id=1855950690]
-custom_minimum_size = Vector2(0, 24)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control47" type="Control" parent="." unique_id=1682357731]
-custom_minimum_size = Vector2(0, 24)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control48" type="Control" parent="." unique_id=1521497229]
-custom_minimum_size = Vector2(0, 24)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control49" type="Control" parent="." unique_id=1920264672]
-custom_minimum_size = Vector2(0, 24)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control50" type="Control" parent="." unique_id=828577906]
-custom_minimum_size = Vector2(0, 24)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control51" type="Control" parent="." unique_id=2094847922]
-custom_minimum_size = Vector2(0, 24)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control52" type="Control" parent="." unique_id=2141664002]
-custom_minimum_size = Vector2(0, 24)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control53" type="Control" parent="." unique_id=171230375]
-custom_minimum_size = Vector2(0, 24)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control54" type="Control" parent="." unique_id=1075941297]
-custom_minimum_size = Vector2(0, 24)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control55" type="Control" parent="." unique_id=256873599]
-custom_minimum_size = Vector2(0, 24)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control56" type="Control" parent="." unique_id=1111308884]
-custom_minimum_size = Vector2(0, 24)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control57" type="Control" parent="." unique_id=828865687]
-custom_minimum_size = Vector2(0, 24)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control58" type="Control" parent="." unique_id=445748678]
-custom_minimum_size = Vector2(0, 24)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control59" type="Control" parent="." unique_id=1216469034]
-custom_minimum_size = Vector2(0, 24)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control60" type="Control" parent="." unique_id=28338612]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control61" type="Control" parent="." unique_id=249401414]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control62" type="Control" parent="." unique_id=1554254373]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Fluorine14" parent="." unique_id=487517881 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 57
-
-[node name="Neon14" parent="." unique_id=713368529 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 58
-
-[node name="Fluorine15" parent="." unique_id=1639011902 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 59
-
-[node name="Neon15" parent="." unique_id=1860305524 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 60
-
-[node name="Fluorine16" parent="." unique_id=588504048 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 61
-
-[node name="Neon16" parent="." unique_id=1898988525 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 62
-
-[node name="Fluorine17" parent="." unique_id=1276558284 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 63
-
-[node name="Neon17" parent="." unique_id=1543328323 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 64
-
-[node name="Fluorine18" parent="." unique_id=1281979558 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 65
-
-[node name="Neon18" parent="." unique_id=219454641 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 66
-
-[node name="Fluorine19" parent="." unique_id=157178725 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 67
-
-[node name="Neon19" parent="." unique_id=732347554 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 68
-
-[node name="Fluorine20" parent="." unique_id=1380424552 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 69
-
-[node name="Neon20" parent="." unique_id=2122225526 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 70
-
-[node name="Neon21" parent="." unique_id=1577363950 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 71
-
-[node name="Control42" type="Control" parent="." unique_id=1131393567]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control43" type="Control" parent="." unique_id=2083386225]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control44" type="Control" parent="." unique_id=650685743]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Fluorine21" parent="." unique_id=1187029774 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 89
-
-[node name="Neon22" parent="." unique_id=64741827 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 90
-
-[node name="Fluorine22" parent="." unique_id=1199401437 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 91
-
-[node name="Neon23" parent="." unique_id=697605666 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 92
-
-[node name="Fluorine23" parent="." unique_id=315767227 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 93
-
-[node name="Neon24" parent="." unique_id=2888668 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 94
-
-[node name="Fluorine24" parent="." unique_id=687484835 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 95
-
-[node name="Neon25" parent="." unique_id=478305551 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 96
-
-[node name="Fluorine25" parent="." unique_id=1266307049 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 97
-
-[node name="Neon26" parent="." unique_id=877297339 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 98
-
-[node name="Fluorine26" parent="." unique_id=1064601809 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 99
-
-[node name="Neon27" parent="." unique_id=1159061397 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 100
-
-[node name="Fluorine27" parent="." unique_id=679341407 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 101
-
-[node name="Neon28" parent="." unique_id=1504997855 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 102
-
-[node name="Neon29" parent="." unique_id=1940252795 instance=ExtResource("1_b7m85")]
-modulate = Color(1, 1, 1, 1)
-layout_mode = 2
-element = 103

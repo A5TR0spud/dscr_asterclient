@@ -1,17 +1,21 @@
 extends GridContainer
 class_name PeriodicTable
 
-@onready var tooltip: PopupPanel = $PopupPanel
-@onready var tip_name: Label = $PopupPanel/VBoxContainer/Name
-@onready var tip_proton: Label = $PopupPanel/VBoxContainer/ProtonLong
-@onready var tip_metallicity: Label = $PopupPanel/VBoxContainer/Metallicity
+@onready var tooltip: PanelContainer = $"../PopupPanel"
+@onready var tip_name: Label = $"../PopupPanel/VBoxContainer/Name"
+@onready var tip_proton: Label = $"../PopupPanel/VBoxContainer/ProtonLong"
+@onready var tip_metallicity: Label = $"../PopupPanel/VBoxContainer/Metallicity"
 
 var _current_element: int = 0
 
 signal focus(elem: int)
 
+func _gui_input(event: InputEvent):
+	if event is InputEventMouseButton:
+		event = event as InputEventMouseButton
+		get_viewport().update_mouse_cursor_state.call_deferred()
+
 func on_hover_start(elem: ElementCell):
-	tooltip.hide()
 	var element: int = elem.element
 	var r: Rect2 = elem.get_global_rect()
 	tip_name.text = elem.name_label.text
@@ -24,14 +28,16 @@ func on_hover_start(elem: ElementCell):
 	elif m == ElementCell.Metallicity.METALLOID:
 		key += "METALLOID"
 		tip_metallicity.modulate = Color(0.6, 0.8, 0.8)
-	else:
+	elif m == ElementCell.Metallicity.NONMETAL:
 		key += "NONMETAL"
 		tip_metallicity.modulate = Color(1.0, 0.6, 0.6)
+	tip_metallicity.visible = m != ElementCell.Metallicity.UNKNOWN
 	tip_metallicity.text = Localizer.translate(key)
-	@warning_ignore("narrowing_conversion")
-	tooltip.popup.call_deferred(Rect2i(
-		r.position.x + r.size.x - 2, r.position.y, 0, 0
-	))
+	tooltip.global_position = Vector2(
+		r.position.x + r.size.x - 2, r.position.y
+	)
+	tooltip.show()
+	tooltip.reset_size()
 	_current_element = element
 	focus.emit(element)
 

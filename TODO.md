@@ -1,5 +1,6 @@
 ## TODO
 
+* m0 unit converter
 * add signal-matching options? (eg recolor matching pairs of -14 and -15, autocompleting -14 also types -15)
 * add "macro-dictionary" tab
 * probably add macros as an emoji keyboard type of thing rather than another parser
@@ -32,6 +33,7 @@
 ## TRANSLATIONS
 
 * Periodic table
+* Units of measure
 * SETTINGS_COLOR_REF
 * SETTINGS_COLOR_REF_NONE
 * SETTINGS_COLOR_REF_INLINE

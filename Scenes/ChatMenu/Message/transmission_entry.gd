@@ -215,7 +215,7 @@ func _handle_clickables():
 		return
 	if Input.is_action_pressed("click_signal_modifier") and is_hovering and not is_clickable:
 		request_rewrite(true)
-		warp_mouse.call_deferred(get_local_mouse_position())
+		get_viewport().update_mouse_cursor_state.call_deferred()
 		is_clickable = true
 	if (not Input.is_action_pressed("click_signal_modifier") or not is_hovering) and is_clickable:
 		request_rewrite(false)
