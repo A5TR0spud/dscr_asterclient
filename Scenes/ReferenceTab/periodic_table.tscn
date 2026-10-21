@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bbsao5ly4n2ye" path="res://Scenes/ReferenceTab/periodic_table.gd" id="1_afasx"]
 [ext_resource type="PackedScene" uid="uid://b1t0ne2nxs6pi" path="res://Scenes/ReferenceTab/element_cell.tscn" id="1_b7m85"]
+[ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="3_xh0xs"]
 
 [node name="MarginContainer" type="MarginContainer" unique_id=1390222257]
 anchors_preset = 15
@@ -759,14 +760,15 @@ element = 103
 
 [node name="PopupPanel" type="PanelContainer" parent="." unique_id=440044296]
 visible = false
-top_level = true
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+offset_transform_enabled = true
 mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PopupPanel" unique_id=687106483]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Name" type="Label" parent="PopupPanel/VBoxContainer" unique_id=1824822766]
 layout_mode = 2
@@ -779,3 +781,14 @@ text = "15 protons"
 [node name="Metallicity" type="Label" parent="PopupPanel/VBoxContainer" unique_id=581826550]
 layout_mode = 2
 text = "metal"
+
+[node name="Radioactive" type="Label" parent="PopupPanel/VBoxContainer" unique_id=1093404535]
+layout_mode = 2
+text = "radioactive"
+
+[node name="LocaleNode" type="Node" parent="PopupPanel/VBoxContainer/Radioactive" unique_id=2091556125]
+script = ExtResource("3_xh0xs")
+translations = Dictionary[StringName, String]({
+&"text": "REFERENCE_PD_UNSTABLE"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"

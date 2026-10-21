@@ -97,6 +97,11 @@ static func phase_at_stp(protons: int) -> Phase:
 		return Phase.SOLID
 	return Phase.UNKNOWN
 
+static func no_stable_isotopes(protons: int) -> bool:
+	if protons == 43 or protons == 61:
+		return true
+	return protons >= 84
+
 static func get_metallicity(protons: int) -> Metallicity:
 	if protons <= 2:
 		return Metallicity.NONMETAL

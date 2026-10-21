@@ -5,6 +5,7 @@ class_name PeriodicTable
 @onready var tip_name: Label = $"../PopupPanel/VBoxContainer/Name"
 @onready var tip_proton: Label = $"../PopupPanel/VBoxContainer/ProtonLong"
 @onready var tip_metallicity: Label = $"../PopupPanel/VBoxContainer/Metallicity"
+@onready var tip_unstable: Label = $"../PopupPanel/VBoxContainer/Radioactive"
 
 var _current_element: int = 0
 
@@ -17,7 +18,7 @@ func _gui_input(event: InputEvent):
 
 func on_hover_start(elem: ElementCell):
 	var element: int = elem.element
-	var r: Rect2 = elem.get_global_rect()
+	var r: Rect2 = elem.get_rect()
 	tip_name.text = elem.name_label.text
 	tip_proton.text = Localizer.translate_plural("REFERENCE_PD_PROTON", element, element)
 	var key: String = "REFERENCE_PD_"
@@ -32,13 +33,22 @@ func on_hover_start(elem: ElementCell):
 		key += "NONMETAL"
 		tip_metallicity.modulate = Color(1.0, 0.6, 0.6)
 	tip_metallicity.visible = m != ElementCell.Metallicity.UNKNOWN
+	tip_unstable.visible = ElementCell.no_stable_isotopes(element)
 	tip_metallicity.text = Localizer.translate(key)
-	tooltip.global_position = Vector2(
+	tooltip.offset_transform_position = Vector2(
 		r.position.x + r.size.x - 2, r.position.y
 	)
-	tooltip.show()
 	tooltip.reset_size()
+	var screen_bottom: float = size.y
+	var tip_bottom: float = tooltip.offset_transform_position.y + tooltip.size.y
+	if tip_bottom > screen_bottom:
+		tooltip.offset_transform_position.y -= tip_bottom - screen_bottom
+	var screen_right: float = size.x
+	var tip_right: float = tooltip.offset_transform_position.x + tooltip.size.x
+	if tip_right > screen_right:
+		tooltip.offset_transform_position.x = r.position.x - tooltip.size.x + 2
 	_current_element = element
+	tooltip.show()
 	focus.emit(element)
 
 func on_hover_end(elem: ElementCell):
