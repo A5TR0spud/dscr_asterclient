@@ -95,6 +95,10 @@ func has_next() -> bool:
 	var n: ChatEntryNode = Chat.history.catalog[ni]
 	if n == null:
 		return false
+	# failsafe to prevent leaks
+	if id != Chat.SKELETON_KEY and n.has_channel:
+		if n.channel != id:
+			return false
 	return true
 
 func advance() -> bool:
@@ -106,6 +110,10 @@ func advance() -> bool:
 	var n: ChatEntryNode = Chat.history.catalog[ni]
 	if n == null:
 		return false
+	# failsafe to prevent leaks
+	if id != Chat.SKELETON_KEY and n.has_channel:
+		if n.channel != id:
+			return false
 	current_head = n
 	current_head_idx = ni
 	return true
@@ -133,6 +141,9 @@ func try_show_one_history() -> bool:
 	trx.sender = current_head.sender
 	trx.trans = current_head.trx
 	trx.is_historical = true
+	#print("channel: ", id)
+	#print("from: ", current_head.channel)
+	#print("to idx: ", current_head.earlier_in_channel)
 	@warning_ignore("incompatible_ternary")
 	trx.key = current_head.channel if current_head.has_channel and id == Chat.SKELETON_KEY else null
 	chat_display.add_child(trx)
@@ -141,6 +152,8 @@ func try_show_one_history() -> bool:
 	shown_transmissions += 1
 	if not advance():
 		fin = true
+	#else:
+		#print("to: ", current_head.channel)
 	return true
 
 func try_show_history():

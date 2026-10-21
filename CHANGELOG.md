@@ -22,6 +22,8 @@
 * Saving transmissions in the Library now properly saves the JSON as an array of integers instead of appending ".0" to every number
 * Disabled context menu in nickname edit
 * Dictionary edit menu no longer closes on scrolling chat
+* (?) Probably fixed history of channels being infiltrated by other channels
+* Fixed rollover of history being inaccessible
 
 ## 0.9.0: Historical Record
 
