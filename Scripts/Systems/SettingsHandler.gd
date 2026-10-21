@@ -18,6 +18,7 @@ static var do_bbcode: bool = false
 static var color_signal_mode: int = 0
 static var use_at_undef: bool = false
 static var language: String = ""
+static var use_m0_ui: bool = false
 static var websocket_address: String = Main.DSCR_URL
 static var websocket_addresses: Array = [Main.DSCR_URL]
 static var current_dictionary: String = "DICTIONARY-1.save"
@@ -83,6 +84,10 @@ static func initialize() -> void:
 	color_signal_mode = SaveSystem.settings.get_or_add("color_signal_mode", 1 if do_bbcode else 0)
 	use_at_undef = SaveSystem.settings.get_or_add("use_at_undef", use_at_undef)
 	language = SaveSystem.settings.get_or_add("language", language)
+	use_m0_ui = SaveSystem.settings.get_or_add("use_m0_ui", use_m0_ui)
+	if language == "m0":
+		language = "en"
+		use_m0_ui = true
 	validate_and_set_language.call_deferred()
 	websocket_address = SaveSystem.settings.get_or_add("WebsocketAddress", websocket_address)
 	websocket_addresses = SaveSystem.settings.get_or_add("wss_addresses", websocket_addresses)
@@ -138,6 +143,7 @@ static func export() -> void:
 	SaveSystem.settings.set("color_signal_mode", color_signal_mode)
 	SaveSystem.settings.set("use_at_undef", use_at_undef)
 	SaveSystem.settings.set("language", language)
+	SaveSystem.settings.set("use_m0_ui", use_m0_ui)
 	SaveSystem.settings.set("wss_addresses", websocket_addresses)
 	SaveSystem.settings.set("WebsocketAddress", websocket_address)
 	SaveSystem.settings.set("current_dictionary", current_dictionary)

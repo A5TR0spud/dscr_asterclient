@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cw8a263plge6n" path="res://Assets/Icons/LanguageIcons/meteor0ese.svg" id="1_g7jid"]
 [ext_resource type="Texture2D" uid="uid://ba5336swev2p1" path="res://Assets/Icons/LanguageIcons/english.svg" id="3_vklgi"]
 [ext_resource type="Texture2D" uid="uid://0q4nkiso04lb" path="res://Assets/Icons/LanguageIcons/polish.svg" id="4_vklgi"]
+[ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="5_u0u3c"]
 
 [node name="LocaleMenu" type="PanelContainer" unique_id=1619317538]
 top_level = true
@@ -16,38 +17,110 @@ script = ExtResource("1_d2tkp")
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=1699782983]
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="GridContainer" type="GridContainer" parent="CenterContainer" unique_id=763846540]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1233854035]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1658456040]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "change lang"
+horizontal_alignment = 1
+
+[node name="LocaleNode" type="Node" parent="CenterContainer/VBoxContainer/Label" unique_id=1897619768]
+script = ExtResource("5_u0u3c")
+translations = Dictionary[StringName, String]({
+&"text": "BUTTON_LANG"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer/VBoxContainer" unique_id=1322008099]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/PanelContainer" unique_id=543788515]
+layout_mode = 2
+
+[node name="m0" type="Button" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=654038840]
+texture_filter = 4
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-
-[node name="m0" type="Button" parent="CenterContainer/GridContainer" unique_id=654038840]
-texture_filter = 4
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
 theme_override_constants/icon_max_width = 24
 theme_override_font_sizes/font_size = 24
+toggle_mode = true
+button_pressed = true
 text = "1420405752"
 icon = ExtResource("1_g7jid")
 
-[node name="en" type="Button" parent="CenterContainer/GridContainer" unique_id=1824061060]
-texture_filter = 2
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=1055619994]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=1682669321]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="en" type="Button" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=1911974623]
 layout_mode = 2
 theme_override_constants/icon_max_width = 24
 theme_override_font_sizes/font_size = 24
 text = "English"
 icon = ExtResource("3_vklgi")
 
-[node name="pl" type="Button" parent="CenterContainer/GridContainer" unique_id=474255170]
-texture_filter = 1
+[node name="pl" type="Button" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=1972945672]
 layout_mode = 2
 theme_override_constants/icon_max_width = 24
 theme_override_font_sizes/font_size = 24
-text = "Polski
-"
+text = "Polski"
 icon = ExtResource("4_vklgi")
 
-[connection signal="pressed" from="CenterContainer/GridContainer/m0" to="." method="_on_m_0_pressed"]
-[connection signal="pressed" from="CenterContainer/GridContainer/en" to="." method="_on_en_pressed"]
-[connection signal="pressed" from="CenterContainer/GridContainer/pl" to="." method="_on_pl_pressed"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=1296521264]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=501487912]
+modulate = Color(1, 1, 1, 0.5921569)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "helios"
+horizontal_alignment = 1
+
+[node name="LocaleNode" type="Node" parent="CenterContainer/VBoxContainer/HBoxContainer/Label" unique_id=523935301]
+script = ExtResource("5_u0u3c")
+translations = Dictionary[StringName, String]({
+&"text": "REFERENCE_ELEMENT_NAME_1"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=2053238731]
+modulate = Color(1, 1, 1, 0.5921569)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "helios"
+horizontal_alignment = 1
+
+[node name="LocaleNode2" type="Node" parent="CenterContainer/VBoxContainer/HBoxContainer/Label2" unique_id=1129047640]
+script = ExtResource("5_u0u3c")
+translations = Dictionary[StringName, String]({
+&"text": "REFERENCE_ELEMENT_NAME_2"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="Close" type="Button" parent="CenterContainer/VBoxContainer" unique_id=2095941556]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "Close"
+
+[node name="LocaleNode" type="Node" parent="CenterContainer/VBoxContainer/Close" unique_id=1581000692]
+script = ExtResource("5_u0u3c")
+translations = Dictionary[StringName, String]({
+&"text": "SUBMIT"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[connection signal="toggled" from="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/m0" to="." method="_on_m_0_toggled"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/GridContainer/en" to="." method="_on_en_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/GridContainer/pl" to="." method="_on_pl_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Close" to="." method="_on_close_pressed"]

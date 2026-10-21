@@ -4,12 +4,14 @@
 
 ### Additions
 
+* Added Reference tab
 * Split |-54 colorizer into its own setting. It can be disabled, work inline (only available with styling), or create a reference spectrum at the bottom
 * Nicknames will translate piped signals (|). Pipes can be escaped by doubling them (ie. type '||-245' to get '|-245' instead of \<signal_-245\>)
 * Can now click callsigns in chat to quickly start editing nickname
 
 ### Changes
 
+* Due to the periodic table being useless or impossible to translate to Meteorese, it has been separated from the main language options into a UI preference
 * Adjusted English localization for the word style setting to make it more distinct
 * Identicons dim in chat when the user is offline
 * Sending a message scrolls to bottom

@@ -8,16 +8,21 @@ class_name ElementCell
 		if is_instance_valid(proton_label):
 			proton_label.text = str(value)
 
-@onready var proton_label: Label = $VBoxContainer/Head/ProtonCt
-@onready var symbol_label: Label = $VBoxContainer/Symbol
-@onready var name_label: Label = $VBoxContainer/ScrollContainer/Name
-@onready var name_scroll: HScrollBar = $VBoxContainer/ScrollContainer.get_h_scroll_bar()
+@onready var proton_label: Label = $MarginContainer/VBoxContainer/Head/ProtonCt
+@onready var symbol_label: Label = $MarginContainer/VBoxContainer/Symbol
+@onready var name_label: Label = $MarginContainer/VBoxContainer/ScrollContainer/Name
+@onready var name_scroll: HScrollBar = $MarginContainer/VBoxContainer/ScrollContainer.get_h_scroll_bar()
 @onready var edger: Timer = $EdgeTimer
+
+var _pd_table: PeriodicTable
 
 func _ready():
 	proton_label.text = str(element)
 	if Engine.is_editor_hint():
 		return
+	_pd_table = get_parent() if get_parent() is PeriodicTable else null
+	if _pd_table:
+		_pd_table.focus.connect(_on_pd_focus)
 	var l: LocaleNode = LocaleNode.new()
 	l.translations = {"text": str("REFERENCE_ELEMENT_SYMBOL_",element)}
 	symbol_label.add_child(l)
@@ -25,8 +30,29 @@ func _ready():
 	l.translations = {"text": str("REFERENCE_ELEMENT_NAME_",element)}
 	name_label.add_child(l)
 
+func hover_refresh(elm: int, start: bool):
+	if element == elm and start:
+		modulate.a = 1
+		return
+	if element != elm and start:
+		modulate.a = 0.5
+		return
+	if element == elm and not start:
+		modulate.a = 1
+	modulate.a = 0.5 if element != elm and start else 1.0
+
+var _bright: bool = true
+
+func _on_pd_focus(elem: int):
+	_bright = elem <= 0 or element == elem
+
 var going_right: bool = true
 func _process(delta):
+	if _bright:
+		modulate.a = min(modulate.a + delta * 3.0, 1)
+	else:
+		modulate.a = max(modulate.a - delta * 3.0, 0.5)
+	
 	if not edger.is_stopped():
 		return
 	if not going_right:
@@ -116,3 +142,13 @@ static func get_metallicity(protons: int) -> Metallicity:
 #; ;
 #ALL KNOWN METALLOID
 #[ ELEMENT 5, 14, 32, 33, 51, 52, 85 ]
+
+func _on_mouse_entered():
+	if Input.get_mouse_button_mask() > 0 or not _pd_table:
+		return
+	_pd_table.on_hover_start(self)
+
+func _on_mouse_exited():
+	if not _pd_table:
+		return
+	_pd_table.on_hover_end(self)

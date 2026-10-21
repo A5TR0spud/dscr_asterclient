@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://baymf4kshn718" path="res://Scenes/ReferenceTab/element_cell.gd" id="1_ilioc"]
 
 [node name="ElementCell" type="PanelContainer" unique_id=1338587854]
+modulate = Color(1, 1, 1, 0.5)
 offset_right = 107.0
 offset_bottom = 115.0
 size_flags_horizontal = 3
@@ -12,26 +13,33 @@ script = ExtResource("1_ilioc")
 wait_time = 1.6134
 one_shot = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=370388808]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=753709687]
+layout_mode = 2
+theme_override_constants/margin_left = -4
+theme_override_constants/margin_top = -2
+theme_override_constants/margin_right = -4
+theme_override_constants/margin_bottom = -2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=370388808]
 clip_contents = true
 layout_mode = 2
 
-[node name="Head" type="HBoxContainer" parent="VBoxContainer" unique_id=785332237]
+[node name="Head" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=785332237]
 layout_mode = 2
 
-[node name="ProtonCt" type="Label" parent="VBoxContainer/Head" unique_id=1582748722]
+[node name="ProtonCt" type="Label" parent="MarginContainer/VBoxContainer/Head" unique_id=1582748722]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 14
 text = "1"
 
-[node name="Symbol" type="Label" parent="VBoxContainer" unique_id=1649322929]
+[node name="Symbol" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1649322929]
 layout_mode = 2
 size_flags_vertical = 6
 text = "H"
 horizontal_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer" unique_id=72012594]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer" unique_id=72012594]
 custom_minimum_size = Vector2(0, 14)
 layout_mode = 2
 mouse_filter = 2
@@ -39,9 +47,12 @@ horizontal_scroll_mode = 3
 vertical_scroll_mode = 0
 scroll_horizontal_by_default = true
 
-[node name="Name" type="Label" parent="VBoxContainer/ScrollContainer" unique_id=1875315365]
+[node name="Name" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer" unique_id=1875315365]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 14
 text = "Helium"
 horizontal_alignment = 1
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

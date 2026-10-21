@@ -136,11 +136,21 @@ func _input(event: InputEvent) -> void:
 				return
 			auto_list_panel.hide()
 
+#this is evil
 func _gui_input(event: InputEvent) -> void:
 	# TODO: implement brace matching (handling), so that it can parse |-14 and |-15 if they are group symbols
 	if (
-		event.is_action_pressed("ui_text_newline")
-		and (eat_enter or not event.is_action_pressed("ui_text_submit"))
+		(
+			event.is_action_pressed("ui_text_newline")
+			and (not eat_enter or event.is_action_pressed("ui_text_submit"))
+		)
+		or
+		(
+			not eat_enter and
+			event is InputEventKey and
+			(event as InputEventKey).keycode == Key.KEY_ENTER and
+			event.is_pressed()
+		)
 	):
 		insert_text_at_caret("\n")
 		accept_event()
@@ -159,9 +169,9 @@ func _gui_input(event: InputEvent) -> void:
 		accept_event()
 		return
 	if event.is_action_pressed("ui_paste"):
-		auto_list_panel.hide()
 		insert_text_at_caret(DisplayServer.clipboard_get().to_upper())
 		accept_event()
+		auto_list_panel.hide.call_deferred()
 		return
 	if event.is_action("ui_undo") or event.is_action("ui_redo") or event.is_action("ui_text_select_all"):
 		return

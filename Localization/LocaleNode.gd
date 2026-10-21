@@ -13,7 +13,7 @@ func _ready():
 signal locale_reloaded
 
 func refresh(from_dict_reload: bool = false):
-	if from_dict_reload and TranslationServer.get_locale() != "m0":
+	if from_dict_reload and not SettingsHandler.use_m0_ui:
 		return
 	locale_reloaded.emit()
 	var parent: Node = get_parent()

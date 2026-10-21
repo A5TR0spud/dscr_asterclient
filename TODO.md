@@ -25,9 +25,25 @@
 * per-channel notification sounds
 * split history per websocket
 * bool setting: message log txts per-day (sender, trx, wss, timestamp (unix), timestamp (system date and time), message (signals))
-
-### nikzapp
-
 * arbitrary parsing/clean up parser
 * lua modules/plugins
 * android support
+
+## TRANSLATIONS
+
+* Periodic table
+* SETTINGS_COLOR_REF
+* SETTINGS_COLOR_REF_NONE
+* SETTINGS_COLOR_REF_INLINE
+* SETTINGS_COLOR_REF_BOTTOM
+* SETTINGS_COLOR_REF_TOGGLE
+* TAB_REFERENCES
+* REFERENCE_COLOR
+* REFERENCE_PD
+* REFERENCE_PD_PROTON
+* REFERENCE_PD_SOLID
+* REFERENCE_PD_LIQUID
+* REFERENCE_PD_GAS
+* REFERENCE_PD_METAL
+* REFERENCE_PD_METALLOID
+* REFERENCE_PD_NONMETAL

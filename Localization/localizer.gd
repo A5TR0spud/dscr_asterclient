@@ -1,20 +1,24 @@
 extends RefCounted
 class_name Localizer
 
+static func get_m0_string(key: String) -> String:
+	return TranslationServer.find_translations("m0", true)[0].get_message(key)
+
 static func translate(key: String, arguments: Variant = []) -> String:
-	var translation: String = TranslationServer.translate(key)
 	if arguments is not Array and arguments is not Dictionary:
 		arguments = [arguments]
-	if TranslationServer.get_locale() == "m0":
-		var arr: Array = translation.split(" ")
-		for idx in range(arr.size()):
-			if str(arr[idx]).is_valid_int():
-				arr[idx] = str(arr[idx]).to_int()
-		translation = DictionaryHandler.signals_to_words(arr)
-	return translation.format(arguments)
+	if SettingsHandler.use_m0_ui and DictionaryHandler.support_m0:
+		var translation: String = get_m0_string(key)
+		if translation:
+			var arr: Array = translation.split(" ")
+			for idx in range(arr.size()):
+				if str(arr[idx]).is_valid_int():
+					arr[idx] = str(arr[idx]).to_int()
+			return DictionaryHandler.signals_to_words(arr).format(arguments)
+	return TranslationServer.translate(key).format(arguments)
 
 static func translate_plural(key: String, n: int, arguments: Variant = []) -> String:
-		if TranslationServer.get_locale() == "m0":
+		if SettingsHandler.use_m0_ui and DictionaryHandler.support_m0:
 			return translate(key, arguments)
 		if n < 0:
 			n = 0
@@ -26,10 +30,11 @@ static func translate_plural(key: String, n: int, arguments: Variant = []) -> St
 ## Returns an array with 1 string if not in meteorese.
 ## Returns an array of signals (with parsing strings) if in meteorese
 static func raw_translate(key: String) -> Array:
-	var translation: String = TranslationServer.translate(key)
-	if TranslationServer.get_locale() == "m0":
-		return _raw_translate_m0(translation)
-	return [translation]
+	if SettingsHandler.use_m0_ui and DictionaryHandler.support_m0:
+		var translation: String = get_m0_string(key)
+		if translation:
+			return _raw_translate_m0(translation)
+	return [TranslationServer.translate(key)]
 	
 static func raw_translate_plural(key: String, n: int) -> Array:
 	if TranslationServer.get_locale() == "m0":
