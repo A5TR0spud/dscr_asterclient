@@ -25,7 +25,7 @@
 * song queue visualization
 * per-channel notification sounds
 * split history per websocket
-* bool setting: message log txts per-day (sender, trx, wss, timestamp (unix), timestamp (system date and time), message (signals))
+* bool setting: message log txts per-day (sender, trx, wss, timestamp (system date and time), message (signals))
 * arbitrary parsing/clean up parser
 * lua modules/plugins
 * android support

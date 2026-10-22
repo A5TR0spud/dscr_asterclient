@@ -171,7 +171,7 @@ func try_hide_history():
 		fin = false
 		for c in chat_display.get_children():
 			if scroll_bar.page + 64 >= scroll_bar.max_value - scroll_bar.min_value:
-				return
+				break
 			if c is StatusLogEntry:
 				c.queue_free()
 			if c is TransEntry:
@@ -179,6 +179,10 @@ func try_hide_history():
 				shown_transmissions -= 1
 				if shown_transmissions <= HIDE_EXCESS_TRANSMISSIONS:
 					break
+	shown_transmissions = 0
+	for c in chat_display.get_children():
+		if c is TransEntry and not c.is_queued_for_deletion():
+			shown_transmissions += 1
 
 func _on_chat_display_child_entered_tree(_node):
 	try_hide_history()

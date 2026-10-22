@@ -11,7 +11,7 @@
 
 ### Changes
 
-* Due to the periodic table being useless or impossible to translate to Meteorese, it has been separated from the main language options into a UI preference
+* Due to the periodic table being useless or impossible to translate to Meteorese, Meteorese has been separated from the main language options into a UI preference
 * Adjusted English localization for the word style setting to make it more distinct
 * Identicons dim in chat when the user is offline
 * Sending a message scrolls to bottom
