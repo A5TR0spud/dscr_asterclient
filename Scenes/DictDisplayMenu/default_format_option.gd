@@ -6,4 +6,4 @@ func _gui_input(event: InputEvent):
 		event = event as InputEventMouse
 		if event.button_mask != MouseButton.MOUSE_BUTTON_LEFT or not event.is_pressed():
 			return
-		DictEditMenu.open(to_open, true)
+		DictEditMenu.open(to_open)

@@ -13,7 +13,7 @@ func _try_make(new_text: String) -> void:
 	var sig: int = -absi(int(num_chooser.text.to_int()))
 	if sig >= 0:
 		return
+	var tmp: String = ""
 	if new_text and not DictionaryHandler.contains_signal(sig):
-		DictionaryHandler.apply_signal_name(sig, new_text)
-		SaveSystem.save_dict()
-	DictEditMenu.open(sig)
+		tmp = DictionaryHandler.filter_name_input(new_text)
+	DictEditMenu.open(sig, tmp)

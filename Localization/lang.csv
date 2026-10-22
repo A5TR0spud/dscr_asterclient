@@ -26,10 +26,10 @@ USERS_UNNICKED,-111,,unnamed,bez nazwy
 SETTINGS_HEADER,-241 -174,,Settings,Ustawienia
 SETTINGS_DIRECTORY,-40 -174,,Change Save Directory,Zmień Miejsce Zapisu
 SETTINGS_RECONNECT,-241 0 -41,,Reconnect,Połącz ponownie
-SETTINGS_DO_WHITESPACE,-26 -14 -42 -190 -85 -100 -223 -15 -4,,Follow dictionary whitespace?,Formatuj białe znaki
-SETTINGS_DEFAULT_IMAGE,-26 -14 -124 -53 -163 -85 -15 -4,,Show images by default?,Wyświetl obrazy domyślnie
+SETTINGS_DO_WHITESPACE,-26 -14 -42 -190 -85 -100 -223 -216 -15 -4,,Follow dictionary whitespace?,Formatuj białe znaki
+SETTINGS_DEFAULT_IMAGE,-26 -14 -104 -149 -53 -163 -85 -15 -4,,Show images by default?,Wyświetl obrazy domyślnie
 SETTINGS_DO_BBCODE,-26 -14 -42 -163 -100 -223 -216 -15 -4,,Enable word styling?,Formatuj słowa
-SETTINGS_COLOR_REF,42 -14 -54 -15 -163 -100,,Display |-54 color reference?,
+SETTINGS_COLOR_REF,-42 -14 -54 -15 -163 -100,,Display |-54 color reference?,
 SETTINGS_COLOR_REF_NONE,-111,,No,
 SETTINGS_COLOR_REF_INLINE,-169 -42,,Inlined,
 SETTINGS_COLOR_REF_BOTTOM,-170 -43,,Bottom,
@@ -68,6 +68,8 @@ CALLSIGN,-128 -42,,Callsign,Znak wywoławczy
 COPY_SIGNAL_NUMBERS,-42 -40,,Copy signals,Kopiuj sygnały
 COPY_SIGNAL_NAMES,-237 -40,,Copy words,Kopiuj słowa
 SUBMIT_LONG,-174 -85,,Submit,Zapisz
+LIBRARY_NEW,-43 -38 -85,,Submit,
+LIBRARY_REPLACE,-43 -174 -85,,Replace,
 CANCEL_LONG,-174 -29 -85,,Cancel,Cofnij zmiany
 DELETE_ASK,-88 -127 -85,,Delete?,Usuń
 DELETE_CONFIRM_TRX,-43 -88 -85,,Are you sure?,Napewno?

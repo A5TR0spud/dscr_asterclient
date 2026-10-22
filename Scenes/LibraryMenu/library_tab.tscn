@@ -37,12 +37,12 @@ size_flags_horizontal = 3
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="LineEdit" type="LineEdit" parent="Body/HBoxContainer/Editor/Header" unique_id=993922443]
+[node name="TransNameEdit" type="LineEdit" parent="Body/HBoxContainer/Editor/Header" unique_id=993922443]
 layout_mode = 2
 size_flags_horizontal = 3
 max_length = 30
 
-[node name="LocaleNode" type="Node" parent="Body/HBoxContainer/Editor/Header/LineEdit" unique_id=1494968717]
+[node name="LocaleNode" type="Node" parent="Body/HBoxContainer/Editor/Header/TransNameEdit" unique_id=1494968717]
 script = ExtResource("4_s4yvl")
 translations = Dictionary[StringName, String]({
 &"placeholder_text": "LIBRARY_NAME_PLACEHOLDER"
@@ -124,7 +124,7 @@ text = "submit"
 [node name="LocaleNode" type="Node" parent="Body/HBoxContainer/Editor/Buttons/Submit" unique_id=207078532]
 script = ExtResource("4_s4yvl")
 translations = Dictionary[StringName, String]({
-&"text": "SUBMIT_LONG"
+&"text": "LIBRARY_NEW"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
@@ -185,6 +185,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [connection signal="timeout" from="RefreshDebounce" to="." method="_on_refresh_debounce_timeout"]
+[connection signal="text_changed" from="Body/HBoxContainer/Editor/Header/TransNameEdit" to="." method="_on_trans_name_edit_text_changed"]
 [connection signal="pressed" from="Body/HBoxContainer/Editor/VSplitContainer/VBoxContainer/HBoxContainer/CopySignals" to="." method="_on_copy_signals_pressed"]
 [connection signal="pressed" from="Body/HBoxContainer/Editor/VSplitContainer/VBoxContainer/HBoxContainer/CopyWords" to="." method="_on_copy_words_pressed"]
 [connection signal="text_changed" from="Body/HBoxContainer/Editor/VSplitContainer/VBoxContainer/ScrollContainer/TransmissionEdit" to="." method="_on_transmission_edit_text_changed"]

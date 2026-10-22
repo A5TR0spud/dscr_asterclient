@@ -12,10 +12,12 @@
 ### Changes
 
 * Due to the periodic table being useless or impossible to translate to Meteorese, Meteorese has been separated from the main language options into a UI preference
-* Adjusted English localization for the word style setting to make it more distinct
+* Adjusted some translations
 * Identicons dim in chat when the user is offline
 * Sending a message scrolls to bottom
 * Pressing Ctrl+E now sends
+* Clicking the top left of the dictionary signal edit window now copies the number
+* Library submit button now changes based on whether it will overwrite or not
 
 ### Fixes
 
@@ -24,6 +26,7 @@
 * Dictionary edit menu no longer closes on scrolling chat
 * (?) Probably fixed history of channels being infiltrated by other channels
 * Fixed rollover of history being inaccessible
+* Pressing the make a signal button no longer adds it to the dictionary without updating the dictionary
 
 ## 0.9.0: Historical Record
 

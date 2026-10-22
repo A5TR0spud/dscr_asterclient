@@ -46,6 +46,7 @@ func _ready():
 	hide()
 
 const UNKNOWN_SIGNAL: int = 0
+const NEW_SIGNAL_NO_NUMBER: int = 1
 
 func save() -> void:
 	if current_signal == UNKNOWN_SIGNAL:
@@ -105,6 +106,7 @@ func reload() -> void:
 	before_label.set_item_disabled(4, current_signal >= 0)
 	after_label.set_item_disabled(4, current_signal >= 0)
 	notes_scroll.scroll_vertical = 0
+	name_label.mouse_default_cursor_shape = Control.CURSOR_ARROW if current_signal >= 0 else Control.CURSOR_POINTING_HAND
 	if current_signal == UNKNOWN_SIGNAL:
 		before_after_clear_label.text = Localizer.translate("DICT_EDIT_BA_LABEL_GENERIC")
 		before_label.select(DictionaryHandler.default_before_mode)
@@ -221,13 +223,17 @@ func _input(event):
 static func is_open() -> bool:
 	return instance.visible
 
-static func open(sig: int = 0, repeat_to_close: bool = false) -> void:
-	if instance.current_signal == sig and repeat_to_close and is_open():
-		close()
-		return
+static func open(sig: int = 0, tempname: String = "") -> void:
+	#if instance.current_signal == sig and repeat_to_close and is_open():
+	#	close()
+	#	return
 	instance.current_signal = sig
 	instance.grab_click_focus()
 	instance.reload()
+	if tempname and sig not in DictionaryHandler.word_keys:
+		instance.name_edit.text = tempname
+		instance.name_edit.grab_focus()
+		instance.name_edit.select_all()
 	instance.show()
 
 static func close():
@@ -277,3 +283,8 @@ func _on_delete_button_confirmed():
 	Main.on_dict_reload()
 	SaveSystem.save_dict()
 	close()
+
+func _on_name_label_gui_input(event: InputEvent):
+	if event is InputEventMouseButton:
+		if event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT and current_signal < 0:
+			DisplayServer.clipboard_set(str(current_signal))

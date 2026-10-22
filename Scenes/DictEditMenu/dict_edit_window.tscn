@@ -38,6 +38,8 @@ layout_mode = 2
 
 [node name="NameLabel" type="Label" parent="DictEditMainframe/SignalNameEdit" unique_id=1340875693]
 layout_mode = 2
+mouse_filter = 1
+mouse_default_cursor_shape = 2
 text = "signal -# ="
 
 [node name="NameLineEdit" type="LineEdit" parent="DictEditMainframe/SignalNameEdit" unique_id=2113161036]
@@ -398,6 +400,7 @@ translations = Dictionary[StringName, String]({
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
+[connection signal="gui_input" from="DictEditMainframe/SignalNameEdit/NameLabel" to="." method="_on_name_label_gui_input"]
 [connection signal="text_submitted" from="DictEditMainframe/SignalNameEdit/NameLineEdit" to="." method="_on_name_line_edit_text_submitted"]
 [connection signal="gui_input" from="DictEditMainframe/NotesScrollContainer/NotesEdit" to="." method="_on_notes_edit_gui_input"]
 [connection signal="value_changed" from="DictEditMainframe/BBCodeOptions/ColorPicker/GridContainer/HueSpinner" to="." method="_on_hue_spinner_value_changed"]

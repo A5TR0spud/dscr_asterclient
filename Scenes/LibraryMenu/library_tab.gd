@@ -1,7 +1,7 @@
 extends Control
 class_name Library
 
-@onready var name_edit: LineEdit = $Body/HBoxContainer/Editor/Header/LineEdit
+@onready var name_edit: LineEdit = $Body/HBoxContainer/Editor/Header/TransNameEdit
 @onready var words_edit: TransmissionEdit = $Body/HBoxContainer/Editor/VSplitContainer/VBoxContainer/ScrollContainer/TransmissionEdit
 @onready var delete_button: ConfirmationButton = $Body/HBoxContainer/Editor/Buttons/Delete
 @onready var t_preview: TransEntry = $Body/HBoxContainer/Editor/VSplitContainer/TransHolder/TransmissionEntry
@@ -10,6 +10,8 @@ class_name Library
 @onready var catalog: Container = $Body/Sidebar/ScrollContainer/Catalogue
 @onready var search: LineEdit = $Body/Sidebar/SearchBar
 @onready var sidebar: Container = $Body/Sidebar
+
+@onready var submit_lang: LocaleNode = $Body/HBoxContainer/Editor/Buttons/Submit/LocaleNode
 
 var lib_entry = preload("res://Scenes/LibraryMenu/library_entry.tscn")
 
@@ -101,6 +103,7 @@ func _reload():
 	if search.text.is_empty():
 		_do_sort()
 	queue_search()
+	instance.refresh_submit_text()
 
 func _get_name() -> String:
 	var o: String = name_edit.text
@@ -177,3 +180,13 @@ func _on_search_bar_text_changed(new_text: String):
 
 func _on_collapse_sidebar_toggled(toggled_on: bool):
 	sidebar.visible = toggled_on
+
+func _on_trans_name_edit_text_changed(new_text: String):
+	refresh_submit_text(new_text)
+
+func refresh_submit_text(t: String = name_edit.text):
+	if t in LibraryHandler.get_all_transmissions():
+		submit_lang.translations.text = "LIBRARY_REPLACE"
+	else:
+		submit_lang.translations.text = "LIBRARY_NEW"
+	submit_lang.refresh()
