@@ -395,7 +395,7 @@ static func calc_desc_color(color_value: Variant) -> Color:
 	else:
 		return Color.WHITE
 
-static func signals_to_words(input: Array, do_whitespace_format: bool = false, can_do_bbcode: bool = false, do_appearance_format: bool = false, do_clickable: bool = false) -> String:
+static func signals_to_words(input: Array, do_whitespace_format: bool = false, can_do_bbcode: bool = false, do_appearance_format: bool = false, do_clickable: bool = false, do_hint: bool = false) -> String:
 	var o: String = ""
 	var indent: int = 0
 	var ws: int = 0
@@ -469,6 +469,8 @@ static func signals_to_words(input: Array, do_whitespace_format: bool = false, c
 			word = word.replace("[", "[lb]")
 			if do_clickable and is_signal:
 				o += "[url=" + str(sig) + "]"
+			if is_signal and do_hint:
+				o += str("[hint=\"|", sig ,"\"]")
 			if do_appearance_format:
 				if bold:
 					o += "[b]"
@@ -493,6 +495,8 @@ static func signals_to_words(input: Array, do_whitespace_format: bool = false, c
 					o += "[/i]"
 				if bold:
 					o += "[/b]"
+			if is_signal and do_hint:
+				o += "[/hint]"
 			if do_clickable and is_signal:
 				o += "[/url]"
 		

@@ -70,7 +70,8 @@ func _evaluate_corpus(clickable: bool = false):
 			SettingsHandler.do_formatting,
 			supports_bbcode(),
 			SettingsHandler.do_bbcode,
-			clickable
+			clickable,
+			supports_bbcode()
 		)
 	)
 

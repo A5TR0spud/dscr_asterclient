@@ -131,6 +131,7 @@ bbcode_enabled = true
 text = "test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test "
 fit_content = true
 meta_underlined = false
+hint_underlined = false
 selection_enabled = true
 
 [node name="CustomEffectsInstallerNode" type="Node" parent="Body/Corpus/Message" unique_id=438355690]

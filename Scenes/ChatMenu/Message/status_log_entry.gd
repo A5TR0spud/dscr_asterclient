@@ -39,7 +39,7 @@ func set_message_text(_new_text: String):
 	message_node.text = _new_text.format(arguments)
 
 func supports_bbcode() -> bool:
-	return false
+	return true
 
 func _on_delete_button_pressed():
 	queue_free()
