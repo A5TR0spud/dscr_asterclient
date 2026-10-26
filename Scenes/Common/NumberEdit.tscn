@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://dkmx0p5bvnjve"]
+
+[ext_resource type="Script" uid="uid://gtpqlwktlalr" path="res://Scripts/FilteredLineEdit.gd" id="1_7a1j1"]
+[ext_resource type="Script" uid="uid://nu6tjra0cn44" path="res://Scenes/Common/number_edit.gd" id="1_v2rx5"]
+
+[node name="NumberEdit" type="HBoxContainer" unique_id=256041095]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v2rx5")
+
+[node name="Negative" type="Label" parent="." unique_id=847243726]
+layout_mode = 2
+text = "+/-"
+
+[node name="Natural" type="LineEdit" parent="." unique_id=797799910]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("1_7a1j1")
+deny_list = "0123456789"
+allow_list = true
+replace_list = {}
+capitalize = false
+metadata/_custom_type_script = "uid://gtpqlwktlalr"
+
+[node name="Decimal" type="Label" parent="." unique_id=877893604]
+layout_mode = 2
+text = "."
+
+[node name="Rational" type="LineEdit" parent="." unique_id=1582041885]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("1_7a1j1")
+deny_list = "0123456789"
+allow_list = true
+replace_list = {}
+capitalize = false
+metadata/_custom_type_script = "uid://gtpqlwktlalr"
+
+[connection signal="character_rejected" from="Natural" to="." method="_on_natural_character_rejected"]
+[connection signal="character_rejected" from="Rational" to="." method="_on_rational_character_rejected"]

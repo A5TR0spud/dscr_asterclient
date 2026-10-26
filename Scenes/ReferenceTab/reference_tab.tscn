@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="2_jk0c3"]
 [ext_resource type="PackedScene" uid="uid://ebnh5oxmelbl" path="res://Scenes/ReferenceTab/periodic_table.tscn" id="4_cydeu"]
 [ext_resource type="Script" uid="uid://cwy0rhlrtctmt" path="res://Scenes/ReferenceTab/unit_conversion.gd" id="4_vb677"]
+[ext_resource type="Script" uid="uid://daa7cp85f4qgs" path="res://Scripts/NumberEdit.gd" id="5_vb677"]
 
 [node name="ReferenceTab" type="PanelContainer" unique_id=834008978]
 anchors_preset = 15
@@ -23,348 +24,660 @@ vertical_scroll_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="M0Refs" type="VBoxContainer" parent="ScrollContainer/VBoxContainer" unique_id=1039492989]
+[node name="M0Refs" type="FoldableContainer" parent="ScrollContainer/VBoxContainer" unique_id=280768690]
+layout_mode = 2
+folded = true
+title = "meteor 0 refs"
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/M0Refs" unique_id=889370263]
+script = ExtResource("2_jk0c3")
+translations = Dictionary[StringName, String]({
+&"title": "REF_M0"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/M0Refs" unique_id=1726704827]
+visible = false
 layout_mode = 2
 
-[node name="ColorRef" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/M0Refs" unique_id=1374500898]
+[node name="ColorRef" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/M0Refs/VBoxContainer" unique_id=1374500898]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/M0Refs/ColorRef" unique_id=1122290605]
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/M0Refs/VBoxContainer/ColorRef" unique_id=1122290605]
 layout_mode = 2
 text = "spectrum"
 
-[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/M0Refs/ColorRef/Label" unique_id=1220305924]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/M0Refs/VBoxContainer/ColorRef/Label" unique_id=1220305924]
 script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"text": "REFERENCE_COLOR"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="ColorReference" parent="ScrollContainer/VBoxContainer/M0Refs/ColorRef" unique_id=486884822 instance=ExtResource("1_16g7y")]
+[node name="ColorReference" parent="ScrollContainer/VBoxContainer/M0Refs/VBoxContainer/ColorRef" unique_id=486884822 instance=ExtResource("1_16g7y")]
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="ScrollContainer/VBoxContainer/M0Refs/ColorRef" unique_id=130387752]
+[node name="UnitsDrop" type="FoldableContainer" parent="ScrollContainer/VBoxContainer" unique_id=1240872268]
 layout_mode = 2
+title = "units"
 
-[node name="UnitConversion" type="VBoxContainer" parent="ScrollContainer/VBoxContainer" unique_id=1895155616]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitsDrop" unique_id=228561470]
+script = ExtResource("2_jk0c3")
+translations = Dictionary[StringName, String]({
+&"title": "REF_UNITS"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="UnitConversion" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/UnitsDrop" unique_id=1895155616]
 layout_mode = 2
 script = ExtResource("4_vb677")
 
-[node name="LengthLabel" type="Label" parent="ScrollContainer/VBoxContainer/UnitConversion" unique_id=1706354773]
+[node name="LengthLabel" type="Label" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion" unique_id=1706354773]
 layout_mode = 2
 text = "lengths"
 horizontal_alignment = 1
 
-[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitConversion/LengthLabel" unique_id=1394875892]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/LengthLabel" unique_id=1394875892]
 script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"text": "REF_UNIT_LENGTHS"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="Length" type="GridContainer" parent="ScrollContainer/VBoxContainer/UnitConversion" unique_id=831092742]
+[node name="Length" type="GridContainer" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion" unique_id=831092742]
 layout_mode = 2
 columns = 2
 
-[node name="Akermeter" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitConversion/Length" unique_id=343518800]
+[node name="Akermeter" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Length" unique_id=792326474]
 layout_mode = 2
 size_flags_horizontal = 3
+min_value = -9.223372e+18
+max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
 update_on_text_changed = true
 custom_arrow_step = 1.0
+custom_arrow_round = true
+script = ExtResource("5_vb677")
 
-[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitConversion/Length/Akermeter" unique_id=85093383]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Length/Akermeter" unique_id=85093383]
 script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_AKERMETER"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="Metrimeter" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitConversion/Length" unique_id=230068561]
+[node name="Metrimeter" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Length" unique_id=702985990]
 layout_mode = 2
 size_flags_horizontal = 3
+min_value = -9.223372e+18
+max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
 update_on_text_changed = true
 custom_arrow_step = 1.0
+custom_arrow_round = true
+script = ExtResource("5_vb677")
 
-[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitConversion/Length/Metrimeter" unique_id=319568712]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Length/Metrimeter" unique_id=319568712]
 script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_METER"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="Lightakersecond" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitConversion/Length" unique_id=1672685512]
+[node name="Lightakersecond" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Length" unique_id=1056477843]
 layout_mode = 2
 size_flags_horizontal = 3
+min_value = -9.223372e+18
+max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
 update_on_text_changed = true
 custom_arrow_step = 1.0
+custom_arrow_round = true
+script = ExtResource("5_vb677")
 
-[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitConversion/Length/Lightakersecond" unique_id=619987922]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Length/Lightakersecond" unique_id=619987922]
 script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_LIGHT_ASEC"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="Lightsecond" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitConversion/Length" unique_id=1750874291]
+[node name="Lightsecond" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Length" unique_id=2126679878]
 layout_mode = 2
 size_flags_horizontal = 3
+min_value = -9.223372e+18
+max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
 update_on_text_changed = true
 custom_arrow_step = 1.0
+custom_arrow_round = true
+script = ExtResource("5_vb677")
 
-[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitConversion/Length/Lightsecond" unique_id=933461512]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Length/Lightsecond" unique_id=933461512]
 script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_LIGHTSEC"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="AU" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitConversion/Length" unique_id=1992349066]
+[node name="AU" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Length" unique_id=1973318246]
 layout_mode = 2
 size_flags_horizontal = 3
+min_value = -9.223372e+18
+max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
 update_on_text_changed = true
 custom_arrow_step = 1.0
+custom_arrow_round = true
+script = ExtResource("5_vb677")
 
-[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitConversion/Length/AU" unique_id=2117206059]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Length/AU" unique_id=2117206059]
 script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_AU"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="Lightyear" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitConversion/Length" unique_id=1681037522]
+[node name="Lightyear" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Length" unique_id=791620711]
 layout_mode = 2
 size_flags_horizontal = 3
+min_value = -9.223372e+18
+max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
 update_on_text_changed = true
 custom_arrow_step = 1.0
+custom_arrow_round = true
+script = ExtResource("5_vb677")
 
-[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitConversion/Length/Lightyear" unique_id=1204375615]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Length/Lightyear" unique_id=1204375615]
 script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_LIGHTYEAR"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="Feet" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitConversion/Length" unique_id=588635762]
+[node name="Inches" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Length" unique_id=466379470]
 layout_mode = 2
 size_flags_horizontal = 3
+min_value = -9.223372e+18
+max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
 update_on_text_changed = true
 custom_arrow_step = 1.0
+custom_arrow_round = true
+script = ExtResource("5_vb677")
 
-[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitConversion/Length/Feet" unique_id=1597588837]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Length/Inches" unique_id=557941731]
+script = ExtResource("2_jk0c3")
+translations = Dictionary[StringName, String]({
+&"suffix": "REF_UNIT_INCH"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="Feet" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Length" unique_id=721911119]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -9.223372e+18
+max_value = 9.223372e+18
+step = 0.0
+allow_greater = true
+allow_lesser = true
+update_on_text_changed = true
+custom_arrow_step = 1.0
+custom_arrow_round = true
+script = ExtResource("5_vb677")
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Length/Feet" unique_id=1597588837]
 script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_FOOT"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="TimeLabel" type="Label" parent="ScrollContainer/VBoxContainer/UnitConversion" unique_id=1474712970]
+[node name="Miles" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Length" unique_id=587814124]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -9.223372e+18
+max_value = 9.223372e+18
+step = 0.0
+allow_greater = true
+allow_lesser = true
+update_on_text_changed = true
+custom_arrow_step = 1.0
+custom_arrow_round = true
+script = ExtResource("5_vb677")
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Length/Miles" unique_id=1682954491]
+script = ExtResource("2_jk0c3")
+translations = Dictionary[StringName, String]({
+&"suffix": "REF_UNIT_MILE"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="HSeparator" type="HSeparator" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion" unique_id=966229878]
+layout_mode = 2
+
+[node name="TimeLabel" type="Label" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion" unique_id=1474712970]
 layout_mode = 2
 text = "durations"
 horizontal_alignment = 1
 
-[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitConversion/TimeLabel" unique_id=1815856641]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/TimeLabel" unique_id=1815856641]
 script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"text": "REF_UNIT_DURATIONS"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="Time" type="GridContainer" parent="ScrollContainer/VBoxContainer/UnitConversion" unique_id=1621921337]
+[node name="Time" type="GridContainer" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion" unique_id=1621921337]
 layout_mode = 2
 columns = 2
 
-[node name="HeSec" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitConversion/Time" unique_id=1017365932]
+[node name="HeSec" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Time" unique_id=1981016557]
 layout_mode = 2
 size_flags_horizontal = 3
+min_value = -9.223372e+18
+max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
 update_on_text_changed = true
 custom_arrow_step = 1.0
+custom_arrow_round = true
+script = ExtResource("5_vb677")
 
-[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitConversion/Time/HeSec" unique_id=502600484]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Time/HeSec" unique_id=502600484]
 script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_HESEC"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="CeSec" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitConversion/Time" unique_id=79145734]
+[node name="CeSec" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Time" unique_id=2090726733]
 layout_mode = 2
 size_flags_horizontal = 3
+min_value = -9.223372e+18
+max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
 update_on_text_changed = true
 custom_arrow_step = 1.0
+custom_arrow_round = true
+script = ExtResource("5_vb677")
 
-[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitConversion/Time/CeSec" unique_id=309216847]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Time/CeSec" unique_id=309216847]
 script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_SECOND"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="DecMinute" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitConversion/Time" unique_id=388057338]
+[node name="DecMinute" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Time" unique_id=802895904]
 layout_mode = 2
 size_flags_horizontal = 3
+min_value = -9.223372e+18
+max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
 update_on_text_changed = true
 custom_arrow_step = 1.0
+custom_arrow_round = true
+script = ExtResource("5_vb677")
 
-[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitConversion/Time/DecMinute" unique_id=1220727968]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Time/DecMinute" unique_id=1220727968]
 script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_MINUTE"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="DecHour" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitConversion/Time" unique_id=1042614154]
+[node name="DecHour" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Time" unique_id=1444821974]
 layout_mode = 2
 size_flags_horizontal = 3
+min_value = -9.223372e+18
+max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
 update_on_text_changed = true
 custom_arrow_step = 1.0
+custom_arrow_round = true
+script = ExtResource("5_vb677")
 
-[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitConversion/Time/DecHour" unique_id=329118414]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Time/DecHour" unique_id=329118414]
 script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_HOUR"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="DecDay" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitConversion/Time" unique_id=1119870559]
+[node name="DecDay" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Time" unique_id=1072472210]
 layout_mode = 2
 size_flags_horizontal = 3
+min_value = -9.223372e+18
+max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
 update_on_text_changed = true
 custom_arrow_step = 1.0
+custom_arrow_round = true
+script = ExtResource("5_vb677")
 
-[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitConversion/Time/DecDay" unique_id=1396291362]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Time/DecDay" unique_id=1396291362]
 script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_DAY"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="OctMonth" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitConversion/Time" unique_id=1534185990]
+[node name="OctMonth" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Time" unique_id=132832877]
 layout_mode = 2
 size_flags_horizontal = 3
+min_value = -9.223372e+18
+max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
 update_on_text_changed = true
 custom_arrow_step = 1.0
+custom_arrow_round = true
+script = ExtResource("5_vb677")
 
-[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitConversion/Time/OctMonth" unique_id=1347360163]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Time/OctMonth" unique_id=1347360163]
 script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_OCTMONTH"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="OctYear" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitConversion/Time" unique_id=1199650892]
+[node name="OctYear" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Time" unique_id=994503551]
 layout_mode = 2
 size_flags_horizontal = 3
+min_value = -9.223372e+18
+max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
 update_on_text_changed = true
 custom_arrow_step = 1.0
+custom_arrow_round = true
+script = ExtResource("5_vb677")
 
-[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitConversion/Time/OctYear" unique_id=550240910]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Time/OctYear" unique_id=550240910]
 script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_OCTYEAR"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="DecYear" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitConversion/Time" unique_id=1863257541]
+[node name="DecYear" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Time" unique_id=1280630938]
 layout_mode = 2
 size_flags_horizontal = 3
+min_value = -9.223372e+18
+max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
 update_on_text_changed = true
 custom_arrow_step = 1.0
+custom_arrow_round = true
+script = ExtResource("5_vb677")
 
-[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitConversion/Time/DecYear" unique_id=536858284]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Time/DecYear" unique_id=536858284]
 script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_YEAR"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="HSeparator" type="HSeparator" parent="ScrollContainer/VBoxContainer/UnitConversion" unique_id=966229878]
+[node name="HSeparator2" type="HSeparator" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion" unique_id=515416096]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=273401841]
+[node name="MassLabel" type="Label" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion" unique_id=1001706790]
 layout_mode = 2
-text = "periodic table"
+text = "masses"
+horizontal_alignment = 1
 
-[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/Label" unique_id=1751833679]
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/MassLabel" unique_id=895503623]
 script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
-&"text": "REFERENCE_PD"
+&"text": "REF_UNIT_MASSES"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="CenterContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer" unique_id=179111949]
+[node name="Mass" type="GridContainer" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion" unique_id=1575875211]
+layout_mode = 2
+columns = 2
+
+[node name="Akergram" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Mass" unique_id=1538390920]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -9.223372e+18
+max_value = 9.223372e+18
+step = 0.0
+allow_greater = true
+allow_lesser = true
+update_on_text_changed = true
+custom_arrow_step = 1.0
+custom_arrow_round = true
+script = ExtResource("5_vb677")
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Mass/Akergram" unique_id=1857852732]
+script = ExtResource("2_jk0c3")
+translations = Dictionary[StringName, String]({
+&"suffix": "REF_UNIT_AKERGRAM"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="Gram" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Mass" unique_id=53393934]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -9.223372e+18
+max_value = 9.223372e+18
+step = 0.0
+allow_greater = true
+allow_lesser = true
+update_on_text_changed = true
+custom_arrow_step = 1.0
+custom_arrow_round = true
+script = ExtResource("5_vb677")
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Mass/Gram" unique_id=202126004]
+script = ExtResource("2_jk0c3")
+translations = Dictionary[StringName, String]({
+&"suffix": "REF_UNIT_GRAM"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="Pound" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Mass" unique_id=1746803710]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -9.223372e+18
+max_value = 9.223372e+18
+step = 0.0
+allow_greater = true
+allow_lesser = true
+update_on_text_changed = true
+custom_arrow_step = 1.0
+custom_arrow_round = true
+script = ExtResource("5_vb677")
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Mass/Pound" unique_id=719069516]
+script = ExtResource("2_jk0c3")
+translations = Dictionary[StringName, String]({
+&"suffix": "REF_UNIT_POUND"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="Stones" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Mass" unique_id=788411518]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -9.223372e+18
+max_value = 9.223372e+18
+step = 0.0
+allow_greater = true
+allow_lesser = true
+update_on_text_changed = true
+custom_arrow_step = 1.0
+custom_arrow_round = true
+script = ExtResource("5_vb677")
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Mass/Stones" unique_id=1448884241]
+script = ExtResource("2_jk0c3")
+translations = Dictionary[StringName, String]({
+&"suffix": "REF_UNIT_STONE"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="ImpTon" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Mass" unique_id=489583067]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -9.223372e+18
+max_value = 9.223372e+18
+step = 0.0
+allow_greater = true
+allow_lesser = true
+update_on_text_changed = true
+custom_arrow_step = 1.0
+custom_arrow_round = true
+script = ExtResource("5_vb677")
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Mass/ImpTon" unique_id=1404648906]
+script = ExtResource("2_jk0c3")
+translations = Dictionary[StringName, String]({
+&"suffix": "REF_UNIT_TON"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="Supermass" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Mass" unique_id=1904977026]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -9.223372e+18
+max_value = 9.223372e+18
+step = 0.0
+allow_greater = true
+allow_lesser = true
+update_on_text_changed = true
+custom_arrow_step = 1.0
+custom_arrow_round = true
+script = ExtResource("5_vb677")
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Mass/Supermass" unique_id=764231416]
+script = ExtResource("2_jk0c3")
+translations = Dictionary[StringName, String]({
+&"suffix": "REF_UNIT_SUPERMASS"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="Earth" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Mass" unique_id=301450199]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -9.223372e+18
+max_value = 9.223372e+18
+step = 0.0
+allow_greater = true
+allow_lesser = true
+update_on_text_changed = true
+custom_arrow_step = 1.0
+custom_arrow_round = true
+script = ExtResource("5_vb677")
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Mass/Earth" unique_id=974868012]
+script = ExtResource("2_jk0c3")
+translations = Dictionary[StringName, String]({
+&"suffix": "REF_UNIT_EARTH"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="Sol" type="SpinBox" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Mass" unique_id=1750719742]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -9.223372e+18
+max_value = 9.223372e+18
+step = 0.0
+allow_greater = true
+allow_lesser = true
+update_on_text_changed = true
+custom_arrow_step = 1.0
+custom_arrow_round = true
+script = ExtResource("5_vb677")
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Mass/Sol" unique_id=1874873009]
+script = ExtResource("2_jk0c3")
+translations = Dictionary[StringName, String]({
+&"suffix": "REF_UNIT_SOL"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="FoldableContainer" type="FoldableContainer" parent="ScrollContainer/VBoxContainer" unique_id=13968256]
+layout_mode = 2
+folded = true
+title = "periodic table"
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/FoldableContainer" unique_id=1751833679]
+script = ExtResource("2_jk0c3")
+translations = Dictionary[StringName, String]({
+&"title": "REFERENCE_PD"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="CenterContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/FoldableContainer" unique_id=179111949]
+visible = false
 layout_mode = 2
 
-[node name="Control" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer" unique_id=433863956]
+[node name="Control" type="Control" parent="ScrollContainer/VBoxContainer/FoldableContainer/CenterContainer" unique_id=433863956]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.3
 
-[node name="PeriodicTable" parent="ScrollContainer/VBoxContainer/CenterContainer" unique_id=1498053878 instance=ExtResource("4_cydeu")]
+[node name="PeriodicTable" parent="ScrollContainer/VBoxContainer/FoldableContainer/CenterContainer" unique_id=1498053878 instance=ExtResource("4_cydeu")]
 layout_mode = 2
 size_flags_stretch_ratio = 10.0
 
-[node name="Control2" type="Control" parent="ScrollContainer/VBoxContainer/CenterContainer" unique_id=177358249]
+[node name="Control2" type="Control" parent="ScrollContainer/VBoxContainer/FoldableContainer/CenterContainer" unique_id=177358249]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.3
 
-[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitConversion/Length/Akermeter" to="ScrollContainer/VBoxContainer/UnitConversion" method="_on_akermeter_value_changed"]
-[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitConversion/Length/Metrimeter" to="ScrollContainer/VBoxContainer/UnitConversion" method="_on_metrimeter_value_changed"]
-[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitConversion/Length/Lightakersecond" to="ScrollContainer/VBoxContainer/UnitConversion" method="_on_lightakersecond_value_changed"]
-[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitConversion/Length/Lightsecond" to="ScrollContainer/VBoxContainer/UnitConversion" method="_on_lightsecond_value_changed"]
-[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitConversion/Length/AU" to="ScrollContainer/VBoxContainer/UnitConversion" method="_on_au_value_changed"]
-[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitConversion/Length/Lightyear" to="ScrollContainer/VBoxContainer/UnitConversion" method="_on_lightyear_value_changed"]
-[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitConversion/Length/Feet" to="ScrollContainer/VBoxContainer/UnitConversion" method="_on_feet_value_changed"]
-[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitConversion/Time/HeSec" to="ScrollContainer/VBoxContainer/UnitConversion" method="_on_he_sec_value_changed"]
-[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitConversion/Time/CeSec" to="ScrollContainer/VBoxContainer/UnitConversion" method="_on_ce_sec_value_changed"]
-[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitConversion/Time/DecMinute" to="ScrollContainer/VBoxContainer/UnitConversion" method="_on_dec_minute_value_changed"]
-[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitConversion/Time/DecHour" to="ScrollContainer/VBoxContainer/UnitConversion" method="_on_dec_hour_value_changed"]
-[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitConversion/Time/DecDay" to="ScrollContainer/VBoxContainer/UnitConversion" method="_on_dec_day_value_changed"]
-[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitConversion/Time/OctMonth" to="ScrollContainer/VBoxContainer/UnitConversion" method="_on_oct_month_value_changed"]
-[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitConversion/Time/OctYear" to="ScrollContainer/VBoxContainer/UnitConversion" method="_on_oct_year_value_changed"]
-[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitConversion/Time/DecYear" to="ScrollContainer/VBoxContainer/UnitConversion" method="_on_dec_year_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Length/Akermeter" to="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion" method="_on_akermeter_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Length/Metrimeter" to="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion" method="_on_metrimeter_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Length/Lightakersecond" to="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion" method="_on_lightakersecond_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Length/Lightsecond" to="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion" method="_on_lightsecond_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Length/AU" to="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion" method="_on_au_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Length/Lightyear" to="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion" method="_on_lightyear_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Length/Inches" to="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion" method="_on_inches_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Length/Feet" to="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion" method="_on_feet_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Length/Miles" to="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion" method="_on_miles_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Time/HeSec" to="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion" method="_on_he_sec_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Time/CeSec" to="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion" method="_on_ce_sec_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Time/DecMinute" to="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion" method="_on_dec_minute_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Time/DecHour" to="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion" method="_on_dec_hour_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Time/DecDay" to="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion" method="_on_dec_day_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Time/OctMonth" to="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion" method="_on_oct_month_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Time/OctYear" to="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion" method="_on_oct_year_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Time/DecYear" to="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion" method="_on_dec_year_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Mass/Akergram" to="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion" method="_on_akergram_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Mass/Gram" to="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion" method="_on_gram_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Mass/Pound" to="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion" method="_on_pound_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Mass/Stones" to="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion" method="_on_stones_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Mass/ImpTon" to="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion" method="_on_imp_ton_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Mass/Supermass" to="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion" method="_on_supermass_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Mass/Earth" to="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion" method="_on_earth_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion/Mass/Sol" to="ScrollContainer/VBoxContainer/UnitsDrop/UnitConversion" method="_on_sol_value_changed"]

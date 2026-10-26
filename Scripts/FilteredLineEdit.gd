@@ -23,6 +23,8 @@ func _filter_paste() -> void:
 		text = new_text
 		caret_column = column
 
+signal character_rejected(c: String)
+
 func _gui_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_paste"):
 		_filter_paste.call_deferred()
@@ -39,6 +41,7 @@ func _gui_input(event: InputEvent) -> void:
 			(deny_list.contains(char(uni)) and not allow_list) or
 			(not deny_list.contains(char(uni)) and allow_list)
 		):
+			character_rejected.emit(char(uni))
 			accept_event()
 			return
 		if capitalize:
