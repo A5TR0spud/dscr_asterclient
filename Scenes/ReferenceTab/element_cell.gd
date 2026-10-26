@@ -102,6 +102,25 @@ static func no_stable_isotopes(protons: int) -> bool:
 		return true
 	return protons >= 84
 
+static func noble_gas(protons: int) -> bool:
+	return (
+		protons == 2 or
+		protons == 10 or
+		protons == 18 or
+		protons == 36 or 
+		protons == 54 or
+		protons == 86
+	)
+
+static func diatomic(protons: int) -> bool:
+	return (
+		protons == 1 or
+		protons == 7 or protons == 8 or protons == 9 or
+		protons == 17 or
+		protons == 35 or
+		protons == 53
+	)
+
 static func get_metallicity(protons: int) -> Metallicity:
 	if protons <= 2:
 		return Metallicity.NONMETAL

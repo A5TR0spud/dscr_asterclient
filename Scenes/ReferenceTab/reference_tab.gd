@@ -1,6 +1,6 @@
 extends PanelContainer
 
-@onready var m0_refs: Control = $ScrollContainer/VBoxContainer/M0Refs
+@onready var m0_refs: Control = $Corpus/VBoxContainer/M0Refs
 
 func _ready():
 	Main.instance.reload_dictionary_support.connect(refresh_dict_support)

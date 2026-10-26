@@ -6,6 +6,9 @@ class_name PeriodicTable
 @onready var tip_proton: Label = $"../PopupPanel/VBoxContainer/ProtonLong"
 @onready var tip_metallicity: Label = $"../PopupPanel/VBoxContainer/Metallicity"
 @onready var tip_unstable: Label = $"../PopupPanel/VBoxContainer/Radioactive"
+@onready var tip_noble: Label = $"../PopupPanel/VBoxContainer/Nobility"
+@onready var tip_diatomic: Label = $"../PopupPanel/VBoxContainer/Diatomic"
+@onready var tip_phase: Label = $"../PopupPanel/VBoxContainer/Phase"
 
 var _current_element: int = 0
 
@@ -33,8 +36,24 @@ func on_hover_start(elem: ElementCell):
 		key += "NONMETAL"
 		tip_metallicity.modulate = Color(1.0, 0.6, 0.6)
 	tip_metallicity.visible = m != ElementCell.Metallicity.UNKNOWN
-	tip_unstable.visible = ElementCell.no_stable_isotopes(element)
 	tip_metallicity.text = Localizer.translate(key)
+	key = "REFERENCE_PD_STP_"
+	var n: ElementCell.Phase = ElementCell.phase_at_stp(element)
+	if n == ElementCell.Phase.SOLID:
+		key += "SOLID"
+		tip_phase.modulate = Color(0.537, 0.59, 0.538, 1.0)
+	elif n == ElementCell.Phase.LIQUID:
+		key += "LIQUID"
+		tip_phase.modulate = Color(0.49, 0.748, 0.96, 1.0)
+	elif n == ElementCell.Phase.GAS:
+		key += "GAS"
+		tip_phase.modulate = Color(1.0, 0.813, 0.65, 1.0)
+	tip_phase.visible = n != ElementCell.Phase.UNKNOWN
+	tip_phase.text = Localizer.translate(key)
+	
+	tip_unstable.visible = ElementCell.no_stable_isotopes(element)
+	tip_noble.visible = ElementCell.noble_gas(element)
+	tip_diatomic.visible = ElementCell.diatomic(element)
 	tooltip.offset_transform_position = Vector2(
 		r.position.x + r.size.x - 2, r.position.y
 	)

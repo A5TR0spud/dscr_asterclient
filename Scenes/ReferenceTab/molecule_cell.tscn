@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dkjcdxgii88yv"]
+
+[node name="MoleculeCell" type="HBoxContainer" unique_id=1256021337]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="." unique_id=1794812622]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "formula"
+
+[node name="Label2" type="Label" parent="." unique_id=1423686693]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "name"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="." unique_id=359786566]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "notes"
+horizontal_alignment = 2

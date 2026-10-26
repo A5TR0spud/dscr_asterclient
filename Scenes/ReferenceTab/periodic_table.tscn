@@ -782,7 +782,36 @@ text = "15 protons"
 layout_mode = 2
 text = "metal"
 
+[node name="Phase" type="Label" parent="PopupPanel/VBoxContainer" unique_id=126909679]
+layout_mode = 2
+text = "solid"
+
+[node name="Nobility" type="Label" parent="PopupPanel/VBoxContainer" unique_id=1397720716]
+modulate = Color(0.78039217, 0.60784316, 1, 1)
+layout_mode = 2
+text = "noble"
+
+[node name="LocaleNode" type="Node" parent="PopupPanel/VBoxContainer/Nobility" unique_id=1591459229]
+script = ExtResource("3_xh0xs")
+translations = Dictionary[StringName, String]({
+&"text": "REFERENCE_PD_NOBLE"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="Diatomic" type="Label" parent="PopupPanel/VBoxContainer" unique_id=1367327296]
+modulate = Color(1, 0.9529412, 0.7529412, 1)
+layout_mode = 2
+text = "diatomic"
+
+[node name="LocaleNode" type="Node" parent="PopupPanel/VBoxContainer/Diatomic" unique_id=1923971261]
+script = ExtResource("3_xh0xs")
+translations = Dictionary[StringName, String]({
+&"text": "REFERENCE_PD_DIATOMIC"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
 [node name="Radioactive" type="Label" parent="PopupPanel/VBoxContainer" unique_id=1093404535]
+modulate = Color(0.8352941, 1, 0.74509805, 1)
 layout_mode = 2
 text = "radioactive"
 

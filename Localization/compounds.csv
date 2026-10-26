@@ -1,0 +1,33 @@
+key,m0,en,pl
+
+REF_CMP_FORM_WATER,-57 -14 2 -56 1 -3 -56 8 -15,H₂O,
+REF_CMP_NAME_WATER,,Water,
+REF_CMP_NOTE_WATER,-166 -122 -101,Liquid life,
+
+REF_CMP_FORM_CARBON_DIOXIDE,-57 -14 -56 6 -3 2 -56 8 -15,CO₂,
+REF_CMP_NAME_CARBON_DIOXIDE,,Carbon Dioxide,
+REF_CMP_NOTE_CARBON_DIOXIDE,,Breathed in by plants and out by animals,
+
+REF_CMP_FORM_AMMONIA,-57 -14 -56 7 -3 3 -56 1 -15,NH₃,
+REF_CMP_NAME_AMMONIA,,Ammonia,
+REF_CMP_NOTE_AMMONIA,-86 -101 -133 -85,Toxic,
+
+REF_CMP_FORM_<gohere,,,
+REF_CMP_NAME_<gohere,,,
+REF_CMP_NOTE_<gohere,,,
+
+REF_CMP_FORM_<gohere,,,
+REF_CMP_NAME_<gohere,,,
+REF_CMP_NOTE_<gohere,,,
+
+REF_CMP_FORM_<gohere,,,
+REF_CMP_NAME_<gohere,,,
+REF_CMP_NOTE_<gohere,,,
+
+REF_CMP_FORM_ACETIC_ACID,-57 -14 4 -56 1 -3 2 -56 6 -3 2 -56 8 -15,CH₃CO₂H or H₄C₂O,
+REF_CMP_NAME_ACETIC_ACID,,Acetic Acid,
+REF_CMP_NOTE_ACETIC_ACID,,,
+
+REF_CMP_FORM_ACETONE,,(CH₃)₂CO or H₆C₃O,
+REF_CMP_NAME_ACETONE,,Acetone,
+REF_CMP_NOTE_ACETONE,,,

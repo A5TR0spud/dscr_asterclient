@@ -18,6 +18,7 @@ text = "+/-"
 [node name="Natural" type="LineEdit" parent="." unique_id=797799910]
 layout_mode = 2
 size_flags_horizontal = 3
+alignment = 2
 script = ExtResource("1_7a1j1")
 deny_list = "0123456789"
 allow_list = true
@@ -40,4 +41,6 @@ capitalize = false
 metadata/_custom_type_script = "uid://gtpqlwktlalr"
 
 [connection signal="character_rejected" from="Natural" to="." method="_on_natural_character_rejected"]
+[connection signal="text_submitted" from="Natural" to="." method="_on_natural_text_submitted"]
 [connection signal="character_rejected" from="Rational" to="." method="_on_rational_character_rejected"]
+[connection signal="text_submitted" from="Rational" to="." method="_on_rational_text_submitted"]

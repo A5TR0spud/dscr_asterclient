@@ -1,5 +1,5 @@
 extends SpinBox
-class_name NumberEdit
+class_name NumberEditSpinBox
 
 func _ready():
 	step = 0.0000001
