@@ -178,13 +178,13 @@ func _gui_input(event: InputEvent) -> void:
 	if auto_list_panel.visible:
 		var selected = autocomplete_list.get_selected_items()
 		var idx = selected[0] if not selected.is_empty() else 0
-		if event.is_action_pressed("ui_down"):
+		if event.is_action_pressed("ui_down", true):
 			idx = min(idx + 1, autocomplete_list.item_count - 1)
 			autocomplete_list.select(idx)
 			autocomplete_list.ensure_current_is_visible()
 			accept_event()
 			return
-		if event.is_action_pressed("ui_up"):
+		if event.is_action_pressed("ui_up", true):
 			idx = max(idx - 1, 0)
 			autocomplete_list.select(idx)
 			autocomplete_list.ensure_current_is_visible()

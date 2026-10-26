@@ -59,6 +59,7 @@ layout_mode = 2
 
 [node name="UnitsDrop" type="FoldableContainer" parent="ScrollContainer/VBoxContainer" unique_id=1240872268]
 layout_mode = 2
+folded = true
 title = "units"
 
 [node name="LocaleNode" type="Node" parent="ScrollContainer/VBoxContainer/UnitsDrop" unique_id=228561470]
@@ -69,6 +70,7 @@ translations = Dictionary[StringName, String]({
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="UnitConversion" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/UnitsDrop" unique_id=1895155616]
+visible = false
 layout_mode = 2
 script = ExtResource("4_vb677")
 

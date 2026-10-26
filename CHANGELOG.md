@@ -20,6 +20,7 @@
 * Clicking the top left of the dictionary signal edit window now copies the number
 * Library submit button now changes based on whether it will overwrite or not
 * System messages now support signal styling
+* Middle clicking a channel tab now closes it
 
 ### Fixes
 
@@ -29,6 +30,7 @@
 * (?) Probably fixed history of channels being infiltrated by other channels
 * Fixed rollover of history being inaccessible
 * Pressing the make a signal button no longer adds it to the dictionary without updating the dictionary
+* Holding up/down now continues to scroll autocomplete
 
 ## 0.9.0: Historical Record
 

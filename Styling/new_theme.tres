@@ -7,7 +7,9 @@
 [ext_resource type="StyleBox" uid="uid://chd3p7o56iqny" path="res://Styling/text_edit_style.tres" id="2_5vjxe"]
 [ext_resource type="StyleBox" uid="uid://da5ge6d3pcwlc" path="res://Styling/Button/pressed_box.tres" id="3_08nyo"]
 [ext_resource type="StyleBox" uid="uid://6bx0nrubukdd" path="res://Styling/HScrollBar/grabber.tres" id="4_u5f6s"]
+[ext_resource type="Texture2D" uid="uid://dslqewh0nuu40" path="res://Assets/Icons/closed_menu.png" id="5_77blk"]
 [ext_resource type="StyleBox" uid="uid://d2w74s2vi088d" path="res://Styling/HScrollBar/grabber_pressed.tres" id="5_em145"]
+[ext_resource type="Texture2D" uid="uid://bcncyacvyj36q" path="res://Assets/Icons/opened_menu.png" id="6_efnsc"]
 [ext_resource type="StyleBox" uid="uid://bc7c1ue25eq6g" path="res://Styling/HScrollBar/scroll_back.tres" id="6_i4omk"]
 [ext_resource type="StyleBox" uid="uid://dgjcahl47q10n" path="res://Styling/Seps/h_sep.tres" id="7_fqkxe"]
 [ext_resource type="StyleBox" uid="uid://b1t3fn13p4807" path="res://Styling/Seps/h_split.tres" id="8_k7nka"]
@@ -28,6 +30,11 @@
 [ext_resource type="StyleBox" uid="uid://10juafvr3ky1" path="res://Styling/Tabber/ButtonLookalike/tab_unselected.tres" id="15_d5xg6"]
 [ext_resource type="StyleBox" uid="uid://db3k5eiovgegq" path="res://Styling/Seps/v_sep.tres" id="15_k7nka"]
 [ext_resource type="FontFile" uid="uid://kx3rrq8lr2ar" path="res://fonts/CascadiaMono-Regular.ttf" id="18_pkgym"]
+[ext_resource type="Texture2D" uid="uid://536wnp7dpwyy" path="res://Assets/Icons/tabbar_close.png" id="20_5aavf"]
+[ext_resource type="Texture2D" uid="uid://bflhoitjkdmwb" path="res://Assets/Icons/tabbar_left.png" id="20_iutw7"]
+[ext_resource type="Texture2D" uid="uid://bj2hydnfnnjs4" path="res://Assets/Icons/tabbar_left_highlight.png" id="21_mjybl"]
+[ext_resource type="Texture2D" uid="uid://c8mj5g14b5axa" path="res://Assets/Icons/tabbar_right.png" id="21_pyxdf"]
+[ext_resource type="Texture2D" uid="uid://d4nv71bnasi1y" path="res://Assets/Icons/tabbar_right_highlight.png" id="23_5aavf"]
 [ext_resource type="StyleBox" uid="uid://circtrvcvn66m" path="res://Styling/Seps/v_split.tres" id="25_00ekq"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gt42v"]
@@ -93,6 +100,8 @@ Button/styles/normal = ExtResource("2_2dlxw")
 Button/styles/pressed = ExtResource("3_08nyo")
 CodeEdit/colors/font_readonly_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
 CodeEdit/styles/read_only = SubResource("StyleBoxEmpty_gt42v")
+FoldableContainer/icons/expanded_arrow = ExtResource("5_77blk")
+FoldableContainer/icons/folded_arrow = ExtResource("6_efnsc")
 FoldableContainer/styles/focus = ExtResource("1_pkgym")
 FoldableContainer/styles/panel = ExtResource("1_tvtlr")
 FoldableContainer/styles/title_collapsed_hover_panel = ExtResource("1_pkgym")
@@ -169,12 +178,21 @@ SpinBox/styles/up_background = ExtResource("2_2dlxw")
 SpinBox/styles/up_background_hovered = ExtResource("1_pkgym")
 SpinBox/styles/up_background_pressed = ExtResource("3_08nyo")
 TabBar/colors/font_unselected_color = Color(0.69803923, 0.69803923, 0.69803923, 0.7647059)
+TabBar/icons/close = ExtResource("20_5aavf")
+TabBar/icons/decrement = ExtResource("20_iutw7")
+TabBar/icons/decrement_highlight = ExtResource("21_mjybl")
+TabBar/icons/increment = ExtResource("21_pyxdf")
+TabBar/icons/increment_highlight = ExtResource("23_5aavf")
 TabBar/styles/tab_focus = ExtResource("12_rvmd7")
 TabBar/styles/tab_hovered = ExtResource("13_3jl28")
 TabBar/styles/tab_selected = ExtResource("14_f5bgc")
 TabBar/styles/tab_unselected = ExtResource("15_d5xg6")
 TabContainer/colors/font_unselected_color = Color(0.69803923, 0.69803923, 0.69803923, 0.7647059)
 TabContainer/constants/side_margin = 0
+TabContainer/icons/decrement = ExtResource("20_iutw7")
+TabContainer/icons/decrement_highlight = ExtResource("21_mjybl")
+TabContainer/icons/increment = ExtResource("21_pyxdf")
+TabContainer/icons/increment_highlight = ExtResource("23_5aavf")
 TabContainer/styles/panel = ExtResource("1_tvtlr")
 TabContainer/styles/tab_focus = ExtResource("9_i4omk")
 TabContainer/styles/tab_hovered = ExtResource("10_gwgd7")

@@ -9,6 +9,7 @@ static var status_log_entry_scene = preload("uid://bfuqifdrv6kq3")
 static var chat_channel_scene = preload("uid://c7bn3w1ijabx4")
 @onready var channel_container: TabContainer = $TabContainer
 @onready var main_channel: ChatChannel = $TabContainer/Main
+@onready var tabbar: TabBar = channel_container.get_tab_bar()
 
 const CHANNEL_SELECTOR: int = -65535
 const COMMAND_JOIN: int = -65534
@@ -43,6 +44,19 @@ func _ready():
 	Main.instance.reload_settings.connect(open_loaded_channels)
 	open_loaded_channels()
 	main_channel.try_show_history()
+	#refresh_can_close()
+	tabbar.tab_close_pressed.connect(close_tab_from_button)
+
+func close_tab_from_button(idx: int):
+	var c: ChatChannel = channel_container.get_child(idx)
+	if c.id is not int:
+		return
+	disable_channel(c.id)
+	SoundManager.play_sound(SoundManager.Sounds.CLOSE_UI)
+
+#func refresh_can_close():
+	#return
+	#tabbar.tab_close_display_policy = TabBar.CLOSE_BUTTON_SHOW_NEVER if main_channel.visible else TabBar.CLOSE_BUTTON_SHOW_ACTIVE_ONLY
 
 static func get_active_channel() -> ChatChannel:
 	var idx: int = instance.channel_container.current_tab
@@ -277,6 +291,7 @@ func _on_tab_container_tab_changed(tab: int) -> void:
 		if c.is_visible_in_tree():
 			continue
 		disable_channel(c.id)
+	#refresh_can_close()
 
 static func new_log(state: State, args: Array = []) -> void:
 	var new_message: StatusLogEntry = status_log_entry_scene.instantiate()
