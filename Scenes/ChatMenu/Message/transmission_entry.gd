@@ -108,10 +108,11 @@ func refresh_callsign():
 			elif not nick[0].is_valid_int() and state >= 1:
 				state = 0
 				if num:
-					composite += DictionaryHandler.get_or_default_signal_name(num.to_int()) + nick[0]
+					composite += DictionaryHandler.get_or_default_signal_name(num.to_int())
 				else:
 					composite += "|" + nick[0]
 				num = ""
+				continue
 			elif nick[0] == "|" and state == 0:
 				state = 1
 			else:
