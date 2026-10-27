@@ -1,11 +1,14 @@
 [gd_scene format=3 uid="uid://dkjcdxgii88yv"]
 
+[ext_resource type="Script" uid="uid://747vimlwy12n" path="res://Scenes/ReferenceTab/molecule_cell.gd" id="1_pgfuh"]
+
 [node name="MoleculeCell" type="HBoxContainer" unique_id=1256021337]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_pgfuh")
 
 [node name="Label" type="Label" parent="." unique_id=1794812622]
 layout_mode = 2

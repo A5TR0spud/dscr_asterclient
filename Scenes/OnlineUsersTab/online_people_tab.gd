@@ -6,7 +6,7 @@ static var instance: ActiveUsersTab
 
 func _ready():
 	instance = self
-	Main.instance.reload_dict.connect(refresh)
+	#Main.instance.reload_dict.connect(refresh)
 	Main.instance.localization_reload.connect(refresh)
 	Main.instance.connected_user_change.connect(reload)
 	Main.instance.reload_nicknames.connect(reload_known)

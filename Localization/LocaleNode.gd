@@ -6,15 +6,12 @@ class_name LocaleNode
 @export var translations: Dictionary[StringName, String]
 
 func _ready():
-	Main.instance.reload_dict.connect(refresh.bind(true))
 	Main.instance.localization_reload.connect(refresh)
 	refresh()
 
 signal locale_reloaded
 
-func refresh(from_dict_reload: bool = false):
-	if from_dict_reload and not SettingsHandler.use_m0_ui:
-		return
+func refresh():
 	locale_reloaded.emit()
 	var parent: Node = get_parent()
 	if not parent:

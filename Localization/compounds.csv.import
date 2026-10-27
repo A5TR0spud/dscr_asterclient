@@ -6,7 +6,10 @@ uid="uid://bq1pdttt7lpk4"
 
 [deps]
 
+files=["res://Localization/compounds.m0.translation", "res://Localization/compounds.en.translation"]
+
 source_file="res://Localization/compounds.csv"
+dest_files=["res://Localization/compounds.m0.translation", "res://Localization/compounds.en.translation"]
 
 [params]
 

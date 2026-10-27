@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5dnfcqtfudxt"
-path="res://.godot/imported/wave.svg-b79ba1a4d9279e3909de1d9332171bd3.ctex"
+uid="uid://cul5vj6e3qmoa"
+path="res://.godot/imported/gas.svg-b550bcabd38c6df4e454375c4a035551.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Icons/AsOfYetUnused/wave.svg"
-dest_files=["res://.godot/imported/wave.svg-b79ba1a4d9279e3909de1d9332171bd3.ctex"]
+source_file="res://Assets/Icons/Science/gas.svg"
+dest_files=["res://.godot/imported/gas.svg-b550bcabd38c6df4e454375c4a035551.ctex"]
 
 [params]
 

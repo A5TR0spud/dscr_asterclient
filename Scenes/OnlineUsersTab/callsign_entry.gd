@@ -12,7 +12,7 @@ func _ready():
 	num_node.self_modulate = Main.get_callsign_color(callsign)
 	name_node.self_modulate = Main.get_callsign_color(callsign)
 	Main.instance.reload_nicknames.connect(refresh_name)
-	Main.instance.reload_dict.connect(refresh_label)
+	#Main.instance.reload_dict.connect(refresh_label)
 	Main.instance.localization_reload.connect(refresh_label)
 	refresh_label()
 	refresh_name()

@@ -12,7 +12,7 @@ signal changed
 
 func _ready():
 	verify_form()
-	Main.instance.reload_dict.connect(refresh)
+	#Main.instance.reload_dict.connect(refresh)
 	Main.instance.localization_reload.connect(refresh)
 
 func _on_natural_character_rejected(c: String):

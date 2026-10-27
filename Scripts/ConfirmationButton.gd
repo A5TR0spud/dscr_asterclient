@@ -13,7 +13,7 @@ var _time_window: Timer
 var confirm: bool = false
 
 func _ready():
-	Main.instance.reload_dict.connect(set_confirm_state)
+	#Main.instance.reload_dict.connect(set_confirm_state)
 	Main.instance.localization_reload.connect(set_confirm_state)
 	_time_window = Timer.new()
 	add_child(_time_window, false, Node.INTERNAL_MODE_BACK)

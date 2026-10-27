@@ -4,15 +4,22 @@ class_name PeriodicTable
 @onready var tooltip: PanelContainer = $"../PopupPanel"
 @onready var tip_name: Label = $"../PopupPanel/VBoxContainer/Name"
 @onready var tip_proton: Label = $"../PopupPanel/VBoxContainer/ProtonLong"
-@onready var tip_metallicity: Label = $"../PopupPanel/VBoxContainer/Metallicity"
-@onready var tip_unstable: Label = $"../PopupPanel/VBoxContainer/Radioactive"
-@onready var tip_noble: Label = $"../PopupPanel/VBoxContainer/Nobility"
-@onready var tip_diatomic: Label = $"../PopupPanel/VBoxContainer/Diatomic"
-@onready var tip_phase: Label = $"../PopupPanel/VBoxContainer/Phase"
+@onready var tip_unstable: Control = $"../PopupPanel/VBoxContainer/Decays"
+@onready var tip_noble: Control = $"../PopupPanel/VBoxContainer/Noble"
+@onready var tip_diatomic: Control = $"../PopupPanel/VBoxContainer/Diatomic"
+@onready var tip_solid: Control = $"../PopupPanel/VBoxContainer/Solid"
+@onready var tip_liquid: Control = $"../PopupPanel/VBoxContainer/Liquid"
+@onready var tip_gas: Control = $"../PopupPanel/VBoxContainer/Gas"
+@onready var tip_metal: Control = $"../PopupPanel/VBoxContainer/Metal"
+@onready var tip_metalloid: Control = $"../PopupPanel/VBoxContainer/Metalloid"
+@onready var tip_nonmetal: Control = $"../PopupPanel/VBoxContainer/Nonmetal"
 
 var _current_element: int = 0
 
 signal focus(elem: int)
+
+func _ready():
+	tooltip.hide()
 
 func _gui_input(event: InputEvent):
 	if event is InputEventMouseButton:
@@ -24,32 +31,14 @@ func on_hover_start(elem: ElementCell):
 	var r: Rect2 = elem.get_rect()
 	tip_name.text = elem.name_label.text
 	tip_proton.text = Localizer.translate_plural("REFERENCE_PD_PROTON", element, element)
-	var key: String = "REFERENCE_PD_"
-	var m: ElementCell.Metallicity = ElementCell.get_metallicity(element)
-	if m == ElementCell.Metallicity.METAL:
-		key += "METAL"
-		tip_metallicity.modulate = Color(0.6, 0.6, 1.0)
-	elif m == ElementCell.Metallicity.METALLOID:
-		key += "METALLOID"
-		tip_metallicity.modulate = Color(0.6, 0.8, 0.8)
-	elif m == ElementCell.Metallicity.NONMETAL:
-		key += "NONMETAL"
-		tip_metallicity.modulate = Color(1.0, 0.6, 0.6)
-	tip_metallicity.visible = m != ElementCell.Metallicity.UNKNOWN
-	tip_metallicity.text = Localizer.translate(key)
-	key = "REFERENCE_PD_STP_"
-	var n: ElementCell.Phase = ElementCell.phase_at_stp(element)
-	if n == ElementCell.Phase.SOLID:
-		key += "SOLID"
-		tip_phase.modulate = Color(0.537, 0.59, 0.538, 1.0)
-	elif n == ElementCell.Phase.LIQUID:
-		key += "LIQUID"
-		tip_phase.modulate = Color(0.49, 0.748, 0.96, 1.0)
-	elif n == ElementCell.Phase.GAS:
-		key += "GAS"
-		tip_phase.modulate = Color(1.0, 0.813, 0.65, 1.0)
-	tip_phase.visible = n != ElementCell.Phase.UNKNOWN
-	tip_phase.text = Localizer.translate(key)
+	var tmp: int = ElementCell.get_metallicity(element)
+	tip_metal.visible = tmp == ElementCell.Metallicity.METAL
+	tip_metalloid.visible = tmp == ElementCell.Metallicity.METALLOID
+	tip_nonmetal.visible = tmp == ElementCell.Metallicity.NONMETAL
+	tmp = ElementCell.phase_at_stp(element)
+	tip_solid.visible = tmp == ElementCell.Phase.SOLID
+	tip_liquid.visible = tmp == ElementCell.Phase.LIQUID
+	tip_gas.visible = tmp == ElementCell.Phase.GAS
 	
 	tip_unstable.visible = ElementCell.no_stable_isotopes(element)
 	tip_noble.visible = ElementCell.noble_gas(element)

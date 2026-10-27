@@ -31,6 +31,7 @@ func get_timeago_string():
 func _ready():
 	ready()
 	hover_change.emit(false)
+	_on_locale_reload()
 	_refresh()
 	collapsed = true
 	calc_time()
@@ -41,14 +42,14 @@ func _ready():
 	self.mouse_exited.connect(hover_change.emit.bind(false))
 
 func _refresh():
-	_on_locale_reload(false)
+	#_on_locale_reload(false)
 	refresh()
 	_evaluate_corpus()
 
-func _on_locale_reload(re_eval: bool = true):
+func _on_locale_reload():
 	_etc_string = Localizer.raw_translate("TRUNCATION")
-	if re_eval:
-		_evaluate_corpus()
+	#if re_eval:
+	_evaluate_corpus()
 
 func request_rewrite(clickable: bool):
 	_evaluate_corpus(clickable)

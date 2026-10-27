@@ -1,0 +1,16 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+	<style>
+		.s0 { fill: #ffffff } 
+		.s1 { fill: none;stroke: #ffffff;paint-order:stroke fill markers;stroke-miterlimit:100;stroke-width: 30 } 
+	</style>
+	<g id="Layer 1">
+		<path id="Shape 1" fill-rule="evenodd" class="s0" d="m40 220c-16.59 0-30-13.41-30-30 0-16.59 13.41-30 30-30 16.59 0 30 13.41 30 30 0 16.59-13.41 30-30 30z"/>
+		<path id="Shape 1 copy" fill-rule="evenodd" class="s0" d="m30 160c-16.59 0-30-13.41-30-30 0-16.59 13.41-30 30-30 16.59 0 30 13.41 30 30 0 16.59-13.41 30-30 30z"/>
+		<path id="Shape 1 copy 5" fill-rule="evenodd" class="s0" d="m80 120c-16.59 0-30-13.41-30-30 0-16.59 13.41-30 30-30 16.59 0 30 13.41 30 30 0 16.59-13.41 30-30 30z"/>
+		<path id="Shape 1 copy 3" fill-rule="evenodd" class="s0" d="m90 180c-16.59 0-30-13.41-30-30 0-16.59 13.41-30 30-30 16.59 0 30 13.41 30 30 0 16.59-13.41 30-30 30z"/>
+		<path id="Shape 1 copy 2" fill-rule="evenodd" class="s0" d="m100 240c-16.59 0-30-13.41-30-30 0-16.59 13.41-30 30-30 16.59 0 30 13.41 30 30 0 16.59-13.41 30-30 30z"/>
+		<path id="Shape 1 copy 6" fill-rule="evenodd" class="s0" d="m150 200c-16.59 0-30-13.41-30-30 0-16.59 13.41-30 30-30 16.59 0 30 13.41 30 30 0 16.59-13.41 30-30 30z"/>
+		<path id="Shape 1 copy 4" fill-rule="evenodd" class="s0" d="m210 60c-16.59 0-30-13.41-30-30 0-16.59 13.41-30 30-30 16.59 0 30 13.41 30 30 0 16.59-13.41 30-30 30z"/>
+		<path id="Shape 2" fill-rule="evenodd" class="s1" d="m140 100l40-40z"/>
+	</g>
+</svg>

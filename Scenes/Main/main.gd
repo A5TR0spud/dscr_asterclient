@@ -8,7 +8,7 @@ var socket: WebSocketPeer = WebSocketPeer.new()
 const MAX_MESSAGE_LENGTH: int = 2000
 const HE6_HALF_LIFE: float = 0.8067
 
-@onready var callsign_node: CallsignSelector = $Body/Sidebar/CallsignContainer/CallsignEdit
+@onready var callsign_node: CallsignSelector = %CallsignPickerMain
 var callsign: int = 0:
 	set(value):
 		if value < 0:
@@ -27,8 +27,8 @@ var connected_users: Array[int] = []
 @onready var boot_sound: AudioStreamPlayer = $BootUp
 @onready var shut_down_sound: AudioStreamPlayer = $ShutDown
 
-@onready var dsve_button: IconButton = $Body/Corpus/Header/DSVE_Button
-@onready var dsmidi_button: IconButton = $Body/Corpus/Header/DSMIDI_Button
+@onready var dsve_button: IconButton = %DSVE_Button
+@onready var dsmidi_button: IconButton = %DSMIDI_Button
 
 static var instance : Main
 
@@ -36,6 +36,8 @@ signal reload_dict
 static func on_dict_reload() -> void:
 	SaveSystem.eval_bad_dict()
 	instance.reload_dict.emit()
+	if SettingsHandler.use_m0_ui:
+		on_localization_reload()
 signal reload_settings
 static func on_settings_reload() -> void:
 	ThemeManager.set_font_size()
@@ -468,8 +470,7 @@ func _on_dsve_button_pressed():
 func _on_dsmidi_button_pressed():
 	OS.shell_open("https://dsmidi.akqqa.dev/")
 
-
-@onready var sidebar_tabber: TabContainer = $Body/Sidebar/SidebarTabber
+@onready var sidebar_tabber: TabContainer = %SidebarTabberMain
 
 static func open_callsign_window() -> void:
 	instance.sidebar_tabber.current_tab = 1

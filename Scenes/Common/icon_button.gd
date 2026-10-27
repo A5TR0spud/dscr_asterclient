@@ -41,7 +41,7 @@ func _ready():
 	button.toggled.connect(toggled.emit)
 	if not tooltip_key.is_empty():
 		Main.instance.localization_reload.connect(_refresh)
-		Main.instance.reload_dict.connect(_refresh)
+		#Main.instance.reload_dict.connect(_refresh)
 
 func _on_change():
 	if not is_node_ready():

@@ -20,9 +20,10 @@ extends Control
 @onready var decyear: SpinBox = $Time/DecYear
 
 @onready var akergram: SpinBox = $Mass/Akergram
-@onready var gram: SpinBox = $Mass/Gram
+@onready var kilogram: SpinBox = $Mass/Kilogram
 @onready var pound: SpinBox = $Mass/Pound
 @onready var stone: SpinBox = $Mass/Stones
+@onready var slug: SpinBox = $Mass/Slugs
 @onready var ton: SpinBox = $Mass/ImpTon
 @onready var supermass: SpinBox = $Mass/Supermass
 @onready var earthmass: SpinBox = $Mass/Earth
@@ -46,15 +47,16 @@ const HESEC_PER_AMONTH: float = 1006893
 
 const KILOGRAMS_PER_AKERGRAM: float = 14.3728158895040179409107756612273792975412133888
 const AKERGRAMS_PER_SUPERMASS: float = 3586098686288827308324625.693278208
-const GRAMS_PER_POUND: float = 453.59237
+const KILOGRAMS_PER_POUND: float = 0.45359237
 const POUNDS_PER_STONE: float = 14
 const KILOGRAMS_PER_EARTH: float = 5.9722e+24
 const KILOGRAMS_PER_SUN: float = 1.988416e+30
 const POUNDS_PER_TON: float = 2240
+const POUNDS_PER_SLUG: float = 32.17405
 
 var length_in_meters: float = 0
 var time_in_seconds: float = 0
-var mass_in_grams: float = 0
+var mass_in_kilograms: float = 0
 
 func _ready():
 	Main.instance.reload_dictionary_support.connect(refresh_dict_support)
@@ -90,14 +92,15 @@ func update_times():
 	octyear.set_value_no_signal(time_in_seconds / HESEC_PER_AYEAR / SECONDS_PER_HE6)
 
 func update_masses():
-	akergram.set_value_no_signal(mass_in_grams / 1000.0 / KILOGRAMS_PER_AKERGRAM)
-	gram.set_value_no_signal(mass_in_grams)
-	pound.set_value_no_signal(mass_in_grams / GRAMS_PER_POUND)
-	stone.set_value_no_signal(mass_in_grams / GRAMS_PER_POUND / POUNDS_PER_STONE)
-	ton.set_value_no_signal(mass_in_grams / GRAMS_PER_POUND / POUNDS_PER_TON)
-	supermass.set_value_no_signal(mass_in_grams / 1000.0 / KILOGRAMS_PER_AKERGRAM / AKERGRAMS_PER_SUPERMASS)
-	earthmass.set_value_no_signal(mass_in_grams / 1000.0 / KILOGRAMS_PER_EARTH)
-	solarmass.set_value_no_signal(mass_in_grams / 1000.0 / KILOGRAMS_PER_SUN)
+	akergram.set_value_no_signal(mass_in_kilograms / KILOGRAMS_PER_AKERGRAM)
+	kilogram.set_value_no_signal(mass_in_kilograms)
+	pound.set_value_no_signal(mass_in_kilograms / KILOGRAMS_PER_POUND)
+	stone.set_value_no_signal(mass_in_kilograms / KILOGRAMS_PER_POUND / POUNDS_PER_STONE)
+	slug.set_value_no_signal(mass_in_kilograms / KILOGRAMS_PER_POUND / POUNDS_PER_SLUG)
+	ton.set_value_no_signal(mass_in_kilograms / KILOGRAMS_PER_POUND / POUNDS_PER_TON)
+	supermass.set_value_no_signal(mass_in_kilograms / KILOGRAMS_PER_AKERGRAM / AKERGRAMS_PER_SUPERMASS)
+	earthmass.set_value_no_signal(mass_in_kilograms / KILOGRAMS_PER_EARTH)
+	solarmass.set_value_no_signal(mass_in_kilograms / KILOGRAMS_PER_SUN)
 
 func _on_akermeter_value_changed(value: float):
 	length_in_meters = value * AKERMETER_TO_METRE
@@ -168,33 +171,37 @@ func _on_dec_year_value_changed(value):
 	update_times()
 
 func _on_akergram_value_changed(value):
-	mass_in_grams = value * KILOGRAMS_PER_AKERGRAM * 1000
-	update_masses()
-
-func _on_gram_value_changed(value):
-	mass_in_grams = value
+	mass_in_kilograms = value * KILOGRAMS_PER_AKERGRAM
 	update_masses()
 
 func _on_pound_value_changed(value):
-	mass_in_grams = value * GRAMS_PER_POUND
+	mass_in_kilograms = value * KILOGRAMS_PER_POUND
 	update_masses()
 
 func _on_stones_value_changed(value):
-	mass_in_grams = value * GRAMS_PER_POUND * POUNDS_PER_STONE
+	mass_in_kilograms = value * KILOGRAMS_PER_POUND * POUNDS_PER_STONE
 	update_masses()
 
 func _on_imp_ton_value_changed(value):
-	mass_in_grams = value * GRAMS_PER_POUND * POUNDS_PER_TON
+	mass_in_kilograms = value * KILOGRAMS_PER_POUND * POUNDS_PER_TON
 	update_masses()
 
 func _on_supermass_value_changed(value):
-	mass_in_grams = value * KILOGRAMS_PER_AKERGRAM * 1000 * AKERGRAMS_PER_SUPERMASS
+	mass_in_kilograms = value * KILOGRAMS_PER_AKERGRAM * AKERGRAMS_PER_SUPERMASS
 	update_masses()
 
 func _on_earth_value_changed(value):
-	mass_in_grams = value * 1000 * KILOGRAMS_PER_EARTH
+	mass_in_kilograms = value * KILOGRAMS_PER_EARTH
 	update_masses()
 
 func _on_sol_value_changed(value):
-	mass_in_grams = value * 1000 * KILOGRAMS_PER_SUN
+	mass_in_kilograms = value * KILOGRAMS_PER_SUN
+	update_masses()
+
+func _on_kilogram_value_changed(value):
+	mass_in_kilograms = value
+	update_masses()
+
+func _on_slugs_value_changed(value):
+	mass_in_kilograms = value * KILOGRAMS_PER_POUND * POUNDS_PER_SLUG
 	update_masses()

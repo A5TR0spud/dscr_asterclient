@@ -2,7 +2,16 @@
 
 [ext_resource type="Script" uid="uid://bbsao5ly4n2ye" path="res://Scenes/ReferenceTab/periodic_table.gd" id="1_afasx"]
 [ext_resource type="PackedScene" uid="uid://b1t0ne2nxs6pi" path="res://Scenes/ReferenceTab/element_cell.tscn" id="1_b7m85"]
+[ext_resource type="Texture2D" uid="uid://b5dnfcqtfudxt" path="res://Assets/Icons/Science/metal.svg" id="3_cu41k"]
+[ext_resource type="Texture2D" uid="uid://hioy3dpmbfsy" path="res://Assets/Icons/Science/diatomic.svg" id="3_ey3pd"]
 [ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="3_xh0xs"]
+[ext_resource type="Texture2D" uid="uid://bai3s7hdy8jcr" path="res://Assets/Icons/Science/solid.svg" id="4_uux4a"]
+[ext_resource type="Texture2D" uid="uid://uaj1oifxyika" path="res://Assets/Icons/Science/liquid.svg" id="5_oe6gi"]
+[ext_resource type="Texture2D" uid="uid://ysccaampaefj" path="res://Assets/Icons/Science/metalloid.svg" id="5_ps78w"]
+[ext_resource type="Texture2D" uid="uid://cul5vj6e3qmoa" path="res://Assets/Icons/Science/gas.svg" id="6_fpnrf"]
+[ext_resource type="Texture2D" uid="uid://4s3spusjrbfu" path="res://Assets/Icons/Science/nonmetal.svg" id="6_yg63q"]
+[ext_resource type="Texture2D" uid="uid://bw07ukqhtcbnf" path="res://Assets/Icons/Science/noble.svg" id="7_fpnrf"]
+[ext_resource type="Texture2D" uid="uid://bbb6rdy7luj6g" path="res://Assets/Icons/Science/decay.svg" id="7_oe6gi"]
 
 [node name="MarginContainer" type="MarginContainer" unique_id=1390222257]
 anchors_preset = 15
@@ -759,63 +768,265 @@ layout_mode = 2
 element = 103
 
 [node name="PopupPanel" type="PanelContainer" parent="." unique_id=440044296]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 offset_transform_enabled = true
 mouse_filter = 2
+mouse_behavior_recursive = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PopupPanel" unique_id=687106483]
 layout_mode = 2
 mouse_filter = 2
+mouse_behavior_recursive = 1
 
 [node name="Name" type="Label" parent="PopupPanel/VBoxContainer" unique_id=1824822766]
 layout_mode = 2
+mouse_behavior_recursive = 1
 text = "helium"
 
 [node name="ProtonLong" type="Label" parent="PopupPanel/VBoxContainer" unique_id=297637457]
 layout_mode = 2
+mouse_behavior_recursive = 1
 text = "15 protons"
 
-[node name="Metallicity" type="Label" parent="PopupPanel/VBoxContainer" unique_id=581826550]
+[node name="Metal" type="HBoxContainer" parent="PopupPanel/VBoxContainer" unique_id=1014491000]
+modulate = Color(0.6, 0.6, 1, 1)
 layout_mode = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+
+[node name="TextureRect" type="TextureRect" parent="PopupPanel/VBoxContainer/Metal" unique_id=48179040]
+texture_filter = 4
+layout_mode = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+texture = ExtResource("3_cu41k")
+expand_mode = 3
+stretch_mode = 6
+
+[node name="Metallicity" type="Label" parent="PopupPanel/VBoxContainer/Metal" unique_id=581826550]
+layout_mode = 2
+mouse_behavior_recursive = 1
 text = "metal"
 
-[node name="Phase" type="Label" parent="PopupPanel/VBoxContainer" unique_id=126909679]
+[node name="LocaleNode" type="Node" parent="PopupPanel/VBoxContainer/Metal/Metallicity" unique_id=484215193]
+script = ExtResource("3_xh0xs")
+translations = Dictionary[StringName, String]({
+&"text": "REFERENCE_PD_METAL"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="Metalloid" type="HBoxContainer" parent="PopupPanel/VBoxContainer" unique_id=815512163]
+modulate = Color(0.6, 0.8, 0.8, 1)
 layout_mode = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+
+[node name="TextureRect" type="TextureRect" parent="PopupPanel/VBoxContainer/Metalloid" unique_id=1961212979]
+texture_filter = 4
+layout_mode = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+texture = ExtResource("5_ps78w")
+expand_mode = 3
+stretch_mode = 6
+
+[node name="Metallicity" type="Label" parent="PopupPanel/VBoxContainer/Metalloid" unique_id=1147263959]
+layout_mode = 2
+mouse_behavior_recursive = 1
+text = "metalloid"
+
+[node name="LocaleNode" type="Node" parent="PopupPanel/VBoxContainer/Metalloid/Metallicity" unique_id=1569265618]
+script = ExtResource("3_xh0xs")
+translations = Dictionary[StringName, String]({
+&"text": "REFERENCE_PD_METALLOID"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="Nonmetal" type="HBoxContainer" parent="PopupPanel/VBoxContainer" unique_id=46754239]
+modulate = Color(1, 0.6, 0.6, 1)
+layout_mode = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+
+[node name="TextureRect" type="TextureRect" parent="PopupPanel/VBoxContainer/Nonmetal" unique_id=548547117]
+texture_filter = 4
+layout_mode = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+texture = ExtResource("6_yg63q")
+expand_mode = 3
+stretch_mode = 6
+
+[node name="Metallicity" type="Label" parent="PopupPanel/VBoxContainer/Nonmetal" unique_id=287834560]
+layout_mode = 2
+mouse_behavior_recursive = 1
+text = "nonmetal"
+
+[node name="LocaleNode" type="Node" parent="PopupPanel/VBoxContainer/Nonmetal/Metallicity" unique_id=1549924657]
+script = ExtResource("3_xh0xs")
+translations = Dictionary[StringName, String]({
+&"text": "REFERENCE_PD_NONMETAL"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="Solid" type="HBoxContainer" parent="PopupPanel/VBoxContainer" unique_id=1022702288]
+modulate = Color(0.5372549, 0.5882353, 0.5372549, 1)
+layout_mode = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+
+[node name="TextureRect" type="TextureRect" parent="PopupPanel/VBoxContainer/Solid" unique_id=493336410]
+texture_filter = 4
+layout_mode = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+texture = ExtResource("4_uux4a")
+expand_mode = 3
+stretch_mode = 6
+
+[node name="Phase" type="Label" parent="PopupPanel/VBoxContainer/Solid" unique_id=126909679]
+layout_mode = 2
+mouse_behavior_recursive = 1
 text = "solid"
 
-[node name="Nobility" type="Label" parent="PopupPanel/VBoxContainer" unique_id=1397720716]
+[node name="LocaleNode" type="Node" parent="PopupPanel/VBoxContainer/Solid/Phase" unique_id=1707800090]
+script = ExtResource("3_xh0xs")
+translations = Dictionary[StringName, String]({
+&"text": "REFERENCE_PD_STP_SOLID"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="Liquid" type="HBoxContainer" parent="PopupPanel/VBoxContainer" unique_id=814767327]
+modulate = Color(0.49019608, 0.7490196, 0.9607843, 1)
+layout_mode = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+
+[node name="TextureRect" type="TextureRect" parent="PopupPanel/VBoxContainer/Liquid" unique_id=1632853198]
+texture_filter = 4
+layout_mode = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+texture = ExtResource("5_oe6gi")
+expand_mode = 3
+stretch_mode = 6
+
+[node name="Phase" type="Label" parent="PopupPanel/VBoxContainer/Liquid" unique_id=1026712506]
+layout_mode = 2
+mouse_behavior_recursive = 1
+text = "liquid"
+
+[node name="LocaleNode" type="Node" parent="PopupPanel/VBoxContainer/Liquid/Phase" unique_id=1964016802]
+script = ExtResource("3_xh0xs")
+translations = Dictionary[StringName, String]({
+&"text": "REFERENCE_PD_STP_LIQUID"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="Gas" type="HBoxContainer" parent="PopupPanel/VBoxContainer" unique_id=262963112]
+modulate = Color(1, 0.8117647, 0.6509804, 1)
+layout_mode = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+
+[node name="TextureRect" type="TextureRect" parent="PopupPanel/VBoxContainer/Gas" unique_id=2106000472]
+texture_filter = 4
+layout_mode = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+texture = ExtResource("6_fpnrf")
+expand_mode = 3
+stretch_mode = 6
+
+[node name="Phase" type="Label" parent="PopupPanel/VBoxContainer/Gas" unique_id=2117758319]
+layout_mode = 2
+mouse_behavior_recursive = 1
+text = "gas"
+
+[node name="LocaleNode" type="Node" parent="PopupPanel/VBoxContainer/Gas/Phase" unique_id=712404742]
+script = ExtResource("3_xh0xs")
+translations = Dictionary[StringName, String]({
+&"text": "REFERENCE_PD_STP_GAS"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="Noble" type="HBoxContainer" parent="PopupPanel/VBoxContainer" unique_id=718924157]
 modulate = Color(0.78039217, 0.60784316, 1, 1)
 layout_mode = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+
+[node name="TextureRect" type="TextureRect" parent="PopupPanel/VBoxContainer/Noble" unique_id=2088766630]
+texture_filter = 4
+layout_mode = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+texture = ExtResource("7_fpnrf")
+expand_mode = 3
+stretch_mode = 6
+
+[node name="Nobility" type="Label" parent="PopupPanel/VBoxContainer/Noble" unique_id=1397720716]
+layout_mode = 2
+mouse_behavior_recursive = 1
 text = "noble"
 
-[node name="LocaleNode" type="Node" parent="PopupPanel/VBoxContainer/Nobility" unique_id=1591459229]
+[node name="LocaleNode" type="Node" parent="PopupPanel/VBoxContainer/Noble/Nobility" unique_id=1591459229]
 script = ExtResource("3_xh0xs")
 translations = Dictionary[StringName, String]({
 &"text": "REFERENCE_PD_NOBLE"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="Diatomic" type="Label" parent="PopupPanel/VBoxContainer" unique_id=1367327296]
+[node name="Diatomic" type="HBoxContainer" parent="PopupPanel/VBoxContainer" unique_id=113376998]
 modulate = Color(1, 0.9529412, 0.7529412, 1)
 layout_mode = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+
+[node name="TextureRect" type="TextureRect" parent="PopupPanel/VBoxContainer/Diatomic" unique_id=465218974]
+texture_filter = 4
+layout_mode = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+texture = ExtResource("3_ey3pd")
+expand_mode = 3
+stretch_mode = 6
+
+[node name="Diatomic" type="Label" parent="PopupPanel/VBoxContainer/Diatomic" unique_id=1367327296]
+layout_mode = 2
+mouse_behavior_recursive = 1
 text = "diatomic"
 
-[node name="LocaleNode" type="Node" parent="PopupPanel/VBoxContainer/Diatomic" unique_id=1923971261]
+[node name="LocaleNode" type="Node" parent="PopupPanel/VBoxContainer/Diatomic/Diatomic" unique_id=1923971261]
 script = ExtResource("3_xh0xs")
 translations = Dictionary[StringName, String]({
 &"text": "REFERENCE_PD_DIATOMIC"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="Radioactive" type="Label" parent="PopupPanel/VBoxContainer" unique_id=1093404535]
+[node name="Decays" type="HBoxContainer" parent="PopupPanel/VBoxContainer" unique_id=1945663671]
 modulate = Color(0.8352941, 1, 0.74509805, 1)
 layout_mode = 2
-text = "radioactive"
+mouse_filter = 2
+mouse_behavior_recursive = 1
 
-[node name="LocaleNode" type="Node" parent="PopupPanel/VBoxContainer/Radioactive" unique_id=2091556125]
+[node name="TextureRect" type="TextureRect" parent="PopupPanel/VBoxContainer/Decays" unique_id=1811434291]
+texture_filter = 4
+layout_mode = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+texture = ExtResource("7_oe6gi")
+expand_mode = 3
+stretch_mode = 6
+
+[node name="Radioactive" type="Label" parent="PopupPanel/VBoxContainer/Decays" unique_id=1093404535]
+layout_mode = 2
+mouse_behavior_recursive = 1
+text = "no stable isotopes"
+
+[node name="LocaleNode" type="Node" parent="PopupPanel/VBoxContainer/Decays/Radioactive" unique_id=2091556125]
 script = ExtResource("3_xh0xs")
 translations = Dictionary[StringName, String]({
 &"text": "REFERENCE_PD_UNSTABLE"

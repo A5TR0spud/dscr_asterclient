@@ -533,7 +533,7 @@ translations = Dictionary[StringName, String]({
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="Gram" type="SpinBox" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Mass" unique_id=788664132]
+[node name="Kilogram" type="SpinBox" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Mass" unique_id=788664132]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = -9.223372e+18
@@ -547,10 +547,10 @@ custom_arrow_round = true
 script = ExtResource("5_vb677")
 metadata/_custom_type_script = "uid://daa7cp85f4qgs"
 
-[node name="LocaleNode" type="Node" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Mass/Gram" unique_id=202126004]
+[node name="LocaleNode" type="Node" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Mass/Kilogram" unique_id=202126004]
 script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
-&"suffix": "REF_UNIT_GRAM"
+&"suffix": "REF_UNIT_KILOGRAM"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
@@ -593,6 +593,27 @@ metadata/_custom_type_script = "uid://daa7cp85f4qgs"
 script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_STONE"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="Slugs" type="SpinBox" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Mass" unique_id=1522540719]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -9.223372e+18
+max_value = 9.223372e+18
+step = 0.0
+allow_greater = true
+allow_lesser = true
+update_on_text_changed = true
+custom_arrow_step = 1.0
+custom_arrow_round = true
+script = ExtResource("5_vb677")
+metadata/_custom_type_script = "uid://daa7cp85f4qgs"
+
+[node name="LocaleNode" type="Node" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Mass/Slugs" unique_id=1629403847]
+script = ExtResource("2_jk0c3")
+translations = Dictionary[StringName, String]({
+&"suffix": "REF_UNIT_SLUG"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
@@ -712,56 +733,44 @@ metadata/_custom_type_script = "uid://7gga31jeosxl"
 [node name="VBoxContainer" type="VBoxContainer" parent="Corpus/VBoxContainer/CommonCompounds" unique_id=1165898416]
 layout_mode = 2
 
-[node name="MoleculeCell" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=1256021337 instance=ExtResource("9_nqcgi")]
+[node name="Water" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=1256021337 instance=ExtResource("9_nqcgi")]
+layout_mode = 2
+type = "WATER"
+
+[node name="CO2" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=955220435 instance=ExtResource("9_nqcgi")]
+layout_mode = 2
+type = "CARBON_DIOXIDE"
+
+[node name="Ammonia" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=1914255866 instance=ExtResource("9_nqcgi")]
+layout_mode = 2
+type = "AMMONIA"
+
+[node name="H2O2" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=1207488832 instance=ExtResource("9_nqcgi")]
+layout_mode = 2
+type = "HYDROGEN_PEROXIDE"
+
+[node name="Salt" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=2034140791 instance=ExtResource("9_nqcgi")]
+layout_mode = 2
+type = "TABLE_SALT"
+
+[node name="K Nitrate" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=587062801 instance=ExtResource("9_nqcgi")]
+layout_mode = 2
+type = "POTASSIUM_NITRATE"
+
+[node name="Sulfuric Acid" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=630725560 instance=ExtResource("9_nqcgi")]
+layout_mode = 2
+type = "SULFURIC_ACID"
+
+[node name="HCl" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=739592513 instance=ExtResource("9_nqcgi")]
+layout_mode = 2
+type = "HYDROCHLORIC_ACID"
+
+[node name="Acetic Acid" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=1244397070 instance=ExtResource("9_nqcgi")]
 layout_mode = 2
 
-[node name="MoleculeCell2" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=955220435 instance=ExtResource("9_nqcgi")]
+[node name="Acetone" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=582733675 instance=ExtResource("9_nqcgi")]
 layout_mode = 2
-
-[node name="MoleculeCell3" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=1914255866 instance=ExtResource("9_nqcgi")]
-layout_mode = 2
-
-[node name="MoleculeCell4" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=1207488832 instance=ExtResource("9_nqcgi")]
-layout_mode = 2
-
-[node name="MoleculeCell5" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=2034140791 instance=ExtResource("9_nqcgi")]
-layout_mode = 2
-
-[node name="MoleculeCell6" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=587062801 instance=ExtResource("9_nqcgi")]
-layout_mode = 2
-
-[node name="MoleculeCell7" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=630725560 instance=ExtResource("9_nqcgi")]
-layout_mode = 2
-
-[node name="MoleculeCell8" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=739592513 instance=ExtResource("9_nqcgi")]
-layout_mode = 2
-
-[node name="MoleculeCell9" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=1244397070 instance=ExtResource("9_nqcgi")]
-layout_mode = 2
-
-[node name="MoleculeCell10" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=582733675 instance=ExtResource("9_nqcgi")]
-layout_mode = 2
-
-[node name="MoleculeCell11" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=1779137342 instance=ExtResource("9_nqcgi")]
-layout_mode = 2
-
-[node name="MoleculeCell12" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=1196629859 instance=ExtResource("9_nqcgi")]
-layout_mode = 2
-
-[node name="MoleculeCell13" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=611606055 instance=ExtResource("9_nqcgi")]
-layout_mode = 2
-
-[node name="MoleculeCell14" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=1312334094 instance=ExtResource("9_nqcgi")]
-layout_mode = 2
-
-[node name="MoleculeCell15" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=184182696 instance=ExtResource("9_nqcgi")]
-layout_mode = 2
-
-[node name="MoleculeCell16" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=358962116 instance=ExtResource("9_nqcgi")]
-layout_mode = 2
-
-[node name="MoleculeCell17" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=165036131 instance=ExtResource("9_nqcgi")]
-layout_mode = 2
+type = "ACETONE"
 
 [connection signal="value_changed" from="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Length/Akermeter" to="Corpus/VBoxContainer/UnitsDrop/UnitConversion" method="_on_akermeter_value_changed"]
 [connection signal="value_changed" from="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Length/Metrimeter" to="Corpus/VBoxContainer/UnitsDrop/UnitConversion" method="_on_metrimeter_value_changed"]
@@ -781,9 +790,10 @@ layout_mode = 2
 [connection signal="value_changed" from="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Time/OctYear" to="Corpus/VBoxContainer/UnitsDrop/UnitConversion" method="_on_oct_year_value_changed"]
 [connection signal="value_changed" from="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Time/DecYear" to="Corpus/VBoxContainer/UnitsDrop/UnitConversion" method="_on_dec_year_value_changed"]
 [connection signal="value_changed" from="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Mass/Akergram" to="Corpus/VBoxContainer/UnitsDrop/UnitConversion" method="_on_akergram_value_changed"]
-[connection signal="value_changed" from="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Mass/Gram" to="Corpus/VBoxContainer/UnitsDrop/UnitConversion" method="_on_gram_value_changed"]
+[connection signal="value_changed" from="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Mass/Kilogram" to="Corpus/VBoxContainer/UnitsDrop/UnitConversion" method="_on_kilogram_value_changed"]
 [connection signal="value_changed" from="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Mass/Pound" to="Corpus/VBoxContainer/UnitsDrop/UnitConversion" method="_on_pound_value_changed"]
 [connection signal="value_changed" from="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Mass/Stones" to="Corpus/VBoxContainer/UnitsDrop/UnitConversion" method="_on_stones_value_changed"]
+[connection signal="value_changed" from="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Mass/Slugs" to="Corpus/VBoxContainer/UnitsDrop/UnitConversion" method="_on_slugs_value_changed"]
 [connection signal="value_changed" from="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Mass/ImpTon" to="Corpus/VBoxContainer/UnitsDrop/UnitConversion" method="_on_imp_ton_value_changed"]
 [connection signal="value_changed" from="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Mass/Supermass" to="Corpus/VBoxContainer/UnitsDrop/UnitConversion" method="_on_supermass_value_changed"]
 [connection signal="value_changed" from="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Mass/Earth" to="Corpus/VBoxContainer/UnitsDrop/UnitConversion" method="_on_earth_value_changed"]

@@ -18,7 +18,7 @@ var current_head: ChatEntryNode = null
 var fin: bool = false
 
 func _ready() -> void:
-	Main.instance.reload_dict.connect(update_name)
+	#Main.instance.reload_dict.connect(update_name)
 	Main.instance.localization_reload.connect(update_name)
 	scroll_bar.value_changed.connect(_on_scroll)
 	scroll_bar.changed.connect(set_scroll_down_vis)

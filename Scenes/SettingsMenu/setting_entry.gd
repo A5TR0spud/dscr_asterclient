@@ -20,7 +20,7 @@ func set_state_no_signal(val: bool):
 	bool_button.refresh()
 
 func _ready():
-	Main.instance.reload_dict.connect(refresh)
+	#Main.instance.reload_dict.connect(refresh)
 	Main.instance.localization_reload.connect(refresh)
 	bool_button.set_pressed_no_signal(state)
 	bool_button.refresh()

@@ -96,11 +96,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="DSMIDI_Button" parent="Body/Corpus/Header" unique_id=171257682 instance=ExtResource("7_c4b4r")]
+unique_name_in_owner = true
 layout_mode = 2
 icon = ExtResource("8_4o5wv")
 tooltip_key = "BUTTON_DSMIDI"
 
 [node name="DSVE_Button" parent="Body/Corpus/Header" unique_id=1745782209 instance=ExtResource("7_c4b4r")]
+unique_name_in_owner = true
 layout_mode = 2
 icon = ExtResource("9_4o5wv")
 tooltip_key = "BUTTON_DSVE"
@@ -134,7 +136,8 @@ layout_mode = 2
 [node name="Sidebar" type="VBoxContainer" parent="Body" unique_id=2052290855]
 layout_mode = 2
 
-[node name="SidebarTabber" type="TabContainer" parent="Body/Sidebar" unique_id=853955400]
+[node name="SidebarTabberMain" type="TabContainer" parent="Body/Sidebar" unique_id=853955400]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 current_tab = 0
@@ -144,18 +147,18 @@ tab_0/title = "Dict"
 tab_1/title = "Human"
 script = ExtResource("6_es6iu")
 
-[node name="DictionaryTab" parent="Body/Sidebar/SidebarTabber" unique_id=1745367524 instance=ExtResource("7_hfg1r")]
+[node name="DictionaryTab" parent="Body/Sidebar/SidebarTabberMain" unique_id=1745367524 instance=ExtResource("7_hfg1r")]
 layout_mode = 2
 
-[node name="OnlinePeopleTab" parent="Body/Sidebar/SidebarTabber" unique_id=1445824947 instance=ExtResource("8_hfg1r")]
+[node name="OnlinePeopleTab" parent="Body/Sidebar/SidebarTabberMain" unique_id=1445824947 instance=ExtResource("8_hfg1r")]
 visible = false
 layout_mode = 2
 
-[node name="SettingsTab" parent="Body/Sidebar/SidebarTabber" unique_id=1649791393 instance=ExtResource("9_4e4y2")]
+[node name="SettingsTab" parent="Body/Sidebar/SidebarTabberMain" unique_id=1649791393 instance=ExtResource("9_4e4y2")]
 visible = false
 layout_mode = 2
 
-[node name="LocaleNode" type="Node" parent="Body/Sidebar/SidebarTabber" unique_id=1503982285]
+[node name="LocaleNode" type="Node" parent="Body/Sidebar/SidebarTabberMain" unique_id=1503982285]
 script = ExtResource("6_2ok46")
 translations = Dictionary[StringName, String]({
 &"tab_0/title": "TAB_DICT",
@@ -183,7 +186,8 @@ translations = Dictionary[StringName, String]({
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="CallsignEdit" parent="Body/Sidebar/CallsignContainer" unique_id=965442127 instance=ExtResource("11_4a3kt")]
+[node name="CallsignPickerMain" parent="Body/Sidebar/CallsignContainer" unique_id=965442127 instance=ExtResource("11_4a3kt")]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 
@@ -213,5 +217,5 @@ layout_mode = 2
 [connection signal="pressed" from="Body/Corpus/Header/DSVE_Button" to="." method="_on_dsve_button_pressed"]
 [connection signal="pressed" from="Body/Corpus/Header/LocaleButton" to="." method="_on_locale_button_pressed"]
 [connection signal="force_select" from="Body/Corpus/TabContainer/Library" to="Body/Corpus" method="_on_library_force_select"]
-[connection signal="callsign_submitted" from="Body/Sidebar/CallsignContainer/CallsignEdit" to="." method="_on_callsign_edit_callsign_submitted"]
+[connection signal="callsign_submitted" from="Body/Sidebar/CallsignContainer/CallsignPickerMain" to="." method="_on_callsign_edit_callsign_submitted"]
 [connection signal="visibility_changed" from="DictEditPrison/DictEditWindow" to="DictEditPrison" method="_on_dict_edit_window_visibility_changed"]

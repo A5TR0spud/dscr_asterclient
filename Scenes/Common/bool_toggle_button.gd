@@ -5,7 +5,7 @@ class_name BoolButton
 @export var on_text: String = "SETTINGS_BOOL_TRUE"
 
 func _ready():
-	Main.instance.reload_dict.connect(refresh)
+	#Main.instance.reload_dict.connect(refresh)
 	Main.instance.localization_reload.connect(refresh)
 	refresh.call_deferred()
 
