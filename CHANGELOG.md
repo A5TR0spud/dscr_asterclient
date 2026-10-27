@@ -9,11 +9,12 @@
 * Nicknames will translate piped signals (|). Pipes can be escaped by doubling them (ie. type '||-245' to get '|-245' instead of \<signal_-245\>)
 * Can now click callsigns in chat to quickly start editing nickname
 * Hovering over signals in transmissions now shows their signal numbers
+* Added rename button to Library
 
 ### Changes
 
 * Due to the periodic table being useless or impossible to translate to Meteorese, Meteorese has been separated from the main language options into a UI preference
-* Adjusted some translations
+* Adjusted some translations/localizations
 * Identicons dim in chat when the user is offline
 * Sending a message scrolls to bottom
 * Pressing Ctrl+E now sends
@@ -21,6 +22,8 @@
 * Library submit button now changes based on whether it will overwrite or not
 * System messages now support signal styling
 * Middle clicking a channel tab now closes it
+* Reduced tick rate from 25hz to 10hz
+* Capped FPS to 60 and enabled low processor mode
 
 ### Fixes
 

@@ -16,6 +16,8 @@ config/tags=PackedStringArray("2d", "effort", "ui")
 run/main_scene="uid://bft3wuvruhqvw"
 config/auto_accept_quit=false
 config/features=PackedStringArray("4.7", "Forward Plus")
+run/max_fps=60
+run/low_processor_mode=true
 boot_splash/bg_color=Color(0.07058824, 0, 0.10980392, 1)
 boot_splash/stretch_mode=0
 boot_splash/image="uid://j24vprtvfml2"
@@ -182,12 +184,12 @@ search_history={
 [internationalization]
 
 rendering/root_node_auto_translate=false
-locale/translations=PackedStringArray("res://Localization/lang.en.translation", "res://Localization/lang.m0.translation", "res://Localization/lang.pl.translation", "res://Localization/periodic_table.en.translation", "res://Localization/periodic_table.pl.translation", "res://Localization/compounds.en.translation", "res://Localization/compounds.m0.translation")
+locale/translations=PackedStringArray("res://Localization/lang.en.translation", "res://Localization/lang.m0.translation", "res://Localization/lang.pl.translation", "res://Localization/periodic_table.en.translation", "res://Localization/periodic_table.pl.translation")
 
 [physics]
 
 2d/run_on_separate_thread=true
-common/physics_ticks_per_second=25
+common/physics_ticks_per_second=10
 common/max_physics_steps_per_frame=5
 2d/physics_engine="Dummy"
 3d/physics_engine="Dummy"

@@ -9,8 +9,8 @@ BUTTON_DSMIDI,-577 -38,,DSMIDI,DSMIDI
 BUTTON_LANG,-195 -174,,Change language,Zmiana języka
 BUTTON_SCROLL,-119 -43,,Return to bottom,Przewiń w dół
 PLACEHOLDER_ENTRY,-43 -38,,Enter message here…,Wpisz wiadomość…
-SIGNAL_NAME,-42,,Signal,Hasło
-SIGNAL_NUMBER,-237,,Number,Sygnał
+SIGNAL_NAME,-42,,Name,Hasło
+SIGNAL_NUMBER,-237,,Signal,Sygnał
 TIME_AGO_HSEC,{0} -69 -118 -121,yes,{0} He-6 second ago,{0} He-6 sekundę temu
 ,,,{0} He-6 seconds ago,{0} He-6 sekundy temu
 ,,,,{0} He-6 sekund temu
@@ -70,6 +70,7 @@ COPY_SIGNAL_NAMES,-237 -40,,Copy words,Kopiuj słowa
 SUBMIT_LONG,-174 -85,,Submit,Zapisz
 LIBRARY_NEW,-43 -38 -85,,Submit,
 LIBRARY_REPLACE,-43 -174 -85,,Replace,
+LIBRARY_RENAME,-41 {0} -40,,Rename from “{0}”,
 CANCEL_LONG,-174 -29 -85,,Cancel,Cofnij zmiany
 DELETE_ASK,-88 -127 -85,,Delete?,Usuń
 DELETE_CONFIRM_TRX,-43 -88 -85,,Are you sure?,Napewno?
@@ -150,7 +151,7 @@ DICT_COUNT,-42 -23 -4 {0},yes,{0} Defined Signal,Zdefiniowano {0} hasło
 ,,,,Zdefiniowano {0} haseł
 LIBRARY_SEARCH,-163,,Search…,Wyszukaj…
 CHAT_CHANNEL,{0},,{0},{0}
-CHAT_CHANNEL_NONE,-111 -65535,,Main Chat,Główne pasmo
+CHAT_CHANNEL_NONE,-111 -65535,,None {0},Główne {0}
 CHAT_CHANNEL_UNREAD,-124 {0},,(?) {0},(?) {0}
 SEND_TO_LIBRARY,-16 -14 -43 -15 -41 -39,,Send to library,Dodaj do biblioteki
 NEW_LIBRARY_NAME,{name} -2 {trx} -14 {contents} -25 -15,,{name}_tr_{trx}: “{contents}…”,{name}_tr_{trx}: “{contents}…”
@@ -201,4 +202,3 @@ REF_UNIT_TON,2240 -130 -104 -151 -74 -68,,Long Tons,
 REF_UNIT_SUPERMASS,-76,,Octoid Planets,
 REF_UNIT_EARTH,-139 -74,,Terran Masses,
 REF_UNIT_SOL,-130 -90 -74,,Solar Masses,
-REF_COMPOUNDS,-108 -23 -57,,Common Compounds,

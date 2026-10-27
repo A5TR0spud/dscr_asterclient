@@ -5,10 +5,7 @@
 [ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="2_jk0c3"]
 [ext_resource type="PackedScene" uid="uid://ebnh5oxmelbl" path="res://Scenes/ReferenceTab/periodic_table.tscn" id="4_cydeu"]
 [ext_resource type="Script" uid="uid://cwy0rhlrtctmt" path="res://Scenes/ReferenceTab/unit_conversion.gd" id="4_vb677"]
-[ext_resource type="StyleBox" uid="uid://10juafvr3ky1" path="res://Styling/Tabber/ButtonLookalike/tab_unselected.tres" id="5_f6m34"]
-[ext_resource type="PackedScene" uid="uid://dkmx0p5bvnjve" path="res://Scenes/Common/NumberEdit.tscn" id="5_n1kvl"]
 [ext_resource type="Script" uid="uid://daa7cp85f4qgs" path="res://Scripts/NumberEdit.gd" id="5_vb677"]
-[ext_resource type="PackedScene" uid="uid://dkjcdxgii88yv" path="res://Scenes/ReferenceTab/molecule_cell.tscn" id="9_nqcgi"]
 
 [node name="ReferenceTab" type="PanelContainer" unique_id=834008978]
 anchors_preset = 15
@@ -64,7 +61,6 @@ layout_mode = 2
 
 [node name="UnitsDrop" type="FoldableContainer" parent="Corpus/VBoxContainer" unique_id=1240872268]
 layout_mode = 2
-folded = true
 title = "units"
 
 [node name="LocaleNode" type="Node" parent="Corpus/VBoxContainer/UnitsDrop" unique_id=228561470]
@@ -75,7 +71,6 @@ translations = Dictionary[StringName, String]({
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="UnitConversion" type="VBoxContainer" parent="Corpus/VBoxContainer/UnitsDrop" unique_id=1895155616]
-visible = false
 layout_mode = 2
 script = ExtResource("4_vb677")
 
@@ -95,28 +90,6 @@ metadata/_custom_type_script = "uid://7gga31jeosxl"
 layout_mode = 2
 columns = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Length" unique_id=723305599]
-visible = false
-layout_mode = 2
-theme_override_styles/panel = ExtResource("5_f6m34")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Length/PanelContainer" unique_id=1238528322]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Length/PanelContainer/VBoxContainer" unique_id=1249158385]
-layout_mode = 2
-text = "label"
-
-[node name="LocaleNode" type="Node" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Length/PanelContainer/VBoxContainer/Label" unique_id=987674458]
-script = ExtResource("2_jk0c3")
-translations = Dictionary[StringName, String]({
-&"text": "REF_UNIT_AKERMETER"
-})
-metadata/_custom_type_script = "uid://7gga31jeosxl"
-
-[node name="NumberEdit" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Length/PanelContainer/VBoxContainer" unique_id=256041095 instance=ExtResource("5_n1kvl")]
-layout_mode = 2
-
 [node name="Akermeter" type="SpinBox" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Length" unique_id=528169804]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -125,7 +98,6 @@ max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 custom_arrow_step = 1.0
 custom_arrow_round = true
 script = ExtResource("5_vb677")
@@ -146,7 +118,6 @@ max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 custom_arrow_step = 1.0
 custom_arrow_round = true
 script = ExtResource("5_vb677")
@@ -167,7 +138,6 @@ max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 custom_arrow_step = 1.0
 custom_arrow_round = true
 script = ExtResource("5_vb677")
@@ -188,7 +158,6 @@ max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 custom_arrow_step = 1.0
 custom_arrow_round = true
 script = ExtResource("5_vb677")
@@ -209,7 +178,6 @@ max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 custom_arrow_step = 1.0
 custom_arrow_round = true
 script = ExtResource("5_vb677")
@@ -230,7 +198,6 @@ max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 custom_arrow_step = 1.0
 custom_arrow_round = true
 script = ExtResource("5_vb677")
@@ -251,7 +218,6 @@ max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 custom_arrow_step = 1.0
 custom_arrow_round = true
 script = ExtResource("5_vb677")
@@ -272,7 +238,6 @@ max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 custom_arrow_step = 1.0
 custom_arrow_round = true
 script = ExtResource("5_vb677")
@@ -293,7 +258,6 @@ max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 custom_arrow_step = 1.0
 custom_arrow_round = true
 script = ExtResource("5_vb677")
@@ -333,7 +297,6 @@ max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 custom_arrow_step = 1.0
 custom_arrow_round = true
 script = ExtResource("5_vb677")
@@ -354,7 +317,6 @@ max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 custom_arrow_step = 1.0
 custom_arrow_round = true
 script = ExtResource("5_vb677")
@@ -375,7 +337,6 @@ max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 custom_arrow_step = 1.0
 custom_arrow_round = true
 script = ExtResource("5_vb677")
@@ -396,7 +357,6 @@ max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 custom_arrow_step = 1.0
 custom_arrow_round = true
 script = ExtResource("5_vb677")
@@ -417,7 +377,6 @@ max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 custom_arrow_step = 1.0
 custom_arrow_round = true
 script = ExtResource("5_vb677")
@@ -438,7 +397,6 @@ max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 custom_arrow_step = 1.0
 custom_arrow_round = true
 script = ExtResource("5_vb677")
@@ -459,7 +417,6 @@ max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 custom_arrow_step = 1.0
 custom_arrow_round = true
 script = ExtResource("5_vb677")
@@ -480,7 +437,6 @@ max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 custom_arrow_step = 1.0
 custom_arrow_round = true
 script = ExtResource("5_vb677")
@@ -520,7 +476,6 @@ max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 custom_arrow_step = 1.0
 custom_arrow_round = true
 script = ExtResource("5_vb677")
@@ -541,7 +496,6 @@ max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 custom_arrow_step = 1.0
 custom_arrow_round = true
 script = ExtResource("5_vb677")
@@ -562,7 +516,6 @@ max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 custom_arrow_step = 1.0
 custom_arrow_round = true
 script = ExtResource("5_vb677")
@@ -583,7 +536,6 @@ max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 custom_arrow_step = 1.0
 custom_arrow_round = true
 script = ExtResource("5_vb677")
@@ -604,7 +556,6 @@ max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 custom_arrow_step = 1.0
 custom_arrow_round = true
 script = ExtResource("5_vb677")
@@ -625,7 +576,6 @@ max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 custom_arrow_step = 1.0
 custom_arrow_round = true
 script = ExtResource("5_vb677")
@@ -646,7 +596,6 @@ max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 custom_arrow_step = 1.0
 custom_arrow_round = true
 script = ExtResource("5_vb677")
@@ -667,7 +616,6 @@ max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 custom_arrow_step = 1.0
 custom_arrow_round = true
 script = ExtResource("5_vb677")
@@ -688,7 +636,6 @@ max_value = 9.223372e+18
 step = 0.0
 allow_greater = true
 allow_lesser = true
-update_on_text_changed = true
 custom_arrow_step = 1.0
 custom_arrow_round = true
 script = ExtResource("5_vb677")
@@ -717,60 +664,6 @@ metadata/_custom_type_script = "uid://7gga31jeosxl"
 visible = false
 layout_mode = 2
 size_flags_stretch_ratio = 10.0
-
-[node name="CommonCompounds" type="FoldableContainer" parent="Corpus/VBoxContainer" unique_id=1079724799]
-visible = false
-layout_mode = 2
-title = "common compounds"
-
-[node name="LocaleNode" type="Node" parent="Corpus/VBoxContainer/CommonCompounds" unique_id=1810739982]
-script = ExtResource("2_jk0c3")
-translations = Dictionary[StringName, String]({
-&"title": "REF_COMPOUNDS"
-})
-metadata/_custom_type_script = "uid://7gga31jeosxl"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Corpus/VBoxContainer/CommonCompounds" unique_id=1165898416]
-layout_mode = 2
-
-[node name="Water" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=1256021337 instance=ExtResource("9_nqcgi")]
-layout_mode = 2
-type = "WATER"
-
-[node name="CO2" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=955220435 instance=ExtResource("9_nqcgi")]
-layout_mode = 2
-type = "CARBON_DIOXIDE"
-
-[node name="Ammonia" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=1914255866 instance=ExtResource("9_nqcgi")]
-layout_mode = 2
-type = "AMMONIA"
-
-[node name="H2O2" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=1207488832 instance=ExtResource("9_nqcgi")]
-layout_mode = 2
-type = "HYDROGEN_PEROXIDE"
-
-[node name="Salt" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=2034140791 instance=ExtResource("9_nqcgi")]
-layout_mode = 2
-type = "TABLE_SALT"
-
-[node name="K Nitrate" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=587062801 instance=ExtResource("9_nqcgi")]
-layout_mode = 2
-type = "POTASSIUM_NITRATE"
-
-[node name="Sulfuric Acid" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=630725560 instance=ExtResource("9_nqcgi")]
-layout_mode = 2
-type = "SULFURIC_ACID"
-
-[node name="HCl" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=739592513 instance=ExtResource("9_nqcgi")]
-layout_mode = 2
-type = "HYDROCHLORIC_ACID"
-
-[node name="Acetic Acid" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=1244397070 instance=ExtResource("9_nqcgi")]
-layout_mode = 2
-
-[node name="Acetone" parent="Corpus/VBoxContainer/CommonCompounds/VBoxContainer" unique_id=582733675 instance=ExtResource("9_nqcgi")]
-layout_mode = 2
-type = "ACETONE"
 
 [connection signal="value_changed" from="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Length/Akermeter" to="Corpus/VBoxContainer/UnitsDrop/UnitConversion" method="_on_akermeter_value_changed"]
 [connection signal="value_changed" from="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Length/Metrimeter" to="Corpus/VBoxContainer/UnitsDrop/UnitConversion" method="_on_metrimeter_value_changed"]

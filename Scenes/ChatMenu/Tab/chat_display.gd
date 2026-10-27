@@ -208,7 +208,7 @@ func update_name():
 	Chat.instance.channel_container.set_tab_title(
 		get_index(),
 		Localizer.translate("CHAT_CHANNEL_UNREAD" if _unread_notification else "CHAT_CHANNEL",
-			Localizer.translate("CHAT_CHANNEL_NONE")
+			Localizer.translate("CHAT_CHANNEL_NONE", DictionaryHandler.get_or_default_signal_name(Chat.CHANNEL_SELECTOR))
 			if default_channel else
 			DictionaryHandler.get_or_default_signal_name(id) if id < 0 else str(id)
 		)

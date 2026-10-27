@@ -12,10 +12,11 @@ static func set_transmission(trx_name: String, msg: PackedInt64Array):
 static func get_transmission(trx_name: String) -> PackedInt64Array:
 	return PackedInt64Array((SaveSystem.library.get(trx_name, []) as Array).map(func(a): return int(a)))
 
-static func forget_transmission(trx_name: String):
+static func forget_transmission(trx_name: String, reload: bool = true):
 	SaveSystem.library.erase(trx_name)
-	Main.on_library_reload()
-	SaveSystem.save_library()
+	if reload:
+		Main.on_library_reload()
+		SaveSystem.save_library()
 
 static func get_all_transmissions() -> Array[String]:
 	return SaveSystem.library.keys()

@@ -49,6 +49,10 @@ translations = Dictionary[StringName, String]({
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
+[node name="RenameButton" type="Button" parent="Body/HBoxContainer/Editor/Header" unique_id=1214539870]
+layout_mode = 2
+text = "mynameisedwin"
+
 [node name="VSplitContainer" type="VSplitContainer" parent="Body/HBoxContainer/Editor" unique_id=2060103814]
 layout_mode = 2
 size_flags_vertical = 3
@@ -186,6 +190,7 @@ size_flags_vertical = 3
 
 [connection signal="timeout" from="RefreshDebounce" to="." method="_on_refresh_debounce_timeout"]
 [connection signal="text_changed" from="Body/HBoxContainer/Editor/Header/TransNameEdit" to="." method="_on_trans_name_edit_text_changed"]
+[connection signal="pressed" from="Body/HBoxContainer/Editor/Header/RenameButton" to="." method="_on_rename_button_pressed"]
 [connection signal="pressed" from="Body/HBoxContainer/Editor/VSplitContainer/VBoxContainer/HBoxContainer/CopySignals" to="." method="_on_copy_signals_pressed"]
 [connection signal="pressed" from="Body/HBoxContainer/Editor/VSplitContainer/VBoxContainer/HBoxContainer/CopyWords" to="." method="_on_copy_words_pressed"]
 [connection signal="text_changed" from="Body/HBoxContainer/Editor/VSplitContainer/VBoxContainer/ScrollContainer/TransmissionEdit" to="." method="_on_transmission_edit_text_changed"]

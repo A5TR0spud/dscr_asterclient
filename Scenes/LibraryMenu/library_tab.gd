@@ -12,6 +12,7 @@ class_name Library
 @onready var sidebar: Container = $Body/Sidebar
 
 @onready var submit_lang: LocaleNode = $Body/HBoxContainer/Editor/Buttons/Submit/LocaleNode
+@onready var rename_button: Button = $Body/HBoxContainer/Editor/Header/RenameButton
 
 var lib_entry = preload("res://Scenes/LibraryMenu/library_entry.tscn")
 
@@ -73,6 +74,7 @@ func _ready():
 	Main.instance.reload_library.connect(_reload)
 	Main.instance.reload_nicknames.connect(_refresh_preview)
 	Main.instance.on_callsign_changed.connect(func (_a): _refresh_preview())
+	Main.instance.localization_reload.connect(_refresh_rename_button)
 
 func _refresh_preview():
 	t_preview.refresh()
@@ -111,12 +113,16 @@ func _get_name() -> String:
 		o = "untitled"
 	return o
 
-func _on_submit_pressed():
+func save():
 	_evaluate_transmission()
 	LibraryHandler.set_transmission(_get_name(), current_transmission)
 	_reload()
 	unsaved_changes = false
 	instance.pre_name = _get_name()
+	_refresh_rename_button()
+
+func _on_submit_pressed():
+	save()
 
 func _on_cancel_pressed():
 	name_edit.text = pre_name
@@ -190,3 +196,12 @@ func refresh_submit_text(t: String = name_edit.text):
 	else:
 		submit_lang.translations.text = "LIBRARY_NEW"
 	submit_lang.refresh()
+	_refresh_rename_button()
+
+func _on_rename_button_pressed():
+	LibraryHandler.forget_transmission(pre_name, false)
+	save()
+
+func _refresh_rename_button():
+	rename_button.text = Localizer.translate("LIBRARY_RENAME", pre_name)
+	rename_button.visible = pre_name in LibraryHandler.get_all_transmissions() and _get_name() not in LibraryHandler.get_all_transmissions()
