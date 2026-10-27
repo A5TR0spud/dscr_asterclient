@@ -28,6 +28,7 @@ static var backup_callsign: int = -1
 static var failsafe_callsign_increment: bool = true
 static var stretch_canvas: bool = false
 static var stretch_scale: float = 1
+static var right_handed_sidebar: bool = true
 
 static func validate_and_set_language(code: String = language):
 	if code not in LocaleMenu.VALID_LANGUAGES:
@@ -104,6 +105,7 @@ static func initialize() -> void:
 	stretch_scale = SaveSystem.settings.get_or_add("stretch_scale", stretch_scale)
 	stretch_or_unstretch_canvas.call_deferred()
 	where_is_main_chat = SaveSystem.settings.get_or_add("where_is_main_chat", where_is_main_chat)
+	right_handed_sidebar = SaveSystem.settings.get_or_add("right_handed_sidebar", right_handed_sidebar)
 
 static func evaluate_volume() -> void:
 	AudioServer.set_bus_volume_linear(
@@ -155,3 +157,4 @@ static func export() -> void:
 	SaveSystem.settings.set("stretch_canvas", stretch_canvas)
 	SaveSystem.settings.set("stretch_scale", stretch_scale)
 	SaveSystem.settings.set("where_is_main_chat", where_is_main_chat)
+	SaveSystem.settings.set("right_handed_sidebar", right_handed_sidebar)

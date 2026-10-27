@@ -35,7 +35,7 @@ func _on_sig_edit_text_changed(new_text: String):
 
 var ticker: int = 0
 func _physics_process(_delta: float) -> void:
-	if re_search and ticker >= 4:
+	if re_search and ticker >= 2:
 		search_children()
 		ticker = -1
 	ticker += 1

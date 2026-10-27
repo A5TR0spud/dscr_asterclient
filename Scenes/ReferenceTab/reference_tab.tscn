@@ -28,7 +28,6 @@ size_flags_vertical = 3
 
 [node name="M0Refs" type="FoldableContainer" parent="Corpus/VBoxContainer" unique_id=280768690]
 layout_mode = 2
-folded = true
 title = "meteor 0 refs"
 
 [node name="LocaleNode" type="Node" parent="Corpus/VBoxContainer/M0Refs" unique_id=889370263]
@@ -39,7 +38,6 @@ translations = Dictionary[StringName, String]({
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Corpus/VBoxContainer/M0Refs" unique_id=1726704827]
-visible = false
 layout_mode = 2
 
 [node name="ColorRef" type="VBoxContainer" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer" unique_id=1374500898]
@@ -61,6 +59,7 @@ layout_mode = 2
 
 [node name="UnitsDrop" type="FoldableContainer" parent="Corpus/VBoxContainer" unique_id=1240872268]
 layout_mode = 2
+folded = true
 title = "units"
 
 [node name="LocaleNode" type="Node" parent="Corpus/VBoxContainer/UnitsDrop" unique_id=228561470]
@@ -71,6 +70,7 @@ translations = Dictionary[StringName, String]({
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="UnitConversion" type="VBoxContainer" parent="Corpus/VBoxContainer/UnitsDrop" unique_id=1895155616]
+visible = false
 layout_mode = 2
 script = ExtResource("4_vb677")
 

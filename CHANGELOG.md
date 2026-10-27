@@ -10,6 +10,7 @@
 * Can now click callsigns in chat to quickly start editing nickname
 * Hovering over signals in transmissions now shows their signal numbers
 * Added rename button to Library
+* New setting: right-vs-left-handed sidebar. Defaults to right
 
 ### Changes
 

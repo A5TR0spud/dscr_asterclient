@@ -29,5 +29,4 @@
 * android support
 * fps cap setting?
 * edit signal number from creation menu
-* toggle for left-right sidebar
 * Polish translations

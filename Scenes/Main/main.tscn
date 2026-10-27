@@ -61,6 +61,64 @@ bus = &"System"
 layout_mode = 2
 dragger_visibility = 1
 
+[node name="Sidebar" type="VBoxContainer" parent="Body" unique_id=2052290855]
+layout_mode = 2
+
+[node name="SidebarTabberMain" type="TabContainer" parent="Body/Sidebar" unique_id=853955400]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 0
+clip_tabs = false
+use_hidden_tabs_for_min_size = true
+tab_0/title = "Dict"
+tab_1/title = "Human"
+script = ExtResource("6_es6iu")
+
+[node name="DictionaryTab" parent="Body/Sidebar/SidebarTabberMain" unique_id=1745367524 instance=ExtResource("7_hfg1r")]
+layout_mode = 2
+
+[node name="OnlinePeopleTab" parent="Body/Sidebar/SidebarTabberMain" unique_id=1445824947 instance=ExtResource("8_hfg1r")]
+visible = false
+layout_mode = 2
+
+[node name="SettingsTab" parent="Body/Sidebar/SidebarTabberMain" unique_id=1649791393 instance=ExtResource("9_4e4y2")]
+visible = false
+layout_mode = 2
+
+[node name="LocaleNode" type="Node" parent="Body/Sidebar/SidebarTabberMain" unique_id=1503982285]
+script = ExtResource("6_2ok46")
+translations = Dictionary[StringName, String]({
+&"tab_0/title": "TAB_DICT",
+&"tab_1/title": "TAB_USERS",
+&"tab_2/title": "TAB_SETTINGS"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="HSeparator" type="HSeparator" parent="Body/Sidebar" unique_id=1590731449]
+layout_mode = 2
+
+[node name="CallsignContainer" type="VBoxContainer" parent="Body/Sidebar" unique_id=90528685]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="CallsignLabel" type="Label" parent="Body/Sidebar/CallsignContainer" unique_id=1998627814]
+layout_mode = 2
+text = "callsign"
+horizontal_alignment = 1
+
+[node name="LocaleNode" type="Node" parent="Body/Sidebar/CallsignContainer/CallsignLabel" unique_id=521216219]
+script = ExtResource("6_2ok46")
+translations = Dictionary[StringName, String]({
+&"text": "CALLSIGN"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="CallsignPickerMain" parent="Body/Sidebar/CallsignContainer" unique_id=965442127 instance=ExtResource("11_4a3kt")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+
 [node name="Corpus" type="VBoxContainer" parent="Body" unique_id=1313970636]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -133,64 +191,6 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
-[node name="Sidebar" type="VBoxContainer" parent="Body" unique_id=2052290855]
-layout_mode = 2
-
-[node name="SidebarTabberMain" type="TabContainer" parent="Body/Sidebar" unique_id=853955400]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 3
-current_tab = 0
-clip_tabs = false
-use_hidden_tabs_for_min_size = true
-tab_0/title = "Dict"
-tab_1/title = "Human"
-script = ExtResource("6_es6iu")
-
-[node name="DictionaryTab" parent="Body/Sidebar/SidebarTabberMain" unique_id=1745367524 instance=ExtResource("7_hfg1r")]
-layout_mode = 2
-
-[node name="OnlinePeopleTab" parent="Body/Sidebar/SidebarTabberMain" unique_id=1445824947 instance=ExtResource("8_hfg1r")]
-visible = false
-layout_mode = 2
-
-[node name="SettingsTab" parent="Body/Sidebar/SidebarTabberMain" unique_id=1649791393 instance=ExtResource("9_4e4y2")]
-visible = false
-layout_mode = 2
-
-[node name="LocaleNode" type="Node" parent="Body/Sidebar/SidebarTabberMain" unique_id=1503982285]
-script = ExtResource("6_2ok46")
-translations = Dictionary[StringName, String]({
-&"tab_0/title": "TAB_DICT",
-&"tab_1/title": "TAB_USERS",
-&"tab_2/title": "TAB_SETTINGS"
-})
-metadata/_custom_type_script = "uid://7gga31jeosxl"
-
-[node name="HSeparator" type="HSeparator" parent="Body/Sidebar" unique_id=1590731449]
-layout_mode = 2
-
-[node name="CallsignContainer" type="VBoxContainer" parent="Body/Sidebar" unique_id=90528685]
-layout_mode = 2
-size_flags_horizontal = 8
-
-[node name="CallsignLabel" type="Label" parent="Body/Sidebar/CallsignContainer" unique_id=1998627814]
-layout_mode = 2
-text = "callsign"
-horizontal_alignment = 1
-
-[node name="LocaleNode" type="Node" parent="Body/Sidebar/CallsignContainer/CallsignLabel" unique_id=521216219]
-script = ExtResource("6_2ok46")
-translations = Dictionary[StringName, String]({
-&"text": "CALLSIGN"
-})
-metadata/_custom_type_script = "uid://7gga31jeosxl"
-
-[node name="CallsignPickerMain" parent="Body/Sidebar/CallsignContainer" unique_id=965442127 instance=ExtResource("11_4a3kt")]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 4
-
 [node name="DictEditPrison" type="CenterContainer" parent="." unique_id=336075557]
 visible = false
 layout_mode = 2
@@ -210,6 +210,7 @@ layout_mode = 2
 
 [connection signal="timeout" from="TimeoutTime" to="." method="_on_timeout_time_timeout"]
 [connection signal="timeout" from="ReconnectTime" to="." method="_on_reconnect_time_timeout"]
+[connection signal="callsign_submitted" from="Body/Sidebar/CallsignContainer/CallsignPickerMain" to="." method="_on_callsign_edit_callsign_submitted"]
 [connection signal="mouse_entered" from="Body/Corpus" to="Body/Corpus" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Body/Corpus" to="Body/Corpus" method="_on_mouse_exited"]
 [connection signal="tab_changed" from="Body/Corpus/Header/Tabber" to="Body/Corpus" method="_on_tabber_tab_changed"]
@@ -217,5 +218,4 @@ layout_mode = 2
 [connection signal="pressed" from="Body/Corpus/Header/DSVE_Button" to="." method="_on_dsve_button_pressed"]
 [connection signal="pressed" from="Body/Corpus/Header/LocaleButton" to="." method="_on_locale_button_pressed"]
 [connection signal="force_select" from="Body/Corpus/TabContainer/Library" to="Body/Corpus" method="_on_library_force_select"]
-[connection signal="callsign_submitted" from="Body/Sidebar/CallsignContainer/CallsignPickerMain" to="." method="_on_callsign_edit_callsign_submitted"]
 [connection signal="visibility_changed" from="DictEditPrison/DictEditWindow" to="DictEditPrison" method="_on_dict_edit_window_visibility_changed"]

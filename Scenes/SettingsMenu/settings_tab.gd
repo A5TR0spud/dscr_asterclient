@@ -11,6 +11,7 @@ func _ready() -> void:
 @onready var do_bbcode: SettingEntry = $ScrollContainer/Options/DoBBCode
 @onready var color_ref_group: Control = $ScrollContainer/Options/ColorReferenceMode
 @onready var color_ref: OptionButton = $ScrollContainer/Options/ColorReferenceMode/ColorRefSwitch
+@onready var right_sidebar: SettingEntry = $ScrollContainer/Options/RHSidebar
 @onready var truncate: SpinBox = $ScrollContainer/Options/TruncHbox/TruncationSpinner
 @onready var font_size: SpinBox = $ScrollContainer/Options/FontHbox/FontSpinner
 @onready var ui_stretch: SettingEntry = $ScrollContainer/Options/UIStretch
@@ -54,6 +55,7 @@ func refresh() -> void:
 	callsign_failsafe.set_pressed_no_signal(SettingsHandler.failsafe_callsign_increment)
 	_refresh_dict_supports()
 	ui_scale.set_value_no_signal(SettingsHandler.stretch_scale)
+	right_sidebar.set_state_no_signal(SettingsHandler.right_handed_sidebar)
 
 func _refresh_dict_supports():
 	_refresh_confetti()
@@ -225,3 +227,7 @@ func _on_color_ref_switch_item_selected(index: int):
 	SettingsHandler.color_signal_mode = index
 	Main.on_dictionary_support_updated()
 	save(false)
+
+func _on_rh_sidebar_set(new_value):
+	SettingsHandler.right_handed_sidebar = new_value
+	save(true)

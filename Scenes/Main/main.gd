@@ -30,6 +30,9 @@ var connected_users: Array[int] = []
 @onready var dsve_button: IconButton = %DSVE_Button
 @onready var dsmidi_button: IconButton = %DSMIDI_Button
 
+@onready var main_container: HSplitContainer = $Body
+@onready var sidebar: Control = $Body/Sidebar
+
 static var instance : Main
 
 signal reload_dict
@@ -42,6 +45,7 @@ signal reload_settings
 static func on_settings_reload() -> void:
 	ThemeManager.set_font_size()
 	instance.reload_settings.emit()
+	instance.main_container.move_child(instance.sidebar, 1 if SettingsHandler.right_handed_sidebar else 0)
 	ThemeManager.set_theme_color()
 signal reload_nicknames
 static func on_nicknames_reload() -> void:
