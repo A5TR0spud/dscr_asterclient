@@ -15,12 +15,11 @@
 
 ### Changes
 
-* Due to the periodic table being useless or impossible to translate to Meteorese, Meteorese has been separated from the main language options into a UI preference
+* Due to the names of elements on the periodic table being useless or impossible to translate to Meteorese, Meteorese has been separated from the main language options into a UI preference
 * Adjusted some translations/localizations
 * Identicons dim in chat when the user is offline
 * Sending a message scrolls to bottom
 * Pressing Ctrl+E now sends
-* Clicking the top left of the dictionary signal edit window now copies the number
 * Library submit button now changes based on whether it will overwrite or not
 * System messages now support signal styling
 * Middle clicking a channel tab now closes it
