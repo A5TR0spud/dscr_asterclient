@@ -89,12 +89,12 @@ func push(new_msg: ChatEntryNode) -> void:
 	verify_size()
 	verify_room()
 	if new_msg.has_channel:
-		if get_at_cyclic_index(channel_heads.get(new_msg.channel, -1)):
+		if verify_index(channel_heads.get(new_msg.channel, -1)):
 			get_at_cyclic_index(channel_heads[new_msg.channel]).later_in_channel = last_basic()
 		new_msg.earlier_in_channel = channel_heads.get(new_msg.channel, -1)
 		channel_heads.set(new_msg.channel, last_basic())
 	else:
-		if get_at_cyclic_index(none_channel_head):
+		if verify_index(none_channel_head):
 			get_at_cyclic_index(none_channel_head).later_in_channel = last_basic()
 		new_msg.earlier_in_channel = none_channel_head
 		none_channel_head = last_basic()

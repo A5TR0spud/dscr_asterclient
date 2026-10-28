@@ -36,11 +36,52 @@ layout_mode = 2
 [node name="SignalNameEdit" type="HBoxContainer" parent="DictEditMainframe" unique_id=1529634659]
 layout_mode = 2
 
-[node name="NameLabel" type="Label" parent="DictEditMainframe/SignalNameEdit" unique_id=1340875693]
+[node name="NameLabelLeft" type="Label" parent="DictEditMainframe/SignalNameEdit" unique_id=1340875693]
 layout_mode = 2
 mouse_filter = 1
-mouse_default_cursor_shape = 2
-text = "signal -# ="
+text = "signal"
+
+[node name="LocaleNode" type="Node" parent="DictEditMainframe/SignalNameEdit/NameLabelLeft" unique_id=2008387036]
+script = ExtResource("2_ql6ly")
+translations = Dictionary[StringName, String]({
+&"text": "DICT_EDIT_NAME_LABEL_LEFT"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="SignalNumberEdit" type="LineEdit" parent="DictEditMainframe/SignalNameEdit" unique_id=1110985218]
+propagate_maximum_size = true
+layout_mode = 2
+placeholder_text = "num"
+max_length = 18
+expand_to_text_length = true
+context_menu_enabled = false
+emoji_menu_enabled = false
+caret_blink = true
+script = ExtResource("3_f8ufa")
+deny_list = "0123456789"
+allow_list = true
+replace_list = {}
+capitalize = false
+metadata/_custom_type_script = "uid://gtpqlwktlalr"
+
+[node name="LocaleNode" type="Node" parent="DictEditMainframe/SignalNameEdit/SignalNumberEdit" unique_id=1081916121]
+script = ExtResource("2_ql6ly")
+translations = Dictionary[StringName, String]({
+&"placeholder_text": "SIGNAL_NUMBER"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="NameLabelMiddle" type="Label" parent="DictEditMainframe/SignalNameEdit" unique_id=1506632613]
+layout_mode = 2
+mouse_filter = 1
+text = "is"
+
+[node name="LocaleNode" type="Node" parent="DictEditMainframe/SignalNameEdit/NameLabelMiddle" unique_id=178733944]
+script = ExtResource("2_ql6ly")
+translations = Dictionary[StringName, String]({
+&"text": "DICT_EDIT_NAME_LABEL_MIDDLE"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="NameLineEdit" type="LineEdit" parent="DictEditMainframe/SignalNameEdit" unique_id=2113161036]
 layout_mode = 2
@@ -400,7 +441,8 @@ translations = Dictionary[StringName, String]({
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[connection signal="gui_input" from="DictEditMainframe/SignalNameEdit/NameLabel" to="." method="_on_name_label_gui_input"]
+[connection signal="text_changed" from="DictEditMainframe/SignalNameEdit/SignalNumberEdit" to="." method="_on_signal_number_edit_text_changed"]
+[connection signal="text_submitted" from="DictEditMainframe/SignalNameEdit/SignalNumberEdit" to="." method="_on_signal_number_edit_text_submitted"]
 [connection signal="text_submitted" from="DictEditMainframe/SignalNameEdit/NameLineEdit" to="." method="_on_name_line_edit_text_submitted"]
 [connection signal="gui_input" from="DictEditMainframe/NotesScrollContainer/NotesEdit" to="." method="_on_notes_edit_gui_input"]
 [connection signal="value_changed" from="DictEditMainframe/BBCodeOptions/ColorPicker/GridContainer/HueSpinner" to="." method="_on_hue_spinner_value_changed"]

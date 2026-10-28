@@ -503,7 +503,7 @@ static func signals_to_words(input: Array, do_whitespace_format: bool = false, c
 		prev = sig
 	return o.strip_edges()
 
-static func forget_signal(sig: int) -> void:
+static func forget_signal(sig: int, reload: bool = true) -> void:
 	var idx: int = word_keys.find(sig)
 	if idx >= 0:
 		word_keys.remove_at(idx)
@@ -516,5 +516,6 @@ static func forget_signal(sig: int) -> void:
 		desc_keys.remove_at(idx)
 		if idx < desc_values.size():
 			desc_values.remove_at(idx)
-
-	Main.on_dict_reload()
+	
+	if reload:
+		Main.on_dict_reload()

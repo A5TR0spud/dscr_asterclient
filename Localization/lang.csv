@@ -95,13 +95,16 @@ SYSTEM_CHANNEL_INPUT_TOO_SHORT,-241 -86 -43 -14 {0} -30 -42 -23 -33 3 -15 -196 -
 SYSTEM_INPUT_LENGTH_INVALID_TWO,-241 -86 -43 -14 {0} -30 -42 -23 -4 -29 2 -15 -196 -145 -29 -85,,Cannot use {0} with 2 signals,Komenda {0} potrzebuje conajmniej jednego argumentu
 SYSTEM_INPUT_LENGTH_INVALID_VAR,-241 -86 -43 -14 -42 -23 -4 -29 {0} -15 -196 -145 -29 -85,yes,Cannot send {0} signals,Nie można wysłać {0} sygnałów
 SYSTEM_DUPLICATE_NAME,-42 -14 -1 {sig0} -15 -30 -42 -14 -1 {sig1} -15 -100 -229 -2 {name},,Signals -{sig0} and -{sig1} cannot both be named “ {name} ”,Nie można nadać tej samej nazwy „{name}” sygnałom -{sig0} oraz -{sig1}
+SYSTEM_DUPLICATE_NUMBER,{0} -100 -30 2 -42 -100 -229 -145 -29 -85,,Signal -{0} is already taken,
 DELETE_TRANSMISSION,-88,,Dismiss,Pomiń
 DICT_EDIT_HEADER,-42 -38 -77 -174,,Edit Dictionary,Edytuj słownik
-DICT_EDIT_NAME_LABEL,-42 -14 -1 {0} -15 -4,,Signal -{0} is,Sygnał -{0} to
+DICT_EDIT_NAME_LABEL_LEFT,-42 -14 -1,,Signal -,Sygnał -
+DICT_EDIT_NAME_LABEL_MIDDLE,-15 -4,,is,to
 DICT_EDIT_BA_LABEL,-122 {0} -122,,then {0} then,potem {0} a potem
 DICT_EDIT_BA_LABEL_GENERIC,-122 -42 -122,,then word then,potem hasło a potem
 DICT_EDIT_NAME_PLACEHOLDER,-109 -237 -38,,Enter name…,Wpisz hasło…
 DICT_EDIT_DESC_PLACEHOLDER,-119 -130 -86 -108 -237 -38 -85,,Enter notes…,Wprowadź notatki…
+DICT_EDIT_MOVE,-42 -39 -85,,Move,
 FORMAT_NONE,-111,,Nothing,Nic
 FORMAT_SPACE,1 -190,,Space,Spacja
 FORMAT_NEWLINE,1 -108 -190,,Newline,Złam linię
@@ -166,9 +169,9 @@ REFERENCE_PD_PROTON,{0} -60,yes,{0} Proton,
 REFERENCE_PD_STP_SOLID,-139 -3 -165,,Solid @ STP,
 REFERENCE_PD_STP_LIQUID,-139 -3 -166,,Liquid @ STP,
 REFERENCE_PD_STP_GAS,-139 -3 -167,,Gas @ STP,
-REFERENCE_PD_METAL,-188 -39 -216,,Metal,
-REFERENCE_PD_METALLOID,-188 -39 -145 -85,,Metalloid,
-REFERENCE_PD_NONMETAL,-188 -39 -216 -29,,Nonmetal,
+REFERENCE_PD_METAL,-188 -30 -164 -39 -216,,Metal,
+REFERENCE_PD_METALLOID,-188 -30 -164 -39 -145 -85,,Metalloid,
+REFERENCE_PD_NONMETAL,-188 -30 -164 -39 -216 -29,,Nonmetal,
 REFERENCE_PD_UNSTABLE,-110 -63 -64 -85,,No stable isotopes,
 REFERENCE_PD_NOBLE,-58 -29 -85,,Noble gas,
 REFERENCE_PD_DIATOMIC,-57 -14 2 -229 -56 -15,,Diatomic,

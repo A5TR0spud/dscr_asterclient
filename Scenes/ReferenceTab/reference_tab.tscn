@@ -59,7 +59,6 @@ layout_mode = 2
 
 [node name="UnitsDrop" type="FoldableContainer" parent="Corpus/VBoxContainer" unique_id=1240872268]
 layout_mode = 2
-folded = true
 title = "units"
 
 [node name="LocaleNode" type="Node" parent="Corpus/VBoxContainer/UnitsDrop" unique_id=228561470]
@@ -70,7 +69,6 @@ translations = Dictionary[StringName, String]({
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="UnitConversion" type="VBoxContainer" parent="Corpus/VBoxContainer/UnitsDrop" unique_id=1895155616]
-visible = false
 layout_mode = 2
 script = ExtResource("4_vb677")
 
@@ -650,7 +648,6 @@ metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="PeriodicTable" type="FoldableContainer" parent="Corpus/VBoxContainer" unique_id=13968256]
 layout_mode = 2
-folded = true
 title = "periodic table"
 
 [node name="LocaleNode" type="Node" parent="Corpus/VBoxContainer/PeriodicTable" unique_id=1751833679]
@@ -661,7 +658,6 @@ translations = Dictionary[StringName, String]({
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="PeriodicTable" parent="Corpus/VBoxContainer/PeriodicTable" unique_id=1498053878 instance=ExtResource("4_cydeu")]
-visible = false
 layout_mode = 2
 size_flags_stretch_ratio = 10.0
 

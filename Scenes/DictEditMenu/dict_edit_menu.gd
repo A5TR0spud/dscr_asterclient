@@ -8,8 +8,8 @@ func _enter_tree():
 
 @export var current_signal: int = 0
 
-# TODO: rename these. PascalCase is :(
-@onready var name_label: Label = $DictEditMainframe/SignalNameEdit/NameLabel
+@onready var signal_number_edit: LineEdit = $DictEditMainframe/SignalNameEdit/SignalNumberEdit
+#@onready var name_label: Label = $DictEditMainframe/SignalNameEdit/NameLabel
 @onready var before_label: OptionButton = $DictEditMainframe/BeforeAndAfterFormat/BeforeOption
 @onready var before_after_clear_label: Label = $DictEditMainframe/BeforeAndAfterFormat/FormatClarity
 @onready var after_label: OptionButton = $DictEditMainframe/BeforeAndAfterFormat/AfterOption
@@ -25,6 +25,8 @@ func _enter_tree():
 
 @onready var indentation: Control = $DictEditMainframe/Indentation
 @onready var indent_option: OptionButton = $DictEditMainframe/Indentation/IndentOption
+
+@onready var submit_button_loc: LocaleNode = $DictEditMainframe/SubmitElseCancel/SubmitButton/LocaleNode
 
 @onready var bbcode_options: Control = $DictEditMainframe/BBCodeOptions
 @onready var bold_edit: BoolButton = $DictEditMainframe/BBCodeOptions/GridContainer/Bold/Button
@@ -62,11 +64,19 @@ func save() -> void:
 		SaveSystem.save_dict()
 		Main.on_dict_reload()
 		return
+	var desired_target: int = -signal_number_edit.text.to_int()
+	if desired_target != current_signal:
+		if desired_target in DictionaryHandler.word_keys:
+			SoundManager.play_sound(SoundManager.Sounds.FAIL)
+			Chat.new_log(Chat.State.DUPLICATE_NUMBER, [absi(desired_target)])
+			return
+		DictionaryHandler.forget_signal(current_signal, false)
+		current_signal = desired_target
 	if not DictionaryHandler.apply_signal_name(current_signal, name_edit.text, true):
 		SoundManager.play_sound(SoundManager.Sounds.FAIL)
 		return
 	SoundManager.play_sound(SoundManager.Sounds.CONFIRMED)
-	name_label.text = DictionaryHandler.get_or_default_signal_name(current_signal)
+	#name_label.text = DictionaryHandler.get_or_default_signal_name(current_signal)
 	var desc: Dictionary = {
 		DictionaryHandler.desc_key: desc_edit.text,
 		DictionaryHandler.break_key: break_button.button_pressed
@@ -106,7 +116,7 @@ func reload() -> void:
 	before_label.set_item_disabled(4, current_signal >= 0)
 	after_label.set_item_disabled(4, current_signal >= 0)
 	notes_scroll.scroll_vertical = 0
-	name_label.mouse_default_cursor_shape = Control.CURSOR_ARROW if current_signal >= 0 else Control.CURSOR_POINTING_HAND
+	#name_label.mouse_default_cursor_shape = Control.CURSOR_ARROW if current_signal >= 0 else Control.CURSOR_POINTING_HAND
 	if current_signal == UNKNOWN_SIGNAL:
 		before_after_clear_label.text = Localizer.translate("DICT_EDIT_BA_LABEL_GENERIC")
 		before_label.select(DictionaryHandler.default_before_mode)
@@ -119,7 +129,8 @@ func reload() -> void:
 		background_edit.button_pressed = DictionaryHandler.default_background
 		return
 	var desc: Dictionary = DictionaryHandler.get_or_default_signal_desc(current_signal)
-	name_label.text = Localizer.translate("DICT_EDIT_NAME_LABEL", absi(current_signal))
+	#name_label.text = Localizer.translate("DICT_EDIT_NAME_LABEL", absi(current_signal))
+	signal_number_edit.text = str(absi(current_signal))
 	before_after_clear_label.text = Localizer.translate("DICT_EDIT_BA_LABEL", absi(current_signal))
 	name_edit.text = DictionaryHandler.get_or_default_signal_name(current_signal)
 	if not DictionaryHandler.word_keys.has(current_signal):
@@ -169,6 +180,8 @@ func reload() -> void:
 		color_value = Color.from_string(color_value as String, Color.WHITE)
 	_push_color_to_spinners(color_value as Color)
 	#_sample_color(int(color_edit.value))
+	submit_button_loc.translations.text = "SUBMIT_LONG"
+	submit_button_loc.refresh()
 
 func _get_spinners_as_color() -> Color:
 	var H: float = hue.value
@@ -256,7 +269,6 @@ func _on_close_button_pressed():
 	close()
 
 
-
 func _on_name_line_edit_text_submitted(_new_text):
 	save()
 
@@ -284,7 +296,16 @@ func _on_delete_button_confirmed():
 	SaveSystem.save_dict()
 	close()
 
-func _on_name_label_gui_input(event: InputEvent):
-	if event is InputEventMouseButton:
-		if event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT and current_signal < 0:
-			DisplayServer.clipboard_set(str(current_signal))
+func _on_signal_number_edit_text_submitted(new_text):
+	if not new_text:
+		signal_number_edit.text = str(absi(current_signal))
+	var desired_target: int = -signal_number_edit.text.to_int()
+	submit_button_loc.translations.text = "DICT_EDIT_MOVE" if desired_target != current_signal else "SUBMIT_LONG"
+	submit_button_loc.refresh()
+
+func _on_signal_number_edit_text_changed(new_text):
+	if not new_text:
+		return
+	var desired_target: int = -signal_number_edit.text.to_int()
+	submit_button_loc.translations.text = "DICT_EDIT_MOVE" if desired_target != current_signal else "SUBMIT_LONG"
+	submit_button_loc.refresh()

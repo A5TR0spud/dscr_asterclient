@@ -182,6 +182,7 @@ enum State {
 	INPUT_COMMAND_LENGTH_INVALID,
 	INPUT_LENGTH_INVALID,
 	DUPLICATE_NAME,
+	DUPLICATE_NUMBER,
 }
 
 static func channel_is_available(id = null) -> bool:
@@ -331,7 +332,7 @@ static func new_log(state: State, args: Array = []) -> void:
 			new_message.arguments = args
 		State.INPUT_LENGTH_INVALID:
 			# one arg -> must be equal
-			# two args -> range 
+			# two args -> range
 			if len(args) == 1:
 				new_message.translation_key = "SYSTEM_INPUT_LENGTH_INVALID_VAR"
 				new_message.arguments = args
@@ -342,6 +343,9 @@ static func new_log(state: State, args: Array = []) -> void:
 				"sig1": absi(int(args[1])),
 				"name": args[2]
 			}
+		State.DUPLICATE_NUMBER:
+			new_message.translation_key = "SYSTEM_DUPLICATE_NUMBER"
+			new_message.arguments = args
 	
 	# arbitrary impossible sender for purposes of chat seperators
 	new_message.sender = -1574

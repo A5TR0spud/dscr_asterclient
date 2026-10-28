@@ -27,15 +27,21 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/h_separation = -2
 theme_override_constants/v_separation = -2
-columns = 18
+columns = 19
 script = ExtResource("1_afasx")
 
 [node name="Hydrogen" parent="PeriodicTable" unique_id=1338587854 instance=ExtResource("1_b7m85")]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="PeriodicTable" unique_id=1491364005]
+[node name="Control69" type="Control" parent="PeriodicTable" unique_id=1949637001]
+custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="Control" type="Control" parent="PeriodicTable" unique_id=1491364005]
+custom_minimum_size = Vector2(24, 0)
+custom_maximum_size = Vector2(24, -1)
+layout_mode = 2
 
 [node name="Control2" type="Control" parent="PeriodicTable" unique_id=2122943510]
 layout_mode = 2
@@ -109,6 +115,11 @@ element = 3
 layout_mode = 2
 element = 4
 
+[node name="Control68" type="Control" parent="PeriodicTable" unique_id=1936750170]
+custom_minimum_size = Vector2(24, 0)
+custom_maximum_size = Vector2(24, -1)
+layout_mode = 2
+
 [node name="Control17" type="Control" parent="PeriodicTable" unique_id=2130933430]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -180,6 +191,11 @@ element = 11
 [node name="Magnesium" parent="PeriodicTable" unique_id=1251897122 instance=ExtResource("1_b7m85")]
 layout_mode = 2
 element = 12
+
+[node name="Control67" type="Control" parent="PeriodicTable" unique_id=1283327840]
+custom_minimum_size = Vector2(24, 0)
+custom_maximum_size = Vector2(24, -1)
+layout_mode = 2
 
 [node name="Control27" type="Control" parent="PeriodicTable" unique_id=1074360151]
 layout_mode = 2
@@ -253,6 +269,11 @@ element = 19
 layout_mode = 2
 element = 20
 
+[node name="Control66" type="Control" parent="PeriodicTable" unique_id=1812060361]
+custom_minimum_size = Vector2(24, 0)
+custom_maximum_size = Vector2(24, -1)
+layout_mode = 2
+
 [node name="Nitrogen3" parent="PeriodicTable" unique_id=718234935 instance=ExtResource("1_b7m85")]
 layout_mode = 2
 element = 21
@@ -324,6 +345,11 @@ element = 37
 [node name="Silicon5" parent="PeriodicTable" unique_id=1277003966 instance=ExtResource("1_b7m85")]
 layout_mode = 2
 element = 38
+
+[node name="Control65" type="Control" parent="PeriodicTable" unique_id=376409396]
+custom_minimum_size = Vector2(24, 0)
+custom_maximum_size = Vector2(24, -1)
+layout_mode = 2
 
 [node name="Nitrogen6" parent="PeriodicTable" unique_id=308550950 instance=ExtResource("1_b7m85")]
 layout_mode = 2
@@ -398,6 +424,12 @@ layout_mode = 2
 element = 56
 
 [node name="Control37" type="Control" parent="PeriodicTable" unique_id=859709870]
+custom_minimum_size = Vector2(24, 0)
+custom_maximum_size = Vector2(24, -1)
+layout_mode = 2
+
+[node name="Control64" type="Control" parent="PeriodicTable" unique_id=1548517408]
+custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -470,6 +502,12 @@ layout_mode = 2
 element = 88
 
 [node name="Control38" type="Control" parent="PeriodicTable" unique_id=51496363]
+custom_minimum_size = Vector2(24, 0)
+custom_maximum_size = Vector2(24, -1)
+layout_mode = 2
+
+[node name="Control63" type="Control" parent="PeriodicTable" unique_id=1835057951]
+custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -544,6 +582,12 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Control41" type="Control" parent="PeriodicTable" unique_id=1571410176]
+custom_minimum_size = Vector2(0, 24)
+custom_maximum_size = Vector2(24, -1)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control72" type="Control" parent="PeriodicTable" unique_id=2062270207]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -631,6 +675,11 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="Control70" type="Control" parent="PeriodicTable" unique_id=1428887929]
+custom_minimum_size = Vector2(24, 0)
+custom_maximum_size = Vector2(24, -1)
+layout_mode = 2
+
 [node name="Control62" type="Control" parent="PeriodicTable" unique_id=1554254373]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -702,6 +751,11 @@ size_flags_horizontal = 3
 [node name="Control43" type="Control" parent="PeriodicTable" unique_id=2083386225]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="Control71" type="Control" parent="PeriodicTable" unique_id=2088482114]
+custom_minimum_size = Vector2(24, 0)
+custom_maximum_size = Vector2(24, -1)
+layout_mode = 2
 
 [node name="Control44" type="Control" parent="PeriodicTable" unique_id=650685743]
 layout_mode = 2

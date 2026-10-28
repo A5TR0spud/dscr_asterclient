@@ -28,5 +28,4 @@
 * lua modules/plugins
 * android support
 * fps cap setting?
-* edit signal number from creation menu
 * Polish translations

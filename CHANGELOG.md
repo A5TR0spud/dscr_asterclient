@@ -1,6 +1,6 @@
 # Versions
 
-## --WIP--
+## 0.10.0: Making Science
 
 ### Additions
 
@@ -11,6 +11,7 @@
 * Hovering over signals in transmissions now shows their signal numbers
 * Added rename button to Library
 * New setting: right-vs-left-handed sidebar. Defaults to right
+* Can now move signal numbers
 
 ### Changes
 
