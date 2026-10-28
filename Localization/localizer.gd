@@ -2,7 +2,10 @@ extends RefCounted
 class_name Localizer
 
 static func get_m0_string(key: String) -> String:
-	return TranslationServer.find_translations("m0", true)[0].get_message(key)
+	for t: Translation in TranslationServer.find_translations("m0", true):
+		if t.get_message(key):
+			return t.get_message(key)
+	return ""
 
 static func translate(key: String, arguments: Variant = []) -> String:
 	if arguments is not Array and arguments is not Dictionary:
@@ -37,11 +40,11 @@ static func raw_translate(key: String) -> Array:
 	return [TranslationServer.translate(key)]
 	
 static func raw_translate_plural(key: String, n: int) -> Array:
-	if TranslationServer.get_locale() == "m0":
-		var translation: String = TranslationServer.translate(key)
-		return _raw_translate_m0(translation)
-	else:
-		return [TranslationServer.translate_plural(key, "", n)]
+	if SettingsHandler.use_m0_ui and DictionaryHandler.support_m0:
+		var translation: String = get_m0_string(key)
+		if translation:
+			return _raw_translate_m0(translation)
+	return [TranslationServer.translate_plural(key, "", n)]
 
 static func _raw_translate_m0(translation: String) -> Array:
 	var arr: Array = translation.split(" ")

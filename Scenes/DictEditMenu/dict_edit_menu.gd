@@ -64,6 +64,8 @@ func save() -> void:
 		SaveSystem.save_dict()
 		Main.on_dict_reload()
 		return
+	if not signal_number_edit.text:
+		signal_number_edit.text = str(absi(current_signal))
 	var desired_target: int = -signal_number_edit.text.to_int()
 	if desired_target != current_signal:
 		if desired_target in DictionaryHandler.word_keys:
@@ -303,9 +305,11 @@ func _on_signal_number_edit_text_submitted(new_text):
 	submit_button_loc.translations.text = "DICT_EDIT_MOVE" if desired_target != current_signal else "SUBMIT_LONG"
 	submit_button_loc.refresh()
 
-func _on_signal_number_edit_text_changed(new_text):
-	if not new_text:
-		return
-	var desired_target: int = -signal_number_edit.text.to_int()
+func _on_signal_number_edit_text_changed(new_text: String):
+	var desired_target: int = -new_text.to_int() if new_text else current_signal
 	submit_button_loc.translations.text = "DICT_EDIT_MOVE" if desired_target != current_signal else "SUBMIT_LONG"
 	submit_button_loc.refresh()
+
+func _on_signal_number_edit_focus_exited():
+	if not signal_number_edit.text:
+		signal_number_edit.text = str(absi(current_signal))

@@ -10,7 +10,7 @@ mouse_filter = 1
 script = ExtResource("1_ilioc")
 
 [node name="EdgeTimer" type="Timer" parent="." unique_id=1310362307]
-wait_time = 1.6134
+wait_time = 1.61384
 one_shot = true
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=753709687]

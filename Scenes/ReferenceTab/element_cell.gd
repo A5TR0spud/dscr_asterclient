@@ -29,6 +29,10 @@ func _ready():
 	l = LocaleNode.new()
 	l.translations = {"text": str("REFERENCE_ELEMENT_NAME_",element)}
 	name_label.add_child(l)
+	Main.instance.localization_reload.connect(_refresh_proton_ct_visible)
+
+func _refresh_proton_ct_visible():
+	proton_label.modulate.a = 0 if DictionaryHandler.support_m0 and SettingsHandler.use_m0_ui else 1
 
 func hover_refresh(elm: int, start: bool):
 	if element == elm and start:

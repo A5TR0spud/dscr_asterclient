@@ -76,6 +76,7 @@ icon = ExtResource("4_vklgi")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=1296521264]
 layout_mode = 2
+theme_override_constants/separation = 12
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=501487912]
 modulate = Color(1, 1, 1, 0.5921569)

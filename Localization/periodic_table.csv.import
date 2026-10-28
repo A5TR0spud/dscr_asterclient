@@ -6,10 +6,10 @@ uid="uid://novuiqeuvry2"
 
 [deps]
 
-files=["res://Localization/periodic_table.en.translation", "res://Localization/periodic_table.pl.translation"]
+files=["res://Localization/periodic_table.m0.translation", "res://Localization/periodic_table.en.translation", "res://Localization/periodic_table.pl.translation"]
 
 source_file="res://Localization/periodic_table.csv"
-dest_files=["res://Localization/periodic_table.en.translation", "res://Localization/periodic_table.pl.translation"]
+dest_files=["res://Localization/periodic_table.m0.translation", "res://Localization/periodic_table.en.translation", "res://Localization/periodic_table.pl.translation"]
 
 [params]
 

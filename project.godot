@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="DSCR Asterclient"
-config/version="0.10.0"
+config/version="0.10.1"
 config/tags=PackedStringArray("2d", "effort", "ui")
 run/main_scene="uid://bft3wuvruhqvw"
 config/auto_accept_quit=false
@@ -184,7 +184,7 @@ search_history={
 [internationalization]
 
 rendering/root_node_auto_translate=false
-locale/translations=PackedStringArray("res://Localization/lang.en.translation", "res://Localization/lang.m0.translation", "res://Localization/lang.pl.translation", "res://Localization/periodic_table.en.translation", "res://Localization/periodic_table.pl.translation")
+locale/translations=PackedStringArray("res://Localization/lang.en.translation", "res://Localization/lang.m0.translation", "res://Localization/lang.pl.translation", "res://Localization/periodic_table.en.translation", "res://Localization/periodic_table.pl.translation", "res://Localization/periodic_table.m0.translation")
 
 [physics]
 

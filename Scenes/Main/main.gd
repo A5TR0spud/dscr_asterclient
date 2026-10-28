@@ -6,7 +6,7 @@ var websocket_url: String = DSCR_URL
 var socket: WebSocketPeer = WebSocketPeer.new()
 
 const MAX_MESSAGE_LENGTH: int = 2000
-const HE6_HALF_LIFE: float = 0.8067
+const HE6_HALF_LIFE: float = 0.80692#24
 
 @onready var callsign_node: CallsignSelector = %CallsignPickerMain
 var callsign: int = 0:

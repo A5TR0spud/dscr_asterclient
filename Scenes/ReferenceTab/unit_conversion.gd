@@ -73,7 +73,7 @@ func refresh_dict_support():
 func update_lengths():
 	akermeter.set_value_no_signal(length_in_meters / AKERMETER_TO_METRE)
 	metre.set_value_no_signal(length_in_meters)
-	lightasec.set_value_no_signal(length_in_meters * AKERMETER_TO_METRE / C_AKERMETERS_PER_ASEC)
+	lightasec.set_value_no_signal(length_in_meters / AKERMETER_TO_METRE / C_AKERMETERS_PER_ASEC)
 	lightsec.set_value_no_signal(length_in_meters / C_METERS_PER_SECOND)
 	au.set_value_no_signal(length_in_meters / AU_TO_METRE)
 	lightyear.set_value_no_signal(length_in_meters / LIGHTYEAR_TO_METRE)
@@ -111,7 +111,7 @@ func _on_metrimeter_value_changed(value: float):
 	update_lengths()
 
 func _on_lightakersecond_value_changed(value):
-	length_in_meters = value / AKERMETER_TO_METRE * C_AKERMETERS_PER_ASEC
+	length_in_meters = value * AKERMETER_TO_METRE * C_AKERMETERS_PER_ASEC
 	update_lengths()
 
 func _on_lightsecond_value_changed(value):

@@ -1,5 +1,20 @@
 # Versions
 
+## 0.10.1
+
+### Changes
+
+* By popular demand, the periodic table now uses m0 translations
+  * The language menu still has the UI toggle for easy switching
+
+### Fixes
+
+* Unit conversion for |-72 is fixed
+* Half life of He-6 is now more accurately 0.80692 seconds rather than a compromise with the game's listed 0.8066 for a 0.8067
+  * The game actually uses this number for conversion with |-72
+* Fixed certain strings being forced to non-m0 after 0.10.0
+* Fixed some bugs related to saving a word after untyping its signal
+
 ## 0.10.0: Making Science
 
 ### Additions
