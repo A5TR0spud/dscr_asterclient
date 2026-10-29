@@ -205,7 +205,7 @@ REF_UNIT_INCH,-130 -158 12 -8,y,Inch,cal
 ,,,,cali
 REF_UNIT_MILE,1000 -219 -158,y,Mile,mila
 ,,,Miles,mile
-,,,,mili
+,,,,mil
 REF_UNIT_DURATIONS,-65 -20,,Durations,Czas
 REF_UNIT_HESEC,-69,t,He-6 Half-life,okres półtrwania He-6
 ,,,He-6 Half-lifes,okresy półtrwania He-6
