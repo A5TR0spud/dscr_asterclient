@@ -1,5 +1,13 @@
 # Versions
 
+## WIP 0.10.2
+
+### Changes
+
+* Periodic table now has a toggle for its language
+* Removed element name preview from language menu
+* Fixed element 8 being labelled as carbon (Sugar)
+
 ## 0.10.1
 
 ### Changes

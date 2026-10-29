@@ -1,12 +1,7 @@
-@tool
 extends PanelContainer
 class_name ElementCell
 
-@export var element: int = 1:
-	set(value):
-		element = value
-		if is_instance_valid(proton_label):
-			proton_label.text = str(value)
+@export var element: int = 1
 
 @onready var proton_label: Label = $MarginContainer/VBoxContainer/Head/ProtonCt
 @onready var symbol_label: Label = $MarginContainer/VBoxContainer/Symbol
@@ -17,22 +12,23 @@ class_name ElementCell
 var _pd_table: PeriodicTable
 
 func _ready():
-	proton_label.text = str(element)
-	if Engine.is_editor_hint():
-		return
 	_pd_table = get_parent() if get_parent() is PeriodicTable else null
 	if _pd_table:
 		_pd_table.focus.connect(_on_pd_focus)
-	var l: LocaleNode = LocaleNode.new()
-	l.translations = {"text": str("REFERENCE_ELEMENT_SYMBOL_",element)}
-	symbol_label.add_child(l)
-	l = LocaleNode.new()
-	l.translations = {"text": str("REFERENCE_ELEMENT_NAME_",element)}
-	name_label.add_child(l)
-	Main.instance.localization_reload.connect(_refresh_proton_ct_visible)
+	Main.instance.localization_reload.connect(refresh)
 
-func _refresh_proton_ct_visible():
-	proton_label.modulate.a = 0 if DictionaryHandler.support_m0 and SettingsHandler.use_m0_ui else 1
+func refresh():
+	proton_label.text = str(element)
+	var use_m0_labels: bool = DictionaryHandler.support_m0 and SettingsHandler.use_m0_ui and SettingsHandler.use_m0_elements
+	if use_m0_labels:
+		proton_label.modulate.a = 0
+		symbol_label.text = Localizer.get_m0_translation(str("REFERENCE_ELEMENT_SYMBOL_",element))
+		name_label.text = Localizer.get_m0_translation(str("REFERENCE_ELEMENT_NAME_",element))
+	else:
+		proton_label.modulate.a = 1
+		symbol_label.text = Localizer.get_lang_string(str("REFERENCE_ELEMENT_SYMBOL_",element))
+		name_label.text = Localizer.get_lang_string(str("REFERENCE_ELEMENT_NAME_",element))
+	
 
 func hover_refresh(elm: int, start: bool):
 	if element == elm and start:

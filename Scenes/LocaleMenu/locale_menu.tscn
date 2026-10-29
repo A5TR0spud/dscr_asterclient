@@ -74,40 +74,6 @@ theme_override_font_sizes/font_size = 24
 text = "Polski"
 icon = ExtResource("4_vklgi")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=1296521264]
-layout_mode = 2
-theme_override_constants/separation = 12
-
-[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=501487912]
-modulate = Color(1, 1, 1, 0.5921569)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 24
-text = "helios"
-horizontal_alignment = 1
-
-[node name="LocaleNode" type="Node" parent="CenterContainer/VBoxContainer/HBoxContainer/Label" unique_id=523935301]
-script = ExtResource("5_u0u3c")
-translations = Dictionary[StringName, String]({
-&"text": "REFERENCE_ELEMENT_NAME_1"
-})
-metadata/_custom_type_script = "uid://7gga31jeosxl"
-
-[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=2053238731]
-modulate = Color(1, 1, 1, 0.5921569)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 24
-text = "helios"
-horizontal_alignment = 1
-
-[node name="LocaleNode2" type="Node" parent="CenterContainer/VBoxContainer/HBoxContainer/Label2" unique_id=1129047640]
-script = ExtResource("5_u0u3c")
-translations = Dictionary[StringName, String]({
-&"text": "REFERENCE_ELEMENT_NAME_2"
-})
-metadata/_custom_type_script = "uid://7gga31jeosxl"
-
 [node name="Close" type="Button" parent="CenterContainer/VBoxContainer" unique_id=2095941556]
 layout_mode = 2
 size_flags_horizontal = 4
