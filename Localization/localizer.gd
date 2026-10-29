@@ -26,6 +26,10 @@ static func translate_plural(key: String, n: int, arguments: Variant = []) -> St
 		if n < 0:
 			n = 0
 		var translation: String = TranslationServer.translate_plural(key, "", n);
+		if translation.is_empty():
+			# try using non-plural as a fallback
+			translation = TranslationServer.translate(key)
+			
 		if arguments is not Array and arguments is not Dictionary:
 			arguments = [arguments]
 		return translation.format(arguments)
