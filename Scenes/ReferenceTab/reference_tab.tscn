@@ -106,6 +106,7 @@ script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_AKERMETER"
 })
+isPluralizable = true
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="Metrimeter" type="SpinBox" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Length" unique_id=1067488150]
@@ -126,6 +127,7 @@ script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_METER"
 })
+isPluralizable = true
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="Lightakersecond" type="SpinBox" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Length" unique_id=986800083]
@@ -146,6 +148,7 @@ script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_LIGHT_ASEC"
 })
+isPluralizable = true
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="Lightsecond" type="SpinBox" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Length" unique_id=1616620566]
@@ -166,6 +169,7 @@ script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_LIGHTSEC"
 })
+isPluralizable = true
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="AU" type="SpinBox" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Length" unique_id=929325388]
@@ -186,6 +190,7 @@ script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_AU"
 })
+isPluralizable = true
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="Lightyear" type="SpinBox" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Length" unique_id=481687767]
@@ -206,6 +211,7 @@ script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_LIGHTYEAR"
 })
+isPluralizable = true
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="Inches" type="SpinBox" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Length" unique_id=3713498]
@@ -226,6 +232,7 @@ script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_INCH"
 })
+isPluralizable = true
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="Feet" type="SpinBox" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Length" unique_id=1075897371]
@@ -246,6 +253,7 @@ script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_FOOT"
 })
+isPluralizable = true
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="Miles" type="SpinBox" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Length" unique_id=1602188934]
@@ -266,6 +274,7 @@ script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_MILE"
 })
+isPluralizable = true
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="HSeparator" type="HSeparator" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion" unique_id=966229878]
@@ -305,6 +314,7 @@ script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_HESEC"
 })
+isPluralizable = true
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="CeSec" type="SpinBox" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Time" unique_id=858853957]
@@ -325,6 +335,7 @@ script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_SECOND"
 })
+isPluralizable = true
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="DecMinute" type="SpinBox" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Time" unique_id=1215420718]
@@ -345,6 +356,7 @@ script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_MINUTE"
 })
+isPluralizable = true
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="DecHour" type="SpinBox" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Time" unique_id=487540903]
@@ -365,6 +377,7 @@ script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_HOUR"
 })
+isPluralizable = true
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="DecDay" type="SpinBox" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Time" unique_id=1879045261]
@@ -385,6 +398,7 @@ script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_DAY"
 })
+isPluralizable = true
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="OctMonth" type="SpinBox" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Time" unique_id=1492117005]
@@ -405,6 +419,7 @@ script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_OCTMONTH"
 })
+isPluralizable = true
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="OctYear" type="SpinBox" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Time" unique_id=1255198818]
@@ -425,6 +440,7 @@ script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_OCTYEAR"
 })
+isPluralizable = true
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="DecYear" type="SpinBox" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Time" unique_id=2087995901]
@@ -445,6 +461,7 @@ script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_YEAR"
 })
+isPluralizable = true
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="HSeparator2" type="HSeparator" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion" unique_id=515416096]
@@ -484,6 +501,7 @@ script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_AKERGRAM"
 })
+isPluralizable = true
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="Kilogram" type="SpinBox" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Mass" unique_id=788664132]
@@ -504,6 +522,7 @@ script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_KILOGRAM"
 })
+isPluralizable = true
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="Pound" type="SpinBox" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Mass" unique_id=680644903]
@@ -524,6 +543,7 @@ script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_POUND"
 })
+isPluralizable = true
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="Stones" type="SpinBox" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Mass" unique_id=1276830644]
@@ -544,6 +564,7 @@ script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_STONE"
 })
+isPluralizable = true
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="Slugs" type="SpinBox" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Mass" unique_id=1522540719]
@@ -564,6 +585,7 @@ script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_SLUG"
 })
+isPluralizable = true
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="ImpTon" type="SpinBox" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Mass" unique_id=1346639778]
@@ -584,6 +606,7 @@ script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_TON"
 })
+isPluralizable = true
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="Supermass" type="SpinBox" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Mass" unique_id=1561545355]
@@ -604,6 +627,7 @@ script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_SUPERMASS"
 })
+isPluralizable = true
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="Earth" type="SpinBox" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Mass" unique_id=2050772480]
@@ -624,6 +648,7 @@ script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_EARTH"
 })
+isPluralizable = true
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="Sol" type="SpinBox" parent="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Mass" unique_id=1779440519]
@@ -644,6 +669,7 @@ script = ExtResource("2_jk0c3")
 translations = Dictionary[StringName, String]({
 &"suffix": "REF_UNIT_SOL"
 })
+isPluralizable = true
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="PeriodicTable" type="FoldableContainer" parent="Corpus/VBoxContainer" unique_id=13968256]

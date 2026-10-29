@@ -70,6 +70,11 @@ func refresh_dict_support():
 	akergram.visible = v
 	supermass.visible = v
 
+func _update_translation(node: Node):
+	for child in node.get_children():
+		if child is LocaleNode:
+			child.refresh()
+
 func update_lengths():
 	akermeter.set_value_no_signal(length_in_meters / AKERMETER_TO_METRE)
 	metre.set_value_no_signal(length_in_meters)
@@ -80,6 +85,9 @@ func update_lengths():
 	inch.set_value_no_signal(length_in_meters / FOOT_TO_METER * 12)
 	foot.set_value_no_signal(length_in_meters / FOOT_TO_METER)
 	mile.set_value_no_signal(length_in_meters / FOOT_TO_METER / FEET_PER_MILE)
+	
+	for node  in [akermeter, metre, lightasec, lightsec, au, lightyear, inch, foot, mile]:
+		_update_translation(node)
 
 func update_times():
 	hesec.set_value_no_signal(time_in_seconds / SECONDS_PER_HE6)
@@ -90,6 +98,8 @@ func update_times():
 	decyear.set_value_no_signal(time_in_seconds / SECONDS_PER_YEAR)
 	octmonth.set_value_no_signal(time_in_seconds / HESEC_PER_AMONTH / SECONDS_PER_HE6)
 	octyear.set_value_no_signal(time_in_seconds / HESEC_PER_AYEAR / SECONDS_PER_HE6)
+	for node  in [hesec, cesec, decminute, dechour, decday, decyear, octmonth, octyear]:
+		_update_translation(node)
 
 func update_masses():
 	akergram.set_value_no_signal(mass_in_kilograms / KILOGRAMS_PER_AKERGRAM)
@@ -101,7 +111,9 @@ func update_masses():
 	supermass.set_value_no_signal(mass_in_kilograms / KILOGRAMS_PER_AKERGRAM / AKERGRAMS_PER_SUPERMASS)
 	earthmass.set_value_no_signal(mass_in_kilograms / KILOGRAMS_PER_EARTH)
 	solarmass.set_value_no_signal(mass_in_kilograms / KILOGRAMS_PER_SUN)
-
+	for node  in [akergram, kilogram, pound, stone, slug, ton, supermass, earthmass, solarmass]:
+		_update_translation(node)
+		
 func _on_akermeter_value_changed(value: float):
 	length_in_meters = value * AKERMETER_TO_METRE
 	update_lengths()

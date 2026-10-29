@@ -71,7 +71,7 @@ COPY_SIGNAL_NAMES,-237 -40,,Copy words,Kopiuj słowa
 SUBMIT_LONG,-174 -85,,Submit,Zapisz
 LIBRARY_NEW,-43 -38 -85,,Submit,Zapisz
 LIBRARY_REPLACE,-43 -174 -85,,Replace,Zastąp
-LIBRARY_RENAME,-41 {0} -40,,Rename from “{0}”,Przemianuj „{name}”
+LIBRARY_RENAME,-41 {0} -40,,Rename from “{0}”,Przemianuj „{0}”
 CANCEL_LONG,-174 -29 -85,,Cancel,Cofnij zmiany
 DELETE_ASK,-88 -127 -85,,Delete?,Usuń
 DELETE_CONFIRM_TRX,-43 -88 -85,,Are you sure?,Napewno?
