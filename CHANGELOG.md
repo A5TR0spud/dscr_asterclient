@@ -1,11 +1,16 @@
 # Versions
 
-## WIP 0.10.2
+## 0.10.2
 
 ### Changes
 
+* Translated Reference tab to Polski/Polish (Sugar)
+* Unit conversion now uses singular/plural forms dynamically (Sugar)
 * Periodic table now has a toggle for its language
 * Removed element name preview from language menu
+
+### Fixes
+
 * Fixed element 8 being labelled as carbon (Sugar)
 
 ## 0.10.1

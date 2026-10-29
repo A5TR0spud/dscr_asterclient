@@ -21,7 +21,7 @@ run/low_processor_mode=true
 boot_splash/bg_color=Color(0.07058824, 0, 0.10980392, 1)
 boot_splash/stretch_mode=0
 boot_splash/image="uid://j24vprtvfml2"
-config/icon="res://icon.svg"
+config/icon="uid://cho56tur0yc8o"
 
 [display]
 

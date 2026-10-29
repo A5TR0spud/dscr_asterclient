@@ -198,7 +198,7 @@ REF_UNIT_AU,-139 -90 -91,y,Astronomical Unit,jednostka astronomiczna
 REF_UNIT_LIGHTYEAR,-67 -139 -90 -92 -65 -6,y,Lightyear,rok świetlny
 ,,,Lightyears,lata świetlne
 ,,,,lat świetlnych
-REF_UNIT_FOOT,-130 -158,y,Feet,stopa
+REF_UNIT_FOOT,-130 -158,y,Foot,stopa
 ,,,Feet,stopy
 ,,,,stóp
 REF_UNIT_INCH,-130 -158 12 -8,y,Inch,cal
