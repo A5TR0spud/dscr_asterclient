@@ -99,26 +99,29 @@ static func new_transmission(packet: PackedStringArray) -> void:
 		#print(integer_message)
 	
 	# this is for powering off/on the app
-	var _c: ChatEntryNode = history.get_at_cyclic_index(history.last_valid())
-	var _i: int = 0
-	while _c and _i <= 10:
-		#print(_c.trx, " : ", transmission_number)
-		#print(_c.sender, " : ", sender)
-		#print(_c.message, " : ", integer_message)
-		#print("-------------")
-		if (
-			_c.trx == transmission_number and _c.sender == sender
-			and _c.message.size() == integer_message.size()
-		):
-			var thats_a_dupe: bool = true
-			for _j: int in range(_c.message.size()):
-				if _c.message[_j] != integer_message[_j]:
-					thats_a_dupe = false
-					break
-			if thats_a_dupe:
-				return
-		_i += 1
-		_c = history.get_at_cyclic_index(history.last_valid() - _i)
+	if not is_instance_valid(history):
+		load_history()
+	if history:
+		var _c: ChatEntryNode = history.get_at_cyclic_index(history.last_valid())
+		var _i: int = 0
+		while _c and _i <= 10:
+			#print(_c.trx, " : ", transmission_number)
+			#print(_c.sender, " : ", sender)
+			#print(_c.message, " : ", integer_message)
+			#print("-------------")
+			if (
+				_c.trx == transmission_number and _c.sender == sender
+				and _c.message.size() == integer_message.size()
+			):
+				var thats_a_dupe: bool = true
+				for _j: int in range(_c.message.size()):
+					if _c.message[_j] != integer_message[_j]:
+						thats_a_dupe = false
+						break
+				if thats_a_dupe:
+					return
+			_i += 1
+			_c = history.get_at_cyclic_index(history.last_valid() - _i)
 	
 	var channel: ChatChannel = get_channel_node(channel_id)
 	var spooky_channel: ChatChannel = get_channel_node(SKELETON_KEY)

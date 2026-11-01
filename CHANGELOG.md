@@ -1,5 +1,11 @@
 # Versions
 
+## 0.10.3
+
+### Fixes
+
+* Potentially fixed issue where failure to load history would brick the client's ability to receive messages
+
 ## 0.10.2
 
 ### Changes
