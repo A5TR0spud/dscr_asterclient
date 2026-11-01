@@ -1,5 +1,11 @@
 # Versions
 
+## 0.10.4
+
+### Fixes
+
+* Potentially fixed issue where invalid history data on disk would prevent history from existing at all
+
 ## 0.10.3
 
 ### Fixes

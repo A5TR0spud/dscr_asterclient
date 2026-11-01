@@ -23,7 +23,9 @@ static var ten_most_recent_transmissions: Array[int] = [] as Array[int]
 static func load_history() -> void:
 	history = History.new()
 	if ResourceLoader.exists(SaveSystem._history_path()):
-		history = ResourceLoader.load(SaveSystem._history_path())
+		var tmp = ResourceLoader.load(SaveSystem._history_path())
+		if tmp and tmp is History and is_instance_valid(tmp):
+			history = tmp
 	instance.ready_for_history.emit()
 	#var _c: ChatEntryNode = history.all_channel_head
 	#while _c:
@@ -101,7 +103,7 @@ static func new_transmission(packet: PackedStringArray) -> void:
 	# this is for powering off/on the app
 	if not is_instance_valid(history):
 		load_history()
-	if history:
+	if is_instance_valid(history):
 		var _c: ChatEntryNode = history.get_at_cyclic_index(history.last_valid())
 		var _i: int = 0
 		while _c and _i <= 10:
@@ -170,7 +172,8 @@ static func new_transmission(packet: PackedStringArray) -> void:
 		ske_message.key = channel_id
 		spooky_channel.add_message_node(ske_message)
 	
-	history.add(sender, channel_id, transmission_number, integer_message)
+	if is_instance_valid(history):
+		history.add(sender, channel_id, transmission_number, integer_message)
 
 enum State {
 	CONNECTING,
