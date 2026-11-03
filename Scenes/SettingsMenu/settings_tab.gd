@@ -21,6 +21,7 @@ func _ready() -> void:
 @onready var sound_slider: Range = $ScrollContainer/Options/GlobalVolume/VolumeSlider
 @onready var music_slider: Range = $ScrollContainer/Options/MusicVolume/VolumeSlider
 @onready var sound_sample: AudioStreamPlayer = $AudioPreview
+@onready var crunch_image: SettingEntry = $ScrollContainer/Options/CrunchImage
 @onready var invert_pitch: SettingEntry = $ScrollContainer/Options/ImageMovement/VBoxContainer/InvertPitch
 @onready var invert_yaw: SettingEntry = $ScrollContainer/Options/ImageMovement/VBoxContainer/InvertYaw
 @onready var invert_zoom: SettingEntry = $ScrollContainer/Options/ImageMovement/VBoxContainer/InvertZoom
@@ -56,6 +57,7 @@ func refresh() -> void:
 	_refresh_dict_supports()
 	ui_scale.set_value_no_signal(SettingsHandler.stretch_scale)
 	right_sidebar.set_state_no_signal(SettingsHandler.right_handed_sidebar)
+	crunch_image.set_state_no_signal(SettingsHandler.crunch_image)
 
 func _refresh_dict_supports():
 	_refresh_confetti()
@@ -230,4 +232,8 @@ func _on_color_ref_switch_item_selected(index: int):
 
 func _on_rh_sidebar_set(new_value):
 	SettingsHandler.right_handed_sidebar = new_value
+	save(true)
+
+func _on_crunch_image_set(new_value):
+	SettingsHandler.crunch_image = new_value
 	save(true)

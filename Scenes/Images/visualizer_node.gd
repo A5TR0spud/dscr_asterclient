@@ -42,8 +42,10 @@ static func calculate_color (value: int) -> Color:
 
 var _sphere_data: Array = []
 
-func _enter_tree():
+func _ready():
 	Main.instance.reload_image_inversion.connect(_refresh_inversions)
+	Main.instance.reload_settings.connect(_viewport_res)
+	_viewport_res()
 
 func _set_zoom(value: float) -> void:
 	if SettingsHandler.img_invert_zoom:
@@ -207,6 +209,7 @@ func check_image(message0: Array) -> bool:
 			# Origin Position
 			Vector3(p["x"], p["z"], -p["y"])
 		))
+	_viewport_res.call_deferred()
 	return true
 
 
@@ -286,16 +289,18 @@ func _on_resize_button_gui_input(event: InputEvent):
 	if event is InputEventMouseMotion:
 		custom_maximum_size.x = max(custom_minimum_size.x, custom_maximum_size.x + event.relative.x)
 		if res_button.is_pressed():
-			_viewport_res.call_deferred()
+			_viewport_res.bind(true).call_deferred()
 
 func _on_resolution_button_toggled(toggled_on):
-	if toggled_on:
-		_viewport_res()
-	else:
-		viewport.size = Vector2i(200, 128)
+	_viewport_res(toggled_on)
 
-func _viewport_res():
-	viewport.size = Vector2(visualizer.size.x, visualizer.size.x * 128.0/200.0)
+func _viewport_res(high_res: bool = res_button.is_pressed()):
+	if high_res:
+		viewport.size = Vector2(visualizer.size.x, visualizer.size.x * 128.0/200.0)
+	else:
+		viewport.size = Vector2i(100, 64) if (
+			SettingsHandler.crunch_image
+		) else Vector2i(200, 128)
 
 func _on_center_button_pressed():
 	yaw_slider.value = 0

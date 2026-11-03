@@ -1,5 +1,11 @@
 # Versions
 
+## --WIP--
+
+### Additions
+
+* Added setting to reduce resolution of visuals
+
 ## 0.10.4
 
 ### Fixes

@@ -11,9 +11,9 @@ BUTTON_SCROLL,-119 -43,,Return to bottom,Przewiń w dół
 PLACEHOLDER_ENTRY,-43 -38,,Enter message here…,Wpisz wiadomość…
 SIGNAL_NAME,-42,,Name,Hasło
 SIGNAL_NUMBER,-237,,Signal,Sygnał
-TIME_AGO_HSEC,{0} -69 -118 -121,yes,{0} He-6 second ago,{0} He-6 sekundę temu
-,,,{0} He-6 seconds ago,{0} He-6 sekundy temu
-,,,,{0} He-6 sekund temu
+TIME_AGO_HSEC,{0} -69 -118 -121,yes,{0} He-6 half-life ago,{0} He-6 sekundę temu
+,,,{0} He-6 half-lifes ago,{0} He-6 sekundy temu
+,,,,{0} He-6 half-life temu
 DICT_HEADER,-237 -174,,Dictionary,Słownik
 DICT_DEFAULT,-124 -122 -123,,Default Formatting,Domyślne formatowanie
 DICT_SEARCH_MAKE,-38 -77 -163,,Search or create,Wyszukaj lub stwórz
@@ -29,6 +29,7 @@ SETTINGS_RECONNECT,-241 0 -41,,Reconnect,Połącz ponownie
 SETTINGS_DO_WHITESPACE,-26 -14 -42 -190 -85 -100 -223 -216 -15 -4,,Follow dictionary whitespace?,Formatuj białe znaki
 SETTINGS_DEFAULT_IMAGE,-26 -14 -104 -149 -53 -163 -85 -15 -4,,Show images by default?,Wyświetl obrazy domyślnie
 SETTINGS_DO_BBCODE,-26 -14 -42 -163 -100 -223 -216 -15 -4,,Enable word styling?,Formatuj słowa
+SETTINGS_CRUNCH,-26 -14 -53 -163 -158 -23 -100 -107 -109 -15 -4,,Lower visual resolution?,
 SETTINGS_COLOR_REF,-42 -14 -54 -15 -163 -100,,Display |-54 color reference?,Wyświetl ściągawkę kolorów dla |-54
 SETTINGS_COLOR_REF_NONE,-111,,No,Nie wyświetlaj
 SETTINGS_COLOR_REF_INLINE,-169 -42,,Inlined,W tekście

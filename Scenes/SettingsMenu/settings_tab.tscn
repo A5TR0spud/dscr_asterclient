@@ -408,6 +408,10 @@ layout_mode = 2
 layout_mode = 2
 description = "SETTINGS_DEFAULT_IMAGE"
 
+[node name="CrunchImage" parent="ScrollContainer/Options" unique_id=84521014 instance=ExtResource("3_0yg8b")]
+layout_mode = 2
+description = "SETTINGS_CRUNCH"
+
 [node name="ImageMovement" type="FoldableContainer" parent="ScrollContainer/Options" unique_id=1922610066]
 layout_mode = 2
 title = "image camera inversion"
@@ -483,6 +487,7 @@ on_text = "SETTINGS_BACKUP_INCREMENT"
 [connection signal="value_changed" from="ScrollContainer/Options/MusicVolume/VolumeSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="pressed" from="ScrollContainer/Options/MusicVolume/SliderLabelGrid/Normal" to="." method="_on_music_volume_normal_pressed"]
 [connection signal="set" from="ScrollContainer/Options/ImageVis" to="." method="_on_image_vis_set"]
+[connection signal="set" from="ScrollContainer/Options/CrunchImage" to="." method="_on_crunch_image_set"]
 [connection signal="set" from="ScrollContainer/Options/ImageMovement/VBoxContainer/InvertPitch" to="." method="_on_invert_pitch_set"]
 [connection signal="set" from="ScrollContainer/Options/ImageMovement/VBoxContainer/InvertYaw" to="." method="_on_invert_yaw_set"]
 [connection signal="set" from="ScrollContainer/Options/ImageMovement/VBoxContainer/InvertZoom" to="." method="_on_invert_zoom_set"]

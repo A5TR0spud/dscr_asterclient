@@ -1,5 +1,7 @@
 ## TODO
 
+* setting to crunchify visuals further
+* setting to enable parse preview bar
 * add signal-matching options? (eg recolor matching pairs of -14 and -15, autocompleting -14 also types -15)
 * add "macro-dictionary" tab
 * probably add macros as an emoji keyboard type of thing rather than another parser
