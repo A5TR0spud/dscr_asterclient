@@ -12,6 +12,7 @@ static var instance: SoundManager
 @onready var command_send: AudioStreamPlayer = $command_send
 @onready var click: AudioStreamPlayer = $click
 @onready var party_horn: AudioStreamPlayer = $party_horn
+@onready var ping: AudioStreamPlayer = $ping
 
 enum Sounds {
 	NONE,
@@ -27,6 +28,7 @@ enum Sounds {
 	SUCCESS,
 	MESSAGE_SENT,
 	COMMAND_ACCEPTED,
+	PING,
 	# sourced from https://pixabay.com/sound-effects/film-special-effects-birthday-party-horn-250238/
 	# for free
 	# uploaded by Universfield
@@ -74,3 +76,5 @@ func _play_sound(sound_id: Sounds) -> void:
 		Sounds.PARTY_HORN:
 			party_horn.pitch_scale = randf_range(1.45, 1.55)
 			party_horn.play()
+		Sounds.PING:
+			ping.play()

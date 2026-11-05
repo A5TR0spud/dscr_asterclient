@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://ck4u8ds6d6065" path="res://Scenes/Main/sound_scene.gd" id="1_pkawr"]
 [ext_resource type="AudioStream" uid="uid://b36ck1raxw5vh" path="res://Assets/Sounds/double_dial.ogg" id="1_sib8k"]
 [ext_resource type="AudioStream" uid="uid://q27rk7sfk50e" path="res://Assets/Sounds/dial.ogg" id="2_pkawr"]
+[ext_resource type="AudioStream" uid="uid://bjcwr36wr26mr" path="res://Assets/Sounds/ping.ogg" id="3_5lc5d"]
 [ext_resource type="AudioStream" uid="uid://b4owb6cybhnhj" path="res://Assets/Sounds/closure.ogg" id="3_pkawr"]
 [ext_resource type="AudioStream" uid="uid://d372frnw84240" path="res://Assets/Sounds/acknowledge.ogg" id="4_5lc5d"]
 [ext_resource type="AudioStream" uid="uid://bf1uu02ektp1y" path="res://Assets/Sounds/openure.ogg" id="4_etekg"]
@@ -21,6 +22,12 @@ bus = &"System"
 stream = ExtResource("2_pkawr")
 volume_db = -15.0
 pitch_scale = 2.0
+max_polyphony = 2
+bus = &"System"
+
+[node name="ping" type="AudioStreamPlayer" parent="." unique_id=1442056784]
+stream = ExtResource("3_5lc5d")
+volume_db = 6.0
 max_polyphony = 2
 bus = &"System"
 

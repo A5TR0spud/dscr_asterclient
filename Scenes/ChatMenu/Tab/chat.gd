@@ -166,6 +166,17 @@ static func new_transmission(packet: PackedStringArray) -> void:
 		and channel_is_available(channel_id)
 	):
 		SoundManager.play_sound(SoundManager.Sounds.NOTIFICATION)
+		var target_cs: String = String.num_int64(Main.instance.previously_accepted_callsign, 8)
+		var composite_cs: String = ""
+		for num: int in integer_message:
+			if num < 0:
+				if composite_cs == target_cs:
+					break
+				composite_cs = ""
+				continue
+			composite_cs += str(num)
+		if composite_cs == target_cs:
+			SoundManager.play_sound(SoundManager.Sounds.PING)
 	var ghost_to_skeleton: bool = true
 	if channel_id == SKELETON_KEY:
 		new_message.key = SKELETON_KEY

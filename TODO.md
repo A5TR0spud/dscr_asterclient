@@ -19,7 +19,7 @@
 * music parsing for sine vs square vs saw vs triangle vs smooth square?
 * autocomplete for nicknames to numbers
 * add option to hide transmissions with -132010 in them (truncate to 0 signals and new button)
-* setting to get a ping sound when callsign is spoken and channel is not focused
+* setting for ping volume
 * ctrl+f
 * song queue visualization
 * per-channel notification sound toggles
