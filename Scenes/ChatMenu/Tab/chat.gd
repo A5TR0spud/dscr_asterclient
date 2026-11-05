@@ -525,6 +525,9 @@ func _on_message_edit_caret_changed():
 func _on_message_edit_text_changed():
 	_refresh_parse_bar()
 
+func _on_message_edit_text_set():
+	_refresh_parse_bar()
+
 func _refresh_parse_bar():
 	var input: String = trans_edit.get_line_wrapped_text(trans_edit.get_caret_line())[trans_edit.get_caret_wrap_index()]
 	
@@ -565,5 +568,6 @@ func _refresh_parse_bar():
 		prevend = end
 	
 	parse_bar_word.text = result.strip_edges()
+	get_viewport().update_mouse_cursor_state.call_deferred()
 
 #endregion

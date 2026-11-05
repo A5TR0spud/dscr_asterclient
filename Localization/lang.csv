@@ -9,8 +9,8 @@ BUTTON_DSMIDI,-577 -38,,DSMIDI,DSMIDI
 BUTTON_LANG,-195 -174,,Change language,Zmiana języka
 BUTTON_SCROLL,-119 -43,,Return to bottom,Przewiń w dół
 PLACEHOLDER_ENTRY,-43 -38,,Enter message here…,Wpisz wiadomość…
-SIGNAL_NAME,-42,,Name,Hasło
-SIGNAL_NUMBER,-237,,Signal,Sygnał
+SIGNAL_NAME,-42,,Signal Name,Hasło
+SIGNAL_NUMBER,-237,,Frequency,Sygnał
 TIME_AGO_HSEC,{0} -69 -118 -121,yes,{0} He-6 half-life ago,{0} He-6 sekundę temu
 ,,,{0} He-6 half-lifes ago,{0} He-6 sekundy temu
 ,,,,{0} He-6 half-life temu
@@ -67,7 +67,7 @@ SETTINGS_BACKUP_CALLSIGN,-37 -128 -11 -100 -155 -36,,Backup callsign,Zapasowy zn
 SETTINGS_BACKUP_RANDOM,-11,,Random,Losowy
 SETTINGS_BACKUP_INCREMENT,1 -5,,Increment,Użyj następny
 CALLSIGN,-128 -42,,Callsign,Znak wywoławczy
-COPY_SIGNAL_NUMBERS,-42 -40,,Copy signals,Kopiuj sygnały
+COPY_SIGNAL_NUMBERS,-42 -40,,Copy frequencies,Kopiuj sygnały
 COPY_SIGNAL_NAMES,-237 -40,,Copy words,Kopiuj słowa
 SUBMIT_LONG,-174 -85,,Submit,Zapisz
 LIBRARY_NEW,-43 -38 -85,,Submit,Zapisz
@@ -99,7 +99,7 @@ SYSTEM_DUPLICATE_NAME,-42 -14 -1 {sig0} -15 -30 -42 -14 -1 {sig1} -15 -100 -229 
 SYSTEM_DUPLICATE_NUMBER,{0} -100 -30 2 -42 -100 -229 -145 -29 -85,,Signal -{0} is already taken,Sygnał -{0} jest już zdefiniowany
 DELETE_TRANSMISSION,-88,,Dismiss,Pomiń
 DICT_EDIT_HEADER,-42 -38 -77 -174,,Edit Dictionary,Edytuj słownik
-DICT_EDIT_NAME_LABEL_LEFT,-42 -14 -1,,Signal -,Sygnał -
+DICT_EDIT_NAME_LABEL_LEFT,-42 -14 -1,,Frequency -,Sygnał -
 DICT_EDIT_NAME_LABEL_MIDDLE,-15 -4,,is,to
 DICT_EDIT_BA_LABEL,-122 {0} -122,,then {0} then,potem {0} a potem
 DICT_EDIT_BA_LABEL_GENERIC,-122 -42 -122,,then word then,potem hasło a potem

@@ -108,6 +108,7 @@ ignore_time_scale = true
 [connection signal="caret_changed" from="BottomBar/MessageEdit" to="." method="_on_message_edit_caret_changed"]
 [connection signal="submit_text" from="BottomBar/MessageEdit" to="." method="_on_message_edit_submit_text"]
 [connection signal="text_changed" from="BottomBar/MessageEdit" to="." method="_on_message_edit_text_changed"]
+[connection signal="text_set" from="BottomBar/MessageEdit" to="." method="_on_message_edit_text_set"]
 [connection signal="pressed" from="BottomBar/SideOptionsWrapper/SideOptions/QuickTransmission" to="." method="_on_quick_transmission_pressed"]
 [connection signal="gui_input" from="BottomBar/SideOptionsWrapper/SideOptions/QuickTransmission/Control/PanelContainer/VBoxContainer/QTSearch" to="." method="_on_qt_search_gui_input"]
 [connection signal="text_changed" from="BottomBar/SideOptionsWrapper/SideOptions/QuickTransmission/Control/PanelContainer/VBoxContainer/QTSearch" to="." method="_on_qt_search_text_changed"]
