@@ -27,6 +27,16 @@ drag_to_rearrange_enabled = true
 layout_mode = 2
 metadata/_tab_index = 0
 
+[node name="PWordLabel" type="RichTextLabel" parent="." unique_id=254717242]
+layout_mode = 2
+bbcode_enabled = true
+text = "nerd is the word"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+meta_underlined = false
+hint_underlined = false
+
 [node name="BottomBar" type="HBoxContainer" parent="." unique_id=1954111637]
 layout_mode = 2
 
@@ -95,7 +105,9 @@ ignore_time_scale = true
 
 [connection signal="active_tab_rearranged" from="TabContainer" to="." method="_on_tab_container_active_tab_rearranged"]
 [connection signal="tab_changed" from="TabContainer" to="." method="_on_tab_container_tab_changed"]
+[connection signal="caret_changed" from="BottomBar/MessageEdit" to="." method="_on_message_edit_caret_changed"]
 [connection signal="submit_text" from="BottomBar/MessageEdit" to="." method="_on_message_edit_submit_text"]
+[connection signal="text_changed" from="BottomBar/MessageEdit" to="." method="_on_message_edit_text_changed"]
 [connection signal="pressed" from="BottomBar/SideOptionsWrapper/SideOptions/QuickTransmission" to="." method="_on_quick_transmission_pressed"]
 [connection signal="gui_input" from="BottomBar/SideOptionsWrapper/SideOptions/QuickTransmission/Control/PanelContainer/VBoxContainer/QTSearch" to="." method="_on_qt_search_gui_input"]
 [connection signal="text_changed" from="BottomBar/SideOptionsWrapper/SideOptions/QuickTransmission/Control/PanelContainer/VBoxContainer/QTSearch" to="." method="_on_qt_search_text_changed"]

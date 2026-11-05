@@ -7,6 +7,7 @@
 * Added setting to reduce resolution of visuals
 * Added quick-Library-transmission-insert button next to chat input
 * Your callsign being received in chat now plays a unique sound if a notification is applicable
+* Added parse preview bar. Can hover over signals for frequencies.
 
 ## 0.10.4
 

@@ -16,7 +16,7 @@ static var chat_channel_scene = preload("uid://c7bn3w1ijabx4")
 @onready var quick_transmission_panel: PanelContainer = $BottomBar/SideOptionsWrapper/SideOptions/QuickTransmission/Control/PanelContainer
 @onready var quick_transmission_search: LineEdit = $BottomBar/SideOptionsWrapper/SideOptions/QuickTransmission/Control/PanelContainer/VBoxContainer/QTSearch
 @onready var quick_transmission_list: ItemList = $BottomBar/SideOptionsWrapper/SideOptions/QuickTransmission/Control/PanelContainer/VBoxContainer/QTList
-
+@onready var parse_bar_word: RichTextLabel = $PWordLabel
 
 func _enter_tree():
 	instance = self
@@ -30,6 +30,7 @@ func _ready():
 	refresh_little_menu()
 	tabbar.tab_close_pressed.connect(close_tab_from_button)
 	Main.instance.reload_library.connect(refresh_little_menu)
+	_refresh_parse_bar()
 
 #region Chat
 
@@ -513,5 +514,56 @@ func _on_qt_search_gui_input(event: InputEvent):
 		hide_qt_panel()
 		accept_event()
 		return
+
+#endregion
+
+#region Parse Bar
+
+func _on_message_edit_caret_changed():
+	_refresh_parse_bar()
+
+func _on_message_edit_text_changed():
+	_refresh_parse_bar()
+
+func _refresh_parse_bar():
+	var input: String = trans_edit.get_line_wrapped_text(trans_edit.get_caret_line())[trans_edit.get_caret_wrap_index()]
+	
+	var result: String = ""
+	
+	#print(input)
+	
+	TransmissionCompilation.compile_text(input)
+	var d := TransmissionCompilation.get_as_data_dict()
+	var starts: PackedInt32Array = d["starts"]
+	var lengths: PackedInt32Array = d["lengths"]
+	var sigs: PackedInt64Array = d["signals"]
+	var prevend: int = 0
+	for idx: int in range(starts.size() + 1):
+		var start: int = starts[idx] if idx < starts.size() else input.length()
+		var end: int = start + lengths[idx] if idx < starts.size() else 0
+		result += " "
+		if start > prevend:
+			var bad: String = input.substr(prevend, start - prevend).strip_edges()
+			if bad:
+				result += str(
+					"[color=#ff5566bb]",
+					bad,
+					"[/color] "
+				)
+		if idx < starts.size():
+			var sig: int = sigs[idx]
+			if sig < 0:
+				result += str(
+					"[hint='|",
+					sig,
+					"']",
+					DictionaryHandler.get_or_default_signal_name(sig).replace("[", "[lb]"),
+					"[/hint]"
+				)
+			else:
+				result += DictionaryHandler.get_or_default_signal_name(sig).replace("[", "[lb]")
+		prevend = end
+	
+	parse_bar_word.text = result.strip_edges()
 
 #endregion

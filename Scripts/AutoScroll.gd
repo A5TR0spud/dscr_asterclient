@@ -2,7 +2,7 @@ extends ScrollContainer
 class_name AutoScrollContainer
 
 var _old_bottom: float = 0
-@export var tolerance: int = 25
+@export var tolerance: int = 5
 @onready var _scrollbar: VScrollBar = get_v_scroll_bar()
 
 func _was_scrolled_to_bottom() -> bool:
