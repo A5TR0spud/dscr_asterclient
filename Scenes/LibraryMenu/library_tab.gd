@@ -2,7 +2,7 @@ extends Control
 class_name Library
 
 @onready var name_edit: LineEdit = $Body/HBoxContainer/Editor/Header/TransNameEdit
-@onready var words_edit: TransmissionEdit = $Body/HBoxContainer/Editor/VSplitContainer/VBoxContainer/ScrollContainer/TransmissionEdit
+@onready var words_edit: TransmissionEdit = $Body/HBoxContainer/Editor/VSplitContainer/BottomHalf/TransmissionEdit
 @onready var delete_button: ConfirmationButton = $Body/HBoxContainer/Editor/Buttons/Delete
 @onready var t_preview: TransEntry = $Body/HBoxContainer/Editor/VSplitContainer/TransHolder/TransmissionEntry
 @onready var debounce: Timer = $RefreshDebounce
@@ -13,6 +13,9 @@ class_name Library
 
 @onready var submit_lang: LocaleNode = $Body/HBoxContainer/Editor/Buttons/Submit/LocaleNode
 @onready var rename_button: Button = $Body/HBoxContainer/Editor/Header/RenameButton
+
+@onready var split: VSplitContainer = $Body/HBoxContainer/Editor/VSplitContainer
+@onready var bottom_half: Control = $Body/HBoxContainer/Editor/VSplitContainer/BottomHalf
 
 var lib_entry = preload("res://Scenes/LibraryMenu/library_entry.tscn")
 
@@ -205,3 +208,13 @@ func _on_rename_button_pressed():
 func _refresh_rename_button():
 	rename_button.text = Localizer.translate("LIBRARY_RENAME", pre_name)
 	rename_button.visible = pre_name in LibraryHandler.get_all_transmissions() and _get_name() not in LibraryHandler.get_all_transmissions()
+
+func _on_v_split_container_item_rect_changed():
+	if not is_node_ready():
+		return
+	@warning_ignore("narrowing_conversion")
+	var old: int = bottom_half.custom_maximum_size.y
+	@warning_ignore("narrowing_conversion")
+	var new: int = split.size.y / 2
+	if old != new:
+		bottom_half.custom_maximum_size.y = new

@@ -10,10 +10,32 @@ static var chat_channel_scene = preload("uid://c7bn3w1ijabx4")
 @onready var channel_container: TabContainer = $TabContainer
 @onready var main_channel: ChatChannel = $TabContainer/Main
 @onready var tabbar: TabBar = channel_container.get_tab_bar()
+@onready var trans_edit: TransmissionEdit = $BottomBar/MessageEdit
+@onready var edit_side_options: Control = $BottomBar/SideOptionsWrapper/SideOptions
+@onready var quick_transmission_button: IconButton = $BottomBar/SideOptionsWrapper/SideOptions/QuickTransmission
+@onready var quick_transmission_panel: PanelContainer = $BottomBar/SideOptionsWrapper/SideOptions/QuickTransmission/Control/PanelContainer
+@onready var quick_transmission_search: LineEdit = $BottomBar/SideOptionsWrapper/SideOptions/QuickTransmission/Control/PanelContainer/VBoxContainer/QTSearch
+@onready var quick_transmission_list: ItemList = $BottomBar/SideOptionsWrapper/SideOptions/QuickTransmission/Control/PanelContainer/VBoxContainer/QTList
 
-const CHANNEL_SELECTOR: int = -65535
-const COMMAND_JOIN: int = -65534
+
+func _enter_tree():
+	instance = self
+
+func _ready():
+	hide_qt_panel()
+	Main.instance.reload_settings.connect(open_loaded_channels)
+	open_loaded_channels()
+	main_channel.try_show_history()
+	#refresh_can_close()
+	refresh_little_menu()
+	tabbar.tab_close_pressed.connect(close_tab_from_button)
+	Main.instance.reload_library.connect(refresh_little_menu)
+
+#region Chat
+
 const COMMAND_LEAVE: int = -65533
+const COMMAND_JOIN: int = -65534
+const CHANNEL_SELECTOR: int = -65535
 const SKELETON_KEY: int = -65536
 
 signal ready_for_history
@@ -38,16 +60,6 @@ static func save_history() -> void:
 	#while _c:
 	#	print(_c.trx)
 	#	_c = _c.earlier_in_all
-
-func _enter_tree():
-	instance = self
-
-func _ready():
-	Main.instance.reload_settings.connect(open_loaded_channels)
-	open_loaded_channels()
-	main_channel.try_show_history()
-	#refresh_can_close()
-	tabbar.tab_close_pressed.connect(close_tab_from_button)
 
 func close_tab_from_button(idx: int):
 	var c: ChatChannel = channel_container.get_child(idx)
@@ -357,12 +369,11 @@ static func new_log(state: State, args: Array = []) -> void:
 	new_message.sender = -1574
 	get_current_channel_node().add_message_node(new_message)
 
-@onready var medit: TransmissionEdit = $MessageEdit
 func _on_message_edit_submit_text(message: String):
 	get_current_channel_node().scroll_container.scroll_to_bottom()
 	var send_result: Array = Main.instance.send_message(message.remove_char(ord(TransmissionEdit.DELIMITER_CHARACTER)))
 	if send_result[0]:
-		medit.text = ""
+		trans_edit.text = ""
 	match send_result[1]:
 		Main.MessageCompilationResult.MESSAGE_SENT:
 			SoundManager.play_sound(SoundManager.Sounds.MESSAGE_SENT)
@@ -397,3 +408,99 @@ func _on_tab_container_active_tab_rearranged(_idx_to):
 
 func _on_save_cooldown_timeout():
 	save_history()
+
+#endregion
+
+func refresh_little_menu() -> void:
+	quick_transmission_button.visible = not LibraryHandler.get_all_transmissions().is_empty()
+	edit_side_options.visible = quick_transmission_button.visible
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
+			if Rect2(Vector2.ZERO, quick_transmission_panel.size).has_point(quick_transmission_panel.get_local_mouse_position()):
+				return
+			if Rect2(Vector2.ZERO, quick_transmission_button.size).has_point(quick_transmission_button.get_local_mouse_position()):
+				return
+			hide_qt_panel()
+
+#region Little Menu
+
+func hide_qt_panel():
+	quick_transmission_panel.hide()
+
+func popup_qt_panel():
+	quick_transmission_panel.show()
+	quick_transmission_panel.reset_size.call_deferred()
+	quick_transmission_search.clear()
+	_do_qt_search()
+	quick_transmission_search.grab_focus()
+
+func _on_quick_transmission_pressed():
+	if quick_transmission_panel.visible:
+		hide_qt_panel()
+	else:
+		popup_qt_panel()
+
+func _on_qt_search_text_changed(new_text: String):
+	_do_qt_search(new_text)
+
+func _on_qt_list_item_clicked(index: int, _at_position: Vector2, mouse_button_index: int):
+	if mouse_button_index != MOUSE_BUTTON_LEFT:
+		return
+	_select_qt_item(index)
+
+func _select_qt_item(idx: int):
+	var c0: int = trans_edit.get_caret_column()
+	var l0: int = trans_edit.get_caret_line()
+	trans_edit.insert_text_at_caret(
+		DictionaryHandler.signals_to_words(
+			LibraryHandler.get_transmission(
+				quick_transmission_list.get_item_text(idx)
+			),
+			true
+		)
+	)
+	var c1: int = trans_edit.get_caret_column()
+	var l1: int = trans_edit.get_caret_line()
+	trans_edit.grab_focus()
+	trans_edit.select(l0, c0, l1, c1)
+	hide_qt_panel()
+
+func _do_qt_search(new_text: String = ""):
+	quick_transmission_list.clear()
+	var order: Array = LibraryHandler.get_all_transmissions()
+	if new_text.is_empty():
+		order.sort()
+	else:
+		order = AutocompleteManager.get_dl_candidates(
+			new_text, order, 10
+		)
+	for s: String in order:
+		quick_transmission_list.add_item(s)
+
+func _on_qt_search_gui_input(event: InputEvent):
+	var selected = quick_transmission_list.get_selected_items()
+	var idx = selected[0] if not selected.is_empty() else 0
+	if event.is_action_pressed("ui_down", true):
+		idx = min(idx + 1, quick_transmission_list.item_count - 1)
+		quick_transmission_list.select(idx)
+		quick_transmission_list.ensure_current_is_visible()
+		accept_event()
+		return
+	if event.is_action_pressed("ui_up", true):
+		idx = max(idx - 1, 0)
+		quick_transmission_list.select(idx)
+		quick_transmission_list.ensure_current_is_visible()
+		accept_event()
+		return
+	if event.is_action_pressed("autocomplete_accept") or event.is_action_pressed("ui_text_submit"):
+		_select_qt_item(idx)
+		accept_event()
+		return
+	if event.is_action_pressed("ui_close_dialog"):
+		hide_qt_panel()
+		accept_event()
+		return
+
+#endregion

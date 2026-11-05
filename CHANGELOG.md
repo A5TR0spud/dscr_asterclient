@@ -5,6 +5,7 @@
 ### Additions
 
 * Added setting to reduce resolution of visuals
+* Added quick-Library-transmission-insert button next to chat input
 
 ## 0.10.4
 

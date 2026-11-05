@@ -1,6 +1,5 @@
 ## TODO
 
-* setting to crunchify visuals further
 * setting to enable parse preview bar
 * add signal-matching options? (eg recolor matching pairs of -14 and -15, autocompleting -14 also types -15)
 * add "macro-dictionary" tab
@@ -30,4 +29,5 @@
 * lua modules/plugins
 * android support
 * fps cap setting?
+* tag system using proposed RFC
 * Polish translations

@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://dr2cb7q6mysjs" path="res://Scenes/ChatMenu/Tab/chat.gd" id="1_iy605"]
 [ext_resource type="PackedScene" uid="uid://c7bn3w1ijabx4" path="res://Scenes/ChatMenu/Tab/chat_channel.tscn" id="2_iy605"]
 [ext_resource type="PackedScene" uid="uid://c6kmkupmer6fn" path="res://Scenes/Common/transmission_edit.tscn" id="3_iy605"]
+[ext_resource type="PackedScene" uid="uid://iqh1s0683kvy" path="res://Scenes/Common/icon_button.tscn" id="4_a6gc7"]
+[ext_resource type="Texture2D" uid="uid://bvupahebriyvc" path="res://Assets/Icons/quick_trans_insert.png" id="5_4t4sc"]
+[ext_resource type="StyleBox" uid="uid://b1t3fn13p4807" path="res://Styling/Seps/h_split.tres" id="6_4t4sc"]
 
 [node name="Chat" type="VBoxContainer" unique_id=2068892274]
 anchors_preset = 15
@@ -24,10 +27,65 @@ drag_to_rearrange_enabled = true
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="MessageEdit" parent="." unique_id=48211048 instance=ExtResource("3_iy605")]
+[node name="BottomBar" type="HBoxContainer" parent="." unique_id=1954111637]
+layout_mode = 2
+
+[node name="MessageEdit" parent="BottomBar" unique_id=48211048 instance=ExtResource("3_iy605")]
 custom_maximum_size = Vector2(-1, 400)
 layout_mode = 2
-size_flags_vertical = 8
+
+[node name="SideOptionsWrapper" type="VBoxContainer" parent="BottomBar" unique_id=1299320802]
+layout_mode = 2
+
+[node name="SideOptions" type="HBoxContainer" parent="BottomBar/SideOptionsWrapper" unique_id=1238560717]
+layout_mode = 2
+
+[node name="QuickTransmission" parent="BottomBar/SideOptionsWrapper/SideOptions" unique_id=171257682 instance=ExtResource("4_a6gc7")]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 33)
+layout_mode = 2
+icon = ExtResource("5_4t4sc")
+tooltip_key = "TAB_LIBRARY"
+
+[node name="Control" type="Control" parent="BottomBar/SideOptionsWrapper/SideOptions/QuickTransmission" unique_id=100874059]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="BottomBar/SideOptionsWrapper/SideOptions/QuickTransmission/Control" unique_id=1620954541]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 4.0
+offset_top = -8.0
+offset_right = 304.0
+offset_bottom = 260.0
+grow_horizontal = 0
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(-1, -1)
+offset_transform_visual_only = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BottomBar/SideOptionsWrapper/SideOptions/QuickTransmission/Control/PanelContainer" unique_id=728397477]
+layout_mode = 2
+
+[node name="QTSearch" type="LineEdit" parent="BottomBar/SideOptionsWrapper/SideOptions/QuickTransmission/Control/PanelContainer/VBoxContainer" unique_id=1920657482]
+layout_mode = 2
+focus_next = NodePath("../QTList")
+max_length = 30
+
+[node name="QTList" type="ItemList" parent="BottomBar/SideOptionsWrapper/SideOptions/QuickTransmission/Control/PanelContainer/VBoxContainer" unique_id=1426516848]
+custom_maximum_size = Vector2(-1, 400)
+layout_mode = 2
+size_flags_vertical = 3
+focus_previous = NodePath("../QTSearch")
+allow_search = false
+auto_width = true
+auto_height = true
+
+[node name="Spaceholder" type="Panel" parent="BottomBar/SideOptionsWrapper" unique_id=2125052025]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("6_4t4sc")
 
 [node name="SaveCooldown" type="Timer" parent="." unique_id=1416654278]
 process_callback = 0
@@ -37,5 +95,9 @@ ignore_time_scale = true
 
 [connection signal="active_tab_rearranged" from="TabContainer" to="." method="_on_tab_container_active_tab_rearranged"]
 [connection signal="tab_changed" from="TabContainer" to="." method="_on_tab_container_tab_changed"]
-[connection signal="submit_text" from="MessageEdit" to="." method="_on_message_edit_submit_text"]
+[connection signal="submit_text" from="BottomBar/MessageEdit" to="." method="_on_message_edit_submit_text"]
+[connection signal="pressed" from="BottomBar/SideOptionsWrapper/SideOptions/QuickTransmission" to="." method="_on_quick_transmission_pressed"]
+[connection signal="gui_input" from="BottomBar/SideOptionsWrapper/SideOptions/QuickTransmission/Control/PanelContainer/VBoxContainer/QTSearch" to="." method="_on_qt_search_gui_input"]
+[connection signal="text_changed" from="BottomBar/SideOptionsWrapper/SideOptions/QuickTransmission/Control/PanelContainer/VBoxContainer/QTSearch" to="." method="_on_qt_search_text_changed"]
+[connection signal="item_clicked" from="BottomBar/SideOptionsWrapper/SideOptions/QuickTransmission/Control/PanelContainer/VBoxContainer/QTList" to="." method="_on_qt_list_item_clicked"]
 [connection signal="timeout" from="SaveCooldown" to="." method="_on_save_cooldown_timeout"]
