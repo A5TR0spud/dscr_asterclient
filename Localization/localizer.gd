@@ -41,6 +41,8 @@ static func translate_plural(key: String, n: int, arguments: Variant = []) -> St
 			return translate(key, arguments)
 		if n <= 0:
 			n = 0
+		if n >= INT16_MAX:
+			n = INT16_MAX
 		var translation: String = TranslationServer.translate_plural(key, "", n);
 		if translation.is_empty():
 			# try using non-plural as a fallback

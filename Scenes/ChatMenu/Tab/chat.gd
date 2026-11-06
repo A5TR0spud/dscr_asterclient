@@ -168,15 +168,16 @@ static func new_transmission(packet: PackedStringArray) -> void:
 	):
 		SoundManager.play_sound(SoundManager.Sounds.NOTIFICATION)
 		var target_cs: String = String.num_int64(Main.instance.previously_accepted_callsign, 8)
+		var target_cs2: String = Main.base_10_to_callsign(Main.instance.previously_accepted_callsign)
 		var composite_cs: String = ""
 		for num: int in integer_message:
 			if num < 0:
-				if composite_cs == target_cs:
+				if composite_cs == target_cs or composite_cs == target_cs2:
 					break
 				composite_cs = ""
 				continue
 			composite_cs += str(num)
-		if composite_cs == target_cs:
+		if composite_cs == target_cs or composite_cs == target_cs2:
 			SoundManager.play_sound(SoundManager.Sounds.PING)
 	var ghost_to_skeleton: bool = true
 	if channel_id == SKELETON_KEY:
@@ -442,6 +443,7 @@ func hide_qt_panel():
 	quick_transmission_panel.hide()
 
 func popup_qt_panel():
+	quick_transmission_list.get_v_scroll_bar().value = 0
 	quick_transmission_panel.show()
 	quick_transmission_panel.reset_size.call_deferred()
 	quick_transmission_search.clear()

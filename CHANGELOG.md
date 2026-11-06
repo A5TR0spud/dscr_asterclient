@@ -8,6 +8,10 @@
 * Added quick-Library-transmission-insert button next to chat input
 * Your callsign being received in chat now plays a unique sound if a notification is applicable
 * Added parse preview bar. Can hover over signals for frequencies.
+* Added numerical base conversion to Reference
+  * It supports bases 2, 3, 4, 7, 8, 10, 12, 16, and fractional components
+  * It only has so much precision, sorry
+  * Numbers can go up to roughly 2^31, more or less per base
 
 ### Changes
 

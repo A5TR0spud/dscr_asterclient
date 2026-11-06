@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://ebnh5oxmelbl" path="res://Scenes/ReferenceTab/periodic_table.tscn" id="4_cydeu"]
 [ext_resource type="Script" uid="uid://cwy0rhlrtctmt" path="res://Scenes/ReferenceTab/unit_conversion.gd" id="4_vb677"]
 [ext_resource type="Script" uid="uid://daa7cp85f4qgs" path="res://Scripts/NumberEdit.gd" id="5_vb677"]
+[ext_resource type="Script" uid="uid://dqvp5kv0ktkp4" path="res://Scenes/ReferenceTab/base_conversion.gd" id="6_f6m34"]
+[ext_resource type="Script" uid="uid://gtpqlwktlalr" path="res://Scripts/FilteredLineEdit.gd" id="6_n1kvl"]
 
 [node name="ReferenceTab" type="PanelContainer" unique_id=834008978]
 anchors_preset = 15
@@ -28,6 +30,7 @@ size_flags_vertical = 3
 
 [node name="M0Refs" type="FoldableContainer" parent="Corpus/VBoxContainer" unique_id=280768690]
 layout_mode = 2
+folded = true
 title = "meteor 0 refs"
 
 [node name="LocaleNode" type="Node" parent="Corpus/VBoxContainer/M0Refs" unique_id=889370263]
@@ -38,6 +41,7 @@ translations = Dictionary[StringName, String]({
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Corpus/VBoxContainer/M0Refs" unique_id=1726704827]
+visible = false
 layout_mode = 2
 
 [node name="ColorRef" type="VBoxContainer" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer" unique_id=1374500898]
@@ -56,6 +60,142 @@ metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="ColorReference" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/ColorRef" unique_id=486884822 instance=ExtResource("1_16g7y")]
 layout_mode = 2
+
+[node name="BaseConversion" type="FoldableContainer" parent="Corpus/VBoxContainer" unique_id=1965888826]
+layout_mode = 2
+title = "numeric bases"
+script = ExtResource("6_f6m34")
+
+[node name="LocaleNode" type="Node" parent="Corpus/VBoxContainer/BaseConversion" unique_id=129908020]
+script = ExtResource("2_jk0c3")
+translations = Dictionary[StringName, String]({
+&"title": "REFERENCE_BASES"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="GridContainer" type="GridContainer" parent="Corpus/VBoxContainer/BaseConversion" unique_id=1464343098]
+layout_mode = 2
+columns = 4
+
+[node name="BinaryLabel" type="Label" parent="Corpus/VBoxContainer/BaseConversion/GridContainer" unique_id=1202323812]
+layout_mode = 2
+text = "2"
+
+[node name="Binary" type="LineEdit" parent="Corpus/VBoxContainer/BaseConversion/GridContainer" unique_id=1716065030]
+layout_mode = 2
+size_flags_horizontal = 3
+max_length = 63
+keep_editing_on_text_submit = true
+script = ExtResource("6_n1kvl")
+deny_list = ".,01"
+allow_list = true
+replace_list = {}
+metadata/_custom_type_script = "uid://gtpqlwktlalr"
+
+[node name="TernaryLabel" type="Label" parent="Corpus/VBoxContainer/BaseConversion/GridContainer" unique_id=806002993]
+layout_mode = 2
+text = "3"
+
+[node name="Ternary" type="LineEdit" parent="Corpus/VBoxContainer/BaseConversion/GridContainer" unique_id=77317497]
+layout_mode = 2
+size_flags_horizontal = 3
+max_length = 39
+keep_editing_on_text_submit = true
+script = ExtResource("6_n1kvl")
+deny_list = ".,012"
+allow_list = true
+replace_list = {}
+metadata/_custom_type_script = "uid://gtpqlwktlalr"
+
+[node name="QuaternaryLabel" type="Label" parent="Corpus/VBoxContainer/BaseConversion/GridContainer" unique_id=1842147664]
+layout_mode = 2
+text = "4"
+
+[node name="Quaternary" type="LineEdit" parent="Corpus/VBoxContainer/BaseConversion/GridContainer" unique_id=1345206752]
+layout_mode = 2
+size_flags_horizontal = 3
+max_length = 31
+keep_editing_on_text_submit = true
+script = ExtResource("6_n1kvl")
+deny_list = ".,0123"
+allow_list = true
+replace_list = {}
+metadata/_custom_type_script = "uid://gtpqlwktlalr"
+
+[node name="SeptLabel" type="Label" parent="Corpus/VBoxContainer/BaseConversion/GridContainer" unique_id=1317323529]
+layout_mode = 2
+text = "7"
+
+[node name="Sept" type="LineEdit" parent="Corpus/VBoxContainer/BaseConversion/GridContainer" unique_id=326344586]
+layout_mode = 2
+size_flags_horizontal = 3
+max_length = 22
+keep_editing_on_text_submit = true
+script = ExtResource("6_n1kvl")
+deny_list = ".,0123456"
+allow_list = true
+replace_list = {}
+metadata/_custom_type_script = "uid://gtpqlwktlalr"
+
+[node name="OctalLabel" type="Label" parent="Corpus/VBoxContainer/BaseConversion/GridContainer" unique_id=1849726610]
+layout_mode = 2
+text = "8"
+
+[node name="Octal" type="LineEdit" parent="Corpus/VBoxContainer/BaseConversion/GridContainer" unique_id=1218509622]
+layout_mode = 2
+size_flags_horizontal = 3
+max_length = 21
+keep_editing_on_text_submit = true
+script = ExtResource("6_n1kvl")
+deny_list = ".,01234567"
+allow_list = true
+replace_list = {}
+metadata/_custom_type_script = "uid://gtpqlwktlalr"
+
+[node name="DecimalLabel" type="Label" parent="Corpus/VBoxContainer/BaseConversion/GridContainer" unique_id=284538304]
+layout_mode = 2
+text = "10"
+
+[node name="Decimal" type="LineEdit" parent="Corpus/VBoxContainer/BaseConversion/GridContainer" unique_id=1969520349]
+layout_mode = 2
+size_flags_horizontal = 3
+max_length = 18
+keep_editing_on_text_submit = true
+script = ExtResource("6_n1kvl")
+deny_list = ".,0123456789"
+allow_list = true
+replace_list = {}
+metadata/_custom_type_script = "uid://gtpqlwktlalr"
+
+[node name="DodecimalLabel" type="Label" parent="Corpus/VBoxContainer/BaseConversion/GridContainer" unique_id=2104824222]
+layout_mode = 2
+text = "12"
+
+[node name="Dodecimal" type="LineEdit" parent="Corpus/VBoxContainer/BaseConversion/GridContainer" unique_id=1358755461]
+layout_mode = 2
+size_flags_horizontal = 3
+max_length = 17
+keep_editing_on_text_submit = true
+script = ExtResource("6_n1kvl")
+deny_list = ".,0123456789AB"
+allow_list = true
+replace_list = {}
+metadata/_custom_type_script = "uid://gtpqlwktlalr"
+
+[node name="HexadecimalLabel" type="Label" parent="Corpus/VBoxContainer/BaseConversion/GridContainer" unique_id=1024074258]
+layout_mode = 2
+text = "16"
+
+[node name="Hexadecimal" type="LineEdit" parent="Corpus/VBoxContainer/BaseConversion/GridContainer" unique_id=553946834]
+layout_mode = 2
+size_flags_horizontal = 3
+max_length = 15
+keep_editing_on_text_submit = true
+script = ExtResource("6_n1kvl")
+deny_list = ".,0123456789ABCDEF"
+allow_list = true
+replace_list = {}
+metadata/_custom_type_script = "uid://gtpqlwktlalr"
 
 [node name="UnitsDrop" type="FoldableContainer" parent="Corpus/VBoxContainer" unique_id=1240872268]
 layout_mode = 2
@@ -674,6 +814,7 @@ metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="PeriodicTable" type="FoldableContainer" parent="Corpus/VBoxContainer" unique_id=13968256]
 layout_mode = 2
+folded = true
 title = "periodic table"
 
 [node name="LocaleNode" type="Node" parent="Corpus/VBoxContainer/PeriodicTable" unique_id=1751833679]
@@ -684,9 +825,18 @@ translations = Dictionary[StringName, String]({
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="PeriodicTable" parent="Corpus/VBoxContainer/PeriodicTable" unique_id=1498053878 instance=ExtResource("4_cydeu")]
+visible = false
 layout_mode = 2
 size_flags_stretch_ratio = 10.0
 
+[connection signal="text_submitted" from="Corpus/VBoxContainer/BaseConversion/GridContainer/Binary" to="Corpus/VBoxContainer/BaseConversion" method="_on_binary_text_submitted"]
+[connection signal="text_submitted" from="Corpus/VBoxContainer/BaseConversion/GridContainer/Ternary" to="Corpus/VBoxContainer/BaseConversion" method="_on_ternary_text_submitted"]
+[connection signal="text_submitted" from="Corpus/VBoxContainer/BaseConversion/GridContainer/Quaternary" to="Corpus/VBoxContainer/BaseConversion" method="_on_quaternary_text_submitted"]
+[connection signal="text_submitted" from="Corpus/VBoxContainer/BaseConversion/GridContainer/Sept" to="Corpus/VBoxContainer/BaseConversion" method="_on_sept_text_submitted"]
+[connection signal="text_submitted" from="Corpus/VBoxContainer/BaseConversion/GridContainer/Octal" to="Corpus/VBoxContainer/BaseConversion" method="_on_octal_text_submitted"]
+[connection signal="text_submitted" from="Corpus/VBoxContainer/BaseConversion/GridContainer/Decimal" to="Corpus/VBoxContainer/BaseConversion" method="_on_decimal_text_submitted"]
+[connection signal="text_submitted" from="Corpus/VBoxContainer/BaseConversion/GridContainer/Dodecimal" to="Corpus/VBoxContainer/BaseConversion" method="_on_dodecimal_text_submitted"]
+[connection signal="text_submitted" from="Corpus/VBoxContainer/BaseConversion/GridContainer/Hexadecimal" to="Corpus/VBoxContainer/BaseConversion" method="_on_hexadecimal_text_submitted"]
 [connection signal="value_changed" from="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Length/Akermeter" to="Corpus/VBoxContainer/UnitsDrop/UnitConversion" method="_on_akermeter_value_changed"]
 [connection signal="value_changed" from="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Length/Metrimeter" to="Corpus/VBoxContainer/UnitsDrop/UnitConversion" method="_on_metrimeter_value_changed"]
 [connection signal="value_changed" from="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Length/Lightakersecond" to="Corpus/VBoxContainer/UnitsDrop/UnitConversion" method="_on_lightakersecond_value_changed"]

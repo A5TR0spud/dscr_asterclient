@@ -37,6 +37,11 @@ func _gui_input(event: InputEvent) -> void:
 			return
 		if event.keycode == KEY_CTRL or event.keycode == KEY_META or event.keycode == KEY_ALT:
 			return
+		if capitalize:
+			var capitalized = char(uni).capitalize()
+			if capitalized.length() == 1:
+				event.unicode = capitalized.unicode_at(0)
+				uni = event.unicode
 		if (
 			(deny_list.contains(char(uni)) and not allow_list) or
 			(not deny_list.contains(char(uni)) and allow_list)
@@ -44,10 +49,6 @@ func _gui_input(event: InputEvent) -> void:
 			character_rejected.emit(char(uni))
 			accept_event()
 			return
-		if capitalize:
-			var capitalized = char(uni).capitalize()
-			if capitalized.length() == 1:
-				event.unicode = capitalized.unicode_at(0)
 		if replace_list.has(char(uni)):
 			event.unicode = ord(replace_list[char(uni)])
 			return

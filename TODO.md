@@ -1,5 +1,9 @@
 ## TODO
 
+* unit circle reference
+* calculator reference
+* ?graphing calculator reference?
+* number formatting options
 * pressing new signal button with nothing in frequency field
 * add signal-matching options? (eg recolor matching pairs of -14 and -15, autocompleting -14 also types -15)
 * add "macro-dictionary" tab

@@ -261,3 +261,4 @@ REF_UNIT_EARTH,-139 -74,t,Terran Mass,masa Ziemi
 REF_UNIT_SOL,-130 -90 -74,t,Solar Mass,masa Słońca
 ,,,Solar Masses,masy Słońca
 ,,,,mas Słońca
+REFERENCE_BASES,1 0 -4 8,,Numerical Bases,
