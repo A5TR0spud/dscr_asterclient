@@ -38,43 +38,47 @@ enum Sounds {
 func _enter_tree():
 	instance = self
 
-static func play_sound(sound_id: Sounds) -> void:
-	instance._play_sound(sound_id)
+static func play_sound(sound_id: Sounds, avoid_overlap: bool = false) -> void:
+	instance._play_sound(sound_id, avoid_overlap)
 
-func _play_sound(sound_id: Sounds) -> void:
+func _play_sound(sound_id: Sounds, avoid_overlap: bool = false) -> void:
 	if AudioServer.is_bus_mute(AudioServer.get_bus_index("Master")):
 		return
+	var sound_to_play: AudioStreamPlayer = null
 	match sound_id:
 		Sounds.NONE:
 			return
 		Sounds.NOTIFICATION:
-			notification_sound.play()
+			sound_to_play = notification_sound
 		Sounds.CLICK:
-			click.play()
+			sound_to_play = click
 		Sounds.CANCEL:
 			if confirm_or_success.playing or fail_or_redundant.playing:
 				return
-			cancel_or_close.play()
+			sound_to_play = cancel_or_close
 		Sounds.DISCARD:
-			cancel_or_close.play()
+			sound_to_play = cancel_or_close
 		Sounds.CLOSE_UI:
-			cancel_or_close.play()
+			sound_to_play = cancel_or_close
 		Sounds.OPEN_UI:
-			open_ui.play()
+			sound_to_play = open_ui
 		Sounds.FAIL:
-			fail_or_redundant.play()
+			sound_to_play = fail_or_redundant
 		Sounds.REDUNDANT:
-			fail_or_redundant.play()
+			sound_to_play = fail_or_redundant
 		Sounds.CONFIRMED:
-			confirm_or_success.play()
+			sound_to_play = confirm_or_success
 		Sounds.SUCCESS:
-			confirm_or_success.play()
+			sound_to_play = confirm_or_success
 		Sounds.MESSAGE_SENT:
-			message_send.play()
+			sound_to_play = message_send
 		Sounds.COMMAND_ACCEPTED:
-			message_send.play()
+			sound_to_play = message_send
 		Sounds.PARTY_HORN:
 			party_horn.pitch_scale = randf_range(1.45, 1.55)
-			party_horn.play()
+			sound_to_play = party_horn
 		Sounds.PING:
-			ping.play()
+			sound_to_play = ping
+	if sound_to_play.playing and avoid_overlap:
+		return
+	sound_to_play.play()

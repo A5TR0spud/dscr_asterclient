@@ -11,6 +11,7 @@ static var where_is_main_chat: int = 0
 static var theme_color: int = 57
 static var master_volume: float = 1.0
 static var music_volume: float = 1.0
+static var ping_volume: float = 1.0
 static var img_invert_yaw: bool = false
 static var img_invert_pitch: bool = false
 static var img_invert_zoom: bool = false
@@ -78,6 +79,7 @@ static func initialize() -> void:
 	theme_color = SaveSystem.settings.get_or_add("ThemeColor", theme_color)
 	master_volume = SaveSystem.settings.get_or_add("MasterVolume", master_volume)
 	music_volume = SaveSystem.settings.get_or_add("music_volume", music_volume)
+	ping_volume = SaveSystem.settings.get_or_add("ping_volume", ping_volume)
 	evaluate_volume()
 	img_invert_pitch = SaveSystem.settings.get_or_add("img_invert_pitch", img_invert_pitch)
 	img_invert_yaw = SaveSystem.settings.get_or_add("img_invert_yaw", img_invert_yaw)
@@ -129,6 +131,15 @@ static func evaluate_volume() -> void:
 		AudioServer.get_bus_index("Music"),
 		music_volume <= 0.01
 	)
+	
+	AudioServer.set_bus_volume_linear(
+		AudioServer.get_bus_index("Ping"),
+		ping_volume
+	)
+	AudioServer.set_bus_mute(
+		AudioServer.get_bus_index("Ping"),
+		ping_volume <= 0.01
+	)
 
 static func save() -> void:
 	SaveSystem.save_settings()
@@ -155,6 +166,7 @@ static func export() -> void:
 	SaveSystem.settings.set("current_dictionary", current_dictionary)
 	SaveSystem.settings.set("confetti", confetti)
 	SaveSystem.settings.set("music_volume", music_volume)
+	SaveSystem.settings.set("ping_volume", ping_volume)
 	SaveSystem.settings.set("number_auto_sep", number_auto_sep)
 	SaveSystem.settings.set("backup_callsign", backup_callsign)
 	SaveSystem.settings.set("failsafe_callsign_increment", failsafe_callsign_increment)

@@ -11,7 +11,7 @@
 [sub_resource type="FoldableGroup" id="FoldableGroup_2xmuf"]
 allow_folding_all = true
 
-[node name="SettingsTab" type="VBoxContainer" unique_id=1649791393 node_paths=PackedStringArray("formatting", "default_image_visible", "do_bbcode", "color_ref_group", "color_ref", "right_sidebar", "truncate", "font_size", "ui_stretch", "ui_scale", "color_edit", "color_sample", "sound_slider", "music_slider", "sound_sample", "crunch_image", "invert_pitch", "invert_yaw", "invert_zoom", "undef_setting", "number_sep_setting", "confetti_setting", "image_setting_group", "music_sample", "music_parent", "callsign_backup", "callsign_failsafe")]
+[node name="SettingsTab" type="VBoxContainer" unique_id=1649791393 node_paths=PackedStringArray("formatting", "do_bbcode", "color_ref_group", "color_ref", "truncate", "font_size", "undef_setting", "number_sep_setting", "right_sidebar", "confetti_setting", "ui_stretch", "ui_scale", "color_edit", "color_sample", "sound_slider", "music_slider", "sound_sample", "music_sample", "music_parent", "ping_slider", "default_image_visible", "crunch_image", "invert_pitch", "invert_yaw", "invert_zoom", "image_setting_group", "callsign_backup", "callsign_failsafe")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -21,13 +21,15 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_0yg8b")
 formatting = NodePath("ScrollContainer/Options/SignalDisplay/VBoxContainer/Formatting")
-default_image_visible = NodePath("ScrollContainer/Options/ImageSettings/VBoxContainer/ImageVis")
 do_bbcode = NodePath("ScrollContainer/Options/SignalDisplay/VBoxContainer/DoBBCode")
 color_ref_group = NodePath("ScrollContainer/Options/SignalDisplay/VBoxContainer/ColorReferenceMode")
 color_ref = NodePath("ScrollContainer/Options/SignalDisplay/VBoxContainer/ColorReferenceMode/ColorRefSwitch")
-right_sidebar = NodePath("ScrollContainer/Options/Interface/VBoxContainer/RHSidebar")
 truncate = NodePath("ScrollContainer/Options/SignalDisplay/VBoxContainer/TruncHbox/TruncationSpinner")
 font_size = NodePath("ScrollContainer/Options/SignalDisplay/VBoxContainer/FontHbox/FontSpinner")
+undef_setting = NodePath("ScrollContainer/Options/SignalDisplay/VBoxContainer/UndefSetting")
+number_sep_setting = NodePath("ScrollContainer/Options/Interface/VBoxContainer/NumberSeparation")
+right_sidebar = NodePath("ScrollContainer/Options/Interface/VBoxContainer/RHSidebar")
+confetti_setting = NodePath("ScrollContainer/Options/Interface/VBoxContainer/Confetti")
 ui_stretch = NodePath("ScrollContainer/Options/Interface/VBoxContainer/UIStretch")
 ui_scale = NodePath("ScrollContainer/Options/Interface/VBoxContainer/UIScale/ScaleSpinner")
 color_edit = NodePath("ScrollContainer/Options/Interface/VBoxContainer/ThemeColor/ColorPicker")
@@ -35,16 +37,15 @@ color_sample = NodePath("ScrollContainer/Options/Interface/VBoxContainer/ColorRe
 sound_slider = NodePath("ScrollContainer/Options/Sounds/VBoxContainer/GlobalVolume/VolumeSlider")
 music_slider = NodePath("ScrollContainer/Options/Sounds/VBoxContainer/MusicVolume/VolumeSlider")
 sound_sample = NodePath("AudioPreview")
+music_sample = NodePath("MusicAudioPreview")
+music_parent = NodePath("ScrollContainer/Options/Sounds/VBoxContainer/MusicVolume")
+ping_slider = NodePath("ScrollContainer/Options/Sounds/VBoxContainer/PingVolume/VolumeSlider")
+default_image_visible = NodePath("ScrollContainer/Options/ImageSettings/VBoxContainer/ImageVis")
 crunch_image = NodePath("ScrollContainer/Options/ImageSettings/VBoxContainer/CrunchImage")
 invert_pitch = NodePath("ScrollContainer/Options/ImageSettings/VBoxContainer/CameraControls/VBoxContainer/InvertPitch")
 invert_yaw = NodePath("ScrollContainer/Options/ImageSettings/VBoxContainer/CameraControls/VBoxContainer/InvertYaw")
 invert_zoom = NodePath("ScrollContainer/Options/ImageSettings/VBoxContainer/CameraControls/VBoxContainer/InvertZoom")
-undef_setting = NodePath("ScrollContainer/Options/SignalDisplay/VBoxContainer/UndefSetting")
-number_sep_setting = NodePath("ScrollContainer/Options/Interface/VBoxContainer/NumberSeparation")
-confetti_setting = NodePath("ScrollContainer/Options/Interface/VBoxContainer/Confetti")
 image_setting_group = NodePath("ScrollContainer/Options/ImageSettings")
-music_sample = NodePath("MusicAudioPreview")
-music_parent = NodePath("ScrollContainer/Options/Sounds/VBoxContainer/MusicVolume")
 callsign_backup = NodePath("ScrollContainer/Options/BackupCallsign/CallsignNode")
 callsign_failsafe = NodePath("ScrollContainer/Options/BackupCallsign/BackupBackupMode")
 metadata/_tab_index = 2
@@ -85,6 +86,7 @@ size_flags_vertical = 3
 
 [node name="SignalDisplay" type="FoldableContainer" parent="ScrollContainer/Options" unique_id=1547329348]
 layout_mode = 2
+folded = true
 title = "signal display"
 foldable_group = SubResource("FoldableGroup_2xmuf")
 
@@ -96,6 +98,7 @@ translations = Dictionary[StringName, String]({
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/Options/SignalDisplay" unique_id=1621142141]
+visible = false
 layout_mode = 2
 
 [node name="Formatting" parent="ScrollContainer/Options/SignalDisplay/VBoxContainer" unique_id=1141489488 instance=ExtResource("3_0yg8b")]
@@ -328,7 +331,6 @@ metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="Sounds" type="FoldableContainer" parent="ScrollContainer/Options" unique_id=701943303]
 layout_mode = 2
-folded = true
 title = "sound"
 foldable_group = SubResource("FoldableGroup_2xmuf")
 
@@ -340,7 +342,6 @@ translations = Dictionary[StringName, String]({
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/Options/Sounds" unique_id=1019932741]
-visible = false
 layout_mode = 2
 
 [node name="GlobalVolume" type="VBoxContainer" parent="ScrollContainer/Options/Sounds/VBoxContainer" unique_id=970437208]
@@ -476,6 +477,74 @@ translations = Dictionary[StringName, String]({
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
+[node name="PingVolume" type="VBoxContainer" parent="ScrollContainer/Options/Sounds/VBoxContainer" unique_id=210514807]
+layout_mode = 2
+
+[node name="HSeparator6" type="HSeparator" parent="ScrollContainer/Options/Sounds/VBoxContainer/PingVolume" unique_id=1275345322]
+layout_mode = 2
+
+[node name="VolumeLabel" type="Label" parent="ScrollContainer/Options/Sounds/VBoxContainer/PingVolume" unique_id=1701677906]
+layout_mode = 2
+text = "ping volume"
+autowrap_mode = 2
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/Options/Sounds/VBoxContainer/PingVolume/VolumeLabel" unique_id=112954221]
+script = ExtResource("5_gal0n")
+translations = Dictionary[StringName, String]({
+&"text": "SETTINGS_VOLUME_PING"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="VolumeSlider" type="HSlider" parent="ScrollContainer/Options/Sounds/VBoxContainer/PingVolume" unique_id=104361186]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 128.0
+step = 4.0
+value = 64.0
+rounded = true
+scrollable = false
+
+[node name="SliderLabelGrid" type="HBoxContainer" parent="ScrollContainer/Options/Sounds/VBoxContainer/PingVolume" unique_id=1583257019]
+layout_mode = 2
+
+[node name="Silent" type="Label" parent="ScrollContainer/Options/Sounds/VBoxContainer/PingVolume/SliderLabelGrid" unique_id=1521528809]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "silent"
+horizontal_alignment = 3
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/Options/Sounds/VBoxContainer/PingVolume/SliderLabelGrid/Silent" unique_id=186696493]
+script = ExtResource("5_gal0n")
+translations = Dictionary[StringName, String]({
+&"text": "SETTINGS_VOLUME_ZERO"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="Normal" type="Button" parent="ScrollContainer/Options/Sounds/VBoxContainer/PingVolume/SliderLabelGrid" unique_id=840576760]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "normal"
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/Options/Sounds/VBoxContainer/PingVolume/SliderLabelGrid/Normal" unique_id=1427151452]
+script = ExtResource("5_gal0n")
+translations = Dictionary[StringName, String]({
+&"text": "SETTINGS_VOLUME_DEFAULT"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="Deafening" type="Label" parent="ScrollContainer/Options/Sounds/VBoxContainer/PingVolume/SliderLabelGrid" unique_id=781280033]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "deafening"
+horizontal_alignment = 3
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/Options/Sounds/VBoxContainer/PingVolume/SliderLabelGrid/Deafening" unique_id=1194634109]
+script = ExtResource("5_gal0n")
+translations = Dictionary[StringName, String]({
+&"text": "SETTINGS_VOLUME_LOUD"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
 [node name="ImageSettings" type="FoldableContainer" parent="ScrollContainer/Options" unique_id=2007051662]
 layout_mode = 2
 folded = true
@@ -572,6 +641,8 @@ on_text = "SETTINGS_BACKUP_INCREMENT"
 [connection signal="pressed" from="ScrollContainer/Options/Sounds/VBoxContainer/GlobalVolume/SliderLabelGrid/Normal" to="." method="_on_volume_normal_pressed"]
 [connection signal="value_changed" from="ScrollContainer/Options/Sounds/VBoxContainer/MusicVolume/VolumeSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="pressed" from="ScrollContainer/Options/Sounds/VBoxContainer/MusicVolume/SliderLabelGrid/Normal" to="." method="_on_music_volume_normal_pressed"]
+[connection signal="value_changed" from="ScrollContainer/Options/Sounds/VBoxContainer/PingVolume/VolumeSlider" to="." method="_on_ping_volume_slider_value_changed"]
+[connection signal="pressed" from="ScrollContainer/Options/Sounds/VBoxContainer/PingVolume/SliderLabelGrid/Normal" to="." method="_on_ping_volume_normal_pressed"]
 [connection signal="set" from="ScrollContainer/Options/ImageSettings/VBoxContainer/ImageVis" to="." method="_on_image_vis_set"]
 [connection signal="set" from="ScrollContainer/Options/ImageSettings/VBoxContainer/CrunchImage" to="." method="_on_crunch_image_set"]
 [connection signal="set" from="ScrollContainer/Options/ImageSettings/VBoxContainer/CameraControls/VBoxContainer/InvertPitch" to="." method="_on_invert_pitch_set"]

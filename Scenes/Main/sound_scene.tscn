@@ -29,7 +29,7 @@ bus = &"System"
 stream = ExtResource("3_5lc5d")
 volume_db = 6.0
 max_polyphony = 2
-bus = &"System"
+bus = &"Ping"
 
 [node name="cancel_close" type="AudioStreamPlayer" parent="." unique_id=491395782]
 stream = ExtResource("3_pkawr")

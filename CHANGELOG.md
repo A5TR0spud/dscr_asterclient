@@ -11,6 +11,7 @@
 * Added numerical base conversion to Reference
   * It supports bases 2, 3, 4, 7, 8, 10, 12, 16, 2 custom bases 2-32, and fractional components
   * Numbers can go up to roughly 2^60, more or less per base
+* Hovering over numbers will attempt to translate them in the hint
 
 ### Changes
 

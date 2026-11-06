@@ -295,8 +295,10 @@ static func signals_to_words(input: Array, do_whitespace_format: bool = false, c
 		var color: Color = Color.WHITE
 		var is_signal: bool = sig is int and sig < 0
 		var is_number: bool = sig is int and sig >= 0
+		var hint: String = ""
 		
 		if is_signal:
+			hint = str("|", sig)
 			word = get_or_default_signal_name(sig)
 			var desc: Dictionary = get_or_default_signal_desc(sig)
 			if do_whitespace_format:
@@ -321,6 +323,8 @@ static func signals_to_words(input: Array, do_whitespace_format: bool = false, c
 				color = calc_desc_color(desc.get(color_key))
 		elif is_number:
 			word = str(sig)
+			if sig != 0:
+				hint = str(get_or_default_signal_name(-sig))
 			
 			if color_color_numbers and prev is int and prev == -54 and sig >= 0 and sig <= 64:
 				color = VisualizeNode.calculate_color(sig)
@@ -348,8 +352,8 @@ static func signals_to_words(input: Array, do_whitespace_format: bool = false, c
 			word = word.replace("[", "[lb]")
 			if do_clickable and is_signal:
 				o += "[url=" + str(sig) + "]"
-			if is_signal and do_hint:
-				o += str("[hint=\"|", sig ,"\"]")
+			if do_hint and hint:
+				o += str("[hint=\"", hint ,"\"]")
 			if do_appearance_format:
 				if bold:
 					o += "[b]"
@@ -374,7 +378,7 @@ static func signals_to_words(input: Array, do_whitespace_format: bool = false, c
 					o += "[/i]"
 				if bold:
 					o += "[/b]"
-			if is_signal and do_hint:
+			if do_hint and hint:
 				o += "[/hint]"
 			if do_clickable and is_signal:
 				o += "[/url]"

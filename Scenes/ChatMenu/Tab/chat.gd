@@ -531,7 +531,13 @@ func _on_message_edit_text_set():
 	_refresh_parse_bar()
 
 func _refresh_parse_bar():
-	var input: String = trans_edit.get_line_wrapped_text(trans_edit.get_caret_line())[trans_edit.get_caret_wrap_index()]
+	var input: String = trans_edit.get_selected_text()
+	
+	if input.length() > 128:
+		input = input.left(128)
+	
+	if not input:
+		input = trans_edit.get_line_wrapped_text(trans_edit.get_caret_line())[trans_edit.get_caret_wrap_index()]
 	
 	var result: String = ""
 	
@@ -551,7 +557,7 @@ func _refresh_parse_bar():
 			var bad: String = input.substr(prevend, start - prevend).strip_edges()
 			if bad:
 				result += str(
-					"[color=#ff5566bb]",
+					"[color=#ff5566cc]",
 					bad,
 					"[/color] "
 				)

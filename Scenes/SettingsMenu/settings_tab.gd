@@ -11,31 +11,37 @@ func _ready() -> void:
 	Main.instance.reload_dictionary_support.connect(_refresh_dict_supports)
 	Main.instance.reload_dict.connect(_refresh_confetti)
 
+@export_subgroup("Signal Display")
 @export var formatting: SettingEntry
-@export var default_image_visible: SettingEntry
 @export var do_bbcode: SettingEntry
 @export var color_ref_group: Control
 @export var color_ref: OptionButton
-@export var right_sidebar: SettingEntry
 @export var truncate: SpinBox
 @export var font_size: SpinBox
+@export var undef_setting: SettingEntry
+@export_subgroup("Interface")
+@export var number_sep_setting: SettingEntry
+@export var right_sidebar: SettingEntry
+@export var confetti_setting: SettingEntry
 @export var ui_stretch: SettingEntry
 @export var ui_scale: SpinBox
 @export var color_edit: SpinBox
 @export var color_sample: ColorRect
+@export_subgroup("Sounds")
 @export var sound_slider: Range
 @export var music_slider: Range
 @export var sound_sample: AudioStreamPlayer
+@export var music_sample: AudioStreamPlayer
+@export var music_parent: Control
+@export var ping_slider: Range
+@export_subgroup("Image")
+@export var default_image_visible: SettingEntry
 @export var crunch_image: SettingEntry
 @export var invert_pitch: SettingEntry
 @export var invert_yaw: SettingEntry
 @export var invert_zoom: SettingEntry
-@export var undef_setting: SettingEntry
-@export var number_sep_setting: SettingEntry
-@export var confetti_setting: SettingEntry
 @export var image_setting_group: FoldableContainer
-@export var music_sample: AudioStreamPlayer
-@export var music_parent: Control
+@export_subgroup("")
 @export var callsign_backup: CallsignSelector
 @export var callsign_failsafe: BoolButton
 
@@ -165,7 +171,6 @@ func _on_music_slider_value_changed(value):
 	if not music_sample.playing:
 		music_sample.play()
 	save(false, true)
-	pass
 
 func _on_invert_pitch_set(new_value):
 	SettingsHandler.img_invert_pitch = new_value
@@ -241,3 +246,12 @@ func _on_rh_sidebar_set(new_value):
 func _on_crunch_image_set(new_value):
 	SettingsHandler.crunch_image = new_value
 	save(true)
+
+func _on_ping_volume_normal_pressed():
+	ping_slider.value = _volume_linear_to_slider(ping_slider, 1)
+
+func _on_ping_volume_slider_value_changed(value):
+	SettingsHandler.ping_volume = _volume_slider_to_linear(ping_slider, value)
+	SettingsHandler.evaluate_volume()
+	SoundManager.play_sound(SoundManager.Sounds.PING, true)
+	save(false, true)
