@@ -934,7 +934,7 @@ translations = Dictionary[StringName, String]({
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="Solid" type="HBoxContainer" parent="MarginContainer/PopupPanel/VBoxContainer" unique_id=1022702288]
-modulate = Color(0.5372549, 0.5882353, 0.5372549, 1)
+modulate = Color(0.5546, 0.59, 0.5546, 1)
 layout_mode = 2
 mouse_filter = 2
 mouse_behavior_recursive = 1

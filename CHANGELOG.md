@@ -9,13 +9,17 @@
 * Your callsign being received in chat now plays a unique sound if a notification is applicable
 * Added parse preview bar. Can hover over signals for frequencies.
 * Added numerical base conversion to Reference
-  * It supports bases 2, 3, 4, 7, 8, 10, 12, 16, and fractional components
-  * It only has so much precision, sorry
-  * Numbers can go up to roughly 2^31, more or less per base
+  * It supports bases 2, 3, 4, 7, 8, 10, 12, 16, 2 custom bases 2-32, and fractional components
+  * Numbers can go up to roughly 2^60, more or less per base
 
 ### Changes
 
-* English: swapped some references to numbers as "signals" for "frequencies"
+* Restructured Settings menu
+* English:
+  * Swapped some references to numbers as "signals" for "frequencies"
+  * Swapped "Meteorite 0" for "Meteorite Message 0" in Reference
+* M0:
+  * Corrected sidebar-handedness and auto-number-delimiting settings not having proper syntax
 
 ## 0.10.4
 

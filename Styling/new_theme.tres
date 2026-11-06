@@ -56,13 +56,6 @@ border_width_bottom = 2
 corner_detail = 1
 expand_margin_left = 4.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.10073931, 0.10073931, 0.10073926, 1)
-
 [sub_resource type="Gradient" id="Gradient_yoflm"]
 interpolation_mode = 1
 offsets = PackedFloat32Array(0)
@@ -85,6 +78,13 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.10073931, 0.10073931, 0.10073926, 1)
+
 [sub_resource type="ImageTexture" id="ImageTexture_sxxod"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_i4fbu"]
@@ -100,6 +100,7 @@ Button/styles/normal = ExtResource("2_2dlxw")
 Button/styles/pressed = ExtResource("3_08nyo")
 CodeEdit/colors/font_readonly_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
 CodeEdit/styles/read_only = SubResource("StyleBoxEmpty_gt42v")
+FoldableContainer/constants/h_separation = 8
 FoldableContainer/icons/expanded_arrow = ExtResource("5_77blk")
 FoldableContainer/icons/folded_arrow = ExtResource("6_efnsc")
 FoldableContainer/styles/focus = ExtResource("1_pkgym")
@@ -138,7 +139,7 @@ Label/styles/focus = ExtResource("1_pkgym")
 LineEdit/constants/caret_width = 2
 LineEdit/styles/focus = ExtResource("1_nhcih")
 LineEdit/styles/normal = ExtResource("2_5vjxe")
-LineEdit/styles/read_only = SubResource("StyleBoxFlat_g4v7s")
+LineEdit/styles/read_only = ExtResource("2_5vjxe")
 OptionButton/icons/arrow = SubResource("GradientTexture1D_ttirq")
 Panel/styles/panel = ExtResource("1_tvtlr")
 PanelContainer/styles/panel = ExtResource("1_tvtlr")

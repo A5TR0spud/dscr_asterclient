@@ -1,5 +1,6 @@
 ## TODO
 
+* library paste thing where if its just numbers and minus signs it'll insert pipes
 * unit circle reference
 * calculator reference
 * ?graphing calculator reference?

@@ -1,42 +1,47 @@
 extends VBoxContainer
 
+@onready var parent: VBoxContainer = $ScrollContainer/Options
+
 func _ready() -> void:
+	for c in parent.get_children():
+		if c is FoldableContainer:
+			c.folded = true
 	$ScrollContainer.scroll_vertical = 0
 	Main.instance.reload_settings.connect(refresh)
 	Main.instance.reload_dictionary_support.connect(_refresh_dict_supports)
 	Main.instance.reload_dict.connect(_refresh_confetti)
 
-@onready var formatting: SettingEntry = $ScrollContainer/Options/Formatting
-@onready var image_visibility: SettingEntry = $ScrollContainer/Options/ImageVis
-@onready var do_bbcode: SettingEntry = $ScrollContainer/Options/DoBBCode
-@onready var color_ref_group: Control = $ScrollContainer/Options/ColorReferenceMode
-@onready var color_ref: OptionButton = $ScrollContainer/Options/ColorReferenceMode/ColorRefSwitch
-@onready var right_sidebar: SettingEntry = $ScrollContainer/Options/RHSidebar
-@onready var truncate: SpinBox = $ScrollContainer/Options/TruncHbox/TruncationSpinner
-@onready var font_size: SpinBox = $ScrollContainer/Options/FontHbox/FontSpinner
-@onready var ui_stretch: SettingEntry = $ScrollContainer/Options/UIStretch
-@onready var ui_scale: SpinBox = $ScrollContainer/Options/UIScale/ScaleSpinner
-@onready var color_edit: SpinBox = $ScrollContainer/Options/ThemeColor/ColorPicker
-@onready var color_sample: ColorRect = $ScrollContainer/Options/ColorRect
-@onready var sound_slider: Range = $ScrollContainer/Options/GlobalVolume/VolumeSlider
-@onready var music_slider: Range = $ScrollContainer/Options/MusicVolume/VolumeSlider
-@onready var sound_sample: AudioStreamPlayer = $AudioPreview
-@onready var crunch_image: SettingEntry = $ScrollContainer/Options/CrunchImage
-@onready var invert_pitch: SettingEntry = $ScrollContainer/Options/ImageMovement/VBoxContainer/InvertPitch
-@onready var invert_yaw: SettingEntry = $ScrollContainer/Options/ImageMovement/VBoxContainer/InvertYaw
-@onready var invert_zoom: SettingEntry = $ScrollContainer/Options/ImageMovement/VBoxContainer/InvertZoom
-@onready var undef_setting: SettingEntry = $ScrollContainer/Options/UndefSetting
-@onready var number_sep_setting: SettingEntry = $ScrollContainer/Options/NumberSeparation
-@onready var confetti_setting: SettingEntry = $ScrollContainer/Options/Confetti
-@onready var image_setting_group: FoldableContainer = $ScrollContainer/Options/ImageMovement
-@onready var music_sample: AudioStreamPlayer = $MusicAudioPreview
-@onready var music_parent: Control = $ScrollContainer/Options/MusicVolume
-@onready var callsign_backup: CallsignSelector = $ScrollContainer/Options/BackupCallsign/CallsignNode
-@onready var callsign_failsafe: BoolButton = $ScrollContainer/Options/BackupCallsign/BackupBackupMode
+@export var formatting: SettingEntry
+@export var default_image_visible: SettingEntry
+@export var do_bbcode: SettingEntry
+@export var color_ref_group: Control
+@export var color_ref: OptionButton
+@export var right_sidebar: SettingEntry
+@export var truncate: SpinBox
+@export var font_size: SpinBox
+@export var ui_stretch: SettingEntry
+@export var ui_scale: SpinBox
+@export var color_edit: SpinBox
+@export var color_sample: ColorRect
+@export var sound_slider: Range
+@export var music_slider: Range
+@export var sound_sample: AudioStreamPlayer
+@export var crunch_image: SettingEntry
+@export var invert_pitch: SettingEntry
+@export var invert_yaw: SettingEntry
+@export var invert_zoom: SettingEntry
+@export var undef_setting: SettingEntry
+@export var number_sep_setting: SettingEntry
+@export var confetti_setting: SettingEntry
+@export var image_setting_group: FoldableContainer
+@export var music_sample: AudioStreamPlayer
+@export var music_parent: Control
+@export var callsign_backup: CallsignSelector
+@export var callsign_failsafe: BoolButton
 
 func refresh() -> void:
 	formatting.set_state_no_signal(SettingsHandler.do_formatting)
-	image_visibility.set_state_no_signal(SettingsHandler.image_default)
+	default_image_visible.set_state_no_signal(SettingsHandler.image_default)
 	do_bbcode.set_state_no_signal(SettingsHandler.do_bbcode)
 	color_ref.selected = SettingsHandler.color_signal_mode
 	invert_pitch.set_state_no_signal(SettingsHandler.img_invert_pitch)
@@ -61,7 +66,6 @@ func refresh() -> void:
 
 func _refresh_dict_supports():
 	_refresh_confetti()
-	image_visibility.visible = DictionaryHandler.support_m0
 	image_setting_group.visible = DictionaryHandler.support_m0
 	music_parent.visible = DictionaryHandler.support_dscr
 	number_sep_setting.visible = DictionaryHandler.support_m0

@@ -84,8 +84,10 @@ text = "2"
 [node name="Binary" type="LineEdit" parent="Corpus/VBoxContainer/BaseConversion/GridContainer" unique_id=1716065030]
 layout_mode = 2
 size_flags_horizontal = 3
+placeholder_text = "0"
 max_length = 63
 keep_editing_on_text_submit = true
+emoji_menu_enabled = false
 script = ExtResource("6_n1kvl")
 deny_list = ".,01"
 allow_list = true
@@ -99,8 +101,10 @@ text = "3"
 [node name="Ternary" type="LineEdit" parent="Corpus/VBoxContainer/BaseConversion/GridContainer" unique_id=77317497]
 layout_mode = 2
 size_flags_horizontal = 3
+placeholder_text = "0"
 max_length = 39
 keep_editing_on_text_submit = true
+emoji_menu_enabled = false
 script = ExtResource("6_n1kvl")
 deny_list = ".,012"
 allow_list = true
@@ -114,8 +118,10 @@ text = "4"
 [node name="Quaternary" type="LineEdit" parent="Corpus/VBoxContainer/BaseConversion/GridContainer" unique_id=1345206752]
 layout_mode = 2
 size_flags_horizontal = 3
+placeholder_text = "0"
 max_length = 31
 keep_editing_on_text_submit = true
+emoji_menu_enabled = false
 script = ExtResource("6_n1kvl")
 deny_list = ".,0123"
 allow_list = true
@@ -129,8 +135,10 @@ text = "7"
 [node name="Sept" type="LineEdit" parent="Corpus/VBoxContainer/BaseConversion/GridContainer" unique_id=326344586]
 layout_mode = 2
 size_flags_horizontal = 3
+placeholder_text = "0"
 max_length = 22
 keep_editing_on_text_submit = true
+emoji_menu_enabled = false
 script = ExtResource("6_n1kvl")
 deny_list = ".,0123456"
 allow_list = true
@@ -144,8 +152,10 @@ text = "8"
 [node name="Octal" type="LineEdit" parent="Corpus/VBoxContainer/BaseConversion/GridContainer" unique_id=1218509622]
 layout_mode = 2
 size_flags_horizontal = 3
+placeholder_text = "0"
 max_length = 21
 keep_editing_on_text_submit = true
+emoji_menu_enabled = false
 script = ExtResource("6_n1kvl")
 deny_list = ".,01234567"
 allow_list = true
@@ -159,8 +169,10 @@ text = "10"
 [node name="Decimal" type="LineEdit" parent="Corpus/VBoxContainer/BaseConversion/GridContainer" unique_id=1969520349]
 layout_mode = 2
 size_flags_horizontal = 3
+placeholder_text = "0"
 max_length = 18
 keep_editing_on_text_submit = true
+emoji_menu_enabled = false
 script = ExtResource("6_n1kvl")
 deny_list = ".,0123456789"
 allow_list = true
@@ -174,8 +186,10 @@ text = "12"
 [node name="Dodecimal" type="LineEdit" parent="Corpus/VBoxContainer/BaseConversion/GridContainer" unique_id=1358755461]
 layout_mode = 2
 size_flags_horizontal = 3
+placeholder_text = "0"
 max_length = 17
 keep_editing_on_text_submit = true
+emoji_menu_enabled = false
 script = ExtResource("6_n1kvl")
 deny_list = ".,0123456789AB"
 allow_list = true
@@ -189,16 +203,59 @@ text = "16"
 [node name="Hexadecimal" type="LineEdit" parent="Corpus/VBoxContainer/BaseConversion/GridContainer" unique_id=553946834]
 layout_mode = 2
 size_flags_horizontal = 3
+placeholder_text = "0"
 max_length = 15
 keep_editing_on_text_submit = true
+emoji_menu_enabled = false
 script = ExtResource("6_n1kvl")
 deny_list = ".,0123456789ABCDEF"
 allow_list = true
 replace_list = {}
 metadata/_custom_type_script = "uid://gtpqlwktlalr"
 
+[node name="CustomBaseRadix" type="SpinBox" parent="Corpus/VBoxContainer/BaseConversion/GridContainer" unique_id=572992694]
+layout_mode = 2
+min_value = 2.0
+max_value = 36.0
+value = 5.0
+rounded = true
+
+[node name="CustomBaseValue" type="LineEdit" parent="Corpus/VBoxContainer/BaseConversion/GridContainer" unique_id=1368439159]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "0"
+max_length = 27
+keep_editing_on_text_submit = true
+emoji_menu_enabled = false
+script = ExtResource("6_n1kvl")
+deny_list = ".,0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+allow_list = true
+replace_list = {}
+metadata/_custom_type_script = "uid://gtpqlwktlalr"
+
+[node name="CustomBaseRadix2" type="SpinBox" parent="Corpus/VBoxContainer/BaseConversion/GridContainer" unique_id=1372445259]
+layout_mode = 2
+min_value = 2.0
+max_value = 36.0
+value = 6.0
+rounded = true
+
+[node name="CustomBaseValue2" type="LineEdit" parent="Corpus/VBoxContainer/BaseConversion/GridContainer" unique_id=613507593]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "0"
+max_length = 27
+keep_editing_on_text_submit = true
+emoji_menu_enabled = false
+script = ExtResource("6_n1kvl")
+deny_list = ".,0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+allow_list = true
+replace_list = {}
+metadata/_custom_type_script = "uid://gtpqlwktlalr"
+
 [node name="UnitsDrop" type="FoldableContainer" parent="Corpus/VBoxContainer" unique_id=1240872268]
 layout_mode = 2
+folded = true
 title = "units"
 
 [node name="LocaleNode" type="Node" parent="Corpus/VBoxContainer/UnitsDrop" unique_id=228561470]
@@ -209,6 +266,7 @@ translations = Dictionary[StringName, String]({
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="UnitConversion" type="VBoxContainer" parent="Corpus/VBoxContainer/UnitsDrop" unique_id=1895155616]
+visible = false
 layout_mode = 2
 script = ExtResource("4_vb677")
 
@@ -837,6 +895,10 @@ size_flags_stretch_ratio = 10.0
 [connection signal="text_submitted" from="Corpus/VBoxContainer/BaseConversion/GridContainer/Decimal" to="Corpus/VBoxContainer/BaseConversion" method="_on_decimal_text_submitted"]
 [connection signal="text_submitted" from="Corpus/VBoxContainer/BaseConversion/GridContainer/Dodecimal" to="Corpus/VBoxContainer/BaseConversion" method="_on_dodecimal_text_submitted"]
 [connection signal="text_submitted" from="Corpus/VBoxContainer/BaseConversion/GridContainer/Hexadecimal" to="Corpus/VBoxContainer/BaseConversion" method="_on_hexadecimal_text_submitted"]
+[connection signal="value_changed" from="Corpus/VBoxContainer/BaseConversion/GridContainer/CustomBaseRadix" to="Corpus/VBoxContainer/BaseConversion" method="_on_custom_base_radix_value_changed"]
+[connection signal="text_submitted" from="Corpus/VBoxContainer/BaseConversion/GridContainer/CustomBaseValue" to="Corpus/VBoxContainer/BaseConversion" method="_on_custom_base_value_text_submitted"]
+[connection signal="value_changed" from="Corpus/VBoxContainer/BaseConversion/GridContainer/CustomBaseRadix2" to="Corpus/VBoxContainer/BaseConversion" method="_on_custom_base_radix_2_value_changed"]
+[connection signal="text_submitted" from="Corpus/VBoxContainer/BaseConversion/GridContainer/CustomBaseValue2" to="Corpus/VBoxContainer/BaseConversion" method="_on_custom_base_value_2_text_submitted"]
 [connection signal="value_changed" from="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Length/Akermeter" to="Corpus/VBoxContainer/UnitsDrop/UnitConversion" method="_on_akermeter_value_changed"]
 [connection signal="value_changed" from="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Length/Metrimeter" to="Corpus/VBoxContainer/UnitsDrop/UnitConversion" method="_on_metrimeter_value_changed"]
 [connection signal="value_changed" from="Corpus/VBoxContainer/UnitsDrop/UnitConversion/Length/Lightakersecond" to="Corpus/VBoxContainer/UnitsDrop/UnitConversion" method="_on_lightakersecond_value_changed"]
