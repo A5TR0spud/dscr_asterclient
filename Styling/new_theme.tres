@@ -11,6 +11,7 @@
 [ext_resource type="StyleBox" uid="uid://d2w74s2vi088d" path="res://Styling/HScrollBar/grabber_pressed.tres" id="5_em145"]
 [ext_resource type="Texture2D" uid="uid://bcncyacvyj36q" path="res://Assets/Icons/opened_menu.png" id="6_efnsc"]
 [ext_resource type="StyleBox" uid="uid://bc7c1ue25eq6g" path="res://Styling/HScrollBar/scroll_back.tres" id="6_i4omk"]
+[ext_resource type="StyleBox" uid="uid://bx6usu5xy3w3n" path="res://Styling/foldable_drop_style.tres" id="7_4cyyo"]
 [ext_resource type="StyleBox" uid="uid://dgjcahl47q10n" path="res://Styling/Seps/h_sep.tres" id="7_fqkxe"]
 [ext_resource type="StyleBox" uid="uid://b1t3fn13p4807" path="res://Styling/Seps/h_split.tres" id="8_k7nka"]
 [ext_resource type="StyleBox" uid="uid://8g63ltkd03h1" path="res://Styling/HScrollBar/v_scroll_back.tres" id="9_2dlxw"]
@@ -104,7 +105,7 @@ FoldableContainer/constants/h_separation = 8
 FoldableContainer/icons/expanded_arrow = ExtResource("5_77blk")
 FoldableContainer/icons/folded_arrow = ExtResource("6_efnsc")
 FoldableContainer/styles/focus = ExtResource("1_pkgym")
-FoldableContainer/styles/panel = ExtResource("1_tvtlr")
+FoldableContainer/styles/panel = ExtResource("7_4cyyo")
 FoldableContainer/styles/title_collapsed_hover_panel = ExtResource("1_pkgym")
 FoldableContainer/styles/title_collapsed_panel = ExtResource("2_2dlxw")
 FoldableContainer/styles/title_hover_panel = ExtResource("1_pkgym")

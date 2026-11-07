@@ -44,6 +44,10 @@ func _enter_tree():
 @onready var prv_rect: ColorRect = $DictEditMainframe/BBCodeOptions/ColorPicker/PreviewColor
 
 func _ready():
+	var v: StyleBoxEmpty = StyleBoxEmpty.new()
+	v.content_margin_left = 5
+	v.content_margin_right = 5
+	desc_edit.get_v_scroll_bar().add_theme_stylebox_override("scroll", v)
 	Main.instance.reload_dict.connect(refresh)
 	hide()
 

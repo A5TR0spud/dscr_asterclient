@@ -3,6 +3,8 @@ class_name TransmissionEdit
 
 ## Will disable enter as a newline and emit [code]submit_text[/code] instead
 @export var eat_enter: bool = true
+# Will show nicknames as autocomplete options that fill in to the 4-digit
+#@export var complete_nicknames: bool = false
 @onready var autocomplete_list: ItemList = $PanelContainer/MarginContainer/ItemList
 @onready var auto_list_panel: PanelContainer = $PanelContainer
 
@@ -12,6 +14,10 @@ func _ready():
 	Main.instance.reload_settings.connect(_set_popup_size.call_deferred)
 	auto_list_panel.hide()
 	syntax_highlighter = TransmissionHighlighter.new()
+	var v: StyleBoxEmpty = StyleBoxEmpty.new()
+	v.content_margin_left = 5
+	v.content_margin_right = 5
+	get_v_scroll_bar().add_theme_stylebox_override("scroll", v)
 
 signal submit_text(message: String)
 

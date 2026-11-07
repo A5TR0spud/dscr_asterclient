@@ -7,6 +7,7 @@ static var panel_style = preload("uid://dcmofilgg82h2")
 static var text_edit_style = preload("uid://chd3p7o56iqny")
 static var code_edit_style = preload("uid://cem7hlj42ccbd")
 static var code_autocomplete_style = preload("uid://bca1ief1qema3")
+static var fold_drop_style = preload("uid://bx6usu5xy3w3n")
 # Button
 static var outline_style = preload("uid://2awcl5rgmg3n")
 static var hover_press_style = preload("uid://d4lo7uvlc7obp")
@@ -84,6 +85,7 @@ static func _set_color_inner(col: int):
 		new_color.s *= 1.2
 		new_color.v *= 0.4
 	await _setty(panel_style, "bg_color", new_color)
+	await _setty(fold_drop_style, "bg_color", new_color)
 	await _setty(code_autocomplete_style, "bg_color", new_color)
 	# edit boxes
 	new_color.r += 0.1 * ratio.r
@@ -108,6 +110,7 @@ static func _set_color_inner(col: int):
 	await _setty(tab_selected, "border_color", new_color)
 	await _setty(tab_but_selected, "border_color", new_color)
 	await _setty(panel_style, "border_color", new_color)
+	await _setty(fold_drop_style, "border_color", new_color)
 	await _setty(code_autocomplete_style, "border_color", new_color)
 	await _setty(grabber_pressed_style, "bg_color", new_color)
 	await _setty(v_sep_bright, "bg_color", new_color)
