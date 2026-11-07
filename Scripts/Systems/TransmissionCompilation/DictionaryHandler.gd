@@ -104,6 +104,51 @@ static var default_background: bool:
 		return SaveSystem.dict.get_or_add("defaultInvert", false)
 	set(value):
 		SaveSystem.dict.set("defaultInvert", value)
+
+
+static var number_before_mode: int:
+	get:
+		return SaveSystem.dict.get_or_add("numberBefore", int(0))
+	set(value):
+		SaveSystem.dict.set("numberBefore", int(value))
+static var number_after_mode: int:
+	get:
+		return SaveSystem.dict.get_or_add("numberAfter", int(0))
+	set(value):
+		SaveSystem.dict.set("numberAfter", int(value))
+static var number_color: String:
+	get:
+		if SaveSystem.dict.get("numberColor") is not String:
+			SaveSystem.dict.set("numberColor", "#ffffff")
+		return SaveSystem.dict.get_or_add("numberColor", "#ffffff")
+	set(value):
+		SaveSystem.dict.set("numberColor", value)
+static var number_bold: bool:
+	get:
+		return SaveSystem.dict.get_or_add("numberBold", false)
+	set(value):
+		SaveSystem.dict.set("numberBold", value)
+static var number_italic: bool:
+	get:
+		return SaveSystem.dict.get_or_add("numberItalic", false)
+	set(value):
+		SaveSystem.dict.set("numberItalic", value)
+static var number_underline: bool:
+	get:
+		return SaveSystem.dict.get_or_add("numberUnderline", false)
+	set(value):
+		SaveSystem.dict.set("numberUnderline", value)
+static var number_strikethrough: bool:
+	get:
+		return SaveSystem.dict.get_or_add("numberStrikethrough", false)
+	set(value):
+		SaveSystem.dict.set("numberStrikethrough", value)
+static var number_background: bool:
+	get:
+		return SaveSystem.dict.get_or_add("numberInvert", false)
+	set(value):
+		SaveSystem.dict.set("numberInvert", value)
+
 static var support_m0: bool:
 	get:
 		return SaveSystem.dict.get_or_add("supportMeteorite0", true)
@@ -325,6 +370,17 @@ static func signals_to_words(input: Array, do_whitespace_format: bool = false, c
 			word = str(sig)
 			if sig != 0:
 				hint = str(get_or_default_signal_name(-sig))
+			
+			if do_whitespace_format:
+				format_mode = number_before_mode
+				format_mode_after = number_after_mode
+			if sig not in word_keys:
+				color = number_color
+				bold = number_bold
+				italic = number_italic
+				underline = number_underline
+				strike = number_strikethrough
+				invert = number_background
 			
 			if color_color_numbers and prev is int and prev == -54 and sig >= 0 and sig <= 64:
 				color = VisualizeNode.calculate_color(sig)

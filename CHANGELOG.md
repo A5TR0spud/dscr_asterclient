@@ -2,9 +2,14 @@
 
 ## --WIP--
 
+### Additions
+
+* Added formatting option for numbers
+
 ### Fixes
 
 * Fixed description edit never expanding and not scrolling down for new text
+* Fixed unknown signal formatting not setting strikethrough
 
 ## 0.10.5
 

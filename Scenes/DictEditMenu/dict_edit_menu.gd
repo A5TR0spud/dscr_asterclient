@@ -49,6 +49,7 @@ func _ready():
 
 const UNKNOWN_SIGNAL: int = 0
 const NEW_SIGNAL_NO_NUMBER: int = 1
+const NUMBER_FORMAT: int = 2
 
 func save() -> void:
 	if current_signal == UNKNOWN_SIGNAL:
@@ -58,8 +59,21 @@ func save() -> void:
 		DictionaryHandler.default_bold = bold_edit.button_pressed
 		DictionaryHandler.default_italic = italic_edit.button_pressed
 		DictionaryHandler.default_underline = underline_edit.button_pressed
-		DictionaryHandler.default_italic = italic_edit.button_pressed
+		DictionaryHandler.default_strikethrough = strikethrough_edit.button_pressed
 		DictionaryHandler.default_background = background_edit.button_pressed
+		SoundManager.play_sound(SoundManager.Sounds.CONFIRMED)
+		SaveSystem.save_dict()
+		Main.on_dict_reload()
+		return
+	if current_signal == NUMBER_FORMAT:
+		DictionaryHandler.number_before_mode = before_label.selected
+		DictionaryHandler.number_after_mode = after_label.selected
+		DictionaryHandler.number_color = "#"+_get_spinners_as_color().to_html(false)
+		DictionaryHandler.number_bold = bold_edit.button_pressed
+		DictionaryHandler.number_italic = italic_edit.button_pressed
+		DictionaryHandler.number_underline = underline_edit.button_pressed
+		DictionaryHandler.number_strikethrough = strikethrough_edit.button_pressed
+		DictionaryHandler.number_background = background_edit.button_pressed
 		SoundManager.play_sound(SoundManager.Sounds.CONFIRMED)
 		SaveSystem.save_dict()
 		Main.on_dict_reload()
@@ -129,6 +143,17 @@ func reload() -> void:
 		underline_edit.button_pressed = DictionaryHandler.default_underline
 		strikethrough_edit.button_pressed = DictionaryHandler.default_strikethrough
 		background_edit.button_pressed = DictionaryHandler.default_background
+		return
+	if current_signal == NUMBER_FORMAT:
+		before_after_clear_label.text = Localizer.translate("DICT_EDIT_BA_LABEL_NUMBER")
+		before_label.select(DictionaryHandler.number_before_mode)
+		after_label.select(DictionaryHandler.number_after_mode)
+		_push_color_to_spinners(Color.from_string(DictionaryHandler.number_color, Color.WHITE))
+		bold_edit.button_pressed = DictionaryHandler.number_bold
+		italic_edit.button_pressed = DictionaryHandler.number_italic
+		underline_edit.button_pressed = DictionaryHandler.number_underline
+		strikethrough_edit.button_pressed = DictionaryHandler.number_strikethrough
+		background_edit.button_pressed = DictionaryHandler.number_background
 		return
 	var desc: Dictionary = DictionaryHandler.get_or_default_signal_desc(current_signal)
 	#name_label.text = Localizer.translate("DICT_EDIT_NAME_LABEL", absi(current_signal))
