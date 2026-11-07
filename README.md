@@ -65,3 +65,7 @@ In the Sources tab (third tab), at the bottom of its panel is a button to change
 |-65534|Join Channel|\|-65534 \<signal or number\>|Adds a channel to display in tabs. Will reopen when restarted
 |-65535|Encrypt Message|\|-65535 \<signal or number\> \<message...\>|Sends the message in the corresponding channel. Typing into a channel will automatically use this key. If addressing a channel not shown, it will be visible for only this session.
 |-65536|Skeleton Key|\|-65533 \|-65536 or \|-65534 \|-65536|Shows all active channels, or hides all channels not opted-into
+
+#### Swapping Dictionary Files
+
+The third tab from the left, at the top of the screen. The second column on the page handles dictionary files.
