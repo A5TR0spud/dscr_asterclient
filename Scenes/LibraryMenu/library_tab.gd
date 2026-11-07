@@ -78,6 +78,7 @@ func _ready():
 	Main.instance.reload_nicknames.connect(_refresh_preview)
 	Main.instance.on_callsign_changed.connect(func (_a): _refresh_preview())
 	Main.instance.localization_reload.connect(_refresh_rename_button)
+	Main.instance.localization_reload.connect(_set_sig_text)
 
 func _refresh_preview():
 	t_preview.refresh()

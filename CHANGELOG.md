@@ -1,6 +1,6 @@
 # Versions
 
-## --WIP--
+## 0.10.5
 
 ### Additions
 
@@ -21,6 +21,10 @@
   * Swapped "Meteorite 0" for "Meteorite Message 0" in Reference
 * M0:
   * Corrected sidebar-handedness and auto-number-delimiting settings not having proper syntax
+
+### Fixes
+
+* Signal counter in library now updates when language is changed
 
 ## 0.10.4
 
