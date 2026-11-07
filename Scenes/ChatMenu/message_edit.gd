@@ -12,10 +12,6 @@ func _ready():
 	Main.instance.reload_settings.connect(_set_popup_size.call_deferred)
 	auto_list_panel.hide()
 	syntax_highlighter = TransmissionHighlighter.new()
-	var v: StyleBoxEmpty = StyleBoxEmpty.new()
-	v.content_margin_left = 5
-	v.content_margin_right = 5
-	get_v_scroll_bar().add_theme_stylebox_override("scroll", v)
 
 signal submit_text(message: String)
 
