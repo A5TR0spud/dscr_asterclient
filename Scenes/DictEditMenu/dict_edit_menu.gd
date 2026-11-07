@@ -16,8 +16,8 @@ func _enter_tree():
 @onready var break_button: BoolButton = $DictEditMainframe/BreakSentence/BreakOnDouble
 
 @onready var name_edit: LineEdit = $DictEditMainframe/SignalNameEdit/NameLineEdit
-@onready var desc_edit: TextEdit = $DictEditMainframe/NotesScrollContainer/NotesEdit
-@onready var notes_scroll: ScrollContainer = $DictEditMainframe/NotesScrollContainer
+@onready var desc_edit: TextEdit = $DictEditMainframe/NotesEdit
+#@onready var notes_scroll: ScrollContainer = $DictEditMainframe/NotesScrollContainer
 
 @onready var break_sentence: HBoxContainer = $DictEditMainframe/BreakSentence
 @onready var name_sentence: HBoxContainer = $DictEditMainframe/SignalNameEdit
@@ -111,13 +111,13 @@ func save() -> void:
 func reload() -> void:
 	break_sentence.visible = current_signal < 0
 	name_sentence.visible = current_signal < 0
-	notes_scroll.visible = current_signal < 0
+	desc_edit.visible = current_signal < 0
 	delete_button.visible = current_signal < 0
 	bbcode_options.visible = SettingsHandler.do_bbcode
 	indentation.visible = current_signal < 0
 	before_label.set_item_disabled(4, current_signal >= 0)
 	after_label.set_item_disabled(4, current_signal >= 0)
-	notes_scroll.scroll_vertical = 0
+	desc_edit.scroll_vertical = 0
 	#name_label.mouse_default_cursor_shape = Control.CURSOR_ARROW if current_signal >= 0 else Control.CURSOR_POINTING_HAND
 	if current_signal == UNKNOWN_SIGNAL:
 		before_after_clear_label.text = Localizer.translate("DICT_EDIT_BA_LABEL_GENERIC")

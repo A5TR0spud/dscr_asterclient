@@ -1,5 +1,11 @@
 # Versions
 
+## --WIP--
+
+### Fixes
+
+* Fixed description edit never expanding and not scrolling down for new text
+
 ## 0.10.5
 
 ### Additions

@@ -4,6 +4,8 @@
 * unit circle reference
 * setting to parse "-23" as "|-23" instead of "- 23"
 * calculator reference
+* button per-channel to clear its history
+* draggable dictionary edit window
 * ?graphing calculator reference?
 * number formatting options
 * pressing new signal button with nothing in frequency field
