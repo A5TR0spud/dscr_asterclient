@@ -34,6 +34,6 @@
 * android support
 * fps cap setting?
 * tagging signals and searching by tag
-  * tag system using proposed RFC
+  * tag system using proposed [RFC](https://comparator.neocities.org/tags)
   * option to apply the same formatting to all signals of one tag
 * Polish translations
