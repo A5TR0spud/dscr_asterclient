@@ -45,7 +45,7 @@ static func open_transmission(trx: String):
 	instance.pre_name = trx
 	instance.name_edit.text = trx
 	instance.current_transmission = LibraryHandler.get_transmission(trx)
-	instance._reload()
+	instance._reload(false)
 	instance.current_input = instance.words_edit.text
 
 func _on_transmission_edit_text_changed():
@@ -86,7 +86,7 @@ func _refresh_preview():
 	t_preview.refresh_callsign()
 	_set_sig_text()
 
-func _reload():
+func _reload(reload_search: bool = true):
 	_set_sig_text()
 	delete_button.set_confirm_state(false)
 	words_edit.text = DictionaryHandler.signals_to_words(current_transmission, true)
@@ -108,7 +108,7 @@ func _reload():
 			catalog.add_child(c)
 	if search.text.is_empty():
 		_do_sort()
-	queue_search()
+	if reload_search: queue_search()
 	instance.refresh_submit_text()
 
 func _get_name() -> String:

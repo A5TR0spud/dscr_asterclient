@@ -10,6 +10,7 @@
 
 * Fixed description edit never expanding and not scrolling down for new text
 * Fixed unknown signal formatting not setting strikethrough
+* Fixed loading saved Library transmissions changing the order on the right
 
 ## 0.10.5
 
