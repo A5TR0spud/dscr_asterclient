@@ -269,3 +269,4 @@ REF_UNIT_SOL,-130 -90 -74,t,Solar Mass,masa Słońca
 ,,,Solar Masses,masy Słońca
 ,,,,mas Słońca
 REFERENCE_BASES,1 0 -4 -12,,Numerical Bases,
+SETTINGS_DO_PARSEBAR,-26 -14 -86 -42 -163 -145 -85 -43 -38 -121 -15 -4,,Show pre-parse bar?,

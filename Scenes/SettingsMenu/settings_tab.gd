@@ -22,6 +22,7 @@ func _ready() -> void:
 @export_subgroup("Interface")
 @export var number_sep_setting: SettingEntry
 @export var right_sidebar: SettingEntry
+@export var parsebar: SettingEntry
 @export var confetti_setting: SettingEntry
 @export var ui_stretch: SettingEntry
 @export var ui_scale: SpinBox
@@ -69,6 +70,7 @@ func refresh() -> void:
 	ui_scale.set_value_no_signal(SettingsHandler.stretch_scale)
 	right_sidebar.set_state_no_signal(SettingsHandler.right_handed_sidebar)
 	crunch_image.set_state_no_signal(SettingsHandler.crunch_image)
+	parsebar.set_state_no_signal(SettingsHandler.do_parsebar)
 
 func _refresh_dict_supports():
 	_refresh_confetti()
@@ -255,3 +257,7 @@ func _on_ping_volume_slider_value_changed(value):
 	SettingsHandler.evaluate_volume()
 	SoundManager.play_sound(SoundManager.Sounds.PING, true)
 	save(false, true)
+
+func _on_parsebar_set(new_value):
+	SettingsHandler.do_parsebar = new_value
+	save(true)

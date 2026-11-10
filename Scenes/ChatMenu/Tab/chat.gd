@@ -20,6 +20,7 @@ static var chat_channel_scene = preload("uid://c7bn3w1ijabx4")
 @onready var parse_bar_scroll: ScrollContainer = $ParseBarBox/ParseBarScroller
 @onready var parse_bar_left_spacer: Control = $ParseBarBox/ParseBarScroller/HBoxContainer/LSpacer
 @onready var parse_bar_right_spacer: Control = $ParseBarBox/ParseBarScroller/HBoxContainer/RSpacer
+@onready var parse_bar_panel: PanelContainer = $ParseBarBox
 
 func _enter_tree():
 	instance = self
@@ -33,6 +34,7 @@ func _ready():
 	refresh_little_menu()
 	tabbar.tab_close_pressed.connect(close_tab_from_button)
 	Main.instance.reload_library.connect(refresh_little_menu)
+	Main.instance.reload_settings.connect(reload_parse_par)
 	_refresh_parse_bar()
 
 #region Chat
@@ -541,7 +543,13 @@ func _on_parse_bar_box_item_rect_changed():
 var _fake_result: String = ""
 var _sel_sig: String = ""
 
+func reload_parse_par():
+	parse_bar_panel.visible = SettingsHandler.do_parsebar
+	_refresh_parse_bar()
+
 func _refresh_parse_bar():
+	if not SettingsHandler.do_parsebar:
+		return
 	var input: String = trans_edit.get_selected_text()
 	
 	if not input:

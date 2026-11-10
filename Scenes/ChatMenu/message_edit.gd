@@ -88,7 +88,7 @@ func _show_custom_popup(options: Array):
 	autocomplete_list.select(0)
 	autocomplete_list.ensure_current_is_visible()
 	
-	if center_autocomplete_above:
+	if center_autocomplete_above and center_autocomplete_above.visible:
 		auto_list_panel.position = center_autocomplete_above.global_position + center_autocomplete_above.size * Vector2(0.5, 0)
 		#auto_list_panel.offset_transform_position_ratio.x = 0
 	else:

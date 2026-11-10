@@ -11,7 +11,7 @@
 [sub_resource type="FoldableGroup" id="FoldableGroup_2xmuf"]
 allow_folding_all = true
 
-[node name="SettingsTab" type="VBoxContainer" unique_id=1649791393 node_paths=PackedStringArray("formatting", "do_bbcode", "color_ref_group", "color_ref", "truncate", "font_size", "undef_setting", "number_sep_setting", "right_sidebar", "confetti_setting", "ui_stretch", "ui_scale", "color_edit", "color_sample", "sound_slider", "music_slider", "sound_sample", "music_sample", "music_parent", "ping_slider", "default_image_visible", "crunch_image", "invert_pitch", "invert_yaw", "invert_zoom", "image_setting_group", "callsign_backup", "callsign_failsafe")]
+[node name="SettingsTab" type="VBoxContainer" unique_id=1649791393 node_paths=PackedStringArray("formatting", "do_bbcode", "color_ref_group", "color_ref", "truncate", "font_size", "undef_setting", "number_sep_setting", "right_sidebar", "parsebar", "confetti_setting", "ui_stretch", "ui_scale", "color_edit", "color_sample", "sound_slider", "music_slider", "sound_sample", "music_sample", "music_parent", "ping_slider", "default_image_visible", "crunch_image", "invert_pitch", "invert_yaw", "invert_zoom", "image_setting_group", "callsign_backup", "callsign_failsafe")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -29,6 +29,7 @@ font_size = NodePath("ScrollContainer/Options/Interface/VBoxContainer/FontHbox/F
 undef_setting = NodePath("ScrollContainer/Options/SignalDisplay/VBoxContainer/UndefSetting")
 number_sep_setting = NodePath("ScrollContainer/Options/Interface/VBoxContainer/NumberSeparation")
 right_sidebar = NodePath("ScrollContainer/Options/Interface/VBoxContainer/RHSidebar")
+parsebar = NodePath("ScrollContainer/Options/Interface/VBoxContainer/Parsebar")
 confetti_setting = NodePath("ScrollContainer/Options/Interface/VBoxContainer/Confetti")
 ui_stretch = NodePath("ScrollContainer/Options/Interface/VBoxContainer/UIStretch")
 ui_scale = NodePath("ScrollContainer/Options/Interface/VBoxContainer/UIScale/ScaleSpinner")
@@ -183,7 +184,6 @@ state = true
 
 [node name="Interface" type="FoldableContainer" parent="ScrollContainer/Options" unique_id=1112130352]
 layout_mode = 2
-folded = true
 title = "interface"
 foldable_group = SubResource("FoldableGroup_2xmuf")
 
@@ -195,7 +195,6 @@ translations = Dictionary[StringName, String]({
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/Options/Interface" unique_id=1949425612]
-visible = false
 layout_mode = 2
 
 [node name="NumberSeparation" parent="ScrollContainer/Options/Interface/VBoxContainer" unique_id=1913893789 instance=ExtResource("3_0yg8b")]
@@ -206,6 +205,11 @@ state = true
 [node name="RHSidebar" parent="ScrollContainer/Options/Interface/VBoxContainer" unique_id=491459927 instance=ExtResource("3_0yg8b")]
 layout_mode = 2
 description = "SETTINGS_RIGHT_SIDEBAR"
+state = true
+
+[node name="Parsebar" parent="ScrollContainer/Options/Interface/VBoxContainer" unique_id=320049560 instance=ExtResource("3_0yg8b")]
+layout_mode = 2
+description = "SETTINGS_DO_PARSEBAR"
 state = true
 
 [node name="Confetti" parent="ScrollContainer/Options/Interface/VBoxContainer" unique_id=1525244345 instance=ExtResource("3_0yg8b")]
@@ -331,6 +335,7 @@ metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="Sounds" type="FoldableContainer" parent="ScrollContainer/Options" unique_id=701943303]
 layout_mode = 2
+folded = true
 title = "sound"
 foldable_group = SubResource("FoldableGroup_2xmuf")
 
@@ -342,6 +347,7 @@ translations = Dictionary[StringName, String]({
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/Options/Sounds" unique_id=1019932741]
+visible = false
 layout_mode = 2
 
 [node name="GlobalVolume" type="VBoxContainer" parent="ScrollContainer/Options/Sounds/VBoxContainer" unique_id=970437208]
@@ -628,6 +634,7 @@ on_text = "SETTINGS_BACKUP_INCREMENT"
 [connection signal="set" from="ScrollContainer/Options/SignalDisplay/VBoxContainer/UndefSetting" to="." method="_on_undef_setting_set"]
 [connection signal="set" from="ScrollContainer/Options/Interface/VBoxContainer/NumberSeparation" to="." method="_on_number_separation_set"]
 [connection signal="set" from="ScrollContainer/Options/Interface/VBoxContainer/RHSidebar" to="." method="_on_rh_sidebar_set"]
+[connection signal="set" from="ScrollContainer/Options/Interface/VBoxContainer/Parsebar" to="." method="_on_parsebar_set"]
 [connection signal="set" from="ScrollContainer/Options/Interface/VBoxContainer/Confetti" to="." method="_on_confetti_set"]
 [connection signal="value_changed" from="ScrollContainer/Options/Interface/VBoxContainer/FontHbox/FontSpinner" to="." method="_on_font_spinner_value_changed"]
 [connection signal="set" from="ScrollContainer/Options/Interface/VBoxContainer/UIStretch" to="." method="_on_ui_stretch_set"]

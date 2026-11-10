@@ -68,7 +68,7 @@ layout_mode = 2
 [node name="Spaceholder" type="Label" parent="ParseBarBox" unique_id=767056672]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-text = "t"
+text = "T"
 
 [node name="BottomBar" type="HBoxContainer" parent="." unique_id=1954111637]
 layout_mode = 2

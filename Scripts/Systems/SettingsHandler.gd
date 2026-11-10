@@ -32,6 +32,7 @@ static var stretch_scale: float = 1
 static var right_handed_sidebar: bool = true
 static var use_m0_elements: bool = true
 static var crunch_image: bool = false
+static var do_parsebar: bool = true
 
 static func validate_and_set_language(code: String = language):
 	if code not in LocaleMenu.VALID_LANGUAGES:
@@ -112,6 +113,7 @@ static func initialize() -> void:
 	right_handed_sidebar = SaveSystem.settings.get_or_add("right_handed_sidebar", right_handed_sidebar)
 	use_m0_elements = SaveSystem.settings.get_or_add("use_m0_elements", use_m0_elements)
 	crunch_image = SaveSystem.settings.get_or_add("crunch_image", crunch_image)
+	do_parsebar = SaveSystem.settings.get_or_add("do_parsebar", do_parsebar)
 
 static func evaluate_volume() -> void:
 	AudioServer.set_bus_volume_linear(
@@ -176,3 +178,4 @@ static func export() -> void:
 	SaveSystem.settings.set("right_handed_sidebar", right_handed_sidebar)
 	SaveSystem.settings.set("use_m0_elements", use_m0_elements)
 	SaveSystem.settings.set("crunch_image", crunch_image)
+	SaveSystem.settings.set("do_parsebar", do_parsebar)

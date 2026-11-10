@@ -8,7 +8,8 @@
 
 ### Changes
 
-* Overhauled parse-preview bar
+* Overhauled parse-preview bar and it's now a setting
+* Font size is now under interface settings instead of signal settings
 
 ### Fixes
 
