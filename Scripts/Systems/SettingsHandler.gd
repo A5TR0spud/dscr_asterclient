@@ -24,6 +24,7 @@ static var websocket_address: String = Main.DSCR_URL
 static var websocket_addresses: Array = [Main.DSCR_URL]
 static var current_dictionary: String = "DICTIONARY-1.save"
 static var confetti: bool = true
+static var long_periodic_table: bool = false
 static var number_auto_sep: bool = true
 static var backup_callsign: int = -1
 static var failsafe_callsign_increment: bool = true

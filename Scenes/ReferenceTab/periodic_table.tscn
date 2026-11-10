@@ -30,7 +30,911 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="PeriodicTableLong" type="GridContainer" parent="MarginContainer" unique_id=103356526]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = -2
+theme_override_constants/v_separation = -2
+columns = 7
+script = ExtResource("1_afasx")
+
+[node name="Hydrogen" parent="MarginContainer/PeriodicTableLong" unique_id=1201975638 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 87
+
+[node name="Hydrogen2" parent="MarginContainer/PeriodicTableLong" unique_id=264790680 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 55
+
+[node name="Hydrogen3" parent="MarginContainer/PeriodicTableLong" unique_id=202690528 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 37
+
+[node name="Hydrogen4" parent="MarginContainer/PeriodicTableLong" unique_id=2030736776 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 19
+
+[node name="Hydrogen5" parent="MarginContainer/PeriodicTableLong" unique_id=133180779 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 11
+
+[node name="Hydrogen6" parent="MarginContainer/PeriodicTableLong" unique_id=1884344680 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 3
+
+[node name="Hydrogen7" parent="MarginContainer/PeriodicTableLong" unique_id=1551188012 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+
+[node name="Hydrogen8" parent="MarginContainer/PeriodicTableLong" unique_id=1353238326 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 88
+
+[node name="Hydrogen9" parent="MarginContainer/PeriodicTableLong" unique_id=1091518425 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 56
+
+[node name="Hydrogen10" parent="MarginContainer/PeriodicTableLong" unique_id=1535694392 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 38
+
+[node name="Hydrogen11" parent="MarginContainer/PeriodicTableLong" unique_id=503979367 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 20
+
+[node name="Hydrogen12" parent="MarginContainer/PeriodicTableLong" unique_id=1206605523 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 12
+
+[node name="Hydrogen13" parent="MarginContainer/PeriodicTableLong" unique_id=1032357277 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 4
+
+[node name="Control34" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=2050887176]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hydrogen14" parent="MarginContainer/PeriodicTableLong" unique_id=1575295774 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 89
+
+[node name="Hydrogen15" parent="MarginContainer/PeriodicTableLong" unique_id=1229869704 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 57
+
+[node name="Control35" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1335679094]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control36" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1648819409]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control37" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=2107218695]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control38" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1419401324]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control39" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1116737645]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hydrogen16" parent="MarginContainer/PeriodicTableLong" unique_id=1202090801 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 90
+
+[node name="Hydrogen17" parent="MarginContainer/PeriodicTableLong" unique_id=1553280350 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 58
+
+[node name="Control40" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1258618008]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control41" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1786475397]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control42" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1816219007]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control43" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=449863718]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control44" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=494021128]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hydrogen18" parent="MarginContainer/PeriodicTableLong" unique_id=1350415762 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 91
+
+[node name="Hydrogen19" parent="MarginContainer/PeriodicTableLong" unique_id=201394153 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 59
+
+[node name="Control45" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1316036549]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control46" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1473123094]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control47" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=136881719]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control48" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1779557846]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control49" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1655390347]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hydrogen20" parent="MarginContainer/PeriodicTableLong" unique_id=683326118 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 92
+
+[node name="Hydrogen21" parent="MarginContainer/PeriodicTableLong" unique_id=1557859654 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 60
+
+[node name="Control50" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1915958814]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control51" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1890537169]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control52" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1631898685]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control53" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=2027416662]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control54" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1483653843]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hydrogen22" parent="MarginContainer/PeriodicTableLong" unique_id=2101201520 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 93
+
+[node name="Hydrogen23" parent="MarginContainer/PeriodicTableLong" unique_id=2058544525 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 61
+
+[node name="Control55" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=590224464]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control56" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1587550236]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control57" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=74067543]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control58" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=742160124]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control59" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=368712233]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hydrogen24" parent="MarginContainer/PeriodicTableLong" unique_id=1468225925 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 94
+
+[node name="Hydrogen25" parent="MarginContainer/PeriodicTableLong" unique_id=850419904 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 62
+
+[node name="Control60" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1553709836]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control61" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1006279298]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control62" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=944681774]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control63" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1617157242]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control64" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1247506976]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hydrogen26" parent="MarginContainer/PeriodicTableLong" unique_id=871230933 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 95
+
+[node name="Hydrogen27" parent="MarginContainer/PeriodicTableLong" unique_id=1424727205 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 63
+
+[node name="Control65" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=686472456]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control66" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=668826981]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control67" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1368673273]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control68" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1379222161]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control69" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1441356155]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hydrogen28" parent="MarginContainer/PeriodicTableLong" unique_id=1321974564 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 96
+
+[node name="Hydrogen29" parent="MarginContainer/PeriodicTableLong" unique_id=956360310 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 64
+
+[node name="Control70" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=274810667]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control71" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1570611435]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control72" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=271447551]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control73" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1402577922]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control74" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1595176071]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hydrogen30" parent="MarginContainer/PeriodicTableLong" unique_id=895280403 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 97
+
+[node name="Hydrogen31" parent="MarginContainer/PeriodicTableLong" unique_id=636131957 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 65
+
+[node name="Control75" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1497858073]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control76" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1563191575]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control77" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=2006145324]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control78" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1152207220]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control79" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1651922534]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hydrogen32" parent="MarginContainer/PeriodicTableLong" unique_id=336871275 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 98
+
+[node name="Hydrogen33" parent="MarginContainer/PeriodicTableLong" unique_id=178868627 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 66
+
+[node name="Control80" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=589898255]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control81" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=403206631]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control82" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=2088674308]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control83" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=2147221959]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control84" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1066609197]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hydrogen34" parent="MarginContainer/PeriodicTableLong" unique_id=1923721813 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 99
+
+[node name="Hydrogen35" parent="MarginContainer/PeriodicTableLong" unique_id=1204336825 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 67
+
+[node name="Control85" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1316810212]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control86" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=536035853]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control87" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1592446649]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control88" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1352056498]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control89" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1553437895]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hydrogen36" parent="MarginContainer/PeriodicTableLong" unique_id=169781268 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 100
+
+[node name="Hydrogen37" parent="MarginContainer/PeriodicTableLong" unique_id=625666924 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 68
+
+[node name="Control90" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1891737361]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control91" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1092641416]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control92" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1230614151]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control93" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1741932706]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control94" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=496025583]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hydrogen38" parent="MarginContainer/PeriodicTableLong" unique_id=1401740769 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 101
+
+[node name="Hydrogen39" parent="MarginContainer/PeriodicTableLong" unique_id=165050205 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 69
+
+[node name="Control95" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1306390573]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control96" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1189636184]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control97" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=685788929]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control98" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1246009355]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control99" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=2134920152]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hydrogen40" parent="MarginContainer/PeriodicTableLong" unique_id=116254993 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 102
+
+[node name="Hydrogen41" parent="MarginContainer/PeriodicTableLong" unique_id=781745330 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 70
+
+[node name="Control100" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1621729494]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control101" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=818574493]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control102" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1991529267]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control103" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=578019250]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control104" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1739171105]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hydrogen42" parent="MarginContainer/PeriodicTableLong" unique_id=1112949425 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 103
+
+[node name="Hydrogen43" parent="MarginContainer/PeriodicTableLong" unique_id=1185273607 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 71
+
+[node name="Hydrogen44" parent="MarginContainer/PeriodicTableLong" unique_id=719959421 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 39
+
+[node name="Hydrogen45" parent="MarginContainer/PeriodicTableLong" unique_id=1152117047 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 21
+
+[node name="Control105" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=284490885]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control106" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=402693240]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control107" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1621151232]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hydrogen46" parent="MarginContainer/PeriodicTableLong" unique_id=648144453 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 104
+
+[node name="Hydrogen47" parent="MarginContainer/PeriodicTableLong" unique_id=1807683423 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 72
+
+[node name="Hydrogen48" parent="MarginContainer/PeriodicTableLong" unique_id=666187443 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 40
+
+[node name="Hydrogen49" parent="MarginContainer/PeriodicTableLong" unique_id=1629543851 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 22
+
+[node name="Control108" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1875870792]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control109" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1663312222]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control110" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1203566683]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hydrogen50" parent="MarginContainer/PeriodicTableLong" unique_id=1306069543 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 105
+
+[node name="Hydrogen51" parent="MarginContainer/PeriodicTableLong" unique_id=755814826 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 73
+
+[node name="Hydrogen52" parent="MarginContainer/PeriodicTableLong" unique_id=1405576281 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 41
+
+[node name="Hydrogen53" parent="MarginContainer/PeriodicTableLong" unique_id=2043898345 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 23
+
+[node name="Control111" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=155912398]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control112" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1462601508]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control113" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1036645249]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hydrogen54" parent="MarginContainer/PeriodicTableLong" unique_id=872695396 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 106
+
+[node name="Hydrogen55" parent="MarginContainer/PeriodicTableLong" unique_id=625083919 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 74
+
+[node name="Hydrogen56" parent="MarginContainer/PeriodicTableLong" unique_id=1177072982 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 42
+
+[node name="Hydrogen57" parent="MarginContainer/PeriodicTableLong" unique_id=1127501266 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 24
+
+[node name="Control114" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1185430630]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control115" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1147158279]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control116" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1798519254]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hydrogen58" parent="MarginContainer/PeriodicTableLong" unique_id=1931964277 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 107
+
+[node name="Hydrogen59" parent="MarginContainer/PeriodicTableLong" unique_id=1023514184 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 75
+
+[node name="Hydrogen60" parent="MarginContainer/PeriodicTableLong" unique_id=573428877 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 43
+
+[node name="Hydrogen61" parent="MarginContainer/PeriodicTableLong" unique_id=1362261796 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 25
+
+[node name="Control117" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1309766768]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control118" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1726450410]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control119" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=375780608]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hydrogen62" parent="MarginContainer/PeriodicTableLong" unique_id=1600348642 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 108
+
+[node name="Hydrogen63" parent="MarginContainer/PeriodicTableLong" unique_id=1727082978 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 76
+
+[node name="Hydrogen64" parent="MarginContainer/PeriodicTableLong" unique_id=1560105564 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 44
+
+[node name="Hydrogen65" parent="MarginContainer/PeriodicTableLong" unique_id=184705266 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 26
+
+[node name="Control120" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1297951217]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control121" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=734593642]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control122" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1258559227]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hydrogen66" parent="MarginContainer/PeriodicTableLong" unique_id=1050976379 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 109
+
+[node name="Hydrogen67" parent="MarginContainer/PeriodicTableLong" unique_id=720566337 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 77
+
+[node name="Hydrogen68" parent="MarginContainer/PeriodicTableLong" unique_id=502794370 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 45
+
+[node name="Hydrogen69" parent="MarginContainer/PeriodicTableLong" unique_id=1956569358 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 27
+
+[node name="Control123" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=127644875]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control124" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1021178506]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control125" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=468741173]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hydrogen70" parent="MarginContainer/PeriodicTableLong" unique_id=1240252078 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 110
+
+[node name="Hydrogen71" parent="MarginContainer/PeriodicTableLong" unique_id=871423441 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 78
+
+[node name="Hydrogen72" parent="MarginContainer/PeriodicTableLong" unique_id=1529882932 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 46
+
+[node name="Hydrogen73" parent="MarginContainer/PeriodicTableLong" unique_id=1824459688 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 28
+
+[node name="Control126" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=74818735]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control127" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1531350337]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control128" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=181125063]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hydrogen74" parent="MarginContainer/PeriodicTableLong" unique_id=779932498 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 111
+
+[node name="Hydrogen75" parent="MarginContainer/PeriodicTableLong" unique_id=1198021712 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 79
+
+[node name="Hydrogen76" parent="MarginContainer/PeriodicTableLong" unique_id=1266203932 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 47
+
+[node name="Hydrogen77" parent="MarginContainer/PeriodicTableLong" unique_id=1512609835 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 29
+
+[node name="Control129" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=770225045]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control130" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1075545762]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control131" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1340216764]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hydrogen78" parent="MarginContainer/PeriodicTableLong" unique_id=801393508 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 112
+
+[node name="Hydrogen79" parent="MarginContainer/PeriodicTableLong" unique_id=183881890 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 80
+
+[node name="Hydrogen80" parent="MarginContainer/PeriodicTableLong" unique_id=1067872656 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 48
+
+[node name="Hydrogen81" parent="MarginContainer/PeriodicTableLong" unique_id=758777574 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 30
+
+[node name="Control132" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=876733708]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control133" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1418707834]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control134" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1675819530]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hydrogen82" parent="MarginContainer/PeriodicTableLong" unique_id=642469882 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 113
+
+[node name="Hydrogen83" parent="MarginContainer/PeriodicTableLong" unique_id=1993954765 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 81
+
+[node name="Hydrogen84" parent="MarginContainer/PeriodicTableLong" unique_id=975219706 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 49
+
+[node name="Hydrogen85" parent="MarginContainer/PeriodicTableLong" unique_id=1317281122 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 31
+
+[node name="Hydrogen86" parent="MarginContainer/PeriodicTableLong" unique_id=1332476613 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 13
+
+[node name="Hydrogen87" parent="MarginContainer/PeriodicTableLong" unique_id=857606560 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 5
+
+[node name="Control135" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1498838396]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hydrogen88" parent="MarginContainer/PeriodicTableLong" unique_id=629830552 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 114
+
+[node name="Hydrogen89" parent="MarginContainer/PeriodicTableLong" unique_id=770662363 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 82
+
+[node name="Hydrogen90" parent="MarginContainer/PeriodicTableLong" unique_id=1703405750 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 50
+
+[node name="Hydrogen91" parent="MarginContainer/PeriodicTableLong" unique_id=61380067 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 32
+
+[node name="Hydrogen92" parent="MarginContainer/PeriodicTableLong" unique_id=1262732992 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 14
+
+[node name="Hydrogen93" parent="MarginContainer/PeriodicTableLong" unique_id=1763556389 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 6
+
+[node name="Control136" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=2111092499]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hydrogen94" parent="MarginContainer/PeriodicTableLong" unique_id=386773482 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 115
+
+[node name="Hydrogen95" parent="MarginContainer/PeriodicTableLong" unique_id=354076641 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 83
+
+[node name="Hydrogen96" parent="MarginContainer/PeriodicTableLong" unique_id=1393718019 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 51
+
+[node name="Hydrogen97" parent="MarginContainer/PeriodicTableLong" unique_id=30925878 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 33
+
+[node name="Hydrogen98" parent="MarginContainer/PeriodicTableLong" unique_id=695760672 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 15
+
+[node name="Hydrogen99" parent="MarginContainer/PeriodicTableLong" unique_id=300923863 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 7
+
+[node name="Control137" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1570899421]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hydrogen100" parent="MarginContainer/PeriodicTableLong" unique_id=464840169 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 116
+
+[node name="Hydrogen101" parent="MarginContainer/PeriodicTableLong" unique_id=860177031 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 84
+
+[node name="Hydrogen102" parent="MarginContainer/PeriodicTableLong" unique_id=260480576 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 52
+
+[node name="Hydrogen103" parent="MarginContainer/PeriodicTableLong" unique_id=1968757416 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 34
+
+[node name="Hydrogen104" parent="MarginContainer/PeriodicTableLong" unique_id=1605401086 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 16
+
+[node name="Hydrogen105" parent="MarginContainer/PeriodicTableLong" unique_id=1024583218 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 8
+
+[node name="Control138" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=579714922]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hydrogen106" parent="MarginContainer/PeriodicTableLong" unique_id=797735112 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 117
+
+[node name="Hydrogen107" parent="MarginContainer/PeriodicTableLong" unique_id=1433488050 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 85
+
+[node name="Hydrogen108" parent="MarginContainer/PeriodicTableLong" unique_id=244155752 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 53
+
+[node name="Hydrogen109" parent="MarginContainer/PeriodicTableLong" unique_id=1868445096 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 35
+
+[node name="Hydrogen110" parent="MarginContainer/PeriodicTableLong" unique_id=1954113889 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 17
+
+[node name="Hydrogen111" parent="MarginContainer/PeriodicTableLong" unique_id=1042364621 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 9
+
+[node name="Control139" type="Control" parent="MarginContainer/PeriodicTableLong" unique_id=1475416564]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hydrogen112" parent="MarginContainer/PeriodicTableLong" unique_id=1457516779 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 118
+
+[node name="Hydrogen113" parent="MarginContainer/PeriodicTableLong" unique_id=319201799 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 86
+
+[node name="Hydrogen114" parent="MarginContainer/PeriodicTableLong" unique_id=1012585310 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 54
+
+[node name="Hydrogen115" parent="MarginContainer/PeriodicTableLong" unique_id=1239403601 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 36
+
+[node name="Hydrogen116" parent="MarginContainer/PeriodicTableLong" unique_id=1699317379 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 18
+
+[node name="Hydrogen117" parent="MarginContainer/PeriodicTableLong" unique_id=888910595 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 10
+
+[node name="Hydrogen118" parent="MarginContainer/PeriodicTableLong" unique_id=1365724211 instance=ExtResource("1_b7m85")]
+layout_mode = 2
+element = 2
+
 [node name="PeriodicTable" type="GridContainer" parent="MarginContainer" unique_id=1498053878]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/h_separation = -2

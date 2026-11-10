@@ -217,6 +217,10 @@ layout_mode = 2
 description = "SETTINGS_CONFETTI"
 state = true
 
+[node name="LongPeriodicTable" parent="ScrollContainer/Options/Interface/VBoxContainer" unique_id=1785674227 instance=ExtResource("3_0yg8b")]
+layout_mode = 2
+description = "SETTINGS_LONG_ATOMS"
+
 [node name="FontHbox" type="HBoxContainer" parent="ScrollContainer/Options/Interface/VBoxContainer" unique_id=90540622]
 layout_mode = 2
 theme_override_constants/separation = 8
@@ -636,6 +640,7 @@ on_text = "SETTINGS_BACKUP_INCREMENT"
 [connection signal="set" from="ScrollContainer/Options/Interface/VBoxContainer/RHSidebar" to="." method="_on_rh_sidebar_set"]
 [connection signal="set" from="ScrollContainer/Options/Interface/VBoxContainer/Parsebar" to="." method="_on_parsebar_set"]
 [connection signal="set" from="ScrollContainer/Options/Interface/VBoxContainer/Confetti" to="." method="_on_confetti_set"]
+[connection signal="set" from="ScrollContainer/Options/Interface/VBoxContainer/LongPeriodicTable" to="." method="_on_long_periodic_table_set"]
 [connection signal="value_changed" from="ScrollContainer/Options/Interface/VBoxContainer/FontHbox/FontSpinner" to="." method="_on_font_spinner_value_changed"]
 [connection signal="set" from="ScrollContainer/Options/Interface/VBoxContainer/UIStretch" to="." method="_on_ui_stretch_set"]
 [connection signal="cancel" from="ScrollContainer/Options/Interface/VBoxContainer/ScaleConfirm" to="." method="_on_scale_confirm_cancel"]
