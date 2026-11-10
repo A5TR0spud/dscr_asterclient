@@ -25,7 +25,7 @@ do_bbcode = NodePath("ScrollContainer/Options/SignalDisplay/VBoxContainer/DoBBCo
 color_ref_group = NodePath("ScrollContainer/Options/SignalDisplay/VBoxContainer/ColorReferenceMode")
 color_ref = NodePath("ScrollContainer/Options/SignalDisplay/VBoxContainer/ColorReferenceMode/ColorRefSwitch")
 truncate = NodePath("ScrollContainer/Options/SignalDisplay/VBoxContainer/TruncHbox/TruncationSpinner")
-font_size = NodePath("ScrollContainer/Options/SignalDisplay/VBoxContainer/FontHbox/FontSpinner")
+font_size = NodePath("ScrollContainer/Options/Interface/VBoxContainer/FontHbox/FontSpinner")
 undef_setting = NodePath("ScrollContainer/Options/SignalDisplay/VBoxContainer/UndefSetting")
 number_sep_setting = NodePath("ScrollContainer/Options/Interface/VBoxContainer/NumberSeparation")
 right_sidebar = NodePath("ScrollContainer/Options/Interface/VBoxContainer/RHSidebar")
@@ -176,32 +176,6 @@ metadata/_custom_type_script = "uid://7gga31jeosxl"
 [node name="HSeparator2" type="HSeparator" parent="ScrollContainer/Options/SignalDisplay/VBoxContainer" unique_id=2092124219]
 layout_mode = 2
 
-[node name="FontHbox" type="HBoxContainer" parent="ScrollContainer/Options/SignalDisplay/VBoxContainer" unique_id=90540622]
-layout_mode = 2
-theme_override_constants/separation = 8
-
-[node name="FontSizeLabel" type="Label" parent="ScrollContainer/Options/SignalDisplay/VBoxContainer/FontHbox" unique_id=110664921]
-layout_mode = 2
-text = "font size setting"
-
-[node name="LocaleNode" type="Node" parent="ScrollContainer/Options/SignalDisplay/VBoxContainer/FontHbox/FontSizeLabel" unique_id=651643112]
-script = ExtResource("5_gal0n")
-translations = Dictionary[StringName, String]({
-&"text": "SETTINGS_FONT_SIZE"
-})
-metadata/_custom_type_script = "uid://7gga31jeosxl"
-
-[node name="FontSpinner" type="SpinBox" parent="ScrollContainer/Options/SignalDisplay/VBoxContainer/FontHbox" unique_id=897245892]
-layout_mode = 2
-size_flags_horizontal = 0
-min_value = 15.0
-max_value = 24.0
-value = 18.0
-rounded = true
-
-[node name="HSeparator3" type="HSeparator" parent="ScrollContainer/Options/SignalDisplay/VBoxContainer" unique_id=1013432024]
-layout_mode = 2
-
 [node name="UndefSetting" parent="ScrollContainer/Options/SignalDisplay/VBoxContainer" unique_id=1683413919 instance=ExtResource("3_0yg8b")]
 layout_mode = 2
 description = "SETTINGS_USE_AT_UNDEF"
@@ -238,6 +212,32 @@ state = true
 layout_mode = 2
 description = "SETTINGS_CONFETTI"
 state = true
+
+[node name="FontHbox" type="HBoxContainer" parent="ScrollContainer/Options/Interface/VBoxContainer" unique_id=90540622]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="FontSizeLabel" type="Label" parent="ScrollContainer/Options/Interface/VBoxContainer/FontHbox" unique_id=110664921]
+layout_mode = 2
+text = "font size setting"
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/Options/Interface/VBoxContainer/FontHbox/FontSizeLabel" unique_id=651643112]
+script = ExtResource("5_gal0n")
+translations = Dictionary[StringName, String]({
+&"text": "SETTINGS_FONT_SIZE"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="FontSpinner" type="SpinBox" parent="ScrollContainer/Options/Interface/VBoxContainer/FontHbox" unique_id=897245892]
+layout_mode = 2
+size_flags_horizontal = 0
+min_value = 15.0
+max_value = 24.0
+value = 18.0
+rounded = true
+
+[node name="HSeparator3" type="HSeparator" parent="ScrollContainer/Options/Interface/VBoxContainer" unique_id=1013432024]
+layout_mode = 2
 
 [node name="UIStretch" parent="ScrollContainer/Options/Interface/VBoxContainer" unique_id=1792622087 instance=ExtResource("3_0yg8b")]
 layout_mode = 2
@@ -625,11 +625,11 @@ on_text = "SETTINGS_BACKUP_INCREMENT"
 [connection signal="set" from="ScrollContainer/Options/SignalDisplay/VBoxContainer/DoBBCode" to="." method="_on_do_bb_code_set"]
 [connection signal="item_selected" from="ScrollContainer/Options/SignalDisplay/VBoxContainer/ColorReferenceMode/ColorRefSwitch" to="." method="_on_color_ref_switch_item_selected"]
 [connection signal="value_changed" from="ScrollContainer/Options/SignalDisplay/VBoxContainer/TruncHbox/TruncationSpinner" to="." method="_on_truncation_spinner_value_changed"]
-[connection signal="value_changed" from="ScrollContainer/Options/SignalDisplay/VBoxContainer/FontHbox/FontSpinner" to="." method="_on_font_spinner_value_changed"]
 [connection signal="set" from="ScrollContainer/Options/SignalDisplay/VBoxContainer/UndefSetting" to="." method="_on_undef_setting_set"]
 [connection signal="set" from="ScrollContainer/Options/Interface/VBoxContainer/NumberSeparation" to="." method="_on_number_separation_set"]
 [connection signal="set" from="ScrollContainer/Options/Interface/VBoxContainer/RHSidebar" to="." method="_on_rh_sidebar_set"]
 [connection signal="set" from="ScrollContainer/Options/Interface/VBoxContainer/Confetti" to="." method="_on_confetti_set"]
+[connection signal="value_changed" from="ScrollContainer/Options/Interface/VBoxContainer/FontHbox/FontSpinner" to="." method="_on_font_spinner_value_changed"]
 [connection signal="set" from="ScrollContainer/Options/Interface/VBoxContainer/UIStretch" to="." method="_on_ui_stretch_set"]
 [connection signal="cancel" from="ScrollContainer/Options/Interface/VBoxContainer/ScaleConfirm" to="." method="_on_scale_confirm_cancel"]
 [connection signal="confirmed" from="ScrollContainer/Options/Interface/VBoxContainer/ScaleConfirm" to="." method="_on_scale_confirm_confirmed"]

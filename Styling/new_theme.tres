@@ -21,22 +21,22 @@
 [ext_resource type="Texture2D" uid="uid://lilbca6bxcqx" path="res://Assets/BlankSquare.png" id="10_i4fbu"]
 [ext_resource type="Texture2D" uid="uid://0macp80jjt01" path="res://Assets/HSliderUngrabbed.png" id="10_sxxod"]
 [ext_resource type="StyleBox" uid="uid://8mg0wvheihvx" path="res://Styling/Tabber/tab_selected.tres" id="11_fqkxe"]
-[ext_resource type="FontFile" uid="uid://cwbj6dro36xa3" path="res://fonts/CascadiaMono-Bold.ttf" id="12_d5xg6"]
 [ext_resource type="StyleBox" uid="uid://bcpf14e281kyl" path="res://Styling/Tabber/tab_unselected.tres" id="12_k7nka"]
 [ext_resource type="StyleBox" uid="uid://dupyap3qde3fv" path="res://Styling/Tabber/ButtonLookalike/tab_focus.tres" id="12_rvmd7"]
-[ext_resource type="FontFile" uid="uid://di3o60e8vwo33" path="res://fonts/CascadiaMono-BoldItalic.ttf" id="13_00ekq"]
 [ext_resource type="StyleBox" uid="uid://03se03qmxl1l" path="res://Styling/Tabber/ButtonLookalike/tab_hovered.tres" id="13_3jl28"]
-[ext_resource type="FontFile" uid="uid://dlbnwnjcw76kn" path="res://fonts/CascadiaMono-Italic.ttf" id="14_3a2p8"]
 [ext_resource type="StyleBox" uid="uid://bud12urn6xcjr" path="res://Styling/Tabber/ButtonLookalike/tab_selected.tres" id="14_f5bgc"]
 [ext_resource type="StyleBox" uid="uid://10juafvr3ky1" path="res://Styling/Tabber/ButtonLookalike/tab_unselected.tres" id="15_d5xg6"]
 [ext_resource type="StyleBox" uid="uid://db3k5eiovgegq" path="res://Styling/Seps/v_sep.tres" id="15_k7nka"]
-[ext_resource type="FontFile" uid="uid://kx3rrq8lr2ar" path="res://fonts/CascadiaMono-Regular.ttf" id="18_pkgym"]
+[ext_resource type="FontVariation" uid="uid://b7eq7yq6kud3e" path="res://Styling/Fonts/bold.tres" id="18_8gtnr"]
+[ext_resource type="FontVariation" uid="uid://buud4dkfdnhxh" path="res://Styling/Fonts/bold_italic.tres" id="19_4cyyo"]
 [ext_resource type="Texture2D" uid="uid://536wnp7dpwyy" path="res://Assets/Icons/tabbar_close.png" id="20_5aavf"]
+[ext_resource type="FontVariation" uid="uid://c4dsa28kcedh5" path="res://Styling/Fonts/italic.tres" id="20_fbr71"]
 [ext_resource type="Texture2D" uid="uid://bflhoitjkdmwb" path="res://Assets/Icons/tabbar_left.png" id="20_iutw7"]
 [ext_resource type="Texture2D" uid="uid://bj2hydnfnnjs4" path="res://Assets/Icons/tabbar_left_highlight.png" id="21_mjybl"]
 [ext_resource type="Texture2D" uid="uid://c8mj5g14b5axa" path="res://Assets/Icons/tabbar_right.png" id="21_pyxdf"]
 [ext_resource type="Texture2D" uid="uid://d4nv71bnasi1y" path="res://Assets/Icons/tabbar_right_highlight.png" id="23_5aavf"]
 [ext_resource type="StyleBox" uid="uid://circtrvcvn66m" path="res://Styling/Seps/v_split.tres" id="25_00ekq"]
+[ext_resource type="FontVariation" uid="uid://dsqrtwu56h1nr" path="res://Styling/Fonts/normal.tres" id="37_bkw1e"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gt42v"]
 
@@ -91,7 +91,7 @@ bg_color = Color(0.10073931, 0.10073931, 0.10073926, 1)
 [sub_resource type="ImageTexture" id="ImageTexture_i4fbu"]
 
 [resource]
-default_font = ExtResource("18_pkgym")
+default_font = ExtResource("37_bkw1e")
 default_font_size = 18
 Button/styles/disabled = ExtResource("3_08nyo")
 Button/styles/focus = ExtResource("1_pkgym")
@@ -160,9 +160,9 @@ PopupMenu/icons/unchecked = SubResource("GradientTexture1D_ttirq")
 PopupMenu/icons/unchecked_disabled = SubResource("GradientTexture1D_ttirq")
 PopupMenu/styles/hover = ExtResource("1_pkgym")
 PopupMenu/styles/panel = ExtResource("1_tvtlr")
-RichTextLabel/fonts/bold_font = ExtResource("12_d5xg6")
-RichTextLabel/fonts/bold_italics_font = ExtResource("13_00ekq")
-RichTextLabel/fonts/italics_font = ExtResource("14_3a2p8")
+RichTextLabel/fonts/bold_font = ExtResource("18_8gtnr")
+RichTextLabel/fonts/bold_italics_font = ExtResource("19_4cyyo")
+RichTextLabel/fonts/italics_font = ExtResource("20_fbr71")
 RichTextLabel/styles/focus = SubResource("StyleBoxFlat_nkfox")
 ScrollContainer/constants/scrollbar_h_separation = 8
 SpinBox/icons/down = SubResource("GradientTexture1D_ttirq")

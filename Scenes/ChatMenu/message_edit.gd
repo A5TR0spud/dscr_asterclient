@@ -7,8 +7,9 @@ class_name TransmissionEdit
 #@export var complete_nicknames: bool = false
 @onready var autocomplete_list: ItemList = $PanelContainer/MarginContainer/ItemList
 @onready var auto_list_panel: PanelContainer = $PanelContainer
+@export var center_autocomplete_above: Control
 
-const DELIMITER_CHARACTER = "\u001f"
+#const DELIMITER_CHARACTER = "\u001f"
 
 func _ready():
 	Main.instance.reload_settings.connect(_set_popup_size.call_deferred)
@@ -54,7 +55,7 @@ func _request_code_completion(force: bool) -> void:
 	_show_custom_popup(options)
 
 func is_signal_separating_character(character: String) -> bool:
-	return (character == DELIMITER_CHARACTER) or (character in " \n\t\r")
+	return (character in " \n\t\r")# or (character == DELIMITER_CHARACTER)
 
 ## gets signal under the caret
 ## returns starting column and ending column as an array
@@ -87,15 +88,20 @@ func _show_custom_popup(options: Array):
 	autocomplete_list.select(0)
 	autocomplete_list.ensure_current_is_visible()
 	
-	var word = get_signal_under_caret()
-	var caret_line = get_caret_line()
-	var caret_col = max(0, get_caret_column())
-	var word_start_col = max(0, caret_col - word.length() + 1)
-	
-	var caret_local: Vector2i = get_rect_at_line_column(caret_line, word_start_col).position
-	var caret_global: Vector2i = Vector2i(global_position) + caret_local
-	
-	auto_list_panel.position = caret_global
+	if center_autocomplete_above:
+		auto_list_panel.position = center_autocomplete_above.global_position + center_autocomplete_above.size * Vector2(0.5, 0)
+		#auto_list_panel.offset_transform_position_ratio.x = 0
+	else:
+		var word = get_signal_under_caret()
+		var caret_line = get_caret_line()
+		var caret_col = max(0, get_caret_column())
+		var word_start_col = max(0, caret_col - word.length() + 1)
+		
+		var caret_local: Vector2i = get_rect_at_line_column(caret_line, word_start_col).position
+		var caret_global: Vector2i = Vector2i(global_position) + caret_local
+		#auto_list_panel.offset_transform_position_ratio.x = 0
+		
+		auto_list_panel.position = caret_global
 	auto_list_panel.show()
 	_set_popup_size.call_deferred()
 
@@ -120,18 +126,18 @@ func _confirm_selection(index: int) -> void:
 	
 	# TODO: get the correct signal formatting here
 	var end_formatting = " "
-	insert_text_at_caret(chosen + DELIMITER_CHARACTER + end_formatting)
+	insert_text_at_caret(chosen + end_formatting) #+ DELIMITER_CHARACTER + end_formatting)
 	auto_list_panel.hide()
 	autocomplete_list.get_v_scroll_bar().value = 0
 
-## find delimiter index near the caret, -1 if not found
-func find_delimiter_near(line: String, col: int) -> int:
-	if col - 1 < line.length():
-		if col > 0 and line[col - 1] == DELIMITER_CHARACTER:
-			return col - 1 # thing@|thing@
-	if col < line.length() and line[col] == DELIMITER_CHARACTER:
-		return col     # thing|@thing@
-	return -1
+# find delimiter index near the caret, -1 if not found
+#func find_delimiter_near(line: String, col: int) -> int:
+#	if col - 1 < line.length():
+#		if col > 0 and line[col - 1] == DELIMITER_CHARACTER:
+#			return col - 1 # thing@|thing@
+#	if col < line.length() and line[col] == DELIMITER_CHARACTER:
+#		return col     # thing|@thing@
+#	return -1
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -162,12 +168,12 @@ func _gui_input(event: InputEvent) -> void:
 		accept_event()
 		return
 	if event.is_action_pressed("ui_copy"):
-		var selected_text = get_selected_text().remove_char(ord(DELIMITER_CHARACTER))
+		var selected_text = get_selected_text()#.remove_char(ord(DELIMITER_CHARACTER))
 		DisplayServer.clipboard_set(selected_text)
 		accept_event()
 		return
 	if event.is_action_pressed("ui_cut"):
-		var selected_text = get_selected_text().remove_char(ord(DELIMITER_CHARACTER))
+		var selected_text = get_selected_text()#.remove_char(ord(DELIMITER_CHARACTER))
 		if selected_text != "":
 			DisplayServer.clipboard_set(selected_text)
 			delete_selection()
@@ -184,6 +190,9 @@ func _gui_input(event: InputEvent) -> void:
 	if auto_list_panel.visible:
 		var selected = autocomplete_list.get_selected_items()
 		var idx = selected[0] if not selected.is_empty() else 0
+		if event.is_action_pressed("ui_left", true) or event.is_action_pressed("ui_right", true):
+			auto_list_panel.hide()
+			return
 		if event.is_action_pressed("ui_down", true):
 			idx = min(idx + 1, autocomplete_list.item_count - 1)
 			autocomplete_list.select(idx)
@@ -216,59 +225,59 @@ func _gui_input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		event = event as InputEventKey
 		
-		var line = get_caret_line()
-		var line_text = get_line(line)
-		var col = get_caret_column()
-		var no_selection = get_selected_text().is_empty()
+		#var line = get_caret_line()
+		#var line_text = get_line(line)
+		#var col = get_caret_column()
+		#var no_selection = get_selected_text().is_empty()
 		
-		if event.is_action_pressed("ui_text_caret_right", true) and (no_selection or event.shift_pressed):
-			if col < line_text.length() and line_text[col] == DELIMITER_CHARACTER:
-				set_caret_column(min(col + 2, line_text.length()))
-				accept_event()
-				if no_selection and event.shift_pressed:
-					select(line, col, line, col + 2)
-				return
-		if event.is_action_pressed("ui_text_caret_left", true) and (no_selection or event.shift_pressed):
-			if col > 0 and line_text[col - 1] == DELIMITER_CHARACTER:
-				set_caret_column(max(col - 2, 0))
-				accept_event()
-				if no_selection and event.shift_pressed:
-					select(line, col, line, col - 2)
-				return
+		#if event.is_action_pressed("ui_text_caret_right", true) and (no_selection or event.shift_pressed):
+			#if col < line_text.length() and line_text[col] == DELIMITER_CHARACTER:
+				#set_caret_column(min(col + 2, line_text.length()))
+				#accept_event()
+				#if no_selection and event.shift_pressed:
+					#select(line, col, line, col + 2)
+				#return
+		#if event.is_action_pressed("ui_text_caret_left", true) and (no_selection or event.shift_pressed):
+			#if col > 0 and line_text[col - 1] == DELIMITER_CHARACTER:
+				#set_caret_column(max(col - 2, 0))
+				#accept_event()
+				#if no_selection and event.shift_pressed:
+					#select(line, col, line, col - 2)
+				#return
 		
-		if event.is_action_pressed("ui_text_backspace", true) and get_selected_text() == "":
-			var delimiter_index = find_delimiter_near(line_text, col)
-			if delimiter_index != -1 and delimiter_index > 0:
-				# erase delimiter character as well
-				var start = delimiter_index - 1
-				remove_text(line, start, line, delimiter_index + 1)
-				set_caret_column(start)
-				text_changed.emit()
-				accept_event()
-				return
-		if event.is_action_pressed("ui_text_delete", true) and get_selected_text() == "":
-			var delimiter_index = find_delimiter_near(line_text, col + 1)
-			if delimiter_index != -1 and delimiter_index > 0:
-				# erase delimiter character as well
-				var start = delimiter_index - 1
-				remove_text(line, start, line, delimiter_index + 1)
-				set_caret_column(start)
-				text_changed.emit()
-				accept_event()
-				return
+		#if event.is_action_pressed("ui_text_backspace", true) and get_selected_text() == "":
+			#var delimiter_index = find_delimiter_near(line_text, col)
+			#if delimiter_index != -1 and delimiter_index > 0:
+				## erase delimiter character as well
+				#var start = delimiter_index - 1
+				#remove_text(line, start, line, delimiter_index + 1)
+				#set_caret_column(start)
+				#text_changed.emit()
+				#accept_event()
+				#return
+		#if event.is_action_pressed("ui_text_delete", true) and get_selected_text() == "":
+			#var delimiter_index = find_delimiter_near(line_text, col + 1)
+			#if delimiter_index != -1 and delimiter_index > 0:
+				## erase delimiter character as well
+				#var start = delimiter_index - 1
+				#remove_text(line, start, line, delimiter_index + 1)
+				#set_caret_column(start)
+				#text_changed.emit()
+				#accept_event()
+				#return
 		# do not put ui_accept here! this is tab specific! ui_accept includes enter and space too
 		# removes the delimiter and brings up the autocomplete menu
 		# TODO:
 		# this is still not exactly what i want, it should remove the whitespace that comes before it too,
 		# so the caret points to the signal you wanted to edit
-		if event.keycode == KEY_TAB and not event.shift_pressed:
-			var delimiter_index = find_delimiter_near(line_text, col)
-			if delimiter_index != -1:
-				remove_text(line, delimiter_index, line, delimiter_index + 1)
-				set_caret_column(delimiter_index if col > delimiter_index else col)
-				text_changed.emit()
-			accept_event()
-			return
+		#if event.keycode == KEY_TAB and not event.shift_pressed:
+			#var delimiter_index = find_delimiter_near(line_text, col)
+			#if delimiter_index != -1:
+				#remove_text(line, delimiter_index, line, delimiter_index + 1)
+				#set_caret_column(delimiter_index if col > delimiter_index else col)
+				#text_changed.emit()
+			#accept_event()
+			#return
 			
 		if event.unicode != 0:
 			insert_text_at_caret(char(event.unicode).to_upper())

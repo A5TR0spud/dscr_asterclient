@@ -1,0 +1,9 @@
+[gd_resource type="FontVariation" format=3 uid="uid://buud4dkfdnhxh"]
+
+[ext_resource type="FontFile" uid="uid://di3o60e8vwo33" path="res://fonts/CascadiaMono-BoldItalic.ttf" id="1_v8k2y"]
+[ext_resource type="FontFile" uid="uid://ce8easltaeeyv" path="res://fonts/Hack-BoldItalic.ttf" id="2_fevl7"]
+[ext_resource type="FontFile" uid="uid://gmahrkwdsl8k" path="res://fonts/jetbrains-mono.regular.ttf" id="3_6ec8g"]
+
+[resource]
+fallbacks = Array[Font]([ExtResource("2_fevl7"), ExtResource("3_6ec8g")])
+base_font = ExtResource("1_v8k2y")

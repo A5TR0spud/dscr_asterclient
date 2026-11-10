@@ -3,7 +3,9 @@
 [ext_resource type="Script" uid="uid://dr2cb7q6mysjs" path="res://Scenes/ChatMenu/Tab/chat.gd" id="1_iy605"]
 [ext_resource type="PackedScene" uid="uid://c7bn3w1ijabx4" path="res://Scenes/ChatMenu/Tab/chat_channel.tscn" id="2_iy605"]
 [ext_resource type="PackedScene" uid="uid://c6kmkupmer6fn" path="res://Scenes/Common/transmission_edit.tscn" id="3_iy605"]
+[ext_resource type="StyleBox" uid="uid://10juafvr3ky1" path="res://Styling/Tabber/ButtonLookalike/tab_unselected.tres" id="3_pvrrr"]
 [ext_resource type="PackedScene" uid="uid://iqh1s0683kvy" path="res://Scenes/Common/icon_button.tscn" id="4_a6gc7"]
+[ext_resource type="Script" uid="uid://c81wheph0v6l6" path="res://Scenes/ChatMenu/custom_underline_bold.gd" id="4_pvrrr"]
 [ext_resource type="Texture2D" uid="uid://bvupahebriyvc" path="res://Assets/Icons/quick_trans_insert.png" id="5_4t4sc"]
 [ext_resource type="StyleBox" uid="uid://b1t3fn13p4807" path="res://Styling/Seps/h_split.tres" id="6_4t4sc"]
 
@@ -27,22 +29,54 @@ drag_to_rearrange_enabled = true
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="PWordLabel" type="RichTextLabel" parent="." unique_id=254717242]
+[node name="ParseBarBox" type="PanelContainer" parent="." unique_id=1001123537]
+clip_contents = true
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_pvrrr")
+
+[node name="ParseBarScroller" type="ScrollContainer" parent="ParseBarBox" unique_id=2024619541]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+mouse_filter = 2
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ParseBarBox/ParseBarScroller" unique_id=95821418]
+layout_mode = 2
+
+[node name="LSpacer" type="Control" parent="ParseBarBox/ParseBarScroller/HBoxContainer" unique_id=2142267836]
+layout_mode = 2
+
+[node name="PWordLabel" type="RichTextLabel" parent="ParseBarBox/ParseBarScroller/HBoxContainer" unique_id=254717242]
 layout_mode = 2
 bbcode_enabled = true
-text = "nerd is the word"
+text = "nerd is the wordnerd is the wordnerd is the wordnerd is the wordnordnerdnerd is the wordnerd is the wordnerd is the word"
 fit_content = true
 scroll_active = false
+autowrap_mode = 0
 shortcut_keys_enabled = false
 meta_underlined = false
 hint_underlined = false
 
+[node name="CustomEffectsInstallerNode" type="Node" parent="ParseBarBox/ParseBarScroller/HBoxContainer/PWordLabel" unique_id=1513012786]
+script = ExtResource("4_pvrrr")
+metadata/_custom_type_script = "uid://c81wheph0v6l6"
+
+[node name="RSpacer" type="Control" parent="ParseBarBox/ParseBarScroller/HBoxContainer" unique_id=825510563]
+layout_mode = 2
+
+[node name="Spaceholder" type="Label" parent="ParseBarBox" unique_id=767056672]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+text = "t"
+
 [node name="BottomBar" type="HBoxContainer" parent="." unique_id=1954111637]
 layout_mode = 2
 
-[node name="MessageEdit" parent="BottomBar" unique_id=48211048 instance=ExtResource("3_iy605")]
+[node name="MessageEdit" parent="BottomBar" unique_id=48211048 node_paths=PackedStringArray("center_autocomplete_above") instance=ExtResource("3_iy605")]
 custom_maximum_size = Vector2(-1, 400)
 layout_mode = 2
+center_autocomplete_above = NodePath("../../ParseBarBox")
 
 [node name="SideOptionsWrapper" type="VBoxContainer" parent="BottomBar" unique_id=1299320802]
 layout_mode = 2
@@ -105,6 +139,7 @@ ignore_time_scale = true
 
 [connection signal="active_tab_rearranged" from="TabContainer" to="." method="_on_tab_container_active_tab_rearranged"]
 [connection signal="tab_changed" from="TabContainer" to="." method="_on_tab_container_tab_changed"]
+[connection signal="item_rect_changed" from="ParseBarBox" to="." method="_on_parse_bar_box_item_rect_changed"]
 [connection signal="caret_changed" from="BottomBar/MessageEdit" to="." method="_on_message_edit_caret_changed"]
 [connection signal="submit_text" from="BottomBar/MessageEdit" to="." method="_on_message_edit_submit_text"]
 [connection signal="text_changed" from="BottomBar/MessageEdit" to="." method="_on_message_edit_text_changed"]

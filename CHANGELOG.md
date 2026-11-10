@@ -6,6 +6,10 @@
 
 * Added formatting option for numbers
 
+### Changes
+
+* Overhauled parse-preview bar
+
 ### Fixes
 
 * Fixed description edit never expanding and not scrolling down for new text

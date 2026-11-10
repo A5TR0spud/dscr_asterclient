@@ -16,7 +16,10 @@ static var chat_channel_scene = preload("uid://c7bn3w1ijabx4")
 @onready var quick_transmission_panel: PanelContainer = $BottomBar/SideOptionsWrapper/SideOptions/QuickTransmission/Control/PanelContainer
 @onready var quick_transmission_search: LineEdit = $BottomBar/SideOptionsWrapper/SideOptions/QuickTransmission/Control/PanelContainer/VBoxContainer/QTSearch
 @onready var quick_transmission_list: ItemList = $BottomBar/SideOptionsWrapper/SideOptions/QuickTransmission/Control/PanelContainer/VBoxContainer/QTList
-@onready var parse_bar_word: RichTextLabel = $PWordLabel
+@onready var parse_bar_word: RichTextLabel = $ParseBarBox/ParseBarScroller/HBoxContainer/PWordLabel
+@onready var parse_bar_scroll: ScrollContainer = $ParseBarBox/ParseBarScroller
+@onready var parse_bar_left_spacer: Control = $ParseBarBox/ParseBarScroller/HBoxContainer/LSpacer
+@onready var parse_bar_right_spacer: Control = $ParseBarBox/ParseBarScroller/HBoxContainer/RSpacer
 
 func _enter_tree():
 	instance = self
@@ -384,7 +387,7 @@ static func new_log(state: State, args: Array = []) -> void:
 
 func _on_message_edit_submit_text(message: String):
 	get_current_channel_node().scroll_container.scroll_to_bottom()
-	var send_result: Array = Main.instance.send_message(message.remove_char(ord(TransmissionEdit.DELIMITER_CHARACTER)))
+	var send_result: Array = Main.instance.send_message(message)#.remove_char(ord(TransmissionEdit.DELIMITER_CHARACTER)))
 	if send_result[0]:
 		trans_edit.text = ""
 	match send_result[1]:
@@ -530,14 +533,26 @@ func _on_message_edit_text_changed():
 func _on_message_edit_text_set():
 	_refresh_parse_bar()
 
+func _on_parse_bar_box_item_rect_changed():
+	if is_node_ready():
+		await get_tree().process_frame
+		_post_update_parse_bar.call_deferred()
+
+var _fake_result: String = ""
+var _sel_sig: String = ""
+
 func _refresh_parse_bar():
 	var input: String = trans_edit.get_selected_text()
 	
-	if input.length() > 128:
-		input = input.left(128)
-	
 	if not input:
-		input = trans_edit.get_line_wrapped_text(trans_edit.get_caret_line())[trans_edit.get_caret_wrap_index()]
+		input = trans_edit.get_line(trans_edit.get_caret_line())
+		#input = trans_edit.get_
+		#input = trans_edit.get_line_wrapped_text(trans_edit.get_caret_line())[trans_edit.get_caret_wrap_index()]
+	
+	if input.length() > 2048:
+		input = input.right(2048)
+	
+	#input = input.remove_char(ord(TransmissionEdit.DELIMITER_CHARACTER))
 	
 	var result: String = ""
 	
@@ -549,33 +564,79 @@ func _refresh_parse_bar():
 	var lengths: PackedInt32Array = d["lengths"]
 	var sigs: PackedInt64Array = d["signals"]
 	var prevend: int = 0
+	var look_for_c: bool = true
+	var _c: int = trans_edit.get_caret_column()
+	_fake_result = ""
+	_sel_sig = ""
 	for idx: int in range(starts.size() + 1):
-		var start: int = starts[idx] if idx < starts.size() else input.length()
+		var start: int = starts[idx] if idx < starts.size() else (input.length() + 1)
 		var end: int = start + lengths[idx] if idx < starts.size() else 0
-		result += " "
+		var this_is_it: bool = false
+		if result:
+			result += " "
+			if look_for_c:
+				_fake_result += " "
+		
 		if start > prevend:
-			var bad: String = input.substr(prevend, start - prevend).strip_edges()
+			var bad: String = input.substr(prevend, start - prevend).strip_edges().replace_chars("\n\t", ord(" "))
 			if bad:
+				if look_for_c and _c < start:
+					look_for_c = false
+					this_is_it = true
+					_sel_sig = str(bad)
 				result += str(
-					"[color=#ff5566cc]",
+					"[su2 u=", this_is_it, " s=", not this_is_it, "]",
+					"[color=#cc4452]",
 					bad,
-					"[/color] "
+					"[/color][/su2] "
 				)
+				if look_for_c:
+					_fake_result += str(bad, " ")
+			this_is_it = false
+		if look_for_c and end >= _c:
+			look_for_c = false
+			this_is_it = true
 		if idx < starts.size():
 			var sig: int = sigs[idx]
+			var toadd: String = DictionaryHandler.get_or_default_signal_name(sig)
+			if this_is_it:
+				_sel_sig = toadd
+			var col: Color
+			var hint: String = ""
 			if sig < 0:
-				result += str(
-					"[hint='|",
-					sig,
-					"']",
-					DictionaryHandler.get_or_default_signal_name(sig).replace("[", "[lb]"),
-					"[/hint]"
-				)
+				col = Color(0.867, 0.933, 1.0, 1.0)
+				hint = str("|", sig)
 			else:
-				result += DictionaryHandler.get_or_default_signal_name(sig).replace("[", "[lb]")
+				col = Color(0.867, 1.0, 0.933, 0.498)
+			result += str(
+				"[su2 u=", this_is_it, " s=", false, "]",
+				"[color=", col.to_html(), "]",
+				str("[hint=\"", hint, "\"]") if hint else "",
+				toadd.replace("[", "[lb]"),
+				"[/hint]" if hint else "",
+				"[/color][/su2]"
+			)
+			if look_for_c:
+				_fake_result += str(toadd)
 		prevend = end
 	
-	parse_bar_word.text = result.strip_edges()
+	parse_bar_word.text = result
+	_post_update_parse_bar.call_deferred()
 	get_viewport().update_mouse_cursor_state.call_deferred()
+
+func _post_update_parse_bar():
+	var b: HScrollBar = parse_bar_scroll.get_h_scroll_bar()
+	var font = parse_bar_word.get_theme_default_font()
+	var px = parse_bar_word.get_theme_default_font_size()
+	
+	var to: float = font.get_string_size(_fake_result, HORIZONTAL_ALIGNMENT_LEFT, -1, px).x
+	var off: float = font.get_string_size(_sel_sig, HORIZONTAL_ALIGNMENT_LEFT, -1, px).x
+	
+	parse_bar_right_spacer.custom_minimum_size.x = parse_bar_scroll.size.x
+	var target: float = to - 0.5 * b.page + 0.5 * off
+	parse_bar_left_spacer.custom_minimum_size.x = max(-target, 0)
+	b.value = max(target, 0)
+	if b.value + b.page > b.max_value:
+		b.value = b.max_value
 
 #endregion
