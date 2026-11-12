@@ -5,11 +5,14 @@
 ### Additions
 
 * Added formatting option for numbers
+* Added alternative layout for periodic table (Sugar)
+* Added reference for size and color of m0 atomic structures
 
 ### Changes
 
 * Overhauled parse-preview bar and it's now a setting
 * Font size is now under interface settings instead of signal settings
+* Updated Polski/Polish (Sugar)
 
 ### Fixes
 

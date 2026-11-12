@@ -272,3 +272,12 @@ REFERENCE_BASES,1 0 -4 -12,,Numerical Bases,Systemy liczbowe
 SETTINGS_DO_PARSEBAR,-26 -14 -86 -42 -163 -145 -85 -43 -38 -121 -15 -4,,Show pre-parse bar?,Pokaż wstążkę wprowadzania
 REF_PD_SPLIT,-159 -29,,Split,
 REF_PD_VERTICAL,-108 -51,,Unbroken,Szeroki układ okresowy
+REF_PLOTS,-52,,Rendered Spheres,
+REF_PLOTS_COLOR_TITLE,-54,,Color,
+REF_PLOTS_DIAMETER_TITLE,-22,,Diameter,
+REF_PLOTS_PROTON,-60,,Protons,
+REF_PLOTS_NEUTRON,-61,,Neutrons,
+REF_PLOTS_ELECTRON,-62,,Electrons,
+REF_PLOTS_HYDROGEN,-56 1,,Hydrogen atoms,
+REF_PLOTS_CARBON,-56 6,,Carbon atoms,
+REF_PLOTS_OTHER_ATOM,-56 -11,,Other atoms,

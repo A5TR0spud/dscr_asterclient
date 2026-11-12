@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cpdqgtv6o5dp" path="res://Scenes/ReferenceTab/reference_tab.gd" id="1_k3cvq"]
 [ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="2_jk0c3"]
 [ext_resource type="PackedScene" uid="uid://ebnh5oxmelbl" path="res://Scenes/ReferenceTab/periodic_table.tscn" id="4_cydeu"]
+[ext_resource type="Script" uid="uid://v8wj07p1qiel" path="res://Scripts/Fit_By_Parent.gd" id="4_nqcgi"]
 [ext_resource type="Script" uid="uid://cwy0rhlrtctmt" path="res://Scenes/ReferenceTab/unit_conversion.gd" id="4_vb677"]
 [ext_resource type="Script" uid="uid://daa7cp85f4qgs" path="res://Scripts/NumberEdit.gd" id="5_vb677"]
 [ext_resource type="Script" uid="uid://dqvp5kv0ktkp4" path="res://Scenes/ReferenceTab/base_conversion.gd" id="6_f6m34"]
@@ -30,7 +31,6 @@ size_flags_vertical = 3
 
 [node name="M0Refs" type="FoldableContainer" parent="Corpus/VBoxContainer" unique_id=280768690]
 layout_mode = 2
-folded = true
 title = "meteor 0 refs"
 
 [node name="LocaleNode" type="Node" parent="Corpus/VBoxContainer/M0Refs" unique_id=889370263]
@@ -41,7 +41,6 @@ translations = Dictionary[StringName, String]({
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Corpus/VBoxContainer/M0Refs" unique_id=1726704827]
-visible = false
 layout_mode = 2
 
 [node name="ColorRef" type="VBoxContainer" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer" unique_id=1374500898]
@@ -61,8 +60,238 @@ metadata/_custom_type_script = "uid://7gga31jeosxl"
 [node name="ColorReference" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/ColorRef" unique_id=486884822 instance=ExtResource("1_16g7y")]
 layout_mode = 2
 
+[node name="HSeparator" type="HSeparator" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer" unique_id=1355226710]
+layout_mode = 2
+
+[node name="PlotsLabel" type="Label" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer" unique_id=2076093822]
+layout_mode = 2
+text = "balls"
+
+[node name="LocaleNode" type="Node" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/PlotsLabel" unique_id=766020284]
+script = ExtResource("2_jk0c3")
+translations = Dictionary[StringName, String]({
+&"text": "REF_PLOTS"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="GridContainer" type="GridContainer" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer" unique_id=84187917]
+layout_mode = 2
+theme_override_constants/h_separation = 32
+columns = 4
+
+[node name="spaceholder" type="Control" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer" unique_id=1698905866]
+layout_mode = 2
+
+[node name="TitleDiameter" type="Label" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer" unique_id=770554263]
+layout_mode = 2
+text = "Diameter"
+horizontal_alignment = 1
+
+[node name="LocaleNode" type="Node" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer/TitleDiameter" unique_id=1366811950]
+script = ExtResource("2_jk0c3")
+translations = Dictionary[StringName, String]({
+&"text": "REF_PLOTS_DIAMETER_TITLE"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="TitleColor" type="Label" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer" unique_id=172283067]
+layout_mode = 2
+text = "Color"
+horizontal_alignment = 1
+
+[node name="LocaleNode" type="Node" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer/TitleColor" unique_id=312700129]
+script = ExtResource("2_jk0c3")
+translations = Dictionary[StringName, String]({
+&"text": "REF_PLOTS_COLOR_TITLE"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="spaceholder2" type="Control" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer" unique_id=191053068]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="ProtonsName" type="Label" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer" unique_id=261113860]
+layout_mode = 2
+text = "Protons ...,"
+
+[node name="LocaleNode" type="Node" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer/ProtonsName" unique_id=400098246]
+script = ExtResource("2_jk0c3")
+translations = Dictionary[StringName, String]({
+&"text": "REF_PLOTS_PROTON"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="ProtonsDiameter" type="Label" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer" unique_id=412558902]
+layout_mode = 2
+text = "2"
+
+[node name="ProtonsColor" type="Label" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer" unique_id=1145604061]
+layout_mode = 2
+text = "32"
+
+[node name="ProtonsBar" type="ColorRect" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer" unique_id=1880657776]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+color = Color(0.6431373, 0.11372549, 1, 1)
+
+[node name="FitByParent" type="Node" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer/ProtonsBar" unique_id=1480318482]
+script = ExtResource("4_nqcgi")
+ratio = 2.0
+metadata/_custom_type_script = "uid://v8wj07p1qiel"
+
+[node name="NeutronsName" type="Label" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer" unique_id=1686923993]
+layout_mode = 2
+text = "Neutrons ...,"
+
+[node name="LocaleNode" type="Node" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer/NeutronsName" unique_id=775038583]
+script = ExtResource("2_jk0c3")
+translations = Dictionary[StringName, String]({
+&"text": "REF_PLOTS_NEUTRON"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="NeutronsDiameter" type="Label" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer" unique_id=161828766]
+layout_mode = 2
+text = "2"
+
+[node name="NeutronsColor" type="Label" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer" unique_id=546066414]
+layout_mode = 2
+text = "61"
+
+[node name="NeutronsBar" type="ColorRect" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer" unique_id=660522148]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+color = Color(0.7411765, 0.7411765, 0.7411765, 1)
+
+[node name="FitByParent" type="Node" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer/NeutronsBar" unique_id=679402638]
+script = ExtResource("4_nqcgi")
+ratio = 2.0
+metadata/_custom_type_script = "uid://v8wj07p1qiel"
+
+[node name="ElectronsName" type="Label" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer" unique_id=1452249597]
+layout_mode = 2
+text = "Electrons ...,"
+
+[node name="LocaleNode" type="Node" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer/ElectronsName" unique_id=1428581121]
+script = ExtResource("2_jk0c3")
+translations = Dictionary[StringName, String]({
+&"text": "REF_PLOTS_ELECTRON"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="ElectronsDiameter" type="Label" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer" unique_id=1396535873]
+layout_mode = 2
+text = "1"
+
+[node name="ElectronsColor" type="Label" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer" unique_id=1983821529]
+layout_mode = 2
+text = "6"
+
+[node name="ElectronsBar" type="ColorRect" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer" unique_id=1099833665]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+color = Color(0.7764706, 0.8980392, 0, 1)
+
+[node name="FitByParent" type="Node" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer/ElectronsBar" unique_id=962032093]
+script = ExtResource("4_nqcgi")
+metadata/_custom_type_script = "uid://v8wj07p1qiel"
+
+[node name="HName" type="Label" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer" unique_id=1775392911]
+layout_mode = 2
+text = "Hydrogen atoms ...,"
+
+[node name="LocaleNode" type="Node" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer/HName" unique_id=443613631]
+script = ExtResource("2_jk0c3")
+translations = Dictionary[StringName, String]({
+&"text": "REF_PLOTS_HYDROGEN"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="HDiameter" type="Label" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer" unique_id=886904357]
+layout_mode = 2
+text = "2"
+
+[node name="HColor" type="Label" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer" unique_id=1821170021]
+layout_mode = 2
+text = "32"
+
+[node name="HBar" type="ColorRect" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer" unique_id=1940574263]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+color = Color(0.6431373, 0.11372549, 1, 1)
+
+[node name="FitByParent" type="Node" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer/HBar" unique_id=1508994593]
+script = ExtResource("4_nqcgi")
+ratio = 2.0
+metadata/_custom_type_script = "uid://v8wj07p1qiel"
+
+[node name="CName" type="Label" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer" unique_id=304333476]
+layout_mode = 2
+text = "Carbon atoms ...,"
+
+[node name="LocaleNode" type="Node" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer/CName" unique_id=1652624679]
+script = ExtResource("2_jk0c3")
+translations = Dictionary[StringName, String]({
+&"text": "REF_PLOTS_CARBON"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="CDiameter" type="Label" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer" unique_id=2132729553]
+layout_mode = 2
+text = "4"
+
+[node name="CColor" type="Label" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer" unique_id=1162350126]
+layout_mode = 2
+text = "7"
+
+[node name="CBar" type="ColorRect" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer" unique_id=1929579353]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+color = Color(0.7372549, 0.99215686, 0, 1)
+
+[node name="FitByParent" type="Node" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer/CBar" unique_id=1442706603]
+script = ExtResource("4_nqcgi")
+ratio = 4.0
+metadata/_custom_type_script = "uid://v8wj07p1qiel"
+
+[node name="xName" type="Label" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer" unique_id=602955896]
+layout_mode = 2
+text = "Other atoms ...,"
+
+[node name="LocaleNode" type="Node" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer/xName" unique_id=1037651478]
+script = ExtResource("2_jk0c3")
+translations = Dictionary[StringName, String]({
+&"text": "REF_PLOTS_OTHER_ATOM"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="xDiameter" type="Label" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer" unique_id=570972975]
+layout_mode = 2
+text = "3"
+
+[node name="xColor" type="Label" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer" unique_id=938260565]
+layout_mode = 2
+text = "1"
+
+[node name="xBar" type="ColorRect" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer" unique_id=1945017056]
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+color = Color(0.9607843, 0.4392157, 0, 1)
+
+[node name="FitByParent" type="Node" parent="Corpus/VBoxContainer/M0Refs/VBoxContainer/GridContainer/xBar" unique_id=164725849]
+script = ExtResource("4_nqcgi")
+ratio = 3.0
+metadata/_custom_type_script = "uid://v8wj07p1qiel"
+
 [node name="BaseConversion" type="FoldableContainer" parent="Corpus/VBoxContainer" unique_id=1965888826]
 layout_mode = 2
+folded = true
 title = "numeric bases"
 script = ExtResource("6_f6m34")
 
@@ -74,6 +303,7 @@ translations = Dictionary[StringName, String]({
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="GridContainer" type="GridContainer" parent="Corpus/VBoxContainer/BaseConversion" unique_id=1464343098]
+visible = false
 layout_mode = 2
 columns = 4
 
@@ -872,6 +1102,7 @@ metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="PeriodicTable" type="FoldableContainer" parent="Corpus/VBoxContainer" unique_id=13968256]
 layout_mode = 2
+folded = true
 title = "periodic table"
 
 [node name="LocaleNode" type="Node" parent="Corpus/VBoxContainer/PeriodicTable" unique_id=1751833679]
@@ -882,6 +1113,7 @@ translations = Dictionary[StringName, String]({
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="PeriodicTable" parent="Corpus/VBoxContainer/PeriodicTable" unique_id=1498053878 instance=ExtResource("4_cydeu")]
+visible = false
 layout_mode = 2
 size_flags_stretch_ratio = 10.0
 
