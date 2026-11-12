@@ -15,7 +15,7 @@ TIME_AGO_HSEC,{0} -69 -118 -121,yes,{0} He-6 half-life ago,{0} He-6 sekundę tem
 ,,,{0} He-6 half-lifes ago,{0} He-6 sekundy temu
 ,,,,{0} He-6 half-life temu
 DICT_HEADER,-237 -174,,Dictionary,Słownik
-DICT_DEFAULT,-124 -122 -123,,Default Formatting,Domyślne formatowanie
+DICT_DEFAULT,-124,,Default Formatting,Domyślne formatowanie
 DICT_NUMBER,-11,,Numbers,
 DICT_SEARCH_MAKE,-38 -77 -163,,Search or create,Wyszukaj lub stwórz
 DICT_OPEN_FILE,-40,,Open file,Otwórz plik
@@ -56,7 +56,7 @@ SETTINGS_USE_AT_UNDEF,-26 -14 -124 -42 -100 @-_UNDEF -15 -4,,Should unknown word
 SETTINGS_THEME_COLOR,-110 -54 -100,,Theme color,Schemat kolorów
 SUBMIT,-174,,Submit,Zapisz
 CANCEL,-29,,Cancel,Cofnij zmiany
-SETTINGS_VOLUME,-110 -167 -39 -22 -100,,Volume,Głośność ogólna
+SETTINGS_VOLUME_SYSTEM,-115 -167 -39 -22 -100,,System Volume,Głośność ogólna
 SETTINGS_VOLUME_MUSIC,-577 -167 -39 -22 -100,,Music Volume,Głośność muzyki
 SETTINGS_VOLUME_PING,-130 -128 -11 -167 -39 -22 -100,,Ping Volume,Głośność wzmianek
 SETTINGS_VOLUME_ZERO,-111,,Muted,Wycisz
@@ -270,4 +270,5 @@ REF_UNIT_SOL,-130 -90 -74,t,Solar Mass,masa Słońca
 ,,,,mas Słońca
 REFERENCE_BASES,1 0 -4 -12,,Numerical Bases,Systemy liczbowe
 SETTINGS_DO_PARSEBAR,-26 -14 -86 -42 -163 -145 -85 -43 -38 -121 -15 -4,,Show pre-parse bar?,Pokaż wstążkę wprowadzania
-SETTINGS_LONG_ATOMS,-108 -20 -55 -19,,Long Periodic Table,Szeroki układ okresowy
+REF_PD_SPLIT,-159 -29,,Split,
+REF_PD_VERTICAL,-108 -51,,Unbroken,Szeroki układ okresowy

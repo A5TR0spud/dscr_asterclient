@@ -24,7 +24,6 @@ static var websocket_address: String = Main.DSCR_URL
 static var websocket_addresses: Array = [Main.DSCR_URL]
 static var current_dictionary: String = "DICTIONARY-1.save"
 static var confetti: bool = true
-static var long_periodic_table: bool = false
 static var number_auto_sep: bool = true
 static var backup_callsign: int = -1
 static var failsafe_callsign_increment: bool = true
@@ -34,6 +33,7 @@ static var right_handed_sidebar: bool = true
 static var use_m0_elements: bool = true
 static var crunch_image: bool = false
 static var do_parsebar: bool = true
+static var periodic_table_visualization: int = 0
 
 static func validate_and_set_language(code: String = language):
 	if code not in LocaleMenu.VALID_LANGUAGES:
@@ -115,6 +115,7 @@ static func initialize() -> void:
 	use_m0_elements = SaveSystem.settings.get_or_add("use_m0_elements", use_m0_elements)
 	crunch_image = SaveSystem.settings.get_or_add("crunch_image", crunch_image)
 	do_parsebar = SaveSystem.settings.get_or_add("do_parsebar", do_parsebar)
+	periodic_table_visualization = SaveSystem.settings.get_or_add("periodic_table_visualization", periodic_table_visualization)
 
 static func evaluate_volume() -> void:
 	AudioServer.set_bus_volume_linear(
@@ -180,3 +181,4 @@ static func export() -> void:
 	SaveSystem.settings.set("use_m0_elements", use_m0_elements)
 	SaveSystem.settings.set("crunch_image", crunch_image)
 	SaveSystem.settings.set("do_parsebar", do_parsebar)
+	SaveSystem.settings.set("periodic_table_visualization", periodic_table_visualization)

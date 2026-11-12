@@ -872,7 +872,6 @@ metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="PeriodicTable" type="FoldableContainer" parent="Corpus/VBoxContainer" unique_id=13968256]
 layout_mode = 2
-folded = true
 title = "periodic table"
 
 [node name="LocaleNode" type="Node" parent="Corpus/VBoxContainer/PeriodicTable" unique_id=1751833679]
@@ -883,7 +882,6 @@ translations = Dictionary[StringName, String]({
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="PeriodicTable" parent="Corpus/VBoxContainer/PeriodicTable" unique_id=1498053878 instance=ExtResource("4_cydeu")]
-visible = false
 layout_mode = 2
 size_flags_stretch_ratio = 10.0
 

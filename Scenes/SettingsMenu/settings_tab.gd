@@ -198,10 +198,6 @@ func _on_confetti_set(new_value):
 	SettingsHandler.confetti = new_value
 	save(false)
 
-func _on_long_periodic_table_set(new_value):
-	SettingsHandler.long_periodic_table = new_value
-	save(true)
-
 func _on_number_separation_set(new_value):
 	SettingsHandler.number_auto_sep = new_value
 	save(false)

@@ -217,10 +217,6 @@ layout_mode = 2
 description = "SETTINGS_CONFETTI"
 state = true
 
-[node name="LongPeriodicTable" parent="ScrollContainer/Options/Interface/VBoxContainer" unique_id=1785674227 instance=ExtResource("3_0yg8b")]
-layout_mode = 2
-description = "SETTINGS_LONG_ATOMS"
-
 [node name="FontHbox" type="HBoxContainer" parent="ScrollContainer/Options/Interface/VBoxContainer" unique_id=90540622]
 layout_mode = 2
 theme_override_constants/separation = 8
@@ -359,13 +355,13 @@ layout_mode = 2
 
 [node name="VolumeLabel" type="Label" parent="ScrollContainer/Options/Sounds/VBoxContainer/GlobalVolume" unique_id=187059848]
 layout_mode = 2
-text = "sound volume"
+text = "system volume"
 autowrap_mode = 2
 
 [node name="LocaleNode" type="Node" parent="ScrollContainer/Options/Sounds/VBoxContainer/GlobalVolume/VolumeLabel" unique_id=1039090998]
 script = ExtResource("5_gal0n")
 translations = Dictionary[StringName, String]({
-&"text": "SETTINGS_VOLUME"
+&"text": "SETTINGS_VOLUME_SYSTEM"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
@@ -427,7 +423,7 @@ layout_mode = 2
 
 [node name="VolumeLabel" type="Label" parent="ScrollContainer/Options/Sounds/VBoxContainer/MusicVolume" unique_id=1491597206]
 layout_mode = 2
-text = "sound volume"
+text = "music volume"
 autowrap_mode = 2
 
 [node name="LocaleNode" type="Node" parent="ScrollContainer/Options/Sounds/VBoxContainer/MusicVolume/VolumeLabel" unique_id=417559232]
@@ -640,7 +636,6 @@ on_text = "SETTINGS_BACKUP_INCREMENT"
 [connection signal="set" from="ScrollContainer/Options/Interface/VBoxContainer/RHSidebar" to="." method="_on_rh_sidebar_set"]
 [connection signal="set" from="ScrollContainer/Options/Interface/VBoxContainer/Parsebar" to="." method="_on_parsebar_set"]
 [connection signal="set" from="ScrollContainer/Options/Interface/VBoxContainer/Confetti" to="." method="_on_confetti_set"]
-[connection signal="set" from="ScrollContainer/Options/Interface/VBoxContainer/LongPeriodicTable" to="." method="_on_long_periodic_table_set"]
 [connection signal="value_changed" from="ScrollContainer/Options/Interface/VBoxContainer/FontHbox/FontSpinner" to="." method="_on_font_spinner_value_changed"]
 [connection signal="set" from="ScrollContainer/Options/Interface/VBoxContainer/UIStretch" to="." method="_on_ui_stretch_set"]
 [connection signal="cancel" from="ScrollContainer/Options/Interface/VBoxContainer/ScaleConfirm" to="." method="_on_scale_confirm_cancel"]
