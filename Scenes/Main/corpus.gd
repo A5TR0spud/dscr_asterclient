@@ -3,7 +3,6 @@ extends VBoxContainer
 @onready var tabber: TabBar = $Header/Tabber
 @onready var tab_parent: Control = $TabContainer
 
-
 func _ready():
 	tabber.current_tab = 0
 	_show_tab(0)
@@ -18,3 +17,25 @@ func _show_tab(tab: int):
 func _on_library_force_select():
 	tabber.current_tab = 1
 	_show_tab(1)
+
+func _input(event):
+	if event.is_action_pressed("tab_chat"):
+		tabber.current_tab = 0
+		_show_tab(0)
+		accept_event()
+		return
+	if event.is_action_pressed("tab_library"):
+		tabber.current_tab = 1
+		_show_tab(1)
+		accept_event()
+		return
+	if event.is_action_pressed("tab_sources"):
+		tabber.current_tab = 2
+		_show_tab(2)
+		accept_event()
+		return
+	if event.is_action_pressed("tab_references"):
+		tabber.current_tab = 3
+		_show_tab(3)
+		accept_event()
+		return

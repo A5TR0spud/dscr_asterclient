@@ -211,8 +211,6 @@ layout_mode = 2
 [connection signal="timeout" from="TimeoutTime" to="." method="_on_timeout_time_timeout"]
 [connection signal="timeout" from="ReconnectTime" to="." method="_on_reconnect_time_timeout"]
 [connection signal="callsign_submitted" from="Body/Sidebar/CallsignContainer/CallsignPickerMain" to="." method="_on_callsign_edit_callsign_submitted"]
-[connection signal="mouse_entered" from="Body/Corpus" to="Body/Corpus" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Body/Corpus" to="Body/Corpus" method="_on_mouse_exited"]
 [connection signal="tab_changed" from="Body/Corpus/Header/Tabber" to="Body/Corpus" method="_on_tabber_tab_changed"]
 [connection signal="pressed" from="Body/Corpus/Header/DSMIDI_Button" to="." method="_on_dsmidi_button_pressed"]
 [connection signal="pressed" from="Body/Corpus/Header/DSVE_Button" to="." method="_on_dsve_button_pressed"]

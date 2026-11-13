@@ -11,6 +11,7 @@
 * Added setting for pipe-escaping. Disabling it is more akin to Relay3544
 * Added keybind for toggling m0 UI directly: `ctrl`+`0`
 * Added keybinds for scaling UI size directly: `ctrl`+`-` and `ctrl`+`=`
+* Added keybinds for swapping between meta-tabs: `f1`, `f2`, `f3`, `f4`
 
 ### Changes
 
