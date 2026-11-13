@@ -287,4 +287,4 @@ REF_PARTICLE_PLOTS_ELECTRON,-62,,Electrons,elektron
 REF_PARTICLE_PLOTS_HYDROGEN,-56 1,,Hydrogen atoms,atom wodoru
 REF_PARTICLE_PLOTS_CARBON,-56 6,,Carbon atoms,atom węgla
 REF_PARTICLE_PLOTS_OTHER_ATOM,-56 -11,,Other atoms,inne atomy
-SETTINGS_REQUIRE_PIPE_ESCAPE,-26 -14 -42 -11 -100 | -11 -15 -4,,Require “|” to type raw signals?,
+SETTINGS_REQUIRE_PIPE_ESCAPE,-26 -14 -42 -11 -100 | -11 -15 -4,,Require “|” to type raw signals?,Wymagaj „|” dla surowych sygnałów
