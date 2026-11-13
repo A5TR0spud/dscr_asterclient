@@ -13,7 +13,7 @@ SIGNAL_NAME,-42,,Signal Name,Hasło
 SIGNAL_NUMBER,-237,,Frequency,Sygnał
 TIME_AGO_HSEC,{0} -69 -118 -121,yes,{0} He-6 half-life ago,{0} He-6 sekundę temu
 ,,,{0} He-6 half-lifes ago,{0} He-6 sekundy temu
-,,,,{0} He-6 half-life temu
+,,,,{0} He-6 sekund temu
 DICT_HEADER,-237 -174,,Dictionary,Słownik
 DICT_DEFAULT,-124,,Default Formatting,Domyślne formatowanie
 DICT_NUMBER,-11,,Numbers,
@@ -52,7 +52,7 @@ MUSIC_QUEUE,-5,,Queue,Dodaj do kolejki
 SETTINGS_FONT_SIZE,-42 -22 -4,,Font size,Rozmiar czcionki
 SETTINGS_CANVAS_STRETCH,-26 -14 -110 -22 -174 -85 -15 -4,,Stretch UI,Rozciągnij interfejs
 SETTINGS_UI_SCALE,-110 -22 -6,,UI Scale,Skala interfejsu
-SETTINGS_USE_AT_UNDEF,-26 -14 -124 -42 -100 @-_UNDEF -15 -4,,Should unknown words be displayed with “@UNDEF”?,Pokaż nieznane hasła jako „@UNDEF”
+SETTINGS_USE_AT_UNDEF,-26 -14 -124 -42 -100 @UNDEF -15 -4,,Should unknown words be displayed with “@UNDEF”?,Pokaż nieznane hasła jako „@UNDEF”
 SETTINGS_THEME_COLOR,-110 -54 -100,,Theme color,Schemat kolorów
 SUBMIT,-174,,Submit,Zapisz
 CANCEL,-29,,Cancel,Cofnij zmiany
