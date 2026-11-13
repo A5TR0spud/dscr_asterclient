@@ -34,6 +34,7 @@ static var use_m0_elements: bool = true
 static var crunch_image: bool = false
 static var do_parsebar: bool = true
 static var periodic_table_visualization: int = 0
+static var require_pipe_escape: bool = true
 
 static func validate_and_set_language(code: String = language):
 	if code not in LocaleMenu.VALID_LANGUAGES:
@@ -116,6 +117,7 @@ static func initialize() -> void:
 	crunch_image = SaveSystem.settings.get_or_add("crunch_image", crunch_image)
 	do_parsebar = SaveSystem.settings.get_or_add("do_parsebar", do_parsebar)
 	periodic_table_visualization = SaveSystem.settings.get_or_add("periodic_table_visualization", periodic_table_visualization)
+	require_pipe_escape = SaveSystem.settings.get_or_add("require_pipe_escape", require_pipe_escape)
 
 static func evaluate_volume() -> void:
 	AudioServer.set_bus_volume_linear(
@@ -182,3 +184,4 @@ static func export() -> void:
 	SaveSystem.settings.set("crunch_image", crunch_image)
 	SaveSystem.settings.set("do_parsebar", do_parsebar)
 	SaveSystem.settings.set("periodic_table_visualization", periodic_table_visualization)
+	SaveSystem.settings.set("require_pipe_escape", require_pipe_escape)

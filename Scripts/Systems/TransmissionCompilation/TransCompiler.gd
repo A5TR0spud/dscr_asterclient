@@ -60,9 +60,9 @@ static func compile_text(input: String) -> PackedInt64Array:
 		if is_whitespace(input[start]):
 			continue
 		#print(start, " : ", input[start])
-		if input[start] == "|":
+		if input[start] == "|" or (input[start] == "-" and not SettingsHandler.require_pipe_escape):
 			var _sub: String = input.substr(start)
-			var m := RegEx.create_from_string("^\\|(-?[0-9]{1,18})").search(_sub)
+			var m := RegEx.create_from_string("^\\|?(-?[0-9]{1,18})").search(_sub)
 			if m:
 				var end: int = start + m.get_string().length()
 				if end not in group_ends:
@@ -79,7 +79,7 @@ static func compile_text(input: String) -> PackedInt64Array:
 						per_lengths.append([m.get_string().length()])
 						per_starts.append([start])
 					start = end - 1
-			continue
+				continue
 		if input[start] == "0":
 			var end: int = start + 1
 			if end not in group_ends:

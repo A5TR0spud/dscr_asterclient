@@ -7,11 +7,14 @@
 * Added formatting option for numbers
 * Added alternative layout for periodic table (Sugar)
 * Added reference for size and color of m0 atomic structures
+* Added cm and and Octoid-sun mass to Reference tab (Sugar)
+* Added setting for pipe-escaping. Disabling it is more akin to Relay3544
 
 ### Changes
 
 * Overhauled parse-preview bar and it's now a setting
 * Font size is now under interface settings instead of signal settings
+* Reordered length units in Reference tab
 * Updated Polski/Polish (Sugar)
 
 ### Fixes

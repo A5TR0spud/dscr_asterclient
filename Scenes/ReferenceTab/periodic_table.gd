@@ -30,7 +30,7 @@ func on_hover_start(elem: ElementCell):
 	var element: int = elem.element
 	var r: Rect2 = elem.get_rect()
 	tip_name.text = elem.name_label.text
-	tip_proton.text = Localizer.translate_plural("REFERENCE_PD_PROTON", element, element)
+	tip_proton.text = Localizer.translate_plural("REFERENCE_PD_ATOMIC_NUMBER", element, element)
 	var tmp: int = ElementCell.get_metallicity(element)
 	tip_metal.visible = tmp == ElementCell.Metallicity.METAL
 	tip_metalloid.visible = tmp == ElementCell.Metallicity.METALLOID

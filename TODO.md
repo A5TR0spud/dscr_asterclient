@@ -4,7 +4,6 @@
 * per-channel mute
 * signal counter in parse bar
 * unit circle reference
-* setting to parse "-23" as "|-23" instead of "- 23"
 * calculator reference
 * button per-channel to clear its history
 * draggable dictionary edit window
@@ -20,7 +19,6 @@
 * Image editor tab (w/ compat vs compact exports)
 * audio editor tab (with support for sequences and such)
 * word aliases (unless the macro system is sufficient)
-* (?)figure out transmission history `shown_transmissions` slipping
 * ability to block channels when using the skeleton key
 * music parsing for sine vs square vs saw vs triangle vs smooth square?
 * autocomplete for nicknames to numbers

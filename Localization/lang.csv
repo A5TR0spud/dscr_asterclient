@@ -42,7 +42,7 @@ SETTINGS_TRUNCATE,-42 -122 -25,,Words before truncation,sygnały przed skróceni
 SETTINGS_SIGNAL_DISPLAY_FOLD,-42 -163,,Signal Display,Format sygnałów
 SETTINGS_INTERFACE_FOLD,-159,,Interface,Interfejs
 SETTINGS_SOUNDS_FOLD,-167 -39 -163,,Audio,Dźwięk
-SETTINGS_IMAGE_FOLD,-53,,Visual,Obrazy
+SETTINGS_IMAGE_FOLD,-53,,Renders,Obrazy
 TRUNCATION,-25,,…,…
 TRUNCATE_TOGGLE,-25,,Truncate,Skróć
 IMAGE_TOGGLE,-53,,Visualize,Wizualizacja
@@ -170,10 +170,10 @@ NEW_LIBRARY_NAME,{name} -2 {trx} -14 {contents} -25 -15,,{name}_tr_{trx}: “{co
 NUMBER_NEGATIVE,-1,,-,-
 NUMBER_DECIMAL,-10,,.,.
 TAB_REFERENCES,-208,,Reference,Ściągawka
-REFERENCE_COLOR,-44 0 -54,,Rainbow,spektrum kolorów
+REFERENCE_COLOR,-44 0 -54,,Octoid Spectrum,spektrum kolorów
 REFERENCE_PD,-55 -19,,Periodic Table of Elements,Układ okresowy pierwiastków
 SETTINGS_ELEMENTS_IN_M0,-26 -14 -130 -55 -29 -2 -2 -44 0 -55 -15 -4,,Note: this text is inaccessible in non-m0,
-REFERENCE_PD_PROTON,{0} -60,yes,{0} Proton,liczba atomowa {0}
+REFERENCE_PD_ATOMIC_NUMBER,{0} -60,yes,{0} Proton,liczba atomowa {0}
 ,,,{0} Protons,liczba atomowa {0}
 ,,,,liczba atomowa {0}
 REFERENCE_PD_STP_SOLID,-139 -3 -165,,Solid @ STP,ciało stałe
@@ -278,12 +278,13 @@ REFERENCE_BASES,1 0 -4 -12,,Numerical Bases,Systemy liczbowe
 SETTINGS_DO_PARSEBAR,-26 -14 -86 -42 -163 -145 -85 -43 -38 -121 -15 -4,,Show pre-parse bar?,Pokaż wstążkę wprowadzania
 REF_PD_SPLIT,-159 -29,,Split,blok f oddzielony
 REF_PD_VERTICAL,-108 -51,,Unbroken,blok f razem
-REF_PLOTS,-52,,Rendered Spheres,modele cząstek
-REF_PLOTS_COLOR_TITLE,-54,,Color,kolor
-REF_PLOTS_DIAMETER_TITLE,-22,,Diameter,średnica
-REF_PLOTS_PROTON,-60,,Protons,proton
-REF_PLOTS_NEUTRON,-61,,Neutrons,neutron
-REF_PLOTS_ELECTRON,-62,,Electrons,elektron
-REF_PLOTS_HYDROGEN,-56 1,,Hydrogen atoms,atom wodoru
-REF_PLOTS_CARBON,-56 6,,Carbon atoms,atom węgla
-REF_PLOTS_OTHER_ATOM,-56 -11,,Other atoms,inne atomy
+REF_PARTICLE_PLOTS,-52,,Rendered Particles,modele cząstek
+REF_PARTICLE_PLOTS_COLOR_TITLE,-54,,Color,kolor
+REF_PARTICLE_PLOTS_DIAMETER_TITLE,-22,,Diameter,średnica
+REF_PARTICLE_PLOTS_PROTON,-60,,Protons,proton
+REF_PARTICLE_PLOTS_NEUTRON,-61,,Neutrons,neutron
+REF_PARTICLE_PLOTS_ELECTRON,-62,,Electrons,elektron
+REF_PARTICLE_PLOTS_HYDROGEN,-56 1,,Hydrogen atoms,atom wodoru
+REF_PARTICLE_PLOTS_CARBON,-56 6,,Carbon atoms,atom węgla
+REF_PARTICLE_PLOTS_OTHER_ATOM,-56 -11,,Other atoms,inne atomy
+SETTINGS_REQUIRE_PIPE_ESCAPE,-26 -14 -42 -11 -100 | -11 -15 -4,,Require “|” to type raw signals?,
