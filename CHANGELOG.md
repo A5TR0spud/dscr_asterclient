@@ -9,6 +9,8 @@
 * Added reference for size and color of m0 atomic structures
 * Added cm and and Octoid-sun mass to Reference tab (Sugar)
 * Added setting for pipe-escaping. Disabling it is more akin to Relay3544
+* Added keybind for toggling m0 UI directly: `ctrl`+`0`
+* Added keybinds for scaling UI size directly: `ctrl`+`-` and `ctrl`+`=`
 
 ### Changes
 

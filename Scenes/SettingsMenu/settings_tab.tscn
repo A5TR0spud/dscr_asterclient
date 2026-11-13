@@ -185,6 +185,7 @@ state = true
 
 [node name="Interface" type="FoldableContainer" parent="ScrollContainer/Options" unique_id=1112130352]
 layout_mode = 2
+folded = true
 title = "interface"
 foldable_group = SubResource("FoldableGroup_2xmuf")
 
@@ -196,6 +197,7 @@ translations = Dictionary[StringName, String]({
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/Options/Interface" unique_id=1949425612]
+visible = false
 layout_mode = 2
 
 [node name="NumberSeparation" parent="ScrollContainer/Options/Interface/VBoxContainer" unique_id=1913893789 instance=ExtResource("3_0yg8b")]
@@ -559,7 +561,6 @@ metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="ImageSettings" type="FoldableContainer" parent="ScrollContainer/Options" unique_id=2007051662]
 layout_mode = 2
-folded = true
 title = "image settings"
 foldable_group = SubResource("FoldableGroup_2xmuf")
 
@@ -571,7 +572,6 @@ translations = Dictionary[StringName, String]({
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/Options/ImageSettings" unique_id=1170991668]
-visible = false
 layout_mode = 2
 
 [node name="ImageVis" parent="ScrollContainer/Options/ImageSettings/VBoxContainer" unique_id=1916992470 instance=ExtResource("3_0yg8b")]

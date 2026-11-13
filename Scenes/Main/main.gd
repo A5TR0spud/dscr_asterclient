@@ -146,6 +146,28 @@ static func _hue_to_rgb(p: float, q: float, t: float) -> float:
 static func reconnect_or_change_url(wss: String) -> void:
 	instance._reconnect_or_change_url(wss)
 
+func _input(event):
+	if event.is_action_pressed("toggle_m0"):
+		SettingsHandler.use_m0_ui = not SettingsHandler.use_m0_ui
+		SettingsHandler.save()
+		on_localization_reload()
+		accept_event()
+		return
+	if event.is_action_pressed("scale_ui_up"):
+		SettingsHandler.stretch_scale = min(SettingsHandler.stretch_scale + 0.25, 4)
+		SettingsHandler.stretch_or_unstretch_canvas()
+		SettingsHandler.apply_ui_scale()
+		on_settings_reload()
+		accept_event()
+		return
+	if event.is_action_pressed("scale_ui_down"):
+		SettingsHandler.stretch_scale = max(SettingsHandler.stretch_scale - 0.25, 0.5)
+		SettingsHandler.stretch_or_unstretch_canvas()
+		SettingsHandler.apply_ui_scale()
+		on_settings_reload()
+		accept_event()
+		return
+
 func _reconnect_or_change_url(wss: String) -> void:
 	if trying_to_quit: return
 	if wss.is_empty(): wss = DSCR_URL

@@ -45,7 +45,7 @@ static func validate_and_set_language(code: String = language):
 	Main.on_localization_reload()
 	save()
 
-static func apply_ui_scale(scale: float):
+static func apply_ui_scale(scale: float = stretch_scale):
 	Main.instance.get_tree().root.content_scale_factor = scale
 
 static func stretch_or_unstretch_canvas():
