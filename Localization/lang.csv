@@ -173,9 +173,9 @@ TAB_REFERENCES,-208,,Reference,Ściągawka
 REFERENCE_COLOR,-44 0 -54,,Rainbow,spektrum kolorów
 REFERENCE_PD,-55 -19,,Periodic Table of Elements,Układ okresowy pierwiastków
 SETTINGS_ELEMENTS_IN_M0,-26 -14 -130 -55 -29 -2 -2 -44 0 -55 -15 -4,,Note: this text is inaccessible in non-m0,
-REFERENCE_PD_PROTON,{0} -60,yes,{0} Proton,{0} proton
-,,,{0} Protons,{0} protony
-,,,,{0} protonów
+REFERENCE_PD_PROTON,{0} -60,yes,{0} Proton,liczba atomowa {0}
+,,,{0} Protons,liczba atomowa {0}
+,,,,liczba atomowa {0}
 REFERENCE_PD_STP_SOLID,-139 -3 -165,,Solid @ STP,ciało stałe
 REFERENCE_PD_STP_LIQUID,-139 -3 -166,,Liquid @ STP,ciecz
 REFERENCE_PD_STP_GAS,-139 -3 -167,,Gas @ STP,gaz
@@ -191,6 +191,9 @@ REF_UNIT_LENGTHS,-20,,Lengths,Długość
 REF_UNIT_AKERMETER,-73,yes,Octoid Meter,ośmiometr
 ,,,Octoid Meters,ośmiometry
 ,,,,ośmiometrów
+REF_UNIT_CENTIMETER,-130 -197 -68 100 -8,yes,Centimetre,centymetr
+,,,Centimetres,centymetry
+,,,,centymetrów
 REF_UNIT_METER,-130 -197 -68,yes,Metric Metre,metr
 ,,,Metric Metres,metry
 ,,,,metrów
@@ -237,9 +240,9 @@ REF_UNIT_OCTMONTH,-71,t,Octoid Moon-month,ośmiomiesiąc
 REF_UNIT_OCTYEAR,-70,t,Octoid Year,ośmiorok
 ,,,Octoid Years,ośmiolata
 ,,,,ośmiolat
-REF_UNIT_YEAR,-139 -90 -92,t,Earth Year,ziemski rok
-,,,Earth Years,ziemskie lata
-,,,,ziemskich lat
+REF_UNIT_YEAR,-139 -90 -92,t,Earth Year,rok
+,,,Earth Years,lata
+,,,,lat
 REF_UNIT_MASSES,-74,,Masses,Masa
 REF_UNIT_AKERGRAM,-75,t,Octoid Gram,ośmiogram
 ,,,Octoid Grams,ośmiogramy
@@ -260,24 +263,27 @@ REF_UNIT_TON,2240 -130 -104 -151 -74 -68,t,Long Ton,tona angielska
 ,,,Long Tons,tony angielskie
 ,,,,ton angielskich
 REF_UNIT_SUPERMASS,-76,t,Octoid Planet,masa Ośmioplanety
-,,,Octoid Planets,mas Ośmioplanety
-,,,,masy Ośmioplanety
+,,,Octoid Planets,masy Ośmioplanety
+,,,,mas Ośmioplanety
 REF_UNIT_EARTH,-139 -74,t,Terran Mass,masa Ziemi
 ,,,Terran Masses,masy Ziemi
 ,,,,mas Ziemi
+REF_UNIT_OCTSUN,-141 -74,t,Octoid Star,masa Ośmiogwiazdy
+,,,Octoid Stars,masy Ośmiogwiazdy
+,,,,mas Ośmiogwiazdy
 REF_UNIT_SOL,-130 -90 -74,t,Solar Mass,masa Słońca
 ,,,Solar Masses,masy Słońca
 ,,,,mas Słońca
 REFERENCE_BASES,1 0 -4 -12,,Numerical Bases,Systemy liczbowe
 SETTINGS_DO_PARSEBAR,-26 -14 -86 -42 -163 -145 -85 -43 -38 -121 -15 -4,,Show pre-parse bar?,Pokaż wstążkę wprowadzania
-REF_PD_SPLIT,-159 -29,,Split,
-REF_PD_VERTICAL,-108 -51,,Unbroken,Szeroki układ okresowy
-REF_PLOTS,-52,,Rendered Spheres,
-REF_PLOTS_COLOR_TITLE,-54,,Color,
-REF_PLOTS_DIAMETER_TITLE,-22,,Diameter,
-REF_PLOTS_PROTON,-60,,Protons,
-REF_PLOTS_NEUTRON,-61,,Neutrons,
-REF_PLOTS_ELECTRON,-62,,Electrons,
-REF_PLOTS_HYDROGEN,-56 1,,Hydrogen atoms,
-REF_PLOTS_CARBON,-56 6,,Carbon atoms,
-REF_PLOTS_OTHER_ATOM,-56 -11,,Other atoms,
+REF_PD_SPLIT,-159 -29,,Split,blok f oddzielony
+REF_PD_VERTICAL,-108 -51,,Unbroken,blok f razem
+REF_PLOTS,-52,,Rendered Spheres,modele cząstek
+REF_PLOTS_COLOR_TITLE,-54,,Color,kolor
+REF_PLOTS_DIAMETER_TITLE,-22,,Diameter,średnica
+REF_PLOTS_PROTON,-60,,Protons,proton
+REF_PLOTS_NEUTRON,-61,,Neutrons,neutron
+REF_PLOTS_ELECTRON,-62,,Electrons,elektron
+REF_PLOTS_HYDROGEN,-56 1,,Hydrogen atoms,atom wodoru
+REF_PLOTS_CARBON,-56 6,,Carbon atoms,atom węgla
+REF_PLOTS_OTHER_ATOM,-56 -11,,Other atoms,inne atomy

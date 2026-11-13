@@ -1,5 +1,6 @@
 extends Control
 
+@onready var centimetre: SpinBox = $Length/Metricentimeter
 @onready var metre: SpinBox = $Length/Metrimeter
 @onready var akermeter: SpinBox = $Length/Akermeter
 @onready var lightasec: SpinBox = $Length/Lightakersecond
@@ -27,6 +28,7 @@ extends Control
 @onready var ton: SpinBox = $Mass/ImpTon
 @onready var supermass: SpinBox = $Mass/Supermass
 @onready var earthmass: SpinBox = $Mass/Earth
+@onready var octsunmass: SpinBox = $Mass/Octsun
 @onready var solarmass: SpinBox = $Mass/Sol
 
 const SECONDS_PER_HE6: float = Main.HE6_HALF_LIFE
@@ -34,6 +36,7 @@ const LIGHTYEAR_TO_METRE: float = 9460730472580800
 const C_METERS_PER_SECOND: float = 299792458
 const C_AKERMETERS_PER_ASEC: float = 134217728
 const AKERMETER_TO_METRE: float = C_METERS_PER_SECOND * SECONDS_PER_HE6 / C_AKERMETERS_PER_ASEC
+const CENTIMETRE_TO_METRE: float = 0.01
 const AU_TO_METRE: float = 149597870700
 const FOOT_TO_METER: float = 0.3048
 const FEET_PER_MILE: float = 5280
@@ -50,6 +53,7 @@ const AKERGRAMS_PER_SUPERMASS: float = 3586098686288827308324625.693278208
 const KILOGRAMS_PER_POUND: float = 0.45359237
 const POUNDS_PER_STONE: float = 14
 const KILOGRAMS_PER_EARTH: float = 5.9722e+24
+const KILOGRAMS_PER_OCTSUN: float =  18911 * KILOGRAMS_PER_AKERGRAM * AKERGRAMS_PER_SUPERMASS
 const KILOGRAMS_PER_SUN: float = 1.988416e+30
 const POUNDS_PER_TON: float = 2240
 const POUNDS_PER_SLUG: float = 32.17405
@@ -77,6 +81,7 @@ func _update_translation(node: Node):
 
 func update_lengths():
 	akermeter.set_value_no_signal(length_in_meters / AKERMETER_TO_METRE)
+	centimetre.set_value_no_signal(length_in_meters / CENTIMETRE_TO_METRE)
 	metre.set_value_no_signal(length_in_meters)
 	lightasec.set_value_no_signal(length_in_meters / AKERMETER_TO_METRE / C_AKERMETERS_PER_ASEC)
 	lightsec.set_value_no_signal(length_in_meters / C_METERS_PER_SECOND)
@@ -86,7 +91,7 @@ func update_lengths():
 	foot.set_value_no_signal(length_in_meters / FOOT_TO_METER)
 	mile.set_value_no_signal(length_in_meters / FOOT_TO_METER / FEET_PER_MILE)
 	
-	for node in [akermeter, metre, lightasec, lightsec, au, lightyear, inch, foot, mile]:
+	for node in [akermeter, metre, centimetre, lightasec, lightsec, au, lightyear, inch, foot, mile]:
 		_update_translation(node)
 
 func update_times():
@@ -110,12 +115,17 @@ func update_masses():
 	ton.set_value_no_signal(mass_in_kilograms / KILOGRAMS_PER_POUND / POUNDS_PER_TON)
 	supermass.set_value_no_signal(mass_in_kilograms / KILOGRAMS_PER_AKERGRAM / AKERGRAMS_PER_SUPERMASS)
 	earthmass.set_value_no_signal(mass_in_kilograms / KILOGRAMS_PER_EARTH)
+	octsunmass.set_value_no_signal(mass_in_kilograms / KILOGRAMS_PER_OCTSUN)
 	solarmass.set_value_no_signal(mass_in_kilograms / KILOGRAMS_PER_SUN)
-	for node in [akergram, kilogram, pound, stone, slug, ton, supermass, earthmass, solarmass]:
+	for node in [akergram, kilogram, pound, stone, slug, ton, supermass, earthmass, octsunmass, solarmass]:
 		_update_translation(node)
 		
 func _on_akermeter_value_changed(value: float):
 	length_in_meters = value * AKERMETER_TO_METRE
+	update_lengths()
+
+func _on_metricentimeter_value_changed(value: float):
+	length_in_meters = value * CENTIMETRE_TO_METRE
 	update_lengths()
 
 func _on_metrimeter_value_changed(value: float):
@@ -204,6 +214,10 @@ func _on_supermass_value_changed(value):
 
 func _on_earth_value_changed(value):
 	mass_in_kilograms = value * KILOGRAMS_PER_EARTH
+	update_masses()
+
+func _on_octsun_value_changed(value):
+	mass_in_kilograms = value * KILOGRAMS_PER_OCTSUN
 	update_masses()
 
 func _on_sol_value_changed(value):
