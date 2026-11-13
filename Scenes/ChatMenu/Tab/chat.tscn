@@ -34,6 +34,11 @@ clip_contents = true
 layout_mode = 2
 theme_override_styles/panel = ExtResource("3_pvrrr")
 
+[node name="Spaceholder" type="Label" parent="ParseBarBox" unique_id=767056672]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+text = "T"
+
 [node name="ParseBarScroller" type="ScrollContainer" parent="ParseBarBox" unique_id=2024619541]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
@@ -50,7 +55,7 @@ layout_mode = 2
 [node name="PWordLabel" type="RichTextLabel" parent="ParseBarBox/ParseBarScroller/HBoxContainer" unique_id=254717242]
 layout_mode = 2
 bbcode_enabled = true
-text = "nerd is the wordnerd is the wordnerd is the wordnerd is the wordnordnerdnerd is the wordnerd is the wordnerd is the word"
+text = "LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT, SED DO EIUSMOD TEMPOR INCIDIDUNT UT LABORE ET DOLORE MAGNA ALIQUA."
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
@@ -64,11 +69,6 @@ metadata/_custom_type_script = "uid://c81wheph0v6l6"
 
 [node name="RSpacer" type="Control" parent="ParseBarBox/ParseBarScroller/HBoxContainer" unique_id=825510563]
 layout_mode = 2
-
-[node name="Spaceholder" type="Label" parent="ParseBarBox" unique_id=767056672]
-modulate = Color(1, 1, 1, 0)
-layout_mode = 2
-text = "T"
 
 [node name="BottomBar" type="HBoxContainer" parent="." unique_id=1954111637]
 layout_mode = 2

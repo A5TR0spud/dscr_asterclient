@@ -402,7 +402,10 @@ static func signals_to_words(input: Array, do_whitespace_format: bool = false, c
 		ws = format_mode_after
 		if format_indent > 0:
 			indent += format_indent
-		
+		#TODO: [indent]
+		#[indent] unfortunately forces a newline
+		#it would fix word-wrapping, too. there must be a way to make it work.
+		#maybe the indent option itself has to be changed
 		if can_do_bbcode:
 			# Avoid formatting issues if users put [ in their signal names
 			word = word.replace("[", "[lb]")

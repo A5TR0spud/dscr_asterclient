@@ -17,6 +17,7 @@ static var chat_channel_scene = preload("uid://c7bn3w1ijabx4")
 @onready var quick_transmission_search: LineEdit = $BottomBar/SideOptionsWrapper/SideOptions/QuickTransmission/Control/PanelContainer/VBoxContainer/QTSearch
 @onready var quick_transmission_list: ItemList = $BottomBar/SideOptionsWrapper/SideOptions/QuickTransmission/Control/PanelContainer/VBoxContainer/QTList
 @onready var parse_bar_word: RichTextLabel = $ParseBarBox/ParseBarScroller/HBoxContainer/PWordLabel
+#TODO: look into ways to remove this that still clip the parse bar's text instead of letting it run wild in width
 @onready var parse_bar_scroll: ScrollContainer = $ParseBarBox/ParseBarScroller
 @onready var parse_bar_left_spacer: Control = $ParseBarBox/ParseBarScroller/HBoxContainer/LSpacer
 @onready var parse_bar_right_spacer: Control = $ParseBarBox/ParseBarScroller/HBoxContainer/RSpacer

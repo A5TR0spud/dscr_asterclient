@@ -20,9 +20,14 @@ var fin: bool = false
 func _ready() -> void:
 	#Main.instance.reload_dict.connect(update_name)
 	Main.instance.localization_reload.connect(update_name)
+	update_margins()
+	Main.instance.reload_settings.connect(update_margins)
 	scroll_bar.value_changed.connect(_on_scroll)
 	scroll_bar.changed.connect(set_scroll_down_vis)
 	scroll_down_button.hide()
+
+func update_margins():
+	self.add_theme_constant_override("margin_bottom", 0 if SettingsHandler.do_parsebar else 12)
 
 func _recalculate_sep(node: ChatEntry, adding: bool):
 	var idx: int = node.get_index()

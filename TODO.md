@@ -1,6 +1,8 @@
 ## TODO
 
 * library paste thing where if its just numbers and minus signs it'll insert pipes
+* per-channel mute
+* signal counter in parse bar
 * unit circle reference
 * setting to parse "-23" as "|-23" instead of "- 23"
 * calculator reference
