@@ -1,5 +1,15 @@
 # Versions
 
+## 0.10.6.1
+
+### Changes
+
+* Got more specific with the m0 translation of the m0 particle reference table
+
+### Fixes
+
+* Fixed incorrect Hydrogen color in m0 particle reference table (32 -> 61)
+
 ## 0.10.6
 
 ### Additions

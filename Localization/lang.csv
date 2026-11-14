@@ -278,7 +278,7 @@ REFERENCE_BASES,1 0 -4 -12,,Numerical Bases,Systemy liczbowe
 SETTINGS_DO_PARSEBAR,-26 -14 -86 -42 -163 -145 -85 -43 -38 -121 -15 -4,,Show pre-parse bar?,Pokaż wstążkę wprowadzania
 REF_PD_SPLIT,-159 -29,,Split,blok f oddzielony
 REF_PD_VERTICAL,-108 -51,,Unbroken,blok f razem
-REF_PARTICLE_PLOTS,-52,,Rendered Particles,modele cząstek
+REF_PARTICLE_PLOTS,-56 -77 -60 -77 -25 -52,,Rendered Particles,modele cząstek
 REF_PARTICLE_PLOTS_COLOR_TITLE,-54,,Color,kolor
 REF_PARTICLE_PLOTS_DIAMETER_TITLE,-22,,Diameter,średnica
 REF_PARTICLE_PLOTS_PROTON,-60,,Protons,proton
