@@ -1,0 +1,12 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+	<style>
+		.s0 { fill: #ffffff } 
+		.s1 { fill: #17366e } 
+		.s2 { fill: #c62c3d } 
+	</style>
+	<g id="Layer 1">
+		<path id="Shape 8" fill-rule="evenodd" class="s0" d="m240 0v240h-240v-240z"/>
+		<path id="Shape 1" fill-rule="evenodd" class="s1" d="m80 0v240h-80v-240z"/>
+		<path id="Shape 3" fill-rule="evenodd" class="s2" d="m240 0v240h-80v-240z"/>
+	</g>
+</svg>
