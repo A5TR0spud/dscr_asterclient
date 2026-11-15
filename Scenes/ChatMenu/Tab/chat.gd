@@ -38,6 +38,23 @@ func _ready():
 	Main.instance.reload_settings.connect(reload_parse_par)
 	_refresh_parse_bar()
 
+func refresh_little_menu() -> void:
+	quick_transmission_button.visible = not LibraryHandler.get_all_transmissions().is_empty()
+	edit_side_options.visible = quick_transmission_button.visible
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
+			if Rect2(Vector2.ZERO, quick_transmission_panel.size).has_point(quick_transmission_panel.get_local_mouse_position()):
+				return
+			if Rect2(Vector2.ZERO, quick_transmission_button.size).has_point(quick_transmission_button.get_local_mouse_position()):
+				return
+			hide_qt_panel()
+	if is_visible_in_tree() and event.is_action_pressed("quick_transmission_menu"):
+		_on_quick_transmission_pressed()
+		accept_event()
+		return
+
 #region Chat
 
 const COMMAND_LEAVE: int = -65533
@@ -429,19 +446,6 @@ func _on_save_cooldown_timeout():
 	save_history()
 
 #endregion
-
-func refresh_little_menu() -> void:
-	quick_transmission_button.visible = not LibraryHandler.get_all_transmissions().is_empty()
-	edit_side_options.visible = quick_transmission_button.visible
-
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
-			if Rect2(Vector2.ZERO, quick_transmission_panel.size).has_point(quick_transmission_panel.get_local_mouse_position()):
-				return
-			if Rect2(Vector2.ZERO, quick_transmission_button.size).has_point(quick_transmission_button.get_local_mouse_position()):
-				return
-			hide_qt_panel()
 
 #region Little Menu
 

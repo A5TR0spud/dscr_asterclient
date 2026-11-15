@@ -1,5 +1,11 @@
 # Versions
 
+## --WIP--
+
+### Additions
+
+* Added hotkey for quick transmission menu: `ctrl`+`t`
+
 ## 0.10.6.1
 
 ### Changes
