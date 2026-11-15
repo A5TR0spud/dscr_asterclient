@@ -11,7 +11,7 @@
 [sub_resource type="FoldableGroup" id="FoldableGroup_2xmuf"]
 allow_folding_all = true
 
-[node name="SettingsTab" type="VBoxContainer" unique_id=1649791393 node_paths=PackedStringArray("formatting", "do_bbcode", "color_ref_group", "color_ref", "truncate", "font_size", "undef_setting", "number_sep_setting", "right_sidebar", "parsebar", "pipe_escape", "confetti_setting", "ui_stretch", "ui_scale", "color_edit", "color_sample", "sound_slider", "music_slider", "sound_sample", "music_sample", "music_parent", "ping_slider", "default_image_visible", "crunch_image", "invert_pitch", "invert_yaw", "invert_zoom", "image_setting_group", "callsign_backup", "callsign_failsafe")]
+[node name="SettingsTab" type="VBoxContainer" unique_id=1649791393 node_paths=PackedStringArray("formatting", "do_bbcode", "color_ref_group", "color_ref", "truncate", "font_size", "undef_setting", "number_sep_setting", "right_sidebar", "parsebar", "pipe_escape", "confetti_setting", "ui_stretch", "ui_scale", "color_edit", "color_sample", "low_contrast", "sound_slider", "music_slider", "sound_sample", "music_sample", "music_parent", "ping_slider", "default_image_visible", "crunch_image", "invert_pitch", "invert_yaw", "invert_zoom", "image_setting_group", "callsign_backup", "callsign_failsafe")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -36,6 +36,7 @@ ui_stretch = NodePath("ScrollContainer/Options/Interface/VBoxContainer/UIStretch
 ui_scale = NodePath("ScrollContainer/Options/Interface/VBoxContainer/UIScale/ScaleSpinner")
 color_edit = NodePath("ScrollContainer/Options/Interface/VBoxContainer/ThemeColor/ColorPicker")
 color_sample = NodePath("ScrollContainer/Options/Interface/VBoxContainer/ColorRect")
+low_contrast = NodePath("ScrollContainer/Options/Interface/VBoxContainer/LowContrast")
 sound_slider = NodePath("ScrollContainer/Options/Sounds/VBoxContainer/GlobalVolume/VolumeSlider")
 music_slider = NodePath("ScrollContainer/Options/Sounds/VBoxContainer/MusicVolume/VolumeSlider")
 sound_sample = NodePath("AudioPreview")
@@ -185,7 +186,6 @@ state = true
 
 [node name="Interface" type="FoldableContainer" parent="ScrollContainer/Options" unique_id=1112130352]
 layout_mode = 2
-folded = true
 title = "interface"
 foldable_group = SubResource("FoldableGroup_2xmuf")
 
@@ -197,7 +197,6 @@ translations = Dictionary[StringName, String]({
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/Options/Interface" unique_id=1949425612]
-visible = false
 layout_mode = 2
 
 [node name="NumberSeparation" parent="ScrollContainer/Options/Interface/VBoxContainer" unique_id=1913893789 instance=ExtResource("3_0yg8b")]
@@ -340,6 +339,10 @@ translations = Dictionary[StringName, String]({
 &"text": "CANCEL"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="LowContrast" parent="ScrollContainer/Options/Interface/VBoxContainer" unique_id=691134901 instance=ExtResource("3_0yg8b")]
+layout_mode = 2
+description = "SETTINGS_LOW_CONTRAST"
 
 [node name="Sounds" type="FoldableContainer" parent="ScrollContainer/Options" unique_id=701943303]
 layout_mode = 2
@@ -561,6 +564,7 @@ metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="ImageSettings" type="FoldableContainer" parent="ScrollContainer/Options" unique_id=2007051662]
 layout_mode = 2
+folded = true
 title = "image settings"
 foldable_group = SubResource("FoldableGroup_2xmuf")
 
@@ -572,6 +576,7 @@ translations = Dictionary[StringName, String]({
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/Options/ImageSettings" unique_id=1170991668]
+visible = false
 layout_mode = 2
 
 [node name="ImageVis" parent="ScrollContainer/Options/ImageSettings/VBoxContainer" unique_id=1916992470 instance=ExtResource("3_0yg8b")]
@@ -651,6 +656,7 @@ on_text = "SETTINGS_BACKUP_INCREMENT"
 [connection signal="value_changed" from="ScrollContainer/Options/Interface/VBoxContainer/ThemeColor/ColorPicker" to="." method="_on_color_picker_value_changed"]
 [connection signal="pressed" from="ScrollContainer/Options/Interface/VBoxContainer/ThemeColorSubmitElse/ColorSubmitButton" to="." method="_on_color_submit_button_pressed"]
 [connection signal="pressed" from="ScrollContainer/Options/Interface/VBoxContainer/ThemeColorSubmitElse/ColorCancelButton" to="." method="_on_color_cancel_button_pressed"]
+[connection signal="set" from="ScrollContainer/Options/Interface/VBoxContainer/LowContrast" to="." method="_on_low_contrast_set"]
 [connection signal="value_changed" from="ScrollContainer/Options/Sounds/VBoxContainer/GlobalVolume/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
 [connection signal="pressed" from="ScrollContainer/Options/Sounds/VBoxContainer/GlobalVolume/SliderLabelGrid/Normal" to="." method="_on_volume_normal_pressed"]
 [connection signal="value_changed" from="ScrollContainer/Options/Sounds/VBoxContainer/MusicVolume/VolumeSlider" to="." method="_on_music_slider_value_changed"]

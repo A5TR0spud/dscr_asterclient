@@ -30,6 +30,7 @@ static var h_split = preload("uid://b1t3fn13p4807")
 static var v_split = preload("uid://circtrvcvn66m")
 
 static var old_color: int = -1
+static var old_low_contrast: bool = false
 
 static func set_font_size(size: int = -1) -> void:
 	if size < 12 or size > 32:
@@ -74,12 +75,17 @@ static func _set_color_inner(col: int):
 		new_color.b *= 1.0 - green_correction
 		new_color *= 1.0 - (green_correction * 0.5)
 	var ratio: Color = new_color * 0.5 + Color(0.7, 0.7, 0.7)
+	if SettingsHandler.low_contrast_mode: 
+		ratio *= 0.5
+		new_color *= 0.2
+		new_color.s *= 0.5
 	
 	# backgrounds
-	new_color.r8 -= 62
-	new_color.g8 -= 62
-	new_color.b8 -= 62
-	new_color *= 0.1
+	else:
+		new_color.r8 -= 62
+		new_color.g8 -= 62
+		new_color.b8 -= 62
+		new_color *= 0.1
 	new_color.a8 = 255
 	if col < 50:
 		new_color.s *= 1.2
@@ -140,9 +146,10 @@ static func set_theme_color(col: int = -1) -> void:
 	if SettingsHandler.theme_color != col:
 		SettingsHandler.theme_color = col
 		SettingsHandler.save()
-	if old_color == col:
+	if old_color == col and old_low_contrast == SettingsHandler.low_contrast_mode:
 		return
 	old_color = col
+	old_low_contrast = SettingsHandler.low_contrast_mode
 	if thread_running:
 		WorkerThreadPool.wait_for_task_completion(theme_thread)
 	theme_thread = WorkerThreadPool.add_task(

@@ -1,10 +1,11 @@
 # Versions
 
-## --WIP--
+## 0.10.6.2
 
 ### Additions
 
 * Added hotkey for quick transmission menu: `ctrl`+`t`
+* Added low contrast setting
 
 ## 0.10.6.1
 

@@ -29,6 +29,7 @@ func _ready() -> void:
 @export var ui_scale: SpinBox
 @export var color_edit: SpinBox
 @export var color_sample: ColorRect
+@export var low_contrast: SettingEntry
 @export_subgroup("Sounds")
 @export var sound_slider: Range
 @export var music_slider: Range
@@ -73,6 +74,7 @@ func refresh() -> void:
 	crunch_image.set_state_no_signal(SettingsHandler.crunch_image)
 	parsebar.set_state_no_signal(SettingsHandler.do_parsebar)
 	pipe_escape.set_state_no_signal(SettingsHandler.require_pipe_escape)
+	low_contrast.set_state_no_signal(SettingsHandler.low_contrast_mode)
 
 func _refresh_dict_supports():
 	_refresh_confetti()
@@ -267,3 +269,8 @@ func _on_parsebar_set(new_value):
 func _on_pipe_escape_setting_set(new_value):
 	SettingsHandler.require_pipe_escape = new_value
 	save(true)
+
+func _on_low_contrast_set(new_value):
+	SettingsHandler.low_contrast_mode = new_value
+	save(false)
+	ThemeManager.set_theme_color()
