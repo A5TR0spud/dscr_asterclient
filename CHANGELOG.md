@@ -1,5 +1,12 @@
 # Versions
 
+## --WIP--
+
+### Additions
+
+* Added support for colors 65-128
+* Added support for |-326
+
 ## 0.10.6.2
 
 ### Additions

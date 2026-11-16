@@ -382,9 +382,11 @@ static func signals_to_words(input: Array, do_whitespace_format: bool = false, c
 				strike = number_strikethrough
 				invert = number_background
 			
-			if color_color_numbers and prev is int and prev == -54 and sig >= 0 and sig <= 64:
-				color = VisualizeNode.calculate_color(sig)
-				invert = true
+			if color_color_numbers and prev is int and prev == -54:
+				var _c: Color = VisualizeNode.calculate_color(sig)
+				if _c.a8 > 0:
+					color = _c
+					invert = true
 		
 		if -format_mode >= ws:
 			ws = 0

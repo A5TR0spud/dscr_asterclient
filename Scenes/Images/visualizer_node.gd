@@ -18,7 +18,52 @@ const COLORS: Array = [
 	"FF5800", "BBFF00", "00CDFF", "0084FF", "4D00FF",
 	"FB39FF", "FF0FD7", "484848", "636363", "FFFFFF"
 ];
-static func calculate_color (value: int) -> Color:
+static func calculate_color(value: int) -> Color:
+	if value >= 65 and value <= 128 and DictionaryHandler.support_dscr:
+		value -= 65
+		@warning_ignore_start("integer_division")
+		var r1: int = value / 16 % 4
+		var g1: int = value / 4 % 4
+		var b1: int = value % 4
+		@warning_ignore_restore("integer_division")
+		var r: float
+		var g: float
+		var b: float
+		match r1:
+			0:
+				r = 0.1
+			1:
+				r = 0.5
+			2:
+				r = 0.75
+			3:
+				r = 1
+		match g1:
+			0:
+				g = 0.1
+			1:
+				g = 0.5
+			2:
+				g = 0.75
+			3:
+				g = 1
+		match b1:
+			0:
+				b = 0.1
+			1:
+				b = 0.5
+			2:
+				b = 0.75
+			3:
+				b = 1
+		if r1 == g1 and g1 == b1:
+			r += 0.1
+			g += 0.1
+			b += 0.1
+		var _c: Color = Color(r, g, b)
+		return _c
+	if value < 0 or value > 64:
+		return Color.TRANSPARENT
 	value = clampi(value, 0, 64)
 	var n: float = value / 64.0 * (COLORS.size() - 1)
 	var lo = floor(n)
@@ -34,13 +79,6 @@ static func calculate_color (value: int) -> Color:
 @onready var viewport: SubViewport = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport
 @onready var res_button: IconButton = $Intermediate/VBoxContainer/ResolutionButton
 @onready var center_button: IconButton = $Intermediate/VBoxContainer/CenterButton
-
-@onready var plot_spheres: MultiMeshInstance3D = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport/Spheres
-@onready var multimesh_spheres: MultiMesh = plot_spheres.multimesh
-@onready var plot_cubes: MultiMeshInstance3D = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport/Cubes
-@onready var multimesh_cubes: MultiMesh = plot_cubes.multimesh
-
-var _sphere_data: Array = []
 
 func _ready():
 	Main.instance.reload_image_inversion.connect(_refresh_inversions)
@@ -96,22 +134,33 @@ func _on_pitch_slider_value_changed(value: float):
 	_set_pitch(value)
 
 const IMAGE: int = -53
-const PLOT : int = -52
-const CUBE : int = -524000
-const BOX  : int = -157442
+const PLOT : int = -52 #center x, center y, center z, diameter, color
+const CUBE : int = -524000 #center x, center y, center z, diameter, color
+const BOX  : int = -157442 #center x, center y, center z, x length, y length, z length, color
+const LINE : int = -326 #x0, y0, z0, x1, y1, z1, color
 const SEP  : int = -3
+
+@onready var plot_spheres: MultiMeshInstance3D = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport/Spheres
+@onready var multimesh_spheres: MultiMesh = plot_spheres.multimesh
+@onready var plot_cubes: MultiMeshInstance3D = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport/Cubes
+@onready var multimesh_cubes: MultiMesh = plot_cubes.multimesh
+@onready var line_mesh: ImmediateMesh = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport/Lines.mesh
+
+var _sphere_data: Array = []
 
 var first_sphere: bool = true
 
 var _ball_count: int = 0
 var _cube_count: int = 0
-func _parse_sphere(parser: TransmissionParser) -> Dictionary:
+func _parse_visual_object(parser: TransmissionParser) -> Dictionary:
 	var type: int = 0
 	var ret: Dictionary = {}
 	if DictionaryHandler.support_dscr and parser.try_consume(CUBE):
 		type = 1
 	elif DictionaryHandler.support_dscr and parser.try_consume(BOX):
 		type = 2
+	elif DictionaryHandler.support_dscr and parser.try_consume(LINE):
+		type = 3
 	elif (first_sphere and parser.peek() == PLOT) or not first_sphere:
 		parser.expect(PLOT)
 	ret.t = type
@@ -135,6 +184,14 @@ func _parse_sphere(parser: TransmissionParser) -> Dictionary:
 		parser.expect(SEP)
 		var v3: float = parser.read_number()
 		ret.c = v3
+	elif type == 3:
+		ret.rx = v0
+		ret.ry = v1
+		parser.expect(SEP)
+		ret.rz = parser.read_number()
+		parser.expect(SEP)
+		ret.c = parser.read_number()
+		#print(ret)
 	else:
 		ret.rx = v0
 		ret.ry = v0
@@ -154,6 +211,7 @@ func _parse_sphere(parser: TransmissionParser) -> Dictionary:
 func check_image(message0: Array) -> bool:
 	multimesh_spheres.instance_count = 0
 	_sphere_data.clear()
+	line_mesh.clear_surfaces()
 	var message: Array[int] = []
 	for u in message0:
 		if u is int:
@@ -168,7 +226,7 @@ func check_image(message0: Array) -> bool:
 		_ball_count = 0
 		_cube_count = 0
 		var pos := parser.save_state()
-		var spheres = parser.read_group_items(_parse_sphere)
+		var spheres = parser.read_group_items(_parse_visual_object)
 
 		if parser.has_error():
 			print(parser.get_error_message())
@@ -181,34 +239,43 @@ func check_image(message0: Array) -> bool:
 	if _sphere_data.is_empty():
 		#print("empty image")
 		return false
-	_sphere_data = _sphere_data.filter(func(a: Dictionary): return a.rx > 0 or a.ry > 0 or a.rz > 0)
+	_sphere_data = _sphere_data.filter(func(a: Dictionary): return (a.rx > 0 or a.ry > 0 or a.rz > 0) or a.t == 3)
 	multimesh_spheres.instance_count = _ball_count
 	multimesh_cubes.instance_count = _cube_count
 	var _balldx: int = 0
 	var _cubedx: int = 0
 	for p: Dictionary in _sphere_data:
-		var mm: MultiMesh
-		var t: int = p["t"]
-		var idx: int = 0
-		if t == 0:
-			mm = multimesh_spheres
-			idx = _balldx
-			_balldx += 1
-		if t == 1 or t == 2:
-			mm = multimesh_cubes
-			idx = _cubedx
-			_cubedx += 1
-		mm.set_instance_color(idx, calculate_color(p["c"]).srgb_to_linear())
-		mm.set_instance_transform(idx, Transform3D(
-			# X Scale/Shear
-			Vector3(p.rx, 0, 0),
-			# Y Scale/Shear
-			Vector3(0, p.rz, 0),
-			# Z Scale/Shear
-			Vector3(0, 0, p.ry),
-			# Origin Position
-			Vector3(p["x"], p["z"], -p["y"])
-		))
+		var t: int = p.t
+		var c: Color = calculate_color(p["c"]).srgb_to_linear()
+		if t <= 2:
+			var mm: MultiMesh
+			var idx: int = 0
+			if t == 0:
+				mm = multimesh_spheres
+				idx = _balldx
+				_balldx += 1
+			if t == 1 or t == 2:
+				mm = multimesh_cubes
+				idx = _cubedx
+				_cubedx += 1
+			mm.set_instance_color(idx, c)
+			mm.set_instance_transform(idx, Transform3D(
+				# X Scale/Shear
+				Vector3(p.rx, 0, 0),
+				# Y Scale/Shear
+				Vector3(0, p.rz, 0),
+				# Z Scale/Shear
+				Vector3(0, 0, p.ry),
+				# Origin Position
+				Vector3(p["x"], p["z"], -p["y"])
+			))
+		elif t == 3:
+			line_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+			line_mesh.surface_set_color(c)
+			line_mesh.surface_add_vertex(Vector3(p.x, p.z, -p.y))
+			line_mesh.surface_set_color(c)
+			line_mesh.surface_add_vertex(Vector3(p.rx, p.rz, -p.ry))
+			line_mesh.surface_end()
 	_viewport_res.call_deferred()
 	return true
 
