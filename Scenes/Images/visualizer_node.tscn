@@ -18,6 +18,7 @@ render_priority = 0
 shader = ExtResource("6_1eel7")
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_g4v7s"]
+resource_local_to_scene = true
 
 [node name="VisualizerNode" type="PanelContainer" unique_id=1907311917]
 custom_minimum_size = Vector2(300, 0)

@@ -1,5 +1,11 @@
 # Versions
 
+## 0.10.7.1
+
+### Fixes
+
+* Fixed |-326 being shared across multiple tranmissions
+
 ## 0.10.7
 
 ### Additions
