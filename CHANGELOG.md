@@ -1,10 +1,16 @@
 # Versions
 
+## --WIP--
+
+### Additions
+
+* Being pinged now has a unique unread marker
+
 ## 0.10.7.1
 
 ### Fixes
 
-* Fixed |-326 being shared across multiple tranmissions
+* Fixed |-326 being shared across multiple transmissions
 
 ## 0.10.7
 

@@ -8,6 +8,7 @@ static var trx_scene = preload("uid://d4neakrhevfia")
 var default_channel: bool = true
 var id = null
 var _unread_notification: bool = false
+var _unread_ping: bool = false
 
 const HIDE_EXCESS_TRANSMISSIONS: int = 32
 
@@ -55,7 +56,7 @@ func _recalculate_sep(node: ChatEntry, adding: bool):
 		elif has_before and not has_after:
 			before_message.set_sep_visibility(true)
 
-func add_message_node(message: ChatEntry):
+func add_message_node(message: ChatEntry, mark_ping: bool = false):
 	if message is TransEntry:
 		shown_transmissions += 1
 	message.tree_exiting.connect(_recalculate_sep.bind(message, false))
@@ -67,7 +68,7 @@ func add_message_node(message: ChatEntry):
 		id != Chat.SKELETON_KEY and
 		Chat.get_current_channel_node().id != Chat.SKELETON_KEY
 	):
-		set_notification()
+		set_notification(mark_ping)
 	#try_show_history()
 
 func _input(event):
@@ -198,21 +199,29 @@ func set_channel_name(_id):
 	self.id = _id
 	update_name()
 
-func set_notification():
+func set_notification(pinged: bool = false):
 	_unread_notification = true
+	if pinged:
+		_unread_ping = true
 	update_name()
 
 func clear_notification():
 	_unread_notification = false
+	_unread_ping = false
 	update_name()
 
 func has_notification() -> bool:
 	return _unread_notification
 
 func update_name():
+	var key: String = "CHAT_CHANNEL"
+	if _unread_ping:
+		key = "CHAT_CHANNEL_PINGED"
+	elif _unread_notification:
+		key = "CHAT_CHANNEL_UNREAD"
 	Chat.instance.channel_container.set_tab_title(
 		get_index(),
-		Localizer.translate("CHAT_CHANNEL_UNREAD" if _unread_notification else "CHAT_CHANNEL",
+		Localizer.translate(key,
 			Localizer.translate("CHAT_CHANNEL_NONE", DictionaryHandler.get_or_default_signal_name(Chat.CHANNEL_SELECTOR))
 			if default_channel else
 			DictionaryHandler.get_or_default_signal_name(id) if id < 0 else str(id)

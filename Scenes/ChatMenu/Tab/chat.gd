@@ -180,6 +180,7 @@ static func new_transmission(packet: PackedStringArray) -> void:
 		print("confetti!")
 		Confetti.burst()
 	
+	var ping: bool = false
 	if (
 		(new_message.sender != Main.instance.previously_accepted_callsign)
 		and (
@@ -202,11 +203,12 @@ static func new_transmission(packet: PackedStringArray) -> void:
 			composite_cs += str(num)
 		if composite_cs == target_cs or composite_cs == target_cs2:
 			SoundManager.play_sound(SoundManager.Sounds.PING)
+			ping = true
 	var ghost_to_skeleton: bool = true
 	if channel_id == SKELETON_KEY:
 		new_message.key = SKELETON_KEY
 		ghost_to_skeleton = false
-	channel.add_message_node(new_message)
+	channel.add_message_node(new_message, ping)
 	
 	if get_active_channel().id != channel_id and get_active_channel().id != SKELETON_KEY:
 		spooky_channel.set_notification()
