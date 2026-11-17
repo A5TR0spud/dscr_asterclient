@@ -69,3 +69,7 @@ In the Sources tab (third tab), at the bottom of its panel is a button to change
 #### Swapping Dictionary Files
 
 The third tab from the left, at the top of the screen. The second column on the page handles dictionary files.
+
+#### Enabling Extra (DSCR) Features
+
+By default, features related to DSCR signals are disabled. To enable them, navigate to the third tab at the top of the screen. On the right-side panel is a list of dictionaries. To enable extra features, change it from Meteor 0 to DSCR using the dropdown below the name of the file.
