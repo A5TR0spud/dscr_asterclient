@@ -1,11 +1,15 @@
 # Versions
 
-## --WIP--
+## 0.10.7
 
 ### Additions
 
 * Added support for colors 65-128
 * Added support for |-326
+
+### Changes
+
+* Low contrast now defaults to on
 
 ## 0.10.6.2
 

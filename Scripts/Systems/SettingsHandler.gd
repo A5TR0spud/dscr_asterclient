@@ -35,7 +35,7 @@ static var crunch_image: bool = false
 static var do_parsebar: bool = true
 static var periodic_table_visualization: int = 0
 static var require_pipe_escape: bool = true
-static var low_contrast_mode: bool = false
+static var low_contrast_mode: bool = true
 
 static func validate_and_set_language(code: String = language):
 	if code not in LocaleMenu.VALID_LANGUAGES:

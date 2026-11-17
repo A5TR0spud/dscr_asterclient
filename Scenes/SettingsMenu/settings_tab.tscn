@@ -343,6 +343,7 @@ metadata/_custom_type_script = "uid://7gga31jeosxl"
 [node name="LowContrast" parent="ScrollContainer/Options/Interface/VBoxContainer" unique_id=691134901 instance=ExtResource("3_0yg8b")]
 layout_mode = 2
 description = "SETTINGS_LOW_CONTRAST"
+state = true
 
 [node name="Sounds" type="FoldableContainer" parent="ScrollContainer/Options" unique_id=701943303]
 layout_mode = 2
