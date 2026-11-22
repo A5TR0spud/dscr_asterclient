@@ -5,6 +5,8 @@
 ### Additions
 
 * Being pinged now has a unique unread marker
+* Added |-577 support for the following: |-807, |-157403, |-157457, |-157458, |-157459
+  * And basic/ugly support for: |-310, |-311, |-312
 
 ## 0.10.7.1
 

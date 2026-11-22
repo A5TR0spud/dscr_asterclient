@@ -40,7 +40,7 @@ func advance() -> Variant:
 func check(value: int) -> bool:
 	return peek() == value
 
-## Checks that the signal at the current position equals the given value, otherwise sets the fail flag.
+## Checks that the signal at the current position equals the given value, on success will advance, otherwise sets the fail flag.
 func expect(value: int) -> void:
 	if _error: return
 

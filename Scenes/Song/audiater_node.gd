@@ -14,7 +14,33 @@ enum NoteType {
 	SAWTOOTH,
 	TRIANGLE,
 	ARBITRARY,
+	NOISE,
+	BARK,
+	MEOW,
+	CHIRP,
 }
+
+const NOTE = -605003
+const NOTE_SINE = -807
+const NOTE_NOISE = -157403
+const NOTE_SAW = -157457
+const NOTE_TRI = -157458
+const NOTE_SQUARE = -157459
+const NOTE_BARK = -310
+const NOTE_MEOW = -311
+const NOTE_CHIRP = -312
+
+const VALID_NOTES: PackedInt64Array = [
+	NOTE,
+	NOTE_SINE,
+	NOTE_NOISE,
+	NOTE_SAW,
+	NOTE_SQUARE,
+	NOTE_TRI,
+	NOTE_BARK,
+	NOTE_MEOW,
+	NOTE_CHIRP
+]
 
 const NEG = -1
 const SEP = -3
@@ -24,7 +50,6 @@ const GROUP_BEGIN = -14
 const GROUP_END = -15
 const SEQUENCER = -122
 const SONG = -577
-const NOTE = -605003
 const conversion_factor: float = Main.HE6_HALF_LIFE
 const sample_hz: float = 22050.0
 
@@ -91,27 +116,49 @@ class Note:
 	var start_time: float
 	var duration: float
 	var frequency: float
+	var type: NoteType
 	
-	func _init(start: float, length: float, freq: float):
+	func _init(start: float, length: float, freq: float, note_type: NoteType = NoteType.ARBITRARY):
 		start_time = start
 		duration = length
 		frequency = freq
+		type = note_type
 
 func parse_song_note(parser: TransmissionParser) -> Note:
 	#print("note ", parser.save_state())
-	parser.expect(NOTE)
+	var type: NoteType = NoteType.ARBITRARY
+	
+	if parser.try_consume(NOTE_SINE):
+		type = NoteType.SINE
+	elif parser.try_consume(NOTE_SAW):
+		type = NoteType.SAWTOOTH
+	elif parser.try_consume(NOTE_TRI):
+		type = NoteType.TRIANGLE
+	elif parser.try_consume(NOTE_NOISE):
+		type = NoteType.NOISE
+	elif parser.try_consume(NOTE_SQUARE):
+		type = NoteType.SQUARE
+	elif parser.try_consume(NOTE_BARK):
+		type = NoteType.BARK
+	elif parser.try_consume(NOTE_MEOW):
+		type = NoteType.MEOW
+	elif parser.try_consume(NOTE_CHIRP):
+		type = NoteType.CHIRP
+	else:
+		parser.expect(NOTE)
+
 	var start_time = parser.read_number() * conversion_factor
 	parser.expect(SEP)
 	var duration = parser.read_number() * conversion_factor
 	parser.expect(SEP)
 	var frequency = parser.read_number() / conversion_factor
-	return Note.new(start_time, duration, frequency)
+	return Note.new(start_time, duration, frequency, type)
 
 func parse_song_item(parser: TransmissionParser) -> Array[Note]:
 	#print("item ", parser.save_state())
 	if not parser.can_continue():
 		return []
-	if parser.check(NOTE):
+	if (parser.peek() in VALID_NOTES):
 		return [parse_song_note(parser)]
 	if parser.try_consume(VARIABLE):
 		var idx = parser.advance()
@@ -161,7 +208,7 @@ func parse_song_sequence(parser: TransmissionParser) -> Array[Note]:
 		
 		for idx: int in range(_i.size()):
 			var o: Note = _i[idx]
-			_i[idx] = Note.new(o.start_time + _sequence_accum, o.duration, o.frequency)
+			_i[idx] = Note.new(o.start_time + _sequence_accum, o.duration, o.frequency, o.type)
 		#print(_sequence_accum)
 		#_sequence_accum += _i.reduce(func(acc, b): return max(b.duration, acc), 0)
 		#for existing_note in items:
@@ -177,7 +224,7 @@ func parse_song_group(parser: TransmissionParser) -> Array[Note]:
 	return items
 
 func smoothed_square_wave(phase: float, smoothness: float = 0) -> float:
-	var neg = phase >= 0.5
+	var neg: bool = phase >= 0.5
 	if neg: phase -= 0.5
 	var mag: float = 0
 	if phase < 0.25 * smoothness:
@@ -194,13 +241,13 @@ func _fill_buffer() -> void:
 
 	for i in range(frames_available):
 		while current_note < current_song.size() and playback_time >= current_song[current_note].start_time:
-			var note_data = current_song[current_note]
+			var note_data: Note = current_song[current_note]
 			var note = {
 				"frequency": note_data.frequency,
 				"phase": 0.0,
 				"time_left": note_data.duration,
 				"total_duration": note_data.duration,
-				"type": NoteType.ARBITRARY
+				"type": note_data.type
 			}
 			active_notes.append(note)
 			current_note += 1
@@ -211,34 +258,68 @@ func _fill_buffer() -> void:
 		while j >= 0:
 			var note = active_notes[j]
 			
-			var increment = note.frequency / sample_hz
+			var simulated_frequency: float = note.frequency
+			var attack_time: float = 0.0025
+			var sustain: float = 0.5
+			var decay_time: float = 0.01
+			var volume_envelope: float = 1
 			
 			var sample = 0.0
 			var start_ago: float = note.total_duration - note.time_left
+			var note_time: float = start_ago / note.total_duration
 			match note.type:
 				NoteType.ARBITRARY:
 					var s: float = clamp(1.0 - (600.0 / note.frequency), 0, 1) * 0.3 + 0.25
 					s += max(-0.01, remap(note.time_left / note.total_duration, 1, 0, -0.2, 0.05))
-					sample = smoothed_square_wave(note.phase, clamp(s, 0.2, 0.9)) * 0.8
+					sample = smoothed_square_wave(note.phase, clamp(s, 0.2, 0.9))
+					volume_envelope = 0.8
 				NoteType.SINE:
 					sample = sin(note.phase * TAU)
+					volume_envelope = 2
 				NoteType.SAWTOOTH:
-					sample = (2.0 * note.phase - 1.0) * 0.3
+					sample = 2.0 * abs(fmod(note.phase + 0.5, 1.0)) - 1.0
+					volume_envelope = 0.8
 				NoteType.SQUARE:
-					sample = (1.0 if note.phase < 0.5 else -1.0) * 0.3
+					sample = sign(note.phase - 0.5)
+					volume_envelope = 0.6
 				NoteType.TRIANGLE:
 					sample = 4.0 * abs(fmod(note.phase + 0.75, 1.0) - 0.5) - 1.0
+					volume_envelope = 1.6
+				NoteType.NOISE:
+					sample = (float(rand_from_seed(note.frequency + start_ago * note.frequency * 2)[0]) / INT32_MAX) * 2 - 1
+					volume_envelope = 0.9
+				NoteType.BARK:
+					#attack_time = 0.25 * note.total_duration
+					sustain = 0.2
+					simulated_frequency += (cos(note_time * PI) * 0.5 - 0.5) * simulated_frequency * 0.1 + simulated_frequency * 0.05
+					#decay_time = 0.25 * note.total_duration
+					var _noise = (float(rand_from_seed(note.frequency + start_ago * note.frequency * 2)[0]) / INT32_MAX) * 2 - 1
+					var _smooth = smoothed_square_wave(note.phase, 0.2)
+					sample = lerp(_noise, _smooth, note_time * 0.5 + 0.5)
+				NoteType.MEOW:
+					#simulated_frequency += (simulated_frequency * 0.1) - (simulated_frequency * 0.5 * note_time)
+					simulated_frequency += (cos((note_time * 0.75 - 0.25) * PI) - 0.7) * simulated_frequency * 0.1
+					attack_time = 0.25 * note.total_duration
+					decay_time = 0.25 * note.total_duration
+					sustain = 1
+					sample = 2.0 * abs(fmod(note.phase + 0.5, 1.0)) - 1.0
+				NoteType.CHIRP:
+					simulated_frequency += simulated_frequency * 0.2 * -cos(note_time * PI * 2.3) + simulated_frequency * 0.1
+					attack_time = 0.125 * note.total_duration
+					decay_time = 0.25 * note.total_duration
+					sustain = 0.9
+					sample = smoothed_square_wave(note.phase, 0.8)
+					volume_envelope = 0.8
 			
-			var volume_envelope = 1
-			if start_ago < 0.0025:
-				volume_envelope *= start_ago / 0.0025
-			if note.time_left < 0.01:
-				volume_envelope *= note.time_left / 0.01
-			volume_envelope *= remap(note.time_left / note.total_duration, 1, 0, 1, 0.5)
-			volume_envelope /= note.frequency / 200.0 + 1
+			if start_ago < attack_time:
+				volume_envelope *= start_ago / attack_time
+			if note.time_left < decay_time:
+				volume_envelope *= note.time_left / decay_time
+			volume_envelope *= remap(note_time, 0, 1, 1, sustain)
+			#volume_envelope /= note.frequency / 200.0 + 1
 			mixed_sample += sample * 0.3 * volume_envelope
 			
-			note.phase = fmod(note.phase + increment, 1.0)
+			note.phase = fmod(note.phase + simulated_frequency / sample_hz, 1.0)
 			note.time_left -= time_step
 			
 			if note.time_left <= 0:
