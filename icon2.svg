@@ -1,0 +1,26 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+	<defs>
+		<clipPath clipPathUnits="userSpaceOnUse" id="cp1">
+			<path d="m190 15v105h35v40h-35v65h-40v-65h-50l-35 70h-40l35-70h-40l20-40h40l55-110z"/>
+		</clipPath>
+	</defs>
+	<style>
+		.s0 { fill: #12001c } 
+		.s1 { fill: #f493ff } 
+		.s2 { fill: #e600ff } 
+		.s3 { fill: #a200ff } 
+		.s4 { fill: #400065 } 
+		.s5 { fill: #ffffff } 
+	</style>
+	<g id="Layer 1">
+		<path id="Shape 4" fill-rule="evenodd" class="s0" d="m240 0v240h-240v-240z"/>
+		<g id="&lt;Clip Group&gt;" clip-path="url(#cp1)">
+			<path id="Shape 11" fill-rule="evenodd" class="s1" d="m240 160v80h-240v-80z"/>
+			<path id="Shape 12" fill-rule="evenodd" class="s2" d="m240 70v90h-240v-90z"/>
+			<path id="Shape 13" fill-rule="evenodd" class="s3" d="m240 0v70h-240v-70z"/>
+		</g>
+		<path id="Shape 14" fill-rule="evenodd" class="s0" d="m120 120l30-60v60z"/>
+		<path id="Shape 10" fill-rule="evenodd" class="s4" d="m240 0v240h-240v-240zm-220 20h200v200h-200z"/>
+		<path id="Shape 9" fill-rule="evenodd" class="s5" d="m170 190l-10-40-40-10 40-10 10-40 10 40 40 10-40 10"/>
+	</g>
+</svg>

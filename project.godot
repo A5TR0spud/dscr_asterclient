@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="DSCR Asterclient"
-config/version="0.10.7.1"
+config/version="0.10.7.2"
 config/tags=PackedStringArray("2d", "effort", "ui")
 run/main_scene="uid://bft3wuvruhqvw"
 config/auto_accept_quit=false
@@ -21,7 +21,7 @@ run/low_processor_mode=true
 boot_splash/bg_color=Color(0.07058824, 0, 0.10980392, 1)
 boot_splash/stretch_mode=0
 boot_splash/image="uid://j24vprtvfml2"
-config/icon="uid://cho56tur0yc8o"
+config/icon="uid://d1lnrhn7myhgj"
 
 [display]
 

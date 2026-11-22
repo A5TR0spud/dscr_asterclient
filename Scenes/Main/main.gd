@@ -199,10 +199,12 @@ func start_connect(is_reconnect_attempt: bool = false) -> void:
 		timeout_time.start()
 		print("Connecting to %s..." % websocket_url)
 		set_physics_process(true)
+		DisplayServer.window_set_taskbar_progress_state(DisplayServer.PROGRESS_STATE_INDETERMINATE)
 	else:
 		push_error("Unable to connect.")
 		Chat.new_log(Chat.State.FAILED_TO_CONNECT)
 		set_physics_process(false)
+		DisplayServer.window_set_taskbar_progress_state(DisplayServer.PROGRESS_STATE_ERROR)
 
 enum MessageCompilationResult {
 	MESSAGE_SENT,
@@ -396,13 +398,16 @@ func _physics_process(_delta):
 			connected_users.clear()
 			previously_accepted_callsign = -1
 		elif state == WebSocketPeer.STATE_CLOSING:
+			DisplayServer.window_set_taskbar_progress_state(DisplayServer.PROGRESS_STATE_INDETERMINATE)
 			Chat.new_log(Chat.State.DISCONNECTING)
 			print("CLOSING")
 			connected_users.clear()
 			previously_accepted_callsign = -1
 		elif state == WebSocketPeer.STATE_CONNECTING:
+			DisplayServer.window_set_taskbar_progress_state(DisplayServer.PROGRESS_STATE_INDETERMINATE)
 			print("CONNECTING")
 		elif state == WebSocketPeer.STATE_OPEN:
+			DisplayServer.window_set_taskbar_progress_state(DisplayServer.PROGRESS_STATE_NORMAL)
 			Chat.new_log(Chat.State.CONNECTED)
 			timeout_time.stop()
 			reconnect_time.stop()
@@ -445,8 +450,10 @@ func _physics_process(_delta):
 		var code = socket.get_close_code()
 		if code == -1:
 			Chat.new_log(Chat.State.FAILED_TO_CONNECT)
+			DisplayServer.window_set_taskbar_progress_state(DisplayServer.PROGRESS_STATE_ERROR)
 		else:
 			Chat.new_log(Chat.State.DISCONNECTED)
+			DisplayServer.window_set_taskbar_progress_state(DisplayServer.PROGRESS_STATE_NORMAL)
 		print("WebSocket closed with code: %d. Clean: %s" % [code, code != -1])
 		set_physics_process(false) # Stop processing.
 		if trying_to_quit:

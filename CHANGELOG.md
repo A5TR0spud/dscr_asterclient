@@ -1,12 +1,14 @@
 # Versions
 
-## --WIP--
+## 0.10.7.2
 
 ### Additions
 
 * Being pinged now has a unique unread marker
 * Added |-577 support for the following: |-807, |-157403, |-157457, |-157458, |-157459
   * And basic/ugly support for: |-310, |-311, |-312
+* Getting a ping with pings muted or a new message with system muted now "requests attention" to the OS. On Windows, this flashes the taskbar icon.
+* Taskbar should show when its connecting
 
 ## 0.10.7.1
 

@@ -204,6 +204,17 @@ static func new_transmission(packet: PackedStringArray) -> void:
 		if composite_cs == target_cs or composite_cs == target_cs2:
 			SoundManager.play_sound(SoundManager.Sounds.PING)
 			ping = true
+		if (
+			(not instance.get_window().has_focus() and AudioServer.is_bus_mute(AudioServer.get_bus_index("System"))) or
+			(ping and AudioServer.is_bus_mute(AudioServer.get_bus_index("Ping")))
+		):
+			instance.get_window().request_attention()
+		#TODO: toasts, for Godot 4.8
+		#if not instance.get_window().has_focus() and ping:
+		#var _title: String = Localizer.translate("NOTIFICATION_TOAST_TITLE", [Main.base_10_to_callsign(sender), channel])
+		#contents: translated message
+		#	DisplayServer.send_toast_notification()
+		
 	var ghost_to_skeleton: bool = true
 	if channel_id == SKELETON_KEY:
 		new_message.key = SKELETON_KEY

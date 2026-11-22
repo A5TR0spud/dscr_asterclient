@@ -1,23 +1,20 @@
 <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
 	<style>
 		.s0 { fill: #12001c } 
-		.s1 { fill: #e600ff } 
-		.s2 { fill: #f493ff } 
+		.s1 { fill: #f493ff } 
+		.s2 { fill: #e600ff } 
 		.s3 { fill: #a200ff } 
 		.s4 { fill: #400065 } 
 		.s5 { fill: #ffffff } 
 	</style>
 	<g id="Layer 1">
-		<path id="Shape 4" fill-rule="evenodd" class="s0" d="m239.66 0.38v240h-240v-240z"/>
-		<path id="Shape 1 copy" fill-rule="evenodd" class="s1" d="m189.66 60.38v70h-40v-70z"/>
-		<path id="Shape 5" fill-rule="evenodd" class="s1" d="m149.66 60.38l-35 70h-40l35-70z"/>
-		<path id="Shape 1 copy 2" fill-rule="evenodd" class="s2" d="m189.66 150.38v70h-40v-70z"/>
-		<path id="Shape 1" fill-rule="evenodd" class="s3" d="m189.66 20.38v50h-40v-50z"/>
-		<path id="Shape 2" fill-rule="evenodd" class="s3" d="m169.66 20.38l-25 50h-40l25-50z"/>
-		<path id="Shape 5 copy" fill-rule="evenodd" class="s2" d="m104.66 150.38l-35 70h-40l35-70z"/>
-		<path id="Shape 3" fill-rule="evenodd" class="s1" d="m219.66 120.38v40h-200l20-40z"/>
-		<path id="Shape 6" fill-rule="evenodd" class="s4" d="m239.66 0.38v20h-240v-20z"/>
-		<path id="Shape 6 copy" fill-rule="evenodd" class="s4" d="m239.66 220.38v20h-240v-20z"/>
+		<path id="Shape 4" fill-rule="evenodd" class="s0" d="m240 0v240h-240v-240z"/>
+		<path id="Shape 1 copy 2" fill-rule="evenodd" class="s1" d="m190 160v60h-40v-60z"/>
+		<path id="Shape 5 copy" fill-rule="evenodd" class="s1" d="m100 160l-30 60h-40l30-60z"/>
+		<path id="Shape 1 copy" fill-rule="evenodd" class="s2" d="m190 70v50h30v40h-200l20-40h40l25-50h40l-25 50h30v-50z"/>
+		<path id="Shape 2" fill-rule="evenodd" class="s3" d="m190 20v50h-40v-10l-5 10h-40l25-50z"/>
+		<path id="Shape 6" fill-rule="evenodd" class="s4" d="m220 0v20h-200v-20z"/>
+		<path id="Shape 6 copy" fill-rule="evenodd" class="s4" d="m220 220v20h-200v-20z"/>
 		<path id="Shape 7" fill-rule="evenodd" class="s4" d="m20 0v240h-20v-240z"/>
 		<path id="Shape 7 copy" fill-rule="evenodd" class="s4" d="m240 0v240h-20v-240z"/>
 		<path id="Shape 9" fill-rule="evenodd" class="s5" d="m170 190l-10-40-40-10 40-10 10-40 10 40 40 10-40 10"/>
