@@ -191,6 +191,7 @@ static func new_transmission(packet: PackedStringArray) -> void:
 		and channel_is_available(channel_id)
 	):
 		SoundManager.play_sound(SoundManager.Sounds.NOTIFICATION)
+		var flash_taskbar: bool = AudioServer.is_bus_mute(AudioServer.get_bus_index("System"))
 		var target_cs: String = String.num_int64(Main.instance.previously_accepted_callsign, 8)
 		var target_cs2: String = Main.base_10_to_callsign(Main.instance.previously_accepted_callsign)
 		var composite_cs: String = ""
@@ -204,10 +205,9 @@ static func new_transmission(packet: PackedStringArray) -> void:
 		if composite_cs == target_cs or composite_cs == target_cs2:
 			SoundManager.play_sound(SoundManager.Sounds.PING)
 			ping = true
-		if (
-			(not instance.get_window().has_focus() and AudioServer.is_bus_mute(AudioServer.get_bus_index("System"))) or
-			(ping and AudioServer.is_bus_mute(AudioServer.get_bus_index("Ping")))
-		):
+			if AudioServer.is_bus_mute(AudioServer.get_bus_index("Ping")):
+				flash_taskbar = true
+		if flash_taskbar:
 			instance.get_window().request_attention()
 		#TODO: toasts, for Godot 4.8
 		#if not instance.get_window().has_focus() and ping:
