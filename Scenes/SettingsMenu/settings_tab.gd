@@ -244,6 +244,10 @@ func _on_color_ref_switch_item_selected(index: int):
 	SettingsHandler.color_signal_mode = index
 	Main.on_dictionary_support_updated()
 	save(false)
+	
+func _on_request_attention_switch_item_selected(index: int):
+	SettingsHandler.request_attention_mode = index
+	save(false)
 
 func _on_rh_sidebar_set(new_value):
 	SettingsHandler.right_handed_sidebar = new_value

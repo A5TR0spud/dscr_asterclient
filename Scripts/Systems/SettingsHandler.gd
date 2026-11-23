@@ -17,6 +17,7 @@ static var img_invert_pitch: bool = false
 static var img_invert_zoom: bool = false
 static var do_bbcode: bool = false
 static var color_signal_mode: int = 0
+static var request_attention_mode: int = 0
 static var use_at_undef: bool = false
 static var language: String = ""
 static var use_m0_ui: bool = false

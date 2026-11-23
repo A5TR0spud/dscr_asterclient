@@ -191,7 +191,7 @@ static func new_transmission(packet: PackedStringArray) -> void:
 		and channel_is_available(channel_id)
 	):
 		SoundManager.play_sound(SoundManager.Sounds.NOTIFICATION)
-		var flash_taskbar: bool = AudioServer.is_bus_mute(AudioServer.get_bus_index("System"))
+		var flash_taskbar: bool = SettingsHandler.request_attention_mode == 2
 		var target_cs: String = String.num_int64(Main.instance.previously_accepted_callsign, 8)
 		var target_cs2: String = Main.base_10_to_callsign(Main.instance.previously_accepted_callsign)
 		var composite_cs: String = ""
@@ -205,7 +205,7 @@ static func new_transmission(packet: PackedStringArray) -> void:
 		if composite_cs == target_cs or composite_cs == target_cs2:
 			SoundManager.play_sound(SoundManager.Sounds.PING)
 			ping = true
-			if AudioServer.is_bus_mute(AudioServer.get_bus_index("Ping")):
+			if SettingsHandler.request_attention_mode == 1:
 				flash_taskbar = true
 		if flash_taskbar:
 			instance.get_window().request_attention()
