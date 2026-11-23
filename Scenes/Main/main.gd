@@ -407,7 +407,7 @@ func _physics_process(_delta):
 			DisplayServer.window_set_taskbar_progress_state(DisplayServer.PROGRESS_STATE_INDETERMINATE)
 			print("CONNECTING")
 		elif state == WebSocketPeer.STATE_OPEN:
-			DisplayServer.window_set_taskbar_progress_state(DisplayServer.PROGRESS_STATE_NORMAL)
+			DisplayServer.window_set_taskbar_progress_state(DisplayServer.ProgressState.PROGRESS_STATE_NOPROGRESS)
 			Chat.new_log(Chat.State.CONNECTED)
 			timeout_time.stop()
 			reconnect_time.stop()
