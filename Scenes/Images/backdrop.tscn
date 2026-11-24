@@ -18,7 +18,7 @@ texture_filter = 0
 
 [sub_resource type="QuadMesh" id="QuadMesh_g4v7s"]
 material = SubResource("StandardMaterial3D_0mdww")
-size = Vector2(32, 32)
+size = Vector2(33, 33)
 orientation = 1
 
 [node name="Backdrop" type="WorldEnvironment" unique_id=5605136]
