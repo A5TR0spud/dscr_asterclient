@@ -30,6 +30,7 @@ func _ready() -> void:
 @export var color_edit: SpinBox
 @export var color_sample: ColorRect
 @export var low_contrast: SettingEntry
+@export var app_attention: OptionButton
 @export_subgroup("Sounds")
 @export var sound_slider: Range
 @export var music_slider: Range
@@ -75,6 +76,7 @@ func refresh() -> void:
 	parsebar.set_state_no_signal(SettingsHandler.do_parsebar)
 	pipe_escape.set_state_no_signal(SettingsHandler.require_pipe_escape)
 	low_contrast.set_state_no_signal(SettingsHandler.low_contrast_mode)
+	app_attention.selected = SettingsHandler.request_attention_mode
 
 func _refresh_dict_supports():
 	_refresh_confetti()

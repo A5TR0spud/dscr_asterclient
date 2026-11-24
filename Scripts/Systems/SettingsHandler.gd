@@ -121,6 +121,7 @@ static func initialize() -> void:
 	periodic_table_visualization = SaveSystem.settings.get_or_add("periodic_table_visualization", periodic_table_visualization)
 	require_pipe_escape = SaveSystem.settings.get_or_add("require_pipe_escape", require_pipe_escape)
 	low_contrast_mode = SaveSystem.settings.get_or_add("low_contrast_mode", low_contrast_mode)
+	request_attention_mode = SaveSystem.settings.get_or_add("request_attention_mode", request_attention_mode)
 
 static func evaluate_volume() -> void:
 	AudioServer.set_bus_volume_linear(
@@ -189,3 +190,4 @@ static func export() -> void:
 	SaveSystem.settings.set("periodic_table_visualization", periodic_table_visualization)
 	SaveSystem.settings.set("require_pipe_escape", require_pipe_escape)
 	SaveSystem.settings.set("low_contrast_mode", low_contrast_mode)
+	SaveSystem.settings.set("request_attention_mode", request_attention_mode)

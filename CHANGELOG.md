@@ -1,5 +1,15 @@
 # Versions
 
+## --WIP--
+
+### Changes
+
+* Moved attention requesting to new setting (Sugar)
+
+### Fixes
+
+* Taskbar now shows normal instead of 0% when connected (Sugar)
+
 ## 0.10.7.2
 
 ### Additions

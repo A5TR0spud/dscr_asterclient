@@ -11,7 +11,7 @@
 [sub_resource type="FoldableGroup" id="FoldableGroup_2xmuf"]
 allow_folding_all = true
 
-[node name="SettingsTab" type="VBoxContainer" unique_id=1649791393 node_paths=PackedStringArray("formatting", "do_bbcode", "color_ref_group", "color_ref", "truncate", "font_size", "undef_setting", "number_sep_setting", "right_sidebar", "parsebar", "pipe_escape", "confetti_setting", "ui_stretch", "ui_scale", "color_edit", "color_sample", "low_contrast", "sound_slider", "music_slider", "sound_sample", "music_sample", "music_parent", "ping_slider", "default_image_visible", "crunch_image", "invert_pitch", "invert_yaw", "invert_zoom", "image_setting_group", "callsign_backup", "callsign_failsafe")]
+[node name="SettingsTab" type="VBoxContainer" unique_id=1649791393 node_paths=PackedStringArray("formatting", "do_bbcode", "color_ref_group", "color_ref", "truncate", "font_size", "undef_setting", "number_sep_setting", "right_sidebar", "parsebar", "pipe_escape", "confetti_setting", "ui_stretch", "ui_scale", "color_edit", "color_sample", "low_contrast", "app_attention", "sound_slider", "music_slider", "sound_sample", "music_sample", "music_parent", "ping_slider", "default_image_visible", "crunch_image", "invert_pitch", "invert_yaw", "invert_zoom", "image_setting_group", "callsign_backup", "callsign_failsafe")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -37,6 +37,7 @@ ui_scale = NodePath("ScrollContainer/Options/Interface/VBoxContainer/UIScale/Sca
 color_edit = NodePath("ScrollContainer/Options/Interface/VBoxContainer/ThemeColor/ColorPicker")
 color_sample = NodePath("ScrollContainer/Options/Interface/VBoxContainer/ColorRect")
 low_contrast = NodePath("ScrollContainer/Options/Interface/VBoxContainer/LowContrast")
+app_attention = NodePath("ScrollContainer/Options/Interface/VBoxContainer/RequestAttentionMode/RequestAttentionSwitch")
 sound_slider = NodePath("ScrollContainer/Options/Sounds/VBoxContainer/GlobalVolume/VolumeSlider")
 music_slider = NodePath("ScrollContainer/Options/Sounds/VBoxContainer/MusicVolume/VolumeSlider")
 sound_sample = NodePath("AudioPreview")
@@ -288,6 +289,42 @@ metadata/_custom_type_script = "uid://dbvyvpj6id1sv"
 [node name="HSeparator7" type="HSeparator" parent="ScrollContainer/Options/Interface/VBoxContainer" unique_id=913644994]
 layout_mode = 2
 
+[node name="RequestAttentionMode" type="VBoxContainer" parent="ScrollContainer/Options/Interface/VBoxContainer" unique_id=1969600409]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/Options/Interface/VBoxContainer/RequestAttentionMode" unique_id=1724810995]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "request attention mode"
+autowrap_mode = 3
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/Options/Interface/VBoxContainer/RequestAttentionMode/Label" unique_id=1547874942]
+script = ExtResource("5_gal0n")
+translations = Dictionary[StringName, String]({
+&"text": "SETTINGS_REQUEST_ATTENTION"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="RequestAttentionSwitch" type="OptionButton" parent="ScrollContainer/Options/Interface/VBoxContainer/RequestAttentionMode" unique_id=342752714]
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "none"
+popup/item_0/id = 0
+popup/item_1/text = "inline"
+popup/item_1/id = 1
+popup/item_2/text = "bottom"
+popup/item_2/id = 2
+
+[node name="LocaleNode" type="Node" parent="ScrollContainer/Options/Interface/VBoxContainer/RequestAttentionMode/RequestAttentionSwitch" unique_id=24300956]
+script = ExtResource("5_gal0n")
+translations = Dictionary[StringName, String]({
+&"popup/item_0/text": "SETTINGS_REQUEST_ATTENTION_NONE",
+&"popup/item_1/text": "SETTINGS_REQUEST_ATTENTION_PING",
+&"popup/item_2/text": "SETTINGS_REQUEST_ATTENTION_ALWAYS"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
 [node name="ThemeColor" type="HBoxContainer" parent="ScrollContainer/Options/Interface/VBoxContainer" unique_id=243570277]
 layout_mode = 2
 theme_override_constants/separation = 8
@@ -347,42 +384,6 @@ layout_mode = 2
 layout_mode = 2
 description = "SETTINGS_LOW_CONTRAST"
 state = true
-
-[node name="RequestAttentionMode" type="VBoxContainer" parent="ScrollContainer/Options/Interface/VBoxContainer" unique_id=1969600409]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="ScrollContainer/Options/Interface/VBoxContainer/RequestAttentionMode" unique_id=1724810995]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "request attention mode"
-autowrap_mode = 3
-
-[node name="LocaleNode" type="Node" parent="ScrollContainer/Options/Interface/VBoxContainer/RequestAttentionMode/Label" unique_id=1547874942]
-script = ExtResource("5_gal0n")
-translations = Dictionary[StringName, String]({
-&"text": "SETTINGS_REQUEST_ATTENTION"
-})
-metadata/_custom_type_script = "uid://7gga31jeosxl"
-
-[node name="RequestAttentionSwitch" type="OptionButton" parent="ScrollContainer/Options/Interface/VBoxContainer/RequestAttentionMode" unique_id=342752714]
-layout_mode = 2
-selected = 0
-item_count = 3
-popup/item_0/text = "none"
-popup/item_0/id = 0
-popup/item_1/text = "inline"
-popup/item_1/id = 1
-popup/item_2/text = "bottom"
-popup/item_2/id = 2
-
-[node name="LocaleNode" type="Node" parent="ScrollContainer/Options/Interface/VBoxContainer/RequestAttentionMode/RequestAttentionSwitch" unique_id=24300956]
-script = ExtResource("5_gal0n")
-translations = Dictionary[StringName, String]({
-&"popup/item_0/text": "SETTINGS_REQUEST_ATTENTION_NONE",
-&"popup/item_1/text": "SETTINGS_REQUEST_ATTENTION_PING",
-&"popup/item_2/text": "SETTINGS_REQUEST_ATTENTION_ALWAYS"
-})
-metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="Sounds" type="FoldableContainer" parent="ScrollContainer/Options" unique_id=701943303]
 layout_mode = 2
@@ -693,11 +694,11 @@ on_text = "SETTINGS_BACKUP_INCREMENT"
 [connection signal="cancel" from="ScrollContainer/Options/Interface/VBoxContainer/ScaleConfirm" to="." method="_on_scale_confirm_cancel"]
 [connection signal="confirmed" from="ScrollContainer/Options/Interface/VBoxContainer/ScaleConfirm" to="." method="_on_scale_confirm_confirmed"]
 [connection signal="probed" from="ScrollContainer/Options/Interface/VBoxContainer/ScaleConfirm" to="." method="_on_scale_confirm_probed"]
+[connection signal="item_selected" from="ScrollContainer/Options/Interface/VBoxContainer/RequestAttentionMode/RequestAttentionSwitch" to="." method="_on_request_attention_switch_item_selected"]
 [connection signal="value_changed" from="ScrollContainer/Options/Interface/VBoxContainer/ThemeColor/ColorPicker" to="." method="_on_color_picker_value_changed"]
 [connection signal="pressed" from="ScrollContainer/Options/Interface/VBoxContainer/ThemeColorSubmitElse/ColorSubmitButton" to="." method="_on_color_submit_button_pressed"]
 [connection signal="pressed" from="ScrollContainer/Options/Interface/VBoxContainer/ThemeColorSubmitElse/ColorCancelButton" to="." method="_on_color_cancel_button_pressed"]
 [connection signal="set" from="ScrollContainer/Options/Interface/VBoxContainer/LowContrast" to="." method="_on_low_contrast_set"]
-[connection signal="item_selected" from="ScrollContainer/Options/Interface/VBoxContainer/RequestAttentionMode/RequestAttentionSwitch" to="." method="_on_request_attention_switch_item_selected"]
 [connection signal="value_changed" from="ScrollContainer/Options/Sounds/VBoxContainer/GlobalVolume/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
 [connection signal="pressed" from="ScrollContainer/Options/Sounds/VBoxContainer/GlobalVolume/SliderLabelGrid/Normal" to="." method="_on_volume_normal_pressed"]
 [connection signal="value_changed" from="ScrollContainer/Options/Sounds/VBoxContainer/MusicVolume/VolumeSlider" to="." method="_on_music_slider_value_changed"]
