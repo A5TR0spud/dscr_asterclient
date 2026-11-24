@@ -9,19 +9,23 @@ var nam_search: String = ""
 func _ready():
 	Main.instance.reload_dict.connect(refresh)
 
-func refresh():
+func refresh(force_visible: bool = false):
 	for idx: int in range(max(self.get_child_count(), DictionaryHandler.word_keys.size())):
 		if idx >= DictionaryHandler.word_keys.size():
 			self.get_child(idx).queue_free()
 			continue
 		if idx < self.get_child_count():
-			self.get_child(idx).sig = DictionaryHandler.word_keys[idx]
-			self.get_child(idx).refresh()
+			var _ent: DictEntry = self.get_child(idx)
+			_ent.sig = DictionaryHandler.word_keys[idx]
+			_ent.refresh()
+			if force_visible:
+				_ent.show()
 		else:
 			var obj: DictEntry = dict_entry_scene.instantiate()
 			obj.sig = DictionaryHandler.word_keys[idx]
 			self.add_child(obj)
-	search_children()
+	if not force_visible:
+		search_children()
 
 var re_search: bool = false
 
@@ -30,7 +34,7 @@ func _on_num_edit_text_changed(new_text: String):
 	re_search = true
 
 func _on_sig_edit_text_changed(new_text: String):
-	nam_search = DictionaryHandler.filter_name_input(new_text)
+	nam_search = new_text
 	re_search = true
 
 var ticker: int = 0
@@ -41,14 +45,26 @@ func _physics_process(_delta: float) -> void:
 	ticker += 1
 
 func search_children() -> void:
-	var options: Array = AutocompleteManager.get_autocomplete_options(nam_search, DictionaryHandler.word_names)
-	for child: DictEntry in self.get_children():
-		child.visible = (
-			(not num_search or str(child.sig).contains(num_search))
-			and
-			(not nam_search or DictionaryHandler.get_or_default_signal_name(child.sig) in options)
-		)
+	var order: Array = AutocompleteManager.get_autocomplete_options(nam_search, DictionaryHandler.word_names)
+	
 	re_search = false
+	
+	if order.is_empty():
+		refresh(true)
+		if num_search.is_empty():
+			return
+		order = DictionaryHandler.word_names
+	
+	for i: int in range(order.size()):
+		var s: String = order[i]
+		for j: int in range(i, self.get_child_count()):
+			var c: DictEntry = self.get_child(j)
+			if (c.meaning_label.text == s or nam_search.is_empty()) and (c.signal_label.text.contains(num_search) or num_search.is_empty()):
+				self.move_child(c, i)
+				c.show()
+				break
+			else:
+				c.hide()
 
 func _on_dictionary_save_open_pressed():
 	SaveSystem.open_save_location()

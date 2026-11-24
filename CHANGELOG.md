@@ -5,6 +5,7 @@
 ### Changes
 
 * Moved attention requesting to new setting (Sugar)
+* Searching dictionary by names now orders by "closeness" instead of frequency
 
 ### Fixes
 
