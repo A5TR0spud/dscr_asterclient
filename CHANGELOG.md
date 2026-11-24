@@ -5,11 +5,12 @@
 ### Changes
 
 * Moved attention requesting to new setting (Sugar)
-* Searching dictionary by names now orders by "closeness" instead of frequency
+* Searching dictionary by names now orders by likeness instead of frequency
 
 ### Fixes
 
 * Taskbar now shows normal instead of 0% when connected (Sugar)
+* Aligned center of rendered grid lines rather than edges to a grid size of 8x8 (Sugar)
 
 ## 0.10.7.2
 

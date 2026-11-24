@@ -24,6 +24,7 @@ func refresh(force_visible: bool = false):
 			var obj: DictEntry = dict_entry_scene.instantiate()
 			obj.sig = DictionaryHandler.word_keys[idx]
 			self.add_child(obj)
+	in_order = true
 	if not force_visible:
 		search_children()
 
@@ -44,27 +45,44 @@ func _physics_process(_delta: float) -> void:
 		ticker = -1
 	ticker += 1
 
+var in_order: bool = false
+
 func search_children() -> void:
 	var order: Array = AutocompleteManager.get_autocomplete_options(nam_search, DictionaryHandler.word_names)
 	
 	re_search = false
 	
 	if order.is_empty():
-		refresh(true)
-		if num_search.is_empty():
-			return
+		if not in_order and nam_search.is_empty():
+			refresh(true)
 		order = DictionaryHandler.word_names
 	
-	for i: int in range(order.size()):
-		var s: String = order[i]
-		for j: int in range(i, self.get_child_count()):
-			var c: DictEntry = self.get_child(j)
-			if (c.meaning_label.text == s or nam_search.is_empty()) and (c.signal_label.text.contains(num_search) or num_search.is_empty()):
-				self.move_child(c, i)
-				c.show()
-				break
-			else:
-				c.hide()
+	for cidx: int in range(self.get_child_count()):
+		var c: DictEntry = self.get_child(cidx)
+		var target_position: int = order.find(c.meaning_label.text)
+		if target_position < 0 and not nam_search.is_empty():
+			c.hide()
+			continue
+		if target_position != cidx and not nam_search.is_empty():
+			self.move_child(c, target_position)
+			c.visible = c.signal_label.text.contains(num_search) or num_search.is_empty()
+			in_order = false
+			continue
+		c.visible = (nam_search.is_empty() or c.meaning_label.text in order) and (c.signal_label.text.contains(num_search) or num_search.is_empty())
+	
+	#for i: int in range(order.size()):
+		#var s: String = order[i]
+		#for j: int in range(i, self.get_child_count()):
+			#var c: DictEntry = self.get_child(j)
+			#if (c.meaning_label.text == s or nam_search.is_empty()) and (c.signal_label.text.contains(num_search) or num_search.is_empty()):
+				#if j != i:
+					# this falsely fires. unknown reason
+					#self.move_child(c, i)
+					#in_order = false
+				#c.show()
+				#break
+			#else:
+				#c.hide()
 
 func _on_dictionary_save_open_pressed():
 	SaveSystem.open_save_location()
