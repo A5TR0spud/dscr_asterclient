@@ -365,6 +365,14 @@ static func signals_to_words(input: Array, do_whitespace_format: bool = false, c
 				underline = desc.get(underline_key, false)
 				strike = desc.get(strikethrough_key, false)
 				invert = desc.get(background_key, false)
+				var _notes: String = desc.get(desc_key, "")
+				if _notes and do_hint:
+					if _notes.length() > SettingsHandler.truncate_message_size:
+						_notes = _notes.left(SettingsHandler.truncate_message_size)
+						if SettingsHandler.use_m0_ui and support_m0 and _notes.right(1).strip_edges():
+							_notes += " "
+						_notes += Localizer.translate("TRUNCATION")
+					hint += "\n" + _notes.replace("\"", "''")
 				color = calc_desc_color(desc.get(color_key))
 		elif is_number:
 			word = str(sig)
