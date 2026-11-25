@@ -343,7 +343,7 @@ static func signals_to_words(input: Array, do_whitespace_format: bool = false, c
 		var hint: String = ""
 		
 		if is_signal:
-			hint = str("|", sig)
+			hint = str(sig)
 			word = get_or_default_signal_name(sig)
 			var desc: Dictionary = get_or_default_signal_desc(sig)
 			if do_whitespace_format:
