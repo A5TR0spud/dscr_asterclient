@@ -59,7 +59,7 @@ func search_children() -> void:
 	
 	for cidx: int in range(self.get_child_count()):
 		var c: DictEntry = self.get_child(cidx)
-		var target_position: int = order.find(c.meaning_label.text)
+		var target_position: int = order.find(c.strict_name)
 		if target_position < 0 and not nam_search.is_empty():
 			c.hide()
 			continue
@@ -68,7 +68,7 @@ func search_children() -> void:
 			c.visible = c.signal_label.text.contains(num_search) or num_search.is_empty()
 			in_order = false
 			continue
-		c.visible = (nam_search.is_empty() or c.meaning_label.text in order) and (c.signal_label.text.contains(num_search) or num_search.is_empty())
+		c.visible = (nam_search.is_empty() or c.strict_name in order) and (c.signal_label.text.contains(num_search) or num_search.is_empty())
 	
 	#for i: int in range(order.size()):
 		#var s: String = order[i]

@@ -3,6 +3,7 @@ class_name DictEntry
 
 var _previous_sig: int = INT64_MAX
 var sig: int = 0
+var strict_name: String = ""
 
 @onready var signal_label: Label = $Entry/Signal
 @onready var meaning_label: RichTextLabel = $Entry/Meaning
@@ -12,6 +13,7 @@ func _ready():
 	Main.instance.reload_dict.connect(regen_text)
 
 func regen_text():
+	strict_name = DictionaryHandler.get_or_default_signal_name(sig)
 	meaning_label.text = DictionaryHandler.signals_to_words([sig], false, true, SettingsHandler.do_bbcode, false)
 
 func refresh():
