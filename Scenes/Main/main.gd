@@ -109,7 +109,8 @@ func _ready():
 	boot_sound.finished.connect(boot_sound.queue_free)
 	get_window().files_dropped.connect(_on_files_dropped)
 	post_load.emit()
-
+	get_window().dpi_changed.connect(_on_dpi_changed)
+	
 static func get_callsign_color(value: int) -> Color:
 	var hue: float = fmod(137.5 * value, 360) / 360.0;
 	return _hsl_to_color(hue, 1.0, 0.7)
@@ -503,6 +504,9 @@ func _on_dsve_button_pressed():
 
 func _on_dsmidi_button_pressed():
 	OS.shell_open("https://dsmidi.akqqa.dev/")
+
+func _on_dpi_changed():
+	SettingsHandler.apply_ui_scale()
 
 @onready var sidebar_tabber: TabContainer = %SidebarTabberMain
 
