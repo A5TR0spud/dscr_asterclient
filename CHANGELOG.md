@@ -7,6 +7,8 @@
 * Moved attention requesting to new setting (Sugar)
 * Searching dictionary by names now orders by likeness instead of frequency
 * Signal tooltips now show the first x characters of your notes. This is based on the truncation setting.
+* Dictionary is now in DSCR mode by default
+  * Signals will no longer be parsed if they are undefined
 
 ### Fixes
 

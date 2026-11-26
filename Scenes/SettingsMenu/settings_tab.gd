@@ -9,7 +9,7 @@ func _ready() -> void:
 	$ScrollContainer.scroll_vertical = 0
 	Main.instance.reload_settings.connect(refresh)
 	Main.instance.reload_dictionary_support.connect(_refresh_dict_supports)
-	Main.instance.reload_dict.connect(_refresh_confetti)
+	Main.instance.reload_dict.connect(_refresh_dict_supports)
 
 @export_subgroup("Signal Display")
 @export var formatting: SettingEntry
@@ -79,9 +79,9 @@ func refresh() -> void:
 	app_attention.selected = SettingsHandler.request_attention_mode
 
 func _refresh_dict_supports():
-	_refresh_confetti()
+	confetti_setting.visible = DictionaryHandler.support_dscr and DictionaryHandler.contains_signal(-702)
 	image_setting_group.visible = DictionaryHandler.support_m0
-	music_parent.visible = DictionaryHandler.support_dscr
+	music_parent.visible = DictionaryHandler.support_dscr and DictionaryHandler.contains_signal(AudiaterNode.SONG)
 	number_sep_setting.visible = DictionaryHandler.support_m0
 	_refresh_color_ref()
 
@@ -90,9 +90,6 @@ func _refresh_color_ref():
 	color_ref.set_item_disabled(1, not SettingsHandler.do_bbcode)
 	if color_ref.is_item_disabled(1) and color_ref.selected == 1:
 		color_ref.select(2)
-
-func _refresh_confetti():
-	confetti_setting.visible = DictionaryHandler.support_dscr and -702 in DictionaryHandler.word_keys
 
 func _volume_linear_to_slider(slider: Range, value: float) -> float:
 	if value < 0:

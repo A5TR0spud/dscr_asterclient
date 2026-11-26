@@ -76,19 +76,6 @@ func search_children() -> void:
 		if is_instance_valid(re_ordered_children[cdx]):
 			self.move_child(re_ordered_children[cdx], cdx)
 	
-	#for i: int in range(order.size()):
-		#var s: String = order[i]
-		#for j: int in range(i, self.get_child_count()):
-			#var c: DictEntry = self.get_child(j)
-			#if (c.meaning_label.text == s or nam_search.is_empty()) and (c.signal_label.text.contains(num_search) or num_search.is_empty()):
-				#if j != i:
-					# this falsely fires. unknown reason
-					#self.move_child(c, i)
-					#in_order = false
-				#c.show()
-				#break
-			#else:
-				#c.hide()
 
 func _on_dictionary_save_open_pressed():
 	SaveSystem.open_save_location()

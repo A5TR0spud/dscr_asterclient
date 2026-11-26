@@ -21,47 +21,18 @@ const COLORS: Array = [
 static func calculate_color(value: int) -> Color:
 	if value >= 65 and value <= 128 and DictionaryHandler.support_dscr:
 		value -= 65
-		@warning_ignore_start("integer_division")
-		var r1: int = value / 16 % 4
-		var g1: int = value / 4 % 4
-		var b1: int = value % 4
-		@warning_ignore_restore("integer_division")
 		var r: float
 		var g: float
 		var b: float
-		match r1:
-			0:
-				r = 0.1
-			1:
-				r = 0.5
-			2:
-				r = 0.75
-			3:
-				r = 1
-		match g1:
-			0:
-				g = 0.1
-			1:
-				g = 0.5
-			2:
-				g = 0.75
-			3:
-				g = 1
-		match b1:
-			0:
-				b = 0.1
-			1:
-				b = 0.5
-			2:
-				b = 0.75
-			3:
-				b = 1
-		if r1 == g1 and g1 == b1:
+		const _col: PackedFloat32Array = [0.1, 0.5, 0.75, 1]
+		r = _col[(value >> 4) % 4]
+		g = _col[(value >> 2) % 4]
+		b = _col[value % 4]
+		if value == 0:
 			r += 0.1
 			g += 0.1
 			b += 0.1
-		var _c: Color = Color(r, g, b)
-		return _c
+		return Color(r, g, b)
 	if value < 0 or value > 64:
 		return Color.TRANSPARENT
 	value = clampi(value, 0, 64)
@@ -155,11 +126,11 @@ var _cube_count: int = 0
 func _parse_visual_object(parser: TransmissionParser) -> Dictionary:
 	var type: int = 0
 	var ret: Dictionary = {}
-	if DictionaryHandler.support_dscr and parser.try_consume(CUBE):
+	if DictionaryHandler.support_dscr and parser.try_consume(CUBE) and DictionaryHandler.contains_signal(CUBE):
 		type = 1
-	elif DictionaryHandler.support_dscr and parser.try_consume(BOX):
+	elif DictionaryHandler.support_dscr and parser.try_consume(BOX) and DictionaryHandler.contains_signal(BOX):
 		type = 2
-	elif DictionaryHandler.support_dscr and parser.try_consume(LINE):
+	elif DictionaryHandler.support_dscr and parser.try_consume(LINE) and DictionaryHandler.contains_signal(LINE):
 		type = 3
 	elif (first_sphere and parser.peek() == PLOT) or not first_sphere:
 		parser.expect(PLOT)

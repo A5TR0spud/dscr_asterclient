@@ -47,6 +47,7 @@ func ready():
 		key_node.disabled = true
 		key_node.mouse_default_cursor_shape = Control.CURSOR_ARROW
 	Main.instance.reload_dictionary_support.connect(try_parses)
+	Main.instance.reload_dict.connect(try_parses)
 	Main.instance.reload_dictionary_support.connect(func():
 		if -54 in message:
 			request_rewrite(false)
@@ -68,7 +69,7 @@ func try_parses():
 			image_button_node.queue_free()
 	if is_instance_valid(song_node):
 		var has_song: bool = AudiaterNode.SONG in message
-		var song_enabled: bool = DictionaryHandler.support_dscr
+		var song_enabled: bool = DictionaryHandler.support_dscr and DictionaryHandler.contains_signal(AudiaterNode.SONG)
 		var has_valid_song: bool = song_node.check_song(message) if has_song else false
 		song_node.visible = has_valid_song and song_enabled
 		if !has_song and delete_empty_parses:

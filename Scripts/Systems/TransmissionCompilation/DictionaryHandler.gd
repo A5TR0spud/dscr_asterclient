@@ -156,7 +156,7 @@ static var support_m0: bool:
 		SaveSystem.dict.set("supportMeteorite0", value)
 static var support_dscr: bool:
 	get:
-		return SaveSystem.dict.get_or_add("supportDSCR", false)
+		return SaveSystem.dict.get_or_add("supportDSCR", true)
 	set(value):
 		SaveSystem.dict.set("supportDSCR", value)
 

@@ -158,7 +158,7 @@ func parse_song_item(parser: TransmissionParser) -> Array[Note]:
 	#print("item ", parser.save_state())
 	if not parser.can_continue():
 		return []
-	if (parser.peek() in VALID_NOTES):
+	if (parser.peek() in VALID_NOTES) and DictionaryHandler.contains_signal(parser.peek()):
 		return [parse_song_note(parser)]
 	if parser.try_consume(VARIABLE):
 		var idx = parser.advance()

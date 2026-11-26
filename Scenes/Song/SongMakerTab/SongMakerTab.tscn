@@ -1,11 +1,48 @@
 [gd_scene format=3 uid="uid://ctmplqfx71spp"]
 
-[node name="AudioEditor" type="VBoxContainer" unique_id=1747675814]
+[node name="TabContainer" type="TabContainer" unique_id=1667985901]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+current_tab = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1435859591]
+[node name="Composer" type="VSplitContainer" parent="." unique_id=687056630]
+layout_mode = 2
+split_offsets = PackedInt32Array(16)
+drag_nested_intersections = true
+split_offset = 16
+metadata/_tab_index = 0
+
+[node name="Files" type="PanelContainer" parent="Composer" unique_id=524227160]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="Tracks" type="PanelContainer" parent="Composer" unique_id=802845252]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Composer/Tracks" unique_id=1560618930]
+layout_mode = 2
+
+[node name="NotePlacer" type="VSplitContainer" parent="." unique_id=1873991226]
+visible = false
+layout_mode = 2
+split_offsets = PackedInt32Array(16)
+drag_nested_intersections = true
+split_offset = 16
+metadata/_tab_index = 1
+
+[node name="NoteTypes" type="PanelContainer" parent="NotePlacer" unique_id=1443936540]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="Pitches" type="PanelContainer" parent="NotePlacer" unique_id=213605430]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NotePlacer/Pitches" unique_id=289885418]
 layout_mode = 2
