@@ -1,10 +1,10 @@
 ## TODO
 
-* library paste thing where if its just numbers and minus signs it'll insert pipes
 * per-channel mute
 * signal counter in parse bar
 * unit circle reference
 * calculator reference
+* allow multiple renders/images/audios/whathaveyou per transmission and instantiate the scene as needed instead of always having it loaded
 * button per-channel to clear its history
 * draggable dictionary edit window
 * ?graphing calculator reference?
@@ -20,7 +20,6 @@
 * audio editor tab (with support for sequences and such)
 * word aliases (unless the macro system is sufficient)
 * ability to block channels when using the skeleton key
-* music parsing for sine vs square vs saw vs triangle vs smooth square?
 * autocomplete for nicknames to numbers
 * ctrl+f
 * song queue visualization

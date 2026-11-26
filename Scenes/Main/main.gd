@@ -373,15 +373,16 @@ func handle_packet(incoming: String) -> void:
 		for i in status.slice(1):
 			connected_users.append(i.to_int())
 		connected_user_change.emit()
-		#avoid *some* internet race conditions, hopefully
+		#avoid most internet race conditions
 		get_tree().create_timer(randf_range(0.1, 1)).timeout.connect(_try_claim_callsign)
 		return
 	print("UNKNOWN STRING PACKET: %s" % incoming)
 
 static func base_10_to_callsign(num: int) -> String:
 	var o: String = String.num_int64(num, 8)
-	while o.length() < 4:
-		o = "0" + o
+	if o.length() < 4:
+		var pad: String = "0" if num >= 0 else "-"
+		o = pad.repeat(4 - o.length()) + o
 	return o
 
 func _physics_process(_delta):
