@@ -1,13 +1,16 @@
 [gd_scene format=3 uid="uid://dnkvrd1dyt4xj"]
 
+[ext_resource type="Script" uid="uid://cvdydjysnf13j" path="res://Scenes/GraphMakerTab/graph_maker_tab.gd" id="1_04lr5"]
 [ext_resource type="PackedScene" uid="uid://bcqkh2yjqiert" path="res://Scenes/Images/visualizer_node.tscn" id="1_hxmra"]
 
-[node name="GrapherTab" type="VBoxContainer" unique_id=1482626236]
+[node name="GrapherTab" type="VBoxContainer" unique_id=1482626236 node_paths=PackedStringArray("visual")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_04lr5")
+visual = NodePath("PanelContainer/VisualizerNode")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1553478265]
 layout_mode = 2
@@ -22,115 +25,118 @@ size_flags_horizontal = 4
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=121234601]
 layout_mode = 2
 
-[node name="GridContainer" type="GridContainer" parent="HBoxContainer" unique_id=639479245]
+[node name="XSize" type="GridContainer" parent="HBoxContainer" unique_id=639479245]
 layout_mode = 2
 size_flags_horizontal = 10
 columns = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/GridContainer" unique_id=713779578]
+[node name="Label" type="Label" parent="HBoxContainer/XSize" unique_id=713779578]
 layout_mode = 2
 text = "x min ="
 
-[node name="SpinBox" type="SpinBox" parent="HBoxContainer/GridContainer" unique_id=1758509851]
+[node name="XMin" type="SpinBox" parent="HBoxContainer/XSize" unique_id=1758509851]
 layout_mode = 2
 min_value = -16.0
 max_value = 16.0
 allow_greater = true
 allow_lesser = true
 
-[node name="Label2" type="Label" parent="HBoxContainer/GridContainer" unique_id=782909229]
+[node name="Label2" type="Label" parent="HBoxContainer/XSize" unique_id=782909229]
 layout_mode = 2
 text = "x max ="
 
-[node name="SpinBox2" type="SpinBox" parent="HBoxContainer/GridContainer" unique_id=118779458]
+[node name="XMax" type="SpinBox" parent="HBoxContainer/XSize" unique_id=118779458]
 layout_mode = 2
 min_value = -16.0
 max_value = 16.0
+value = 6.0
 allow_greater = true
 allow_lesser = true
 
-[node name="Label3" type="Label" parent="HBoxContainer/GridContainer" unique_id=1756832146]
+[node name="Label3" type="Label" parent="HBoxContainer/XSize" unique_id=1756832146]
 layout_mode = 2
 text = "x count ="
 
-[node name="SpinBox3" type="SpinBox" parent="HBoxContainer/GridContainer" unique_id=1669018737]
+[node name="XCount" type="SpinBox" parent="HBoxContainer/XSize" unique_id=1669018737]
 layout_mode = 2
 min_value = 1.0
-value = 1.0
+value = 4.0
 rounded = true
 
-[node name="GridContainer2" type="GridContainer" parent="HBoxContainer" unique_id=343496344]
+[node name="YSize" type="GridContainer" parent="HBoxContainer" unique_id=343496344]
 layout_mode = 2
 size_flags_horizontal = 6
 columns = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/GridContainer2" unique_id=622444747]
+[node name="Label" type="Label" parent="HBoxContainer/YSize" unique_id=622444747]
 layout_mode = 2
 text = "y min ="
 
-[node name="SpinBox" type="SpinBox" parent="HBoxContainer/GridContainer2" unique_id=169964516]
+[node name="YMin" type="SpinBox" parent="HBoxContainer/YSize" unique_id=169964516]
 layout_mode = 2
 min_value = -16.0
 max_value = 16.0
 allow_greater = true
 allow_lesser = true
 
-[node name="Label2" type="Label" parent="HBoxContainer/GridContainer2" unique_id=697266450]
+[node name="Label2" type="Label" parent="HBoxContainer/YSize" unique_id=697266450]
 layout_mode = 2
 text = "y max ="
 
-[node name="SpinBox2" type="SpinBox" parent="HBoxContainer/GridContainer2" unique_id=456061765]
+[node name="YMax" type="SpinBox" parent="HBoxContainer/YSize" unique_id=456061765]
 layout_mode = 2
 min_value = -16.0
 max_value = 16.0
+value = 6.0
 allow_greater = true
 allow_lesser = true
 
-[node name="Label3" type="Label" parent="HBoxContainer/GridContainer2" unique_id=1499826023]
+[node name="Label3" type="Label" parent="HBoxContainer/YSize" unique_id=1499826023]
 layout_mode = 2
 text = "y count ="
 
-[node name="SpinBox3" type="SpinBox" parent="HBoxContainer/GridContainer2" unique_id=1002135144]
+[node name="YCount" type="SpinBox" parent="HBoxContainer/YSize" unique_id=1002135144]
 layout_mode = 2
 min_value = 1.0
-value = 1.0
+value = 4.0
 rounded = true
 
-[node name="GridContainer3" type="GridContainer" parent="HBoxContainer" unique_id=957099151]
+[node name="ZSize" type="GridContainer" parent="HBoxContainer" unique_id=957099151]
 layout_mode = 2
 size_flags_horizontal = 2
 columns = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/GridContainer3" unique_id=525585119]
+[node name="Label" type="Label" parent="HBoxContainer/ZSize" unique_id=525585119]
 layout_mode = 2
 text = "z min ="
 
-[node name="SpinBox" type="SpinBox" parent="HBoxContainer/GridContainer3" unique_id=399233104]
+[node name="ZMin" type="SpinBox" parent="HBoxContainer/ZSize" unique_id=399233104]
 layout_mode = 2
 min_value = -16.0
 max_value = 16.0
 allow_greater = true
 allow_lesser = true
 
-[node name="Label2" type="Label" parent="HBoxContainer/GridContainer3" unique_id=709292526]
+[node name="Label2" type="Label" parent="HBoxContainer/ZSize" unique_id=709292526]
 layout_mode = 2
 text = "z max ="
 
-[node name="SpinBox2" type="SpinBox" parent="HBoxContainer/GridContainer3" unique_id=1808232513]
+[node name="ZMax" type="SpinBox" parent="HBoxContainer/ZSize" unique_id=1808232513]
 layout_mode = 2
 min_value = -16.0
 max_value = 16.0
+value = 6.0
 allow_greater = true
 allow_lesser = true
 
-[node name="Label3" type="Label" parent="HBoxContainer/GridContainer3" unique_id=1025753144]
+[node name="Label3" type="Label" parent="HBoxContainer/ZSize" unique_id=1025753144]
 layout_mode = 2
 text = "z count ="
 
-[node name="SpinBox3" type="SpinBox" parent="HBoxContainer/GridContainer3" unique_id=1441559927]
+[node name="ZCount" type="SpinBox" parent="HBoxContainer/ZSize" unique_id=1441559927]
 layout_mode = 2
 min_value = 1.0
-value = 1.0
+value = 4.0
 rounded = true
 
 [node name="Label" type="Label" parent="." unique_id=1384699294]
@@ -148,3 +154,13 @@ text = "color"
 [node name="LineEdit2" type="LineEdit" parent="." unique_id=1958537624]
 layout_mode = 2
 text = "z 2 div y 8 div add x 32 div add"
+
+[connection signal="value_changed" from="HBoxContainer/XSize/XMin" to="." method="_on_x_min_value_changed"]
+[connection signal="value_changed" from="HBoxContainer/XSize/XMax" to="." method="_on_x_max_value_changed"]
+[connection signal="value_changed" from="HBoxContainer/XSize/XCount" to="." method="_on_x_count_value_changed"]
+[connection signal="value_changed" from="HBoxContainer/YSize/YMin" to="." method="_on_y_min_value_changed"]
+[connection signal="value_changed" from="HBoxContainer/YSize/YMax" to="." method="_on_y_max_value_changed"]
+[connection signal="value_changed" from="HBoxContainer/YSize/YCount" to="." method="_on_y_count_value_changed"]
+[connection signal="value_changed" from="HBoxContainer/ZSize/ZMin" to="." method="_on_z_min_value_changed"]
+[connection signal="value_changed" from="HBoxContainer/ZSize/ZMax" to="." method="_on_z_max_value_changed"]
+[connection signal="value_changed" from="HBoxContainer/ZSize/ZCount" to="." method="_on_z_count_value_changed"]
