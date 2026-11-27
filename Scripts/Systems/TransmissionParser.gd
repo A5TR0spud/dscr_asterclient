@@ -92,6 +92,196 @@ func read_group_items(item_parser: Callable, collapse_arrays: bool = false) -> A
 	
 	return items
 
+const SIGNAL_CONSTANTS: Dictionary = {
+	-805: 2.71828182846, #e (of euler fame)
+	-806: PI, #pi
+	-354405: TAU, #tau
+	-604002: (sqrt(5.0)+1.0)/2.0, #phi (golden ratio),
+	-157428: 0, #epsilon (sqrt(0))
+	-329: 0, #epsilon (surreal)
+}
+
+var TRANSFORMERS: Dictionary = {
+	#NOP
+	-2: func(a): return a,
+	#ADD
+	-5: func(a: PackedFloat64Array):
+		if a.size() < 2:
+			return a
+		a[a.size()-2] += a[a.size()-1]
+		a.remove_at(a.size()-1)
+		return a,
+	#MULT
+	-6: func(a: PackedFloat64Array):
+		if a.size() < 2:
+			return a
+		a[a.size()-2] *= a[a.size()-1]
+		a.remove_at(a.size()-1)
+		return a,
+	#SUB
+	-7: func(a: PackedFloat64Array):
+		if a.size() < 2:
+			return a
+		a[a.size()-2] -= a[a.size()-1]
+		a.remove_at(a.size()-1)
+		return a,
+	#DIV
+	-8: func(a: PackedFloat64Array):
+		if a.size() < 2:
+			return a
+		a[a.size()-2] /= a[a.size()-1]
+		a.remove_at(a.size()-1)
+		return a,
+	#power/exponent
+	-9: func(a: PackedFloat64Array):
+		if a.size() < 2:
+			return a
+		a[a.size()-2] **= a[a.size()-1]
+		a.remove_at(a.size()-1)
+		return a,
+	#length (absolute value)
+	-20: func(a: PackedFloat64Array):
+		if a.size() < 1:
+			return a
+		a[a.size()-1] = abs(a[a.size()-1])
+		return a,
+	#sig-fig/round
+	-24: func(a: PackedFloat64Array):
+		if a.size() < 2:
+			return a
+		a[a.size()-2] = String.num(a.size()-2, int(a.size()-1)).to_float()
+		a.remove_at(a.size()-1)
+		return a,
+	#root
+	-252: func(a: PackedFloat64Array):
+		if a.size() < 1:
+			return a
+		var _n: float = 2
+		if a.size() >= 2:
+			_n = a[a.size()-1]
+			a.remove_at(a.size()-1)
+		a[a.size()-1] = pow(a[a.size()-1], 1.0 / _n)
+		return a,
+	#natlog
+	-804: func(a: PackedFloat64Array):
+		if a.size() < 1:
+			return a
+		a[a.size()-1] = log(a[a.size()-1])
+		return a,
+	#sine
+	-807: func(a: PackedFloat64Array):
+		if a.size() < 1:
+			return a
+		a[a.size()-1] = sin(a[a.size()-1])
+		return a,
+	#cosine
+	-808: func(a: PackedFloat64Array):
+		if a.size() < 1:
+			return a
+		a[a.size()-1] = cos(a[a.size()-1])
+		return a,
+	#tangent
+	-809: func(a: PackedFloat64Array):
+		if a.size() < 1:
+			return a
+		a[a.size()-1] = tan(a[a.size()-1])
+		return a,
+	#factorial
+	-101135: func(a: PackedFloat64Array):
+		if a.size() < 1:
+			return a
+		var _a: int = int(a[a.size() - 1])
+		var _b: int = 1
+		for _i in range(_a):
+			_b *= _i + 1
+		a[a.size() - 1] = _b
+		return a,
+	#degree (presumably wanted for sine/cosine/etc so convert to radians)
+	-101141: func(a: PackedFloat64Array):
+		if a.size() < 1:
+			return a
+		a[a.size()-1] = deg_to_rad(a[a.size()-1])
+		return a,
+	#radian (already assumes radians for sine/etc so do nothing)
+	-101142: func(a): return a,
+	#logarithm
+	-157414: func(a: PackedFloat64Array):
+		if a.size() < 2:
+			return a
+		a[a.size()-2] = log(a[a.size()-2]) / log(a[a.size()-1])
+		a.remove_at(a.size()-1)
+		return a,
+	#sign/normalize
+	-157456: func(a: PackedFloat64Array):
+		if a.size() < 1:
+			return a
+		a[a.size()-1] = sign(a[a.size()-1])
+		return a,
+	#sawtooth
+	-157457: func(a: PackedFloat64Array):
+		if a.size() < 1:
+			return a
+		a[a.size()-1] = (fposmod(a[a.size()-1] - PI, TAU) - PI) / PI
+		return a,
+	#trianglewave
+	-157458: func(a: PackedFloat64Array):
+		if a.size() < 1:
+			return a
+		a[a.size()-1] = absf(fposmod(a[a.size()-1] - (0.5 * PI), TAU) - PI) * 2.0 / PI - 1.0
+		return a,
+	#squarewave
+	-157459: func(a: PackedFloat64Array):
+		if a.size() < 1:
+			return a
+		a[a.size()-1] = sign(sin(a[a.size()-1]))
+		return a,
+	#modulo
+	-354406: func(a: PackedFloat64Array):
+		if a.size() < 2:
+			return a
+		a[a.size()-2] = fposmod(a[a.size()-2], a[a.size()-1])
+		a.remove_at(a.size()-1)
+		return a
+}
+
+func parse_out_number() -> float:
+	#print("------")
+	var stack: PackedFloat64Array = []
+	var do: bool = has_number_or_constant()
+	while do:
+		#print(stack)
+		if peek() is not int:
+			break
+		var _next: int = peek()
+		#print(_next)
+		if has_number_or_constant():
+			stack.append(read_number_or_constant())
+		elif _next in TRANSFORMERS.keys():
+			if !DictionaryHandler.contains_signal(_next):
+				break
+			if _next < -245 and !DictionaryHandler.support_dscr:
+				break
+			stack = Callable(TRANSFORMERS[advance()]).call(stack)
+		else:
+			break
+		do = has_number_or_constant()
+		if not do:
+			do = peek() in TRANSFORMERS.keys()
+		#	print("preview: ", peek())
+	#print(stack)
+	var prod: float = 0.0 if stack.is_empty() else 1.0
+	for _j in stack:
+		prod *= _j
+	return prod
+
+func read_number_or_constant() -> float:
+	if DictionaryHandler.support_dscr:
+		for _sigconst: int in SIGNAL_CONSTANTS.keys():
+			if DictionaryHandler.contains_signal(_sigconst) and check(_sigconst):
+				advance()
+				return SIGNAL_CONSTANTS[_sigconst]
+	return read_number()
+
 ## Peeks a number at the current position + offset and returns its length in signals.
 ## Uses the same logic as [code]read_number()[/code].
 func number_length(offset: int = 0) -> int:
@@ -112,9 +302,12 @@ func number_length(offset: int = 0) -> int:
 
 	return idx - offset
 
+func has_number_or_constant() -> bool:
+	return has_number() or peek() in SIGNAL_CONSTANTS.keys()
+
 func has_number() -> bool:
 	var p = peek()
-	return p >= 0 or p == NEGATIVE or p == DECIMAL
+	return p != null and (p >= 0 or p == NEGATIVE or p == DECIMAL)
 
 ## Reads a floating-point number at the current position.
 ## Ignores leading zeroes in the integer portion, but preserves them in the fractional portion.

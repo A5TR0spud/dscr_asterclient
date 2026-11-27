@@ -135,33 +135,33 @@ func _parse_visual_object(parser: TransmissionParser) -> Dictionary:
 	elif (first_sphere and parser.peek() == PLOT) or not first_sphere:
 		parser.expect(PLOT)
 	ret.t = type
-	ret.x = parser.read_number()
+	ret.x = parser.parse_out_number()
 	parser.expect(SEP)
-	ret.y = parser.read_number()
+	ret.y = parser.parse_out_number()
 	parser.expect(SEP)
-	ret.z = parser.read_number()
+	ret.z = parser.parse_out_number()
 	parser.expect(SEP)
-	var v0: float = parser.read_number()
+	var v0: float = parser.parse_out_number()
 	parser.expect(SEP)
-	var v1: float = parser.read_number()
+	var v1: float = parser.parse_out_number()
 	var biggest_dimension: float = v0
 	if type == 2:
 		ret.rx = v0
 		ret.ry = v1
 		parser.expect(SEP)
-		var v2: float = parser.read_number()
+		var v2: float = parser.parse_out_number()
 		biggest_dimension = max(v0, v1, v2)
 		ret.rz = v2
 		parser.expect(SEP)
-		var v3: float = parser.read_number()
+		var v3: float = parser.parse_out_number()
 		ret.c = v3
 	elif type == 3:
 		ret.rx = v0
 		ret.ry = v1
 		parser.expect(SEP)
-		ret.rz = parser.read_number()
+		ret.rz = parser.parse_out_number()
 		parser.expect(SEP)
-		ret.c = parser.read_number()
+		ret.c = parser.parse_out_number()
 		#print(ret)
 	else:
 		ret.rx = v0
