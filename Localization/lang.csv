@@ -294,3 +294,6 @@ SETTINGS_REQUEST_ATTENTION,-43 -218,,App icon requests attention?,Ikonka wymaga 
 SETTINGS_REQUEST_ATTENTION_NONE,-111,,Never,nigdy
 SETTINGS_REQUEST_ATTENTION_PING,-130 -128,,Pings Only,po wzmiance
 SETTINGS_REQUEST_ATTENTION_ALWAYS,-110,,All Messages,po każdej wiadomości
+IMAGE_PREVIOUS,-118,,<,
+IMAGE_NEXT,-120,,>,
+IMAGE_CURRENT,{0} -2 -2 {1},,{0}/{1},

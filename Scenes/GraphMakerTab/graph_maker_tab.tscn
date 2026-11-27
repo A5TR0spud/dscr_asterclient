@@ -1,33 +1,6 @@
 [gd_scene format=3 uid="uid://dnkvrd1dyt4xj"]
 
 [ext_resource type="PackedScene" uid="uid://bcqkh2yjqiert" path="res://Scenes/Images/visualizer_node.tscn" id="1_hxmra"]
-[ext_resource type="Material" uid="uid://cjd3hjlgtsjip" path="res://Scenes/Images/reverse_fresnel_material.tres" id="2_04lr5"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g4v7s"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_04lr5"]
-viewport_path = NodePath("Intermediate/RenderAndYaw/VisualizerRect/SubViewport")
-
-[sub_resource type="SphereMesh" id="SphereMesh_57qmd"]
-material = ExtResource("2_04lr5")
-
-[sub_resource type="MultiMesh" id="MultiMesh_ib2lt"]
-resource_local_to_scene = true
-transform_format = 1
-use_colors = true
-mesh = SubResource("SphereMesh_57qmd")
-
-[sub_resource type="BoxMesh" id="BoxMesh_psu8h"]
-material = ExtResource("2_04lr5")
-
-[sub_resource type="MultiMesh" id="MultiMesh_a0tk0"]
-resource_local_to_scene = true
-transform_format = 1
-use_colors = true
-mesh = SubResource("BoxMesh_psu8h")
-
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_rrgja"]
-resource_local_to_scene = true
 
 [node name="GrapherTab" type="VBoxContainer" unique_id=1482626236]
 anchors_preset = 15
@@ -40,50 +13,11 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=938311014]
-clip_contents = true
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/margin_right = -42
-
-[node name="VisualizerNode" parent="PanelContainer/MarginContainer" unique_id=1907311917 instance=ExtResource("1_hxmra")]
+[node name="VisualizerNode" parent="PanelContainer" unique_id=1907311917 instance=ExtResource("1_hxmra")]
 custom_minimum_size = Vector2(0, 0)
 custom_maximum_size = Vector2(-1, -1)
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxEmpty_g4v7s")
-
-[node name="Intermediate" parent="PanelContainer/MarginContainer/VisualizerNode" index="0" unique_id=89764320]
-offset_transform_enabled = true
-
-[node name="VisualizerRect" parent="PanelContainer/MarginContainer/VisualizerNode/Intermediate/RenderAndYaw" parent_id_path=PackedInt32Array(1907311917, 2113766076) index="0" unique_id=1823197112]
-size_flags_vertical = 3
-texture = SubResource("ViewportTexture_04lr5")
-stretch_mode = 6
-
-[node name="SubViewport" parent="PanelContainer/MarginContainer/VisualizerNode/Intermediate/RenderAndYaw/VisualizerRect" index="0" unique_id=626713555]
-size = Vector2i(1600, 512)
-
-[node name="Spheres" parent="PanelContainer/MarginContainer/VisualizerNode/Intermediate/RenderAndYaw/VisualizerRect/SubViewport" index="2" unique_id=1090367063]
-multimesh = SubResource("MultiMesh_ib2lt")
-
-[node name="Cubes" parent="PanelContainer/MarginContainer/VisualizerNode/Intermediate/RenderAndYaw/VisualizerRect/SubViewport" index="3" unique_id=1261465019]
-multimesh = SubResource("MultiMesh_a0tk0")
-
-[node name="Lines" parent="PanelContainer/MarginContainer/VisualizerNode/Intermediate/RenderAndYaw/VisualizerRect/SubViewport" index="4" unique_id=593617939]
-mesh = SubResource("ImmediateMesh_rrgja")
-
-[node name="VBoxContainer" parent="PanelContainer/MarginContainer/VisualizerNode/Intermediate" index="4" unique_id=507738295]
-offset_transform_enabled = true
-offset_transform_position = Vector2(-27, 0)
-offset_transform_position_ratio = Vector2(-1, 0)
-offset_transform_visual_only = false
-
-[node name="ResizeButton" parent="PanelContainer/MarginContainer/VisualizerNode/Intermediate/VBoxContainer" index="1" unique_id=1985047988]
-visible = false
-
-[node name="ResolutionButton" parent="PanelContainer/MarginContainer/VisualizerNode/Intermediate/VBoxContainer" index="2" unique_id=575959960]
-visible = false
+size_flags_horizontal = 4
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=121234601]
 layout_mode = 2
@@ -214,5 +148,3 @@ text = "color"
 [node name="LineEdit2" type="LineEdit" parent="." unique_id=1958537624]
 layout_mode = 2
 text = "z 2 div y 8 div add x 32 div add"
-
-[editable path="PanelContainer/MarginContainer/VisualizerNode"]
