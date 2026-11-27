@@ -50,16 +50,19 @@ class VisualData:
 	extends Resource
 	@export var objects: Array[VisualObject]
 	
+	func export_to_signals() -> String:
+		return "sorry, i forgot"
+	
 	func _parse_visual_object(parser: TransmissionParser) -> void:
 		var wip: VisualObject = VisualObject.new()
-		if DictionaryHandler.support_dscr and parser.try_consume(SigDB.CUBE) and DictionaryHandler.contains_signal(SigDB.CUBE):
+		if parser.try_consume(SigDB.CUBE) and SigDB.support_dscr(SigDB.CUBE):
 			wip.type = SigDB.CUBE
-		elif DictionaryHandler.support_dscr and parser.try_consume(SigDB.BOX) and DictionaryHandler.contains_signal(SigDB.BOX):
+		elif parser.try_consume(SigDB.BOX) and SigDB.support_dscr(SigDB.BOX):
 			wip.type = SigDB.BOX
-		elif DictionaryHandler.support_dscr and parser.try_consume(SigDB.RENDER_LINE) and DictionaryHandler.contains_signal(SigDB.RENDER_LINE):
+		elif parser.try_consume(SigDB.RENDER_LINE) and SigDB.support_dscr(SigDB.RENDER_LINE):
 			wip.type = SigDB.RENDER
-		elif (objects.is_empty() and parser.peek() == SigDB.RENDER_SPHERE) or not objects.is_empty():
-			parser.expect(SigDB.RENDER_SPHERE)
+		else:
+			parser.try_consume(SigDB.RENDER_SPHERE)
 			wip.type = SigDB.RENDER_SPHERE
 
 		wip.pos.x = parser.read_number()

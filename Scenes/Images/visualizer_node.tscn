@@ -162,7 +162,7 @@ expand_mode = 5
 start_disabled = true
 
 [node name="ResizeButton" type="Button" parent="Intermediate/Corpus/VBoxContainer" unique_id=1985047988]
-custom_minimum_size = Vector2(20, 0)
+custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 1

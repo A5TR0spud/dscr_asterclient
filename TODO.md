@@ -5,7 +5,7 @@
 * signal counter in parse bar
 * unit circle reference
 * calculator reference
-* allow multiple renders/images/audios/whathaveyou per transmission and instantiate the scene as needed instead of always having it loaded
+* allow multiple audios per transmission and instantiate the scene of parses as needed instead of always having them loaded
 * button per-channel to clear its history
 * draggable dictionary edit window
 * ?graphing calculator reference?

@@ -23,7 +23,6 @@
 [ext_resource type="PackedScene" uid="uid://cnhrmaid1urmm" path="res://Scenes/LocaleMenu/locale_menu.tscn" id="17_koken"]
 [ext_resource type="PackedScene" uid="uid://dtbd3sge4ym14" path="res://Scenes/Confetti/confetti.tscn" id="19_1t20g"]
 [ext_resource type="PackedScene" uid="uid://bjsm5yvgoxcva" path="res://Scenes/SourcesMenu/source_menu.tscn" id="19_c4b4r"]
-[ext_resource type="PackedScene" uid="uid://dnkvrd1dyt4xj" path="res://Scenes/GraphMakerTab/graph_maker_tab.tscn" id="20_ifk88"]
 
 [node name="Main" type="PanelContainer" unique_id=201184023]
 anchors_preset = 15
@@ -134,12 +133,11 @@ layout_mode = 2
 current_tab = 0
 clip_tabs = false
 close_with_middle_mouse = false
-tab_count = 5
+tab_count = 4
 tab_0/title = "chat"
 tab_1/title = "library"
 tab_2/title = "sources"
 tab_3/title = "references"
-tab_4/title = "graphmaker"
 
 [node name="LocaleNode" type="Node" parent="Body/Corpus/Header/Tabber" unique_id=927415609]
 script = ExtResource("6_2ok46")
@@ -190,10 +188,6 @@ visible = false
 layout_mode = 2
 
 [node name="ReferenceTab" parent="Body/Corpus/TabContainer" unique_id=834008978 instance=ExtResource("14_4a3kt")]
-visible = false
-layout_mode = 2
-
-[node name="GrapherTab" parent="Body/Corpus/TabContainer" unique_id=1482626236 instance=ExtResource("20_ifk88")]
 visible = false
 layout_mode = 2
 

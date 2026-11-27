@@ -2,6 +2,10 @@
 
 ## --WIP--
 
+### Additions
+
+* Multiple renders (|-53) can be in each transmission
+
 ### Changes
 
 * Moved attention requesting to new setting (Sugar)

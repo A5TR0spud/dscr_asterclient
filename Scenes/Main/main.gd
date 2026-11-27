@@ -64,7 +64,7 @@ signal reload_dictionary_support
 static func on_dictionary_support_updated() -> void:
 	instance.reload_dictionary_support.emit()
 	instance.dsve_button.visible = DictionaryHandler.support_m0
-	instance.dsmidi_button.visible = DictionaryHandler.support_dscr and DictionaryHandler.contains_signal(-577)
+	instance.dsmidi_button.visible = SigDB.support_dscr(SigDB.SONG)
 	if SettingsHandler.use_m0_ui:
 		on_localization_reload()
 
