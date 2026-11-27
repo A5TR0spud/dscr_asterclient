@@ -65,8 +65,8 @@ func add_message_node(message: ChatEntry, mark_ping: bool = false):
 	
 	if (
 		Chat.instance.channel_container.current_tab != get_index() and
-		id != Chat.SKELETON_KEY and
-		Chat.get_current_channel_node().id != Chat.SKELETON_KEY
+		id != SigDB.CHANNEL_SKELETON_KEY and
+		Chat.get_current_channel_node().id != SigDB.CHANNEL_SKELETON_KEY
 	):
 		set_notification(mark_ping)
 	#try_show_history()
@@ -95,14 +95,14 @@ func set_scroll_down_vis():
 func has_next() -> bool:
 	if current_head == null:
 		return false
-	var ni: int = Chat.history.get_previous_idx(current_head_idx, id == Chat.SKELETON_KEY)
+	var ni: int = Chat.history.get_previous_idx(current_head_idx, id == SigDB.CHANNEL_SKELETON_KEY)
 	if ni < 0:
 		return false
 	var n: ChatEntryNode = Chat.history.catalog[ni]
 	if n == null:
 		return false
 	# failsafe to prevent leaks
-	if id != Chat.SKELETON_KEY and n.has_channel:
+	if id != SigDB.CHANNEL_SKELETON_KEY and n.has_channel:
 		if n.channel != id:
 			return false
 	return true
@@ -110,14 +110,14 @@ func has_next() -> bool:
 func advance() -> bool:
 	if current_head == null:
 		return false
-	var ni: int = Chat.history.get_previous_idx(current_head_idx, id == Chat.SKELETON_KEY)
+	var ni: int = Chat.history.get_previous_idx(current_head_idx, id == SigDB.CHANNEL_SKELETON_KEY)
 	if ni < 0:
 		return false
 	var n: ChatEntryNode = Chat.history.catalog[ni]
 	if n == null:
 		return false
 	# failsafe to prevent leaks
-	if id != Chat.SKELETON_KEY and n.has_channel:
+	if id != SigDB.CHANNEL_SKELETON_KEY and n.has_channel:
 		if n.channel != id:
 			return false
 	current_head = n
@@ -151,7 +151,7 @@ func try_show_one_history() -> bool:
 	#print("from: ", current_head.channel)
 	#print("to idx: ", current_head.earlier_in_channel)
 	@warning_ignore("incompatible_ternary")
-	trx.key = current_head.channel if current_head.has_channel and id == Chat.SKELETON_KEY else null
+	trx.key = current_head.channel if current_head.has_channel and id == SigDB.CHANNEL_SKELETON_KEY else null
 	chat_display.add_child(trx)
 	chat_display.move_child(trx, 0)
 	_recalculate_sep(trx, true)
@@ -222,7 +222,7 @@ func update_name():
 	Chat.instance.channel_container.set_tab_title(
 		get_index(),
 		Localizer.translate(key,
-			Localizer.translate("CHAT_CHANNEL_NONE", DictionaryHandler.get_or_default_signal_name(Chat.CHANNEL_SELECTOR))
+			Localizer.translate("CHAT_CHANNEL_NONE", DictionaryHandler.get_or_default_signal_name(SigDB.CHANNEL_SELECTOR))
 			if default_channel else
 			DictionaryHandler.get_or_default_signal_name(id) if id < 0 else str(id)
 		)
@@ -232,7 +232,7 @@ func get_prefix() -> PackedInt64Array:
 	if default_channel:
 		return []
 	else:
-		return [Chat.CHANNEL_SELECTOR, id]
+		return [SigDB.CHANNEL_SELECTOR, id]
 
 func _on_scroll_to_new_pressed():
 	scroll_container.scroll_to_bottom()

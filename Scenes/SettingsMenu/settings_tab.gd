@@ -79,9 +79,9 @@ func refresh() -> void:
 	app_attention.selected = SettingsHandler.request_attention_mode
 
 func _refresh_dict_supports():
-	confetti_setting.visible = DictionaryHandler.support_dscr and DictionaryHandler.contains_signal(-702)
+	confetti_setting.visible = SigDB.support_dscr(SigDB.CONFETTI)
 	image_setting_group.visible = DictionaryHandler.support_m0
-	music_parent.visible = DictionaryHandler.support_dscr and DictionaryHandler.contains_signal(AudiaterNode.SONG)
+	music_parent.visible = SigDB.support_dscr(SigDB.SONG)
 	number_sep_setting.visible = DictionaryHandler.support_m0
 	_refresh_color_ref()
 
@@ -151,7 +151,7 @@ func _on_font_spinner_value_changed(value):
 func _sample_color(val: int = -1):
 	if val < 0 or val > 64:
 		val = roundi(color_edit.value)
-	color_sample.color = VisualizeNode.calculate_color(val)
+	color_sample.color = SignalRendering.calculate_color(val)
 
 func _on_color_submit_button_pressed():
 	ThemeManager.set_theme_color(roundi(color_edit.value))

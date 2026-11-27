@@ -16,7 +16,7 @@ const MAX_SUPERCAPACITY: int = 4096
 func get_head_idx(channel: Variant) -> int:
 	verify_size()
 	var ni: int = -1
-	if channel == Chat.SKELETON_KEY:
+	if channel == SigDB.CHANNEL_SKELETON_KEY:
 		ni = last_valid()
 	elif channel is int:
 		ni = channel_heads.get(channel, -1)

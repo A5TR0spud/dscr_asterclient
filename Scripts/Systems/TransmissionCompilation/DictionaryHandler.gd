@@ -313,7 +313,7 @@ static func calc_luminosity(c: Color) -> float:
 
 static func calc_desc_color(color_value: Variant) -> Color:
 	if (color_value is int or color_value is float) and color_value >= 0 and color_value <= 64:
-		return VisualizeNode.calculate_color(color_value)
+		return SignalRendering.calculate_color(color_value)
 	elif color_value is String:
 		return Color.from_string(color_value, Color.WHITE)
 	else:
@@ -391,7 +391,7 @@ static func signals_to_words(input: Array, do_whitespace_format: bool = false, c
 				invert = number_background
 			
 			if color_color_numbers and prev is int and prev == -54:
-				var _c: Color = VisualizeNode.calculate_color(sig)
+				var _c: Color = SignalRendering.calculate_color(sig)
 				if _c.a8 > 0:
 					color = _c
 					invert = true
