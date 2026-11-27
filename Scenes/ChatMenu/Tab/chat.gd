@@ -56,12 +56,6 @@ func _input(event: InputEvent) -> void:
 		return
 
 #region Chat
-
-const COMMAND_LEAVE: int = -65533
-const COMMAND_JOIN: int = -65534
-const CHANNEL_SELECTOR: int = -65535
-const SKELETON_KEY: int = -65536
-
 signal ready_for_history
 
 static var ten_most_recent_transmissions: Array[int] = [] as Array[int]
@@ -131,7 +125,7 @@ static func new_transmission(packet: PackedStringArray) -> void:
 		ten_most_recent_transmissions.remove_at(0)
 	
 	var channel_id = null
-	if (len(integer_message) >= 2 and integer_message[0] == CHANNEL_SELECTOR):
+	if (len(integer_message) >= 2 and integer_message[0] == SigDB.CHANNEL_SELECTOR):
 		channel_id = integer_message[1]
 		integer_message = integer_message.slice(2)
 		#print(integer_message)
@@ -162,7 +156,7 @@ static func new_transmission(packet: PackedStringArray) -> void:
 			_c = history.get_at_cyclic_index(history.last_valid() - _i)
 	
 	var channel: ChatChannel = get_channel_node(channel_id)
-	var spooky_channel: ChatChannel = get_channel_node(SKELETON_KEY)
+	var spooky_channel: ChatChannel = get_channel_node(SigDB.CHANNEL_SKELETON_KEY)
 	
 	new_message.message = integer_message
 	
@@ -172,7 +166,7 @@ static func new_transmission(packet: PackedStringArray) -> void:
 			(get_active_channel().id == channel_id and
 			channel.scroll_container.bottom_is_visible())
 			or
-			(get_active_channel().id == SKELETON_KEY and
+			(get_active_channel().id == SigDB.CHANNEL_SKELETON_KEY and
 			spooky_channel.scroll_container.bottom_is_visible())
 		) and
 		instance.is_visible_in_tree()
@@ -185,7 +179,7 @@ static func new_transmission(packet: PackedStringArray) -> void:
 		(new_message.sender != Main.instance.previously_accepted_callsign)
 		and (
 			not instance.get_window().has_focus() or
-			(get_active_channel().id != channel_id and get_active_channel().id != SKELETON_KEY) or
+			(get_active_channel().id != channel_id and get_active_channel().id != SigDB.CHANNEL_SKELETON_KEY) or
 			not channel.scroll_container.bottom_is_visible()
 		)
 		and channel_is_available(channel_id)
@@ -216,12 +210,12 @@ static func new_transmission(packet: PackedStringArray) -> void:
 		#	DisplayServer.send_toast_notification()
 		
 	var ghost_to_skeleton: bool = true
-	if channel_id == SKELETON_KEY:
-		new_message.key = SKELETON_KEY
+	if channel_id == SigDB.CHANNEL_SKELETON_KEY:
+		new_message.key = SigDB.CHANNEL_SKELETON_KEY
 		ghost_to_skeleton = false
 	channel.add_message_node(new_message, ping)
 	
-	if get_active_channel().id != channel_id and get_active_channel().id != SKELETON_KEY:
+	if get_active_channel().id != channel_id and get_active_channel().id != SigDB.CHANNEL_SKELETON_KEY:
 		spooky_channel.set_notification()
 	
 	if ghost_to_skeleton:
@@ -264,12 +258,12 @@ static func channel_is_available(id = null) -> bool:
 static func open_channel_from_selector(id: int) -> void:
 	if get_active_channel().id == id:
 		return
-	if get_active_channel().id == SKELETON_KEY:
+	if get_active_channel().id == SigDB.CHANNEL_SKELETON_KEY:
 		return
-	var has_skeleton_key := SKELETON_KEY in SettingsHandler.opened_channels
+	var has_skeleton_key := SigDB.CHANNEL_SKELETON_KEY in SettingsHandler.opened_channels
 	var has_key := id in SettingsHandler.opened_channels
 	if has_skeleton_key and not has_key:
-		id = SKELETON_KEY
+		id = SigDB.CHANNEL_SKELETON_KEY
 	Chat.get_channel_node(id)
 	Chat.focus_channel(id)
 
@@ -302,7 +296,7 @@ static func enable_channel(id: int, save: bool = true):
 	if save and id not in SettingsHandler.opened_channels:
 		SettingsHandler.opened_channels.append(id)
 		SettingsHandler.save()
-	if id == SKELETON_KEY:
+	if id == SigDB.CHANNEL_SKELETON_KEY:
 		for tab_to_bone in range(tabber.get_tab_count()):
 			var bone_id: Variant = (tabber.get_child(tab_to_bone) as ChatChannel).id
 			if bone_id is not int:
@@ -335,20 +329,20 @@ static func focus_channel(id: int):
 
 func _update_skeleton_key_notification() -> void:
 	for c: ChatChannel in channel_container.get_children():
-		if c.id == SKELETON_KEY:
+		if c.id == SigDB.CHANNEL_SKELETON_KEY:
 			continue
 		if c.has_notification():
 			return
-	get_channel_node(SKELETON_KEY).clear_notification()
+	get_channel_node(SigDB.CHANNEL_SKELETON_KEY).clear_notification()
 
 func _on_tab_container_tab_changed(tab: int) -> void:
 	var cha: ChatChannel = channel_container.get_child(tab)
 	cha.clear_notification()
-	if cha.id != SKELETON_KEY:
+	if cha.id != SigDB.CHANNEL_SKELETON_KEY:
 		_update_skeleton_key_notification()
-	var debone_zone: bool = SKELETON_KEY not in SettingsHandler.opened_channels
+	var debone_zone: bool = SigDB.CHANNEL_SKELETON_KEY not in SettingsHandler.opened_channels
 	for c: ChatChannel in channel_container.get_children():
-		if cha.id == SKELETON_KEY:
+		if cha.id == SigDB.CHANNEL_SKELETON_KEY:
 			c.clear_notification()
 		if debone_zone:
 			continue

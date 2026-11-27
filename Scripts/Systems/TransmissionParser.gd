@@ -1,19 +1,6 @@
 extends RefCounted
 class_name TransmissionParser
 
-##"."
-const DECIMAL = -10
-##"["
-const GROUP_START = -14
-##"]"
-const GROUP_END = -15
-##"-"
-const NEGATIVE = -1
-##","
-const GROUP_SEQUENCE = -3
-##"is followed by"
-const ORDER_SEQUENCE = -122
-
 var _data: Array
 var _error: bool = false
 var _error_pos: int = 0
@@ -80,15 +67,15 @@ func peek(offset: int = 0):
 ## Provided Callable will be provided the parser as its only argument.
 func read_group_items(item_parser: Callable, collapse_arrays: bool = false) -> Array:
 	var items: Array = []
-	expect(GROUP_START)
-	while can_continue() and not check(GROUP_END):
+	expect(SigDB.GROUP_START)
+	while can_continue() and not check(SigDB.GROUP_END):
 		var tmp = item_parser.call(self)
 		if collapse_arrays and tmp is Array:
 			items.append_array(tmp)
 		else:
 			items.append(tmp)
 	if not is_at_end():
-		expect(GROUP_END)
+		expect(SigDB.GROUP_END)
 	
 	return items
 
@@ -102,58 +89,49 @@ const SIGNAL_CONSTANTS: Dictionary = {
 }
 
 var TRANSFORMERS: Dictionary = {
-	#NOP
-	-2: func(a): return a,
-	#ADD
-	-5: func(a: PackedFloat64Array):
+	SigDB.DELIMIT: func(a): return a,
+	SigDB.ADD: func(a: PackedFloat64Array):
 		if a.size() < 2:
 			return a
 		a[a.size()-2] += a[a.size()-1]
 		a.remove_at(a.size()-1)
 		return a,
-	#MULT
-	-6: func(a: PackedFloat64Array):
+	SigDB.MULT: func(a: PackedFloat64Array):
 		if a.size() < 2:
 			return a
 		a[a.size()-2] *= a[a.size()-1]
 		a.remove_at(a.size()-1)
 		return a,
-	#SUB
-	-7: func(a: PackedFloat64Array):
+	SigDB.SUB: func(a: PackedFloat64Array):
 		if a.size() < 2:
 			return a
 		a[a.size()-2] -= a[a.size()-1]
 		a.remove_at(a.size()-1)
 		return a,
-	#DIV
-	-8: func(a: PackedFloat64Array):
+	SigDB.DIV: func(a: PackedFloat64Array):
 		if a.size() < 2:
 			return a
 		a[a.size()-2] /= a[a.size()-1]
 		a.remove_at(a.size()-1)
 		return a,
-	#power/exponent
-	-9: func(a: PackedFloat64Array):
+	SigDB.POW: func(a: PackedFloat64Array):
 		if a.size() < 2:
 			return a
 		a[a.size()-2] **= a[a.size()-1]
 		a.remove_at(a.size()-1)
 		return a,
-	#length (absolute value)
-	-20: func(a: PackedFloat64Array):
+	SigDB.LENGTH: func(a: PackedFloat64Array):
 		if a.size() < 1:
 			return a
 		a[a.size()-1] = abs(a[a.size()-1])
 		return a,
-	#sig-fig/round
-	-24: func(a: PackedFloat64Array):
+	SigDB.SIGFIG_ROUND: func(a: PackedFloat64Array):
 		if a.size() < 2:
 			return a
 		a[a.size()-2] = String.num(a.size()-2, int(a.size()-1)).to_float()
 		a.remove_at(a.size()-1)
 		return a,
-	#root
-	-252: func(a: PackedFloat64Array):
+	SigDB.ROOT: func(a: PackedFloat64Array):
 		if a.size() < 1:
 			return a
 		var _n: float = 2
@@ -162,32 +140,27 @@ var TRANSFORMERS: Dictionary = {
 			a.remove_at(a.size()-1)
 		a[a.size()-1] = pow(a[a.size()-1], 1.0 / _n)
 		return a,
-	#natlog
-	-804: func(a: PackedFloat64Array):
+	SigDB.NATLOG: func(a: PackedFloat64Array):
 		if a.size() < 1:
 			return a
 		a[a.size()-1] = log(a[a.size()-1])
 		return a,
-	#sine
-	-807: func(a: PackedFloat64Array):
+	SigDB.WAVE_SINE: func(a: PackedFloat64Array):
 		if a.size() < 1:
 			return a
 		a[a.size()-1] = sin(a[a.size()-1])
 		return a,
-	#cosine
-	-808: func(a: PackedFloat64Array):
+	SigDB.COSINE: func(a: PackedFloat64Array):
 		if a.size() < 1:
 			return a
 		a[a.size()-1] = cos(a[a.size()-1])
 		return a,
-	#tangent
-	-809: func(a: PackedFloat64Array):
+	SigDB.TANGENT: func(a: PackedFloat64Array):
 		if a.size() < 1:
 			return a
 		a[a.size()-1] = tan(a[a.size()-1])
 		return a,
-	#factorial
-	-101135: func(a: PackedFloat64Array):
+	SigDB.FACTORIAL: func(a: PackedFloat64Array):
 		if a.size() < 1:
 			return a
 		var _a: int = int(a[a.size() - 1])
@@ -196,47 +169,39 @@ var TRANSFORMERS: Dictionary = {
 			_b *= _i + 1
 		a[a.size() - 1] = _b
 		return a,
-	#degree (presumably wanted for sine/cosine/etc so convert to radians)
-	-101141: func(a: PackedFloat64Array):
+	SigDB.DEGREE: func(a: PackedFloat64Array):
 		if a.size() < 1:
 			return a
 		a[a.size()-1] = deg_to_rad(a[a.size()-1])
 		return a,
-	#radian (already assumes radians for sine/etc so do nothing)
-	-101142: func(a): return a,
-	#logarithm
-	-157414: func(a: PackedFloat64Array):
+	SigDB.RADIAN: func(a): return a,
+	SigDB.LOGARITHM: func(a: PackedFloat64Array):
 		if a.size() < 2:
 			return a
 		a[a.size()-2] = log(a[a.size()-2]) / log(a[a.size()-1])
 		a.remove_at(a.size()-1)
 		return a,
-	#sign/normalize
-	-157456: func(a: PackedFloat64Array):
+	SigDB.NORMALIZE: func(a: PackedFloat64Array):
 		if a.size() < 1:
 			return a
 		a[a.size()-1] = sign(a[a.size()-1])
 		return a,
-	#sawtooth
-	-157457: func(a: PackedFloat64Array):
+	SigDB.WAVE_SAW: func(a: PackedFloat64Array):
 		if a.size() < 1:
 			return a
 		a[a.size()-1] = (fposmod(a[a.size()-1] - PI, TAU) - PI) / PI
 		return a,
-	#trianglewave
-	-157458: func(a: PackedFloat64Array):
+	SigDB.WAVE_TRI: func(a: PackedFloat64Array):
 		if a.size() < 1:
 			return a
 		a[a.size()-1] = absf(fposmod(a[a.size()-1] - (0.5 * PI), TAU) - PI) * 2.0 / PI - 1.0
 		return a,
-	#squarewave
-	-157459: func(a: PackedFloat64Array):
+	SigDB.WAVE_SQUARE: func(a: PackedFloat64Array):
 		if a.size() < 1:
 			return a
 		a[a.size()-1] = sign(sin(a[a.size()-1]))
 		return a,
-	#modulo
-	-354406: func(a: PackedFloat64Array):
+	SigDB.MODULO: func(a: PackedFloat64Array):
 		if a.size() < 2:
 			return a
 		a[a.size()-2] = fposmod(a[a.size()-2], a[a.size()-1])
@@ -286,13 +251,13 @@ func read_number_or_constant() -> float:
 ## Uses the same logic as [code]read_number()[/code].
 func number_length(offset: int = 0) -> int:
 	var idx: int = offset
-	if peek(idx) == NEGATIVE:
+	if peek(idx) == SigDB.NEGATIVE:
 		idx += 1
 	while peek(idx) == 0:
 		idx += 1
 	while not _error and idx < _data.size():
 		var i = peek(idx)
-		if i == DECIMAL:
+		if i == SigDB.DECIMAL:
 			idx += 1
 			continue
 		elif i >= 0:
@@ -307,19 +272,19 @@ func has_number_or_constant() -> bool:
 
 func has_number() -> bool:
 	var p = peek()
-	return p != null and (p >= 0 or p == NEGATIVE or p == DECIMAL)
+	return p != null and (p >= 0 or p == SigDB.NEGATIVE or p == SigDB.DECIMAL)
 
 ## Reads a floating-point number at the current position.
 ## Ignores leading zeroes in the integer portion, but preserves them in the fractional portion.
 ## Failed parses result in an output of 0.
 func read_number() -> float:
-	var negative := try_consume(NEGATIVE)
+	var negative := try_consume(SigDB.NEGATIVE)
 	while peek() == 0: skip()
 
 	var val_str: String = ""
 	while can_continue():
 		var i = peek()
-		if i == DECIMAL:
+		if i == SigDB.DECIMAL:
 			val_str += "."
 			skip()
 			continue

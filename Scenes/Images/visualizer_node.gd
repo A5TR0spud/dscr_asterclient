@@ -1,45 +1,5 @@
 extends Control
 class_name VisualizeNode
-# Helper method for calculating the sphere colors
-# Visual Object colors are evaluated on a gradient [0, 64] to get RGB values. The full gradient linearly blends between keys. In the game, the keys are: 
-# 0 - #FF5800  0.00 red-orange
-# 1 - #BBFF00  7.11 yellow-green
-# 2 - #00CDFF 14.22 cyan
-# 3 - #0084FF 21.33 light blue
-# 4 - #4D00FF 28.44 blurple
-# 5 - #FB39FF 35.56 bubblegum pink
-# 6 - #FF0FD7 42.67 hot pink
-# 7 - #484848 49.78 black
-# 8 - #636363 56.89 grey
-# 9 - #FFFFFF 64.00 white
-# Code thanks to @elnico56 in discord!!!!
-# Code adapted from https://github.com/dixonary/mfds-server/blob/0d359cef41a64cfe2bddbacb12898f066fa099b8/public/mfds.js#L1009-L1034
-const COLORS: Array = [
-	"FF5800", "BBFF00", "00CDFF", "0084FF", "4D00FF",
-	"FB39FF", "FF0FD7", "484848", "636363", "FFFFFF"
-];
-static func calculate_color(value: int) -> Color:
-	if value >= 65 and value <= 128 and DictionaryHandler.support_dscr:
-		value -= 65
-		var r: float
-		var g: float
-		var b: float
-		const _col: PackedFloat32Array = [0.1, 0.5, 0.75, 1]
-		r = _col[(value >> 4) % 4]
-		g = _col[(value >> 2) % 4]
-		b = _col[value % 4]
-		if value == 0:
-			r += 0.1
-			g += 0.1
-			b += 0.1
-		return Color(r, g, b)
-	if value < 0 or value > 64:
-		return Color.TRANSPARENT
-	value = clampi(value, 0, 64)
-	var n: float = value / 64.0 * (COLORS.size() - 1)
-	var lo = floor(n)
-	var hi = ceil(n)
-	return lerp(Color(COLORS[lo]), Color(COLORS[hi]), fmod(n, 1))
 
 @onready var cam_pivot: Node3D = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport/CameraOrigin
 @onready var cam: Camera3D = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport/CameraOrigin/Cam
@@ -53,8 +13,9 @@ static func calculate_color(value: int) -> Color:
 
 func _ready():
 	Main.instance.reload_image_inversion.connect(_refresh_inversions)
-	Main.instance.reload_settings.connect(_viewport_res)
-	_viewport_res()
+	if res_button.visible:
+		Main.instance.reload_settings.connect(_viewport_res)
+		_viewport_res()
 
 func _set_zoom(value: float) -> void:
 	if SettingsHandler.img_invert_zoom:
@@ -104,143 +65,57 @@ func _on_pitch_slider_value_changed(value: float):
 	value /= zoom_slider.min_value
 	_set_pitch(value)
 
-const IMAGE: int = -53
-const PLOT : int = -52 #center x, center y, center z, diameter, color
-const CUBE : int = -524000 #center x, center y, center z, diameter, color
-const BOX  : int = -157442 #center x, center y, center z, x length, y length, z length, color
-const LINE : int = -326 #x0, y0, z0, x1, y1, z1, color
-const SEP  : int = -3
-
 @onready var plot_spheres: MultiMeshInstance3D = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport/Spheres
 @onready var multimesh_spheres: MultiMesh = plot_spheres.multimesh
 @onready var plot_cubes: MultiMeshInstance3D = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport/Cubes
 @onready var multimesh_cubes: MultiMesh = plot_cubes.multimesh
 @onready var line_mesh: ImmediateMesh = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport/Lines.mesh
 
-var _sphere_data: Array = []
-
-var first_sphere: bool = true
-
-var _ball_count: int = 0
-var _cube_count: int = 0
-func _parse_visual_object(parser: TransmissionParser) -> Dictionary:
-	var type: int = 0
-	var ret: Dictionary = {}
-	if DictionaryHandler.support_dscr and parser.try_consume(CUBE) and DictionaryHandler.contains_signal(CUBE):
-		type = 1
-	elif DictionaryHandler.support_dscr and parser.try_consume(BOX) and DictionaryHandler.contains_signal(BOX):
-		type = 2
-	elif DictionaryHandler.support_dscr and parser.try_consume(LINE) and DictionaryHandler.contains_signal(LINE):
-		type = 3
-	elif (first_sphere and parser.peek() == PLOT) or not first_sphere:
-		parser.expect(PLOT)
-	ret.t = type
-	ret.x = parser.parse_out_number()
-	parser.expect(SEP)
-	ret.y = parser.parse_out_number()
-	parser.expect(SEP)
-	ret.z = parser.parse_out_number()
-	parser.expect(SEP)
-	var v0: float = parser.parse_out_number()
-	parser.expect(SEP)
-	var v1: float = parser.parse_out_number()
-	var biggest_dimension: float = v0
-	if type == 2:
-		ret.rx = v0
-		ret.ry = v1
-		parser.expect(SEP)
-		var v2: float = parser.parse_out_number()
-		biggest_dimension = max(v0, v1, v2)
-		ret.rz = v2
-		parser.expect(SEP)
-		var v3: float = parser.parse_out_number()
-		ret.c = v3
-	elif type == 3:
-		ret.rx = v0
-		ret.ry = v1
-		parser.expect(SEP)
-		ret.rz = parser.parse_out_number()
-		parser.expect(SEP)
-		ret.c = parser.parse_out_number()
-		#print(ret)
-	else:
-		ret.rx = v0
-		ret.ry = v0
-		ret.rz = v0
-		ret.c = v1
-	parser.try_consume(SEP)
-	first_sphere = false
-	match type:
-		0:
-			if v0 > 0: _ball_count += 1
-		1:
-			if v0 > 0: _cube_count += 1
-		2:
-			if biggest_dimension > 0: _cube_count += 1
-	return ret
-
-func check_image(message0: Array) -> bool:
+func render_data(data: SignalRendering.VisualData):
 	multimesh_spheres.instance_count = 0
-	_sphere_data.clear()
 	line_mesh.clear_surfaces()
-	var message: Array[int] = []
-	for u in message0:
-		if u is int:
-			message.append(u)
-		else:
-			return false
-	var parser = TransmissionParser.new(message)
-	while not parser.is_at_end():
-		if not parser.skip_to(IMAGE): return false
-		parser.expect(IMAGE)
-		first_sphere = true
-		_ball_count = 0
-		_cube_count = 0
-		var pos := parser.save_state()
-		var spheres = parser.read_group_items(_parse_visual_object)
 
-		if parser.has_error():
-			print(parser.get_error_message())
-			parser.restore_state(pos, true)
-			continue
-
-		_sphere_data = spheres
-		break
-
-	if _sphere_data.is_empty():
-		#print("empty image")
-		return false
-	_sphere_data = _sphere_data.filter(func(a: Dictionary): return (a.rx > 0 or a.ry > 0 or a.rz > 0) or a.t == 3)
+	data.objects = data.objects.filter(
+		func(a: SignalRendering.VisualObject):
+			return (a.delta[a.delta.max_axis_index()] > 0) or a.type == SigDB.RENDER_LINE
+	)
+	var _ball_count: int = 0
+	var _cube_count: int = 0
+	for v: SignalRendering.VisualObject in data.objects:
+		if v.type == SigDB.RENDER_SPHERE:
+			_ball_count += 1
+		elif v.type == SigDB.CUBE or v.type == SigDB.BOX:
+			_cube_count += 1
 	multimesh_spheres.instance_count = _ball_count
 	multimesh_cubes.instance_count = _cube_count
 	var _balldx: int = 0
 	var _cubedx: int = 0
-	for p: Dictionary in _sphere_data:
-		var t: int = p.t
-		var c: Color = calculate_color(p["c"]).srgb_to_linear()
-		if t <= 2:
+	for p: SignalRendering.VisualObject in data.objects:
+		var t: int = p.type
+		var c: Color = SignalRendering.calculate_color(p.color).srgb_to_linear()
+		if t != SigDB.RENDER_LINE:
 			var mm: MultiMesh
 			var idx: int = 0
-			if t == 0:
+			if t == SigDB.RENDER_SPHERE:
 				mm = multimesh_spheres
 				idx = _balldx
 				_balldx += 1
-			if t == 1 or t == 2:
+			else:
 				mm = multimesh_cubes
 				idx = _cubedx
 				_cubedx += 1
 			mm.set_instance_color(idx, c)
 			mm.set_instance_transform(idx, Transform3D(
 				# X Scale/Shear
-				Vector3(p.rx, 0, 0),
+				Vector3(p.delta.x, 0, 0),
 				# Y Scale/Shear
-				Vector3(0, p.rz, 0),
+				Vector3(0, p.delta.z, 0),
 				# Z Scale/Shear
-				Vector3(0, 0, p.ry),
+				Vector3(0, 0, p.delta.y),
 				# Origin Position
-				Vector3(p["x"], p["z"], -p["y"])
+				Vector3(p.pos.x, p.pos.z, -p.pos.y)
 			))
-		elif t == 3:
+		else:
 			line_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
 			line_mesh.surface_set_color(c)
 			line_mesh.surface_add_vertex(Vector3(p.x, p.z, -p.y))
@@ -275,8 +150,8 @@ func _on_visualizer_rect_gui_input(event: InputEvent):
 		accept_event()
 		return
 	if event is InputEventMouseMotion and Input.is_action_pressed("pan_image") and not Input.is_action_pressed("rotate_image"):
-		var dx: float = -event.relative.x * 0.005 * cam.position.z
-		var dy: float = event.relative.y * 0.005 * cam.position.z
+		var dx: float = -event.relative.x * 0.005 * cam.position.z / size.x * 480
+		var dy: float = event.relative.y * 0.005 * cam.position.z / size.x * 480
 		var _yaw: float = cam_pivot.rotation.y
 		var _pitch: float = cam_pivot.rotation.x
 		
@@ -289,12 +164,7 @@ func _on_visualizer_rect_gui_input(event: InputEvent):
 		_newpos.x += dy * sin(_yaw) * sin(_pitch)
 		_newpos.z += dy * cos(_yaw) * sin(_pitch)
 		
-		if (
-			-16 <= _newpos.x and _newpos.x <= 16 and
-			-12 <= _newpos.y and _newpos.y <= 12 and
-			-16 <= _newpos.z and _newpos.z <= 16
-		):
-			cam_pivot.position = _newpos
+		cam_pivot.position = _newpos.clamp(Vector3(-16, -12, -16), Vector3(16, 12, 16))
 		
 		accept_event()
 		_calc_center_button_enabled()

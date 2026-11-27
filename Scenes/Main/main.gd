@@ -226,9 +226,9 @@ func send_message(written: String) -> Array:
 		return [false, MessageCompilationResult.MESSAGE_FAILED]
 	# handle commands
 	# TODO: move to its own class
-	if sig[0] == Chat.COMMAND_JOIN:
+	if sig[0] == SigDB.CHANNEL_JOIN:
 		if len(sig) != 2:
-			Chat.new_log(Chat.State.INPUT_COMMAND_LENGTH_INVALID, [Chat.COMMAND_JOIN, 2])
+			Chat.new_log(Chat.State.INPUT_COMMAND_LENGTH_INVALID, [SigDB.CHANNEL_JOIN, 2])
 			return [false, MessageCompilationResult.COMMAND_FAILED]
 		var res := MessageCompilationResult.REDUNDANT
 		if not SettingsHandler.opened_channels.has(sig[1]):
@@ -236,21 +236,21 @@ func send_message(written: String) -> Array:
 		Chat.enable_channel(sig[1])
 		Chat.focus_channel(sig[1])
 		return [true, res]
-	if sig[0] == Chat.COMMAND_LEAVE:
+	if sig[0] == SigDB.CHANNEL_LEAVE:
 		if len(sig) != 2:
-			Chat.new_log(Chat.State.INPUT_COMMAND_LENGTH_INVALID, [Chat.COMMAND_LEAVE, 2])
+			Chat.new_log(Chat.State.INPUT_COMMAND_LENGTH_INVALID, [SigDB.CHANNEL_LEAVE, 2])
 			return [false, MessageCompilationResult.COMMAND_FAILED]
 		var res := MessageCompilationResult.REDUNDANT
 		if Chat.channel_is_available(sig[1]):
 			res = MessageCompilationResult.HIDE_SENT
 		Chat.disable_channel(sig[1])
 		return [true, res]
-	if sig[0] == Chat.CHANNEL_SELECTOR:
+	if sig[0] == SigDB.CHANNEL_SELECTOR:
 		if len(sig) < 3:
-			Chat.new_log(Chat.State.INPUT_ENCRYPT_TOO_SHORT, [Chat.CHANNEL_SELECTOR])
+			Chat.new_log(Chat.State.INPUT_ENCRYPT_TOO_SHORT, [SigDB.CHANNEL_SELECTOR])
 			return [false, MessageCompilationResult.COMMAND_FAILED]
 		Chat.open_channel_from_selector(sig[1])
-	elif Chat.get_active_channel().id != Chat.SKELETON_KEY:
+	elif Chat.get_active_channel().id != SigDB.CHANNEL_SKELETON_KEY:
 		#only apply prefix if not manually setting a prefix
 		var prefix: PackedInt64Array = Chat.get_current_channel_node().get_prefix()
 		sig = prefix + sig

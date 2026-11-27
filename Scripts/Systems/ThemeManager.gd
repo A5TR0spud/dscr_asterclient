@@ -50,7 +50,7 @@ static func _setty(n, nam: String, val):
 	await Main.instance.get_tree().process_frame
 
 static func _set_color_inner(col: int):
-	var new_color: Color = VisualizeNode.calculate_color(col)
+	var new_color: Color = SignalRendering.calculate_color(col)
 	var red_correction: float = 0
 	if col == 0:
 		red_correction = 1

@@ -206,7 +206,7 @@ func reload() -> void:
 	
 	var color_value = desc.get(DictionaryHandler.color_key, 64)
 	if color_value is int or color_value is float:
-		color_value = VisualizeNode.calculate_color(color_value as int)
+		color_value = SignalRendering.calculate_color(color_value as int)
 	elif color_value is String:
 		color_value = Color.from_string(color_value as String, Color.WHITE)
 	_push_color_to_spinners(color_value as Color)
@@ -307,9 +307,9 @@ func _sample_color():
 	var h: int = roundi(hue.value)
 	var s: int = roundi(sat.value)
 	var v: int = roundi(val.value)
-	hue_rect.color = VisualizeNode.calculate_color(h)
-	sat_rect.color = VisualizeNode.calculate_color(s)
-	val_rect.color = VisualizeNode.calculate_color(v)
+	hue_rect.color = SignalRendering.calculate_color(h)
+	sat_rect.color = SignalRendering.calculate_color(s)
+	val_rect.color = SignalRendering.calculate_color(v)
 	prv_rect.color = _get_spinners_as_color()
 
 func _on_hue_spinner_value_changed(_value):

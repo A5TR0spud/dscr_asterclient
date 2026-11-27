@@ -20,36 +20,18 @@ enum NoteType {
 	CHIRP,
 }
 
-const NOTE = -605003
-const NOTE_SINE = -807
-const NOTE_NOISE = -157403
-const NOTE_SAW = -157457
-const NOTE_TRI = -157458
-const NOTE_SQUARE = -157459
-const NOTE_BARK = -310
-const NOTE_MEOW = -311
-const NOTE_CHIRP = -312
-
 const VALID_NOTES: PackedInt64Array = [
-	NOTE,
-	NOTE_SINE,
-	NOTE_NOISE,
-	NOTE_SAW,
-	NOTE_SQUARE,
-	NOTE_TRI,
-	NOTE_BARK,
-	NOTE_MEOW,
-	NOTE_CHIRP
+	SigDB.NOTE,
+	SigDB.WAVE_SINE,
+	SigDB.NOTE_NOISE,
+	SigDB.WAVE_SAW,
+	SigDB.WAVE_SQUARE,
+	SigDB.WAVE_TRI,
+	SigDB.SOUND_BARK,
+	SigDB.SOUND_MEOW,
+	SigDB.SOUND_CHIRP
 ]
 
-const NEG = -1
-const SEP = -3
-const DECIMAL = -10
-const VARIABLE = -11
-const GROUP_BEGIN = -14
-const GROUP_END = -15
-const SEQUENCER = -122
-const SONG = -577
 const conversion_factor: float = Main.HE6_HALF_LIFE
 const sample_hz: float = 22050.0
 
@@ -87,8 +69,8 @@ func check_song(message: Array) -> bool:
 
 	var parser = TransmissionParser.new(message)
 	while not parser.is_at_end():
-		if not parser.skip_to(SONG): return false
-		parser.expect(SONG)
+		if not parser.skip_to(SigDB.SONG): return false
+		parser.expect(SigDB.SONG)
 		var pos := parser.save_state()
 		song_variables = {}
 		var notes := parse_song_group(parser)
@@ -128,29 +110,29 @@ func parse_song_note(parser: TransmissionParser) -> Note:
 	#print("note ", parser.save_state())
 	var type: NoteType = NoteType.ARBITRARY
 	
-	if parser.try_consume(NOTE_SINE):
+	if parser.try_consume(SigDB.WAVE_SINE):
 		type = NoteType.SINE
-	elif parser.try_consume(NOTE_SAW):
+	elif parser.try_consume(SigDB.WAVE_SAW):
 		type = NoteType.SAWTOOTH
-	elif parser.try_consume(NOTE_TRI):
+	elif parser.try_consume(SigDB.WAVE_TRI):
 		type = NoteType.TRIANGLE
-	elif parser.try_consume(NOTE_NOISE):
+	elif parser.try_consume(SigDB.NOTE_NOISE):
 		type = NoteType.NOISE
-	elif parser.try_consume(NOTE_SQUARE):
+	elif parser.try_consume(SigDB.WAVE_SQUARE):
 		type = NoteType.SQUARE
-	elif parser.try_consume(NOTE_BARK):
+	elif parser.try_consume(SigDB.SOUND_BARK):
 		type = NoteType.BARK
-	elif parser.try_consume(NOTE_MEOW):
+	elif parser.try_consume(SigDB.SOUND_MEOW):
 		type = NoteType.MEOW
-	elif parser.try_consume(NOTE_CHIRP):
+	elif parser.try_consume(SigDB.SOUND_CHIRP):
 		type = NoteType.CHIRP
 	else:
-		parser.expect(NOTE)
+		parser.expect(SigDB.NOTE)
 
 	var start_time = parser.read_number() * conversion_factor
-	parser.expect(SEP)
+	parser.expect(SigDB.SEP)
 	var duration = parser.read_number() * conversion_factor
-	parser.expect(SEP)
+	parser.expect(SigDB.SEP)
 	var frequency = parser.read_number() / conversion_factor
 	return Note.new(start_time, duration, frequency, type)
 
@@ -160,10 +142,10 @@ func parse_song_item(parser: TransmissionParser) -> Array[Note]:
 		return []
 	if (parser.peek() in VALID_NOTES) and DictionaryHandler.contains_signal(parser.peek()):
 		return [parse_song_note(parser)]
-	if parser.try_consume(VARIABLE):
+	if parser.try_consume(SigDB.VARIABLE):
 		var idx = parser.advance()
 		#print(song_variables.get(idx))
-		if parser.check(GROUP_BEGIN):
+		if parser.check(SigDB.GROUP_START):
 			var p := parse_song_group(parser)
 			song_variables[idx] = p
 			return p
@@ -177,14 +159,14 @@ func parse_song_chord(parser: TransmissionParser) -> Array[Note]:
 	#print("chord ", parser.save_state())
 	var items: Array[Note] = []
 	var sav: int = parser.save_state()
-	while not parser.check(GROUP_END) and parser.can_continue():
+	while not parser.check(SigDB.GROUP_END) and parser.can_continue():
 		var _i: Array[Note] = parse_song_item(parser)
 		if not _i:
 			parser.restore_state(sav, true)
 			break
 		sav = parser.save_state()
 		items.append_array(_i)
-		parser.try_consume(SEP)
+		parser.try_consume(SigDB.SEP)
 	return items
 
 func parse_song_sequence(parser: TransmissionParser) -> Array[Note]:
@@ -193,9 +175,9 @@ func parse_song_sequence(parser: TransmissionParser) -> Array[Note]:
 	var _sequence_accum: float = 0
 	var do: bool = true
 	var sav: int = parser.save_state()
-	while not parser.check(GROUP_END) and parser.can_continue() and do:
+	while not parser.check(SigDB.GROUP_END) and parser.can_continue() and do:
 		var _i: Array[Note] = parse_song_chord(parser)
-		do = parser.try_consume(SEQUENCER)
+		do = parser.try_consume(SigDB.SEQUENCE)
 		if not _i:
 			parser.restore_state(sav, true)
 			break
@@ -218,9 +200,9 @@ func parse_song_sequence(parser: TransmissionParser) -> Array[Note]:
 
 func parse_song_group(parser: TransmissionParser) -> Array[Note]:
 	#print("group ", parser.save_state())
-	parser.expect(GROUP_BEGIN)
+	parser.expect(SigDB.GROUP_START)
 	var items := parse_song_sequence(parser)
-	parser.expect(GROUP_END)
+	parser.expect(SigDB.GROUP_END)
 	return items
 
 func smoothed_square_wave(phase: float, smoothness: float = 0) -> float:

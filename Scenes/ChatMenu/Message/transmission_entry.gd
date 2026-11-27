@@ -43,7 +43,7 @@ func ready():
 	if is_historical:
 		modulate = Color(1, 1, 1, 0.75)
 	keybox_node.visible = key != null
-	if key == Chat.SKELETON_KEY:
+	if key == SigDB.CHANNEL_SKELETON_KEY:
 		key_node.disabled = true
 		key_node.mouse_default_cursor_shape = Control.CURSOR_ARROW
 	Main.instance.reload_dictionary_support.connect(try_parses)
@@ -58,18 +58,20 @@ func get_color() -> Color:
 
 func try_parses():
 	if is_instance_valid(image_node):
-		var has_image: bool = VisualizeNode.IMAGE in message
+		var has_image: bool = SigDB.RENDER in message
 		var image_enabled: bool = DictionaryHandler.support_m0
-		var has_valid_image: bool = image_node.check_image(message) if has_image else false
-		image_node.visible = has_valid_image and is_image_open and image_enabled
+		var images: Array[SignalRendering.VisualData] = SignalRendering.check_message(message)
+		image_node.visible = not images.is_empty() and is_image_open and image_enabled
+		if not images.is_empty():
+			image_node.render_data(images[0])
 		image_button_node.set_pressed_no_signal(image_node.visible)
-		image_button_node.visible = has_valid_image and image_enabled
+		image_button_node.visible = not images.is_empty() and image_enabled
 		if !has_image and delete_empty_parses:
 			image_node.queue_free()
 			image_button_node.queue_free()
 	if is_instance_valid(song_node):
-		var has_song: bool = AudiaterNode.SONG in message
-		var song_enabled: bool = DictionaryHandler.support_dscr and DictionaryHandler.contains_signal(AudiaterNode.SONG)
+		var has_song: bool = SigDB.SONG in message
+		var song_enabled: bool = SigDB.support_dscr(SigDB.SONG)
 		var has_valid_song: bool = song_node.check_song(message) if has_song else false
 		song_node.visible = has_valid_song and song_enabled
 		if !has_song and delete_empty_parses:
@@ -194,7 +196,7 @@ func _on_hover_change(hovering: bool) -> void:
 	timeago_node.text = get_timeago_string()
 	hover_node.visible = hovering
 	transmission_node.flat = not hovering
-	key_node.flat = not hovering or key == Chat.SKELETON_KEY
+	key_node.flat = not hovering or key == SigDB.CHANNEL_SKELETON_KEY
 
 func _on_set_etc_visibility(visiblity: bool) -> void:
 	etc_button_node.visible = visiblity
