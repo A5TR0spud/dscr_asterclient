@@ -63,7 +63,7 @@ func try_parses():
 		var images: Array[SignalRendering.VisualData] = SignalRendering.check_message(message)
 		image_node.visible = not images.is_empty() and is_image_open and image_enabled
 		if not images.is_empty():
-			image_node.render_data(images[0])
+			image_node.prepare_from_multiple(images)
 		image_button_node.set_pressed_no_signal(image_node.visible)
 		image_button_node.visible = not images.is_empty() and image_enabled
 		if !has_image and delete_empty_parses:

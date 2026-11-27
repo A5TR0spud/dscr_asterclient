@@ -1,15 +1,17 @@
 extends Control
 class_name VisualizeNode
 
-@onready var cam_pivot: Node3D = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport/CameraOrigin
-@onready var cam: Camera3D = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport/CameraOrigin/Cam
-@onready var zoom_slider: Range = $Intermediate/ZoomSlider
-@onready var yaw_slider: Range = $Intermediate/RenderAndYaw/YawSlider
-@onready var pitch_slider: Range = $Intermediate/PitchSlider
-@onready var visualizer: TextureRect = $Intermediate/RenderAndYaw/VisualizerRect
-@onready var viewport: SubViewport = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport
-@onready var res_button: IconButton = $Intermediate/VBoxContainer/ResolutionButton
-@onready var center_button: IconButton = $Intermediate/VBoxContainer/CenterButton
+@onready var cam_pivot: Node3D = $Intermediate/Corpus/RenderAndYaw/VisualizerRect/SubViewport/CameraOrigin
+@onready var cam: Camera3D = $Intermediate/Corpus/RenderAndYaw/VisualizerRect/SubViewport/CameraOrigin/Cam
+@onready var zoom_slider: Range = $Intermediate/Corpus/ZoomSlider
+@onready var yaw_slider: Range = $Intermediate/Corpus/RenderAndYaw/YawSlider
+@onready var pitch_slider: Range = $Intermediate/Corpus/PitchSlider
+@onready var visualizer: TextureRect = $Intermediate/Corpus/RenderAndYaw/VisualizerRect
+@onready var viewport: SubViewport = $Intermediate/Corpus/RenderAndYaw/VisualizerRect/SubViewport
+@onready var res_button: IconButton = $Intermediate/Corpus/VBoxContainer/ResolutionButton
+@onready var center_button: IconButton = $Intermediate/Corpus/VBoxContainer/CenterButton
+@onready var header: Control = $Intermediate/Header
+@onready var index_display: Label = $Intermediate/Header/Label
 
 func _ready():
 	Main.instance.reload_image_inversion.connect(_refresh_inversions)
@@ -65,11 +67,40 @@ func _on_pitch_slider_value_changed(value: float):
 	value /= zoom_slider.min_value
 	_set_pitch(value)
 
-@onready var plot_spheres: MultiMeshInstance3D = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport/Spheres
+@onready var plot_spheres: MultiMeshInstance3D = $Intermediate/Corpus/RenderAndYaw/VisualizerRect/SubViewport/Spheres
 @onready var multimesh_spheres: MultiMesh = plot_spheres.multimesh
-@onready var plot_cubes: MultiMeshInstance3D = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport/Cubes
+@onready var plot_cubes: MultiMeshInstance3D = $Intermediate/Corpus/RenderAndYaw/VisualizerRect/SubViewport/Cubes
 @onready var multimesh_cubes: MultiMesh = plot_cubes.multimesh
-@onready var line_mesh: ImmediateMesh = $Intermediate/RenderAndYaw/VisualizerRect/SubViewport/Lines.mesh
+@onready var line_mesh: ImmediateMesh = $Intermediate/Corpus/RenderAndYaw/VisualizerRect/SubViewport/Lines.mesh
+
+var saved_data: Array[SignalRendering.VisualData] = []
+var data_index: int = 0
+
+func prepare_from_multiple(data: Array[SignalRendering.VisualData]):
+	saved_data = data
+	if not data.is_empty():
+		data_index %= data.size()
+		render_data(data[data_index])
+		index_display.text = Localizer.translate("IMAGE_CURRENT", [data_index, data.size()])
+		header.visible = data.size() > 1
+		return
+	header.hide()
+	data_index = 0
+	render_data(SignalRendering.VisualData.new())
+
+func _on_next_button_pressed():
+	if saved_data.is_empty():
+		return
+	data_index = (data_index + 1) % saved_data.size()
+	index_display.text = Localizer.translate("IMAGE_CURRENT", [data_index, saved_data.size()])
+	render_data(saved_data[data_index])
+
+func _on_prev_button_pressed():
+	if saved_data.is_empty():
+		return
+	data_index = posmod(data_index - 1, saved_data.size())
+	index_display.text = Localizer.translate("IMAGE_CURRENT", [data_index, saved_data.size()])
+	render_data(saved_data[data_index])
 
 func render_data(data: SignalRendering.VisualData):
 	multimesh_spheres.instance_count = 0

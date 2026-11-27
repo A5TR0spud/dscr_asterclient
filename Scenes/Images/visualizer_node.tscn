@@ -11,7 +11,7 @@
 [ext_resource type="Shader" uid="uid://c8lh2ma3q2n5x" path="res://Scenes/Images/unshaded_unculled_vertex_colored.gdshader" id="6_1eel7"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_kq2tu"]
-viewport_path = NodePath("Intermediate/RenderAndYaw/VisualizerRect/SubViewport")
+viewport_path = NodePath("Intermediate/Corpus/RenderAndYaw/VisualizerRect/SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3bk5g"]
 render_priority = 0
@@ -25,26 +25,62 @@ custom_minimum_size = Vector2(300, 0)
 custom_maximum_size = Vector2(576, -1)
 script = ExtResource("1_psu8h")
 
-[node name="Intermediate" type="HBoxContainer" parent="." unique_id=89764320]
+[node name="Intermediate" type="VBoxContainer" parent="." unique_id=550316154]
 layout_mode = 2
 
-[node name="ZoomSlider" type="VScrollBar" parent="Intermediate" unique_id=235791851]
+[node name="Header" type="HBoxContainer" parent="Intermediate" unique_id=178107880]
+layout_mode = 2
+
+[node name="PrevButton" type="Button" parent="Intermediate/Header" unique_id=1309135874]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "prior"
+
+[node name="LocaleNode" type="Node" parent="Intermediate/Header/PrevButton" unique_id=1583633967]
+script = ExtResource("2_psu8h")
+translations = Dictionary[StringName, String]({
+&"text": "IMAGE_PREVIOUS"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="Label" type="Label" parent="Intermediate/Header" unique_id=1014532277]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0 ;; 5"
+horizontal_alignment = 1
+
+[node name="NextButton" type="Button" parent="Intermediate/Header" unique_id=1642205301]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "next"
+
+[node name="LocaleNode" type="Node" parent="Intermediate/Header/NextButton" unique_id=485596975]
+script = ExtResource("2_psu8h")
+translations = Dictionary[StringName, String]({
+&"text": "IMAGE_NEXT"
+})
+metadata/_custom_type_script = "uid://7gga31jeosxl"
+
+[node name="Corpus" type="HBoxContainer" parent="Intermediate" unique_id=89764320]
+layout_mode = 2
+
+[node name="ZoomSlider" type="VScrollBar" parent="Intermediate/Corpus" unique_id=235791851]
 layout_mode = 2
 min_value = -60.0
 page = 40.0
 
-[node name="LocaleNode" type="Node" parent="Intermediate/ZoomSlider" unique_id=196089722]
+[node name="LocaleNode" type="Node" parent="Intermediate/Corpus/ZoomSlider" unique_id=196089722]
 script = ExtResource("2_psu8h")
 translations = Dictionary[StringName, String]({
 &"tooltip_text": "IMAGE_ZOOM"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="RenderAndYaw" type="VBoxContainer" parent="Intermediate" unique_id=2113766076]
+[node name="RenderAndYaw" type="VBoxContainer" parent="Intermediate/Corpus" unique_id=2113766076]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VisualizerRect" type="TextureRect" parent="Intermediate/RenderAndYaw" unique_id=1823197112]
+[node name="VisualizerRect" type="TextureRect" parent="Intermediate/Corpus/RenderAndYaw" unique_id=1823197112]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 mouse_filter = 0
@@ -54,85 +90,85 @@ texture = SubResource("ViewportTexture_kq2tu")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="SubViewport" type="SubViewport" parent="Intermediate/RenderAndYaw/VisualizerRect" unique_id=626713555]
+[node name="SubViewport" type="SubViewport" parent="Intermediate/Corpus/RenderAndYaw/VisualizerRect" unique_id=626713555]
 own_world_3d = true
 scaling_3d_mode = 5
 anisotropic_filtering_level = 0
 oversampling = false
 size = Vector2i(200, 128)
 
-[node name="CameraOrigin" type="Node3D" parent="Intermediate/RenderAndYaw/VisualizerRect/SubViewport" unique_id=1532143772]
+[node name="CameraOrigin" type="Node3D" parent="Intermediate/Corpus/RenderAndYaw/VisualizerRect/SubViewport" unique_id=1532143772]
 
-[node name="Cam" type="Camera3D" parent="Intermediate/RenderAndYaw/VisualizerRect/SubViewport/CameraOrigin" unique_id=2127089122]
+[node name="Cam" type="Camera3D" parent="Intermediate/Corpus/RenderAndYaw/VisualizerRect/SubViewport/CameraOrigin" unique_id=2127089122]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16)
 current = true
 fov = 60.0
 far = 64.0
 
-[node name="Backdrop" parent="Intermediate/RenderAndYaw/VisualizerRect/SubViewport" unique_id=1970434345 instance=ExtResource("3_indmu")]
+[node name="Backdrop" parent="Intermediate/Corpus/RenderAndYaw/VisualizerRect/SubViewport" unique_id=1970434345 instance=ExtResource("3_indmu")]
 
-[node name="Spheres" type="MultiMeshInstance3D" parent="Intermediate/RenderAndYaw/VisualizerRect/SubViewport" unique_id=1090367063]
+[node name="Spheres" type="MultiMeshInstance3D" parent="Intermediate/Corpus/RenderAndYaw/VisualizerRect/SubViewport" unique_id=1090367063]
 cast_shadow = 0
 custom_aabb = AABB(-16, -8, -16, 32, 16, 32)
 gi_mode = 0
 multimesh = ExtResource("4_indmu")
 
-[node name="Cubes" type="MultiMeshInstance3D" parent="Intermediate/RenderAndYaw/VisualizerRect/SubViewport" unique_id=1261465019]
+[node name="Cubes" type="MultiMeshInstance3D" parent="Intermediate/Corpus/RenderAndYaw/VisualizerRect/SubViewport" unique_id=1261465019]
 cast_shadow = 0
 custom_aabb = AABB(-16, -8, -16, 32, 16, 32)
 gi_mode = 0
 multimesh = ExtResource("5_1eel7")
 
-[node name="Lines" type="MeshInstance3D" parent="Intermediate/RenderAndYaw/VisualizerRect/SubViewport" unique_id=593617939]
+[node name="Lines" type="MeshInstance3D" parent="Intermediate/Corpus/RenderAndYaw/VisualizerRect/SubViewport" unique_id=593617939]
 material_override = SubResource("ShaderMaterial_3bk5g")
 cast_shadow = 0
 mesh = SubResource("ImmediateMesh_g4v7s")
 
-[node name="YawSlider" type="HScrollBar" parent="Intermediate/RenderAndYaw" unique_id=2145835859]
+[node name="YawSlider" type="HScrollBar" parent="Intermediate/Corpus/RenderAndYaw" unique_id=2145835859]
 layout_mode = 2
 min_value = -60.0
 page = 40.0
 
-[node name="LocaleNode" type="Node" parent="Intermediate/RenderAndYaw/YawSlider" unique_id=947944797]
+[node name="LocaleNode" type="Node" parent="Intermediate/Corpus/RenderAndYaw/YawSlider" unique_id=947944797]
 script = ExtResource("2_psu8h")
 translations = Dictionary[StringName, String]({
 &"tooltip_text": "IMAGE_YAW"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="PitchSlider" type="VScrollBar" parent="Intermediate" unique_id=2089934509]
+[node name="PitchSlider" type="VScrollBar" parent="Intermediate/Corpus" unique_id=2089934509]
 layout_mode = 2
 min_value = -60.0
 page = 40.0
 
-[node name="LocaleNode" type="Node" parent="Intermediate/PitchSlider" unique_id=14300425]
+[node name="LocaleNode" type="Node" parent="Intermediate/Corpus/PitchSlider" unique_id=14300425]
 script = ExtResource("2_psu8h")
 translations = Dictionary[StringName, String]({
 &"tooltip_text": "IMAGE_PITCH"
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="VSeparator" type="VSeparator" parent="Intermediate" unique_id=1764003837]
+[node name="VSeparator" type="VSeparator" parent="Intermediate/Corpus" unique_id=1764003837]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Intermediate" unique_id=507738295]
+[node name="VBoxContainer" type="VBoxContainer" parent="Intermediate/Corpus" unique_id=507738295]
 layout_mode = 2
 
-[node name="CenterButton" parent="Intermediate/VBoxContainer" unique_id=1745782209 instance=ExtResource("5_1c76j")]
+[node name="CenterButton" parent="Intermediate/Corpus/VBoxContainer" unique_id=1745782209 instance=ExtResource("5_1c76j")]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 icon = ExtResource("5_8vf8x")
 expand_mode = 5
 start_disabled = true
 
-[node name="ResizeButton" type="Button" parent="Intermediate/VBoxContainer" unique_id=1985047988]
+[node name="ResizeButton" type="Button" parent="Intermediate/Corpus/VBoxContainer" unique_id=1985047988]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 1
 mouse_default_cursor_shape = 10
 
-[node name="ResolutionButton" parent="Intermediate/VBoxContainer" unique_id=575959960 instance=ExtResource("5_1c76j")]
+[node name="ResolutionButton" parent="Intermediate/Corpus/VBoxContainer" unique_id=575959960 instance=ExtResource("5_1c76j")]
 texture_filter = 1
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -140,10 +176,12 @@ icon = ExtResource("5_uo7r5")
 expand_mode = 5
 toggle_mode = true
 
-[connection signal="value_changed" from="Intermediate/ZoomSlider" to="." method="_on_zoom_slider_value_changed"]
-[connection signal="gui_input" from="Intermediate/RenderAndYaw/VisualizerRect" to="." method="_on_visualizer_rect_gui_input"]
-[connection signal="value_changed" from="Intermediate/RenderAndYaw/YawSlider" to="." method="_on_yaw_slider_value_changed"]
-[connection signal="value_changed" from="Intermediate/PitchSlider" to="." method="_on_pitch_slider_value_changed"]
-[connection signal="pressed" from="Intermediate/VBoxContainer/CenterButton" to="." method="_on_center_button_pressed"]
-[connection signal="gui_input" from="Intermediate/VBoxContainer/ResizeButton" to="." method="_on_resize_button_gui_input"]
-[connection signal="toggled" from="Intermediate/VBoxContainer/ResolutionButton" to="." method="_on_resolution_button_toggled"]
+[connection signal="pressed" from="Intermediate/Header/PrevButton" to="." method="_on_prev_button_pressed"]
+[connection signal="pressed" from="Intermediate/Header/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="value_changed" from="Intermediate/Corpus/ZoomSlider" to="." method="_on_zoom_slider_value_changed"]
+[connection signal="gui_input" from="Intermediate/Corpus/RenderAndYaw/VisualizerRect" to="." method="_on_visualizer_rect_gui_input"]
+[connection signal="value_changed" from="Intermediate/Corpus/RenderAndYaw/YawSlider" to="." method="_on_yaw_slider_value_changed"]
+[connection signal="value_changed" from="Intermediate/Corpus/PitchSlider" to="." method="_on_pitch_slider_value_changed"]
+[connection signal="pressed" from="Intermediate/Corpus/VBoxContainer/CenterButton" to="." method="_on_center_button_pressed"]
+[connection signal="gui_input" from="Intermediate/Corpus/VBoxContainer/ResizeButton" to="." method="_on_resize_button_gui_input"]
+[connection signal="toggled" from="Intermediate/Corpus/VBoxContainer/ResolutionButton" to="." method="_on_resolution_button_toggled"]

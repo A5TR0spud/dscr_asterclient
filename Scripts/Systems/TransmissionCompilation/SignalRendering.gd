@@ -111,6 +111,7 @@ static func check_message(message0: Array) -> Array[VisualData]:
 		if parser.has_error():
 			print(parser.get_error_message())
 			parser.restore_state(pos, true)
+			wip = VisualData.new()
 			continue
 		
 		if not wip.objects.is_empty():
