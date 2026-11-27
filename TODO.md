@@ -1,5 +1,6 @@
 ## TODO
 
+* folders for library
 * per-channel mute
 * signal counter in parse bar
 * unit circle reference
