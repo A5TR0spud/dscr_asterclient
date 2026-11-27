@@ -205,12 +205,6 @@ func _on_number_separation_set(new_value):
 	SettingsHandler.number_auto_sep = new_value
 	save(false)
 
-func _on_volume_normal_pressed():
-	sound_slider.value = _volume_linear_to_slider(sound_slider, 1)
-
-func _on_music_volume_normal_pressed():
-	music_slider.value = _volume_linear_to_slider(music_slider, 1)
-
 func _on_callsign_node_callsign_submitted(new_value):
 	SettingsHandler.backup_callsign = new_value
 	save(false)
@@ -256,9 +250,6 @@ func _on_crunch_image_set(new_value):
 	SettingsHandler.crunch_image = new_value
 	save(true)
 
-func _on_ping_volume_normal_pressed():
-	ping_slider.value = _volume_linear_to_slider(ping_slider, 1)
-
 func _on_ping_volume_slider_value_changed(value):
 	SettingsHandler.ping_volume = _volume_slider_to_linear(ping_slider, value)
 	SettingsHandler.evaluate_volume()
@@ -277,3 +268,31 @@ func _on_low_contrast_set(new_value):
 	SettingsHandler.low_contrast_mode = new_value
 	save(false)
 	ThemeManager.set_theme_color()
+
+
+func _on_volume_silent_pressed():
+	sound_slider.value = sound_slider.min_value
+
+func _on_volume_normal_pressed():
+	sound_slider.value = _volume_linear_to_slider(sound_slider, 1)
+
+func _on_volume_deafening_pressed():
+	sound_slider.value = sound_slider.max_value
+
+func _on_music_silent_pressed():
+	music_slider.value = music_slider.min_value
+
+func _on_music_volume_normal_pressed():
+	music_slider.value = _volume_linear_to_slider(music_slider, 1)
+
+func _on_music_deafening_pressed():
+	music_slider.value = music_slider.max_value
+
+func _on_ping_silent_pressed():
+	ping_slider.value = ping_slider.min_value
+
+func _on_ping_volume_normal_pressed():
+	ping_slider.value = _volume_linear_to_slider(ping_slider, 1)
+
+func _on_ping_deafening_pressed():
+	ping_slider.value = ping_slider.max_value

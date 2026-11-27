@@ -187,6 +187,7 @@ state = true
 
 [node name="Interface" type="FoldableContainer" parent="ScrollContainer/Options" unique_id=1112130352]
 layout_mode = 2
+folded = true
 title = "interface"
 foldable_group = SubResource("FoldableGroup_2xmuf")
 
@@ -198,6 +199,7 @@ translations = Dictionary[StringName, String]({
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/Options/Interface" unique_id=1949425612]
+visible = false
 layout_mode = 2
 
 [node name="NumberSeparation" parent="ScrollContainer/Options/Interface/VBoxContainer" unique_id=1913893789 instance=ExtResource("3_0yg8b")]
@@ -387,7 +389,6 @@ state = true
 
 [node name="Sounds" type="FoldableContainer" parent="ScrollContainer/Options" unique_id=701943303]
 layout_mode = 2
-folded = true
 title = "sound"
 foldable_group = SubResource("FoldableGroup_2xmuf")
 
@@ -399,7 +400,6 @@ translations = Dictionary[StringName, String]({
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/Options/Sounds" unique_id=1019932741]
-visible = false
 layout_mode = 2
 
 [node name="GlobalVolume" type="VBoxContainer" parent="ScrollContainer/Options/Sounds/VBoxContainer" unique_id=970437208]
@@ -429,11 +429,10 @@ scrollable = false
 [node name="SliderLabelGrid" type="HBoxContainer" parent="ScrollContainer/Options/Sounds/VBoxContainer/GlobalVolume" unique_id=1443703006]
 layout_mode = 2
 
-[node name="Silent" type="Label" parent="ScrollContainer/Options/Sounds/VBoxContainer/GlobalVolume/SliderLabelGrid" unique_id=1261588972]
+[node name="Silent" type="Button" parent="ScrollContainer/Options/Sounds/VBoxContainer/GlobalVolume/SliderLabelGrid" unique_id=231000795]
 layout_mode = 2
 size_flags_horizontal = 2
 text = "silent"
-horizontal_alignment = 3
 
 [node name="LocaleNode" type="Node" parent="ScrollContainer/Options/Sounds/VBoxContainer/GlobalVolume/SliderLabelGrid/Silent" unique_id=47497133]
 script = ExtResource("5_gal0n")
@@ -454,11 +453,10 @@ translations = Dictionary[StringName, String]({
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="Deafening" type="Label" parent="ScrollContainer/Options/Sounds/VBoxContainer/GlobalVolume/SliderLabelGrid" unique_id=1679507505]
+[node name="Deafening" type="Button" parent="ScrollContainer/Options/Sounds/VBoxContainer/GlobalVolume/SliderLabelGrid" unique_id=1308145678]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "deafening"
-horizontal_alignment = 3
 
 [node name="LocaleNode" type="Node" parent="ScrollContainer/Options/Sounds/VBoxContainer/GlobalVolume/SliderLabelGrid/Deafening" unique_id=1699773932]
 script = ExtResource("5_gal0n")
@@ -497,11 +495,10 @@ scrollable = false
 [node name="SliderLabelGrid" type="HBoxContainer" parent="ScrollContainer/Options/Sounds/VBoxContainer/MusicVolume" unique_id=1836988671]
 layout_mode = 2
 
-[node name="Silent" type="Label" parent="ScrollContainer/Options/Sounds/VBoxContainer/MusicVolume/SliderLabelGrid" unique_id=89725400]
+[node name="Silent" type="Button" parent="ScrollContainer/Options/Sounds/VBoxContainer/MusicVolume/SliderLabelGrid" unique_id=1136778086]
 layout_mode = 2
 size_flags_horizontal = 2
 text = "silent"
-horizontal_alignment = 3
 
 [node name="LocaleNode" type="Node" parent="ScrollContainer/Options/Sounds/VBoxContainer/MusicVolume/SliderLabelGrid/Silent" unique_id=585240623]
 script = ExtResource("5_gal0n")
@@ -522,11 +519,10 @@ translations = Dictionary[StringName, String]({
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="Deafening" type="Label" parent="ScrollContainer/Options/Sounds/VBoxContainer/MusicVolume/SliderLabelGrid" unique_id=1166531189]
+[node name="Deafening" type="Button" parent="ScrollContainer/Options/Sounds/VBoxContainer/MusicVolume/SliderLabelGrid" unique_id=1373640222]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "deafening"
-horizontal_alignment = 3
 
 [node name="LocaleNode" type="Node" parent="ScrollContainer/Options/Sounds/VBoxContainer/MusicVolume/SliderLabelGrid/Deafening" unique_id=47513575]
 script = ExtResource("5_gal0n")
@@ -565,11 +561,10 @@ scrollable = false
 [node name="SliderLabelGrid" type="HBoxContainer" parent="ScrollContainer/Options/Sounds/VBoxContainer/PingVolume" unique_id=1583257019]
 layout_mode = 2
 
-[node name="Silent" type="Label" parent="ScrollContainer/Options/Sounds/VBoxContainer/PingVolume/SliderLabelGrid" unique_id=1521528809]
+[node name="Silent" type="Button" parent="ScrollContainer/Options/Sounds/VBoxContainer/PingVolume/SliderLabelGrid" unique_id=948521349]
 layout_mode = 2
 size_flags_horizontal = 2
 text = "silent"
-horizontal_alignment = 3
 
 [node name="LocaleNode" type="Node" parent="ScrollContainer/Options/Sounds/VBoxContainer/PingVolume/SliderLabelGrid/Silent" unique_id=186696493]
 script = ExtResource("5_gal0n")
@@ -590,11 +585,10 @@ translations = Dictionary[StringName, String]({
 })
 metadata/_custom_type_script = "uid://7gga31jeosxl"
 
-[node name="Deafening" type="Label" parent="ScrollContainer/Options/Sounds/VBoxContainer/PingVolume/SliderLabelGrid" unique_id=781280033]
+[node name="Deafening" type="Button" parent="ScrollContainer/Options/Sounds/VBoxContainer/PingVolume/SliderLabelGrid" unique_id=1283742176]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "deafening"
-horizontal_alignment = 3
 
 [node name="LocaleNode" type="Node" parent="ScrollContainer/Options/Sounds/VBoxContainer/PingVolume/SliderLabelGrid/Deafening" unique_id=1194634109]
 script = ExtResource("5_gal0n")
@@ -700,11 +694,17 @@ on_text = "SETTINGS_BACKUP_INCREMENT"
 [connection signal="pressed" from="ScrollContainer/Options/Interface/VBoxContainer/ThemeColorSubmitElse/ColorCancelButton" to="." method="_on_color_cancel_button_pressed"]
 [connection signal="set" from="ScrollContainer/Options/Interface/VBoxContainer/LowContrast" to="." method="_on_low_contrast_set"]
 [connection signal="value_changed" from="ScrollContainer/Options/Sounds/VBoxContainer/GlobalVolume/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="pressed" from="ScrollContainer/Options/Sounds/VBoxContainer/GlobalVolume/SliderLabelGrid/Silent" to="." method="_on_volume_silent_pressed"]
 [connection signal="pressed" from="ScrollContainer/Options/Sounds/VBoxContainer/GlobalVolume/SliderLabelGrid/Normal" to="." method="_on_volume_normal_pressed"]
+[connection signal="pressed" from="ScrollContainer/Options/Sounds/VBoxContainer/GlobalVolume/SliderLabelGrid/Deafening" to="." method="_on_volume_deafening_pressed"]
 [connection signal="value_changed" from="ScrollContainer/Options/Sounds/VBoxContainer/MusicVolume/VolumeSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="pressed" from="ScrollContainer/Options/Sounds/VBoxContainer/MusicVolume/SliderLabelGrid/Silent" to="." method="_on_music_silent_pressed"]
 [connection signal="pressed" from="ScrollContainer/Options/Sounds/VBoxContainer/MusicVolume/SliderLabelGrid/Normal" to="." method="_on_music_volume_normal_pressed"]
+[connection signal="pressed" from="ScrollContainer/Options/Sounds/VBoxContainer/MusicVolume/SliderLabelGrid/Deafening" to="." method="_on_music_deafening_pressed"]
 [connection signal="value_changed" from="ScrollContainer/Options/Sounds/VBoxContainer/PingVolume/VolumeSlider" to="." method="_on_ping_volume_slider_value_changed"]
+[connection signal="pressed" from="ScrollContainer/Options/Sounds/VBoxContainer/PingVolume/SliderLabelGrid/Silent" to="." method="_on_ping_silent_pressed"]
 [connection signal="pressed" from="ScrollContainer/Options/Sounds/VBoxContainer/PingVolume/SliderLabelGrid/Normal" to="." method="_on_ping_volume_normal_pressed"]
+[connection signal="pressed" from="ScrollContainer/Options/Sounds/VBoxContainer/PingVolume/SliderLabelGrid/Deafening" to="." method="_on_ping_deafening_pressed"]
 [connection signal="set" from="ScrollContainer/Options/ImageSettings/VBoxContainer/ImageVis" to="." method="_on_image_vis_set"]
 [connection signal="set" from="ScrollContainer/Options/ImageSettings/VBoxContainer/CrunchImage" to="." method="_on_crunch_image_set"]
 [connection signal="set" from="ScrollContainer/Options/ImageSettings/VBoxContainer/CameraControls/VBoxContainer/InvertPitch" to="." method="_on_invert_pitch_set"]
