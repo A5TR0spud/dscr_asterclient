@@ -23,6 +23,9 @@ static func get_m0_translation(key: String) -> String:
 static func get_lang_string(key: String) -> String:
 	return TranslationServer.translate(key)
 
+static func index() -> int:
+	return 0 if SettingsHandler.use_m0_ui and DictionaryHandler.support_m0 else 1
+
 static func translate(key: String, arguments: Variant = []) -> String:
 	if arguments is not Array and arguments is not Dictionary:
 		arguments = [arguments]

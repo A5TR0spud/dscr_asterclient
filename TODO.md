@@ -5,6 +5,7 @@
 * signal counter in parse bar
 * unit circle reference
 * calculator reference
+* make renders tell you what you're hovering over
 * allow multiple audios per transmission and instantiate the scene of parses as needed instead of always having them loaded
 * button per-channel to clear its history
 * draggable dictionary edit window
