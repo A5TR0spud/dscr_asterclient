@@ -4,3 +4,6 @@
 /Builds
 /Unused
 Localization/.~lock.lang.csv\#
+
+# pretend that no mac users edited this code
+.DS_Store
