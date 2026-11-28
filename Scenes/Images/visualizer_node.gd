@@ -81,7 +81,7 @@ func prepare_from_multiple(data: Array[SignalRendering.VisualData]):
 	if not data.is_empty():
 		data_index %= data.size()
 		render_data(data[data_index])
-		index_display.text = Localizer.translate("IMAGE_CURRENT", [data_index, data.size()])
+		index_display.text = Localizer.translate("IMAGE_CURRENT", [data_index + 1, data.size()])
 		header.visible = data.size() > 1
 		return
 	header.hide()
@@ -92,14 +92,14 @@ func _on_next_button_pressed():
 	if saved_data.is_empty():
 		return
 	data_index = (data_index + 1) % saved_data.size()
-	index_display.text = Localizer.translate("IMAGE_CURRENT", [data_index, saved_data.size()])
+	index_display.text = Localizer.translate("IMAGE_CURRENT", [data_index + 1, saved_data.size()])
 	render_data(saved_data[data_index])
 
 func _on_prev_button_pressed():
 	if saved_data.is_empty():
 		return
 	data_index = posmod(data_index - 1, saved_data.size())
-	index_display.text = Localizer.translate("IMAGE_CURRENT", [data_index, saved_data.size()])
+	index_display.text = Localizer.translate("IMAGE_CURRENT", [data_index + 1, saved_data.size()])
 	render_data(saved_data[data_index])
 
 func render_data(data: SignalRendering.VisualData):

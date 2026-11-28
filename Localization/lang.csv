@@ -16,7 +16,7 @@ TIME_AGO_HSEC,{0} -69 -118 -121,yes,{0} He-6 half-life ago,{0} He-6 sekundę tem
 ,,,,{0} He-6 sekund temu,
 DICT_HEADER,-237 -174,,Dictionary,Słownik,Dictionnaire
 DICT_DEFAULT,-124,,Default Formatting,Domyślne formatowanie,Formatage par défaut
-DICT_NUMBER,-11,,Numbers,,Nombres
+DICT_NUMBER,-11,,Numbers,Formatowanie liczb,Nombres
 DICT_SEARCH_MAKE,-38 -77 -163,,Search or create,Wyszukaj lub stwórz,Chercher ou créer
 DICT_OPEN_FILE,-40,,Open file,Otwórz plik,Ouvrir le dossier
 USERS_HEADER,-130 -23 -4 {0},,Online Users: {0},Nadające stacje: {0},Utilisateurs connectés: {0}
@@ -32,12 +32,12 @@ SETTINGS_DEFAULT_IMAGE,-26 -14 -104 -149 -53 -163 -85 -15 -4,,Show images by def
 SETTINGS_DO_BBCODE,-26 -14 -42 -163 -100 -223 -216 -15 -4,,Enable word styling?,Formatuj słowa,Formatage des mots
 SETTINGS_CRUNCH,-26 -14 -53 -163 -158 -23 -100 -107 -109 -15 -4,,Lower visual resolution?,Niższa rozdzielczość obrazów,Faible résolution des images
 SETTINGS_COLOR_REF,-42 -14 -54 -15 -163 -100,,Display |-54 color reference?,Ściągawka kolorów dla |-54,Rappel des couleurs pour |-54
-SETTINGS_COLOR_REF_NONE,-111,,No,Nie wyświetlaj,Non
-SETTINGS_COLOR_REF_INLINE,-169 -42,,Inlined,Koloruj tekst,Colorer le texte
-SETTINGS_COLOR_REF_BOTTOM,-170 -43,,Bottom,Wyświetl pod wiadomością,En dessous
+SETTINGS_COLOR_REF_NONE,-111,,No,brak,Non
+SETTINGS_COLOR_REF_INLINE,-169 -42,,Inlined,koloruj tekst,Colorer le texte
+SETTINGS_COLOR_REF_BOTTOM,-170 -43,,Bottom,pod wiadomością,En dessous
 SETTINGS_COLOR_REF_TOGGLE,-54,,Color,Kolor,Couleur
-SETTINGS_BOOL_TRUE,-27,,Yes,Tak,Oui
-SETTINGS_BOOL_FALSE,-28,,No,Nie,Non
+SETTINGS_BOOL_TRUE,-27,,Yes,tak,Oui
+SETTINGS_BOOL_FALSE,-28,,No,nie,Non
 SETTINGS_TRUNCATE,-42 -122 -25,,Words before truncation,sygnały przed skróceniem,Mots avant de tronquer
 SETTINGS_SIGNAL_DISPLAY_FOLD,-42 -163,,Signal Display,Format sygnałów,Formatage des signaux
 SETTINGS_INTERFACE_FOLD,-159,,Interface,Interfejs,Interface
@@ -71,7 +71,7 @@ SETTINGS_CONFETTI,-702,,Confetti!,Konfetti!,Confetti !
 SETTINGS_NUMBER_SEP,-26 -14 -11 -190 -11 -100 -11 -2 -11 -15 -4,,Insert |-2 between spaced numbers?,Wstaw |-2 między liczbami,Insérer |-2 entre les nombres espacés
 SETTINGS_BACKUP_CALLSIGN,-37 -128 -11 -100 -155 -36,,Backup callsign,Zapasowy znak wywoławczy,Indicatif d’appel de recours
 SETTINGS_BACKUP_RANDOM,-11,,Random,Losowy,Aléatoire
-SETTINGS_BACKUP_INCREMENT,1 -5,,Increment,Użyj następny,Incrémenter
+SETTINGS_BACKUP_INCREMENT,1 -5,,Increment,Następny wolny,Incrémenter
 CALLSIGN,-128 -42,,Callsign,Znak wywoławczy,Indicatif d’appel
 COPY_SIGNAL_NUMBERS,-42 -40,,Copy frequencies,Kopiuj sygnały,Copier les signaux
 COPY_SIGNAL_NAMES,-237 -40,,Copy words,Kopiuj słowa,Copier les mots
@@ -114,28 +114,28 @@ DICT_EDIT_BA_LABEL_NUMBER,-122 -11 -122,,then number then,potem liczba a potem,p
 DICT_EDIT_NAME_PLACEHOLDER,-109 -237 -38,,Enter name…,Wpisz hasło…,Saisissez un nom…
 DICT_EDIT_DESC_PLACEHOLDER,-119 -130 -86 -108 -237 -38 -85,,Enter notes…,Wprowadź notatki…,Saisissez vos notes…
 DICT_EDIT_MOVE,-42 -39 -85,,Move,Redefiniuj,Réaffecter
-FORMAT_NONE,-111,,Nothing,Nic,Rien
-FORMAT_SPACE,1 -190,,Space,Spacja,Espace
-FORMAT_NEWLINE,1 -108 -190,,Newline,Złam linię,Fin de ligne
-FORMAT_DOUBLE,2 -108 -190,,Double newline,Podwójna linia,Saut de ligne
-FORMAT_ATTRACT,1 -189,,Remove space,Usuń spację,Enlever un espace
+FORMAT_NONE,-111,,Nothing,nic,Rien
+FORMAT_SPACE,1 -190,,Space,spacja,Espace
+FORMAT_NEWLINE,1 -108 -190,,Newline,złam linię,Fin de ligne
+FORMAT_DOUBLE,2 -108 -190,,Double newline,podwójna linia,Saut de ligne
+FORMAT_ATTRACT,1 -189,,Remove space,usuń spację,Enlever un espace
 DICT_EDIT_BREAK,-26 -14 2 -229 -42 -122 1 -108 -190 -15 -4,,Break on double?,Złam po podwojeniu?,Fin de ligne si doublon
 DICT_EDIT_INDENTATION,-42 -86 -190,,Indentation:,Wcięcie:,Indentation
-DICT_EDIT_NO_INDENT,-38 -29 -85,,None,Brak,Aucune
-DICT_EDIT_INDENT,-38 -85,,Indent,Zwiększ wcięcie,Indenter
-DICT_EDIT_DEDENT,-88 -85,,Dedent,Zmniejsz wcięcie,Désindenter
+DICT_EDIT_NO_INDENT,-38 -29 -85,,None,zachowaj,Aucune
+DICT_EDIT_INDENT,-38 -85,,Indent,zwiększ wcięcie,Indenter
+DICT_EDIT_DEDENT,-88 -85,,Dedent,zmniejsz wcięcie,Désindenter
 DICT_EDIT_BOLD,-42 -22 -100,,Bold?,Wytłuść?,Gras
-DICT_EDIT_NO_BOLD,-114,,No,Nie,Non
-DICT_EDIT_YES_BOLD,-108,,Yes,Tak,Oui
+DICT_EDIT_NO_BOLD,-114,,No,nie,Non
+DICT_EDIT_YES_BOLD,-108,,Yes,tak,Oui
 DICT_EDIT_ITALICS,-42 -49 -86 -51,,Italicize?,Pochyl?,Italique
-DICT_EDIT_NO_ITALICS,-174 -29 -85,,No,Nie,Non
-DICT_EDIT_YES_ITALICS,-174 -85,,Yes,Tak,Oui
+DICT_EDIT_NO_ITALICS,-174 -29 -85,,No,nie,Non
+DICT_EDIT_YES_ITALICS,-174 -85,,Yes,tak,Oui
 DICT_EDIT_UNDERLINE,-109 -51 -17,,Underline?,Podkreśl?,Sousligné
-DICT_EDIT_NO_UNDERLINE,-100 -29,,No,Nie,Non
-DICT_EDIT_YES_UNDERLINE,-100,,Yes,Tak,Oui
+DICT_EDIT_NO_UNDERLINE,-100 -29,,No,nie,Non
+DICT_EDIT_YES_UNDERLINE,-100,,Yes,tak,Oui
 DICT_EDIT_STRIKETHROUGH,-114 -51 -17,,Strikethrough?,Przekreśl?,Barré
-DICT_EDIT_NO_STRIKE,-100 -29,,No,Nie,Non
-DICT_EDIT_YES_STRIKE,-100,,Yes,Tak,Oui
+DICT_EDIT_NO_STRIKE,-100 -29,,No,nie,Non
+DICT_EDIT_YES_STRIKE,-100,,Yes,tak,Oui
 DICT_EDIT_COLOR_IS,-100,,is,jako,est
 DICT_EDIT_COLOR_SIGNAL,-42 -54,,word color,kolor hasła,la couleur du mot
 DICT_EDIT_COLOR_BG,-22 -54,,background color,kolor tła,la couleur du fond
@@ -289,3 +289,11 @@ REF_PARTICLE_PLOTS_HYDROGEN,-56 1,,Hydrogen atoms,atom wodoru,Atomes d’hydrogr
 REF_PARTICLE_PLOTS_CARBON,-56 6,,Carbon atoms,atom węgla,Atomes de carbone
 REF_PARTICLE_PLOTS_OTHER_ATOM,-56 -11,,Other atoms,inne atomy,Autres atomes
 SETTINGS_REQUIRE_PIPE_ESCAPE,-26 -14 -42 -11 -100 | -11 -15 -4,,Require “|” to type raw signals?,Wymagaj „|” dla surowych sygnałów,Exiger « | » pour les signaux bruts
+SETTINGS_LOW_CONTRAST,-26 -14 -110 -54 -100 -117 -229 -15 -4,,Use low contrast?,Niski kontrast,Contraste faible
+SETTINGS_REQUEST_ATTENTION,-43 -218,,App icon requests attention?,Ikonka wymaga uwagi, Clignotement de l'icône
+SETTINGS_REQUEST_ATTENTION_NONE,-111,,Never,nigdy,Jamais
+SETTINGS_REQUEST_ATTENTION_PING,-130 -128,,Pings Only,po wzmiance,Notifications seulement
+SETTINGS_REQUEST_ATTENTION_ALWAYS,-110,,All Messages,po każdej wiadomości,Tous les messages
+IMAGE_PREVIOUS,-118,,<,‹,
+IMAGE_NEXT,-120,,>,›,
+IMAGE_CURRENT,{0} -2 {1},,{0}/{1},{0} z {1},
