@@ -1,299 +1,291 @@
-key,m0,?plural,en,pl
-TAB_CHAT,-214,,Relay,Radiostacja
-TAB_LIBRARY,-43,,Library,Biblioteka
-TAB_DICT,-42,,Dictionary,Słownik
-TAB_USERS,-130,,Users,Stacje
-TAB_SETTINGS,-241,,Settings,Ustawienia
-BUTTON_DSVE,-53 -38,,DSVE,DSVE
-BUTTON_DSMIDI,-577 -38,,DSMIDI,DSMIDI
-BUTTON_LANG,-195 -174,,Change language,Zmiana języka
-BUTTON_SCROLL,-119 -43,,Return to bottom,Przewiń w dół
-PLACEHOLDER_ENTRY,-43 -38,,Enter message here…,Wpisz wiadomość…
-SIGNAL_NAME,-42,,Signal Name,Hasło
-SIGNAL_NUMBER,-237,,Frequency,Sygnał
-TIME_AGO_HSEC,{0} -69 -118 -121,yes,{0} He-6 half-life ago,{0} He-6 sekundę temu
-,,,{0} He-6 half-lifes ago,{0} He-6 sekundy temu
-,,,,{0} He-6 sekund temu
-DICT_HEADER,-237 -174,,Dictionary,Słownik
-DICT_DEFAULT,-124,,Default Formatting,Domyślne formatowanie
-DICT_NUMBER,-11,,Numbers,
-DICT_SEARCH_MAKE,-38 -77 -163,,Search or create,Wyszukaj lub stwórz
-DICT_OPEN_FILE,-40,,Open file,Otwórz plik
-USERS_HEADER,-130 -23 -4 {0},,Online Users: {0},Nadające stacje: {0}
-USERS_ONLINE,-119,,Online,Nadają teraz
-USERS_NICKED,-123,,Nicknamed,Ksywki
-USERS_NICK_IS,{0} -100,,{0} is,{0} to
-USERS_UNNICKED,-111,,unnamed,bez nazwy
-SETTINGS_HEADER,-241 -174,,Settings,Ustawienia
-SETTINGS_DIRECTORY,-40 -174,,Change Save Directory,Zmień Miejsce Zapisu
-SETTINGS_RECONNECT,-241 0 -41,,Reconnect,Połącz ponownie
-SETTINGS_DO_WHITESPACE,-26 -14 -42 -190 -85 -100 -223 -216 -15 -4,,Follow dictionary whitespace?,Formatuj białe znaki
-SETTINGS_DEFAULT_IMAGE,-26 -14 -104 -149 -53 -163 -85 -15 -4,,Show images by default?,Wyświetl obrazy domyślnie
-SETTINGS_DO_BBCODE,-26 -14 -42 -163 -100 -223 -216 -15 -4,,Enable word styling?,Formatuj słowa
-SETTINGS_CRUNCH,-26 -14 -53 -163 -158 -23 -100 -107 -109 -15 -4,,Lower visual resolution?,Niższa rozdzielczość obrazów
-SETTINGS_COLOR_REF,-42 -14 -54 -15 -163 -100,,Display |-54 color reference?,Ściągawka kolorów dla |-54
-SETTINGS_COLOR_REF_NONE,-111,,No,Nie wyświetlaj
-SETTINGS_COLOR_REF_INLINE,-169 -42,,Inlined,Koloruj tekst
-SETTINGS_COLOR_REF_BOTTOM,-170 -43,,Bottom,Wyświetl pod wiadomością
-SETTINGS_COLOR_REF_TOGGLE,-54,,Color,Kolor
-SETTINGS_BOOL_TRUE,-27,,Yes,Tak
-SETTINGS_BOOL_FALSE,-28,,No,Nie
-SETTINGS_TRUNCATE,-42 -122 -25,,Words before truncation,sygnały przed skróceniem
-SETTINGS_SIGNAL_DISPLAY_FOLD,-42 -163,,Signal Display,Format sygnałów
-SETTINGS_INTERFACE_FOLD,-159,,Interface,Interfejs
-SETTINGS_SOUNDS_FOLD,-167 -39 -163,,Audio,Dźwięk
-SETTINGS_IMAGE_FOLD,-53,,Renders,Obrazy
-TRUNCATION,-25,,…,…
-TRUNCATE_TOGGLE,-25,,Truncate,Skróć
-IMAGE_TOGGLE,-53,,Visualize,Wizualizacja
-MUSIC_PLAY,-577,,Play,Odtwórz
-MUSIC_STOP,-29,,Stop,Zatrzymaj
-MUSIC_QUEUE,-5,,Queue,Dodaj do kolejki
-SETTINGS_FONT_SIZE,-42 -22 -4,,Font size,Rozmiar czcionki
-SETTINGS_CANVAS_STRETCH,-26 -14 -110 -22 -174 -85 -15 -4,,Stretch UI,Rozciągnij interfejs
-SETTINGS_UI_SCALE,-110 -22 -6,,UI Scale,Skala interfejsu
-SETTINGS_USE_AT_UNDEF,-26 -14 -124 -42 -100 @UNDEF -15 -4,,Should unknown words be displayed with “@UNDEF”?,Pokaż nieznane hasła jako „@UNDEF”
-SETTINGS_THEME_COLOR,-110 -54 -100,,Theme color,Schemat kolorów
-SUBMIT,-174,,Submit,Zapisz
-CANCEL,-29,,Cancel,Cofnij zmiany
-SETTINGS_VOLUME_SYSTEM,-115 -167 -39 -22 -100,,System Volume,Głośność ogólna
-SETTINGS_VOLUME_MUSIC,-577 -167 -39 -22 -100,,Music Volume,Głośność muzyki
-SETTINGS_VOLUME_PING,-130 -128 -11 -167 -39 -22 -100,,Ping Volume,Głośność wzmianek
-SETTINGS_VOLUME_ZERO,-111,,Muted,Wycisz
-SETTINGS_VOLUME_DEFAULT,-114,,Default,Domyślna
-SETTINGS_VOLUME_LOUD,-108,,Loud,Wysoka
-SETTINGS_CAMERA_HEADER,-53 -39,,Camera Controls,Kontrola Kamery
-SETTINGS_INVERT_PITCH,-26 -14 -49 -92 -100 -87 -15 -4,,Invert pitch?,Odwróć nachylenie
-SETTINGS_INVERT_YAW,-26 -14 -51 -92 -100 -87 -15 -4,,Invert yaw?,Odwróć pochylenie
-SETTINGS_INVERT_ZOOM,-26 -14 -50 -39 -100 -87 -15 -4,,Invert zoom?,Odwróć zbliżenie
-SETTINGS_RIGHT_SIDEBAR,-26 -14 -237 -19 -49 -32 -214 -19 -49 -15 -4,,Right-handed sidebar,Prawostronny pasek boczny
-SETTINGS_CONFETTI,-702,,Confetti!,Konfetti!
-SETTINGS_NUMBER_SEP,-26 -14 -11 -190 -11 -100 -11 -2 -11 -15 -4,,Insert |-2 between spaced numbers?,Wstaw |-2 między liczbami
-SETTINGS_BACKUP_CALLSIGN,-37 -128 -11 -100 -155 -36,,Backup callsign,Zapasowy znak wywoławczy
-SETTINGS_BACKUP_RANDOM,-11,,Random,Losowy
-SETTINGS_BACKUP_INCREMENT,1 -5,,Increment,Użyj następny
-CALLSIGN,-128 -42,,Callsign,Znak wywoławczy
-COPY_SIGNAL_NUMBERS,-42 -40,,Copy frequencies,Kopiuj sygnały
-COPY_SIGNAL_NAMES,-237 -40,,Copy words,Kopiuj słowa
-SUBMIT_LONG,-174 -85,,Submit,Zapisz
-LIBRARY_NEW,-43 -38 -85,,Submit,Zapisz
-LIBRARY_REPLACE,-43 -174 -85,,Replace,Zastąp
-LIBRARY_RENAME,-41 {0} -40,,Rename from “{0}”,Przemianuj „{0}”
-CANCEL_LONG,-174 -29 -85,,Cancel,Cofnij zmiany
-DELETE_ASK,-88 -127 -85,,Delete?,Usuń
-DELETE_CONFIRM_TRX,-43 -88 -85,,Are you sure?,Napewno?
-DELETE_CONFIRM_SIG,-42 -88 -85,,Are you sure?,Napewno?
-DELETE_ASK_SHORT,-88,,Delete?,Usuń?
-DELETE_CONFIRM,-85,,Delete.,Usuń.
-SYSTEM,-241,,System,System
-SYSTEM_CONNECTING,-119 -241 -86 -14 -241 0 -196 -15 -127 -85,,Attempting to connect…,Łączenie…
-SYSTEM_CONNECTED,-154 -2 -119 -241 -86 -241 0 -196 -145 -85,,Connected!,Połączono!
-SYSTEM_CONNECTION_FAILED,-155 -2 -119 -241 -86 -241 0 -196 -145 -29 -85,,Cannot connect.,Nie udało się nawiązać połączenia.
-SYSTEM_DISCONNECTING,-119 -241 -30 -241 0 -86 -14 -196 -15 -127 -29 -186 -85 -109 -120 -65 -121,,Attempting to disconnect…,Rozłączanie…
-SYSTEM_DISCONNECTED,-241 0 -86 -119 -241 -196 -29 -85,,Disconnected.,Rozłączono.
-SYSTEM_WILL_RECONNECT,-119 -241 -86 -14 -241 0 -196 -15 -127 -85 {0} -69 -120 -121,yes,Will reconnect in {0} He-6 second…,Połączy ponownie za {0} He-6 sekundę…
-,,,Will reconnect in {0} He-6 seconds…,Połączy ponownie za {0} He-6 sekundy…
-,,,,Połączy ponownie za {0} He-6 sekund…
-SYSTEM_UNKNOWN_SIGNAL,-124 -42 -100 -14 {0} -15,,Unknown words: {0},Nieznane hasła: {0}
+key,m0,?plural,en,pl,fr
+TAB_CHAT,-214,,Relay,Radiostacja,Relais
+TAB_LIBRARY,-43,,Library,Biblioteka,Bibliothèque
+TAB_DICT,-42,,Dictionary,Słownik,Dictionnaire
+TAB_USERS,-130,,Users,Stacje,Utilisateurs
+TAB_SETTINGS,-241,,Settings,Ustawienia,Paramètres
+BUTTON_DSVE,-53 -38,,DSVE,DSVE,DSVE
+BUTTON_DSMIDI,-577 -38,,DSMIDI,DSMIDI,DSMIDI
+BUTTON_LANG,-195 -174,,Change language,Zmiana języka,Changer la langue
+BUTTON_SCROLL,-119 -43,,Return to bottom,Przewiń w dół,Revenir en bas
+PLACEHOLDER_ENTRY,-43 -38,,Enter message here…,Wpisz wiadomość…,Envoyer un message
+SIGNAL_NAME,-42,,Signal Name,Hasło,Mot
+SIGNAL_NUMBER,-237,,Frequency,Sygnał,Signal
+TIME_AGO_HSEC,{0} -69 -118 -121,yes,{0} He-6 half-life ago,{0} He-6 sekundę temu,Il y a {0} demi-vie d’He-6
+,,,{0} He-6 half-lifes ago,{0} He-6 sekundy temu,Il y a {0} demi-vies d’He-6
+,,,,{0} He-6 sekund temu,
+DICT_HEADER,-237 -174,,Dictionary,Słownik,Dictionnaire
+DICT_DEFAULT,-124,,Default Formatting,Domyślne formatowanie,Formatage par défaut
+DICT_NUMBER,-11,,Numbers,,Nombres
+DICT_SEARCH_MAKE,-38 -77 -163,,Search or create,Wyszukaj lub stwórz,Chercher ou créer
+DICT_OPEN_FILE,-40,,Open file,Otwórz plik,Ouvrir le dossier
+USERS_HEADER,-130 -23 -4 {0},,Online Users: {0},Nadające stacje: {0},Utilisateurs connectés: {0}
+USERS_ONLINE,-119,,Online,Nadają teraz,En ligne
+USERS_NICKED,-123,,Nicknamed,Ksywki,Nommé.es
+USERS_NICK_IS,{0} -100,,{0} is,{0} to,{0} est
+USERS_UNNICKED,-111,,unnamed,bez nazwy,sans nom
+SETTINGS_HEADER,-241 -174,,Settings,Ustawienia,Paramètres
+SETTINGS_DIRECTORY,-40 -174,,Change Save Directory,Zmień Miejsce Zapisu,Changer le dossier de sauvegarde
+SETTINGS_RECONNECT,-241 0 -41,,Reconnect,Połącz ponownie,Se reconnecter
+SETTINGS_DO_WHITESPACE,-26 -14 -42 -190 -85 -100 -223 -216 -15 -4,,Follow dictionary whitespace?,Formatuj białe znaki,Formatage des espaces blancs
+SETTINGS_DEFAULT_IMAGE,-26 -14 -104 -149 -53 -163 -85 -15 -4,,Show images by default?,Wyświetl obrazy domyślnie,Affichage des images par défaut
+SETTINGS_DO_BBCODE,-26 -14 -42 -163 -100 -223 -216 -15 -4,,Enable word styling?,Formatuj słowa,Formatage des mots
+SETTINGS_CRUNCH,-26 -14 -53 -163 -158 -23 -100 -107 -109 -15 -4,,Lower visual resolution?,Niższa rozdzielczość obrazów,Faible résolution des images
+SETTINGS_COLOR_REF,-42 -14 -54 -15 -163 -100,,Display |-54 color reference?,Ściągawka kolorów dla |-54,Rappel des couleurs pour |-54
+SETTINGS_COLOR_REF_NONE,-111,,No,Nie wyświetlaj,Non
+SETTINGS_COLOR_REF_INLINE,-169 -42,,Inlined,Koloruj tekst,Colorer le texte
+SETTINGS_COLOR_REF_BOTTOM,-170 -43,,Bottom,Wyświetl pod wiadomością,En dessous
+SETTINGS_COLOR_REF_TOGGLE,-54,,Color,Kolor,Couleur
+SETTINGS_BOOL_TRUE,-27,,Yes,Tak,Oui
+SETTINGS_BOOL_FALSE,-28,,No,Nie,Non
+SETTINGS_TRUNCATE,-42 -122 -25,,Words before truncation,sygnały przed skróceniem,Mots avant de tronquer
+SETTINGS_SIGNAL_DISPLAY_FOLD,-42 -163,,Signal Display,Format sygnałów,Formatage des signaux
+SETTINGS_INTERFACE_FOLD,-159,,Interface,Interfejs,Interface
+SETTINGS_SOUNDS_FOLD,-167 -39 -163,,Audio,Dźwięk,Son
+SETTINGS_IMAGE_FOLD,-53,,Renders,Obrazy,Visuels
+TRUNCATION,-25,,…,…,…
+TRUNCATE_TOGGLE,-25,,Truncate,Skróć,Tronquer
+IMAGE_TOGGLE,-53,,Visualize,Wizualizacja,Visualiser
+MUSIC_PLAY,-577,,Play,Odtwórz,Jouer
+MUSIC_STOP,-29,,Stop,Zatrzymaj,Arrêter
+MUSIC_QUEUE,-5,,Queue,Dodaj do kolejki,Jouer après
+SETTINGS_FONT_SIZE,-42 -22 -4,,Font size,Rozmiar czcionki,Taille de police
+SETTINGS_CANVAS_STRETCH,-26 -14 -110 -22 -174 -85 -15 -4,,Stretch UI,Rozciągnij interfejs,Étendre l’interface
+SETTINGS_UI_SCALE,-110 -22 -6,,UI Scale,Skala interfejsu,Taille de l’interface
+SETTINGS_USE_AT_UNDEF,-26 -14 -124 -42 -100 @UNDEF -15 -4,,Should unknown words be displayed with “@UNDEF”?,Pokaż nieznane hasła jako „@UNDEF”,Afficher les inconnus avec « @UNDEF »
+SETTINGS_THEME_COLOR,-110 -54 -100,,Theme color,Schemat kolorów,Couleur du thème
+SUBMIT,-174,,Submit,Zapisz,Confirmer
+CANCEL,-29,,Cancel,Cofnij zmiany,Annuler
+SETTINGS_VOLUME_SYSTEM,-115 -167 -39 -22 -100,,System Volume,Głośność ogólna,Volume système
+SETTINGS_VOLUME_MUSIC,-577 -167 -39 -22 -100,,Music Volume,Głośność muzyki,Volume musique
+SETTINGS_VOLUME_PING,-130 -128 -11 -167 -39 -22 -100,,Ping Volume,Głośność wzmianek,Volume notifications
+SETTINGS_VOLUME_ZERO,-111,,Muted,Wycisz,Muet
+SETTINGS_VOLUME_DEFAULT,-114,,Default,Domyślna,Par défaut
+SETTINGS_VOLUME_LOUD,-108,,Loud,Wysoka,Fort
+SETTINGS_CAMERA_HEADER,-53 -39,,Camera Controls,Kontrola Kamery,Contrôles de la Caméra
+SETTINGS_INVERT_PITCH,-26 -14 -49 -92 -100 -87 -15 -4,,Invert pitch?,Odwróć nachylenie,Tangage inversé
+SETTINGS_INVERT_YAW,-26 -14 -51 -92 -100 -87 -15 -4,,Invert yaw?,Odwróć pochylenie,Lacet inversé
+SETTINGS_INVERT_ZOOM,-26 -14 -50 -39 -100 -87 -15 -4,,Invert zoom?,Odwróć zbliżenie,Zoom inversé
+SETTINGS_RIGHT_SIDEBAR,-26 -14 -237 -19 -49 -32 -214 -19 -49 -15 -4,,Right-handed sidebar,Prawostronny pasek boczny,Barre latérale à droite
+SETTINGS_CONFETTI,-702,,Confetti!,Konfetti!,Confetti !
+SETTINGS_NUMBER_SEP,-26 -14 -11 -190 -11 -100 -11 -2 -11 -15 -4,,Insert |-2 between spaced numbers?,Wstaw |-2 między liczbami,Insérer |-2 entre les nombres espacés
+SETTINGS_BACKUP_CALLSIGN,-37 -128 -11 -100 -155 -36,,Backup callsign,Zapasowy znak wywoławczy,Indicatif d’appel de recours
+SETTINGS_BACKUP_RANDOM,-11,,Random,Losowy,Aléatoire
+SETTINGS_BACKUP_INCREMENT,1 -5,,Increment,Użyj następny,Incrémenter
+CALLSIGN,-128 -42,,Callsign,Znak wywoławczy,Indicatif d’appel
+COPY_SIGNAL_NUMBERS,-42 -40,,Copy frequencies,Kopiuj sygnały,Copier les signaux
+COPY_SIGNAL_NAMES,-237 -40,,Copy words,Kopiuj słowa,Copier les mots
+SUBMIT_LONG,-174 -85,,Submit,Zapisz,Confirmer
+LIBRARY_NEW,-43 -38 -85,,Submit,Zapisz,Ajouter
+LIBRARY_REPLACE,-43 -174 -85,,Replace,Zastąp,Remplacer
+LIBRARY_RENAME,-41 {0} -40,,Rename from “{0}”,Przemianuj „{0}”,Renommer depuis « {0} »
+CANCEL_LONG,-174 -29 -85,,Cancel,Cofnij zmiany,Annuler
+DELETE_ASK,-88 -127 -85,,Delete?,Usuń,Supprimer
+DELETE_CONFIRM_TRX,-43 -88 -85,,Are you sure?,Napewno?,Êtes-vous sûr ?
+DELETE_CONFIRM_SIG,-42 -88 -85,,Are you sure?,Napewno?,Êtes-vous sûr ?
+DELETE_ASK_SHORT,-88,,Delete?,Usuń?,Supprimer ?
+DELETE_CONFIRM,-85,,Delete.,Usuń.,Supprimer.
+SYSTEM,-241,,System,System,Système
+SYSTEM_CONNECTING,-119 -241 -86 -14 -241 0 -196 -15 -127 -85,,Attempting to connect…,Łączenie…,Connexion en cours…
+SYSTEM_CONNECTED,-154 -2 -119 -241 -86 -241 0 -196 -145 -85,,Connected!,Połączono!,Connecté !
+SYSTEM_CONNECTION_FAILED,-155 -2 -119 -241 -86 -241 0 -196 -145 -29 -85,,Cannot connect.,Nie udało się nawiązać połączenia.,Impossible de se connecter.
+SYSTEM_DISCONNECTING,-119 -241 -30 -241 0 -86 -14 -196 -15 -127 -29 -186 -85 -109 -120 -65 -121,,Attempting to disconnect…,Rozłączanie…,Déconnexion en cours…
+SYSTEM_DISCONNECTED,-241 0 -86 -119 -241 -196 -29 -85,,Disconnected.,Rozłączono.,Déconnecté.
+SYSTEM_WILL_RECONNECT,-119 -241 -86 -14 -241 0 -196 -15 -127 -85 {0} -69 -120 -121,yes,Will reconnect in {0} He-6 second…,Połączy ponownie za {0} He-6 sekundę…,Reconnexion dans {0} demi-vie d’He-6…
+,,,Will reconnect in {0} He-6 seconds…,Połączy ponownie za {0} He-6 sekundy…,Reconnexion dans {0} demi-vies d’He-6…
+,,,,Połączy ponownie za {0} He-6 sekund…,
+SYSTEM_UNKNOWN_SIGNAL,-124 -42 -100 -14 {0} -15,,Unknown words: {0},Nieznane hasła: {0},Mots inconnus : {0}
 SYSTEM_TOO_LONG,-241 -86 -43 -14 -42 -23 -32 {maxLength} -15 -196 -145 -29 -85 -2 -42 -23 -4 {trxSize},,"Maximum signals per transmission: {maxLength}
 Signals in this transmission: {trxSize}","Maksymalna liczba sygnałów na transmisję: {maxLength}
-Liczba sygnałów wewnątrz aktualnej transmisji: {trxSize}"
-SYSTEM_CHANNEL_INPUT_TOO_SHORT,-241 -86 -43 -14 {0} -30 -42 -23 -33 3 -15 -196 -145 -29 -85,,Cannot use {0} with less than 3 signals,Nie można użyć komendy {0} z mniej niż dwoma argumentami
-SYSTEM_INPUT_LENGTH_INVALID_TWO,-241 -86 -43 -14 {0} -30 -42 -23 -4 -29 2 -15 -196 -145 -29 -85,,Cannot use {0} with 2 signals,Komenda {0} potrzebuje conajmniej jednego argumentu
-SYSTEM_INPUT_LENGTH_INVALID_VAR,-241 -86 -43 -14 -42 -23 -4 -29 {0} -15 -196 -145 -29 -85,yes,Cannot send {0} signals,Nie można wysłać {0} sygnałów
-SYSTEM_DUPLICATE_NAME,-42 -14 -1 {sig0} -15 -30 -42 -14 -1 {sig1} -15 -100 -229 -2 {name},,Signals -{sig0} and -{sig1} cannot both be named “ {name} ”,Nie można nadać tej samej nazwy „{name}” sygnałom -{sig0} oraz -{sig1}
-SYSTEM_DUPLICATE_NUMBER,{0} -100 -30 2 -42 -100 -229 -145 -29 -85,,Signal -{0} is already taken,Sygnał -{0} jest już zdefiniowany
-DELETE_TRANSMISSION,-88,,Dismiss,Pomiń
-DICT_EDIT_HEADER,-42 -38 -77 -174,,Edit Dictionary,Edytuj słownik
-DICT_EDIT_NAME_LABEL_LEFT,-42 -14 -1,,Frequency -,Sygnał -
-DICT_EDIT_NAME_LABEL_MIDDLE,-15 -4,,is,to
-DICT_EDIT_BA_LABEL,-122 {0} -122,,then {0} then,potem {0} a potem
-DICT_EDIT_BA_LABEL_GENERIC,-122 -42 -122,,then word then,potem hasło a potem
-DICT_EDIT_BA_LABEL_NUMBER,-122 -11 -122,,then number then,potem liczba a potem
-DICT_EDIT_NAME_PLACEHOLDER,-109 -237 -38,,Enter name…,Wpisz hasło…
-DICT_EDIT_DESC_PLACEHOLDER,-119 -130 -86 -108 -237 -38 -85,,Enter notes…,Wprowadź notatki…
-DICT_EDIT_MOVE,-42 -39 -85,,Move,Redefiniuj
-FORMAT_NONE,-111,,Nothing,Nic
-FORMAT_SPACE,1 -190,,Space,Spacja
-FORMAT_NEWLINE,1 -108 -190,,Newline,Złam linię
-FORMAT_DOUBLE,2 -108 -190,,Double newline,Podwójna linia
-FORMAT_ATTRACT,1 -189,,Remove space,Usuń spację
-DICT_EDIT_BREAK,-26 -14 2 -229 -42 -122 1 -108 -190 -15 -4,,Break on double?,Złam po podwojeniu?
-DICT_EDIT_INDENTATION,-42 -86 -190,,Indentation:,Wcięcie:
-DICT_EDIT_NO_INDENT,-38 -29 -85,,None,Brak
-DICT_EDIT_INDENT,-38 -85,,Indent,Zwiększ wcięcie
-DICT_EDIT_DEDENT,-88 -85,,Dedent,Zmniejsz wcięcie
-DICT_EDIT_BOLD,-42 -22 -100,,Bold?,Wytłuść?
-DICT_EDIT_NO_BOLD,-114,,No,Nie
-DICT_EDIT_YES_BOLD,-108,,Yes,Tak
-DICT_EDIT_ITALICS,-42 -49 -86 -51,,Italicize?,Pochyl?
-DICT_EDIT_NO_ITALICS,-174 -29 -85,,No,Nie
-DICT_EDIT_YES_ITALICS,-174 -85,,Yes,Tak
-DICT_EDIT_UNDERLINE,-109 -51 -17,,Underline?,Podkreśl?
-DICT_EDIT_NO_UNDERLINE,-100 -29,,No,Nie
-DICT_EDIT_YES_UNDERLINE,-100,,Yes,Tak
-DICT_EDIT_STRIKETHROUGH,-114 -51 -17,,Strikethrough?,Przekreśl?
-DICT_EDIT_NO_STRIKE,-100 -29,,No,Nie
-DICT_EDIT_YES_STRIKE,-100,,Yes,Tak
-DICT_EDIT_COLOR_IS,-100,,is,jako
-DICT_EDIT_COLOR_SIGNAL,-42 -54,,word color,kolor hasła
-DICT_EDIT_COLOR_BG,-22 -54,,background color,kolor tła
-CLOSE_MENU_LONG,-163 -29 -85,,Close,Zamknij
-LIBRARY_SIGNAL_COUNT,-42 -23 -4 {0},,Signal count: {0},Liczba sygnałów: {0}
-CALLSIGN_ADD,-5,,+,+
-CALLSIGN_SUB,-7,,-,-
-LIBRARY_NAME_PLACEHOLDER,-43 -237,,Name transmission…,Nazwij transmisję…
-IMAGE_ZOOM,-50 -39,,Zoom,Zbliż
-IMAGE_YAW,-51 -92,,Yaw,Nachylenie
-IMAGE_PITCH,-49 -92,,Pitch,Pochylenie
-WSS_CONNECT,-40,,Connect,Połącz
-WSS_HEADER,-241 0,,Websocket Addresses,Adresy serwerów
-WSS_ADD,-38,,Add new address,Dodaj adres
-DICT_NEW,-38,,Add new dictionary,Dodaj słownik
-DICT_DUPE,-144,,Duplicate,Zduplikuj
-DICT_USE,-40,,Load,Ładuj
-DICT_METEOR,-44 0,,Meteorese,Meteorowy
-DICT_DSCR,-247,,DSCR,DSCR
-DICT_OTHER,-223,,Other,Inny
-SOURCE_DICT_HEADER,-42,,Dictionaries,Słowniki
-SOURCE_DICT_PLACEHOLD,-237,,Name dictionary…,Nazwij słownik…
-TAB_SOURCES,-40,,Sources,Źródła
-DICT_COUNT,-42 -23 -4 {0},yes,{0} Defined Signal,Zdefiniowano {0} hasło
-,,,{0} Defined Signals,Zdefiniowano {0} hasła
-,,,,Zdefiniowano {0} haseł
-LIBRARY_SEARCH,-163,,Search…,Wyszukaj…
-CHAT_CHANNEL,{0},,{0},{0}
-CHAT_CHANNEL_NONE,-111 -65535,,None {0},Główne {0}
-CHAT_CHANNEL_UNREAD,-124 {0},,(?) {0},(?) {0}
-CHAT_CHANNEL_PINGED,-127 {0},,(!!) {0},(!!) {0}
-SEND_TO_LIBRARY,-16 -14 -43 -15 -41 -39,,Send to library,Dodaj do biblioteki
-NEW_LIBRARY_NAME,{name} -2 {trx} -14 {contents} -25 -15,,{name}_tr_{trx}: “{contents}…”,{name}_tr_{trx}: “{contents}…”
-NUMBER_NEGATIVE,-1,,-,-
-NUMBER_DECIMAL,-10,,.,.
-TAB_REFERENCES,-208,,Reference,Ściągawka
-REFERENCE_COLOR,-44 0 -54,,Octoid Spectrum,spektrum kolorów
-REFERENCE_PD,-55 -19,,Periodic Table of Elements,Układ okresowy pierwiastków
-SETTINGS_ELEMENTS_IN_M0,-26 -14 -130 -55 -29 -2 -2 -44 0 -55 -15 -4,,Note: this text is inaccessible in non-m0,
-REFERENCE_PD_ATOMIC_NUMBER,{0} -60,yes,{0} Proton,liczba atomowa {0}
-,,,{0} Protons,liczba atomowa {0}
-,,,,liczba atomowa {0}
-REFERENCE_PD_STP_SOLID,-139 -3 -165,,Solid @ STP,ciało stałe
-REFERENCE_PD_STP_LIQUID,-139 -3 -166,,Liquid @ STP,ciecz
-REFERENCE_PD_STP_GAS,-139 -3 -167,,Gas @ STP,gaz
-REFERENCE_PD_METAL,-188 -30 -164 -39 -216,,Metal,metal
-REFERENCE_PD_METALLOID,-188 -30 -164 -39 -145 -85,,Metalloid,półmetal
-REFERENCE_PD_NONMETAL,-188 -30 -164 -39 -216 -29,,Nonmetal,niemetal
-REFERENCE_PD_UNSTABLE,-110 -63 -64 -85,,No stable isotopes,nietrwały
-REFERENCE_PD_NOBLE,-58 -29 -85,,Noble gas,gaz szlachetny
-REFERENCE_PD_DIATOMIC,-57 -14 2 -229 -56 -15,,Diatomic,dwuatomowy
-REF_M0,-44 0,,Meteorite Message 0,Meteoryt 0
-REF_UNITS,-68,,Units,Jednostki
-REF_UNIT_LENGTHS,-20,,Lengths,Długość
-REF_UNIT_AKERMETER,-73,yes,Octoid Meter,ośmiometr
-,,,Octoid Meters,ośmiometry
-,,,,ośmiometrów
-REF_UNIT_CENTIMETER,-130 -197 -68 100 -8,yes,Centimetre,centymetr
-,,,Centimetres,centymetry
-,,,,centymetrów
-REF_UNIT_METER,-130 -197 -68,yes,Metric Metre,metr
-,,,Metric Metres,metry
-,,,,metrów
-REF_UNIT_LIGHT_ASEC,-72,yes,Octoid Lightsecond,ośmiosekunda świetlna
-,,,Octoid Lightseconds,ośmiosekundy świetlne
-,,,,ośmiosekund świetlnych
-REF_UNIT_LIGHTSEC,-67 -130 -69 -6,yes,Lightsecond,sekunda świetlna
-,,,Lightseconds,sekundy świetlne
-,,,,sekund świetlnych
-REF_UNIT_AU,-139 -90 -91,y,Astronomical Unit,jednostka astronomiczna
-,,,Astronomical Units,jednostki astronomiczne
-,,,,jednostek astronomicznych
-REF_UNIT_LIGHTYEAR,-67 -139 -90 -92 -65 -6,y,Lightyear,rok świetlny
-,,,Lightyears,lata świetlne
-,,,,lat świetlnych
-REF_UNIT_FOOT,-130 -158,y,Foot,stopa
-,,,Feet,stopy
-,,,,stóp
-REF_UNIT_INCH,-130 -158 12 -8,y,Inch,cal
-,,,Inches,cale
-,,,,cali
-REF_UNIT_MILE,1000 -219 -158,y,Mile,mila
-,,,Miles,mile
-,,,,mil
-REF_UNIT_DURATIONS,-65 -20,,Durations,Czas
-REF_UNIT_HESEC,-69,t,He-6 Half-life,okres półtrwania He-6
-,,,He-6 Half-lifes,okresy półtrwania He-6
-,,,,okresów półtrwania He-6
-REF_UNIT_SECOND,-130 -69,t,Second,sekunda
-,,,Seconds,sekundy
-,,,,sekund
-REF_UNIT_MINUTE,60 -130 -69,t,Minute,minuta
-,,,Minutes,minuty
-,,,,minut
-REF_UNIT_HOUR,3600 -130 -69,t,Hour,godzina
-,,,Hours,godziny
-,,,,godzin
-REF_UNIT_DAY,-139 -139 -92,t,Earth Day,doba
-,,,Earth Days,doby
-,,,,dób
-REF_UNIT_OCTMONTH,-71,t,Octoid Moon-month,ośmiomiesiąc
-,,,Octoid Moon-months,ośmiomiesięce
-,,,,ośmiomiesięcy
-REF_UNIT_OCTYEAR,-70,t,Octoid Year,ośmiorok
-,,,Octoid Years,ośmiolata
-,,,,ośmiolat
-REF_UNIT_YEAR,-139 -90 -92,t,Earth Year,rok
-,,,Earth Years,lata
-,,,,lat
-REF_UNIT_MASSES,-74,,Masses,Masa
-REF_UNIT_AKERGRAM,-75,t,Octoid Gram,ośmiogram
-,,,Octoid Grams,ośmiogramy
-,,,,ośmiogramów
-REF_UNIT_KILOGRAM,-130 -197 -68,t,Metric Kilogram,kilogram
-,,,Metric Kilograms,kilogramy
-,,,,kilogramów
-REF_UNIT_POUND,-130 -104 -151 -74 -68,t,Pound-mass,funt
-,,,Pound-masses,funty
-,,,,funtów
-REF_UNIT_STONE,16 -130 -104 -151 -74 -68,t,Stone,kamień
-,,,Stones,kamienie
-,,,,kamieni
-REF_UNIT_SLUG,-104 -151 -30 -139 -189 -68,t,Slug,slug
-,,,Slugs,slug
-,,,,slug
-REF_UNIT_TON,2240 -130 -104 -151 -74 -68,t,Long Ton,tona angielska
-,,,Long Tons,tony angielskie
-,,,,ton angielskich
-REF_UNIT_SUPERMASS,-76,t,Octoid Planet,masa Ośmioplanety
-,,,Octoid Planets,masy Ośmioplanety
-,,,,mas Ośmioplanety
-REF_UNIT_EARTH,-139 -74,t,Terran Mass,masa Ziemi
-,,,Terran Masses,masy Ziemi
-,,,,mas Ziemi
-REF_UNIT_OCTSUN,-141 -74,t,Octoid Star,masa Ośmiogwiazdy
-,,,Octoid Stars,masy Ośmiogwiazdy
-,,,,mas Ośmiogwiazdy
-REF_UNIT_SOL,-130 -90 -74,t,Solar Mass,masa Słońca
-,,,Solar Masses,masy Słońca
-,,,,mas Słońca
-REFERENCE_BASES,1 0 -4 -12,,Numerical Bases,Systemy liczbowe
-SETTINGS_DO_PARSEBAR,-26 -14 -86 -42 -163 -145 -85 -43 -38 -121 -15 -4,,Show pre-parse bar?,Pokaż wstążkę wprowadzania
-REF_PD_SPLIT,-159 -29,,Split,blok f oddzielony
-REF_PD_VERTICAL,-108 -51,,Unbroken,blok f razem
-REF_PARTICLE_PLOTS,-56 -77 -60 -77 -25 -52,,Rendered Particles,modele cząstek
-REF_PARTICLE_PLOTS_COLOR_TITLE,-54,,Color,kolor
-REF_PARTICLE_PLOTS_DIAMETER_TITLE,-22,,Diameter,średnica
-REF_PARTICLE_PLOTS_PROTON,-60,,Protons,proton
-REF_PARTICLE_PLOTS_NEUTRON,-61,,Neutrons,neutron
-REF_PARTICLE_PLOTS_ELECTRON,-62,,Electrons,elektron
-REF_PARTICLE_PLOTS_HYDROGEN,-56 1,,Hydrogen atoms,atom wodoru
-REF_PARTICLE_PLOTS_CARBON,-56 6,,Carbon atoms,atom węgla
-REF_PARTICLE_PLOTS_OTHER_ATOM,-56 -11,,Other atoms,inne atomy
-SETTINGS_REQUIRE_PIPE_ESCAPE,-26 -14 -42 -11 -100 | -11 -15 -4,,Require “|” to type raw signals?,Wymagaj „|” dla surowych sygnałów
-SETTINGS_LOW_CONTRAST,-26 -14 -110 -54 -100 -117 -229 -15 -4,,Use low contrast?,Zmniejszony kontrast
-SETTINGS_REQUEST_ATTENTION,-43 -218,,App icon requests attention?,Ikonka wymaga uwagi
-SETTINGS_REQUEST_ATTENTION_NONE,-111,,Never,nigdy
-SETTINGS_REQUEST_ATTENTION_PING,-130 -128,,Pings Only,po wzmiance
-SETTINGS_REQUEST_ATTENTION_ALWAYS,-110,,All Messages,po każdej wiadomości
-IMAGE_PREVIOUS,-118,,<,
-IMAGE_NEXT,-120,,>,
-IMAGE_CURRENT,{0} -2 {1},,{0}/{1},
+Liczba sygnałów wewnątrz aktualnej transmisji: {trxSize}","Nombre maximal de signaux par transmission : {maxLength}
+Nombre de signaux dans cette transmission : {trxSize}"
+SYSTEM_CHANNEL_INPUT_TOO_SHORT,-241 -86 -43 -14 {0} -30 -42 -23 -33 3 -15 -196 -145 -29 -85,,Cannot use {0} with less than 3 signals,Nie można użyć komendy {0} z mniej niż dwoma argumentami,La commande {0} nécessite au moins deux arguments
+SYSTEM_INPUT_LENGTH_INVALID_TWO,-241 -86 -43 -14 {0} -30 -42 -23 -4 -29 2 -15 -196 -145 -29 -85,,Cannot use {0} with 2 signals,Komenda {0} potrzebuje conajmniej jednego argumentu,La commande {0} nécessite au moins un argument
+SYSTEM_INPUT_LENGTH_INVALID_VAR,-241 -86 -43 -14 -42 -23 -4 -29 {0} -15 -196 -145 -29 -85,yes,Cannot send {0} signals,Nie można wysłać {0} sygnałów,Impossible d’envoyer {0} signaux
+SYSTEM_DUPLICATE_NAME,-42 -14 -1 {sig0} -15 -30 -42 -14 -1 {sig1} -15 -100 -229 -2 {name},,Signals -{sig0} and -{sig1} cannot both be named “ {name} ”,Nie można nadać tej samej nazwy „{name}” sygnałom -{sig0} oraz -{sig1},Les signaux -{sig0} et -{sig1} ne peuvent pas partager le nom «{name}»
+SYSTEM_DUPLICATE_NUMBER,{0} -100 -30 2 -42 -100 -229 -145 -29 -85,,Signal -{0} is already taken,Sygnał -{0} jest już zdefiniowany,Le signal -{0} existe déjà
+DELETE_TRANSMISSION,-88,,Dismiss,Pomiń,Ignorer
+DICT_EDIT_HEADER,-42 -38 -77 -174,,Edit Dictionary,Edytuj słownik,Modifier le dictionnaire
+DICT_EDIT_NAME_LABEL_LEFT,-42 -14 -1,,Frequency -,Sygnał -,Le signal -
+DICT_EDIT_NAME_LABEL_MIDDLE,-15 -4,,is,to,est
+DICT_EDIT_BA_LABEL,-122 {0} -122,,then {0} then,potem {0} a potem,puis {0} puis
+DICT_EDIT_BA_LABEL_GENERIC,-122 -42 -122,,then word then,potem hasło a potem,puis mot puis
+DICT_EDIT_BA_LABEL_NUMBER,-122 -11 -122,,then number then,potem liczba a potem,puis nombre puis
+DICT_EDIT_NAME_PLACEHOLDER,-109 -237 -38,,Enter name…,Wpisz hasło…,Saisissez un nom…
+DICT_EDIT_DESC_PLACEHOLDER,-119 -130 -86 -108 -237 -38 -85,,Enter notes…,Wprowadź notatki…,Saisissez vos notes…
+DICT_EDIT_MOVE,-42 -39 -85,,Move,Redefiniuj,Réaffecter
+FORMAT_NONE,-111,,Nothing,Nic,Rien
+FORMAT_SPACE,1 -190,,Space,Spacja,Espace
+FORMAT_NEWLINE,1 -108 -190,,Newline,Złam linię,Fin de ligne
+FORMAT_DOUBLE,2 -108 -190,,Double newline,Podwójna linia,Saut de ligne
+FORMAT_ATTRACT,1 -189,,Remove space,Usuń spację,Enlever un espace
+DICT_EDIT_BREAK,-26 -14 2 -229 -42 -122 1 -108 -190 -15 -4,,Break on double?,Złam po podwojeniu?,Fin de ligne si doublon
+DICT_EDIT_INDENTATION,-42 -86 -190,,Indentation:,Wcięcie:,Indentation
+DICT_EDIT_NO_INDENT,-38 -29 -85,,None,Brak,Aucune
+DICT_EDIT_INDENT,-38 -85,,Indent,Zwiększ wcięcie,Indenter
+DICT_EDIT_DEDENT,-88 -85,,Dedent,Zmniejsz wcięcie,Désindenter
+DICT_EDIT_BOLD,-42 -22 -100,,Bold?,Wytłuść?,Gras
+DICT_EDIT_NO_BOLD,-114,,No,Nie,Non
+DICT_EDIT_YES_BOLD,-108,,Yes,Tak,Oui
+DICT_EDIT_ITALICS,-42 -49 -86 -51,,Italicize?,Pochyl?,Italique
+DICT_EDIT_NO_ITALICS,-174 -29 -85,,No,Nie,Non
+DICT_EDIT_YES_ITALICS,-174 -85,,Yes,Tak,Oui
+DICT_EDIT_UNDERLINE,-109 -51 -17,,Underline?,Podkreśl?,Sousligné
+DICT_EDIT_NO_UNDERLINE,-100 -29,,No,Nie,Non
+DICT_EDIT_YES_UNDERLINE,-100,,Yes,Tak,Oui
+DICT_EDIT_STRIKETHROUGH,-114 -51 -17,,Strikethrough?,Przekreśl?,Barré
+DICT_EDIT_NO_STRIKE,-100 -29,,No,Nie,Non
+DICT_EDIT_YES_STRIKE,-100,,Yes,Tak,Oui
+DICT_EDIT_COLOR_IS,-100,,is,jako,est
+DICT_EDIT_COLOR_SIGNAL,-42 -54,,word color,kolor hasła,la couleur du mot
+DICT_EDIT_COLOR_BG,-22 -54,,background color,kolor tła,la couleur du fond
+CLOSE_MENU_LONG,-163 -29 -85,,Close,Zamknij,Fermer
+LIBRARY_SIGNAL_COUNT,-42 -23 -4 {0},,Signal count: {0},Liczba sygnałów: {0},Nombre de signaux: {0}
+CALLSIGN_ADD,-5,,+,+,+
+CALLSIGN_SUB,-7,,-,-,-
+LIBRARY_NAME_PLACEHOLDER,-43 -237,,Name transmission…,Nazwij transmisję…,Nommez la transmission…
+IMAGE_ZOOM,-50 -39,,Zoom,Zbliż,Zoom
+IMAGE_YAW,-51 -92,,Yaw,Nachylenie,Lacet
+IMAGE_PITCH,-49 -92,,Pitch,Pochylenie,Tangage
+WSS_CONNECT,-40,,Connect,Połącz,Se connecter
+WSS_HEADER,-241 0,,Websocket Addresses,Adresy serwerów,Adresse WebSocket
+WSS_ADD,-38,,Add new address,Dodaj adres,Nouvelle adresse
+DICT_NEW,-38,,Add new dictionary,Dodaj słownik,Nouveau dictionnaire
+DICT_DUPE,-144,,Duplicate,Zduplikuj,Dupliquer
+DICT_USE,-40,,Load,Ładuj,Charger
+DICT_METEOR,-44 0,,Meteorese,Meteorowy,Météorois
+DICT_DSCR,-247,,DSCR,DSCR,DSCR
+DICT_OTHER,-223,,Other,Inny,Autre
+SOURCE_DICT_HEADER,-42,,Dictionaries,Słowniki,Dictionnaires
+SOURCE_DICT_PLACEHOLD,-237,,Name dictionary…,Nazwij słownik…,Nommez le dictionnaire…
+TAB_SOURCES,-40,,Sources,Źródła,Sources
+DICT_COUNT,-42 -23 -4 {0},yes,{0} Defined Signal,Zdefiniowano {0} hasło,{0} signal défini
+,,,{0} Defined Signals,Zdefiniowano {0} hasła,{0} signaux définis
+,,,,Zdefiniowano {0} haseł,
+LIBRARY_SEARCH,-163,,Search…,Wyszukaj…,Chercher…
+CHAT_CHANNEL,{0},,{0},{0},{0}
+CHAT_CHANNEL_NONE,-111 -65535,,None {0},Główne {0},{0} général
+CHAT_CHANNEL_UNREAD,-124 {0},,(?) {0},(?) {0},(?) {0}
+SEND_TO_LIBRARY,-16 -14 -43 -15 -41 -39,,Send to library,Dodaj do biblioteki,Envoyer dans la bibliothèque
+NEW_LIBRARY_NAME,{name} -2 {trx} -14 {contents} -25 -15,,{name}_tr_{trx}: “{contents}…”,{name}_tr_{trx}: “{contents}…”,{name}_tr_{trx}: “{contents}…”
+NUMBER_NEGATIVE,-1,,-,-,-
+NUMBER_DECIMAL,-10,,.,.,","
+TAB_REFERENCES,-208,,Reference,Ściągawka,Rappels
+REFERENCE_COLOR,-44 0 -54,,Octoid Spectrum,spektrum kolorów,Spectre des couleurs
+REFERENCE_PD,-55 -19,,Periodic Table of Elements,Układ okresowy pierwiastków,Tableau périodique des éléments
+SETTINGS_ELEMENTS_IN_M0,-26 -14 -130 -55 -29 -2 -2 -44 0 -55 -15 -4,,Note: this text is inaccessible in non-m0,,Note: ce texte est inaccessible hors Météorois
+REFERENCE_PD_ATOMIC_NUMBER,{0} -60,yes,{0} Proton,liczba atomowa {0},{0} proton
+,,,{0} Protons,liczba atomowa {0},{0} protons
+,,,,liczba atomowa {0},
+REFERENCE_PD_STP_SOLID,-139 -3 -165,,Solid @ STP,ciało stałe,Solide (CNTP)
+REFERENCE_PD_STP_LIQUID,-139 -3 -166,,Liquid @ STP,ciecz,Liquide (CNTP)
+REFERENCE_PD_STP_GAS,-139 -3 -167,,Gas @ STP,gaz,Gaz (CNTP)
+REFERENCE_PD_METAL,-188 -30 -164 -39 -216,,Metal,metal,Métal
+REFERENCE_PD_METALLOID,-188 -30 -164 -39 -145 -85,,Metalloid,półmetal,Métalloïde
+REFERENCE_PD_NONMETAL,-188 -30 -164 -39 -216 -29,,Nonmetal,niemetal,Non-métal
+REFERENCE_PD_UNSTABLE,-110 -63 -64 -85,,No stable isotopes,nietrwały,Pas d’isotope stable
+REFERENCE_PD_NOBLE,-58 -29 -85,,Noble gas,gaz szlachetny,Gaz noble
+REFERENCE_PD_DIATOMIC,-57 -14 2 -229 -56 -15,,Diatomic,dwuatomowy,Diatomique
+REF_M0,-44 0,,Meteorite Message 0,Meteoryt 0,Météorite 0
+REF_UNITS,-68,,Units,Jednostki,Unités
+REF_UNIT_LENGTHS,-20,,Lengths,Długość,Longueurs
+REF_UNIT_AKERMETER,-73,yes,Octoid Meter,ośmiometr,Octo-mètre
+,,,Octoid Meters,ośmiometry,Octo-mètres
+,,,,ośmiometrów,
+REF_UNIT_CENTIMETER,-130 -197 -68 100 -8,yes,Centimetre,centymetr,Centimètre
+,,,Centimetres,centymetry,Centimètres
+,,,,centymetrów,
+REF_UNIT_METER,-130 -197 -68,yes,Metric Metre,metr,Mètre
+,,,Metric Metres,metry,Mètres
+,,,,metrów,
+REF_UNIT_LIGHT_ASEC,-72,yes,Octoid Lightsecond,ośmiosekunda świetlna,Octo-seconde-lumière
+,,,Octoid Lightseconds,ośmiosekundy świetlne,Octo-secondes-lumière
+,,,,ośmiosekund świetlnych,
+REF_UNIT_LIGHTSEC,-67 -130 -69 -6,yes,Lightsecond,sekunda świetlna,Seconde-lumière
+,,,Lightseconds,sekundy świetlne,Secondes-lumière
+,,,,sekund świetlnych,
+REF_UNIT_AU,-139 -90 -91,y,Astronomical Unit,jednostka astronomiczna,Unité astronomique
+,,,Astronomical Units,jednostki astronomiczne,Unités astronomiques
+,,,,jednostek astronomicznych,
+REF_UNIT_LIGHTYEAR,-67 -139 -90 -92 -65 -6,y,Lightyear,rok świetlny,Année-lumière
+,,,Lightyears,lata świetlne,Années-lumière
+,,,,lat świetlnych,
+REF_UNIT_FOOT,-130 -158,y,Foot,stopa,Pied
+,,,Feet,stopy,Pieds
+,,,,stóp,
+REF_UNIT_INCH,-130 -158 12 -8,y,Inch,cal,Pouce
+,,,Inches,cale,Pouces
+,,,,cali,
+REF_UNIT_MILE,1000 -219 -158,y,Mile,mila,Mille
+,,,Miles,mile,Milles
+,,,,mil,
+REF_UNIT_DURATIONS,-65 -20,,Durations,Czas,Durées
+REF_UNIT_HESEC,-69,t,He-6 Half-life,okres półtrwania He-6,Demi-vie d’He-6
+,,,He-6 Half-lifes,okresy półtrwania He-6,Demi-vies d’He-6
+,,,,okresów półtrwania He-6,
+REF_UNIT_SECOND,-130 -69,t,Second,sekunda,Seconde
+,,,Seconds,sekundy,Secondes
+,,,,sekund,
+REF_UNIT_MINUTE,60 -130 -69,t,Minute,minuta,Minute
+,,,Minutes,minuty,Minutes
+,,,,minut,
+REF_UNIT_HOUR,3600 -130 -69,t,Hour,godzina,Heure
+,,,Hours,godziny,Heures
+,,,,godzin,
+REF_UNIT_DAY,-139 -139 -92,t,Earth Day,doba,Jour solaire terrestre
+,,,Earth Days,doby,Jours solaires terrestres
+,,,,dób,
+REF_UNIT_OCTMONTH,-71,t,Octoid Moon-month,ośmiomiesiąc,Octo-mois lunaire
+,,,Octoid Moon-months,ośmiomiesięce,Octo-mois lunaires
+,,,,ośmiomiesięcy,
+REF_UNIT_OCTYEAR,-70,t,Octoid Year,ośmiorok,Octo-année
+,,,Octoid Years,ośmiolata,Octo-années
+,,,,ośmiolat,
+REF_UNIT_YEAR,-139 -90 -92,t,Earth Year,rok,Année terrestre
+,,,Earth Years,lata,Années terrestres
+,,,,lat,
+REF_UNIT_MASSES,-74,,Masses,Masa,Masses
+REF_UNIT_AKERGRAM,-75,t,Octoid Gram,ośmiogram,Octo-gramme
+,,,Octoid Grams,ośmiogramy,Octo-grammes
+,,,,ośmiogramów,
+REF_UNIT_KILOGRAM,-130 -197 -68,t,Metric Kilogram,kilogram,Kilogramme
+,,,Metric Kilograms,kilogramy,Kilogrammes
+,,,,kilogramów,
+REF_UNIT_POUND,-130 -104 -151 -74 -68,t,Pound-mass,funt,Livre
+,,,Pound-masses,funty,Livres
+,,,,funtów,
+REF_UNIT_STONE,16 -130 -104 -151 -74 -68,t,Stone,kamień,Stone
+,,,Stones,kamienie,Stone
+,,,,kamieni,
+REF_UNIT_SLUG,-104 -151 -30 -139 -189 -68,t,Slug,slug,Slug
+,,,Slugs,slug,Slugs
+,,,,slug,
+REF_UNIT_TON,2240 -130 -104 -151 -74 -68,t,Long Ton,tona angielska,Long ton
+,,,Long Tons,tony angielskie,Long tons
+,,,,ton angielskich,
+REF_UNIT_SUPERMASS,-76,t,Octoid Planet,masa Ośmioplanety,Planète Octoïde
+,,,Octoid Planets,masy Ośmioplanety,Planètes Octoïdes
+,,,,mas Ośmioplanety,
+REF_UNIT_EARTH,-139 -74,t,Terran Mass,masa Ziemi,Masse terrestre
+,,,Terran Masses,masy Ziemi,Masses terrestres
+,,,,mas Ziemi,
+REF_UNIT_OCTSUN,-141 -74,t,Octoid Star,masa Ośmiogwiazdy,Étoile Octoïde
+,,,Octoid Stars,masy Ośmiogwiazdy,Étoiles Octoïdes
+,,,,mas Ośmiogwiazdy,
+REF_UNIT_SOL,-130 -90 -74,t,Solar Mass,masa Słońca,Masse solaire
+,,,Solar Masses,masy Słońca,Masses solaires
+,,,,mas Słońca,
+REFERENCE_BASES,1 0 -4 -12,,Numerical Bases,Systemy liczbowe,Bases numériques
+SETTINGS_DO_PARSEBAR,-26 -14 -86 -42 -163 -145 -85 -43 -38 -121 -15 -4,,Show pre-parse bar?,Pokaż wstążkę wprowadzania,Barre de pré-analyse
+REF_PD_SPLIT,-159 -29,,Split,blok f oddzielony,Divisé
+REF_PD_VERTICAL,-108 -51,,Unbroken,blok f razem,Étendu
+REF_PARTICLE_PLOTS,-52,,Rendered Particles,modele cząstek,Particules modelisées
+REF_PARTICLE_PLOTS_COLOR_TITLE,-54,,Color,kolor,Couleur
+REF_PARTICLE_PLOTS_DIAMETER_TITLE,-22,,Diameter,średnica,Diamètre
+REF_PARTICLE_PLOTS_PROTON,-60,,Protons,proton,Protons
+REF_PARTICLE_PLOTS_NEUTRON,-61,,Neutrons,neutron,Neutrons
+REF_PARTICLE_PLOTS_ELECTRON,-62,,Electrons,elektron,Electrons
+REF_PARTICLE_PLOTS_HYDROGEN,-56 1,,Hydrogen atoms,atom wodoru,Atomes d’hydrogrène
+REF_PARTICLE_PLOTS_CARBON,-56 6,,Carbon atoms,atom węgla,Atomes de carbone
+REF_PARTICLE_PLOTS_OTHER_ATOM,-56 -11,,Other atoms,inne atomy,Autres atomes
+SETTINGS_REQUIRE_PIPE_ESCAPE,-26 -14 -42 -11 -100 | -11 -15 -4,,Require “|” to type raw signals?,Wymagaj „|” dla surowych sygnałów,Exiger « | » pour les signaux bruts

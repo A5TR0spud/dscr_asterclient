@@ -2,7 +2,7 @@ extends PanelContainer
 class_name LocaleMenu
 
 static var instance: LocaleMenu
-const VALID_LANGUAGES: PackedStringArray = ["en", "pl"]
+const VALID_LANGUAGES: PackedStringArray = ["en", "pl", "fr"]
 @onready var m0: Button = $CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/m0
 
 func _enter_tree():
@@ -33,3 +33,6 @@ func _on_en_pressed():
 
 func _on_pl_pressed():
 	_select("pl")
+	
+func _on_fr_pressed():
+	_select("fr")

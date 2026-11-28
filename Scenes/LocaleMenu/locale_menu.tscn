@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://ba5336swev2p1" path="res://Assets/Icons/LanguageIcons/english.svg" id="3_vklgi"]
 [ext_resource type="Texture2D" uid="uid://0q4nkiso04lb" path="res://Assets/Icons/LanguageIcons/polish.svg" id="4_vklgi"]
 [ext_resource type="Script" uid="uid://7gga31jeosxl" path="res://Localization/LocaleNode.gd" id="5_u0u3c"]
+[ext_resource type="Texture2D" uid="uid://du2f30xwpak8e" path="res://Assets/Icons/LanguageIcons/french.svg" id="6_nwb0m"]
 
 [node name="LocaleMenu" type="PanelContainer" unique_id=1619317538]
 top_level = true
@@ -74,6 +75,13 @@ theme_override_font_sizes/font_size = 24
 text = "Polski"
 icon = ExtResource("4_vklgi")
 
+[node name="fr" type="Button" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=1868210333]
+layout_mode = 2
+theme_override_constants/icon_max_width = 24
+theme_override_font_sizes/font_size = 24
+text = "Français"
+icon = ExtResource("6_nwb0m")
+
 [node name="Close" type="Button" parent="CenterContainer/VBoxContainer" unique_id=2095941556]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -90,4 +98,5 @@ metadata/_custom_type_script = "uid://7gga31jeosxl"
 [connection signal="toggled" from="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/m0" to="." method="_on_m_0_toggled"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/GridContainer/en" to="." method="_on_en_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/GridContainer/pl" to="." method="_on_pl_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/GridContainer/fr" to="." method="_on_fr_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Close" to="." method="_on_close_pressed"]
